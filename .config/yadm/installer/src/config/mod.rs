@@ -1,10 +1,12 @@
 use std::path::PathBuf;
 
+use self::prelude::{Package, Service, ConfigFile, Repository};
+
 pub mod system;
 
 pub mod prelude {
     pub use super::system::prelude::*;
-    pub use super::{InstallerConfig, Target, Version};
+    pub use super::{InstallerConfig, Target};
 }
 
 const HOME: &str = env!("HOME");
