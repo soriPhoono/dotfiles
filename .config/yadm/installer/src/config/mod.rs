@@ -18,6 +18,7 @@ pub mod prelude {
 pub const HOME: &str = env!("HOME");
 pub const TARGETS_DIR: &str = "/.config/yadm/targets/";
 
+pub const REPO_HELPER: &str = "sudo pacman";
 pub const AUR_HELPER: &str = "paru";
 pub const CHECK_COMMAND: &str = "-Q";
 pub const UPDATE_COMMAND: &str = "-Syu --noconfirm";
@@ -60,15 +61,15 @@ impl InstallTarget {
             let mut dependency = Self::new(dependency)?;
 
             optional_repos.append(&mut dependency.optional_repos);
+            config_files.append(&mut dependency.config_files);
             packages.append(&mut dependency.packages);
             services.append(&mut dependency.services);
-            config_files.append(&mut dependency.config_files);
         }
 
         optional_repos.append(&mut build_target.optional_repos.clone());
+        config_files.append(&mut build_target.config_files.clone());
         packages.append(&mut build_target.packages.clone());
         services.append(&mut build_target.services.clone());
-        config_files.append(&mut build_target.config_files.clone());
 
         Ok(Self {
             optional_repos,
@@ -104,16 +105,16 @@ impl Display for InstallTarget {
         writeln!(f, "paru {}", UPDATE_COMMAND)?; // TODO: migrate to controller
         writeln!(f)?;
 
+        for config_file in self.config_files() {
+            writeln!(f, "{}", config_file)?;
+        }
+
         for package in self.packages() {
             writeln!(f, "{}", package)?;
         }
 
         for service in self.services() {
             writeln!(f, "{}", service)?;
-        }
-
-        for config_file in self.config_files() {
-            writeln!(f, "{}", config_file)?;
         }
 
         Ok(())
