@@ -1,10 +1,10 @@
 # Folders
-/.vscode/
+.vscode/
 
 target/
 
 # Files
-/.editorconfig
+.editorconfig
 
 Cargo.lock
 Cargo.toml
