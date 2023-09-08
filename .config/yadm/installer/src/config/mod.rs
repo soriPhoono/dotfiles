@@ -6,7 +6,7 @@ use std::{
 
 use crate::app::get_output;
 
-use self::prelude::{Command, ConfigFile, Package, Repository, Service};
+use self::prelude::{ConfigFile, Package, Repository, Service};
 
 pub mod system;
 
@@ -31,22 +31,18 @@ pub struct BuildTarget {
 
     pub optional_repos: Vec<Repository>,
 
+    pub config_files: Vec<ConfigFile>,
     pub packages: Vec<Package>,
     pub services: Vec<Service>,
-    pub config_files: Vec<ConfigFile>,
-
-    pub commands: Vec<Command>,
 }
 
 #[derive(Debug, Clone)]
 pub struct InstallTarget {
     optional_repos: Vec<Repository>,
 
+    config_files: Vec<ConfigFile>,
     packages: Vec<Package>,
     services: Vec<Service>,
-    config_files: Vec<ConfigFile>,
-
-    commands: Vec<Command>,
 }
 
 impl InstallTarget {
@@ -55,7 +51,6 @@ impl InstallTarget {
         let mut packages = Vec::new();
         let mut services = Vec::new();
         let mut config_files = Vec::new();
-        let mut commands = Vec::new();
 
         for dependency in build_target.depends {
             let dependency: BuildTarget = serde_json::from_reader(BufReader::new(File::open(
@@ -68,21 +63,18 @@ impl InstallTarget {
             packages.append(&mut dependency.packages);
             services.append(&mut dependency.services);
             config_files.append(&mut dependency.config_files);
-            commands.append(&mut dependency.commands);
         }
 
         optional_repos.append(&mut build_target.optional_repos.clone());
         packages.append(&mut build_target.packages.clone());
         services.append(&mut build_target.services.clone());
         config_files.append(&mut build_target.config_files.clone());
-        commands.append(&mut build_target.commands.clone());
 
         Ok(Self {
             optional_repos,
+            config_files,
             packages,
             services,
-            config_files,
-            commands,
         })
     }
 
@@ -101,21 +93,10 @@ impl InstallTarget {
     pub fn config_files(&self) -> &Vec<ConfigFile> {
         &self.config_files
     }
-
-    pub fn commands(&self) -> &Vec<Command> {
-        &self.commands
-    }
 }
 
 impl Display for InstallTarget {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        for pre_install in self.commands().iter().filter(|command| match command {
-            Command::PreInstall { .. } => true,
-            _ => false,
-        }) {
-            writeln!(f, "{}", pre_install)?;
-        }
-
         for repository in self.optional_repos() {
             writeln!(f, "{}", repository)?;
         }
@@ -133,13 +114,6 @@ impl Display for InstallTarget {
 
         for config_file in self.config_files() {
             writeln!(f, "{}", config_file)?;
-        }
-
-        for post_install in self.commands().iter().filter(|command| match command {
-            Command::PostInstall { .. } => true,
-            _ => false,
-        }) {
-            writeln!(f, "{}", post_install)?;
         }
 
         Ok(())

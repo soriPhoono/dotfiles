@@ -18,7 +18,8 @@ pub mod prelude {
 pub struct Repository {
     name: String,
 
-    bootstrap_commands: Vec<Command>,
+    bootstrap_commands: Vec<String>,
+    pacman_entry: String,
 }
 
 impl Repository {
@@ -26,21 +27,19 @@ impl Repository {
         Self {
             name: name.to_string(),
 
-            bootstrap_commands: vec![Command::post_install(&format!(
-                "{} {}",
-                AUR_HELPER, UPDATE_COMMAND
-            ))],
+            bootstrap_commands: vec![format!("{} {}", AUR_HELPER, UPDATE_COMMAND)],
+            pacman_entry: String::new(),
         }
     }
 
-    pub fn bootstrap_command(mut self, command: Command) -> Self {
-        self.bootstrap_commands.push(command);
+    pub fn bootstrap_command(mut self, command: &str) -> Self {
+        self.bootstrap_commands.push(command.to_string());
 
         self
     }
 
-    pub fn sort_command(mut self) -> Self {
-        self.bootstrap_commands.sort();
+    pub fn pacman_entry(mut self, entry: &str) -> Self {
+        self.pacman_entry = entry.to_string();
 
         self
     }
@@ -50,10 +49,20 @@ impl Display for Repository {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         if !self.bootstrap_commands.is_empty() {
             for command in &self.bootstrap_commands {
-                writeln!(f, "{}", command)?;
+                writeln!(f, "{} > /dev/null", command)?;
             }
         } else {
             log::warn!("Repository {} has no bootstrap commands", self.name);
+        }
+
+        if !self.pacman_entry.is_empty() {
+            writeln!(
+                f,
+                "echo -e '{}' | sudo tee -a /etc/pacman.conf",
+                self.pacman_entry
+            )?;
+        } else {
+            log::warn!("Repository {} has no pacman entry", self.name);
         }
 
         Ok(())
@@ -69,7 +78,8 @@ pub struct Package {
 
     from_archive: bool,
 
-    post_install: Vec<Command>,
+    post_install: Vec<String>,
+    config_files: Vec<ConfigFile>,
 }
 
 impl Package {
@@ -83,6 +93,7 @@ impl Package {
             from_archive: false,
 
             post_install: vec![],
+            config_files: vec![],
         }
     }
 
@@ -96,19 +107,8 @@ impl Package {
             from_archive: true,
 
             post_install: vec![],
+            config_files: vec![],
         }
-    }
-
-    pub fn with_conflict(mut self, conflict: &str) -> Self {
-        self.conflicts.push(conflict.to_string());
-
-        self
-    }
-
-    pub fn with_conflicts(mut self, conflicts: Vec<String>) -> Self {
-        self.conflicts.append(&mut conflicts.clone());
-
-        self
     }
 
     pub fn with_depend(mut self, depend: Package) -> Self {
@@ -117,14 +117,20 @@ impl Package {
         self
     }
 
-    pub fn with_depends(mut self, depends: Vec<Package>) -> Self {
-        self.depends.append(&mut depends.clone());
+    pub fn with_conflict(mut self, conflict: &str) -> Self {
+        self.conflicts.push(conflict.to_string());
 
         self
     }
 
-    pub fn post_install(mut self, command: Command) -> Self {
+    pub fn post_install(mut self, command: String) -> Self {
         self.post_install.push(command);
+
+        self
+    }
+
+    pub fn config_file(mut self, config_file: ConfigFile) -> Self {
+        self.config_files.push(config_file);
 
         self
     }
@@ -133,20 +139,24 @@ impl Package {
         &self.name
     }
 
-    pub fn conflicts(&self) -> &Vec<String> {
-        &self.conflicts
-    }
-
     pub fn depends(&self) -> &Vec<Package> {
         &self.depends
+    }
+
+    pub fn conflicts(&self) -> &Vec<String> {
+        &self.conflicts
     }
 
     pub fn from_archive(&self) -> bool {
         self.from_archive
     }
 
-    pub fn post_install_commands(&self) -> &Vec<Command> {
+    pub fn post_install_commands(&self) -> &Vec<String> {
         &self.post_install
+    }
+
+    pub fn config_files(&self) -> &Vec<ConfigFile> {
+        &self.config_files
     }
 }
 
@@ -164,9 +174,7 @@ impl Display for Package {
                         .map(|line| line.to_string())
                         .collect::<Vec<String>>(),
                     Err(why) => {
-                        log::warn!("Failed to check installed packages: {}", why);
-
-                        Vec::new()
+                        panic!("Failed to check installed packages: {}", why);
                     }
                 };
 
@@ -200,6 +208,14 @@ impl Display for Package {
             )?;
         } else {
             writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, self.name)?;
+        }
+
+        for command in &self.post_install {
+            writeln!(f, "{} > /dev/null", command)?;
+        }
+
+        for config_file in &self.config_files {
+            writeln!(f, "{}", config_file)?;
         }
 
         Ok(())
@@ -254,35 +270,28 @@ impl Service {
 
 impl Display for Service {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        if self.user {
+        write!(
+            f,
+            "{}systemctl {}{} {}",
+            if self.user { "" } else { "sudo " },
+            if self.user { "--user " } else { "" },
             if self.enable && self.start {
-                write!(f, "systemctl --user enable --now {}", self.name)
+                "enable --now"
             } else if self.enable {
-                write!(f, "systemctl --user enable {}", self.name)
+                "enable"
             } else if self.start {
-                write!(f, "systemctl --user start {}", self.name)
+                "start"
             } else {
-                log::debug!("System service queried for command, but not setup to produce any");
+                log::warn!("Service {} has no action", self.name);
 
-                Ok(())
-            }
-        } else {
-            if self.enable && self.start {
-                write!(f, "sudo systemctl enable --now {}", self.name)
-            } else if self.enable {
-                write!(f, "sudo systemctl enable {}", self.name)
-            } else if self.start {
-                write!(f, "sudo systemctl start {}", self.name)
-            } else {
-                log::debug!("System service queried for command, but not setup to produce any");
-
-                Ok(())
-            }
-        }
+                return Ok(());
+            },
+            self.name
+        )
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum Backup {
     None,
     Copy,
@@ -330,7 +339,7 @@ pub struct ConfigFile {
     source: PathBuf,
     backup: Backup,
 
-    to_write: String,
+    commands: Vec<String>,
 }
 
 impl ConfigFile {
@@ -339,7 +348,7 @@ impl ConfigFile {
             source: PathBuf::from_str(source).unwrap(),
             backup: Backup::None,
 
-            to_write: String::new(),
+            commands: Vec::new(),
         }
     }
 
@@ -349,8 +358,8 @@ impl ConfigFile {
         self
     }
 
-    pub fn to_write(mut self, to_write: String) -> Self {
-        self.to_write = to_write;
+    pub fn command(mut self, to_run: &str) -> Self {
+        self.commands.push(to_run.to_string());
 
         self
     }
@@ -360,51 +369,43 @@ impl Display for ConfigFile {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         let needs_sudo = self.source.starts_with(HOME);
 
-        write!(
-            f,
-            "{}echo \n{}\n | {}tee {} > /dev/null",
-            if let Backup::None = self.backup {
-                String::new()
-            } else {
-                format!(
-                    "{}{} {}{} && ",
-                    if needs_sudo { "sudo " } else { "" },
-                    self.backup,
-                    if self.source.is_dir() { "-r " } else { "" },
-                    if let Backup::Restore = self.backup {
-                        format!(
-                            "{} {}",
-                            self.source.join(".bak").to_str().ok_or_else(|| {
-                                log::warn!("Failed to convert path to string");
+        // backup file if needed
+        if self.backup != Backup::None {
+            let backup_target = self.source.join(".bak");
 
-                                fmt::Error
-                            })?,
-                            self.source.to_str().ok_or_else(|| {
-                                log::warn!("Failed to convert path to string");
+            let op_source = match self.backup {
+                Backup::Restore => &backup_target,
+                _ => self.source.as_path(),
+            };
 
-                                fmt::Error
-                            })?
-                        )
-                    } else {
-                        format!(
-                            "{} {}",
-                            self.source.to_str().ok_or_else(|| {
-                                log::warn!("Failed to convert path to string");
+            let op_dest = match self.backup {
+                Backup::Restore => self.source.as_path(),
+                _ => &backup_target,
+            };
 
-                                fmt::Error
-                            })?,
-                            self.source.join(".bak").to_str().ok_or_else(|| {
-                                log::warn!("Failed to convert path to string");
+            write!(
+                f,
+                "{}{} {}{} {}",
+                if needs_sudo { "sudo " } else { "" },
+                self.backup,
+                if self.source.is_dir() { "-r " } else { "" },
+                op_source.to_str().ok_or_else(|| {
+                    log::warn!("Failed to convert path to string");
 
-                                fmt::Error
-                            })?
-                        )
-                    }
-                )
-            },
-            self.to_write,
-            if needs_sudo { "sudo " } else { "" },
-            self.source.display(),
-        )
+                    fmt::Error
+                })?,
+                op_dest.to_str().ok_or_else(|| {
+                    log::warn!("Failed to convert path to string");
+
+                    fmt::Error
+                })?,
+            )?;
+        }
+
+        for command in &self.commands {
+            write!(f, "{} > /dev/null", command)?;
+        }
+
+        Ok(())
     }
 }
