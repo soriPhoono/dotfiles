@@ -7,6 +7,8 @@ pub mod prelude {
     pub use super::{InstallerConfig, Target, Version};
 }
 
+const HOME: &str = env!("HOME");
+
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct Target {
     depends: Vec<String>,
