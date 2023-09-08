@@ -7,14 +7,14 @@ use std::{
 
 use super::{
     prelude::get_output, AUR_HELPER, CHECK_COMMAND, HOME, INSTALL_COMMAND, REMOVE_COMMAND,
-    UNPACK_COMMAND, UPDATE_COMMAND,
+    REPO_HELPER, UNPACK_COMMAND, UPDATE_COMMAND,
 };
 
 pub mod prelude {
     pub use super::*;
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct Repository {
     name: String,
 
@@ -69,14 +69,21 @@ impl Display for Repository {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub enum PackageSource {
+    System,
+    Archive,
+    Aur,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct Package {
     name: String,
 
     depends: Vec<Package>,
     conflicts: Vec<String>,
 
-    from_archive: bool,
+    source: PackageSource,
 
     post_install: Vec<String>,
     config_files: Vec<ConfigFile>,
@@ -90,7 +97,7 @@ impl Package {
             conflicts: Vec::new(),
             depends: Vec::new(),
 
-            from_archive: false,
+            source: PackageSource::System,
 
             post_install: vec![],
             config_files: vec![],
@@ -104,7 +111,21 @@ impl Package {
             conflicts: Vec::new(),
             depends: Vec::new(),
 
-            from_archive: true,
+            source: PackageSource::Archive,
+
+            post_install: vec![],
+            config_files: vec![],
+        }
+    }
+
+    pub fn aur(name: &str) -> Self {
+        Self {
+            name: name.to_string(),
+
+            conflicts: Vec::new(),
+            depends: Vec::new(),
+
+            source: PackageSource::Aur,
 
             post_install: vec![],
             config_files: vec![],
@@ -147,8 +168,8 @@ impl Package {
         &self.conflicts
     }
 
-    pub fn from_archive(&self) -> bool {
-        self.from_archive
+    pub fn source(&self) -> &PackageSource {
+        &self.source
     }
 
     pub fn post_install_commands(&self) -> &Vec<String> {
@@ -162,10 +183,6 @@ impl Package {
 
 impl Display for Package {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        for depend in &self.depends {
-            write!(f, "{}", depend)?;
-        }
-
         if !self.conflicts.is_empty() {
             let current_installed =
                 match get_output(format!("{} {}", AUR_HELPER, CHECK_COMMAND).as_str()) {
@@ -188,8 +205,15 @@ impl Display for Package {
             }
         }
 
-        if self.from_archive {
-            writeln!(
+        for depend in &self.depends {
+            write!(f, "{}", depend)?;
+        }
+
+        match self.source {
+            PackageSource::System => {
+                writeln!(f, "{} {} {}", REPO_HELPER, INSTALL_COMMAND, self.name)?
+            }
+            PackageSource::Archive => writeln!(
                 f,
                 "{} {} https://archive.archlinux.org/packages/{}/{}/{}-{}.pkg.tar.zst",
                 AUR_HELPER,
@@ -205,10 +229,9 @@ impl Display for Package {
                 self.name,
                 self.name,
                 consts::ARCH,
-            )?;
-        } else {
-            writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, self.name)?;
-        }
+            )?,
+            PackageSource::Aur => writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, self.name)?,
+        };
 
         for command in &self.post_install {
             writeln!(f, "{} > /dev/null", command)?;
@@ -222,7 +245,7 @@ impl Display for Package {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct Service {
     user: bool,
 
@@ -299,24 +322,6 @@ pub enum Backup {
     Restore,
 }
 
-impl Backup {
-    pub fn none() -> Self {
-        Self::None
-    }
-
-    pub fn copy() -> Self {
-        Self::Copy
-    }
-
-    pub fn move_to() -> Self {
-        Self::Move
-    }
-
-    pub fn restore() -> Self {
-        Self::Restore
-    }
-}
-
 impl Display for Backup {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match self {
@@ -334,7 +339,7 @@ impl Display for Backup {
     }
 }
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct ConfigFile {
     source: PathBuf,
     backup: Backup,
