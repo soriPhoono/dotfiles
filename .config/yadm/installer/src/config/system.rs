@@ -127,9 +127,9 @@ impl Display for PackageGroup {
         for package in &self.install {
             match package {
                 Package::System { name, aur } => {
-                    if aur && self.aur_helper {
+                    if *aur && self.aur_helper {
                         writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, name)?;
-                    } else if aur {
+                    } else if *aur {
                         writeln!(
                             f,
                             "git clone https://aur.archlinux.org/{}.git /tmp/dfm/{}",
