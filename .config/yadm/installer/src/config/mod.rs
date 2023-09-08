@@ -15,15 +15,15 @@ pub mod prelude {
     pub use super::*;
 }
 
-const HOME: &str = env!("HOME");
-const TARGETS_DIR: &str = "/.config/yadm/targets/";
+pub const HOME: &str = env!("HOME");
+pub const TARGETS_DIR: &str = "/.config/yadm/targets/";
 
-const AUR_HELPER: &str = "paru";
-const CHECK_COMMAND: &str = "-Q";
-const UPDATE_COMMAND: &str = "-Syu --noconfirm";
-const INSTALL_COMMAND: &str = "-S --needed --noconfirm";
-const UNPACK_COMMAND: &str = "-U --noconfirm";
-const REMOVE_COMMAND: &str = "-R --noconfirm";
+pub const AUR_HELPER: &str = "paru";
+pub const CHECK_COMMAND: &str = "-Q";
+pub const UPDATE_COMMAND: &str = "-Syu --noconfirm";
+pub const INSTALL_COMMAND: &str = "-S --needed --noconfirm";
+pub const UNPACK_COMMAND: &str = "-U --noconfirm";
+pub const REMOVE_COMMAND: &str = "-R --noconfirm";
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct BuildTarget {
