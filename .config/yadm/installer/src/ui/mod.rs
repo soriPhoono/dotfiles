@@ -2,6 +2,7 @@ use std::{
     error, fs,
     io::{stdout, Stdout},
     path::{self, Path, PathBuf},
+    str::FromStr,
 };
 
 use crossterm::terminal::enable_raw_mode;
@@ -30,20 +31,25 @@ fn setup_terminal() -> Result<Console, Box<dyn error::Error>> {
 fn default_target(terminal: &Console) -> BuildTarget {
     let pacman_backup = "/etc/pacman.conf";
 
-    let config_files = if pacman_backup.exists() {
+    let config_files = if Path::new(&format!("{}.bak", pacman_backup)).exists() {
         log::info!("Found previous backup for pacman.conf");
 
-        ConfigFile::new(pacman_backup).backup()
+        vec![
+            ConfigFile::new(pacman_backup).backup(Backup::Restore),
+            ConfigFile::new("/etc/xdg/reflector/reflector.conf").backup(Backup::Restore),
+        ]
     } else {
         log::debug!("Failed to find previous backup for pacman.conf");
+
+        vec![]
     };
 
     BuildTarget {
-        depends: vec!["system/pacman".to_string()],
+        depends: vec!["system/cli".to_string()],
 
         optional_repos: vec![],
 
-        packages: vec![Package::system("base-devel")],
+        packages: vec![Package::system("reflector"), Package::system("")],
         config_files,
         services: vec![],
 
@@ -56,5 +62,5 @@ pub fn aquire_target() -> Result<InstallTarget, Box<dyn error::Error>> {
 
     let terminal = setup_terminal()?;
 
-    Ok(InstallTarget::new(default_target())?)
+    Ok(InstallTarget::new(default_target(&terminal))?)
 }
