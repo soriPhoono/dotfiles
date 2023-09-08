@@ -7,7 +7,7 @@ use std::{
 
 use super::{
     prelude::get_output, AUR_HELPER, CHECK_COMMAND, HOME, INSTALL_COMMAND, REMOVE_COMMAND,
-    UNPACK_COMMAND,
+    UNPACK_COMMAND, UPDATE_COMMAND,
 };
 
 pub mod prelude {
@@ -18,7 +18,7 @@ pub mod prelude {
 pub struct Repository {
     name: String,
 
-    bootstrap_commands: Vec<String>,
+    bootstrap_commands: Vec<Command>,
 }
 
 impl Repository {
@@ -26,12 +26,21 @@ impl Repository {
         Self {
             name: name.to_string(),
 
-            bootstrap_commands: Vec::new(),
+            bootstrap_commands: vec![Command::post_install(&format!(
+                "{} {}",
+                AUR_HELPER, UPDATE_COMMAND
+            ))],
         }
     }
 
-    pub fn bootstrap_command(mut self, command: String) -> Self {
+    pub fn bootstrap_command(mut self, command: Command) -> Self {
         self.bootstrap_commands.push(command);
+
+        self
+    }
+
+    pub fn sort_command(mut self) -> Self {
+        self.bootstrap_commands.sort();
 
         self
     }
@@ -59,6 +68,8 @@ pub struct Package {
     conflicts: Vec<String>,
 
     from_archive: bool,
+
+    post_install: Vec<Command>,
 }
 
 impl Package {
@@ -70,6 +81,8 @@ impl Package {
             depends: Vec::new(),
 
             from_archive: false,
+
+            post_install: vec![],
         }
     }
 
@@ -81,6 +94,8 @@ impl Package {
             depends: Vec::new(),
 
             from_archive: true,
+
+            post_install: vec![],
         }
     }
 
@@ -108,6 +123,12 @@ impl Package {
         self
     }
 
+    pub fn post_install(mut self, command: Command) -> Self {
+        self.post_install.push(command);
+
+        self
+    }
+
     pub fn name(&self) -> &str {
         &self.name
     }
@@ -122,6 +143,10 @@ impl Package {
 
     pub fn from_archive(&self) -> bool {
         self.from_archive
+    }
+
+    pub fn post_install_commands(&self) -> &Vec<Command> {
+        &self.post_install
     }
 }
 
@@ -381,59 +406,5 @@ impl Display for ConfigFile {
             if needs_sudo { "sudo " } else { "" },
             self.source.display(),
         )
-    }
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-pub enum Command {
-    PreInstall { command: String, sudo: bool },
-    PostInstall { command: String, sudo: bool },
-}
-
-impl Command {
-    pub fn pre_install(command: &str) -> Self {
-        Self::PreInstall {
-            command: command.to_string(),
-
-            sudo: false,
-        }
-    }
-
-    pub fn post_install(command: &str) -> Self {
-        Self::PostInstall {
-            command: command.to_string(),
-
-            sudo: false,
-        }
-    }
-
-    pub fn sudo(mut self) -> Self {
-        match self {
-            Self::PreInstall { ref mut sudo, .. } => *sudo = true,
-            Self::PostInstall { ref mut sudo, .. } => *sudo = true,
-        }
-
-        self
-    }
-}
-
-impl Display for Command {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        match self {
-            Self::PreInstall { command, sudo } => {
-                if *sudo {
-                    write!(f, "sudo {}", command)
-                } else {
-                    write!(f, "{}", command)
-                }
-            }
-            Self::PostInstall { command, sudo } => {
-                if *sudo {
-                    write!(f, "sudo {}", command)
-                } else {
-                    write!(f, "{}", command)
-                }
-            }
-        }
     }
 }
