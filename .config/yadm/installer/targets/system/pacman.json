@@ -36,7 +36,7 @@
       "name": "paru",
       "depends": [],
       "conflicts": [],
-      "from_archive": false,
+      "source": "System",
       "post_install": [],
       "config_files": [
         {
@@ -49,18 +49,10 @@
       ]
     },
     {
-      "name": "yadm",
-      "depends": [],
-      "conflicts": [],
-      "from_archive": false,
-      "post_install": [],
-      "config_files": []
-    },
-    {
       "name": "asp",
       "depends": [],
       "conflicts": [],
-      "from_archive": false,
+      "source": "System",
       "post_install": [],
       "config_files": []
     },
@@ -68,7 +60,7 @@
       "name": "bat",
       "depends": [],
       "conflicts": [],
-      "from_archive": false,
+      "source": "System",
       "post_install": [],
       "config_files": []
     },
@@ -76,7 +68,7 @@
       "name": "devtools",
       "depends": [],
       "conflicts": [],
-      "from_archive": false,
+      "source": "System",
       "post_install": [],
       "config_files": []
     },
@@ -84,7 +76,7 @@
       "name": "reflector",
       "depends": [],
       "conflicts": [],
-      "from_archive": false,
+      "source": "System",
       "post_install": [],
       "config_files": [
         {
@@ -100,7 +92,7 @@
       "name": "rsync",
       "depends": [],
       "conflicts": [],
-      "from_archive": false,
+      "source": "System",
       "post_install": [],
       "config_files": []
     }
