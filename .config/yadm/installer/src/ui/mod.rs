@@ -52,8 +52,6 @@ fn default_target(terminal: &Console) -> BuildTarget {
         packages: vec![Package::system("reflector"), Package::system("")],
         config_files,
         services: vec![],
-
-        commands: vec![],
     }
 }
 

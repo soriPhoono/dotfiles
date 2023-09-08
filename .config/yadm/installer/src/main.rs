@@ -15,7 +15,8 @@ use config::InstallTarget;
 use crate::{
     app::Commands,
     config::{
-        system::{Backup, Command, ConfigFile, Package, Repository},
+        prelude::Service,
+        system::{Backup, ConfigFile, Package, Repository},
         BuildTarget, AUR_HELPER, UPDATE_COMMAND,
     },
 };
@@ -57,8 +58,17 @@ fn main() -> Result<(), Box<dyn Error>> {
                 match target
                     .map(|target_path| {
                         InstallTarget::new(
-                            match serde_json::from_reader(BufReader::new(File::open(target_path)?))
-                            {
+                            match serde_json::from_reader(BufReader::new(match File::open(target_path) {
+                                Ok(file) => file,
+                                Err(why) => {
+                                    log::warn!(
+                                        "Failed to open target file, falling back to interactive mode!\n{}",
+                                        why
+                                    );
+
+                                    return ui::aquire_target();
+                                }
+                            })) {
                                 Ok(target) => target,
                                 Err(why) => {
                                     log::warn!(
@@ -68,8 +78,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
                                     return ui::aquire_target();
                                 }
-                            },
-                        )
+                            },)
                         .map_err(|why| why.into())
                     })
                     .transpose()?
@@ -82,40 +91,7 @@ fn main() -> Result<(), Box<dyn Error>> {
                 },
             );
         }
-        Commands::Create { target } => {
-            serde_json::to_writer_pretty(
-                BufWriter::new(File::create(target)?),
-                &BuildTarget {
-                    depends: vec![],
-
-                    optional_repos: vec![
-                        Repository::new("chaotic-aur")
-                            .bootstrap_command(Command::pre_install("sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com"))
-                            .bootstrap_command(Command::pre_install("sudo pacman-key --lsign-key 3056513887B78AEB"))
-                            .bootstrap_command(Command::pre_install("sudo pacman -U --noconfirm --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'"))
-                            .bootstrap_command(Command::pre_install("echo -e \"[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist\" | sudo tee -a /etc/pacman.conf"))
-                            .sort_command(),
-                    ],
-                    packages: vec![
-                        Package::system("paru")
-                            .post_install(Command::post_install()),
-                        Package::system("asp"),
-                        Package::system("bat"),
-                        Package::system("devtools"),
-                        Package::system("reflector"),
-                        Package::system("rsync"),
-                    ],
-                    services: vec![],
-
-                    commands: vec![
-                        Command::pre_install("sudo sed -i 's/#Color/Color/' /etc/pacman.conf"),
-                        Command::pre_install("sudo sed -i 's/#ParallelDownloads.*/ParallelDownloads = 5/' /etc/pacman.conf"),
-                        Command::pre_install("sudo git clone https://aur.archlinux.org/paru.git /tmp/dfm/paru"),
-                        Command::pre_install("cd /tmp/dfm/paru && makepkg -si --noconfirm"),
-                    ],
-                }
-            )?;
-        }
+        Commands::Create { target } => {}
     }
 
     Ok(())
