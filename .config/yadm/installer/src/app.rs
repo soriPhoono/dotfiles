@@ -20,6 +20,11 @@ pub enum Commands {
         #[arg(short, long)]
         target: Option<PathBuf>,
     },
+
+    Create {
+        #[arg(short, long)]
+        target: PathBuf,
+    },
 }
 
 pub fn create_subprocess(command: &str) -> Result<Child, Box<dyn error::Error>> {
