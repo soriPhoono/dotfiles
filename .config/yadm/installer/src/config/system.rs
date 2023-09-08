@@ -1,10 +1,14 @@
 use std::{
     env::consts,
     fmt::{self, Display, Formatter},
-    path::{Path, PathBuf},
+    path::PathBuf,
+    str::FromStr,
 };
 
-use super::{AUR_HELPER, HOME, INSTALL_COMMAND, UNPACK_COMMAND};
+use super::{
+    prelude::get_output, AUR_HELPER, CHECK_COMMAND, HOME, INSTALL_COMMAND, REMOVE_COMMAND,
+    UNPACK_COMMAND,
+};
 
 pub mod prelude {
     pub use super::*;
@@ -51,8 +55,8 @@ impl Display for Repository {
 pub struct Package {
     name: String,
 
+    depends: Vec<Package>,
     conflicts: Vec<String>,
-    depends: Vec<String>,
 
     from_archive: bool,
 }
@@ -92,25 +96,70 @@ impl Package {
         self
     }
 
-    pub fn with_depend(mut self, depend: &str) -> Self {
-        self.depends.push(depend.to_string());
+    pub fn with_depend(mut self, depend: Package) -> Self {
+        self.depends.push(depend);
 
         self
     }
 
-    pub fn with_depends(mut self, depends: Vec<String>) -> Self {
+    pub fn with_depends(mut self, depends: Vec<Package>) -> Self {
         self.depends.append(&mut depends.clone());
 
         self
+    }
+
+    pub fn name(&self) -> &str {
+        &self.name
+    }
+
+    pub fn conflicts(&self) -> &Vec<String> {
+        &self.conflicts
+    }
+
+    pub fn depends(&self) -> &Vec<Package> {
+        &self.depends
+    }
+
+    pub fn from_archive(&self) -> bool {
+        self.from_archive
     }
 }
 
 impl Display for Package {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        for depend in &self.depends {
+            write!(f, "{}", depend)?;
+        }
+
+        if !self.conflicts.is_empty() {
+            let current_installed =
+                match get_output(format!("{} {}", AUR_HELPER, CHECK_COMMAND).as_str()) {
+                    Ok(output) => output
+                        .split('\n')
+                        .map(|line| line.to_string())
+                        .collect::<Vec<String>>(),
+                    Err(why) => {
+                        log::warn!("Failed to check installed packages: {}", why);
+
+                        Vec::new()
+                    }
+                };
+
+            for conflict in &self.conflicts {
+                if current_installed
+                    .iter()
+                    .any(|installed| installed.contains(conflict))
+                {
+                    writeln!(f, "{} {} {}", AUR_HELPER, REMOVE_COMMAND, conflict)?;
+                }
+            }
+        }
+
         if self.from_archive {
             writeln!(
                 f,
-                "sudo pacman {} https://archive.archlinux.org/packages/{}/{}/{}-{}.pkg.tar.zst",
+                "{} {} https://archive.archlinux.org/packages/{}/{}/{}-{}.pkg.tar.zst",
+                AUR_HELPER,
                 UNPACK_COMMAND,
                 match self.name.chars().nth(0) {
                     Some(letter) => letter,
@@ -211,8 +260,8 @@ impl Display for Service {
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub enum Backup {
     None,
-    Copy(PathBuf),
-    Move(PathBuf),
+    Copy,
+    Move,
 }
 
 impl Backup {
@@ -220,48 +269,24 @@ impl Backup {
         Self::None
     }
 
-    pub fn copy(backup_path: PathBuf) -> Self {
-        Self::Copy(backup_path)
+    pub fn copy() -> Self {
+        Self::Copy
     }
 
-    pub fn move_to(backup_path: PathBuf) -> Self {
-        Self::Move(backup_path)
+    pub fn move_to() -> Self {
+        Self::Move
     }
 }
 
 impl Display for Backup {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match self {
-            Self::None => write!(f, "true"),
-            Self::Copy(backup_path) => {
-                if backup_path.starts_with(HOME) {
-                    if backup_path.is_dir() {
-                        write!(f, "cp -r {} {}", self, backup_path.display())
-                    } else {
-                        write!(f, "cp {} {}", self, backup_path.display())
-                    }
-                } else {
-                    if backup_path.is_dir() {
-                        write!(f, "sudo cp -r {} {}", self, backup_path.display())
-                    } else {
-                        write!(f, "sudo cp {} {}", self, backup_path.display())
-                    }
-                }
+            Self::None => write!(f, ""),
+            Self::Copy => {
+                write!(f, "cp")
             }
-            Self::Move(backup_path) => {
-                if backup_path.starts_with(HOME) {
-                    if backup_path.is_dir() {
-                        write!(f, "mv -r {} {}", self, backup_path.display())
-                    } else {
-                        write!(f, "mv {} {}", self, backup_path.display())
-                    }
-                } else {
-                    if backup_path.is_dir() {
-                        write!(f, "sudo mv -r {} {}", self, backup_path.display())
-                    } else {
-                        write!(f, "sudo mv {} {}", self, backup_path.display())
-                    }
-                }
+            Self::Move => {
+                write!(f, "mv")
             }
         }
     }
@@ -276,9 +301,9 @@ pub struct ConfigFile {
 }
 
 impl ConfigFile {
-    pub fn new(source: &Path) -> Self {
+    pub fn new(source: &str) -> Self {
         Self {
-            source: source.to_path_buf(),
+            source: PathBuf::from_str(source).unwrap(),
             backup: Backup::None,
 
             to_write: String::new(),
@@ -303,16 +328,65 @@ impl Display for ConfigFile {
         if self.source.starts_with(HOME) {
             write!(
                 f,
-                "{} && echo \"{}\" | tee {} > /dev/null",
+                "{}echo \"{}\" | tee {} > /dev/null",
+                if let Backup::None = self.backup {
+                    String::new()
+                } else {
+                    format!(
+                        "{} {}{} {} && ",
+                        format!("sudo {}", self.backup),
+                        if self.source.is_dir() { "-r " } else { "" },
+                        self.source.to_str().ok_or_else(|| {
+                            log::warn!("Failed to convert path to string");
+
+                            fmt::Error
+                        })?,
+                        self.source.join(".bak").to_str().ok_or_else(|| {
+                            log::warn!("Failed to convert path to string");
+
+                            fmt::Error
+                        })?
+                    )
+                },
                 self.to_write,
                 self.source.display(),
-                self.backup
             )
         } else {
             write!(
                 f,
-                "{} && echo \"{}\" | sudo tee {} > /dev/null",
-                self.backup,
+                "{}echo \"{}\" | sudo tee {} > /dev/null",
+                if let Backup::None = self.backup {
+                    String::new()
+                } else {
+                    format!(
+                        "{} {}{} {} && ",
+                        self.backup,
+                        if self.source.is_dir() { "-r " } else { "" },
+                        self.source.to_str().ok_or_else(|| {
+                            log::warn!("Failed to convert path to string");
+
+                            fmt::Error
+                        })?,
+                        self.source
+                            .with_extension(format!(
+                                "{}.bak",
+                                self.source
+                                    .extension()
+                                    .and_then(|extension| extension.to_str())
+                                    .ok_or_else(|| {
+                                        log::warn!("Failed to get extension");
+
+                                        fmt::Error
+                                    })?
+                            ))
+                            .to_str()
+                            .ok_or_else(|| {
+                                log::warn!("Failed to convert path to string");
+
+                                fmt::Error
+                            })?
+                    )
+                },
                 self.to_write,
                 self.source.display(),
             )
