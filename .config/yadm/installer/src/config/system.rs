@@ -94,12 +94,74 @@ pub struct Repository {
     bootstrap_commands: Vec<String>,
 }
 
+pub trait Package {
+    fn get_install_command(&self) -> String;
+}
+
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-pub struct Package {
+pub struct SystemPackage {
     name: String,
     version: Option<Version>,
+}
 
-    requires_aur: bool,
+impl SystemPackage {
+    pub fn new(name: &str) -> Self {
+        Self {
+            name: name.to_string(),
+            version: None,
+        }
+    }
+
+    pub fn with_version(mut self, version: Version) -> Self {
+        self.version = Some(version);
+
+        self
+    }
+}
+
+impl Package for SystemPackage {
+    fn get_install_command(&self) -> String {
+        let mut command = String::new();
+
+        command.push_str("sudo pacman -S --needed --noconfirm ");
+
+        command
+    }
+}
+
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub struct AurPackage {
+    name: String,
+
+    build_directory: PathBuf,
+}
+
+impl AurPackage {
+    pub fn new(name: &str) -> Self {
+        Self {
+            name: name.to_string(),
+
+            build_directory: PathBuf::from("/tmp"),
+        }
+    }
+}
+
+impl Package for AurPackage {
+    fn get_install_command(&self) -> String {
+        let mut command = String::new();
+
+        command.push_str(
+            format!(
+                "git clone https://aur.archlinux.org/{}.git /tmp/{}",
+                self.name, self.name
+            )
+            .as_str(),
+        );
+        command.push_str(format!("&& cd /tmp/{}", self.name).as_str());
+        command.push_str("&& makepkg -si");
+
+        command
+    }
 }
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
