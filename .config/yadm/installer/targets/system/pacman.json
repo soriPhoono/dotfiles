@@ -1,0 +1,25 @@
+{
+    "depends": [],
+    "optional_repos": [
+        {
+            "name": "multilib",
+            "bootstrap_commands": [
+                "sudo sed -i 's/#\\[multilib\\]/\\[multilib\\]/' /etc/pacman.conf",
+                "sudo sed -i '/\\[multilib\\]/!b;n;cInclude = \/etc\/pacman.d\/mirrorlist' /etc/pacman.conf"
+            ]
+        },
+        {
+            "name": "chaotic-aur",
+            "bootstrap_commands": [
+                "sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com",
+                "sudo pacman-key --lsign-key 3056513887B78AEB",
+                "sudo pacman -U --noconfirm --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'",
+                "echo -e \"[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist\" | sudo tee -a /etc/pacman.conf"
+            ]
+        }
+    ],
+    "packages": [],
+    "services": [],
+    "config_files": [],
+    "commands": []
+}
