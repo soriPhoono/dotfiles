@@ -1,91 +1,20 @@
 use std::{
-    error,
+    env::consts,
     fmt::{self, Display, Formatter},
-    path::PathBuf,
-    str::FromStr,
+    path::{Path, PathBuf},
 };
 
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-pub struct Version {
-    major: u8,
-    minor: u8,
-    patch: Option<u8>,
+use super::HOME;
+
+pub mod prelude {
+    pub use super::*;
 }
 
-impl Version {
-    pub fn new(major: u8, minor: u8) -> Self {
-        Self {
-            major,
-            minor,
-            patch: None,
-        }
-    }
-
-    pub fn with_patch(mut self, patch: u8) -> Self {
-        self.patch = Some(patch);
-
-        self
-    }
-
-    pub fn major(&self) -> u8 {
-        self.major
-    }
-
-    pub fn minor(&self) -> u8 {
-        self.minor
-    }
-
-    pub fn patch(&self) -> Option<u8> {
-        self.patch.as_ref().map(|patch| *patch)
-    }
-}
-
-impl Default for Version {
-    fn default() -> Self {
-        Self::new(0, 1)
-    }
-}
-
-impl Display for Version {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        write!(f, "{}.{}", self.major, self.minor)?;
-
-        if let Some(patch) = &self.patch {
-            write!(f, ".{}", patch)
-        } else {
-            Ok(())
-        }
-    }
-}
-
-impl FromStr for Version {
-    type Err = Box<dyn error::Error>;
-
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        let mut version_parts = s.split(".");
-
-        let major = version_parts
-            .next()
-            .map(|major_str| major_str.parse())
-            .transpose()?
-            .ok_or_else(|| "Failed to find major version component")?;
-        let minor = version_parts
-            .next()
-            .map(|minor_str| minor_str.parse())
-            .transpose()?
-            .ok_or_else(|| "Failed to find minor version component")?;
-        let patch = version_parts
-            .next()
-            .map(|patch_str| patch_str.parse())
-            .transpose()?;
-
-        Ok(Self {
-            major,
-            minor,
-            patch,
-        })
-    }
-}
+const AUR_HELPER: &str = "paru";
+const UPDATE_COMMAND: &str = "-Syu --noconfirm";
+const INSTALL_COMMAND: &str = "-S --needed --noconfirm";
+const UNPACK_COMMAND: &str = "-U --noconfirm";
+const REMOVE_COMMAND: &str = "-R --noconfirm";
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct Repository {
@@ -94,73 +23,148 @@ pub struct Repository {
     bootstrap_commands: Vec<String>,
 }
 
-pub trait Package {
-    fn get_install_command(&self) -> String;
-}
-
-#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-pub struct SystemPackage {
-    name: String,
-    version: Option<Version>,
-}
-
-impl SystemPackage {
+impl Repository {
     pub fn new(name: &str) -> Self {
         Self {
             name: name.to_string(),
-            version: None,
+
+            bootstrap_commands: Vec::new(),
         }
     }
 
-    pub fn with_version(mut self, version: Version) -> Self {
-        self.version = Some(version);
+    pub fn bootstrap_command(mut self, command: String) -> Self {
+        self.bootstrap_commands.push(command);
 
         self
     }
 }
 
-impl Package for SystemPackage {
-    fn get_install_command(&self) -> String {
-        let mut command = String::new();
+impl Display for Repository {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if !self.bootstrap_commands.is_empty() {
+            for command in &self.bootstrap_commands {
+                writeln!(f, "{}", command)?;
+            }
+        } else {
+            log::warn!("Repository {} has no bootstrap commands", self.name);
+        }
 
-        command.push_str("sudo pacman -S --needed --noconfirm ");
-
-        command
+        Ok(())
     }
 }
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-pub struct AurPackage {
-    name: String,
-
-    build_directory: PathBuf,
+pub enum Package {
+    System { name: String, aur: bool },
+    Archive(String),
 }
 
-impl AurPackage {
-    pub fn new(name: &str) -> Self {
-        Self {
+impl Package {
+    pub fn system(name: &str) -> Self {
+        Self::System {
             name: name.to_string(),
 
-            build_directory: PathBuf::from("/tmp"),
+            aur: false,
         }
+    }
+
+    pub fn aur(name: &str) -> Self {
+        Self::System {
+            name: name.to_string(),
+
+            aur: true,
+        }
+    }
+
+    pub fn archive(name: &str) -> Self {
+        Self::Archive(name.to_string())
     }
 }
 
-impl Package for AurPackage {
-    fn get_install_command(&self) -> String {
-        let mut command = String::new();
+pub struct PackageGroup {
+    aur_helper: bool,
 
-        command.push_str(
-            format!(
-                "git clone https://aur.archlinux.org/{}.git /tmp/{}",
-                self.name, self.name
-            )
-            .as_str(),
-        );
-        command.push_str(format!("&& cd /tmp/{}", self.name).as_str());
-        command.push_str("&& makepkg -si");
+    install: Vec<Package>,
+}
 
-        command
+impl PackageGroup {
+    pub fn new() -> Self {
+        Self {
+            aur_helper: false,
+
+            install: Vec::new(),
+        }
+    }
+
+    pub fn aur_helper(mut self, aur_helper: bool) -> Self {
+        self.aur_helper = aur_helper;
+
+        self
+    }
+
+    pub fn install(mut self, package: Package) -> Self {
+        self.install.push(package);
+
+        self
+    }
+
+    pub fn install_many(mut self, packages: Vec<Package>) -> Self {
+        self.install.extend(packages);
+
+        self
+    }
+}
+
+impl Display for PackageGroup {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if self.aur_helper {
+            writeln!(f, "paru {}", UPDATE_COMMAND)?; // TODO: migrate to controller
+        } else {
+            writeln!(f, "sudo pacman {}", UPDATE_COMMAND)?; // TODO: migrate to controller
+            writeln!(f, "sudo mkdir --parents /tmp/dfm/")?; // TODO: migrate to controller
+        }
+
+        for package in &self.install {
+            match package {
+                Package::System { name, aur } => {
+                    if aur && self.aur_helper {
+                        writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, name)?;
+                    } else if aur {
+                        writeln!(
+                            f,
+                            "git clone https://aur.archlinux.org/{}.git /tmp/dfm/{}",
+                            name, name
+                        )?;
+                        writeln!(f, "cd /tmp/dfm/{}", name)?;
+                        writeln!(f, "makepkg -si --noconfirm")?;
+                    } else if self.aur_helper {
+                        writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, name)?;
+                    } else {
+                        writeln!(f, "sudo pacman {} {}", INSTALL_COMMAND, name)?;
+                    }
+                }
+                Package::Archive(name) => {
+                    writeln!(
+                        f,
+                        "sudo pacman {} https://archive.archlinux.org/packages/{}/{}/{}-{}.pkg.tar.zst",
+                        UNPACK_COMMAND,
+                        match name.chars().nth(0) {
+                            Some(letter) => letter,
+                            None => {
+                                log::warn!("Package has no name");
+
+                                return Ok(());
+                            }
+                        },
+                        name,
+                        name,
+                        consts::ARCH,
+                    )?;
+                }
+            }
+        }
+
+        Ok(())
     }
 }
 
@@ -241,20 +245,113 @@ impl Display for Service {
 }
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-pub enum ConfigFile {
-    CopyToBackup(PathBuf),
-    MoveToBackup(PathBuf),
+pub enum Backup {
+    None,
+    Copy(PathBuf),
+    Move(PathBuf),
+}
+
+impl Backup {
+    pub fn none() -> Self {
+        Self::None
+    }
+
+    pub fn copy(backup_path: PathBuf) -> Self {
+        Self::Copy(backup_path)
+    }
+
+    pub fn move_to(backup_path: PathBuf) -> Self {
+        Self::Move(backup_path)
+    }
+}
+
+impl Display for Backup {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::None => write!(f, "true"),
+            Self::Copy(backup_path) => {
+                if backup_path.starts_with(HOME) {
+                    if backup_path.is_dir() {
+                        write!(f, "cp -r {} {}", self, backup_path.display())
+                    } else {
+                        write!(f, "cp {} {}", self, backup_path.display())
+                    }
+                } else {
+                    if backup_path.is_dir() {
+                        write!(f, "sudo cp -r {} {}", self, backup_path.display())
+                    } else {
+                        write!(f, "sudo cp {} {}", self, backup_path.display())
+                    }
+                }
+            }
+            Self::Move(backup_path) => {
+                if backup_path.starts_with(HOME) {
+                    if backup_path.is_dir() {
+                        write!(f, "mv -r {} {}", self, backup_path.display())
+                    } else {
+                        write!(f, "mv {} {}", self, backup_path.display())
+                    }
+                } else {
+                    if backup_path.is_dir() {
+                        write!(f, "sudo mv -r {} {}", self, backup_path.display())
+                    } else {
+                        write!(f, "sudo mv {} {}", self, backup_path.display())
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub struct ConfigFile {
+    source: PathBuf,
+    backup: Backup,
+
+    to_write: String,
+}
+
+impl ConfigFile {
+    pub fn new(source: Path) -> Self {
+        Self {
+            source: source.to_path_buf(),
+            backup: Backup::None,
+
+            to_write: String::new(),
+        }
+    }
+
+    pub fn backup(mut self, backup: Backup) -> Self {
+        self.backup = backup;
+
+        self
+    }
+
+    pub fn to_write(mut self, to_write: String) -> Self {
+        self.to_write = to_write;
+
+        self
+    }
 }
 
 impl Display for ConfigFile {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        match self {
-            Self::CopyToBackup(path) => {
-                write!(f, "sudo cp {} {}.bak", path.display(), path.display())
-            }
-            Self::MoveToBackup(path) => {
-                write!(f, "sudo mv {} {}.bak", path.display(), path.display())
-            }
+        if self.source.starts_with(HOME) {
+            write!(
+                f,
+                "{} && echo \"{}\" | tee {} > /dev/null",
+                self.to_write,
+                self.source.display(),
+                self.backup
+            )
+        } else {
+            write!(
+                f,
+                "{} && echo \"{}\" | sudo tee {} > /dev/null",
+                self.backup,
+                self.to_write,
+                self.source.display(),
+            )
         }
     }
 }
