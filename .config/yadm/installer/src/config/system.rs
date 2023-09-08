@@ -262,6 +262,7 @@ pub enum Backup {
     None,
     Copy,
     Move,
+    Restore,
 }
 
 impl Backup {
@@ -276,6 +277,10 @@ impl Backup {
     pub fn move_to() -> Self {
         Self::Move
     }
+
+    pub fn restore() -> Self {
+        Self::Restore
+    }
 }
 
 impl Display for Backup {
@@ -286,6 +291,9 @@ impl Display for Backup {
                 write!(f, "cp")
             }
             Self::Move => {
+                write!(f, "mv")
+            }
+            Self::Restore => {
                 write!(f, "mv")
             }
         }
@@ -325,72 +333,54 @@ impl ConfigFile {
 
 impl Display for ConfigFile {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        if self.source.starts_with(HOME) {
-            write!(
-                f,
-                "{}echo \"{}\" | tee {} > /dev/null",
-                if let Backup::None = self.backup {
-                    String::new()
-                } else {
-                    format!(
-                        "{} {}{} {} && ",
-                        format!("sudo {}", self.backup),
-                        if self.source.is_dir() { "-r " } else { "" },
-                        self.source.to_str().ok_or_else(|| {
-                            log::warn!("Failed to convert path to string");
+        let needs_sudo = self.source.starts_with(HOME);
 
-                            fmt::Error
-                        })?,
-                        self.source.join(".bak").to_str().ok_or_else(|| {
-                            log::warn!("Failed to convert path to string");
+        write!(
+            f,
+            "{}echo \n{}\n | {}tee {} > /dev/null",
+            if let Backup::None = self.backup {
+                String::new()
+            } else {
+                format!(
+                    "{}{} {}{} && ",
+                    if needs_sudo { "sudo " } else { "" },
+                    self.backup,
+                    if self.source.is_dir() { "-r " } else { "" },
+                    if let Backup::Restore = self.backup {
+                        format!(
+                            "{} {}",
+                            self.source.join(".bak").to_str().ok_or_else(|| {
+                                log::warn!("Failed to convert path to string");
 
-                            fmt::Error
-                        })?
-                    )
-                },
-                self.to_write,
-                self.source.display(),
-            )
-        } else {
-            write!(
-                f,
-                "{}echo \"{}\" | sudo tee {} > /dev/null",
-                if let Backup::None = self.backup {
-                    String::new()
-                } else {
-                    format!(
-                        "{} {}{} {} && ",
-                        self.backup,
-                        if self.source.is_dir() { "-r " } else { "" },
-                        self.source.to_str().ok_or_else(|| {
-                            log::warn!("Failed to convert path to string");
-
-                            fmt::Error
-                        })?,
-                        self.source
-                            .with_extension(format!(
-                                "{}.bak",
-                                self.source
-                                    .extension()
-                                    .and_then(|extension| extension.to_str())
-                                    .ok_or_else(|| {
-                                        log::warn!("Failed to get extension");
-
-                                        fmt::Error
-                                    })?
-                            ))
-                            .to_str()
-                            .ok_or_else(|| {
+                                fmt::Error
+                            })?,
+                            self.source.to_str().ok_or_else(|| {
                                 log::warn!("Failed to convert path to string");
 
                                 fmt::Error
                             })?
-                    )
-                },
-                self.to_write,
-                self.source.display(),
-            )
-        }
+                        )
+                    } else {
+                        format!(
+                            "{} {}",
+                            self.source.to_str().ok_or_else(|| {
+                                log::warn!("Failed to convert path to string");
+
+                                fmt::Error
+                            })?,
+                            self.source.join(".bak").to_str().ok_or_else(|| {
+                                log::warn!("Failed to convert path to string");
+
+                                fmt::Error
+                            })?
+                        )
+                    }
+                )
+            },
+            self.to_write,
+            if needs_sudo { "sudo " } else { "" },
+            self.source.display(),
+        )
     }
 }
 
