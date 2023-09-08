@@ -10,12 +10,6 @@ pub mod prelude {
     pub use super::*;
 }
 
-const AUR_HELPER: &str = "paru";
-const UPDATE_COMMAND: &str = "-Syu --noconfirm";
-const INSTALL_COMMAND: &str = "-S --needed --noconfirm";
-const UNPACK_COMMAND: &str = "-U --noconfirm";
-const REMOVE_COMMAND: &str = "-R --noconfirm";
-
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct Repository {
     name: String,
@@ -55,116 +49,17 @@ impl Display for Repository {
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub enum Package {
-    System { name: String, aur: bool },
+    System(String),
     Archive(String),
 }
 
 impl Package {
     pub fn system(name: &str) -> Self {
-        Self::System {
-            name: name.to_string(),
-
-            aur: false,
-        }
-    }
-
-    pub fn aur(name: &str) -> Self {
-        Self::System {
-            name: name.to_string(),
-
-            aur: true,
-        }
+        Self::System(name.to_string())
     }
 
     pub fn archive(name: &str) -> Self {
         Self::Archive(name.to_string())
-    }
-}
-
-pub struct PackageGroup {
-    aur_helper: bool,
-
-    install: Vec<Package>,
-}
-
-impl PackageGroup {
-    pub fn new() -> Self {
-        Self {
-            aur_helper: false,
-
-            install: Vec::new(),
-        }
-    }
-
-    pub fn aur_helper(mut self, aur_helper: bool) -> Self {
-        self.aur_helper = aur_helper;
-
-        self
-    }
-
-    pub fn install(mut self, package: Package) -> Self {
-        self.install.push(package);
-
-        self
-    }
-
-    pub fn install_many(mut self, packages: Vec<Package>) -> Self {
-        self.install.extend(packages);
-
-        self
-    }
-}
-
-impl Display for PackageGroup {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        if self.aur_helper {
-            writeln!(f, "paru {}", UPDATE_COMMAND)?; // TODO: migrate to controller
-        } else {
-            writeln!(f, "sudo pacman {}", UPDATE_COMMAND)?; // TODO: migrate to controller
-            writeln!(f, "sudo mkdir --parents /tmp/dfm/")?; // TODO: migrate to controller
-        }
-
-        for package in &self.install {
-            match package {
-                Package::System { name, aur } => {
-                    if *aur && self.aur_helper {
-                        writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, name)?;
-                    } else if *aur {
-                        writeln!(
-                            f,
-                            "git clone https://aur.archlinux.org/{}.git /tmp/dfm/{}",
-                            name, name
-                        )?;
-                        writeln!(f, "cd /tmp/dfm/{}", name)?;
-                        writeln!(f, "makepkg -si --noconfirm")?;
-                    } else if self.aur_helper {
-                        writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, name)?;
-                    } else {
-                        writeln!(f, "sudo pacman {} {}", INSTALL_COMMAND, name)?;
-                    }
-                }
-                Package::Archive(name) => {
-                    writeln!(
-                        f,
-                        "sudo pacman {} https://archive.archlinux.org/packages/{}/{}/{}-{}.pkg.tar.zst",
-                        UNPACK_COMMAND,
-                        match name.chars().nth(0) {
-                            Some(letter) => letter,
-                            None => {
-                                log::warn!("Package has no name");
-
-                                return Ok(());
-                            }
-                        },
-                        name,
-                        name,
-                        consts::ARCH,
-                    )?;
-                }
-            }
-        }
-
-        Ok(())
     }
 }
 
@@ -352,6 +247,60 @@ impl Display for ConfigFile {
                 self.to_write,
                 self.source.display(),
             )
+        }
+    }
+}
+
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
+pub enum Command {
+    PreInstall { command: String, sudo: bool },
+    PostInstall { command: String, sudo: bool },
+}
+
+impl Command {
+    pub fn pre_install(command: &str) -> Self {
+        Self::PreInstall {
+            command: command.to_string(),
+
+            sudo: false,
+        }
+    }
+
+    pub fn post_install(command: &str) -> Self {
+        Self::PostInstall {
+            command: command.to_string(),
+
+            sudo: false,
+        }
+    }
+
+    pub fn sudo(mut self) -> Self {
+        match self {
+            Self::PreInstall { ref mut sudo, .. } => *sudo = true,
+            Self::PostInstall { ref mut sudo, .. } => *sudo = true,
+        }
+
+        self
+    }
+}
+
+impl Display for Command {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        match self {
+            Self::PreInstall { command, sudo } => {
+                if *sudo {
+                    write!(f, "sudo {}", command)
+                } else {
+                    write!(f, "{}", command)
+                }
+            }
+            Self::PostInstall { command, sudo } => {
+                if *sudo {
+                    write!(f, "sudo {}", command)
+                } else {
+                    write!(f, "{}", command)
+                }
+            }
         }
     }
 }
