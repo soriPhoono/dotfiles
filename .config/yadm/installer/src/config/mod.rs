@@ -121,29 +121,7 @@ impl Display for InstallTarget {
         writeln!(f, "paru {}", UPDATE_COMMAND)?; // TODO: migrate to controller
 
         for package in self.packages() {
-            match package {
-                Package::System(name) => {
-                    writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, name)?;
-                }
-                Package::Archive(name) => {
-                    writeln!(
-                        f,
-                        "sudo pacman {} https://archive.archlinux.org/packages/{}/{}/{}-{}.pkg.tar.zst",
-                        UNPACK_COMMAND,
-                        match name.chars().nth(0) {
-                            Some(letter) => letter,
-                            None => {
-                                log::warn!("Package has no name");
-
-                                return Ok(());
-                            }
-                        },
-                        name,
-                        name,
-                        consts::ARCH,
-                    )?;
-                }
-            }
+            
         }
 
         for service in self.services() {

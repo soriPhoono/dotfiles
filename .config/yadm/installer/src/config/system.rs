@@ -4,7 +4,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use super::HOME;
+use super::{AUR_HELPER, HOME, INSTALL_COMMAND, UNPACK_COMMAND};
 
 pub mod prelude {
     pub use super::*;
@@ -48,18 +48,87 @@ impl Display for Repository {
 }
 
 #[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
-pub enum Package {
-    System(String),
-    Archive(String),
+pub struct Package {
+    name: String,
+
+    conflicts: Vec<String>,
+    depends: Vec<String>,
+
+    from_archive: bool,
 }
 
 impl Package {
     pub fn system(name: &str) -> Self {
-        Self::System(name.to_string())
+        Self {
+            name: name.to_string(),
+
+            conflicts: Vec::new(),
+            depends: Vec::new(),
+
+            from_archive: false,
+        }
     }
 
     pub fn archive(name: &str) -> Self {
-        Self::Archive(name.to_string())
+        Self {
+            name: name.to_string(),
+
+            conflicts: Vec::new(),
+            depends: Vec::new(),
+
+            from_archive: true,
+        }
+    }
+
+    pub fn with_conflict(mut self, conflict: &str) -> Self {
+        self.conflicts.push(conflict.to_string());
+
+        self
+    }
+
+    pub fn with_conflicts(mut self, conflicts: Vec<String>) -> Self {
+        self.conflicts.append(&mut conflicts.clone());
+
+        self
+    }
+
+    pub fn with_depend(mut self, depend: &str) -> Self {
+        self.depends.push(depend.to_string());
+
+        self
+    }
+
+    pub fn with_depends(mut self, depends: Vec<String>) -> Self {
+        self.depends.append(&mut depends.clone());
+
+        self
+    }
+}
+
+impl Display for Package {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if self.from_archive {
+            writeln!(
+                f,
+                "sudo pacman {} https://archive.archlinux.org/packages/{}/{}/{}-{}.pkg.tar.zst",
+                UNPACK_COMMAND,
+                match self.name.chars().nth(0) {
+                    Some(letter) => letter,
+                    None => {
+                        log::warn!("Package has no name");
+
+                        return Ok(());
+                    }
+                },
+                self.name,
+                self.name,
+                consts::ARCH,
+            )?;
+        } else {
+            writeln!(f, "{} {} {}", AUR_HELPER, INSTALL_COMMAND, self.name)?;
+        }
+
+        Ok(())
     }
 }
 
