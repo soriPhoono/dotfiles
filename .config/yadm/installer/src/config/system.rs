@@ -312,7 +312,7 @@ pub struct ConfigFile {
 }
 
 impl ConfigFile {
-    pub fn new(source: Path) -> Self {
+    pub fn new(source: &Path) -> Self {
         Self {
             source: source.to_path_buf(),
             backup: Backup::None,
