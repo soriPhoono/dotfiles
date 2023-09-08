@@ -1,9 +1,10 @@
 use std::{
-    env::consts,
     fmt::{self, Display, Formatter},
     fs::File,
     io::{self, BufReader},
 };
+
+use crate::app::{check_output, get_output};
 
 use self::prelude::{Command, ConfigFile, Package, Repository, Service};
 
@@ -18,6 +19,7 @@ const HOME: &str = env!("HOME");
 const TARGETS_DIR: &str = "/.config/yadm/targets/";
 
 const AUR_HELPER: &str = "paru";
+const CHECK_COMMAND: &str = "-Q";
 const UPDATE_COMMAND: &str = "-Syu --noconfirm";
 const INSTALL_COMMAND: &str = "-S --needed --noconfirm";
 const UNPACK_COMMAND: &str = "-U --noconfirm";
@@ -119,9 +121,10 @@ impl Display for InstallTarget {
         }
 
         writeln!(f, "paru {}", UPDATE_COMMAND)?; // TODO: migrate to controller
+        writeln!(f)?;
 
         for package in self.packages() {
-            
+            writeln!(f, "{}", package)?;
         }
 
         for service in self.services() {
