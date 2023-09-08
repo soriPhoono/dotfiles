@@ -4,7 +4,7 @@ use std::{
     io::{self, BufReader},
 };
 
-use crate::app::{check_output, get_output};
+use crate::app::get_output;
 
 use self::prelude::{Command, ConfigFile, Package, Repository, Service};
 
