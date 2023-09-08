@@ -1,7 +1,23 @@
 use std::{
     error,
+    path::PathBuf,
     process::{Child, Command},
 };
+
+#[derive(Debug, clap::Parser)]
+#[command(author, version, about, long_about = None)]
+pub struct Cli {
+    #[command(subcommand)]
+    pub subcommand: Commands,
+}
+
+#[derive(Debug, clap::Subcommand)]
+pub enum Commands {
+    Install {
+        #[arg(short, long)]
+        target: Option<PathBuf>,
+    },
+}
 
 pub fn create_subprocess(command: &str) -> Result<Child, Box<dyn error::Error>> {
     if command.is_empty() {
