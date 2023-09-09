@@ -34,7 +34,8 @@ class App:
 
             self.stdscr.addstr(0, 0, 'Hello, world!')
 
-            self.stdscr.refresh()
+            self.stdscr.noutrefresh()
+            curses.doupdate()
 
             match self.stdscr.getch():
                 case EXIT_KEY:
