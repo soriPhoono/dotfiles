@@ -16,12 +16,12 @@ class Window(abc.ABC):
             child.update(key)
 
 
-class MainWindow():
+class MainWindow(Window):
     def __init__(self) -> None:
-        pass
+        super().__init__()
 
     def draw(self) -> None:
-        pass
+        super().draw()
 
     def update(self, key: int) -> None:
-        pass
+        super().update(key)
