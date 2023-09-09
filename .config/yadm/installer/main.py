@@ -1,7 +1,10 @@
 #!/bin/python
 
 import curses
+
 from curses import wrapper
+
+import ui
 
 
 class App:
