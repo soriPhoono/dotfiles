@@ -6,29 +6,39 @@ from curses import wrapper
 
 import ui
 
+EXIT_KEY = ord('q')
+
 
 class App:
     def __init__(self) -> None:
-        self.exit_key = ord('q')
+        self.stdscr: curses.window = curses.initscr()
 
-        pass
-
-    def run(self, stdscr: curses.window) -> None:
         curses.noecho()
         curses.cbreak()
+        self.stdscr.keypad(True)
+
         curses.curs_set(0)
-        stdscr.keypad(True)
 
+    def __del__(self) -> None:
+        curses.curs_set(1)
+
+        self.stdscr.keypad(False)
+        curses.nocbreak()
+        curses.echo()
+
+        curses.endwin()
+
+    def run(self) -> None:
         while True:
-            stdscr.erase()
+            self.stdscr.erase()
 
-            stdscr.addstr(0, 0, 'Hello, world!')
+            self.stdscr.addstr(0, 0, 'Hello, world!')
 
-            stdscr.refresh()
+            self.stdscr.refresh()
 
-            match stdscr.getch():
-                case self.exit_key:
+            match self.stdscr.getch():
+                case EXIT_KEY:
                     break
 
 
-wrapper(App().run)
+App().run()
