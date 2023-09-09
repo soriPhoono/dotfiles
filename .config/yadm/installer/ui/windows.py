@@ -1,19 +1,22 @@
 import abc
+import curses
 
 import widgets
 
+
 class Window(abc.ABC):
-    def __init__(self) -> None:
-        self.parent: Window = None
-        self.children: list[widgets.Widget] = []
+    def __init__(self, x: int, y: int, width: int, height: int) -> None:
+        self.inner: curses.window = curses.newwin(height, width, y, x)
 
     def draw(self) -> None:
-        for child in self.children:
-            child.draw()
+        self.inner.clear()
+
+
+
+        self.inner.noutrefresh()
 
     def update(self, key: int) -> None:
-        for child in self.children:
-            child.update(key)
+        pass
 
 
 class MainWindow(Window):
