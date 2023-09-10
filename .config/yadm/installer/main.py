@@ -32,10 +32,10 @@ def main(mode: str) -> bool:
     match mode:
         case "install":
             click.echo("Available target branches:")
-            for i, branch in enumerate(get_branches()):
+            branches = get_branches()
+            for i, branch in enumerate(branches):
                 click.echo(f"{i}: " + branch)
-            target_branch = click.prompt(
-                "Enter target branch")
+            target_branch = branches[int(click.prompt("Enter target branch"))]
 
             system("yadm checkout {}".format(target_branch))
 
