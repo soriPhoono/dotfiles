@@ -24,7 +24,7 @@
   "config_files": [
     {
       "source": "/etc/pacman.conf",
-      "backup": "Copy",
+      "backup": "copy",
       "commands": [
         "sudo sed -i 's/#Color/Color/' /etc/pacman.conf",
         "sudo sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/' /etc/pacman.conf"
@@ -41,7 +41,7 @@
       "config_files": [
         {
           "source": "/etc/paru.conf",
-          "backup": "Copy",
+          "backup": "copy",
           "commands": [
             "sudo sed -i 's/#BottomUp/BottomUp/' /etc/paru.conf"
           ]
@@ -81,7 +81,7 @@
       "config_files": [
         {
           "source": "/etc/xdg/reflector/reflector.conf",
-          "backup": "Move",
+          "backup": "move",
           "commands": [
             "echo -e '--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--latest 10' | sudo tee -a /etc/xdg/reflector/reflector.conf"
           ]
@@ -101,14 +101,12 @@
     {
       "user": false,
       "name": "reflector.service",
-      "start": true,
-      "enable": false
+      "operation": "enable --now"
     },
     {
       "user": false,
       "name": "reflector.timer",
-      "start": true,
-      "enable": true
+      "operation": "enable --now"
     }
   ]
 }
