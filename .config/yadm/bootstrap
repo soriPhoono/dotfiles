@@ -1,20 +1,10 @@
 #!/bin/bash
 
-# If python is not installed
-if [ $(command -v cargo >/dev/null) ]; then
-    echo "Python is not installed, installing..."
+# Install packages
+echo "Installing required dependencies..."
+sudo pacman -S --needed --noconfirm \
+    python \
+    python-click > /dev/null
 
-    # Install python
-    sudo -A pacman -S --noconfirm --needed rust
-fi
-
-# Ensure yadm is not installed
-if [ $(command -v yadm >/dev/null) ]; then
-    echo "yadm is not installed, installing..."
-
-    # Install yadm
-    sudo -A pacman -S --noconfirm --needed yadm
-fi
-
-# Run installer script
-cargo run --release
+# Run bootstrap commands
+python ~/.config/yadm/installer/main.py
