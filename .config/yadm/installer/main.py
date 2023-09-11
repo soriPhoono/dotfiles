@@ -8,6 +8,39 @@ import click
 from system import check_return, get_output
 
 
+def install_branch(branch: str) -> bool:
+    commands = [
+        "~/.config/yadm/installer/scripts/init.sh",
+        "~/.config/yadm/installer/scripts/pacman.sh"
+        "yadm checkout {}".format(target_branch),
+    ]
+
+    click.clear()
+
+    for command in commands:
+        click.echo("Executing command: " + command)
+        click.echo("")
+
+        if check_return(command):
+            click.echo("Successfully executed command: " + command)
+        else:
+            click.echo("Failed to execute command: " + command)
+            return False
+
+    try:
+        click.echo("Attempting to import desktop environment installation script...")
+        desktop_script = __import__("desktop")
+    except ImportError:
+        click.echo("Failed to import desktop environment installation script.")
+        return False
+
+    if not desktop_script.main():
+        click.echo("Failed to execute desktop environment installation script.")
+        return False
+
+    return True
+
+
 def get_branches() -> list[str]:
     """Get all branches of the current yadm repository"""
     blacklisted = ["HEAD", "main", "installer", "boilerplate"]
@@ -42,23 +75,7 @@ def main(mode: str) -> bool:
                 else:
                     break
 
-            commands = [
-                "yadm checkout {}".format(target_branch),
-                "~/.config/yadm/installer/scripts/init.sh",
-                "~/.config/yadm/installer/scripts/pacman.sh"
-            ]
-
-            click.clear()
-
-            for command in commands:
-                click.echo("Executing command: " + command)
-                click.echo("")
-
-                if check_return(command):
-                    click.echo("Successfully executed command: " + command)
-                else:
-                    click.echo("Failed to execute command: " + command)
-                    return False
+            return install_branch(target_branch)
 
 
 if __name__ == "__main__":
