@@ -1,8 +1,4 @@
 """Operations for the installer"""
-#!/bin/python
-
-from os import path
-
 import click
 
 from system import check_return, get_output
@@ -52,7 +48,8 @@ def get_branches() -> list[str]:
     for branch in get_output("yadm branch -r").split("\n"):
         # if the blacklist does not contain a part of the branch name,
         # add it to the list
-        if not any(blk_branch in branch for blk_branch in blacklisted):
+        if not (len(branch) == 0
+                or any(blk_branch in branch for blk_branch in blacklisted)):
             branches.append(branch[9:])
 
     return branches
