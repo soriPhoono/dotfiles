@@ -2,12 +2,10 @@
 #!/bin/python
 
 from os import path
-from asyncio import run
 
 import click
 
-from system import get_output as system
-from models import Target
+from system import check_return, get_output
 
 
 def get_branches() -> list[str]:
@@ -17,7 +15,7 @@ def get_branches() -> list[str]:
     branches = []
 
     # Get all remote branches and iterate through them
-    for branch in system("yadm branch -r").split("\n"):
+    for branch in get_output("yadm branch -r").split("\n"):
         # if the blacklist does not contain a part of the branch name, add it to the list
         if not any([blacklisted_branch in branch for blacklisted_branch in blacklisted]):
             branches.append(branch[9:])
@@ -31,15 +29,36 @@ def main(mode: str) -> bool:
     """Entry point of the installer"""
     match mode:
         case "install":
-            click.echo("Available target branches:")
-            branches = get_branches()
-            for i, branch in enumerate(branches):
-                click.echo(f"{i}: " + branch)
-            target_branch = branches[int(click.prompt("Enter target branch"))]
+            while True:
+                try:
+                    click.echo("Available target branches:")
+                    branches = get_branches()
+                    for i, branch in enumerate(branches):
+                        click.echo(f"{i}: " + branch)
+                    target_branch = branches[int(
+                        click.prompt("Enter target branch"))]
+                except IndexError:
+                    click.echo("Invalid branch index.")
+                else:
+                    break
 
-            system("yadm checkout {}".format(target_branch))
+            commands = [
+                "yadm checkout {}".format(target_branch),
+                "~/.config/yadm/installer/scripts/init.sh",
+                "~/.config/yadm/installer/scripts/pacman.sh"
+            ]
 
-            return run(Target().install())
+            click.clear()
+
+            for command in commands:
+                click.echo("Executing command: " + command)
+                click.echo("")
+
+                if check_return(command):
+                    click.echo("Successfully executed command: " + command)
+                else:
+                    click.echo("Failed to execute command: " + command)
+                    return False
 
 
 if __name__ == "__main__":
