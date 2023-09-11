@@ -28,7 +28,8 @@ def install_branch(branch: str) -> bool:
             return False
 
     try:
-        click.echo("Attempting to import desktop environment installation script...")
+        click.echo(
+            "Attempting to import desktop environment installation script...")
         desktop_script = __import__("desktop")
     except ImportError:
         click.echo("Failed to import desktop environment installation script.")
@@ -57,7 +58,11 @@ def get_branches() -> list[str]:
 
 
 @click.command()
-@click.option("--mode", prompt="Set operation mode (install, uninstall, list, create, delete, edit)", default="install", help="Set operation mode (install, uninstall, list, create, delete, edit)")
+@click.option(
+    "--mode",
+    prompt="Set operation mode (i, u, l, c, d, e)",
+    default="install",
+    help="Set operation mode (i, u, l, c, d, e)")
 def main(mode: str) -> bool:
     """Entry point of the installer"""
     match mode:
