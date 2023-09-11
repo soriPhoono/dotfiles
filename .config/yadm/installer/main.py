@@ -9,11 +9,11 @@ from system import check_return, get_output
 
 
 def install_branch(branch: str) -> bool:
+    """Install the target branch"""
     commands = [
         "~/.config/yadm/installer/scripts/init.sh",
         "~/.config/yadm/installer/scripts/pacman.sh"
-        "yadm checkout {}".format(target_branch),
-    ]
+        f"yadm checkout {branch}",]
 
     click.clear()
 
@@ -36,7 +36,7 @@ def install_branch(branch: str) -> bool:
         return False
 
     if not desktop_script.main():
-        click.echo("Failed to execute desktop environment installation script.")
+        click.echo("Failed to execute desktop environment script.")
         return False
 
     return True
@@ -50,8 +50,9 @@ def get_branches() -> list[str]:
 
     # Get all remote branches and iterate through them
     for branch in get_output("yadm branch -r").split("\n"):
-        # if the blacklist does not contain a part of the branch name, add it to the list
-        if not any([blacklisted_branch in branch for blacklisted_branch in blacklisted]):
+        # if the blacklist does not contain a part of the branch name,
+        # add it to the list
+        if not any(blk_branch in branch for blk_branch in blacklisted):
             branches.append(branch[9:])
 
     return branches
