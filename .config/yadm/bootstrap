@@ -3,6 +3,7 @@
 # Install packages
 echo "Installing required dependencies..."
 sudo pacman -S --needed --noconfirm \
+    yadm \
     python \
     python-click > /dev/null
 
