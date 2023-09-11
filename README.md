@@ -37,3 +37,10 @@ chmod +x ~/.config/yadm/bootstrap
 ```
 
 Followed by running the script
+
+## Features
+
+This branch contains little to no actual content pertaining to the final installation state,
+this is because this branch simply houses the boilerplate for the final installation.
+If you wish to gain a more comprehensive view of what this script does, please check the readme
+entries in the other branches who's names do not begin with the word boilerplate.
