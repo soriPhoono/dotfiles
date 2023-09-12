@@ -28,9 +28,8 @@ def install_branch(branch: str) -> bool:
 
     import desktop
 
-    if not desktop.main():
-        click.echo("Failed to execute desktop environment script.")
-        return False
+    installer_target = desktop.main()
+    installer_target.install()
 
     return True
 
