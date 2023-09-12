@@ -3,7 +3,7 @@ import subprocess
 
 import click
 
-from system import checkreturn
+from system import check_return
 
 
 class InstallerTarget(abc.ABC):
