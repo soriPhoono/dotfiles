@@ -20,9 +20,10 @@ def install_branch(branch: str) -> bool:
         click.echo("Executing command: " + command)
         click.echo("")
 
-        if check_return(command):
+        try:
+            check_return(command)
             click.echo("Successfully executed command: " + command)
-        else:
+        except subprocess.CalledProcessError:
             click.echo("Failed to execute command: " + command)
             return False
 
