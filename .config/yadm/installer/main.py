@@ -23,15 +23,9 @@ def install_branch(branch: str) -> bool:
             click.echo("Failed to execute command: " + command)
             return False
 
-    try:
-        click.echo(
-            "Attempting to import desktop environment installation script...")
-        desktop_script = __import__("desktop")
-    except ImportError:
-        click.echo("Failed to import desktop environment installation script.")
-        return False
+    import desktop
 
-    if not desktop_script.main():
+    if not desktop.main():
         click.echo("Failed to execute desktop environment script.")
         return False
 
@@ -79,6 +73,8 @@ def main(mode: str) -> bool:
                     break
 
             return install_branch(target_branch)
+
+    return False
 
 
 if __name__ == "__main__":
