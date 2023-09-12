@@ -1,4 +1,7 @@
 """Operations for the installer"""
+import abc
+import subprocess
+
 import click
 
 from system import check_return, get_output
