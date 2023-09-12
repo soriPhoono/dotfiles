@@ -6,7 +6,7 @@ import click
 from system import check_return
 
 
-class InstallerTarget(abc.ABC):
+class InstallerTarget:
     """Base class for installer targets"""
 
     def __init__(self) -> None:
@@ -16,13 +16,11 @@ class InstallerTarget(abc.ABC):
 
         self.package_sets: list[tuple[list[str], list[str]]] = []
 
-    @abc.abstractmethod
     def add_package_set(self, packages: tuple[list[str], list[str]]) -> None:
         """Add a set of packages"""
 
         self.package_sets.append(packages)
 
-    @abc.abstractmethod
     def install(self) -> bool:
         """Install the target"""
 
@@ -57,5 +55,5 @@ class InstallerTarget(abc.ABC):
             return False
 
 
-def main() -> bool:
+def main() -> InstallerTarget:
     return False
