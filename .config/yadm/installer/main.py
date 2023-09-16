@@ -10,7 +10,7 @@ from system import check_return, get_output
 def install_branch(branch: str) -> bool:
     """Install the target branch"""
     commands = [
-        "~/.config/yadm/installer/scripts/init.sh",
+        "yadm submodule init && yadm submodule update",
         "~/.config/yadm/installer/scripts/pacman.sh"
         f"yadm checkout {branch}",]
 
