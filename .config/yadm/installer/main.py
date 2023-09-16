@@ -10,9 +10,10 @@ from system import check_return, get_output
 def install_branch(branch: str) -> bool:
     """Install the target branch"""
     commands = [
+        f"yadm checkout {branch}",
         "yadm submodule init && yadm submodule update",
         "~/.config/yadm/installer/scripts/pacman.sh",
-        f"yadm checkout {branch}",]
+    ]
 
     click.clear()
 
@@ -58,10 +59,12 @@ def get_branches() -> list[str]:
     prompt="Set operation mode (i, u, l, c, d, e)",
     default="install",
     help="Set operation mode (i, u, l, c, d, e)")
-def main(mode: str) -> bool:
+def main(mode: str):
     """Entry point of the installer"""
     match mode:
         case "install":
+            click.clear()
+
             while True:
                 try:
                     click.echo("Available target branches:")
@@ -75,13 +78,10 @@ def main(mode: str) -> bool:
                 else:
                     break
 
-            return install_branch(target_branch)
+            install_branch(target_branch)
 
     return False
 
 
 if __name__ == "__main__":
-    if main():
-        click.echo("Target configuration installed successfully.")
-    else:
-        click.echo("Target configuration installation failed.")
+    main()
