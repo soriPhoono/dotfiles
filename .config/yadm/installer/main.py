@@ -11,7 +11,7 @@ def install_branch(branch: str) -> bool:
     """Install the target branch"""
     commands = [
         "yadm submodule init && yadm submodule update",
-        "~/.config/yadm/installer/scripts/pacman.sh"
+        "~/.config/yadm/installer/scripts/pacman.sh",
         f"yadm checkout {branch}",]
 
     click.clear()
