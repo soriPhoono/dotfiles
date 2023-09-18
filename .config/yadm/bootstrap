@@ -1,11 +1,20 @@
 #!/bin/bash
 
-# Install packages
-echo "Installing required dependencies..."
-sudo pacman -S --needed --noconfirm \
-    yadm \
-    python \
-    python-click > /dev/null
-
-# Run bootstrap commands
-python ~/.config/yadm/installer/main.py
+# Setup pacman.conf and paru.conf
+# Create pacman.conf.bak or restore it if it exists
+if [[ -f /etc/pacman.conf.bak ]]; then
+    sudo mv /etc/pacman.conf.bak /etc/pacman.conf
+else
+    sudo cp /etc/pacman.conf /etc/pacman.conf.bak
+fi
+# Setup parallel downloads and colored output
+sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
+sudo sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
+# Setup multilib repository
+sudo sed -i 's/#\[multilib\]/\[multilib\]/g' /etc/pacman.conf
+sudo sed -i '/\[multilib\]/!b;n;cInclude = \/etc\/pacman.d\/mirrorlist' /etc/pacman.conf
+# Setup chaotic-aur repository
+sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key 3056513887B78AEB
+sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+echo -e "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
