@@ -63,3 +63,5 @@ done
 
 # Install packages from list
 paru -S --noconfirm --needed "${packages[@]}"
+
+source ./networking.sh
