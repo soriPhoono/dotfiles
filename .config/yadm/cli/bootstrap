@@ -63,5 +63,11 @@ done
 
 # Install packages from list
 paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >>/dev/null 2>&1
+xdg-user-dirs-update >>/dev/null 2>&1
+chsh -s /bin/zsh $(whoami) >>/dev/null 2>&1
+sudo systemctl enable paccache.timer >>/dev/null 2>&1
+bat cache --build >>/dev/null 2>&1
+
 
 source ./networking.sh
