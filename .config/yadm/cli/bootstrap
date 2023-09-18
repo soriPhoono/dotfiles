@@ -1,0 +1,40 @@
+#!/bin/bash
+
+kernels=(
+    "linux",
+    "linux-lts",
+    "linux-hardened",
+    "linux-zen",
+)
+
+packages=(
+    "base-devel",
+    "git",
+    "yadm",
+    "neovim",
+    "tmux",
+    "zsh",
+    "oh-my-zsh-git",
+    "starship",
+)
+
+# Install kernel for linux
+while true; do
+    i=1
+
+    echo "Available kernels:"
+    for kernel in "${kernels[@]}"; do
+        echo "    $i: $kernel"
+        i=$((i + 1))
+    done
+
+    read -p "Select kernel: " kernel
+
+    if [[ $kernel -ge 0 && $kernel -lt ${#kernels[@]} ]]; then
+        sudo pacman -S --noconfirm --needed "${kernels[$i - 1]} ${kernels[$i - 1]}-headers"
+        break
+    fi
+done
+
+# Install packages from list
+sudo pacman -S --noconfirm --needed "${packages[@]}"
