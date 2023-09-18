@@ -55,13 +55,13 @@ while true; do
     read -p "Select kernel: " kernel
 
     if [[ $kernel -ge 0 && $kernel -lt ${#kernels[@]} ]]; then
-        paru -S --noconfirm --needed "${kernels[$i - 1]} ${kernels[$i - 1]}-headers"
-        paru -S --noconfirm --needed "${kernel_supporting[@]}"
+        paru -S --noconfirm --needed "${kernels[$i - 1]} ${kernels[$i - 1]}-headers" >>/dev/null 2>&1
+        paru -S --noconfirm --needed "${kernel_supporting[@]}" >>/dev/null 2>&1
         break
     fi
 done
 
 # Install packages from list
-paru -S --noconfirm --needed "${packages[@]}"
+paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
 
 source ./networking.sh
