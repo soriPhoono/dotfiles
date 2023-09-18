@@ -7,6 +7,15 @@ kernels=(
     "linux-zen",
 )
 
+kernel_supporting=(
+    "linux-firmware",
+    "linux-firmware-qlogic",
+    "linux-firmware-bnx2x",
+    "linux-firmware-liquidio",
+    "linux-firmware-mellanox",
+    "linux-firmware-nfp",
+)
+
 packages=(
     "base-devel",
     "git",
@@ -31,10 +40,11 @@ while true; do
     read -p "Select kernel: " kernel
 
     if [[ $kernel -ge 0 && $kernel -lt ${#kernels[@]} ]]; then
-        sudo pacman -S --noconfirm --needed "${kernels[$i - 1]} ${kernels[$i - 1]}-headers"
+        paru -S --noconfirm --needed "${kernels[$i - 1]} ${kernels[$i - 1]}-headers"
+        paru -S --noconfirm --needed "${kernel_supporting[@]}"
         break
     fi
 done
 
 # Install packages from list
-sudo pacman -S --noconfirm --needed "${packages[@]}"
+paru -S --noconfirm --needed "${packages[@]}"
