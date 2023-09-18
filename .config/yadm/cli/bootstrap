@@ -18,13 +18,28 @@ kernel_supporting=(
 
 packages=(
     "base-devel",
-    "git",
-    "yadm",
+    "dosfstools",
+    "exfatprogs",
+    "xdg-user-dirs",
+    "pacman-contrib",
+    "nano",
     "neovim",
     "tmux",
     "zsh",
     "oh-my-zsh-git",
     "starship",
+    "neofetch",
+    "usbutils",
+    "curl",
+    "eza",
+    "bat",
+    "diff-so-fancy",
+    "dua-cli",
+    "duf",
+    "tre-command",
+    "scc",
+    "jq",
+    "btop",
 )
 
 # Install kernel for linux
