@@ -4,12 +4,6 @@
 
 # Setup development tools
 
-# Utilities
-# Build system
-# Debugging
-# Compilers
-# Linkers
-
 languages=(
     "C/C++",
     "Zig",
