@@ -25,22 +25,22 @@ done
 read -p "Select categories: " categories
 for category in $categories; do
     case $category; in
-        1)
+        "1")
             packages+=("gimp")
             ;;
-        2)
+        "2")
             packages+=("shotcut")
             ;;
-        3)
+        "3")
             packages+=("synfigstudio")
             ;;
-        4 | 5)
+        "4" | "5")
             packages+=("blender")
             ;;
-        6)
+        "6")
             echo "3d printing is not supported yet"
             ;;
-        7)
+        "7")
             packages+=("audacity")
             ;;
     esac

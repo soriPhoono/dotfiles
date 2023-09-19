@@ -27,25 +27,25 @@ done
 read -p "Select languages: " languages
 for language in $languages; do
     case $language in
-    1)
+    "1")
         packages+=("valgrind" "cmake" "ninja" "meson" "gdb" "gcc" "lldb" "clang" "llvm" "lld")
         ;;
-    2)
+    "2")
         packages+=("zls" "zig")
         ;;
-    3)
+    "3")
         packages+=("rust")
         ;;
-    4)
+    "4")
         packages+=("go" "delve" "gopls")
         ;;
-    5)
+    "5")
         packages+=("jdk-openjdk" "jdk17-openjdk" "jdk11-openjdk" "jdk8-openjdk")
         ;;
-    6)
+    "6")
         packages+=("perl")
         ;;
-    7)
+    "7")
         packages+=("python" "python-pip")
 
         read -p "Install django? [Y/n] " -n 1 -r
@@ -54,10 +54,10 @@ for language in $languages; do
             packages+=("python-django" "python-mysqlclient")
         fi
         ;;
-    8)
+    "8")
         packages+=("luarocks" "luajit" "lua")
         ;;
-    9)
+    "9")
         packages+=("nodejs" "npm")
         ;;
     esac
