@@ -53,10 +53,11 @@ while true; do
         i=$((i + 1))
     done
 
-    read -p "Select kernel: " kernel
+    read -p "Select kernel: " -n 1 -r
+    echo
 
     if [[ $kernel -ge 0 && $kernel -lt ${#kernels[@]} ]]; then
-        paru -S --noconfirm --needed "${kernels[$i - 1]} ${kernels[$i - 1]}-headers" >>/dev/null 2>&1
+        paru -S --noconfirm --needed "${kernels[$REPLY - 1]} ${kernels[$REPLY - 1]}-headers" >>/dev/null 2>&1
         paru -S --noconfirm --needed "${kernel_supporting[@]}" >>/dev/null 2>&1
         break
     fi
