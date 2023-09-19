@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Path:         ~/.config/yadm/personal/gaming.sh
+
 MULTILIB=false
 for arg in "$@"; do
     case $arg in
