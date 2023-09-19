@@ -40,6 +40,7 @@ packages=(
     "scc",
     "jq",
     "btop",
+    "cava",
 )
 
 # Install kernel for linux
