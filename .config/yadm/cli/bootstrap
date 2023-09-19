@@ -69,5 +69,5 @@ chsh -s /bin/zsh $(whoami) >>/dev/null 2>&1
 sudo systemctl enable paccache.timer >>/dev/null 2>&1
 bat cache --build >>/dev/null 2>&1
 
-
+source ./git.sh
 source ./networking.sh
