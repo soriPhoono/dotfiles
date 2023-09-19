@@ -94,7 +94,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=("virtualbox" "virtualbox-host-dkms" "virtualbox-guest-iso" "virtualbox-unattended-templates" "virtualbox-ext-oracle")
 fi
 
-sudo usermod -aG vboxusers "$USER"
+sudo usermod -aG vboxusers "$USER" >>/dev/null 2>&1
 
 # Docker
 read -p "Install docker and docker-compose? [Y/n] " -n 1 -r
@@ -103,8 +103,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=("docker" "docker-compose")
 fi
 
-sudo systemctl enable --now docker.service
+sudo systemctl enable --now docker.service >>/dev/null 2>&1
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}"
+paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
 echo "Finished installing developer environment packages"
