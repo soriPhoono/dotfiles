@@ -55,3 +55,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=("tome4-bin", "tome4-zomnibus_addon")
 fi
+
+echo "Installing packages..."
+paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+echo "Installed games packages."
