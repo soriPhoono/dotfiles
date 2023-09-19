@@ -8,25 +8,31 @@ else
     sudo cp /etc/pacman.conf /etc/pacman.conf.bak
 fi
 echo "Created pacman.conf backup file"
+
 # Setup parallel downloads and colored output
 sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
 sudo sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
 echo "Setup parallel downloads and colored output for pacman"
+
 # Setup multilib repository
 sudo sed -i 's/#\[multilib\]/\[multilib\]/g' /etc/pacman.conf
 sudo sed -i '/\[multilib\]/!b;n;cInclude = \/etc\/pacman.d\/mirrorlist' /etc/pacman.conf
 echo "Setup multilib repository"
+
 # Setup chaotic-aur repository
 sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com >>/dev/null
 sudo pacman-key --lsign-key 3056513887B78AEB >>/dev/null
 sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' >>/dev/null
 echo -e "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf >>/dev/null
 echo "Setup chaotic-aur repository"
+
 # Update system
 sudo pacman -Syu --noconfirm >>/dev/null
+
 # Install paru
 sudo pacman -S --noconfirm --needed paru >>/dev/null
 echo "Installed paru"
+
 # Create paru.conf.bak or restore it if it exists
 if [[ -f /etc/paru.conf.bak ]]; then
     sudo mv /etc/paru.conf.bak /etc/paru.conf
@@ -34,16 +40,22 @@ else
     sudo cp /etc/paru.conf /etc/paru.conf.bak
 fi
 echo "Created paru.conf backup file"
+
 # Setup bottom up reading of available packages for paru.conf
 sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
 echo "Setup bottom up reading of available packages for paru.conf"
+
 # Configure mirrors using reflector
 paru -S --noconfirm --needed reflector rsync >>/dev/null
 sudo mv /etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf.bak
 echo -e "--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--fastest 15" | sudo tee -a /etc/xdg/reflector/reflector.conf >>/dev/null
 sudo systemctl start reflector.service >>/dev/null
 sudo systemctl enable --now reflector.timer >>/dev/null
+
 # Install submodules
 yadm submodule init >>/dev/null
 yadm submodule update >>/dev/null
 echo "Installed submodules"
+
+# Install cli packages
+source cli/bootstrap.sh
