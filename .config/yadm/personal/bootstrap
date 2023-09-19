@@ -1,3 +1,12 @@
 #!/bin/bash
 
-# Path: .config/yadm/personal/bootstrap
+# Path:         ~/.config/yadm/personal/bootstrap
+
+MULTILIB=false
+for arg in "$@"; do
+    case $arg in
+    -m | --multilib)
+        MULTILIB=true
+        ;;
+    esac
+done
