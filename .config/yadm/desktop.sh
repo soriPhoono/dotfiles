@@ -4,11 +4,29 @@
 
 packages=(
     "sddm"
+    "sddm-sugar-candy-git"
     "xorg-xhost"
     "xxd-standalone"
     "xorg-xauth"
+    "xorg-xinit"
     "xorg-xmodmap"
     "xdg-desktop-portal"
+    "qtile"
+    "polybar"
+    "picom-ftlabs-git"
+    "xidlehook"
+    "qt5-graphicaleffects"
+    "qt5-quickcontrols2"
+    "qt5-svg"
+    "rofi"
+    "betterlockscreen"
+    "cool-retro-term"
+    "cmatrix"
+    "redshift"
+    "unclutter"
+    "catppuccin-gtk-theme-mocha"
+    "catppuccin-cursors-mocha"
+    "papirus-icon-theme"
     "playerctl"
     "zenity"
     "imagemagick"
@@ -119,3 +137,5 @@ npm install >>/dev/null 2>&1 && npm run build >>/dev/null 2>&1
 sudo npm install -g node-linux >>/dev/null 2>&1 && npm link node-linux >>/dev/null 2>&1
 sudo npm register_linux >>/dev/null 2>&1
 sudo systemctl enable chevron.service >>/dev/null 2>&1
+
+sudo systemctl enable sddm >>/dev/null 2>&1
