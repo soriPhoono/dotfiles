@@ -92,3 +92,30 @@ sudo usermod -aG input "$(whoami)" >>/dev/null 2>&1
 sudo usermod -aG disk "$(whoami)" >>/dev/null 2>&1
 sudo usermod -aG audio "$(whoami)" >>/dev/null 2>&1
 sudo usermod -aG games "$(whoami)" >>/dev/null 2>&1
+
+read -n 1 -rp "Which browser would you like to install (f)irefox, (c)hrome, or (b)oth? " browser
+echo
+case "$browser" in
+"f")
+    echo "Installing firefox..."
+    paru -S --noconfirm --needed firefox >>/dev/null 2>&1
+    echo "Finished installing firefox"
+    ;;
+"c")
+    echo "Installing chrome..."
+    paru -S --noconfirm --needed google-chrome >>/dev/null 2>&1
+    echo "Finished installing chrome"
+    ;;
+"b")
+    echo "Installing firefox and chrome..."
+    paru -S --noconfirm --needed firefox google-chrome >>/dev/null 2>&1
+    echo "Finished installing firefox and chrome"
+    ;;
+esac
+
+paru -S --noconfirm --needed npm nodejs >>/dev/null 2>&1
+cd ~/.config/chevron
+npm install >>/dev/null 2>&1 && npm run build >>/dev/null 2>&1
+sudo npm install -g node-linux >>/dev/null 2>&1 && npm link node-linux >>/dev/null 2>&1
+sudo npm register_linux >>/dev/null 2>&1
+sudo systemctl enable chevron.service >>/dev/null 2>&1
