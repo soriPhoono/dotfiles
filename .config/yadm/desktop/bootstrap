@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Path:         ~/.config/yadm/desktop/bootstrap
+
+packages=(
+    "sddm"
+    "xorg-xhost"
+    "xxd-standalone"
+    "xorg-xauth"
+    "xorg-xmodmap"
+    "xdg-desktop-portal"
+    "playerctl"
+    "zenity"
+    "imagemagick"
+    "cava"
+    "qt5ct"
+    "qt6ct"
+    "nwg-look"
+    "font-manager"
+    "adobe-source-code-pro-fonts"
+    "ttf-sourcecodepro-nerd"
+    "ttf-nerd-fonts-symbols"
+    "ttf-nerd-fonts-symbols-mono"
+    "noto-fonts-emoji"
+    "polkit-gnome"
+    "gnome-keyring"
+    "alacritty"
+    "gvfs"
+    "gvfs-afc"
+    "gvfs-mtp"
+    "gvfs-gphoto2"
+    "pcmanfm-gtk3"
+    "file-roller"
+    "gnome-disk-utility"
+    "gparted"
+    "bleachbit"
+    "flameshot"
+    "imv"
+    "exaile"
+    "mpv"
+    "vlc"
+    "qbittorrent"
+    "google-chrome"
+)
+
+echo "Installing pipewire audio server..."
+packages+=("pipewire" "pipewire-audio" "pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber" "pavucontrol" "carla" "easyeffects")
+echo "Installed pipewire audio server!"
+
+echo "Installing gstreamer video pipeline..."
+packages+=("gstreamer" "gst-libav" "gst-plugins-base" "gst-plugins-good" "gst-plugin-pipewire" "gstreamer-vaapi")
+for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
+    case "$line" in
+    "*NVIDIA*")
+        packages+=("gst-plugins-bad")
+        sudo tee -a /etc/environment >/dev/null 2>&1 <<EOF
+GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX
+EOF
+        ;;
+    esac
+done
+echo "Installed gstreamer video pipeline!"
+
+echo "Installing packages..."
+paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+echo "Finished installing core desktop environment packages"
+
+read -p "Enable bluetooth? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Installing bluetooth packages..."
+    paru -S --noconfirm --needed bluez bluez-utils blueberry >>/dev/null 2>&1
+    sudo systemctl enable bluetooth >>/dev/null 2>&1
+    echo "Finished installing bluetooth packages"
+fi
+
+sudo tee -a /etc/environment >/dev/null 2>&1 <<EOF
+TERM=alacritty
+QT_QPA_PLATFORMTHEME=qt5ct
+EOF
+
+sudo tee -a /etc/sudo.conf >/dev/null 2>&1 <<EOF
+Path askpass /usr/local/bin/zenity-passphrase
+EOF
+
+sudo usermod -aG video "$(whoami)" >>/dev/null 2>&1
+sudo usermod -aG input "$(whoami)" >>/dev/null 2>&1
+sudo usermod -aG disk "$(whoami)" >>/dev/null 2>&1
+sudo usermod -aG audio "$(whoami)" >>/dev/null 2>&1
+sudo usermod -aG games "$(whoami)" >>/dev/null 2>&1

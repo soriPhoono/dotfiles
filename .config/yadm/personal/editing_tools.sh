@@ -24,7 +24,7 @@ for category in $categories; do
 done
 read -p "Select categories: " categories
 for category in $categories; do
-    case $category; in
+    case $category in
         "1")
             packages+=("gimp")
             ;;
