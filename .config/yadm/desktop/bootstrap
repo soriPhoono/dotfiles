@@ -40,8 +40,9 @@ packages=(
     "mpv"
     "vlc"
     "qbittorrent"
-    "google-chrome"
 )
+
+commands=()
 
 echo "Installing pipewire audio server..."
 packages+=("pipewire" "pipewire-audio" "pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber" "pavucontrol" "carla" "easyeffects")
@@ -53,9 +54,9 @@ for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     case "$line" in
     "*NVIDIA*")
         packages+=("gst-plugins-bad")
-        sudo tee -a /etc/environment >/dev/null 2>&1 <<EOF
+        commands+=("sudo tee -a /etc/environment >/dev/null 2>&1 <<EOF
 GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX
-EOF
+EOF")
         ;;
     esac
 done
@@ -63,6 +64,9 @@ echo "Installed gstreamer video pipeline!"
 
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+for command in $commands; do
+    eval "$command"
+done
 echo "Finished installing core desktop environment packages"
 
 read -p "Enable bluetooth? (y/n) " -n 1 -r
