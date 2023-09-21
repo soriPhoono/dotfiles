@@ -16,7 +16,9 @@ done
 packages=(
     "nvidia-dkms"
     "nvidia-utils"
+    "ocl-icd"
     "opencl-nvidia"
+    "clinfo"
     "prime-run"
 )
 
@@ -32,9 +34,9 @@ if $MULTILIB; then
 fi
 
 # Install packages
-sudo pacman -S "${packages[@]}"
+paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
 
 # Execute commands
 for command in "${commands[@]}"; do
-    eval "$command"
+    eval "$command" >>/dev/null 2>&1
 done
