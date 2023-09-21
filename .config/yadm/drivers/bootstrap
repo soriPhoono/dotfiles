@@ -15,6 +15,8 @@ for gpu in "$gpus_installed"; do
     esac
 done
 
+installed=()
+
 if [ $gpu_count -lt 3 ]; then
     if [ $gpu_count == 2 ]; then
         read -p "Two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
@@ -25,15 +27,19 @@ if [ $gpu_count -lt 3 ]; then
             case "$cpu_type" in
             "GenuineIntel")
                 sh "$HOME/.config/yadm/drivers/intel.sh" --integrated
+
+                installed+=("intel")
                 ;;
             "AuthenticAMD")
                 sh "$HOME/.config/yadm/drivers/amd.sh" --integrated
+
+                installed+=("amd")
                 ;;
             esac
         else
             echo "Please install drivers manually"
 
-            exit 1
+            exit 0
         fi
     fi
 
@@ -43,15 +49,25 @@ if [ $gpu_count -lt 3 ]; then
         for gpu in "$gpus_installed"; do
             case "$gpu" in
             "*AMD*")
-                sh "$HOME/.config/yadm/drivers/amd.sh" --discrete
+                if [[ ! " ${installed[@]} " =~ "amd" ]]; then
+                    sh "$HOME/.config/yadm/drivers/amd.sh" --discrete
+
+                    installed+=("amd")
+                fi
                 ;;
 
             "*Intel*")
-                sh "$HOME/.config/yadm/drivers/intel.sh" --discrete
+                if [[ ! " ${installed[@]} " =~ "intel" ]]; then
+                    sh "$HOME/.config/yadm/drivers/intel.sh" --discrete
+
+                    installed+=("intel")
+                fi
                 ;;
             esac
         done
     fi
 else
     echo "Unusual number of GPUs detected, please install drivers manually"
+
+    exit 0
 fi
