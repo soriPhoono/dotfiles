@@ -5,14 +5,10 @@
 # Author:           Sori Phoono <soriphoono@gmail.com>
 
 MULTILIB=false
-DISCRETE=false
 for arg in "$@"; do
     case "$arg" in
     -m | --multilib)
         MULTILIB=true
-        ;;
-    -d | --discrete)
-        DISCRETE=true
         ;;
     esac
 done
