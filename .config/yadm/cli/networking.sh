@@ -11,6 +11,7 @@ echo "Installing networking packages..."
 paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
 
 read -p "Enable NetworkManager advanced features (tor, i2p, dnscrypt proxy)? [Y/n] " -n 1 -r
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     advanced_packages=(
         "dnsmasq",
