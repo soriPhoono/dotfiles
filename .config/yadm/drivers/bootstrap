@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Path:         ~/.config/yadm/drivers/bootstrap
-
 # Description:  Install gpu drivers, cpu microcode, and other hardware related packages
+# Author:      Sori Phoono (soriphoono@gmail.com)
 
 gpus_installed=$(lspci | grep -e "3D" -e "VGA" >>/dev/null 2>&1)
 gpu_count=$(grep "" -c <<<"$gpus_installed")
@@ -26,12 +26,12 @@ if [ $gpu_count -lt 3 ]; then
 
             case "$cpu_type" in
             "GenuineIntel")
-                sh "$HOME/.config/yadm/drivers/intel.sh" --integrated
+                sh "$HOME/.config/yadm/drivers/intel.sh"
 
                 installed+=("intel")
                 ;;
             "AuthenticAMD")
-                sh "$HOME/.config/yadm/drivers/amd.sh" --integrated
+                sh "$HOME/.config/yadm/drivers/amd.sh"
 
                 installed+=("amd")
                 ;;
@@ -48,19 +48,19 @@ if [ $gpu_count -lt 3 ]; then
     else
         for gpu in "$gpus_installed"; do
             case "$gpu" in
+            "*Intel*")
+                if [[ ! " ${installed[@]} " =~ "intel" ]]; then
+                    sh "$HOME/.config/yadm/drivers/intel.sh"
+
+                    installed+=("intel")
+                fi
+                ;;
+
             "*AMD*")
                 if [[ ! " ${installed[@]} " =~ "amd" ]]; then
                     sh "$HOME/.config/yadm/drivers/amd.sh" --discrete
 
                     installed+=("amd")
-                fi
-                ;;
-
-            "*Intel*")
-                if [[ ! " ${installed[@]} " =~ "intel" ]]; then
-                    sh "$HOME/.config/yadm/drivers/intel.sh" --discrete
-
-                    installed+=("intel")
                 fi
                 ;;
             esac
