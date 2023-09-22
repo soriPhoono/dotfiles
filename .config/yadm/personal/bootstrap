@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Path:         ~/.config/yadm/personal/bootstrap
+# Description:  Bootstrap script for personal packages
+# Author:       Sori Phoono <soriphoono@gmail.com>
 
 MULTILIB=false
 for arg in "$@"; do
@@ -16,18 +18,20 @@ feature_sets=()
 i=1
 echo "Feature sets for personal packages: "
 for source_file in $(find ~/.config/yadm/personal -name "*.sh"); do
-    if [ $source_file -ne ~/.config/yadm/personal/bootstrap.sh ]; then
+    if [ $source_file != ~/.config/yadm/personal/bootstrap.sh ]; then
         echo "$i) $(basename $source_file)"
-        feature_sets+=($source_file)
+        feature_sets+=("$source_file")
         i=$((i + 1))
     fi
 done
 read -p "Select feature set: " feature_set
 
+feature_set_len=${#feature_sets[@]}
+feature_set_len=$((feature_set_len + 1))
 for feature_set in $feature_set; do
-    if [ $feature_set -gt 0 ] && [ $feature_set -lt ${#feature_sets[@]} ]; then
-        source $feature_set
+    if [ $feature_set -gt 0 ] && [ $feature_set -lt $feature_set_len ]; then
+        sh ${feature_sets[$((feature_set - 1))]} $MULTILIB
     else
-        echo "Invalid feature set"
+        echo "Invalid feature set index: $feature_set"
     fi
 done
