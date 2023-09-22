@@ -3,61 +3,61 @@
 # Path:         ~/.config/yadm/desktop/bootstrap
 
 packages=(
-    "sddm"
-    "sddm-sugar-candy-git"
-    "xorg-xhost"
-    "xxd-standalone"
-    "xorg-xauth"
-    "xorg-xinit"
-    "xorg-xmodmap"
-    "xdg-desktop-portal"
-    "qtile"
-    "polybar"
-    "picom-ftlabs-git"
-    "xidlehook"
-    "qt5-graphicaleffects"
-    "qt5-quickcontrols2"
-    "qt5-svg"
-    "rofi"
-    "betterlockscreen"
-    "cool-retro-term"
-    "cmatrix"
-    "redshift"
-    "unclutter"
-    "catppuccin-gtk-theme-mocha"
-    "catppuccin-cursors-mocha"
-    "papirus-icon-theme"
-    "playerctl"
-    "zenity"
-    "imagemagick"
-    "cava"
-    "qt5ct"
-    "qt6ct"
-    "nwg-look"
-    "font-manager"
-    "adobe-source-code-pro-fonts"
-    "ttf-sourcecodepro-nerd"
-    "ttf-nerd-fonts-symbols"
-    "ttf-nerd-fonts-symbols-mono"
-    "noto-fonts-emoji"
-    "polkit-gnome"
-    "gnome-keyring"
-    "alacritty"
-    "gvfs"
-    "gvfs-afc"
-    "gvfs-mtp"
-    "gvfs-gphoto2"
-    "pcmanfm-gtk3"
-    "file-roller"
-    "gnome-disk-utility"
-    "gparted"
-    "bleachbit"
-    "flameshot"
-    "imv"
-    "exaile"
-    "mpv"
-    "vlc"
-    "qbittorrent"
+    "sddm"                        # Display manager
+    "sddm-sugar-candy-git"        # SDDM theme
+    "xorg-xhost"                  # X11 utility for controlling access to the X server
+    "xxd-standalone"              # Xxd from vim for .Xauthority creation
+    "xorg-xauth"                  # X11 authority file management
+    "xorg-xinit"                  # X11 initialisation program
+    "xorg-xmodmap"                # Utility for modifying keymaps and pointer button mappings in X
+    "xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
+    "qtile"                       # Window manager
+    "polybar"                     # Status bar
+    "picom-ftlabs-git"            # Compositor
+    "xidlehook"                   # Idle management daemon
+    "qt5-graphicaleffects"        # Qt5 graphicaleffects
+    "qt5-quickcontrols2"          # Qt5 quickcontrols2
+    "qt5-svg"                     # Qt5 svg
+    "rofi"                        # Application launcher
+    "betterlockscreen"            # Lockscreen
+    "cool-retro-term"             # Terminal emulator for lockscreen effect
+    "cmatrix"                     # Terminal emulator for lockscreen effect program
+    "redshift"                    # Screen temperature adjustment
+    "unclutter"                   # Hides cursor when idle
+    "catppuccin-gtk-theme-mocha"  # GTK theme
+    "catppuccin-cursors-mocha"    # Cursor theme
+    "papirus-icon-theme"          # Icon theme
+    "playerctl"                   # Media player control
+    "zenity"                      # Dialog boxes
+    "imagemagick"                 # Image manipulation
+    "cava"                        # Audio visualiser
+    "qt5ct"                       # Qt5 configuration utility
+    "qt6ct"                       # Qt6 configuration utility
+    "nwg-look"                    # GTK theme switcher
+    "font-manager"                # Font manager
+    "adobe-source-code-pro-fonts" # Monospace font
+    "ttf-sourcecodepro-nerd"      # Monospace font
+    "ttf-nerd-fonts-symbols"      # Icon font
+    "ttf-nerd-fonts-symbols-mono" # Icon font
+    "noto-fonts-emoji"            # Emoji font
+    "polkit-gnome"                # PolicyKit authentication agent
+    "gnome-keyring"               # Keyring
+    "alacritty"                   # Terminal emulator
+    "gvfs"                        # Virtual filesystem
+    "gvfs-afc"                    # Virtual filesystem
+    "gvfs-mtp"                    # Virtual filesystem
+    "gvfs-gphoto2"                # Virtual filesystem
+    "pcmanfm-gtk3"                # File manager
+    "file-roller"                 # Archive manager
+    "gnome-disk-utility"          # Disk utility
+    "gparted"                     # Partition manager
+    "bleachbit"                   # System cleaner
+    "flameshot"                   # Screenshot utility
+    "imv"                         # Image viewer
+    "exaile"                      # Music player
+    "mpv"                         # Video player
+    "vlc"                         # Video player
+    "qbittorrent"                 # Torrent client
 )
 
 commands=()
