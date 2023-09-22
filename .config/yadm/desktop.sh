@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Path:         ~/.config/yadm/desktop/bootstrap
+# Description:  Bootstrap script for desktop environment
+# Author:       Sori Phoono <soriphoono@gmail.com>
 
 packages=(
     "sddm"                        # Display manager

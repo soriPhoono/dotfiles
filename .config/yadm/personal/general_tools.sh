@@ -1,13 +1,15 @@
 #!/bin/bash
 
 # Path:         ~/.config/yadm/personal/bootstrap
+# Description:  Bootstrap script for personal environment
+# Author:       Sori Phoono <soriphoono@gmail.com>
 
 packages=(
-    "telegram-desktop"
-    "signal-desktop"
-    "discord"
-    "betterdiscordctl-git"
-    "python-spotdl"
+    "telegram-desktop"     # Telegram desktop client
+    "signal-desktop"       # Signal desktop client
+    "discord"              # Discord desktop client
+    "betterdiscordctl-git" # BetterDiscord installer
+    "python-spotdl"        # Spotify downloader (also installes youtube-dl as dependency) (AUR)
 )
 
 echo "Installing packages..."
