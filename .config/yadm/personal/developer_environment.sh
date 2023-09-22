@@ -17,6 +17,7 @@ languages=(
 )
 
 packages=()
+commands=()
 
 i=1
 echo "Available languages:"
@@ -28,37 +29,80 @@ read -p "Select languages: " languages
 for language in $languages; do
     case $language in
     "1")
-        packages+=("valgrind" "cmake" "ninja" "meson" "gdb" "gcc" "lldb" "clang" "llvm" "lld")
+        packages+=(
+            "valgrind" # C/C++ memory leak checker
+            "cmake"    # C/C++ build system
+            "ninja"    # C/C++ makefile generator
+            "meson"    # C/C++ build system
+            "gdb"      # C/C++ debugger (gnu)
+            "gcc"      # C/C++ compiler
+            "lldb"     # C/C++ debugger (llvm)
+            "clang"    # C/C++ compiler
+            "llvm"     # C/C++ compiler infrastructure
+            "lld"      # C/C++ linker optimizer
+        )
         ;;
     "2")
-        packages+=("zls" "zig")
+        packages+=(
+            "zls" # Zig language server
+            "zig" # Zig compiler
+        )
         ;;
     "3")
-        packages+=("rust")
+        packages+=(
+            "rustup" # Rust toolchain manager
+        )
+        commands+=(
+            "rustup default stable" # Set default rust toolchain to stable (download and configure it)
+        )
         ;;
     "4")
-        packages+=("go" "delve" "gopls")
+        packages+=(
+            "go"    # Go compiler
+            "delve" # Go debugger
+            "gopls" # Go language server
+        )
         ;;
     "5")
-        packages+=("jdk-openjdk" "jdk17-openjdk" "jdk11-openjdk" "jdk8-openjdk")
+        packages+=(
+            "jdk-openjdk"   # Java compiler (version 19)
+            "jdk17-openjdk" # Java compiler (version 17)
+            "jdk11-openjdk" # Java compiler (version 11)
+            "jdk8-openjdk"  # Java compiler (version 8)
+        )
         ;;
     "6")
-        packages+=("perl")
+        packages+=(
+            "perl" # Perl interpreter
+        )
         ;;
     "7")
-        packages+=("python" "python-pip")
+        packages+=(
+            "python"     # Python interpreter
+            "python-pip" # Python package manager
+        )
 
         read -p "Install django? [Y/n] " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            packages+=("python-django" "python-mysqlclient")
+            packages+=(
+                "python-django"      # Django web framework
+                "python-mysqlclient" # Python mysql connector
+            )
         fi
         ;;
     "8")
-        packages+=("luarocks" "luajit" "lua")
+        packages+=(
+            "lua"      # Lua interpreter
+            "luajit"   # LuaJIT compiler
+            "luarocks" # Lua package manager
+        )
         ;;
     "9")
-        packages+=("nodejs" "npm")
+        packages+=(
+            "nodejs" # NodeJS interpreter
+            "npm"    # NodeJS package manager
+        )
         ;;
     esac
 done
@@ -68,7 +112,9 @@ done
 read -p "Install github-cli for integration with github remotes? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=("github-cli")
+    packages+=(
+        "github-cli" # Github cli
+    )
 fi
 if ! gh auth status; then
     gh auth login
@@ -78,20 +124,31 @@ fi
 read -p "Install visual studio code and obsidian notation software? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=("visual-studio-code-bin" "obsidian")
+    packages+=(
+        "visual-studio-code-bin" # Visual studio code
+        "obsidian"               # Obsidian
+    )
 fi
 
 read -p "Install imhex hex viewer? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=("imhex")
+    packages+=(
+        "imhex" # Hex viewer
+    )
 fi
 
 # Virtual Machines
 read -p "Install virtualbox and extension pack? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=("virtualbox" "virtualbox-host-dkms" "virtualbox-guest-iso" "virtualbox-unattended-templates" "virtualbox-ext-oracle")
+    packages+=(
+        "virtualbox"                      # Virtualbox application
+        "virtualbox-host-dkms"            # Virtualbox host kernel modules
+        "virtualbox-guest-iso"            # Virtualbox guest iso
+        "virtualbox-unattended-templates" # Virtualbox unattended templates
+        "virtualbox-ext-oracle"           # Virtualbox extension pack
+    )
 fi
 
 sudo usermod -aG vboxusers "$USER" >>/dev/null 2>&1
@@ -100,7 +157,10 @@ sudo usermod -aG vboxusers "$USER" >>/dev/null 2>&1
 read -p "Install docker and docker-compose? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=("docker" "docker-compose")
+    packages+=(
+        "docker"         # Docker containerized application system
+        "docker-compose" # Docker compose (docker container manager)
+    )
 fi
 
 sudo systemctl enable --now docker.service >>/dev/null 2>&1
@@ -108,3 +168,9 @@ sudo systemctl enable --now docker.service >>/dev/null 2>&1
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
 echo "Finished installing developer environment packages"
+
+echo "Running setup commands..."
+for command in "${commands[@]}"; do
+    eval $command >>/dev/null 2>&1
+done
+echo "Finished running setup commands"
