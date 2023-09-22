@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Path: .config/yadm/personal/developer_environment.sh
+# Path:         .config/yadm/personal/developer_environment.sh
+# Description:  Bootstrap script for developer environment packages
+# Author:       Sori Phoono <soriphoono@gmail.com>
 
 # Setup development tools
 
