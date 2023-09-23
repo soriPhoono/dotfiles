@@ -64,11 +64,7 @@ packages=(
 
 commands=()
 
-echo "Installing pipewire audio server..."
 packages+=("pipewire" "pipewire-audio" "pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber" "pavucontrol" "carla" "easyeffects")
-echo "Installed pipewire audio server!"
-
-echo "Installing gstreamer video pipeline..."
 packages+=("gstreamer" "gst-libav" "gst-plugins-base" "gst-plugins-good" "gst-plugin-pipewire" "gstreamer-vaapi")
 for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     case "$line" in
@@ -80,7 +76,45 @@ EOF")
         ;;
     esac
 done
-echo "Installed gstreamer video pipeline!"
+
+read -p "Enable bluetooth? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    packages+=("bluez bluez-utils blueberry")
+    commands+=("sudo systemctl enable bluetooth >>/dev/null 2>&1")
+fi
+
+commands+=("echo -e \"TERM=alacritty\nQT_QPA_PLATFORMTHEME=qt6ct\" | sudo tee -a /etc/environment >/dev/null 2>&1")
+commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf >/dev/null 2>&1")
+
+commands+=("sudo usermod -aG video "$(whoami)" >>/dev/null 2>&1")
+commands+=("sudo usermod -aG input "$(whoami)" >>/dev/null 2>&1")
+commands+=("sudo usermod -aG disk "$(whoami)" >>/dev/null 2>&1")
+commands+=("sudo usermod -aG audio "$(whoami)" >>/dev/null 2>&1")
+commands+=("sudo usermod -aG games "$(whoami)" >>/dev/null 2>&1")
+
+read -n 1 -rp "Which browser would you like to install (f)irefox, (c)hrome, or (b)oth? " browser
+echo
+case "$browser" in
+"f")
+    packages+=("firefox")
+    ;;
+"c")
+    packages+=("google-chrome")
+    ;;
+"b")
+    packages+=("firefox" "google-chrome")
+    ;;
+esac
+
+packages+=("nodejs" "npm")
+commands+=("cd ~/.config/chevron")
+commands+=("npm install >>/dev/null 2>&1 && npm run build >>/dev/null 2>&1")
+commands+=("sudo npm install -g node-linux >>/dev/null 2>&1 && npm link node-linux >>/dev/null 2>&1")
+commands+=("sudo npm register_linux >>/dev/null 2>&1")
+commands+=("sudo systemctl enable chevron.service >>/dev/null 2>&1")
+
+commands+=("sudo systemctl enable sddm >>/dev/null 2>&1")
 
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
@@ -88,56 +122,3 @@ for command in $commands; do
     eval "$command"
 done
 echo "Finished installing core desktop environment packages"
-
-read -p "Enable bluetooth? (y/n) " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Installing bluetooth packages..."
-    paru -S --noconfirm --needed bluez bluez-utils blueberry >>/dev/null 2>&1
-    sudo systemctl enable bluetooth >>/dev/null 2>&1
-    echo "Finished installing bluetooth packages"
-fi
-
-sudo tee -a /etc/environment >/dev/null 2>&1 <<EOF
-TERM=alacritty
-QT_QPA_PLATFORMTHEME=qt5ct
-EOF
-
-sudo tee -a /etc/sudo.conf >/dev/null 2>&1 <<EOF
-Path askpass /usr/local/bin/zenity-passphrase
-EOF
-
-sudo usermod -aG video "$(whoami)" >>/dev/null 2>&1
-sudo usermod -aG input "$(whoami)" >>/dev/null 2>&1
-sudo usermod -aG disk "$(whoami)" >>/dev/null 2>&1
-sudo usermod -aG audio "$(whoami)" >>/dev/null 2>&1
-sudo usermod -aG games "$(whoami)" >>/dev/null 2>&1
-
-read -n 1 -rp "Which browser would you like to install (f)irefox, (c)hrome, or (b)oth? " browser
-echo
-case "$browser" in
-"f")
-    echo "Installing firefox..."
-    paru -S --noconfirm --needed firefox >>/dev/null 2>&1
-    echo "Finished installing firefox"
-    ;;
-"c")
-    echo "Installing chrome..."
-    paru -S --noconfirm --needed google-chrome >>/dev/null 2>&1
-    echo "Finished installing chrome"
-    ;;
-"b")
-    echo "Installing firefox and chrome..."
-    paru -S --noconfirm --needed firefox google-chrome >>/dev/null 2>&1
-    echo "Finished installing firefox and chrome"
-    ;;
-esac
-
-paru -S --noconfirm --needed npm nodejs >>/dev/null 2>&1
-cd ~/.config/chevron
-npm install >>/dev/null 2>&1 && npm run build >>/dev/null 2>&1
-sudo npm install -g node-linux >>/dev/null 2>&1 && npm link node-linux >>/dev/null 2>&1
-sudo npm register_linux >>/dev/null 2>&1
-sudo systemctl enable chevron.service >>/dev/null 2>&1
-
-sudo systemctl enable sddm >>/dev/null 2>&1
