@@ -49,8 +49,8 @@ echo "Setup bottom up reading of available packages for paru.conf"
 paru -S --noconfirm --needed reflector rsync >/dev/null
 sudo mv /etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf.bak
 echo -e "--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--fastest 15" | sudo tee -a /etc/xdg/reflector/reflector.conf >/dev/null
-sudo systemctl start reflector.service >/dev/null
 sudo systemctl enable --now reflector.timer >/dev/null
+echo "Enabled reflector.timer"
 
 # Install submodules
 yadm submodule init >/dev/null
@@ -65,3 +65,6 @@ sh ~/.config/yadm/desktop.sh
 
 # Copy configuration files
 cp -r ~/.config/yadm/conf/* /
+
+# Reboot system
+reboot
