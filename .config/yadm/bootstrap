@@ -59,4 +59,3 @@ echo "Installed submodules"
 
 # Install cli packages
 sh ~/.config/yadm/cli/bootstrap
-sh ~/.config/yadm/personal/bootstrap
