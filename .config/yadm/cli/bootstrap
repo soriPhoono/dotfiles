@@ -55,8 +55,9 @@ while true; do
 
     read -p "Select kernel: " -n 1 -r
     echo
+    REPLY=$((REPLY - 1)))
 
-    if [[ $REPLY -gt 0 && $REPLY -lt ${#kernels[@]} ]]; then
+    if [[ $REPLY -ge 0 && $REPLY -lt ${#kernels[@]} ]]; then
         paru -S --noconfirm --needed "${kernels[$REPLY - 1]} ${kernels[$REPLY - 1]}-headers" >/dev/null
         paru -S --noconfirm --needed "${kernel_supporting[@]}" >/dev/null
         break
