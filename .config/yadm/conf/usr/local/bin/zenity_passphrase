@@ -1,0 +1,3 @@
+#!/bin/bash
+
+zenity --password --title="Password for $USER" --timeout=10
