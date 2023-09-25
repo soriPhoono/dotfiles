@@ -57,20 +57,23 @@ while true; do
     echo
 
     if [[ $kernel -ge 0 && $kernel -lt ${#kernels[@]} ]]; then
-        paru -S --noconfirm --needed "${kernels[$REPLY - 1]} ${kernels[$REPLY - 1]}-headers" >>/dev/null 2>&1
-        paru -S --noconfirm --needed "${kernel_supporting[@]}" >>/dev/null 2>&1
+        paru -S --noconfirm --needed "${kernels[$REPLY - 1]} ${kernels[$REPLY - 1]}-headers" >/dev/null
+        paru -S --noconfirm --needed "${kernel_supporting[@]}" >/dev/null
         break
     fi
 done
 
 # Install packages from list
-paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 
-mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >>/dev/null 2>&1
-xdg-user-dirs-update >>/dev/null 2>&1
-chsh -s /bin/zsh $(whoami) >>/dev/null 2>&1
-sudo systemctl enable paccache.timer >>/dev/null 2>&1
-bat cache --build >>/dev/null 2>&1
+mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >/dev/null
+xdg-user-dirs-update >/dev/null
+
+chsh -s /bin/zsh $(whoami) >/dev/null
+
+sudo systemctl enable paccache.timer >/dev/null
+
+bat cache --build >/dev/null
 
 sh git.sh
 sh networking.sh
