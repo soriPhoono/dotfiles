@@ -13,9 +13,9 @@ if [ "$ACTION" = "add" ]; then
         notify-send -i "$icon_mtp_desktop" -u normal -r 50 "Android device connected"
     fi
 else
-    if [ ! -d /sys/class/power_supply ]; then
-        notify-send -i "$icon_mtp_desktop" -u normal -r 50 "Android device disconnected"
-    else
+    if [ -d /sys/class/power_supply ]; then
         notify-send -i "$icon_mtp_laptop" -u normal -r 50 "Android device disconnected"
+    else
+        notify-send -i "$icon_mtp_desktop" -u normal -r 50 "Android device disconnected"
     fi
 fi

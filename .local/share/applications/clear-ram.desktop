@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Clear Ram
+Icon=Ram
+Exec=google-chrome-stable https://youtube.com

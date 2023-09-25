@@ -154,6 +154,14 @@ KERNEL=="sd?", ACTION=="add", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin
 KERNEL=="sd?", ACTION=="remove", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
 EOF
 
+sudo touch /etc/udev/rules.d/99-charging.rules
+sudo tee -a /etc/udev/rules.d/99-charging.rules >/dev/null <<EOF
+# Battery
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/$(whoami)/.Xauthority" RUN+="/usr/bin/su $(whoami) -c '/home/$(whoami)/.local/bin/notifications/power-supply.sh 0'"
+# AC
+ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/$(whoami)/.Xauthority" RUN+="/usr/bin/su $(whoami) -c '/home/$(whoami)/.local/bin/notifications/power-supply.sh 1'"
+EOF
+
 touch ~/.config/qt5ct/qt5ct.conf
 tee -a ~/.config/qt5ct/qt5ct.conf >/dev/null <<EOF
 [Appearance]
