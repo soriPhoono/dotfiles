@@ -4,9 +4,8 @@
 # Create pacman.conf.bak or restore it if it exists
 if [[ -f /etc/pacman.conf.bak ]]; then
     sudo mv /etc/pacman.conf.bak /etc/pacman.conf
-else
-    sudo cp /etc/pacman.conf /etc/pacman.conf.bak
 fi
+sudo cp /etc/pacman.conf /etc/pacman.conf.bak
 echo "Created pacman.conf backup file"
 
 # Setup parallel downloads and colored output
@@ -36,9 +35,8 @@ echo "Installed paru"
 # Create paru.conf.bak or restore it if it exists
 if [[ -f /etc/paru.conf.bak ]]; then
     sudo mv /etc/paru.conf.bak /etc/paru.conf
-else
-    sudo cp /etc/paru.conf /etc/paru.conf.bak
 fi
+sudo cp /etc/paru.conf /etc/paru.conf.bak
 echo "Created paru.conf backup file"
 
 # Setup bottom up reading of available packages for paru.conf
@@ -48,7 +46,7 @@ echo "Setup bottom up reading of available packages for paru.conf"
 # Configure mirrors using reflector
 paru -S --noconfirm --needed reflector rsync >/dev/null
 sudo mv /etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf.bak
-echo -e "--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--fastest 15" | sudo tee -a /etc/xdg/reflector/reflector.conf >/dev/null
+echo -e "--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--fastest 15" | sudo tee /etc/xdg/reflector/reflector.conf >/dev/null
 sudo systemctl enable --now reflector.timer >/dev/null
 echo "Enabled reflector.timer"
 
