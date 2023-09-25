@@ -4,6 +4,15 @@
 # Description:  Install gpu drivers, cpu microcode, and other hardware related packages
 # Author:      Sori Phoono (soriphoono@gmail.com)
 
+MULTILIB=false
+for arg in "$@"; do
+    case "$arg" in
+    "--multilib")
+        MULTILIB=true
+        ;;
+    esac
+done
+
 gpus_installed=$(lspci | grep -e "3D" -e "VGA" >/dev/null)
 gpu_count=$(grep "" -c <<<"$gpus_installed")
 nvidia=false
@@ -29,14 +38,14 @@ if [ $gpu_count -lt 3 ]; then
 
             case "$cpu_type" in
             "GenuineIntel")
-                sh "$HOME/.config/yadm/drivers/intel.sh"
+                sh "$HOME/.config/yadm/drivers/intel.sh" $($MULTILIB && echo "--multilib")
 
                 installed+=("intel")
 
                 igpu_vendor="Intel"
                 ;;
             "AuthenticAMD")
-                sh "$HOME/.config/yadm/drivers/amd.sh"
+                sh "$HOME/.config/yadm/drivers/amd.sh" $($MULTILIB && echo "--multilib")
 
                 installed+=("amd")
 
@@ -51,13 +60,13 @@ if [ $gpu_count -lt 3 ]; then
     fi
 
     if $nvidia; then
-        sh "$HOME/.config/yadm/drivers/nvidia.sh"
+        sh "$HOME/.config/yadm/drivers/nvidia.sh" $($MULTILIB && echo "--multilib")
 
         installed+=("nvidia")
 
         dgpu_vendor="NVIDIA"
     else
-        sh "$HOME/.config/yadm/drivers/amd.sh" --discrete
+        sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($MULTILIB && echo "--multilib")
 
         installed+=("amd")
 
