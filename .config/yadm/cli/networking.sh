@@ -8,13 +8,13 @@ packages=(
 )
 
 echo "Installing networking packages..."
-paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 
-sudo systemctl enable NetworkManager.service >>/dev/null 2>&1
-sudo systemctl enable ufw.service >>/dev/null 2>&1
-sudo ufw default deny >>/dev/null 2>&1
-sudo ufw allow from "$(ip -json route get 8.8.8.8 | jq -r '.[].prefsrc' | sed 's/\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.\)[0-9]\{1,3\}$/\10\/24/')" >>/dev/null 2>&1
-sudo ufw enable >>/dev/null 2>&1
+sudo systemctl enable NetworkManager.service >/dev/null
+sudo systemctl enable ufw.service >/dev/null
+sudo ufw default deny >/dev/null
+sudo ufw allow from "$(ip -json route get 8.8.8.8 | jq -r '.[].prefsrc' | sed 's/\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.\)[0-9]\{1,3\}$/\10\/24/')" >/dev/null
+sudo ufw enable >/dev/null
 
 read -p "Enable NetworkManager advanced features (tor, i2p, dnscrypt proxy)? [Y/n] " -n 1 -r
 echo
@@ -27,7 +27,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 
     echo "Installing advanced networking packages..."
-    paru -S --noconfirm --needed "${advanced_packages[@]}" >>/dev/null 2>&1
+    paru -S --noconfirm --needed "${advanced_packages[@]}" >/dev/null
 
     # Copy config files
     sudo cp -r ~/.config/yadm/conf/etc/dnscrypt-proxy/ /etc/
@@ -64,8 +64,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     sudo chown -R tor:tor $TORCHROOT/var/lib/tor
     sudo chown -R tor:tor $TORCHROOT/var/log/tor
 
-    sudo sh -c "grep --color=never ^tor /etc/passwd > $TORCHROOT/etc/passwd" >>/dev/null 2>&1
-    sudo sh -c "grep --color=never ^tor /etc/group > $TORCHROOT/etc/group" >>/dev/null 2>&1
+    sudo sh -c "grep --color=never ^tor /etc/passwd > $TORCHROOT/etc/passwd" >/dev/null
+    sudo sh -c "grep --color=never ^tor /etc/group > $TORCHROOT/etc/group" >/dev/null
 
     sudo mknod -m 644 $TORCHROOT/dev/random c 1 8
     sudo mknod -m 644 $TORCHROOT/dev/urandom c 1 9
@@ -78,9 +78,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     fi
 
     # Enable services
-    sudo systemctl enable --now dnscrypt-proxy.service >>/dev/null 2>&1
-    sudo systemctl enable --now tor.service >>/dev/null 2>&1
-    sudo systemctl enable --now i2pd.service >>/dev/null 2>&1
+    sudo systemctl enable --now dnscrypt-proxy.service >/dev/null
+    sudo systemctl enable --now tor.service >/dev/null
+    sudo systemctl enable --now i2pd.service >/dev/null
 
     echo "Configured internet anonymizing features"
 fi
