@@ -1,46 +1,46 @@
 #!/bin/bash
 
 kernels=(
-    "linux",
-    "linux-lts",
-    "linux-hardened",
-    "linux-zen",
+    "linux",          # default kernel
+    "linux-lts",      # long term support kernel
+    "linux-hardened", # hardened kernel
+    "linux-zen",      # zen kernel (optimized for throughput) (unneeded in like 90% of cases)
 )
 
 kernel_supporting=(
-    "linux-firmware",
-    "linux-firmware-qlogic",
-    "linux-firmware-bnx2x",
-    "linux-firmware-liquidio",
-    "linux-firmware-mellanox",
-    "linux-firmware-nfp",
+    "linux-firmware",          # firmware for linux kernel
+    "linux-firmware-qlogic",   # firmware for qlogic devices
+    "linux-firmware-bnx2x",    # firmware for bnx2x broadcom ethernet devices
+    "linux-firmware-liquidio", # firmware for liquidio cavium liquidio server devices
+    "linux-firmware-mellanox", # firmware for mellanox spectrum switches
+    "linux-firmware-nfp",      # firmware for nfp netronome flow processors
 )
 
 packages=(
-    "base-devel",
-    "dosfstools",
-    "exfatprogs",
-    "xdg-user-dirs",
-    "pacman-contrib",
-    "nano",
-    "neovim",
-    "tmux",
-    "zsh",
-    "oh-my-zsh-git",
-    "starship",
-    "neofetch",
-    "usbutils",
-    "curl",
-    "eza",
-    "bat",
-    "diff-so-fancy",
-    "dua-cli",
-    "duf",
-    "tre-command",
-    "scc",
-    "jq",
-    "btop",
-    "cava",
+    "base-devel",     # base development tools
+    "dosfstools",     # dos filesystem tools
+    "exfatprogs",     # exfat filesystem tools
+    "xdg-user-dirs",  # xdg user directories
+    "pacman-contrib", # pacman contrib (needed for paccache cache cleaner)
+    "nano",           # nano text editor (simple text editor)
+    "neovim",         # neovim text editor (advanced text editor)
+    "tmux",           # tmux terminal multiplexer
+    "zsh",            # zsh shell
+    "oh-my-zsh-git",  # oh-my-zsh (zsh configuration framework)
+    "starship",       # starship (shell prompt)
+    "neofetch",       # neofetch (system information tool)
+    "usbutils",       # usbutils (usb tools)
+    "curl",           # curl (file transfer tool)
+    "eza",            # eza (better ls command, community maintained fork of exa)
+    "bat",            # bat (better cat command)
+    "diff-so-fancy",  # diff-so-fancy (better git diff)
+    "dua-cli",        # dua-cli (better du command)
+    "duf",            # duf (better df command)
+    "tre-command",    # tre-command (better tree command)
+    "scc",            # scc (better cloc command)
+    "jq",             # jq (json processor)
+    "btop",           # btop (better htop)
+    "cava",           # cava (audio visualizer)
 )
 
 # Install kernel for linux
@@ -57,20 +57,23 @@ while true; do
     echo
 
     if [[ $kernel -ge 0 && $kernel -lt ${#kernels[@]} ]]; then
-        paru -S --noconfirm --needed "${kernels[$REPLY - 1]} ${kernels[$REPLY - 1]}-headers" >>/dev/null 2>&1
-        paru -S --noconfirm --needed "${kernel_supporting[@]}" >>/dev/null 2>&1
+        paru -S --noconfirm --needed "${kernels[$REPLY - 1]} ${kernels[$REPLY - 1]}-headers" >/dev/null
+        paru -S --noconfirm --needed "${kernel_supporting[@]}" >/dev/null
         break
     fi
 done
 
 # Install packages from list
-paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 
-mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >>/dev/null 2>&1
-xdg-user-dirs-update >>/dev/null 2>&1
-chsh -s /bin/zsh $(whoami) >>/dev/null 2>&1
-sudo systemctl enable paccache.timer >>/dev/null 2>&1
-bat cache --build >>/dev/null 2>&1
+mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >/dev/null
+xdg-user-dirs-update >/dev/null
+
+chsh -s /bin/zsh $(whoami) >/dev/null
+
+sudo systemctl enable paccache.timer >/dev/null
+
+bat cache --build >/dev/null
 
 source ./git.sh
 source ./networking.sh
