@@ -30,5 +30,5 @@ if $MULTILIB; then
 fi
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" /dev/null 
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 echo "Finished installing recording tools"

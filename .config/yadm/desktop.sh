@@ -70,9 +70,11 @@ for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     case "$line" in
     "*NVIDIA*")
         packages+=("gst-plugins-bad")
-        commands+=("sudo tee -a /etc/environment >/dev/null  <<EOF
-GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX
-EOF")
+        if grep "GST_PLUGIN_FEATURE_RANK" /etc/environment >/dev/null; then
+            commands+=("sudo sed -i \"s/GST_PLUGIN_FEATURE_RANK=.*/GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" /etc/environment")
+        else
+            commands+=("grep \"GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" | sudo tee -a /etc/environment >/dev/null")
+        fi
         ;;
     esac
 done
@@ -81,17 +83,30 @@ read -p "Enable bluetooth? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=("bluez bluez-utils blueberry")
-    commands+=("sudo systemctl enable bluetooth /dev/null ")
+    commands+=("sudo systemctl enable bluetooth >/dev/null")
 fi
 
-commands+=("echo -e \"TERM=alacritty\nQT_QPA_PLATFORMTHEME=qt6ct\" | sudo tee -a /etc/environment >/dev/null ")
-commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf >/dev/null ")
+if grep "QT_QPA_PLATFORMTHEME" /etc/environment >/dev/null; then
+    commands+=("sudo sed -i \"s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g\" /etc/environment")
+else
+    commands+=("grep \"QT_QPA_PLATFORMTHEME=qt5ct\" | sudo tee -a /etc/environment >/dev/null")
+fi
 
-commands+=("sudo usermod -aG video "$(whoami)" /dev/null ")
-commands+=("sudo usermod -aG input "$(whoami)" /dev/null ")
-commands+=("sudo usermod -aG disk "$(whoami)" /dev/null ")
-commands+=("sudo usermod -aG audio "$(whoami)" /dev/null ")
-commands+=("sudo usermod -aG games "$(whoami)" /dev/null ")
+if grep "TERM" /etc/environment >/dev/null; then
+    commands+=("sudo sed -i \"s/TERM=.*/TERM=alacritty/g\" /etc/environment")
+else
+    commands+=("grep \"TERM=alacritty\" | sudo tee -a /etc/environment >/dev/null")
+fi
+
+if !grep "Path askpass"; then
+    commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf >/dev/null")
+fi
+
+commands+=("sudo usermod -aG video "$(whoami)" >/dev/null")
+commands+=("sudo usermod -aG input "$(whoami)" >/dev/null")
+commands+=("sudo usermod -aG disk "$(whoami)" >/dev/null")
+commands+=("sudo usermod -aG audio "$(whoami)" >/dev/null")
+commands+=("sudo usermod -aG games "$(whoami)" >/dev/null")
 
 read -n 1 -rp "Which browser would you like to install (f)irefox, (c)hrome, or (b)oth? " browser
 echo
@@ -109,15 +124,15 @@ esac
 
 packages+=("nodejs" "npm")
 commands+=("cd ~/.config/chevron")
-commands+=("npm install /dev/null  && npm run build /dev/null ")
-commands+=("sudo npm install -g node-linux /dev/null  && npm link node-linux /dev/null ")
-commands+=("sudo npm register_linux /dev/null ")
-commands+=("sudo systemctl enable chevron.service /dev/null ")
+commands+=("npm install >/dev/null && npm run build >/dev/null")
+commands+=("sudo npm install -g node-linux >/dev/null && npm link node-linux >/dev/null")
+commands+=("sudo npm register_linux >/dev/null")
+commands+=("sudo systemctl enable chevron.service >/dev/null")
 
-commands+=("sudo systemctl enable sddm /dev/null ")
+commands+=("sudo systemctl enable sddm >/dev/null")
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" /dev/null 
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 for command in $commands; do
     eval "$command"
 done

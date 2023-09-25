@@ -78,7 +78,13 @@ for language in $languages; do
             "rustup" # Rust toolchain manager
         )
         commands+=(
-            "rustup default stable" # Set default rust toolchain to stable (download and configure it)
+            "rustup default stable >/dev/null" # Set default rust toolchain to stable (download and configure it)
+        )
+        packages+=(
+            "rustup" # Rust toolchain manager
+        )
+        commands+=(
+            "rustup default stable >/dev/null" # Set default rust toolchain to stable (download and configure it)
         )
         ;;
     "4")
@@ -174,9 +180,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
         "github-cli" # Github cli
     )
-fi
-if ! gh auth status; then
-    gh auth login
+
+    if ! gh auth status; then
+        gh auth login
+    fi
 fi
 
 # Text Editors/Markdown writers
@@ -215,16 +222,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "virtualbox-unattended-templates" # Virtualbox unattended templates
         "virtualbox-ext-oracle"           # Virtualbox extension pack
     )
-    packages+=(
-        "virtualbox"                      # Virtualbox application
-        "virtualbox-host-dkms"            # Virtualbox host kernel modules
-        "virtualbox-guest-iso"            # Virtualbox guest iso
-        "virtualbox-unattended-templates" # Virtualbox unattended templates
-        "virtualbox-ext-oracle"           # Virtualbox extension pack
-    )
 fi
-
-sudo usermod -aG vboxusers "$USER" /dev/null 
 
 # Docker
 read -p "Install docker and docker-compose? [Y/n] " -n 1 -r
@@ -234,20 +232,11 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "docker"         # Docker containerized application system
         "docker-compose" # Docker compose (docker container manager)
     )
-    packages+=(
-        "docker"         # Docker containerized application system
-        "docker-compose" # Docker compose (docker container manager)
-    )
 fi
 
-sudo systemctl enable --now docker.service /dev/null 
-
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" /dev/null 
-echo "Finished installing developer environment packages"
-
-echo "Running setup commands..."
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 for command in "${commands[@]}"; do
-    eval $command /dev/null 
+    eval $command >/dev/null
 done
-echo "Finished running setup commands"
+echo "Finished installing developer environment packages"
