@@ -4,7 +4,16 @@
 # Description:  Install gpu drivers, cpu microcode, and other hardware related packages
 # Author:       Sori Phoono <soriphoono@gmail.com>
 
-gpus_installed=$(lspci | grep -e "3D" -e "VGA" >/dev/null )
+MULTILIB=false
+for arg in "$@"; do
+    case "$arg" in
+    "--multilib")
+        MULTILIB=true
+        ;;
+    esac
+done
+
+gpus_installed=$(lspci | grep -e "3D" -e "VGA" >/dev/null)
 gpu_count=$(grep "" -c <<<"$gpus_installed")
 nvidia=false
 for gpu in "$gpus_installed"; do
@@ -17,6 +26,9 @@ done
 
 installed=()
 
+igpu_vendor="None"
+dgpu_vendor="None"
+
 if [ $gpu_count -lt 3 ]; then
     if [ $gpu_count == 2 ]; then
         read -p "Two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
@@ -26,14 +38,18 @@ if [ $gpu_count -lt 3 ]; then
 
             case "$cpu_type" in
             "GenuineIntel")
-                sh "$HOME/.config/yadm/drivers/intel.sh"
+                sh "$HOME/.config/yadm/drivers/intel.sh" $($MULTILIB && echo "--multilib")
 
                 installed+=("intel")
+
+                igpu_vendor="Intel"
                 ;;
             "AuthenticAMD")
-                sh "$HOME/.config/yadm/drivers/amd.sh"
+                sh "$HOME/.config/yadm/drivers/amd.sh" $($MULTILIB && echo "--multilib")
 
                 installed+=("amd")
+
+                igpu_vendor="AMD"
                 ;;
             esac
         else
@@ -44,12 +60,35 @@ if [ $gpu_count -lt 3 ]; then
     fi
 
     if $nvidia; then
-        sh "$HOME/.config/yadm/drivers/nvidia.sh"
+        sh "$HOME/.config/yadm/drivers/nvidia.sh" $($MULTILIB && echo "--multilib")
+
+        installed+=("nvidia")
+
+        dgpu_vendor="NVIDIA"
     else
-        sh "$HOME/.config/yadm/drivers/amd.sh" --discrete
+        sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($MULTILIB && echo "--multilib")
+
+        installed+=("amd")
+
+        dgpu_vendor="AMD"
     fi
 else
     echo "Unusual number of GPUs detected, please install drivers manually"
 
     exit 0
+fi
+
+echo "Installed ${installed[*]} drivers"
+
+# Write igpu and dgpu vendor to file
+if grep "igpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor" >/dev/null; then
+    sed -i "/igpu_vendor/c\igpu_vendor=$igpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor"
+else
+    echo "igpu_vendor=$igpu_vendor" >>"$HOME/.config/yadm/drivers/gpu_vendor"
+fi
+
+if grep "dgpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor" >/dev/null; then
+    sed -i "/dgpu_vendor/c\dgpu_vendor=$dgpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor"
+else
+    echo "dgpu_vendor=$dgpu_vendor" >>"$HOME/.config/yadm/drivers/gpu_vendor"
 fi

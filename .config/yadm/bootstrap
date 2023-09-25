@@ -58,7 +58,7 @@ yadm submodule update >/dev/null
 echo "Installed submodules"
 
 # Install cli packages
-sh ~/.config/yadm/drivers/bootstrap
+sh ~/.config/yadm/drivers/bootstrap --multilib
 sh ~/.config/yadm/cli/bootstrap
 sh ~/.config/yadm/personal/bootstrap --multilib
 sh ~/.config/yadm/desktop.sh
