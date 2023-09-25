@@ -6,6 +6,15 @@
 
 # Setup development tools
 
+MULTILIB=false
+for arg in "$@"; do
+    case $arg in
+    "--multilib")
+        MULTILIB=true
+        ;;
+    esac
+done
+
 languages=(
     "C/C++"
     "Zig"
@@ -152,6 +161,32 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 
     commands+=("usermod -aG vboxusers $USER") # Add user to vboxusers group
+fi
+
+# Android development tools
+if $MULTILIB && read -p "Install android studio? [Y/n] " -n 1 -r; then
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        packages+=(
+            "android-studio"                   # Android studio
+            "android-sdk-cmdline-tools-latest" # Android sdk command line tools
+            "android-sdk-build-tools"          # Android sdk build tools
+            "android-sdk-platform-tools"       # Android sdk platform tools
+            "android-platform"                 # Android platform
+            "android-emulator"                 # Android emulator
+            "android-support-repository"       # Android support repository
+            "aosp-devel"                       # Android open source project development tools
+            "lineageos-devel"                  # LineageOS development tools
+            "repo"                             # Android repository tool
+            "android-udev"                     # Android udev rules
+            "heimdall"                         # Heimdall flash tool for Samsung devices
+        )
+
+        commands+=("groupadd android-sdk")                             # Add android-sdk group
+        commands+=("usermod -aG android-sdk $USER")                    # Add user to android-sdk group
+        commands+=("setfacl -R -m g:android-sdk:rwx /opt/android-sdk") # Set android-sdk group permissions
+        commands+=("setfacl -d -m g:android-sdk:rwX /opt/android-sdk") # Set android-sdk group default permissions
+    fi
 fi
 
 # Docker
