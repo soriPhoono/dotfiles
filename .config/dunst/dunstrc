@@ -12,7 +12,7 @@ corner_radius               = 7
 padding                     = 4
 horizontal_padding          = 4
 origin                      = top-right
-offset                      = 15x15
+offset                      = 8x46
 width                       = 400
 height                      = 400
 
@@ -63,6 +63,3 @@ mouse_left_click            = open_url, close_current, do_action
  background = "#1E1E2E"
  foreground = "#CDD6F4"
  frame_color = "#FAB387"
-
-# vim:ft=cfg
-
