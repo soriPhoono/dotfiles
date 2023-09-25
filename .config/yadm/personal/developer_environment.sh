@@ -20,7 +20,6 @@ languages=(
 
 packages=()
 commands=()
-commands=()
 
 i=1
 echo "Available languages:"
@@ -44,42 +43,14 @@ for language in $languages; do
             "llvm"     # C/C++ compiler infrastructure
             "lld"      # C/C++ linker optimizer
         )
-        packages+=(
-            "valgrind" # C/C++ memory leak checker
-            "cmake"    # C/C++ build system
-            "ninja"    # C/C++ makefile generator
-            "meson"    # C/C++ build system
-            "gdb"      # C/C++ debugger (gnu)
-            "gcc"      # C/C++ compiler
-            "lldb"     # C/C++ debugger (llvm)
-            "clang"    # C/C++ compiler
-            "llvm"     # C/C++ compiler infrastructure
-            "lld"      # C/C++ linker optimizer
-        )
         ;;
     "2")
         packages+=(
             "zls" # Zig language server
             "zig" # Zig compiler
         )
-        packages+=(
-            "zls" # Zig language server
-            "zig" # Zig compiler
-        )
         ;;
     "3")
-        packages+=(
-            "rustup" # Rust toolchain manager
-        )
-        commands+=(
-            "rustup default stable" # Set default rust toolchain to stable (download and configure it)
-        )
-        packages+=(
-            "rustup" # Rust toolchain manager
-        )
-        commands+=(
-            "rustup default stable >/dev/null" # Set default rust toolchain to stable (download and configure it)
-        )
         packages+=(
             "rustup" # Rust toolchain manager
         )
@@ -93,19 +64,8 @@ for language in $languages; do
             "delve" # Go debugger
             "gopls" # Go language server
         )
-        packages+=(
-            "go"    # Go compiler
-            "delve" # Go debugger
-            "gopls" # Go language server
-        )
         ;;
     "5")
-        packages+=(
-            "jdk-openjdk"   # Java compiler (version 19)
-            "jdk17-openjdk" # Java compiler (version 17)
-            "jdk11-openjdk" # Java compiler (version 11)
-            "jdk8-openjdk"  # Java compiler (version 8)
-        )
         packages+=(
             "jdk-openjdk"   # Java compiler (version 19)
             "jdk17-openjdk" # Java compiler (version 17)
@@ -117,15 +77,8 @@ for language in $languages; do
         packages+=(
             "perl" # Perl interpreter
         )
-        packages+=(
-            "perl" # Perl interpreter
-        )
         ;;
     "7")
-        packages+=(
-            "python"     # Python interpreter
-            "python-pip" # Python package manager
-        )
         packages+=(
             "python"     # Python interpreter
             "python-pip" # Python package manager
@@ -138,10 +91,6 @@ for language in $languages; do
                 "python-django"      # Django web framework
                 "python-mysqlclient" # Python mysql connector
             )
-            packages+=(
-                "python-django"      # Django web framework
-                "python-mysqlclient" # Python mysql connector
-            )
         fi
         ;;
     "8")
@@ -150,17 +99,8 @@ for language in $languages; do
             "luajit"   # LuaJIT compiler
             "luarocks" # Lua package manager
         )
-        packages+=(
-            "lua"      # Lua interpreter
-            "luajit"   # LuaJIT compiler
-            "luarocks" # Lua package manager
-        )
         ;;
     "9")
-        packages+=(
-            "nodejs" # NodeJS interpreter
-            "npm"    # NodeJS package manager
-        )
         packages+=(
             "nodejs" # NodeJS interpreter
             "npm"    # NodeJS package manager
@@ -177,13 +117,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
         "github-cli" # Github cli
     )
-    packages+=(
-        "github-cli" # Github cli
-    )
 
-    if ! gh auth status; then
-        gh auth login
-    fi
+    commands+=("gh auth login") # Login to github
 fi
 
 # Text Editors/Markdown writers
@@ -194,18 +129,11 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "visual-studio-code-bin" # Visual studio code
         "obsidian"               # Obsidian
     )
-    packages+=(
-        "visual-studio-code-bin" # Visual studio code
-        "obsidian"               # Obsidian
-    )
 fi
 
 read -p "Install imhex hex viewer? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=(
-        "imhex" # Hex viewer
-    )
     packages+=(
         "imhex" # Hex viewer
     )
@@ -222,6 +150,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "virtualbox-unattended-templates" # Virtualbox unattended templates
         "virtualbox-ext-oracle"           # Virtualbox extension pack
     )
+
+    commands+=("usermod -aG vboxusers $USER") # Add user to vboxusers group
 fi
 
 # Docker
@@ -232,6 +162,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "docker"         # Docker containerized application system
         "docker-compose" # Docker compose (docker container manager)
     )
+
+    commands+=("sudo systemctl enable docker") # Enable docker service
 fi
 
 echo "Installing packages..."
