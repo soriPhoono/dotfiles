@@ -10,6 +10,12 @@ packages=(
 echo "Installing networking packages..."
 paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
 
+sudo systemctl enable NetworkManager.service >>/dev/null 2>&1
+sudo systemctl enable ufw.service >>/dev/null 2>&1
+sudo ufw default deny >>/dev/null 2>&1
+sudo ufw allow from "$(ip -json route get 8.8.8.8 | jq -r '.[].prefsrc' | sed 's/\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.\)[0-9]\{1,3\}$/\10\/24/')" >>/dev/null 2>&1
+sudo ufw enable >>/dev/null 2>&1
+
 read -p "Enable NetworkManager advanced features (tor, i2p, dnscrypt proxy)? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
