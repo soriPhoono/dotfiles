@@ -35,11 +35,11 @@ fi
 
 # Install packages
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null 
 echo "Installed nvidia driver packages."
 
 # Execute commands
 for command in "${commands[@]}"; do
-    eval "$command" >>/dev/null 2>&1
+    eval "$command" >/dev/null 
 done
 echo "Configured nvidia driver."

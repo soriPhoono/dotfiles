@@ -4,7 +4,7 @@
 # Description:  Install gpu drivers, cpu microcode, and other hardware related packages
 # Author:       Sori Phoono <soriphoono@gmail.com>
 
-gpus_installed=$(lspci | grep -e "3D" -e "VGA" >>/dev/null 2>&1)
+gpus_installed=$(lspci | grep -e "3D" -e "VGA" >/dev/null )
 gpu_count=$(grep "" -c <<<"$gpus_installed")
 nvidia=false
 for gpu in "$gpus_installed"; do
