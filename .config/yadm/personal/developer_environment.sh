@@ -20,6 +20,7 @@ languages=(
 
 packages=()
 commands=()
+commands=()
 
 i=1
 echo "Available languages:"
@@ -43,14 +44,36 @@ for language in $languages; do
             "llvm"     # C/C++ compiler infrastructure
             "lld"      # C/C++ linker optimizer
         )
+        packages+=(
+            "valgrind" # C/C++ memory leak checker
+            "cmake"    # C/C++ build system
+            "ninja"    # C/C++ makefile generator
+            "meson"    # C/C++ build system
+            "gdb"      # C/C++ debugger (gnu)
+            "gcc"      # C/C++ compiler
+            "lldb"     # C/C++ debugger (llvm)
+            "clang"    # C/C++ compiler
+            "llvm"     # C/C++ compiler infrastructure
+            "lld"      # C/C++ linker optimizer
+        )
         ;;
     "2")
         packages+=(
             "zls" # Zig language server
             "zig" # Zig compiler
         )
+        packages+=(
+            "zls" # Zig language server
+            "zig" # Zig compiler
+        )
         ;;
     "3")
+        packages+=(
+            "rustup" # Rust toolchain manager
+        )
+        commands+=(
+            "rustup default stable" # Set default rust toolchain to stable (download and configure it)
+        )
         packages+=(
             "rustup" # Rust toolchain manager
         )
@@ -64,8 +87,19 @@ for language in $languages; do
             "delve" # Go debugger
             "gopls" # Go language server
         )
+        packages+=(
+            "go"    # Go compiler
+            "delve" # Go debugger
+            "gopls" # Go language server
+        )
         ;;
     "5")
+        packages+=(
+            "jdk-openjdk"   # Java compiler (version 19)
+            "jdk17-openjdk" # Java compiler (version 17)
+            "jdk11-openjdk" # Java compiler (version 11)
+            "jdk8-openjdk"  # Java compiler (version 8)
+        )
         packages+=(
             "jdk-openjdk"   # Java compiler (version 19)
             "jdk17-openjdk" # Java compiler (version 17)
@@ -77,8 +111,15 @@ for language in $languages; do
         packages+=(
             "perl" # Perl interpreter
         )
+        packages+=(
+            "perl" # Perl interpreter
+        )
         ;;
     "7")
+        packages+=(
+            "python"     # Python interpreter
+            "python-pip" # Python package manager
+        )
         packages+=(
             "python"     # Python interpreter
             "python-pip" # Python package manager
@@ -91,6 +132,10 @@ for language in $languages; do
                 "python-django"      # Django web framework
                 "python-mysqlclient" # Python mysql connector
             )
+            packages+=(
+                "python-django"      # Django web framework
+                "python-mysqlclient" # Python mysql connector
+            )
         fi
         ;;
     "8")
@@ -99,8 +144,17 @@ for language in $languages; do
             "luajit"   # LuaJIT compiler
             "luarocks" # Lua package manager
         )
+        packages+=(
+            "lua"      # Lua interpreter
+            "luajit"   # LuaJIT compiler
+            "luarocks" # Lua package manager
+        )
         ;;
     "9")
+        packages+=(
+            "nodejs" # NodeJS interpreter
+            "npm"    # NodeJS package manager
+        )
         packages+=(
             "nodejs" # NodeJS interpreter
             "npm"    # NodeJS package manager
@@ -117,6 +171,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
         "github-cli" # Github cli
     )
+    packages+=(
+        "github-cli" # Github cli
+    )
 fi
 if ! gh auth status; then
     gh auth login
@@ -130,11 +187,18 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "visual-studio-code-bin" # Visual studio code
         "obsidian"               # Obsidian
     )
+    packages+=(
+        "visual-studio-code-bin" # Visual studio code
+        "obsidian"               # Obsidian
+    )
 fi
 
 read -p "Install imhex hex viewer? [Y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+    packages+=(
+        "imhex" # Hex viewer
+    )
     packages+=(
         "imhex" # Hex viewer
     )
@@ -151,9 +215,16 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "virtualbox-unattended-templates" # Virtualbox unattended templates
         "virtualbox-ext-oracle"           # Virtualbox extension pack
     )
+    packages+=(
+        "virtualbox"                      # Virtualbox application
+        "virtualbox-host-dkms"            # Virtualbox host kernel modules
+        "virtualbox-guest-iso"            # Virtualbox guest iso
+        "virtualbox-unattended-templates" # Virtualbox unattended templates
+        "virtualbox-ext-oracle"           # Virtualbox extension pack
+    )
 fi
 
-sudo usermod -aG vboxusers "$USER" >>/dev/null 2>&1
+sudo usermod -aG vboxusers "$USER" /dev/null 
 
 # Docker
 read -p "Install docker and docker-compose? [Y/n] " -n 1 -r
@@ -163,16 +234,20 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "docker"         # Docker containerized application system
         "docker-compose" # Docker compose (docker container manager)
     )
+    packages+=(
+        "docker"         # Docker containerized application system
+        "docker-compose" # Docker compose (docker container manager)
+    )
 fi
 
-sudo systemctl enable --now docker.service >>/dev/null 2>&1
+sudo systemctl enable --now docker.service /dev/null 
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+paru -S --noconfirm --needed "${packages[@]}" /dev/null 
 echo "Finished installing developer environment packages"
 
 echo "Running setup commands..."
 for command in "${commands[@]}"; do
-    eval $command >>/dev/null 2>&1
+    eval $command /dev/null 
 done
 echo "Finished running setup commands"
