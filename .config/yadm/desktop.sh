@@ -24,8 +24,11 @@ packages=(
     "betterlockscreen"            # Lockscreen
     "cool-retro-term"             # Terminal emulator for lockscreen effect
     "cmatrix"                     # Terminal emulator for lockscreen effect program
+    "dunst"                       # Notification daemon
+    "geoclue"                     # Location information
     "redshift"                    # Screen temperature adjustment
     "unclutter"                   # Hides cursor when idle
+    "brightnessctl"               # Brightness control
     "catppuccin-gtk-theme-mocha"  # GTK theme
     "catppuccin-cursors-mocha"    # Cursor theme
     "papirus-icon-theme"          # Icon theme
