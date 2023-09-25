@@ -68,6 +68,7 @@ packages=(
 commands=()
 
 packages+=("pipewire" "pipewire-audio" "pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber" "pavucontrol" "carla" "easyeffects")
+commands+=("systemctl --user enable pipewire >/dev/null")
 packages+=("gstreamer" "gst-libav" "gst-plugins-base" "gst-plugins-good" "gst-plugin-pipewire" "gstreamer-vaapi")
 for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     case "$line" in
@@ -81,6 +82,9 @@ for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
         ;;
     esac
 done
+
+commands+=("sudo systemctl enable geoclue >/dev/null")
+commands+=("systemctl --user enable redshift >/dev/null")
 
 read -p "Enable bluetooth? (y/n) " -n 1 -r
 echo

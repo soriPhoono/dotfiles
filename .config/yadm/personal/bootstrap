@@ -17,8 +17,19 @@ feature_sets=()
 
 i=1
 echo "Feature sets for personal packages: "
+source_blacklist=(
+    "~/.config/yadm/personal/bootstrap.sh"
+    "~/.config/yadm/personal/conf/"
+)
 for source_file in $(find ~/.config/yadm/personal -name "*.sh"); do
-    if [ $source_file != ~/.config/yadm/personal/bootstrap.sh ]; then
+    skip=false
+    for blacklist in "${source_blacklist[@]}"; do
+        if [ $source_file = $blacklist ]; then
+            skip=true
+            break
+        fi
+    done
+    if [ $skip = false ]; then
         echo "$i) $(basename $source_file)"
         feature_sets+=("$source_file")
         i=$((i + 1))
@@ -35,3 +46,10 @@ for feature_set in $feature_set; do
         echo "Invalid feature set index: $feature_set"
     fi
 done
+
+read -p "Do you want to copy monitor configs? [Y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Copying monitor configs..."
+    sudo cp -r ~/.config/yadm/personal/conf/* /
+fi

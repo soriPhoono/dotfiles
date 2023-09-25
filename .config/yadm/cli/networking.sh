@@ -77,6 +77,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         sudo ln -s $TORCHROOT/usr/lib ${TORCHROOT}/usr/lib64
     fi
 
+    sudo cp -r ~/.config/yadm/cli/conf/* /
+
     # Enable services
     sudo systemctl enable --now dnscrypt-proxy.service >/dev/null
     sudo systemctl enable --now tor.service >/dev/null

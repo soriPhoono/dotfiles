@@ -2,7 +2,6 @@
 
 xhost + local &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # For authentication
-redshift &
 
 picom &
 dunst &
