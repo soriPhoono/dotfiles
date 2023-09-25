@@ -86,8 +86,21 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     commands+=("sudo systemctl enable bluetooth /dev/null")
 fi
 
-commands+=("echo -e \"TERM=alacritty\nQT_QPA_PLATFORMTHEME=qt6ct\" | sudo tee -a /etc/environment >/dev/null")
-commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf >/dev/null")
+if grep "QT_QPA_PLATFORMTHEME" /etc/environment >/dev/null; then
+    commands+=("sudo sed -i \"s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g\" /etc/environment")
+else
+    commands+=("grep \"QT_QPA_PLATFORMTHEME=qt5ct\" | sudo tee -a /etc/environment >/dev/null")
+fi
+
+if grep "TERM" /etc/environment >/dev/null; then
+    commands+=("sudo sed -i \"s/TERM=.*/TERM=alacritty/g\" /etc/environment")
+else
+    commands+=("grep \"TERM=alacritty\" | sudo tee -a /etc/environment >/dev/null")
+fi
+
+if !grep "Path askpass"; then
+    commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf >/dev/null")
+fi
 
 commands+=("sudo usermod -aG video "$(whoami)" /dev/null")
 commands+=("sudo usermod -aG input "$(whoami)" /dev/null")
