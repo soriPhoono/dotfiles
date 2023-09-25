@@ -30,7 +30,7 @@ feature_set_len=${#feature_sets[@]}
 feature_set_len=$((feature_set_len + 1))
 for feature_set in $feature_set; do
     if [ $feature_set -gt 0 ] && [ $feature_set -lt $feature_set_len ]; then
-        sh ${feature_sets[$((feature_set - 1))]} $MULTILIB
+        sh ${feature_sets[$((feature_set - 1))]} $($MULTILIB && echo "--multilib")
     else
         echo "Invalid feature set index: $feature_set"
     fi
