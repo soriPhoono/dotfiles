@@ -28,8 +28,16 @@ packages=(
     "clinfo"
 )
 
+commands=()
+
 if $MULTILIB; then
     packages+=("lib32-mesa" "lib32-vulkan-radeon" "lib32-libva-mesa-driver" "lib32-ocl-icd" "lib32-opencl-rusticl-mesa")
+fi
+
+if grep -i "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
+    commands+=("sudo sed -i 's/LIBVA_DRIVER_NAME=.*/LIBVA_DRIVER_NAME=radeonsi/' /etc/environment")
+else
+    commands+=("echo 'LIBVA_DRIVER_NAME=radeonsi' | sudo tee -a /etc/environment >/dev/null")
 fi
 
 if $DISCRETE; then
@@ -40,20 +48,15 @@ if $DISCRETE; then
     fi
 
     if grep -i "VK_ICD_FILENAMES" /etc/environment >/dev/null; then
-        sudo sed -i 's/VK_ICD_FILENAMES=.*/VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i86.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json/' /etc/environment
+        commands+=("sudo sed -i 's/VK_ICD_FILENAMES=.*/VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i86.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json/' /etc/environment")
     else
-        sudo tee -a /etc/environment >/dev/null 2>&1 <<EOF
-VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i86.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
-EOF
+        commands+=("echo 'VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.i86.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json' | sudo tee -a /etc/environment >/dev/null")
     fi
 fi
 
-paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
-
-if grep -i "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
-    sudo sed -i "s/LIBVA_DRIVER_NAME=.*/LIBVA_DRIVER_NAME=radeonsi/" /etc/environment
-else
-    sudo tee -a /etc/environment >/dev/null 2>&1 <<EOF
-LIBVA_DRIVER_NAME=radeonsi
-EOF
-fi
+echo "Installing packages..."
+paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+for command in "${commands[@]}"; do
+    eval "$command" >/dev/null
+done
+echo "Installed amd driver packages."
