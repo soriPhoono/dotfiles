@@ -153,3 +153,84 @@ KERNEL=="sd?", ACTION=="add", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin
 # Unplug usb drive
 KERNEL=="sd?", ACTION=="remove", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
 EOF
+
+touch ~/.config/qt5ct/qt5ct.conf
+tee -a ~/.config/qt5ct/qt5ct.conf >/dev/null <<EOF
+[Appearance]
+color_scheme_path=/home/$(whoami)/.config/qt5ct/colors/Catppuccin-Mocha.conf
+custom_palette=true
+icon_theme=Papirus-Dark
+standard_dialogs=default
+style=Fusion
+
+[Fonts]
+fixed="SauceCodeProNFM,12,-1,5,50,0,0,0,0,0"
+general="SauceCodeProNF,12,-1,5,50,0,0,0,0,0"
+
+[Interface]
+activate_item_on_single_click=1
+buttonbox_layout=0
+cursor_flash_time=1000
+dialog_buttons_have_icons=1
+double_click_interval=400
+gui_effects=@Invalid()
+keyboard_scheme=2
+menus_have_icons=true
+show_shortcuts_in_context_menus=true
+stylesheets=/usr/share/qt5ct/qss/scrollbar-simple.qss
+toolbutton_style=4
+underline_shortcut=1
+wheel_scroll_lines=4
+
+[PaletteEditor]
+geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\0\0\0\0\0\0\0\0\x4\x7f\0\0\x2\x1b\0\0\0\0\0\0\0\0\0\0\x2v\0\0\x2\x10\0\0\0\0\x2\0\0\0\a\x80\0\0\0\0\0\0\0\0\0\0\x4\x7f\0\0\x2\x1b)
+
+[SettingsWindow]
+geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\0\x4\0\0\0+\0\0\au\0\0\x4-\0\0\x4\x38\0\0\0\x14\0\0\a\x16\0\0\x2\xac\0\0\0\0\x2\0\0\0\a\x80\0\0\0\a\0\0\0.\0\0\ar\0\0\x4*)
+
+[Troubleshooting]
+force_raster_widgets=0
+ignored_applications=@Invalid()
+EOF
+
+touch ~/.config/qt6ct/qt6ct.conf
+tee -a ~/.config/qt6ct/qt6ct.conf >/dev/null <<EOF
+[Appearance]
+color_scheme_path=/home/soriphoono/.config/qt6ct/colors/Catppuccin-Mocha.conf
+custom_palette=true
+icon_theme=Stylish-Dark
+standard_dialogs=default
+style=Fusion
+
+[Fonts]
+fixed="SauceCodeProNFM,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,Regular"
+general="SauceCodeProNF,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,Regular"
+
+[Interface]
+activate_item_on_single_click=1
+buttonbox_layout=0
+cursor_flash_time=1000
+dialog_buttons_have_icons=0
+double_click_interval=400
+gui_effects=General, FadeMenu, FadeTooltip, AnimateToolBox
+keyboard_scheme=2
+menus_have_icons=false
+show_shortcuts_in_context_menus=true
+stylesheets=/usr/share/qt6ct/qss/fusion-fixes.qss, /usr/share/qt6ct/qss/scrollbar-simple.qss, /usr/share/qt6ct/qss/sliders-simple.qss, /usr/share/qt6ct/qss/tooltip-simple.qss, /usr/share/qt6ct/qss/traynotification-simple.qss
+toolbutton_style=4
+underline_shortcut=1
+wheel_scroll_lines=3
+
+[PaletteEditor]
+geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\x1\x34\0\0\0y\0\0\x5\xb0\0\0\x4m\0\0\x1\x35\0\0\0z\0\0\x5\xaf\0\0\x4l\0\0\0\0\0\0\0\0\a\x80\0\0\x1\x35\0\0\0z\0\0\x5\xaf\0\0\x4l)
+
+[QSSEditor]
+geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\x2|\0\0\x1\\\0\0\x5\x2\0\0\x3R\0\0\x2~\0\0\x1^\0\0\x5\0\0\0\x3P\0\0\0\0\0\0\0\0\a\x80\0\0\x2~\0\0\x1^\0\0\x5\0\0\0\x3P)
+
+[SettingsWindow]
+geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\0\x4\0\0\0+\0\0\au\0\0\x4-\0\0\0\a\0\0\0.\0\0\ar\0\0\x4*\0\0\0\0\0\0\0\0\a\x80\0\0\0\a\0\0\0.\0\0\ar\0\0\x4*)
+
+[Troubleshooting]
+force_raster_widgets=1
+ignored_applications=@Invalid()
+EOF
