@@ -153,7 +153,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 fi
 
-sudo usermod -aG vboxusers "$USER" >>/dev/null 2>&1
+sudo usermod -aG vboxusers "$USER" /dev/null 
 
 # Docker
 read -p "Install docker and docker-compose? [Y/n] " -n 1 -r
@@ -165,14 +165,14 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 fi
 
-sudo systemctl enable --now docker.service >>/dev/null 2>&1
+sudo systemctl enable --now docker.service /dev/null 
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" >>/dev/null 2>&1
+paru -S --noconfirm --needed "${packages[@]}" /dev/null 
 echo "Finished installing developer environment packages"
 
 echo "Running setup commands..."
 for command in "${commands[@]}"; do
-    eval $command >>/dev/null 2>&1
+    eval $command /dev/null 
 done
 echo "Finished running setup commands"
