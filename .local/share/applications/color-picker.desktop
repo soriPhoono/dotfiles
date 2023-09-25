@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=~/.local/bin/color-picker-gui.sh
+Terminal=false
+Hidden=false
+Name=Color Picker
+Icon=colorgrab
+Categories=Development; Graphics; Office; System; Utility; Video
+Comment=Activate graphical color picker for getting hex addresses of colors
