@@ -62,3 +62,6 @@ sh ~/.config/yadm/drivers/bootstrap --multilib
 sh ~/.config/yadm/cli/bootstrap
 sh ~/.config/yadm/personal/bootstrap --multilib
 sh ~/.config/yadm/desktop.sh
+
+# Copy configuration files
+cp -r ~/.config/yadm/conf/* /
