@@ -59,6 +59,11 @@ keys = [
     Key([], "XF86AudioPrev", lazy.spawn(
         "playerctl previous"), desc="Previous track"),
 
+    Key([], "XF86MonBrightnessUp", lazy.spawn(
+        f"{home}/.local/bin/notifications/brightness.sh up"), desc="Increase brightness"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn(
+        f"{home}/.local/bin/notifications/brightness.sh down"), desc="Decrease brightness"),
+
     # Application launchers
     Key([mod], "b", lazy.spawn(browser), desc="Launch browser"),
     Key([mod], "c", lazy.spawn("code"), desc="Launch VSCode"),
