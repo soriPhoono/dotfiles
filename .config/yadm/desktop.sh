@@ -137,3 +137,19 @@ for command in $commands; do
     eval "$command"
 done
 echo "Finished installing core desktop environment packages"
+
+sudo touch /etc/udev/rules.d/99-mtp.rules
+sudo tee -a /etc/udev/rules.d/99-mtp.rules >/dev/null <<EOF
+# Plug in
+ACTION="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/home/$USER/.Xauthority" RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/mtp-device.sh'"
+# Unplug
+ACTION=="remove", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/home/$USER/.Xauthority" RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/mtp-device.sh'"
+EOF
+
+sudo touch /etc/udev/rules.d/99-storage.rules
+sudo tee -a /etc/udev/rules.d/99-storage.rules >/dev/null <<EOF
+# Plug in usb drive
+KERNEL=="sd?", ACTION=="add", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
+# Unplug usb drive
+KERNEL=="sd?", ACTION=="remove", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
+EOF

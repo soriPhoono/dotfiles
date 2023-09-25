@@ -1,4 +1,0 @@
-# Plug in
-ACTION="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/home/$USER/.Xauthority" RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/mtp-device.sh'"
-# Unplug
-ACTION=="remove", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/home/$USER/.Xauthority" RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/mtp-device.sh'"
