@@ -14,6 +14,14 @@ for arg in "$@"; do
 done
 
 gpus_installed=$(lspci | grep -e "3D" -e "VGA" >/dev/null)
+if [ $(systemd-detect-virt) != "none" ]; then
+    echo "Virtual machine detected, installing virtual machine drivers"
+
+    sh "$HOME/.config/yadm/drivers/virtual.sh" $($MULTILIB && echo "--multilib")
+
+    exit 0
+fi
+
 gpu_count=$(grep "" -c <<<"$gpus_installed")
 nvidia=false
 for gpu in "$gpus_installed"; do
