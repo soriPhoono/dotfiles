@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 # Path to your oh-my-zsh installation.
-export PATH=$PATH + ":/home/$(whoami)/.local/bin"
 export ZSH="/usr/share/oh-my-zsh"
 export SHELL=zsh
 
