@@ -185,10 +185,10 @@ if $MULTILIB && read -p "Install android studio? [y/N] " -n 1 -r; then
             "heimdall"                         # Heimdall flash tool for Samsung devices
         )
 
-        commands+=("groupadd android-sdk")                             # Add android-sdk group
-        commands+=("usermod -aG android-sdk $USER")                    # Add user to android-sdk group
-        commands+=("setfacl -R -m g:android-sdk:rwx /opt/android-sdk") # Set android-sdk group permissions
-        commands+=("setfacl -d -m g:android-sdk:rwX /opt/android-sdk") # Set android-sdk group default permissions
+        commands+=("sudo groupadd android-sdk")                             # Add android-sdk group
+        commands+=("sudo usermod -aG android-sdk $USER")                    # Add user to android-sdk group
+        commands+=("sudo setfacl -R -m g:android-sdk:rwx /opt/android-sdk") # Set android-sdk group permissions
+        commands+=("sudo setfacl -d -m g:android-sdk:rwX /opt/android-sdk") # Set android-sdk group default permissions
     fi
 fi
 
