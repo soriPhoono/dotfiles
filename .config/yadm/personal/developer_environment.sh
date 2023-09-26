@@ -64,7 +64,7 @@ for language in $languages; do
             "rustup" # Rust toolchain manager
         )
         commands+=(
-            "rustup default stable >/dev/null" # Set default rust toolchain to stable (download and configure it)
+            "rustup default stable" # Set default rust toolchain to stable (download and configure it)
         )
         ;;
     "4")
