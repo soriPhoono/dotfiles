@@ -147,7 +147,8 @@ read -p "Install imhex hex viewer? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
-        "imhex" # Hex viewer
+        "imhex"    # Hex viewer
+        "glfw-x11" # GLFW
     )
 fi
 
