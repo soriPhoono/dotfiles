@@ -46,7 +46,7 @@ echo "Setup bottom up reading of available packages for paru.conf"
 # Configure mirrors using reflector
 paru -S --noconfirm --needed reflector rsync
 sudo mv /etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf.bak
-echo -e "--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--fastest 15" | sudo tee /etc/xdg/reflector/reflector.conf >/dev/null
+echo -e "--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--latest 15" | sudo tee /etc/xdg/reflector/reflector.conf >/dev/null
 sudo systemctl start reflector.service >/dev/null
 sudo systemctl enable --now reflector.timer >/dev/null
 echo "Enabled reflector.timer"
