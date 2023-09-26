@@ -8,7 +8,7 @@ packages=(
 )
 
 echo "Installing networking packages..."
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+paru -S --noconfirm --needed "${packages[@]}"
 
 sudo systemctl enable NetworkManager.service >/dev/null
 sudo systemctl enable ufw.service >/dev/null
@@ -27,7 +27,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 
     echo "Installing advanced networking packages..."
-    paru -S --noconfirm --needed "${advanced_packages[@]}" >/dev/null
+    paru -S --noconfirm --needed "${advanced_packages[@]}"
 
     # Copy config files
     sudo cp -r ~/.config/yadm/conf/etc/dnscrypt-proxy/ /etc/

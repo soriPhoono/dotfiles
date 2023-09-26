@@ -55,7 +55,7 @@ if $DISCRETE; then
 fi
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+paru -S --noconfirm --needed "${packages[@]}"
 for command in "${commands[@]}"; do
     eval "$command" >/dev/null
 done

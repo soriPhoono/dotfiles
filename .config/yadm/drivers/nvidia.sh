@@ -35,7 +35,7 @@ fi
 
 # Install packages
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+paru -S --noconfirm --needed "${packages[@]}"
 echo "Installed nvidia driver packages."
 
 # Execute commands

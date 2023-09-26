@@ -59,7 +59,7 @@ for category in $categories; do
 done
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+paru -S --noconfirm --needed "${packages[@]}"
 echo "Finished installing editing tools"
 
 paru -c --noconfirm >/dev/null

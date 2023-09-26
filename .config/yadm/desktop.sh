@@ -139,7 +139,7 @@ commands+=("sudo systemctl enable chevron.service >/dev/null")
 commands+=("sudo systemctl enable sddm >/dev/null")
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+paru -S --noconfirm --needed "${packages[@]}"
 for command in $commands; do
     eval "$command"
 done

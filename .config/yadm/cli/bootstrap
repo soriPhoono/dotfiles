@@ -59,14 +59,13 @@ while true; do
     REPLY=$((REPLY - 1))
 
     if [[ $REPLY -ge 0 && $REPLY -lt ${#kernels[@]} ]]; then
-        paru -S --noconfirm --needed "${kernels[$REPLY]}" "${kernels[$REPLY]}-headers" >/dev/null
-        paru -S --noconfirm --needed "${kernel_supporting[@]}" >/dev/null
+        paru -S --noconfirm --needed "${kernels[$REPLY]}" "${kernels[$REPLY]}-headers" "${kernel_supporting[@]}"
         break
     fi
 done
 
 # Install packages from list
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+paru -S --noconfirm --needed "${packages[@]}"
 
 mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >/dev/null
 xdg-user-dirs-update >/dev/null

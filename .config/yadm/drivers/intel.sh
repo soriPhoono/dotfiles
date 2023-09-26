@@ -28,7 +28,7 @@ if $MULTILIB; then
     packages+=("lib32-mesa" "lib32-vulkan-intel" "lib32-libva-mesa-driver" "lib32-ocl-icd" "lib32-opencl-rusticl-mesa")
 fi
 
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+paru -S --noconfirm --needed "${packages[@]}"
 
 if grep -i "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
     sudo sed -i "s/LIBVA_DRIVER_NAME=.*/LIBVA_DRIVER_NAME=radeonsi/" /etc/environment
