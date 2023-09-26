@@ -43,8 +43,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     if $MULTILIB; then
         packages+=(
-            "steam"                # Steam
-            "steam-native-runtime" # Steam native runtime
+            "steam" # Steam
         )
     else
         echo "Steam requires multilib to be enabled."
