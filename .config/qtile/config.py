@@ -26,27 +26,20 @@
 
 import math
 import os
+
 from os import path
 from subprocess import call
-
 
 from libqtile import layout
 from libqtile.config import Click, Drag, Group, Key, Screen
 from libqtile.lazy import lazy
 from libqtile.hook import subscribe
 
-from wm import theme, dispatchers
+from wm import theme, dispatchers, groups
 
 home = path.expanduser('~')
-monitor_count = 3
 
 mod = "mod4"
-
-terminal = os.getenv("TERM") or "alacritty"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal + " -e " + editor
-
-browser = os.getenv("BROWSER") or "firefox"
 
 # TODO: adjust hotkeys
 keys = dispatchers.keys
@@ -73,8 +66,7 @@ layouts = [
                   margin=theme.useless_gap),
 ]
 
-groups = [Group(i, layout="stack",
-                screen_affinity=int(math.floor(int(i) / monitor_count))) for i in "123456"]
+groups = groups.registry
 
 for i in groups:
     keys.extend(
@@ -111,7 +103,7 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: list
+dgroups_app_rules: list = []
 follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = True

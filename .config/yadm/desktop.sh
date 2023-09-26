@@ -94,12 +94,15 @@ echo
 case "$browser" in
 "f")
     packages+=("firefox")
+    commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
     ;;
 "c")
     packages+=("google-chrome")
+    commands+=("echo \"BROWSER=google-chrome-stable\" | sudo tee -a /etc/environment >/dev/null")
     ;;
 "b")
     packages+=("firefox" "google-chrome")
+    commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
     ;;
 esac
 
