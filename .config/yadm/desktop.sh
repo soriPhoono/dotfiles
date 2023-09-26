@@ -90,7 +90,7 @@ commands+=("systemctl --user enable redshift ")
 read -p "Enable bluetooth? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=("bluez bluez-utils blueberry")
+    packages+=("bluez" "bluez-utils" "blueberry")
     commands+=("sudo systemctl enable bluetooth ")
 fi
 
