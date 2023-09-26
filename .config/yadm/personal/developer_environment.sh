@@ -163,7 +163,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "virtualbox-ext-oracle"           # Virtualbox extension pack
     )
 
-    commands+=("usermod -aG vboxusers $USER") # Add user to vboxusers group
+    commands+=("sudo usermod -aG vboxusers $USER") # Add user to vboxusers group
 fi
 
 # Android development tools
