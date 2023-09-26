@@ -13,6 +13,7 @@ packages=(
     "xorg-xinit"                  # X11 initialisation program
     "xorg-xmodmap"                # Utility for modifying keymaps and pointer button mappings in X
     "xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
+    "xdg-desktop-portal-gtk"      # GTK backend for xdg-desktop-portal
     "qtile"                       # Window manager
     "polybar"                     # Status bar
     "picom-ftlabs-git"            # Compositor
