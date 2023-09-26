@@ -61,8 +61,8 @@ paru -c --noconfirm >/dev/null
 # Install cli packages
 sh ~/.config/yadm/drivers/bootstrap --multilib
 sh ~/.config/yadm/cli/bootstrap
-sh ~/.config/yadm/personal/bootstrap --multilib
 sh ~/.config/yadm/desktop.sh
+sh ~/.config/yadm/personal/bootstrap --multilib
 
 # Copy configuration files
 cp -r ~/.config/yadm/conf/* /
