@@ -1,46 +1,46 @@
 #!/bin/bash
 
 kernels=(
-    "linux",          # default kernel
-    "linux-lts",      # long term support kernel
-    "linux-hardened", # hardened kernel
-    "linux-zen",      # zen kernel (optimized for throughput) (unneeded in like 90% of cases)
+    "linux"          # default kernel
+    "linux-lts"      # long term support kernel
+    "linux-hardened" # hardened kernel
+    "linux-zen"      # zen kernel (optimized for throughput) (unneeded in like 90% of cases)
 )
 
 kernel_supporting=(
-    "linux-firmware",          # firmware for linux kernel
-    "linux-firmware-qlogic",   # firmware for qlogic devices
-    "linux-firmware-bnx2x",    # firmware for bnx2x broadcom ethernet devices
-    "linux-firmware-liquidio", # firmware for liquidio cavium liquidio server devices
-    "linux-firmware-mellanox", # firmware for mellanox spectrum switches
-    "linux-firmware-nfp",      # firmware for nfp netronome flow processors
+    "linux-firmware"          # firmware for linux kernel
+    "linux-firmware-qlogic"   # firmware for qlogic devices
+    "linux-firmware-bnx2x"    # firmware for bnx2x broadcom ethernet devices
+    "linux-firmware-liquidio" # firmware for liquidio cavium liquidio server devices
+    "linux-firmware-mellanox" # firmware for mellanox spectrum switches
+    "linux-firmware-nfp"      # firmware for nfp netronome flow processors
 )
 
 packages=(
-    "base-devel",     # base development tools
-    "dosfstools",     # dos filesystem tools
-    "exfatprogs",     # exfat filesystem tools
-    "xdg-user-dirs",  # xdg user directories
-    "pacman-contrib", # pacman contrib (needed for paccache cache cleaner)
-    "nano",           # nano text editor (simple text editor)
-    "neovim",         # neovim text editor (advanced text editor)
-    "tmux",           # tmux terminal multiplexer
-    "zsh",            # zsh shell
-    "oh-my-zsh-git",  # oh-my-zsh (zsh configuration framework)
-    "starship",       # starship (shell prompt)
-    "neofetch",       # neofetch (system information tool)
-    "usbutils",       # usbutils (usb tools)
-    "curl",           # curl (file transfer tool)
-    "eza",            # eza (better ls command, community maintained fork of exa)
-    "bat",            # bat (better cat command)
-    "diff-so-fancy",  # diff-so-fancy (better git diff)
-    "dua-cli",        # dua-cli (better du command)
-    "duf",            # duf (better df command)
-    "tre-command",    # tre-command (better tree command)
-    "scc",            # scc (better cloc command)
-    "jq",             # jq (json processor)
-    "btop",           # btop (better htop)
-    "cava",           # cava (audio visualizer)
+    "base-devel"     # base development tools
+    "dosfstools"     # dos filesystem tools
+    "exfatprogs"     # exfat filesystem tools
+    "xdg-user-dirs"  # xdg user directories
+    "pacman-contrib" # pacman contrib (needed for paccache cache cleaner)
+    "nano"           # nano text editor (simple text editor)
+    "neovim"         # neovim text editor (advanced text editor)
+    "tmux"           # tmux terminal multiplexer
+    "zsh"            # zsh shell
+    "oh-my-zsh-git"  # oh-my-zsh (zsh configuration framework)
+    "starship"       # starship (shell prompt)
+    "neofetch"       # neofetch (system information tool)
+    "usbutils"       # usbutils (usb tools)
+    "curl"           # curl (file transfer tool)
+    "eza"            # eza (better ls command community maintained fork of exa)
+    "bat"            # bat (better cat command)
+    "diff-so-fancy"  # diff-so-fancy (better git diff)
+    "dua-cli"        # dua-cli (better du command)
+    "duf"            # duf (better df command)
+    "tre-command"    # tre-command (better tree command)
+    "scc"            # scc (better cloc command)
+    "jq"             # jq (json processor)
+    "btop"           # btop (better htop)
+    "cava"           # cava (audio visualizer)
 )
 
 # Install kernel for linux

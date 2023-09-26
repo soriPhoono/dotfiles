@@ -1,10 +1,10 @@
 #!/bin/bash
 
 packages=(
-    "networkmanager",
-    "networkmanageer-openvpn",
-    "networkmanager-openconnect",
-    "ufw",
+    "networkmanager"
+    "networkmanageer-openvpn"
+    "networkmanager-openconnect"
+    "ufw"
 )
 
 echo "Installing networking packages..."
