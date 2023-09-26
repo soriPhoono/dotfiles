@@ -207,3 +207,5 @@ for command in "${commands[@]}"; do
     eval $command >/dev/null
 done
 echo "Finished installing developer environment packages"
+
+paru -c --noconfirm >/dev/null

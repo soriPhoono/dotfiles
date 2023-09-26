@@ -94,3 +94,5 @@ echo "Installed ${installed[*]} drivers"
 touch /home/$(whoami)/.config/yadm/drivers/vendors
 echo "igpu_vendor=$igpu_vendor" | sudo tee /home/$(whoami)/.config/yadm/drivers/vendors >/dev/null
 echo "dgpu_vendor=$dgpu_vendor" | sudo tee -a /home/$(whoami)/.config/yadm/drivers/vendors >/dev/null
+
+paru -c --noconfirm >/dev/null

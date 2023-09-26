@@ -60,3 +60,5 @@ for command in "${commands[@]}"; do
     eval "$command" >/dev/null
 done
 echo "Installed amd driver packages."
+
+paru -c --noconfirm >/dev/null

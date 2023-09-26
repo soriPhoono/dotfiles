@@ -27,3 +27,5 @@ for command in "${commands[@]}"; do
     eval "$command" >/dev/null
 done
 echo "Installed virtual machine drivers."
+
+paru -c --noconfirm >/dev/null

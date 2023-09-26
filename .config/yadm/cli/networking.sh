@@ -88,3 +88,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 echo "Configured networking"
+
+paru -c --noconfirm >/dev/null

@@ -15,3 +15,5 @@ packages=(
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 echo "Finished installing general tools"
+
+paru -c --noconfirm >/dev/null

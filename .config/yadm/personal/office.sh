@@ -20,3 +20,5 @@ packages=(
 echo "Installing libreoffice..."
 paru -S --noconfirm --needed ${packages[@]} >/dev/null
 echo "Done!"
+
+paru -c --noconfirm >/dev/null

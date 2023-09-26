@@ -249,3 +249,5 @@ geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\0\x4\0\0\0+\0\0\au\0\0\x4-\0\0\
 force_raster_widgets=1
 ignored_applications=@Invalid()
 EOF
+
+paru -c --noconfirm >/dev/null

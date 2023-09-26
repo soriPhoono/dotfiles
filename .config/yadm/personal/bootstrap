@@ -53,3 +53,5 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Copying monitor configs..."
     sudo cp -r ~/.config/yadm/personal/conf/* /
 fi
+
+paru -c --noconfirm >/dev/null

@@ -78,3 +78,5 @@ bat cache --build >/dev/null
 
 source ./git.sh
 source ./networking.sh
+
+paru -c --noconfirm >/dev/null

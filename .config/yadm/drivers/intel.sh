@@ -35,3 +35,5 @@ if grep -i "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
 else
     echo "LIBVA_DRIVER_NAME=iHD" | sudo tee -a /etc/environment >/dev/null
 fi
+
+paru -c --noconfirm >/dev/null

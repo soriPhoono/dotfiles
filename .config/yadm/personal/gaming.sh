@@ -78,3 +78,5 @@ fi
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}" >/dev/null
 echo "Installed games packages."
+
+paru -c --noconfirm >/dev/null
