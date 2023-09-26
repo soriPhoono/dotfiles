@@ -34,7 +34,7 @@ packages=(
 )
 
 # Install kernel for linux
-paru -S --noconfirm --needed linux-zen-headers "${kernel_supporting[@]}"
+paru -S --noconfirm --needed linux-headers "${kernel_supporting[@]}"
 
 # Install packages from list
 paru -S --noconfirm --needed "${packages[@]}"
