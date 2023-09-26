@@ -122,11 +122,15 @@ sudo usermod -aG disk "$(whoami)"
 sudo usermod -aG audio "$(whoami)"
 sudo usermod -aG games "$(whoami)"
 
-cd ~/.config/chevron
-npm install && npm run build
-sudo npm install -g node-linux && npm link node-linux
-npm run register_linux
-sudo systemctl enable chevron.service
+read -p "Enable chevron start page with chatgpt integration? [y/N] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    cd ~/.config/chevron
+    npm install && npm run build
+    sudo npm install -g node-linux && npm link node-linux
+    npm run register_linux
+    sudo systemctl enable chevron.service
+fi
 
 if [ $(grep -q "QT_QPA_PLATFORMTHEME" /etc/environment) ]; then
     sudo sed -i "s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g" /etc/environment
