@@ -84,7 +84,6 @@ for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     esac
 done
 
-commands+=("sudo systemctl enable geoclue ")
 commands+=("systemctl --user enable redshift ")
 
 read -p "Enable bluetooth? (y/n) " -n 1 -r
