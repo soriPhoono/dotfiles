@@ -129,7 +129,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "github-cli" # Github cli
     )
 
-    echo \"run gh auth login to setup gh-cli\"
+    echo "run gh auth login to setup gh-cli"
+    echo "then run gh auth setup-git to setup git integration"
 fi
 
 # Text Editors/Markdown writers
