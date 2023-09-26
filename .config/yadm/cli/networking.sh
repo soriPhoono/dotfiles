@@ -23,7 +23,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "dnsmasq",
         "dnscrypt-proxy",
         "tor",
-        "i2p",
+        "i2pd",
     )
 
     echo "Installing advanced networking packages..."
