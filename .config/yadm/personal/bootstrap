@@ -30,7 +30,7 @@ for source_file in $(find ~/.config/yadm/personal -name "*.sh"); do
         fi
     done
     if [ $skip = false ]; then
-        echo "$i) $(basename $source_file)"
+        echo "$i) $(basename $source_file | sed 's/.sh//')"
         feature_sets+=("$source_file")
         i=$((i + 1))
     fi
