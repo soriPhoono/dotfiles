@@ -94,15 +94,6 @@ for language in $languages; do
             "python"     # Python interpreter
             "python-pip" # Python package manager
         )
-
-        read -p "Install django? [y/N] " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            packages+=(
-                "python-django"      # Django web framework
-                "python-mysqlclient" # Python mysql connector
-            )
-        fi
         ;;
     "8")
         packages+=(
@@ -157,14 +148,15 @@ read -p "Install virtualbox and extension pack? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
-        "virtualbox"                      # Virtualbox application
-        "virtualbox-host-dkms"            # Virtualbox host kernel modules
-        "virtualbox-guest-iso"            # Virtualbox guest iso
-        "virtualbox-unattended-templates" # Virtualbox unattended templates
-        "virtualbox-ext-oracle"           # Virtualbox extension pack
+        "edk2-ovmf"    # OVMF (Open Virtual Machine Firmware)
+        "qemu-full"    # QEMU (Virtual machine manager)
+        "libvirt"      # Libvirt (Virtual machine management)
+        "virt-manager" # Virtual machine manager
     )
 
-    commands+=("sudo usermod -aG vboxusers $USER") # Add user to vboxusers group
+    commands+=("sudo systemctl enable libvirtd.socket")                               # Enable libvirtd service
+    commands+=("sudo usermod -aG libvirt $USER")                                      # Add user to libvirt group
+    commands+=("sudo cp -r ~/.config/yadm/personal/conf/etc/libvirt/* /etc/libvirt/") # Copy libvirt configs
 fi
 
 # Android development tools

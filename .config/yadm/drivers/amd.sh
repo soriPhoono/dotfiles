@@ -42,6 +42,7 @@ fi
 
 if $DISCRETE; then
     packages+=("radeon-profile-daemon-git" "radeon-profile-git" "amdgpu-pro-oglp" "vulkan-amdgpu-pro" "amf-amdgpu-pro")
+    commands+=("sudo systemctl enable radeon-profile-daemon")
 
     if $MULTILIB; then
         packages+=("lib32-amdgpu-pro-oglp" "lib32-vulkan-amdgpu-pro")

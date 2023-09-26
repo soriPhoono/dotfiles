@@ -53,7 +53,7 @@ read -p "Do you want to copy monitor configs? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Copying monitor configs..."
-    sudo cp -r ~/.config/yadm/personal/conf/* /
+    sudo cp -r ~/.config/yadm/personal/conf/etc/X11/* /etc/X11/
 fi
 
 paru -c --noconfirm >/dev/null

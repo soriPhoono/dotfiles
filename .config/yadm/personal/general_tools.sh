@@ -16,4 +16,10 @@ echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}"
 echo "Finished installing general tools"
 
+echo "Remember to setup betterdiscord after discord's first launch"
+echo "\t1. Open discord"
+echo "\t2. betterdiscordctl install"
+echo "\t3. Restart discord"
+echo "\t4. enable extensions/themes"
+
 paru -c --noconfirm >/dev/null
