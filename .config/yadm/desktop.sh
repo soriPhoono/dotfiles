@@ -130,11 +130,6 @@ case "$browser" in
 esac
 
 packages+=("nodejs" "npm")
-commands+=("cd ~/.config/chevron")
-commands+=("npm install  && npm run build ")
-commands+=("sudo npm install -g node-linux  && npm link node-linux ")
-commands+=("sudo npm register_linux ")
-commands+=("sudo systemctl enable chevron.service ")
 
 commands+=("sudo systemctl enable sddm ")
 
@@ -144,6 +139,12 @@ for command in "${commands[@]}"; do
     eval "$command" >/dev/null
 done
 echo "Finished installing core desktop environment packages"
+
+cd ~/.config/chevron
+npm install && npm run build
+sudo npm install -g node-linux && npm link node-linux
+sudo npm register_linux
+sudo systemctl enable chevron.service
 
 sudo touch /etc/udev/rules.d/99-mtp.rules
 sudo tee /etc/udev/rules.d/99-mtp.rules >/dev/null <<EOF
