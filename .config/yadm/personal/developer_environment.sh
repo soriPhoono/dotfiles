@@ -32,7 +32,7 @@ commands=()
 
 i=1
 echo "Available languages:"
-for language in $languages; do
+for language in "${languages[@]}"; do
     echo "    $i: $language"
     i=$((i + 1))
 done

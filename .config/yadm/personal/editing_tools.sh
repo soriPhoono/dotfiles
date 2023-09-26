@@ -20,7 +20,7 @@ categories=(
 
 i=1
 echo "Available categories: "
-for category in $categories; do
+for category in "${categories[@]}"; do
     echo "    $i: $category"
     i=$((i + 1))
 done
