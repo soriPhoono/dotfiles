@@ -13,39 +13,41 @@ for arg in "$@"; do
     esac
 done
 
-feature_sets=()
+read -p "Install general packages? [y/N] " -n 1 -r
+echo
+if [ $REPLY =~ ^[Yy]$ ]; then
+    sh ~/.config/yadm/personal/general_tools.sh
+fi
 
-i=1
-echo "Feature sets for personal packages: "
-source_blacklist=(
-    "~/.config/yadm/personal/bootstrap.sh"
-    "~/.config/yadm/personal/conf/"
-)
-for source_file in $(find ~/.config/yadm/personal -name "*.sh"); do
-    skip=false
-    for blacklist in "${source_blacklist[@]}"; do
-        if [ $source_file = $blacklist ]; then
-            skip=true
-            break
-        fi
-    done
-    if [ $skip = false ]; then
-        echo "$i) $(basename $source_file | sed 's/.sh//')"
-        feature_sets+=("$source_file")
-        i=$((i + 1))
-    fi
-done
-read -p "Select feature set: " feature_set
+read -p "Install developer environment? [y/N] " -n 1 -r
+echo
+if [ $REPLY =~ ^[Yy]$ ]; then
+    sh ~/.config/yadm/personal/developer_environment.sh
+fi
 
-feature_set_len=${#feature_sets[@]}
-feature_set_len=$((feature_set_len + 1))
-for feature_set in $feature_set; do
-    if [ $feature_set -gt 0 ] && [ $feature_set -lt $feature_set_len ]; then
-        sh ${feature_sets[$((feature_set - 1))]} $($MULTILIB && echo "--multilib")
-    else
-        echo "Invalid feature set index: $feature_set"
-    fi
-done
+read -p "Install office tools? [y/N] " -n 1 -r
+echo
+if [ $REPLY =~ ^[Yy]$ ]; then
+    sh ~/.config/yadm/personal/office.sh
+fi
+
+read -p "Install gaming tools? [y/N] " -n 1 -r
+echo
+if [ $REPLY =~ ^[Yy]$ ]; then
+    sh ~/.config/yadm/personal/gaming.sh
+fi
+
+read -p "Install recording/streaming tools? [y/N] " -n 1 -r
+echo
+if [ $REPLY =~ ^[Yy]$ ]; then
+    sh ~/.config/yadm/personal/recording_tools.sh
+fi
+
+read -p "Install editing tools? [y/N] " -n 1 -r
+echo
+if [ $REPLY =~ ^[Yy]$ ]; then
+    sh ~/.config/yadm/personal/editing_tools.sh
+fi
 
 read -p "Do you want to copy monitor configs? [y/N] " -n 1 -r
 echo
