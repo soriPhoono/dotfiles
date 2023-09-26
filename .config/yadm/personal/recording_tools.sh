@@ -19,7 +19,7 @@ packages=(
     "obs-backgroundremoval" # OBS Studio background removal plugin (AUR)
 )
 
-if grep -q "dgpu_vendor" ~/.config/yadm/drivers/gpu_vendor || grep -q "AMD" && grep -q "amf-amdgpu-pro" <<<"$(paru -Q)"; then
+if grep -q "dgpu_vendor" ~/.config/yadm/drivers/vendors || grep -q "AMD" && grep -q "amf-amdgpu-pro" <<<"$(paru -Q)"; then
     packages+=("obs-studio-amf") # OBS Studio AMD media framework plugin (AUR)
 else
     packages+=("obs-studio-git") # OBS Studio (AUR)

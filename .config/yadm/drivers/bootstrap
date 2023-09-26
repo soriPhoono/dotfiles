@@ -89,14 +89,5 @@ fi
 echo "Installed ${installed[*]} drivers"
 
 # Write igpu and dgpu vendor to file
-if grep "igpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor" >/dev/null; then
-    sed -i "/igpu_vendor/c\igpu_vendor=$igpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor"
-else
-    echo "igpu_vendor=$igpu_vendor" >>"$HOME/.config/yadm/drivers/gpu_vendor"
-fi
-
-if grep "dgpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor" >/dev/null; then
-    sed -i "/dgpu_vendor/c\dgpu_vendor=$dgpu_vendor" "$HOME/.config/yadm/drivers/gpu_vendor"
-else
-    echo "dgpu_vendor=$dgpu_vendor" >>"$HOME/.config/yadm/drivers/gpu_vendor"
-fi
+echo "igpu_vendor=$igpu_vendor" | sudo tee /home/$(whoami)/.config/yadm/drivers/vendors >/dev/null
+echo "dgpu_vendor=$dgpu_vendor" | sudo tee -a /home/$(whoami)/.config/yadm/drivers/vendors >/dev/null
