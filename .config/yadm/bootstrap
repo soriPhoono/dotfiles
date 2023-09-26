@@ -65,7 +65,7 @@ sh ~/.config/yadm/desktop.sh
 sh ~/.config/yadm/personal/bootstrap --multilib
 
 # Copy configuration files
-cp -r ~/.config/yadm/conf/* /
+sudo cp -r ~/.config/yadm/conf/* /
 
 # Reboot system
 reboot

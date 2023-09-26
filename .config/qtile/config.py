@@ -25,6 +25,7 @@
 # SOFTWARE.
 
 import math
+import os
 from os import path
 from subprocess import call
 
@@ -36,8 +37,10 @@ from libqtile.hook import subscribe
 
 from wm import theme, dispatchers
 
-home = os.path.expanduser('~')
+home = path.expanduser('~')
 monitor_count = 3
+
+mod = "mod4"
 
 terminal = os.getenv("TERM") or "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
