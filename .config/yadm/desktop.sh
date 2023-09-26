@@ -68,52 +68,52 @@ packages=(
 commands=()
 
 packages+=("pipewire" "pipewire-audio" "pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber" "pavucontrol" "carla" "easyeffects")
-commands+=("systemctl --user enable pipewire >/dev/null")
+commands+=("systemctl --user enable pipewire ")
 packages+=("gstreamer" "gst-libav" "gst-plugins-base" "gst-plugins-good" "gst-plugin-pipewire" "gstreamer-vaapi")
 for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     case "$line" in
     "*NVIDIA*")
         packages+=("gst-plugins-bad")
-        if grep "GST_PLUGIN_FEATURE_RANK" /etc/environment >/dev/null; then
+        if grep "GST_PLUGIN_FEATURE_RANK" /etc/environment; then
             commands+=("sudo sed -i \"s/GST_PLUGIN_FEATURE_RANK=.*/GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" /etc/environment")
         else
-            commands+=("grep \"GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" | sudo tee -a /etc/environment >/dev/null")
+            commands+=("grep \"GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" | sudo tee -a /etc/environment ")
         fi
         ;;
     esac
 done
 
-commands+=("sudo systemctl enable geoclue >/dev/null")
-commands+=("systemctl --user enable redshift >/dev/null")
+commands+=("sudo systemctl enable geoclue ")
+commands+=("systemctl --user enable redshift ")
 
 read -p "Enable bluetooth? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=("bluez bluez-utils blueberry")
-    commands+=("sudo systemctl enable bluetooth >/dev/null")
+    commands+=("sudo systemctl enable bluetooth ")
 fi
 
-if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment >/dev/null; then
+if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
     commands+=("sudo sed -i \"s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g\" /etc/environment")
 else
-    commands+=("grep \"QT_QPA_PLATFORMTHEME=qt5ct\" | sudo tee -a /etc/environment >/dev/null")
+    commands+=("grep \"QT_QPA_PLATFORMTHEME=qt5ct\" | sudo tee -a /etc/environment ")
 fi
 
-if grep -q "TERM" /etc/environment >/dev/null; then
+if grep -q "TERM" /etc/environment; then
     commands+=("sudo sed -i \"s/TERM=.*/TERM=alacritty/g\" /etc/environment")
 else
-    commands+=("grep \"TERM=alacritty\" | sudo tee -a /etc/environment >/dev/null")
+    commands+=("grep \"TERM=alacritty\" | sudo tee -a /etc/environment ")
 fi
 
 if [ ! $(grep -q "Path askpass" /etc/sudo.conf) ]; then
-    commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf >/dev/null")
+    commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf ")
 fi
 
-commands+=("sudo usermod -aG video "$(whoami)" >/dev/null")
-commands+=("sudo usermod -aG input "$(whoami)" >/dev/null")
-commands+=("sudo usermod -aG disk "$(whoami)" >/dev/null")
-commands+=("sudo usermod -aG audio "$(whoami)" >/dev/null")
-commands+=("sudo usermod -aG games "$(whoami)" >/dev/null")
+commands+=("sudo usermod -aG video "$(whoami)" ")
+commands+=("sudo usermod -aG input "$(whoami)" ")
+commands+=("sudo usermod -aG disk "$(whoami)" ")
+commands+=("sudo usermod -aG audio "$(whoami)" ")
+commands+=("sudo usermod -aG games "$(whoami)" ")
 
 read -n 1 -rp "Which browser would you like to install (f)irefox, (c)hrome, or (b)oth? " browser
 echo
@@ -131,22 +131,22 @@ esac
 
 packages+=("nodejs" "npm")
 commands+=("cd ~/.config/chevron")
-commands+=("npm install >/dev/null && npm run build >/dev/null")
-commands+=("sudo npm install -g node-linux >/dev/null && npm link node-linux >/dev/null")
-commands+=("sudo npm register_linux >/dev/null")
-commands+=("sudo systemctl enable chevron.service >/dev/null")
+commands+=("npm install  && npm run build ")
+commands+=("sudo npm install -g node-linux  && npm link node-linux ")
+commands+=("sudo npm register_linux ")
+commands+=("sudo systemctl enable chevron.service ")
 
-commands+=("sudo systemctl enable sddm >/dev/null")
+commands+=("sudo systemctl enable sddm ")
 
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}"
-for command in $commands; do
-    eval "$command"
+for command in "${commands[@]}"; do
+    eval "$command" >/dev/null
 done
 echo "Finished installing core desktop environment packages"
 
 sudo touch /etc/udev/rules.d/99-mtp.rules
-sudo tee -a /etc/udev/rules.d/99-mtp.rules >/dev/null <<EOF
+sudo tee /etc/udev/rules.d/99-mtp.rules >/dev/null <<EOF
 # Plug in
 ACTION="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/home/$USER/.Xauthority" RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/mtp-device.sh'"
 # Unplug
@@ -154,7 +154,7 @@ ACTION=="remove", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/h
 EOF
 
 sudo touch /etc/udev/rules.d/99-storage.rules
-sudo tee -a /etc/udev/rules.d/99-storage.rules >/dev/null <<EOF
+sudo tee /etc/udev/rules.d/99-storage.rules >/dev/null <<EOF
 # Plug in usb drive
 KERNEL=="sd?", ACTION=="add", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
 # Unplug usb drive
@@ -162,7 +162,7 @@ KERNEL=="sd?", ACTION=="remove", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/
 EOF
 
 sudo touch /etc/udev/rules.d/99-charging.rules
-sudo tee -a /etc/udev/rules.d/99-charging.rules >/dev/null <<EOF
+sudo tee /etc/udev/rules.d/99-charging.rules >/dev/null <<EOF
 # Battery
 ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/$(whoami)/.Xauthority" RUN+="/usr/bin/su $(whoami) -c '/home/$(whoami)/.local/bin/notifications/power-supply.sh 0'"
 # AC
@@ -170,7 +170,7 @@ ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}==
 EOF
 
 touch ~/.config/qt5ct/qt5ct.conf
-tee -a ~/.config/qt5ct/qt5ct.conf >/dev/null <<EOF
+tee ~/.config/qt5ct/qt5ct.conf >/dev/null <<EOF
 [Appearance]
 color_scheme_path=/home/$(whoami)/.config/qt5ct/colors/Catppuccin-Mocha.conf
 custom_palette=true
@@ -209,7 +209,7 @@ ignored_applications=@Invalid()
 EOF
 
 touch ~/.config/qt6ct/qt6ct.conf
-tee -a ~/.config/qt6ct/qt6ct.conf >/dev/null <<EOF
+tee ~/.config/qt6ct/qt6ct.conf >/dev/null <<EOF
 [Appearance]
 color_scheme_path=/home/soriphoono/.config/qt6ct/colors/Catppuccin-Mocha.conf
 custom_palette=true
