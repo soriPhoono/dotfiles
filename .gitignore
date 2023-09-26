@@ -27,6 +27,7 @@ __pycache__/
 .config/falkTX/
 .config/flutter/
 .config/galculator/
+.config/gh/
 .config/github-copilot/
 .config/google-chrome/
 .config/gtk-3.0/
@@ -54,6 +55,7 @@ __pycache__/
 .dart-tool/
 .dart/
 .factorio/
+.gnupg/
 .java/
 .lemminx/
 .local/share/
