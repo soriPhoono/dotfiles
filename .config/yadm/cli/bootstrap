@@ -1,12 +1,5 @@
 #!/bin/bash
 
-kernels=(
-    "linux"          # default kernel
-    "linux-lts"      # long term support kernel
-    "linux-hardened" # hardened kernel
-    "linux-zen"      # zen kernel (optimized for throughput) (unneeded in like 90% of cases)
-)
-
 kernel_supporting=(
     "linux-firmware" # firmware for linux kernel
 )
@@ -40,24 +33,7 @@ packages=(
 )
 
 # Install kernel for linux
-while true; do
-    i=1
-
-    echo "Available kernels:"
-    for kernel in "${kernels[@]}"; do
-        echo "    $i: $kernel"
-        i=$((i + 1))
-    done
-
-    read -p "Select kernel: " -n 1 -r
-    echo
-    REPLY=$((REPLY - 1))
-
-    if [[ $REPLY -ge 0 && $REPLY -lt ${#kernels[@]} ]]; then
-        paru -S --noconfirm --needed "${kernels[$REPLY]}" "${kernels[$REPLY]}-headers" "${kernel_supporting[@]}"
-        break
-    fi
-done
+paru -S --noconfirm --needed linux-zen-headers "${kernel_supporting[@]}"
 
 # Install packages from list
 paru -S --noconfirm --needed "${packages[@]}"
