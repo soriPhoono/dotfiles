@@ -125,7 +125,7 @@ sudo usermod -aG games "$(whoami)"
 cd ~/.config/chevron
 npm install && npm run build
 sudo npm install -g node-linux && npm link node-linux
-sudo npm register_linux
+npm run register_linux
 sudo systemctl enable chevron.service
 
 if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
