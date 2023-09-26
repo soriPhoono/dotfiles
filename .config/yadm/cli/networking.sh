@@ -16,7 +16,7 @@ sudo ufw default deny >/dev/null
 sudo ufw allow from "$(ip -json route get 8.8.8.8 | jq -r '.[].prefsrc' | sed 's/\([0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.\)[0-9]\{1,3\}$/\10\/24/')" >/dev/null
 sudo ufw enable >/dev/null
 
-read -p "Enable NetworkManager advanced features (tor, i2p, dnscrypt proxy)? [Y/n] " -n 1 -r
+read -p "Enable NetworkManager advanced features (tor, i2p, dnscrypt proxy)? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     advanced_packages=(

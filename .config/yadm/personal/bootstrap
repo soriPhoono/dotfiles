@@ -47,7 +47,7 @@ for feature_set in $feature_set; do
     fi
 done
 
-read -p "Do you want to copy monitor configs? [Y/n] " -n 1 -r
+read -p "Do you want to copy monitor configs? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Copying monitor configs..."

@@ -38,7 +38,7 @@ if $MULTILIB; then
 fi
 
 # Install steam(-native) and it's dependencies
-read -p "Install steam? [Y/n] " -n 1 -r
+read -p "Install steam? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     if $MULTILIB; then
@@ -51,7 +51,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     fi
 fi
 
-read -p "Install heroic-launcher? [Y/n] " -n 1 -r
+read -p "Install heroic-launcher? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
@@ -59,7 +59,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 fi
 
-read -p "Install minecraft launcher? [Y/n] " -n 1 -r
+read -p "Install minecraft launcher? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
@@ -67,7 +67,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 fi
 
-read -p "Install tales of maj'eyal? [Y/n] " -n 1 -r
+read -p "Install tales of maj'eyal? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(

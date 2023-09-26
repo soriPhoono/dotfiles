@@ -93,7 +93,7 @@ for language in $languages; do
             "python-pip" # Python package manager
         )
 
-        read -p "Install django? [Y/n] " -n 1 -r
+        read -p "Install django? [y/N] " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             packages+=(
@@ -120,7 +120,7 @@ done
 
 # Tools
 # VCS
-read -p "Install github-cli for integration with github remotes? [Y/n] " -n 1 -r
+read -p "Install github-cli for integration with github remotes? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
@@ -131,7 +131,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Text Editors/Markdown writers
-read -p "Install visual studio code and obsidian notation software? [Y/n] " -n 1 -r
+read -p "Install visual studio code and obsidian notation software? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
@@ -140,7 +140,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     )
 fi
 
-read -p "Install imhex hex viewer? [Y/n] " -n 1 -r
+read -p "Install imhex hex viewer? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
@@ -149,7 +149,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Virtual Machines
-read -p "Install virtualbox and extension pack? [Y/n] " -n 1 -r
+read -p "Install virtualbox and extension pack? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
@@ -164,7 +164,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Android development tools
-if $MULTILIB && read -p "Install android studio? [Y/n] " -n 1 -r; then
+if $MULTILIB && read -p "Install android studio? [y/N] " -n 1 -r; then
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         packages+=(
@@ -190,7 +190,7 @@ if $MULTILIB && read -p "Install android studio? [Y/n] " -n 1 -r; then
 fi
 
 # Docker
-read -p "Install docker and docker-compose? [Y/n] " -n 1 -r
+read -p "Install docker and docker-compose? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
