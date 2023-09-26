@@ -128,20 +128,20 @@ sudo npm install -g node-linux && npm link node-linux
 npm run register_linux
 sudo systemctl enable chevron.service
 
-if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
+if [ $(grep -q "QT_QPA_PLATFORMTHEME" /etc/environment) ]; then
     sudo sed -i "s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g" /etc/environment
 else
-    grep "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
+    echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment >/dev/null
 fi
 
-if grep -q "TERM" /etc/environment; then
+if [ $(grep -q "TERM" /etc/environment) ]; then
     sudo sed -i "s/TERM=.*/TERM=alacritty/g" /etc/environment
 else
-    grep "TERM=alacritty" | sudo tee -a /etc/environment
+    echo "TERM=alacritty" | sudo tee -a /etc/environment >/dev/null
 fi
 
 if [ ! $(grep -q "Path askpass" /etc/sudo.conf) ]; then
-    echo "Path askpass /usr/local/bin/zenity-passphrase" | sudo tee -a /etc/sudo.conf
+    echo "Path askpass /usr/local/bin/zenity-passphrase" | sudo tee -a /etc/sudo.conf >/dev/null
 fi
 
 sudo touch /etc/udev/rules.d/99-mtp.rules
