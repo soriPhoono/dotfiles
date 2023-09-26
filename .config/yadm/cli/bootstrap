@@ -31,6 +31,7 @@ packages=(
     "neofetch"       # neofetch (system information tool)
     "usbutils"       # usbutils (usb tools)
     "curl"           # curl (file transfer tool)
+    "less"           # less (file viewer)
     "eza"            # eza (better ls command community maintained fork of exa)
     "bat"            # bat (better cat command)
     "diff-so-fancy"  # diff-so-fancy (better git diff)
