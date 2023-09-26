@@ -13,81 +13,84 @@ for arg in "$@"; do
     esac
 done
 
+installed=()
+
+igpu_vendor="None"
+dgpu_vendor="None"
+
 gpus_installed=$(lspci | grep -e "3D" -e "VGA" >/dev/null)
 if [ $(systemd-detect-virt) != "none" ]; then
     echo "Virtual machine detected, installing virtual machine drivers"
 
     sh "$HOME/.config/yadm/drivers/virtual.sh" $($MULTILIB && echo "--multilib")
 
-    exit 0
-fi
+    installed+=("virtual")
 
-gpu_count=$(grep "" -c <<<"$gpus_installed")
-nvidia=false
-for gpu in "$gpus_installed"; do
-    case "$gpu" in
-    "*NVIDIA*")
-        nvidia=true
-        ;;
-    esac
-done
-
-installed=()
-
-igpu_vendor="None"
-dgpu_vendor="None"
-
-if [ $gpu_count -lt 3 ]; then
-    if [ $gpu_count == 2 ]; then
-        read -p "Two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            cpu_type=$(lscpu | grep "Vendor ID" | cut -d ":" -f 2 | sed -e 's/^[[:space:]]*//')
-
-            case "$cpu_type" in
-            "GenuineIntel")
-                sh "$HOME/.config/yadm/drivers/intel.sh" $($MULTILIB && echo "--multilib")
-
-                installed+=("intel")
-
-                igpu_vendor="Intel"
-                ;;
-            "AuthenticAMD")
-                sh "$HOME/.config/yadm/drivers/amd.sh" $($MULTILIB && echo "--multilib")
-
-                installed+=("amd")
-
-                igpu_vendor="AMD"
-                ;;
-            esac
-        else
-            echo "Please install drivers manually"
-
-            exit 0
-        fi
-    fi
-
-    if $nvidia; then
-        sh "$HOME/.config/yadm/drivers/nvidia.sh" $($MULTILIB && echo "--multilib")
-
-        installed+=("nvidia")
-
-        dgpu_vendor="NVIDIA"
-    else
-        sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($MULTILIB && echo "--multilib")
-
-        installed+=("amd")
-
-        dgpu_vendor="AMD"
-    fi
+    dgpu_vendor="Virtual"
 else
-    echo "Unusual number of GPUs detected, please install drivers manually"
+    gpu_count=$(grep "" -c <<<"$gpus_installed")
+    nvidia=false
+    for gpu in "$gpus_installed"; do
+        case "$gpu" in
+        "*NVIDIA*")
+            nvidia=true
+            ;;
+        esac
+    done
 
-    exit 0
+    if [ $gpu_count -lt 3 ]; then
+        if [ $gpu_count == 2 ]; then
+            read -p "Two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                cpu_type=$(lscpu | grep "Vendor ID" | cut -d ":" -f 2 | sed -e 's/^[[:space:]]*//')
+
+                case "$cpu_type" in
+                "GenuineIntel")
+                    sh "$HOME/.config/yadm/drivers/intel.sh" $($MULTILIB && echo "--multilib")
+
+                    installed+=("intel")
+
+                    igpu_vendor="Intel"
+                    ;;
+                "AuthenticAMD")
+                    sh "$HOME/.config/yadm/drivers/amd.sh" $($MULTILIB && echo "--multilib")
+
+                    installed+=("amd")
+
+                    igpu_vendor="AMD"
+                    ;;
+                esac
+            else
+                echo "Please install drivers manually"
+
+                exit 0
+            fi
+        fi
+
+        if $nvidia; then
+            sh "$HOME/.config/yadm/drivers/nvidia.sh" $($MULTILIB && echo "--multilib")
+
+            installed+=("nvidia")
+
+            dgpu_vendor="NVIDIA"
+        else
+            sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($MULTILIB && echo "--multilib")
+
+            installed+=("amd")
+
+            dgpu_vendor="AMD"
+        fi
+    else
+        echo "Unusual number of GPUs detected, please install drivers manually"
+
+        exit 0
+    fi
 fi
 
 echo "Installed ${installed[*]} drivers"
 
 # Write igpu and dgpu vendor to file
+touch /home/$(whoami)/.config/yadm/drivers/vendors
 echo "igpu_vendor=$igpu_vendor" | sudo tee /home/$(whoami)/.config/yadm/drivers/vendors >/dev/null
 echo "dgpu_vendor=$dgpu_vendor" | sudo tee -a /home/$(whoami)/.config/yadm/drivers/vendors >/dev/null
