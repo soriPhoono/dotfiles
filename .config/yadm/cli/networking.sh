@@ -2,7 +2,7 @@
 
 packages=(
     "networkmanager"
-    "networkmanageer-openvpn"
+    "networkmanager-openvpn"
     "networkmanager-openconnect"
     "ufw"
 )
