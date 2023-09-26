@@ -8,7 +8,6 @@ packages=(
     "sddm"                        # Display manager
     "sddm-sugar-candy-git"        # SDDM theme
     "xorg-xhost"                  # X11 utility for controlling access to the X server
-    "xxd-standalone"              # Xxd from vim for .Xauthority creation
     "xorg-xauth"                  # X11 authority file management
     "xorg-xinit"                  # X11 initialisation program
     "xorg-xmodmap"                # Utility for modifying keymaps and pointer button mappings in X

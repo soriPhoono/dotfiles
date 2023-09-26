@@ -43,7 +43,7 @@ else
             read -p "Two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]; then
-                cpu_type=$(lscpu | grep "Vendor ID" | cut -d ":" -f 2 | sed -e 's/^[[:space:]]*//') # bug: sed doesn't seem to understand the -e flag
+                cpu_type=$(lscpu | grep "Vendor ID" | cut -d ":" -f 2 | sed -e 's/^[[:space:]]*//')
 
                 case "$cpu_type" in
                 "GenuineIntel")

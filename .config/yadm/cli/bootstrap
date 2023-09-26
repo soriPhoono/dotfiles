@@ -11,6 +11,7 @@ packages=(
     "xdg-user-dirs"  # xdg user directories
     "pacman-contrib" # pacman contrib (needed for paccache cache cleaner)
     "nano"           # nano text editor (simple text editor)
+    "vim"            # vim text editor (advanced text editor)
     "neovim"         # neovim text editor (advanced text editor)
     "tmux"           # tmux terminal multiplexer
     "zsh"            # zsh shell
