@@ -20,10 +20,10 @@ read -p "Enable NetworkManager advanced features (tor, i2p, dnscrypt proxy)? [y/
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     advanced_packages=(
-        "dnsmasq",
-        "dnscrypt-proxy",
-        "tor",
-        "i2pd",
+        "dnsmasq"
+        "dnscrypt-proxy"
+        "tor"
+        "i2pd"
     )
 
     echo "Installing advanced networking packages..."
