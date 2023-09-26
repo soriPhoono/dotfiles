@@ -76,7 +76,7 @@ sudo systemctl enable paccache.timer >/dev/null
 
 bat cache --build >/dev/null
 
-source ./git.sh
-source ./networking.sh
+sh ~/.config/yadm/cli/git.sh
+sh ~/.config/yadm/cli/networking.sh
 
 paru -c --noconfirm >/dev/null
