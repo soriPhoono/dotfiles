@@ -105,7 +105,7 @@ else
     commands+=("grep \"TERM=alacritty\" | sudo tee -a /etc/environment >/dev/null")
 fi
 
-if [ ! grep -q "Path askpass" /etc/sudo.conf ]; then
+if [ ! $(grep -q "Path askpass" /etc/sudo.conf) ]; then
     commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf >/dev/null")
 fi
 
