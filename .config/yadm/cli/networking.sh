@@ -19,6 +19,8 @@ sudo ufw enable >/dev/null
 read -p "Enable NetworkManager advanced features (tor, i2p, dnscrypt proxy)? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+    TORCHROOT="/opt/torchroot"
+
     advanced_packages=(
         "dnsmasq"
         "dnscrypt-proxy"
@@ -30,10 +32,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     paru -S --noconfirm --needed "${advanced_packages[@]}"
 
     # Copy config files
-    sudo cp -r ~/.config/yadm/conf/etc/dnscrypt-proxy/ /etc/
-    sudo cp -r ~/.config/yadm/conf/etc/NetworkManager/ /etc/
-    sudo cp -r ~/.config/yadm/conf/etc/tor/ /etc/
-    sudo cp -r ~/.config/yadm/conf/etc/systemd/ /etc/
+    sudo cp -r ~/.config/yadm/cli/conf/* /
 
     sudo mkdir -p $TORCHROOT
     sudo mkdir -p $TORCHROOT/etc/tor
