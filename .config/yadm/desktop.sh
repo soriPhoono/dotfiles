@@ -69,7 +69,6 @@ packages=(
 commands=()
 
 packages+=("pipewire" "pipewire-audio" "pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber" "pavucontrol" "carla" "easyeffects")
-commands+=("systemctl --user enable pipewire ")
 packages+=("gstreamer" "gst-libav" "gst-plugins-base" "gst-plugins-good" "gst-plugin-pipewire" "gstreamer-vaapi")
 for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     case "$line" in
@@ -84,36 +83,12 @@ for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
     esac
 done
 
-commands+=("systemctl --user enable redshift ")
-
 read -p "Enable bluetooth? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=("bluez" "bluez-utils" "blueberry")
     commands+=("sudo systemctl enable bluetooth ")
 fi
-
-if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
-    commands+=("sudo sed -i \"s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g\" /etc/environment")
-else
-    commands+=("grep \"QT_QPA_PLATFORMTHEME=qt5ct\" | sudo tee -a /etc/environment ")
-fi
-
-if grep -q "TERM" /etc/environment; then
-    commands+=("sudo sed -i \"s/TERM=.*/TERM=alacritty/g\" /etc/environment")
-else
-    commands+=("grep \"TERM=alacritty\" | sudo tee -a /etc/environment ")
-fi
-
-if [ ! $(grep -q "Path askpass" /etc/sudo.conf) ]; then
-    commands+=("echo \"Path askpass /usr/local/bin/zenity-passphrase\" | sudo tee -a /etc/sudo.conf ")
-fi
-
-commands+=("sudo usermod -aG video "$(whoami)" ")
-commands+=("sudo usermod -aG input "$(whoami)" ")
-commands+=("sudo usermod -aG disk "$(whoami)" ")
-commands+=("sudo usermod -aG audio "$(whoami)" ")
-commands+=("sudo usermod -aG games "$(whoami)" ")
 
 read -n 1 -rp "Which browser would you like to install (f)irefox, (c)hrome, or (b)oth? " browser
 echo
@@ -131,8 +106,6 @@ esac
 
 packages+=("nodejs" "npm")
 
-commands+=("sudo systemctl enable sddm ")
-
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}"
 for command in "${commands[@]}"; do
@@ -140,11 +113,36 @@ for command in "${commands[@]}"; do
 done
 echo "Finished installing core desktop environment packages"
 
+systemctl --user enable pipewire.service
+systemctl --user enable redshift.service
+
+sudo usermod -aG video "$(whoami)"
+sudo usermod -aG input "$(whoami)"
+sudo usermod -aG disk "$(whoami)"
+sudo usermod -aG audio "$(whoami)"
+sudo usermod -aG games "$(whoami)"
+
 cd ~/.config/chevron
 npm install && npm run build
 sudo npm install -g node-linux && npm link node-linux
 sudo npm register_linux
 sudo systemctl enable chevron.service
+
+if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
+    sudo sed -i "s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g" /etc/environment
+else
+    grep "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
+fi
+
+if grep -q "TERM" /etc/environment; then
+    sudo sed -i "s/TERM=.*/TERM=alacritty/g" /etc/environment
+else
+    grep "TERM=alacritty" | sudo tee -a /etc/environment
+fi
+
+if [ ! $(grep -q "Path askpass" /etc/sudo.conf) ]; then
+    echo "Path askpass /usr/local/bin/zenity-passphrase" | sudo tee -a /etc/sudo.conf
+fi
 
 sudo touch /etc/udev/rules.d/99-mtp.rules
 sudo tee /etc/udev/rules.d/99-mtp.rules >/dev/null <<EOF
@@ -250,5 +248,7 @@ geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\0\x4\0\0\0+\0\0\au\0\0\x4-\0\0\
 force_raster_widgets=1
 ignored_applications=@Invalid()
 EOF
+
+sudo systemctl enable sddm.service
 
 paru -c --noconfirm >/dev/null
