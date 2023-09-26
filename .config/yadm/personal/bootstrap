@@ -15,37 +15,37 @@ done
 
 read -p "Install general packages? [y/N] " -n 1 -r
 echo
-if [ $REPLY =~ ^[Yy]$ ]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sh ~/.config/yadm/personal/general_tools.sh
 fi
 
 read -p "Install developer environment? [y/N] " -n 1 -r
 echo
-if [ $REPLY =~ ^[Yy]$ ]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sh ~/.config/yadm/personal/developer_environment.sh
 fi
 
 read -p "Install office tools? [y/N] " -n 1 -r
 echo
-if [ $REPLY =~ ^[Yy]$ ]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sh ~/.config/yadm/personal/office.sh
 fi
 
 read -p "Install gaming tools? [y/N] " -n 1 -r
 echo
-if [ $REPLY =~ ^[Yy]$ ]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sh ~/.config/yadm/personal/gaming.sh
 fi
 
 read -p "Install recording/streaming tools? [y/N] " -n 1 -r
 echo
-if [ $REPLY =~ ^[Yy]$ ]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sh ~/.config/yadm/personal/recording_tools.sh
 fi
 
 read -p "Install editing tools? [y/N] " -n 1 -r
 echo
-if [ $REPLY =~ ^[Yy]$ ]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     sh ~/.config/yadm/personal/editing_tools.sh
 fi
 
