@@ -26,7 +26,7 @@ packages=(
     "replay-sorcery"   # Replay sorcery (game replay tool)
     "dxvk-async-git"   # DXVK async (DirectX to Vulkan translation layer)
     "vkd3d"            # VKD3D (DirectX 12 to Vulkan translation layer)
-    "gamescope"        # Gamescope (game compositor) (for fixing issues in window manager on wayland based compositors)
+    "gamescope-plus"   # Gamescope fork with added patches for stability (for fixing issues in window manager on wayland based compositors) (AUR)
 )
 
 # Install proton and it's dependencies
