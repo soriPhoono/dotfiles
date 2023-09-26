@@ -80,6 +80,8 @@ for language in $languages; do
             "jdk17-openjdk" # Java compiler (version 17)
             "jdk11-openjdk" # Java compiler (version 11)
             "jdk8-openjdk"  # Java compiler (version 8)
+            "gradle"        # Java build system
+            "maven"         # Java build system
         )
         ;;
     "6")
