@@ -8,12 +8,7 @@ kernels=(
 )
 
 kernel_supporting=(
-    "linux-firmware"          # firmware for linux kernel
-    "linux-firmware-qlogic"   # firmware for qlogic devices
-    "linux-firmware-bnx2x"    # firmware for bnx2x broadcom ethernet devices
-    "linux-firmware-liquidio" # firmware for liquidio cavium liquidio server devices
-    "linux-firmware-mellanox" # firmware for mellanox spectrum switches
-    "linux-firmware-nfp"      # firmware for nfp netronome flow processors
+    "linux-firmware" # firmware for linux kernel
 )
 
 packages=(
