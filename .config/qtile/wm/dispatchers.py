@@ -40,7 +40,7 @@ keys = [
     # multiple stack panes
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "a", lazy.spawn(
-        home + "/.config/rofi/launchers/type-6/launcher.sh"), desc="Launch rofi"),
+        home + "/.config/rofi/launchers/applauncher/launcher.sh"), desc="Launch rofi"),
     Key([mod], "e", lazy.spawn("pcmanfm"), desc="Launch file manager"),
     Key([mod], "F4", lazy.spawn("flameshot gui"), desc="Launch xkill"),
 
