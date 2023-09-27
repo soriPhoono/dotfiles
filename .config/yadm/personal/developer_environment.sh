@@ -144,7 +144,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Virtual Machines
-read -p "Install virtualbox and extension pack? [y/N] " -n 1 -r
+read -p "Install qemu for virtual machines? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
@@ -202,7 +202,7 @@ fi
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}"
 for command in "${commands[@]}"; do
-    eval $command >/dev/null
+    eval "$command" >/dev/null
 done
 echo "Finished installing developer environment packages"
 
