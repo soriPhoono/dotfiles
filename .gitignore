@@ -32,14 +32,15 @@ __pycache__/
 .config/google-chrome/
 .config/gtk-3.0/
 .config/libfm/
-.config/libreoffice
+.config/libreoffice/
+.config/libvirt/
 .config/menus/
 .config/microsoft-edge/
 # TODO: sort through this to find ui configurations
 .config/obs-studio/
 .config/obsidian/
 .config/openrazer/
-.config/pcmanfm
+.config/pcmanfm/
 .config/polychromatic/
 .config/protonup/
 .config/pulse/
