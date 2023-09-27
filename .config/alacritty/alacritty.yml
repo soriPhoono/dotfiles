@@ -97,7 +97,7 @@ window:
     dynamic_padding: true
     dynamic_title: true
     title: Alacritty
-    opacity: .9
+    opacity: 1
 
 cursor:
     style:
