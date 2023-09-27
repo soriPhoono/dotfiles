@@ -68,4 +68,5 @@ sh ~/.config/yadm/personal/bootstrap --multilib
 sudo cp -r ~/.config/yadm/conf/* /
 
 # Reboot system
+read -p "Press any key to reboot..." -n 1 -r
 reboot
