@@ -21,7 +21,7 @@ fg_minimize = "#99d1db"
 
 useless_gap = 7
 border_normal = "#1e1e2e"
-border_focus = "#1e1e2e"
+border_focus = "#94e2d5"
 border_marked = "#1e1e2e"
 border_radius = 8
 border_width = 3
