@@ -19,6 +19,7 @@ packages=(
     "polybar"                     # Status bar
     "picom-ftlabs-git"            # Compositor
     "xidlehook"                   # Idle management daemon
+    "xgifwallpaper"               # GIF wallpaper (Live wallpaper system)
     "qt5-graphicaleffects"        # Qt5 graphicaleffects
     "qt5-quickcontrols2"          # Qt5 quickcontrols2
     "qt5-svg"                     # Qt5 svg
