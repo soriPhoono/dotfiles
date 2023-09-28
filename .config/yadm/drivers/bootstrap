@@ -39,7 +39,7 @@ else
     done
 
     if [ $gpu_count -lt 3 ]; then
-        if [ $gpu_count == 2 ]; then
+        if [ $gpu_count -le 2 ]; then
             read -p "Two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]; then
