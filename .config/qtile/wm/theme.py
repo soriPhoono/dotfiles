@@ -3,7 +3,7 @@
 import os
 
 home = os.path.expanduser('~')
-wallpaper = home + "/.config/qtile/wallpaper.jpg"
+wallpaper = f"{home}/.config/qtile/wallpaper.jpg"
 
 font = "SauceCodeProNF"
 font_size = 12
