@@ -39,33 +39,31 @@ else
     done
 
     if [ $gpu_count -lt 3 ]; then
-        if [ $gpu_count -le 2 ]; then
-            read -p "Two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                cpu_type=$(lscpu | grep "Vendor ID" | cut -d ":" -f 2 | sed -e 's/^[[:space:]]*//')
+        read -p "At least two GPUs detected, please confirm that one is an integrated gpu before installation. [y/n]" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            cpu_type=$(lscpu | grep "Vendor ID" | cut -d ":" -f 2 | sed -e 's/^[[:space:]]*//')
 
-                case "$cpu_type" in
-                "GenuineIntel")
-                    sh "$HOME/.config/yadm/drivers/intel.sh" $($MULTILIB && echo "--multilib")
+            case "$cpu_type" in
+            "GenuineIntel")
+                sh "$HOME/.config/yadm/drivers/intel.sh" $($MULTILIB && echo "--multilib")
 
-                    installed+=("intel")
+                installed+=("intel")
 
-                    igpu_vendor="Intel"
-                    ;;
-                "AuthenticAMD")
-                    sh "$HOME/.config/yadm/drivers/amd.sh" $($MULTILIB && echo "--multilib")
+                igpu_vendor="Intel"
+                ;;
+            "AuthenticAMD")
+                sh "$HOME/.config/yadm/drivers/amd.sh" $($MULTILIB && echo "--multilib")
 
-                    installed+=("amd")
+                installed+=("amd")
 
-                    igpu_vendor="AMD"
-                    ;;
-                esac
-            else
-                echo "Please install drivers manually"
+                igpu_vendor="AMD"
+                ;;
+            esac
+        else
+            echo "Please install drivers manually"
 
-                exit 0
-            fi
+            exit 0
         fi
 
         if $nvidia; then
