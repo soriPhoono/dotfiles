@@ -36,6 +36,12 @@ fi
 if $HWACCEL; then
     packages+=("ocl-icd" "opencl-nvidia" "clinfo")
 
+    read -p "Install CUDA? [y/n]" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        packages+=("cuda")
+    fi
+
     if $MULTILIB; then
         packages+=("lib32-ocl-icd" "lib32-opencl-nvidia")
     fi
