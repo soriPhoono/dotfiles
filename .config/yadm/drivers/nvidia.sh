@@ -10,15 +10,15 @@ for arg in "$@"; do
     -m | --multilib)
         MULTILIB=true
         ;;
+    --hwaccel)
+        HWACCEL=true
+        ;;
     esac
 done
 
 packages=(
     "nvidia-dkms"
     "nvidia-utils"
-    "ocl-icd"
-    "opencl-nvidia"
-    "clinfo"
     "prime-run"
 )
 
@@ -31,6 +31,14 @@ commands=(
 
 if $MULTILIB; then
     packages+=("lib32-nvidia-utils")
+fi
+
+if $HWACCEL; then
+    packages+=("ocl-icd" "opencl-nvidia" "clinfo")
+
+    if $MULTILIB; then
+        packages+=("lib32-ocl-icd" "lib32-opencl-nvidia")
+    fi
 fi
 
 # Install packages

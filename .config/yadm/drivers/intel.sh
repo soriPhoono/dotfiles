@@ -10,6 +10,9 @@ for arg in "$@"; do
     -m | --multilib)
         MULTILIB=true
         ;;
+    --hwaccel)
+        HWACCEL=true
+        ;;
     esac
 done
 
@@ -17,23 +20,26 @@ packages=(
     "mesa"
     "xf86-video-intel"
     "vulkan-intel"
-    "intel-media-driver"
-    "libva-utils"
-    "ocl-icd"
-    "opencl-rusticl-mesa"
-    "clinfo"
 )
 
 if $MULTILIB; then
-    packages+=("lib32-mesa" "lib32-vulkan-intel" "lib32-libva-mesa-driver" "lib32-ocl-icd" "lib32-opencl-rusticl-mesa")
+    packages+=("lib32-mesa" "lib32-vulkan-intel")
 fi
 
 paru -S --noconfirm --needed "${packages[@]}"
 
-if grep -i "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
-    sudo sed -i "s/LIBVA_DRIVER_NAME=.*/LIBVA_DRIVER_NAME=radeonsi/" /etc/environment
-else
-    echo "LIBVA_DRIVER_NAME=iHD" | sudo tee -a /etc/environment >/dev/null
+if $HWACCEL; then
+    packages+=("intel-media-driver" "libva-utils" "ocl-icd" "opencl-rusticl-mesa" "clinfo")
+
+    if $MULTILIB; then
+        packages+=("lib32-ocl-icd" "lib32-opencl-rusticl-mesa")
+    fi
+
+    if grep -q "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
+        sudo sed -i "s/LIBVA_DRIVER_NAME=.*/LIBVA_DRIVER_NAME=radeonsi/" /etc/environment
+    else
+        echo "LIBVA_DRIVER_NAME=iHD" | sudo tee -a /etc/environment >/dev/null
+    fi
 fi
 
 paru -c --noconfirm >/dev/null

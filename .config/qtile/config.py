@@ -41,7 +41,6 @@ home = path.expanduser('~')
 
 mod = "mod4"
 
-# TODO: adjust hotkeys
 keys = dispatchers.keys
 
 screens = [
