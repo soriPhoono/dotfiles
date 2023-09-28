@@ -16,7 +16,7 @@ keys = [
     # Control system
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod, "shift"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key([mod], "p", lazy.spawn(home + "/.config/rofi/powermenu/type-6/powermenu.sh"),
+    Key([mod], "p", lazy.spawn(home + "/.config/rofi/launchers/powermenu/powermenu.sh"),
         desc="Launch rofi powermenu"),
     # Switch between windows
     Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),

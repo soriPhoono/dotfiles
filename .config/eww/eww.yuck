@@ -1,0 +1,27 @@
+(defwindow bar-left
+  :monitor 0
+  :geometry (geometry :x "1%" :y "1%" :width "13%" :height "2%" :anchor "top left")
+  :stacking "fg"
+  :reserve (struts :distance "3%" :side "top")
+  :windowtype "dock"
+  :wm-ignore false
+  
+  (box
+    :orientation "horizontal"
+    :spacing 0
+    :padding 0
+    
+    (power)
+  )
+)
+
+(defwidget power []
+  (button
+    :onclick "~/.config/rofi/launchers/powermenu/powermenu.sh"
+    
+    (label
+      :text ""
+      :justify "center"
+    )
+  )
+)
