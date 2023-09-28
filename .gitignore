@@ -47,6 +47,7 @@ __pycache__/
 .config/qBittorrent/
 .config/qt5ct/
 .config/qt6ct/
+.config/qtile/wallpapers
 .config/radeon-profile/
 .config/steamtinkerlaunch/
 .config/systemd/
