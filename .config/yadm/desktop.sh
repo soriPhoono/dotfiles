@@ -11,6 +11,8 @@ packages=(
     "xorg-xauth"                  # X11 authority file management
     "xorg-xinit"                  # X11 initialisation program
     "xorg-xmodmap"                # Utility for modifying keymaps and pointer button mappings in X
+    "xorg-xclipboard"             # X11 clipboard manager
+    "xclip"                       # Command line interface to the X11 clipboard
     "xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
     "xdg-desktop-portal-gtk"      # GTK backend for xdg-desktop-portal
     "qtile"                       # Window manager
@@ -216,7 +218,7 @@ EOF
 touch ~/.config/qt6ct/qt6ct.conf
 tee ~/.config/qt6ct/qt6ct.conf >/dev/null <<EOF
 [Appearance]
-color_scheme_path=/home/soriphoono/.config/qt6ct/colors/Catppuccin-Mocha.conf
+color_scheme_path=/home/$(whoami)/.config/qt6ct/colors/Catppuccin-Mocha.conf
 custom_palette=true
 icon_theme=Stylish-Dark
 standard_dialogs=default
@@ -253,6 +255,45 @@ geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x3\0\0\0\0\0\x4\0\0\0+\0\0\au\0\0\x4-\0\0\
 [Troubleshooting]
 force_raster_widgets=1
 ignored_applications=@Invalid()
+EOF
+
+touch ~/.local/share/applications/clear-ram.desktop
+tee ~/.local/share/applications/clear-ram.desktop >/dev/null <<EOF
+[Desktop Entry]
+Type=Application
+Icon=indicator-sensors-chip
+Name=Clear Ram
+Exec=/home/$(whoami)/.local/bin/clear-ram.sh
+Terminal=false
+Hidden=false
+Categories=System; Utility
+Comment=launch script to wipe ram and swap that is not in use
+EOF
+
+touch ~/.local/share/applications/color-picker.desktop
+tee ~/.local/share/applications/color-picker.desktop >/dev/null <<EOF
+[Desktop Entry]
+Type=Application
+Exec=/home/$(whoami)/.local/bin/color-picker-gui.sh
+Terminal=false
+Hidden=false
+Name=Color Picker
+Icon=colorgrab
+Categories=Development; Graphics; Office; System; Utility; Video
+Comment=Activate graphical color picker for getting hex addresses of colors
+EOF
+
+touch ~/.local/share/applications/password-generator.desktop
+tee ~/.local/share/applications/password-generator.desktop >/dev/null <<EOF
+[Desktop Entry]
+Type=Application
+Exec=/home/$(whoami)/.local/bin/password-generator.sh
+Terminal=false
+Hidden=false
+Name=Password Generator
+Icon=emblem-encrypted-locked
+Categories=Network; Office; System; Utility
+Comment=Launch password generator to create random passcode and copy it to the clipboard
 EOF
 
 sudo systemctl enable sddm.service

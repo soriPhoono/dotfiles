@@ -4,5 +4,5 @@
 source "$HOME"/.local/bin/environment.sh
 
 passg=$(openssl rand -base64 $(($RANDOM % 6 + 15)))
-echo "$passg" | wl-copy
+echo "$passg" | xclip -selection clipboard
 notify-send -i "$icon_bell" "Generated Password copied to clipboard"

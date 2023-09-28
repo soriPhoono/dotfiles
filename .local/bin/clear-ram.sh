@@ -2,7 +2,7 @@
 
 source "$HOME"/.local/bin/environment.sh
 
-password="$(zenity --password)"
+sudo -A sh -c 'echo 3 > /proc/sys/vm/drop_caches'
+sudo swapoff -a && sudo swapon -a
 
-echo "$password" | sudo -S sh -c 'echo 3 > /proc/sys/vm/drop_caches'
 notify-send -i "$icon_memory" "Memory cache flushed successfully"
