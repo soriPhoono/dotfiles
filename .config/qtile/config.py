@@ -45,18 +45,9 @@ mod = "mod4"
 keys = dispatchers.keys
 
 screens = [
-    Screen(
-        wallpaper=theme.wallpaper,
-        wallpaper_mode="fill",
-    ),
-    Screen(
-        wallpaper=theme.wallpaper,
-        wallpaper_mode="fill",
-    ),
-    Screen(
-        wallpaper=theme.wallpaper,
-        wallpaper_mode="fill",
-    ),
+    Screen(),
+    Screen(),
+    Screen(),
 ]
 
 layouts = [
