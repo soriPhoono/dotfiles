@@ -49,6 +49,9 @@ __pycache__/
 .config/qt6ct/
 .config/qtile/wallpapers
 .config/radeon-profile/
+.config/spotify/
+.config/spicetify/Backup
+.config/spicetify/Extracted/
 .config/steamtinkerlaunch/
 .config/systemd/
 .config/unity3d/
