@@ -42,13 +42,19 @@ if $HWACCEL; then
     fi
 
     if $MULTILIB; then
-        packages+=("lib32-libva-mesa-driver" "lib32-ocl-icd" "lib32-opencl-rusticl-mesa")
+        packages+=("lib32-libva-mesa-driver" "lib32-opencl-rusticl-mesa")
     fi
 
     if grep -q "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
         commands+=("sudo sed -i 's/LIBVA_DRIVER_NAME=.*/LIBVA_DRIVER_NAME=radeonsi/' /etc/environment")
     else
         commands+=("echo 'LIBVA_DRIVER_NAME=radeonsi' | sudo tee -a /etc/environment >/dev/null")
+    fi
+
+    if grep -q "VDPAU_DRIVER" /etc/environment >/dev/null; then
+        commands+=("sudo sed -i 's/VDPAU_DRIVER=.*/VDPAU_DRIVER=radeonsi/' /etc/environment")
+    else
+        commands+=("echo 'VDPAU_DRIVER=radeonsi' | sudo tee -a /etc/environment >/dev/null")
     fi
 fi
 

@@ -29,11 +29,7 @@ fi
 paru -S --noconfirm --needed "${packages[@]}"
 
 if $HWACCEL; then
-    packages+=("intel-media-driver" "libva-utils" "ocl-icd" "opencl-rusticl-mesa" "clinfo")
-
-    if $MULTILIB; then
-        packages+=("lib32-ocl-icd" "lib32-opencl-rusticl-mesa")
-    fi
+    packages+=("intel-media-driver" "libva-utils" "ocl-icd" "intel-compute-runtime" "clinfo")
 
     if grep -q "LIBVA_DRIVER_NAME" /etc/environment >/dev/null; then
         sudo sed -i "s/LIBVA_DRIVER_NAME=.*/LIBVA_DRIVER_NAME=radeonsi/" /etc/environment
