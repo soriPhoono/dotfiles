@@ -75,11 +75,19 @@ else
 
             dgpu_vendor="NVIDIA"
         else
-            sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($MULTILIB && echo "--multilib")
+            skip_amd=false
+            for driver in "${installed[@]}"; do
+                if [ "$driver" == "amd" ]; then
+                    skip_amd=true
+                fi
+            done
+            if ! $skip_amd; then
+                sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($MULTILIB && echo "--multilib")
 
-            installed+=("amd")
+                installed+=("amd")
 
-            dgpu_vendor="AMD"
+                dgpu_vendor="AMD"
+            fi
         fi
     else
         echo "Unusual number of GPUs detected, please install drivers manually"
