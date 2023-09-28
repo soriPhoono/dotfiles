@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Icon=indicator-sensors-chip
-Name=Clear Ram
-Exec=~/.local/bin/clear-ram.sh
-Terminal=false
-Hidden=false
-Categories=System; Utility
-Comment=launch script to wipe ram and swap that is not in use
