@@ -6,8 +6,7 @@ xhost + local &
 picom &
 dunst &
 unclutter &
-# Get random path from ~/.config/qtile/wallpapers directory using find
-xgifwallpaper $(find ~/.config/qtile/wallpapers -type f | shuf -n1) &
+~/.config/qtile/scripts/wallpaper.sh &
 
 gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice' &
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' &

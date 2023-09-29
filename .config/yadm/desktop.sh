@@ -149,8 +149,8 @@ else
     echo "TERM=alacritty" | sudo tee -a /etc/environment >/dev/null
 fi
 
-if [ ! $(grep -q "Path askpass" /etc/sudo.conf) ]; then
-    echo "Path askpass /usr/local/bin/zenity-passphrase" | sudo tee -a /etc/sudo.conf >/dev/null
+if ! grep -q "Path askpass" /etc/sudo.conf; then
+    echo "Path askpass /usr/local/bin/zenity_passphrase" | sudo tee -a /etc/sudo.conf >/dev/null
 fi
 
 sudo touch /etc/udev/rules.d/99-mtp.rules

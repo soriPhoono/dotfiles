@@ -7,7 +7,7 @@
 MULTILIB=false
 for arg in "$@"; do
     case "$arg" in
-    "--multilib")
+    --multilib)
         MULTILIB=true
         ;;
     esac
@@ -46,28 +46,24 @@ else
 
             case "$cpu_type" in
             "GenuineIntel")
-                sh "$HOME/.config/yadm/drivers/intel.sh" $($MULTILIB && echo "--multilib")
+                sh "$HOME/.config/yadm/drivers/intel.sh" --hwaccel $($MULTILIB && echo "--multilib")
 
                 installed+=("intel")
 
                 igpu_vendor="Intel"
                 ;;
             "AuthenticAMD")
-                sh "$HOME/.config/yadm/drivers/amd.sh" $($MULTILIB && echo "--multilib")
+                sh "$HOME/.config/yadm/drivers/amd.sh" --hwaccel $($MULTILIB && echo "--multilib")
 
                 installed+=("amd")
 
                 igpu_vendor="AMD"
                 ;;
             esac
-        else
-            echo "Please install drivers manually"
-
-            exit 0
         fi
 
         if $nvidia; then
-            sh "$HOME/.config/yadm/drivers/nvidia.sh" $($MULTILIB && echo "--multilib")
+            sh "$HOME/.config/yadm/drivers/nvidia.sh" $($gpu_count == 1 && echo "--hwaccel") $($MULTILIB && echo "--multilib")
 
             installed+=("nvidia")
 
@@ -80,7 +76,7 @@ else
                 fi
             done
             if ! $skip_amd; then
-                sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($MULTILIB && echo "--multilib")
+                sh "$HOME/.config/yadm/drivers/amd.sh" --discrete $($gpu_count == 1 && echo "--hwaccel") $($MULTILIB && echo "--multilib")
 
                 installed+=("amd")
 

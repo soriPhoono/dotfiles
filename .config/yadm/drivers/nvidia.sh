@@ -10,15 +10,15 @@ for arg in "$@"; do
     -m | --multilib)
         MULTILIB=true
         ;;
+    --hwaccel)
+        HWACCEL=true
+        ;;
     esac
 done
 
 packages=(
     "nvidia-dkms"
     "nvidia-utils"
-    "ocl-icd"
-    "opencl-nvidia"
-    "clinfo"
     "prime-run"
 )
 
@@ -31,6 +31,26 @@ commands=(
 
 if $MULTILIB; then
     packages+=("lib32-nvidia-utils")
+fi
+
+if $HWACCEL; then
+    packages+=("ocl-icd" "opencl-nvidia" "clinfo")
+
+    read -p "Install CUDA? [y/n]" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        packages+=("cuda")
+    fi
+
+    if $MULTILIB; then
+        packages+=("lib32-opencl-nvidia")
+    fi
+
+    if grep -q "VDPAU_DRIVER" /etc/environment >/dev/null; then
+        commands+=("sudo sed -i 's/VDPAU_DRIVER=.*/VDPAU_DRIVER=nvidia/' /etc/environment")
+    else
+        commands+=("echo 'VDPAU_DRIVER=nvidia' | sudo tee -a /etc/environment >/dev/null")
+    fi
 fi
 
 # Install packages
