@@ -5,6 +5,8 @@ export PATH=$PATH:~/.local/bin
 export ZSH="/usr/share/oh-my-zsh"
 export SHELL=zsh
 
+export $(dbus-launch)
+
 # Start starship
 eval "$(starship init zsh)"
 
