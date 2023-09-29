@@ -15,9 +15,15 @@ __pycache__/
 .config/BetterDiscord/data/
 .config/BraveSoftware/
 .config/Code/
+.config/GIMP/
+.config/Google/
 .config/JetBrains/
 .config/LanguageTool/
+.config/Meltytech/
+.config/Signal/
 .config/VirtualBox/
+.config/audacity
+.config/bleachbit/
 .config/blender/
 .config/cef_user_data/
 .config/chromium/
@@ -31,6 +37,7 @@ __pycache__/
 .config/github-copilot/
 .config/google-chrome/
 .config/gtk-3.0/
+.config/heroic/
 .config/imhex/
 .config/libfm/
 .config/libreoffice/
@@ -55,6 +62,7 @@ __pycache__/
 .config/spicetify/Extracted/
 .config/steamtinkerlaunch/
 .config/systemd/
+.config/synfig/
 .config/unity3d/
 .config/xfce4/
 .config/xsettingsd/
