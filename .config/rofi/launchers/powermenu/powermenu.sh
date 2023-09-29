@@ -19,11 +19,11 @@ uptime="$(uptime -p | sed -e 's/up //g')"
 host=$(hostnamectl hostname)
 
 # Options
-hibernate='󰒲'
 shutdown='⏻'
 reboot=''
-lock='󰌾'
 suspend='󰶐'
+hibernate='󰒲'
+lock='󰌾'
 logout='󰍃'
 yes=''
 no=''
@@ -72,7 +72,7 @@ run_cmd() {
         elif [[ $1 == '--suspend' ]]; then
             systemctl suspend
         elif [[ $1 == '--logout' ]]; then
-            betterlockscreen -l
+            qtile cmd-obj -o cmd -f shutdown
         fi
     else
         exit 0
@@ -94,8 +94,6 @@ $hibernate)
 $lock)
     if [[ -x '/usr/bin/betterlockscreen' ]]; then
         betterlockscreen -l
-    elif [[ -x '/usr/bin/i3lock' ]]; then
-        i3lock
     fi
     ;;
 $suspend)
