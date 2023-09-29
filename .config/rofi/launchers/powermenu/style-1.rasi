@@ -13,15 +13,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-* {
-    font:                        "SauceCodeProNF 11";
-    background:                  #181825;
-    background-alt:              #1e1e2e;
-    foreground:                  #FFFFFF;
-    selected:                    #b4befe;
-    active:                      #1e1e2e;
-    urgent:                      #1e1e2e;
-}
+@import                          "~/.config/rofi/colors/catppuccin.rasi"
 
 /*
 USE_BUTTONS=YES
@@ -75,7 +67,7 @@ userimage {
 inputbar {
     padding:                     15px;
     border-radius:               10px;
-    background-color:            @urgent;
+    background-color:            @background;
     text-color:                  @foreground;
     children:                    [ "dummy", "prompt", "dummy"];
 }
