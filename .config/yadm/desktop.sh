@@ -39,6 +39,7 @@ packages=(
     "xgifwallpaper"               # GIF wallpaper (Live wallpaper system)
     "geoclue"                     # Location information
     "redshift"                    # Screen temperature adjustment
+    "brightnessctl"               # Brightness control
     "picom-ftlabs-git"            # Compositor
     "qtile"                       # Window manager
     "polybar"                     # Status bar
