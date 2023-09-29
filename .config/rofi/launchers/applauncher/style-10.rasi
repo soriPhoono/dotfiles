@@ -19,15 +19,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-* {
-    font:                        "SauceCodeProNF 11";
-    background:                  #181825;
-    background-alt:              #181825;
-    foreground:                  #FFFFFF;
-    selected:                    #292c3c;
-    active:                      #292c3c;
-    urgent:                      #292c3c;
-}
+@import                          "~/.config/rofi/colors/catppuccin.rasi"
 
 /*****----- Main Window -----*****/
 window {
