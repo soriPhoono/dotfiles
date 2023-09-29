@@ -5,56 +5,56 @@
 # Author:       Sori Phoono <soriphoono@gmail.com>
 
 packages=(
+    "qt5-graphicaleffects"        # Qt5 graphicaleffects
+    "qt5-quickcontrols2"          # Qt5 quickcontrols2
+    "qt5-svg"                     # Qt5 svg
+    "zenity"                      # Dialog boxes
+    "playerctl"                   # Media player control
+    "imagemagick"                 # Image manipulation
+    "catppuccin-gtk-theme-mocha"  # GTK theme
+    "catppuccin-cursors-mocha"    # Cursor theme
+    "papirus-icon-theme"          # Icon theme
+    "adobe-source-code-pro-fonts" # Monospace font
+    "ttf-sourcecodepro-nerd"      # Monospace font
+    "ttf-nerd-fonts-symbols"      # Icon font
+    "ttf-nerd-fonts-symbols-mono" # Icon font
+    "noto-fonts-emoji"            # Emoji font
     "sddm"                        # Display manager
     "sddm-sugar-candy-git"        # SDDM theme
+    "gvfs"                        # Virtual filesystem
+    "gvfs-afc"                    # Virtual filesystem (Apple)
+    "gvfs-mtp"                    # Virtual filesystem (Android)
+    "gvfs-gphoto2"                # Virtual filesystem (camera)
     "xorg-xhost"                  # X11 utility for controlling access to the X server
     "xorg-xauth"                  # X11 authority file management
     "xorg-xinit"                  # X11 initialisation program
     "xorg-xmodmap"                # Utility for modifying keymaps and pointer button mappings in X
     "xorg-xclipboard"             # X11 clipboard manager
     "xclip"                       # Command line interface to the X11 clipboard
+    "unclutter"                   # Hides cursor when idle
     "xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
     "xdg-desktop-portal-gtk"      # GTK backend for xdg-desktop-portal
-    "qtile"                       # Window manager
-    "polybar"                     # Status bar
-    "picom-ftlabs-git"            # Compositor
-    "xidlehook"                   # Idle management daemon
+    "polkit-gnome"                # PolicyKit authentication agent
+    "gnome-keyring"               # Keyring
     "xgifwallpaper"               # GIF wallpaper (Live wallpaper system)
-    "qt5-graphicaleffects"        # Qt5 graphicaleffects
-    "qt5-quickcontrols2"          # Qt5 quickcontrols2
-    "qt5-svg"                     # Qt5 svg
-    "rofi"                        # Application launcher
-    "betterlockscreen"            # Lockscreen
-    "dunst"                       # Notification daemon
     "geoclue"                     # Location information
     "redshift"                    # Screen temperature adjustment
-    "unclutter"                   # Hides cursor when idle
     "brightnessctl"               # Brightness control
-    "catppuccin-gtk-theme-mocha"  # GTK theme
-    "catppuccin-cursors-mocha"    # Cursor theme
-    "papirus-icon-theme"          # Icon theme
-    "playerctl"                   # Media player control
-    "zenity"                      # Dialog boxes
-    "imagemagick"                 # Image manipulation
+    "picom-ftlabs-git"            # Compositor
+    "qtile"                       # Window manager
+    "polybar"                     # Status bar
+    "dunst"                       # Notification daemon
+    "xidlehook"                   # Idle management daemon
+    "betterlockscreen"            # Lockscreen
+    "rofi"                        # Application launcher
     "cava"                        # Audio visualiser
+    "font-manager"                # Font manager
     "qt5ct"                       # Qt5 configuration utility
     "qt6ct"                       # Qt6 configuration utility
     "nwg-look"                    # GTK theme switcher
-    "font-manager"                # Font manager
-    "adobe-source-code-pro-fonts" # Monospace font
-    "ttf-sourcecodepro-nerd"      # Monospace font
-    "ttf-nerd-fonts-symbols"      # Icon font
-    "ttf-nerd-fonts-symbols-mono" # Icon font
-    "noto-fonts-emoji"            # Emoji font
-    "polkit-gnome"                # PolicyKit authentication agent
-    "gnome-keyring"               # Keyring
     "alacritty"                   # Terminal emulator
-    "gvfs"                        # Virtual filesystem
-    "gvfs-afc"                    # Virtual filesystem
-    "gvfs-mtp"                    # Virtual filesystem
-    "gvfs-gphoto2"                # Virtual filesystem
-    "pcmanfm-gtk3"                # File manager
     "file-roller"                 # Archive manager
+    "pcmanfm-gtk3"                # File manager
     "gnome-disk-utility"          # Disk utility
     "gparted"                     # Partition manager
     "bleachbit"                   # System cleaner
