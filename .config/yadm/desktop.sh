@@ -25,8 +25,6 @@ packages=(
     "qt5-svg"                     # Qt5 svg
     "rofi"                        # Application launcher
     "betterlockscreen"            # Lockscreen
-    "cool-retro-term"             # Terminal emulator for lockscreen effect
-    "cmatrix"                     # Terminal emulator for lockscreen effect program
     "dunst"                       # Notification daemon
     "geoclue"                     # Location information
     "redshift"                    # Screen temperature adjustment
