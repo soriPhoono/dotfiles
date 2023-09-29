@@ -9,7 +9,6 @@ while true; do
   # Get random wallpaper
   current_wallpaper=$(shuf -n 1 <<<$wallpapers)
 
-  killall xgifwallpaper
   xgifwallpaper $current_wallpaper &
   notify-send -i "$icon_screenshot" -u normal -r 60 "Updated wallpaper" "New wallpaper: $(basename $current_wallpaper)"
 
