@@ -127,10 +127,11 @@ sudo usermod -aG games "$(whoami)"
 read -p "Enable chevron start page with chatgpt integration? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    cd ~/.config/chevron
+    cd ~/.config/chevron/
     npm install && npm run build
+    cd ~/.config/chevron/dist/
     sudo npm install -g node-linux && npm link node-linux
-    npm run register_linux
+    sudo npm run register_linux
     sudo systemctl enable chevron.service
 fi
 
