@@ -37,5 +37,6 @@ echo "Done!"
 
 echo "Enabling cups service..."
 sudo systemctl enable cups.socket
+echo "Done!"
 
 paru -c --noconfirm >/dev/null

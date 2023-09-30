@@ -29,7 +29,7 @@ packages=(
     "cava"           # cava (audio visualizer)
 )
 
-# Install kernel for linux
+# Install kernel supporting packages for linux
 paru -S --noconfirm --needed linux-headers linux-firmware
 
 # Install packages from list

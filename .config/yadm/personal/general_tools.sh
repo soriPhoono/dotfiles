@@ -15,6 +15,12 @@ packages=(
     "spotifywm-git"        # Spotify window manager (AUR)
 )
 
+read -p "Install openrgb [y/N]: " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    packages+=("openrgb-git")
+fi
+
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}"
 echo "Finished installing general tools"
