@@ -57,3 +57,4 @@ The script installs the following features for this branch
 - Optional installation of streaming and recording tools like open broadcaster software with platform dependent, auto detected amf installation and game capture integration
 - Optional installation of media creation/editing tools like image editors, audio editors, 3d printing (WIP) and modeling tools, and 2d animation tools for sprites (mostly for games or animators)
 - Optional installation of libre-office with spelling and grammar checking
+- Relevant notifications for laptops
