@@ -3,4 +3,4 @@
 	url = https://github.com/AstroNvim/AstroNvim.git
 [submodule ".config/chevron"]
 	path = .config/chevron
-	url = https://github.com/kholmogorov27/chevron
+	url = https://github.com/kholmogorov27/chevron.git

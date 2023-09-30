@@ -23,7 +23,6 @@ packages=(
     "winetricks"       # Wine tricks (configuration tool)
     "gamemode"         # Game mode
     "mangohud"         # MangoHud (game overlay)
-    "replay-sorcery"   # Replay sorcery (game replay tool)
     "dxvk-async-git"   # DXVK async (DirectX to Vulkan translation layer)
     "vkd3d"            # VKD3D (DirectX 12 to Vulkan translation layer)
     "gamescope-plus"   # Gamescope fork with added patches for stability (for fixing issues in window manager on wayland based compositors) (AUR)
@@ -63,15 +62,6 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
         "prismlauncher" # Minecraft instance and version manager
-    )
-fi
-
-read -p "Install tales of maj'eyal? [y/N] " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=(
-        "tome4-bin"            # Tales of Maj'Eyal
-        "tome4-zomnibus_addon" # Tales of Maj'Eyal Zomnibus addon (optional qol mods to improve experience while preserving vanilla feel)
     )
 fi
 

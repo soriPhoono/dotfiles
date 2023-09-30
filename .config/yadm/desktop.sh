@@ -128,10 +128,11 @@ sudo usermod -aG games "$(whoami)"
 read -p "Enable chevron start page with chatgpt integration? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    cd ~/.config/chevron
+    cd ~/.config/chevron/
     npm install && npm run build
+    cd ~/.config/chevron/dist/
     sudo npm install -g node-linux && npm link node-linux
-    npm run register_linux
+    sudo npm run register_linux
     sudo systemctl enable chevron.service
 fi
 
@@ -165,14 +166,6 @@ sudo tee /etc/udev/rules.d/99-storage.rules >/dev/null <<EOF
 KERNEL=="sd?", ACTION=="add", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
 # Unplug usb drive
 KERNEL=="sd?", ACTION=="remove", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
-EOF
-
-sudo touch /etc/udev/rules.d/99-charging.rules
-sudo tee /etc/udev/rules.d/99-charging.rules >/dev/null <<EOF
-# Battery
-ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="0", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/$(whoami)/.Xauthority" RUN+="/usr/bin/su $(whoami) -c '/home/$(whoami)/.local/bin/notifications/power-supply.sh 0'"
-# AC
-ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", ATTR{online}=="1", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/$(whoami)/.Xauthority" RUN+="/usr/bin/su $(whoami) -c '/home/$(whoami)/.local/bin/notifications/power-supply.sh 1'"
 EOF
 
 touch ~/.config/qt5ct/qt5ct.conf

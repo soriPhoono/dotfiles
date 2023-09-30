@@ -63,6 +63,10 @@ else
         fi
 
         if $nvidia; then
+            if [[ $gpu_count -eq 2 ]]; then
+                paru -S --noconfirm --needed supergfxctl
+            fi
+
             sh "$HOME/.config/yadm/drivers/nvidia.sh" $($gpu_count == 1 && echo "--hwaccel") $($MULTILIB && echo "--multilib")
 
             installed+=("nvidia")
