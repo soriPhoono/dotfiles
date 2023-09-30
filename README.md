@@ -2,7 +2,7 @@
 My personal collection of configuration files for a complete Linux desktop environment based on the QTile window manager
 
 ## Usage
-Simply follow the installation instructions below to install the dot files on your system. Then reboot as this repository does install numerous driver packages that may or may not require a reboot to function properly.
+Simply follow the installation instructions below to install the dot files on your system. Then reboot when requested by the bootstrap script as this repository does install numerous driver packages that may or may not require a reboot to function properly.
 
 ## Installation
 This repository can be cloned on its own and setup by running the bootstrap script located at .config/yadm/bootstrap
@@ -55,5 +55,5 @@ The script installs the following features for this branch
 - Optional installation of complete custom developer environment (WIP)
 - Optional installation of steam, heroic launcher,  minecraft instance manager prsimlauncher, , proton/wine troubleshooters, dosbox installation, gamemode, mangohud, and gamescope setup for window manager integration.
 - Optional installation of streaming and recording tools like open broadcaster software with platform dependent, auto detected amf installation and game capture integration
-- Optional installation of media creation/editing tools like image editors, audio editors, 3d printing (WIP) and modeling tools, and 2d animation tools for sprites (mostly for games or animators)
+- Optional installation of media creation/editing tools like image editors, audio editors, 3d modeling tools, and 2d animation tools for sprites (mostly for games or animators)
 - Optional installation of libre-office with spelling and grammar checking
