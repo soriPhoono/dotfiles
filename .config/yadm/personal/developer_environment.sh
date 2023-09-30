@@ -159,6 +159,15 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     commands+=("sudo cp -r ~/.config/yadm/personal/conf/etc/libvirt/* /etc/libvirt/") # Copy libvirt configs
 fi
 
+# QMK
+read -p "Install qmk firmware development tools? [y/N] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    packages+=(
+        "qmk" # QMK firmware development tools
+    )
+fi
+
 # Android development tools
 if $MULTILIB && read -p "Install android studio? [y/N] " -n 1 -r; then
     echo
