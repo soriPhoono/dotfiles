@@ -35,12 +35,6 @@ fi
 if $HWACCEL; then
     packages+=("libva-mesa-driver" "libva-utils" "ocl-icd" "opencl-rusticl-mesa" "clinfo")
 
-    read -p "Install ROCM runtime? [y/n]" -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        packages+=("rocm-opencl-runtime" "rocm-hip-runtime")
-    fi
-
     if $MULTILIB; then
         packages+=("lib32-libva-mesa-driver" "lib32-opencl-rusticl-mesa")
     fi
