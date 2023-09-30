@@ -12,9 +12,7 @@ categories=(
     "image editing"
     "video editing"
     "2d animation"
-    "3d modeling"
-    "3d animation"
-    "3d printing"
+    "3d modeling/animation"
     "audio editing"
 )
 
@@ -42,15 +40,12 @@ for category in $categories; do
             "synfigstudio" # 2d animation software
         )
         ;;
-    "4" | "5")
+    "4")
         packages+=(
             "blender" # 3d modeling and animation software
         )
         ;;
-    "6")
-        echo "3d printing is not supported yet"
-        ;;
-    "7")
+    "5")
         packages+=(
             "audacity" # Audio editor
         )
