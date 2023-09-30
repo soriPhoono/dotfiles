@@ -1,9 +1,5 @@
 #!/bin/bash
 
-kernel_supporting=(
-    "linux-firmware" # firmware for linux kernel
-)
-
 packages=(
     "base-devel"     # base development tools
     "dosfstools"     # dos filesystem tools
@@ -34,21 +30,28 @@ packages=(
 )
 
 # Install kernel for linux
-paru -S --noconfirm --needed linux-headers "${kernel_supporting[@]}"
+paru -S --noconfirm --needed linux-headers linux-firmware
 
 # Install packages from list
 paru -S --noconfirm --needed "${packages[@]}"
 
+# Create home directories
 mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >/dev/null
 xdg-user-dirs-update >/dev/null
 
+# Set default shell to zsh
 chsh -s /bin/zsh $(whoami) >/dev/null
 
+# Enable paccache cache cleaner for pacman cache (meant for systems that are intended to be used for a long time)
 sudo systemctl enable paccache.timer >/dev/null
 
+# Build bat themes
 bat cache --build >/dev/null
 
+# Setup git
 sh ~/.config/yadm/cli/git.sh
+# Setup networking
 sh ~/.config/yadm/cli/networking.sh
 
+# Clean up
 paru -c --noconfirm >/dev/null
