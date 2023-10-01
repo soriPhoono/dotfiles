@@ -118,8 +118,6 @@ case "$browser" in
     ;;
 esac
 
-packages+=("nodejs" "npm")
-
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}"
 for command in "${commands[@]}"; do
@@ -139,11 +137,15 @@ sudo usermod -aG games "$(whoami)"
 read -p "Enable chevron start page with chatgpt integration? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+    paru -S --noconfirm --needed nodejs npm
+
     cd ~/.config/chevron/
     npm install && npm run build
+
     cd ~/.config/chevron/dist/
     sudo npm install -g node-linux && npm link node-linux
     sudo npm run register_linux
+
     sudo systemctl enable chevron.service
 fi
 
