@@ -95,19 +95,29 @@ echo
 case "$browser" in
 "f")
     packages+=("firefox")
-    commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
+    if grep -q "BROWSER" /etc/environment; then
+        commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
+    else
+        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
+    fi
     ;;
 "c")
     packages+=("google-chrome")
-    commands+=("echo \"BROWSER=google-chrome-stable\" | sudo tee -a /etc/environment >/dev/null")
+    if grep -q "BROWSER" /etc/environment; then
+        commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=google-chrome/g\" /etc/environment")
+    else
+        commands+=("echo \"BROWSER=google-chrome\" | sudo tee -a /etc/environment >/dev/null")
+    fi
     ;;
 "b")
     packages+=("firefox" "google-chrome")
-    commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
+    if grep -q "BROWSER" /etc/environment; then
+        commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
+    else
+        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
+    fi
     ;;
 esac
-
-packages+=("nodejs" "npm")
 
 echo "Installing packages..."
 paru -S --noconfirm --needed "${packages[@]}"
@@ -128,21 +138,25 @@ sudo usermod -aG games "$(whoami)"
 read -p "Enable chevron start page with chatgpt integration? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+    paru -S --noconfirm --needed nodejs npm
+
     cd ~/.config/chevron/
     npm install && npm run build
+
     cd ~/.config/chevron/dist/
     sudo npm install -g node-linux && npm link node-linux
     sudo npm run register_linux
+
     sudo systemctl enable chevron.service
 fi
 
-if [ $(grep -q "QT_QPA_PLATFORMTHEME" /etc/environment) ]; then
+if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
     sudo sed -i "s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g" /etc/environment
 else
     echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment >/dev/null
 fi
 
-if [ $(grep -q "TERM" /etc/environment) ]; then
+if grep -q "TERM" /etc/environment; then
     sudo sed -i "s/TERM=.*/TERM=alacritty/g" /etc/environment
 else
     echo "TERM=alacritty" | sudo tee -a /etc/environment >/dev/null

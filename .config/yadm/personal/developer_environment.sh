@@ -159,6 +159,22 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     commands+=("sudo cp -r ~/.config/yadm/personal/conf/etc/libvirt/* /etc/libvirt/") # Copy libvirt configs
 fi
 
+# QMK
+read -p "Install qmk firmware development tools? [y/N] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    paru -U --noconfirm --needed https://archive.archlinux.org/packages/a/avr-gcc/avr-gcc-8.3.0-1-x86_64.pkg.tar.xz
+    if grep -q "IgnorePkg" /etc/pacman.conf; then
+        sudo sed -i "s/IgnorePkg = /IgnorePkg = avr-gcc /" /etc/pacman.conf
+    else
+        sudo sed -i "s/#IgnorePkg = /IgnorePkg = avr-gcc /" /etc/pacman.conf
+    fi
+
+    packages+=(
+        "qmk" # QMK firmware development tools
+    )
+fi
+
 # Android development tools
 if $MULTILIB && read -p "Install android studio? [y/N] " -n 1 -r; then
     echo
