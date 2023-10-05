@@ -26,5 +26,5 @@ border_marked = "#1e1e2e"
 border_radius = 8
 border_width = 3
 
-menu_height = 30
+menu_height = 15
 menu_width = 120
