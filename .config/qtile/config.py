@@ -45,8 +45,6 @@ keys = dispatchers.keys
 
 screens = [
     Screen(),
-    Screen(),
-    Screen(),
 ]
 
 layouts = [
