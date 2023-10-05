@@ -37,6 +37,7 @@ __pycache__/
 .config/gh/
 .config/github-copilot/
 .config/google-chrome/
+.config/gtk-2.0/
 .config/gtk-3.0/
 .config/heroic/
 .config/imhex/
@@ -54,6 +55,7 @@ __pycache__/
 .config/protonup/
 .config/pulse/
 .config/qBittorrent/
+.config/qmk/
 .config/qt5ct/
 .config/qt6ct/
 .config/qtile/wallpapers/
@@ -71,6 +73,7 @@ __pycache__/
 .dart/
 .factorio/
 .gnupg/
+.gradle/
 .java/
 .lemminx/
 .local/share/
@@ -112,6 +115,7 @@ VirtualBox VMs/
 .gtkrc-2.0
 .lesshst
 .node_repl_history
+.pulse-cookie
 .python_history
 .steampath
 .steampid
