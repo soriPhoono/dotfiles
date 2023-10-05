@@ -15,6 +15,7 @@ plugins=(git history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
+alias update="paru && paru -c"
 alias du="dua i"
 alias df="duf"
 alias ls="exa -al --color=auto --icons --group-directories-first --git"
