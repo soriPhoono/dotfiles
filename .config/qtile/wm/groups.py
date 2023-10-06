@@ -7,9 +7,6 @@ registry = [
 
         ],
         layout="spiral",
-        persist=True,
-        init=True,
-        screen_affinity=1,
     ),
     Group(
         "2",
@@ -17,9 +14,6 @@ registry = [
 
         ],
         layout="spiral",
-        persist=True,
-        init=True,
-        screen_affinity=1,
     ),
     Group(
         "3",
@@ -27,9 +21,6 @@ registry = [
 
         ],
         layout="spiral",
-        persist=True,
-        init=True,
-        screen_affinity=2,
     ),
     Group(
         "4",
@@ -37,9 +28,6 @@ registry = [
 
         ],
         layout="spiral",
-        persist=True,
-        init=True,
-        screen_affinity=2,
     ),
     Group(
         "5",
@@ -47,9 +35,6 @@ registry = [
 
         ],
         layout="spiral",
-        persist=True,
-        init=True,
-        screen_affinity=3,
     ),
     Group(
         "6",
@@ -57,8 +42,5 @@ registry = [
 
         ],
         layout="spiral",
-        persist=True,
-        init=True,
-        screen_affinity=3,
     ),
 ]
