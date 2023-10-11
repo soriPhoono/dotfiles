@@ -8,7 +8,7 @@
   boot = {
     loader = {
       systemd-boot = {
-        enabled = true;
+        enable = true;
         consoleMode = "max";
       };
       efi.canTouchEfiVariables = true;
