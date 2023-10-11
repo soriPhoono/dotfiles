@@ -1,0 +1,8 @@
+[2023-10-11 15:38:01.379] [info] Logseq App(0.9.18) Starting... 
+[2023-10-11 15:38:01.383] [info] restore proxy settings {:type "system"}
+[2023-10-11 15:38:01.383] [info] set proxy to {:type "system"}
+[2023-10-11 15:38:03.211] [debug] :electron.handler/watch-dir {:path "/home/soriphoono/.logseq/config"}
+[2023-10-11 15:38:09.481] [info] :electron.handler/open-dir open folder selection dialog
+[2023-10-11 15:38:13.786] [debug] :electron.handler/open-dir {:path "/home/soriphoono/Documents/repos/dotfiles"}
+[2023-10-11 15:38:14.056] [debug] :electron.handler/watch-dir {:path "/home/soriphoono/Documents/repos/dotfiles"}
+[2023-10-11 15:44:49.789] [debug] window-all-closed Quitting...

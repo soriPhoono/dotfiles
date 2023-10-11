@@ -1,0 +1,3 @@
+NixOS
+Ventoy
+checksum_v1 = 187dc988f03e222682fcd859c2dede23
