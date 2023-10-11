@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  include = [
-    ./hardware-configuration.nix # TODO: correct file name
+  imports = [
+    ./hardware-configuration.nix
   ];
 
   boot = {
@@ -19,7 +19,8 @@
   networking = {
     hostName = "home-server";
     networkmanager.enable = true;
-    wireless.enable = true;
+
+    firewall.allowedTCPPorts = [ 22 ];
   };
 
   i18n = {
@@ -46,6 +47,8 @@
     gnumake
     unzip
   ];
+
+  services.openssh.enable = true;
 
   system.stateVersion = "23.05";
 }
