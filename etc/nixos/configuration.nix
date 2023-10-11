@@ -13,7 +13,7 @@
       };
       efi.canTouchEfiVariables = true;
     };
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 
   networking = {
@@ -23,10 +23,9 @@
     firewall.allowedTCPPorts = [ 22 ];
   };
 
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
+  console = {
+    keyMap = "us";
+    font = "Lat2-Terminus16";
   };
 
   time.timeZone = "America/Chicago";
