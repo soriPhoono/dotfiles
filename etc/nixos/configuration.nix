@@ -43,7 +43,9 @@
     starship = {
       enable = true;
       interactiveOnly = true;
-      settings = "$directory $character";
+      settings = {
+        format = "$directory $character";
+      };
     };
 
     git = {
