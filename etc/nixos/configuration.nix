@@ -45,6 +45,22 @@
       interactiveOnly = true;
       settings = "$directory $character";
     };
+
+    git = {
+      enable = true;
+      config = {
+        init = {
+          defaultBranch = "main";
+        };
+        core = {
+          editor = "nvim";
+          pager = "diff-so-fancy | less --tabs=4 -RFX";
+        };
+        interactive = {
+          diffFilter = "diff-so-fancy --patch";
+        };
+      };
+    };
   };
 
   # List packages installed in system profile. To search by name, run:
@@ -68,7 +84,6 @@
     tre-command
     scc
     btop
-    git
   ];
 
   services = {
