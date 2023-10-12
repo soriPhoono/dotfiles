@@ -44,7 +44,114 @@
       enable = true;
       interactiveOnly = true;
       settings = {
+        add_newline = true;
+
         format = "$directory $character";
+
+        right_format = "$all";
+
+        command_timeout = 1000;
+
+        character = {
+          success_symbol = "[](bold green)";
+          error_symbol = "[](bold red)";
+        };
+
+        hostname = {
+          ssh_symbol = " ";
+        };
+
+        git_branch = {
+          symbol = " ";
+          truncation_length = 4;
+          truncation_symbol = "…";
+          style = "bold white";
+        };
+
+        memory_usage = {
+          symbol = "󰍛 ";
+        };
+
+        directory = {
+          read_only = " 󰌾";
+          truncation_length = 8;
+          truncation_symbol = "…";
+        };
+
+        c =
+          { symbol = " "; };
+
+        golang =
+          { symbol = " "; };
+
+        java =
+          { symbol = " "; };
+
+        lua =
+          { symbol = " "; };
+
+        meson =
+          { symbol = "󰔷 "; };
+
+        nix_shell =
+          { symbol = " "; };
+
+        nodejs =
+          { symbol = " "; };
+
+        package =
+          { symbol = "󰏗 "; };
+
+        python =
+          { symbol = " "; };
+
+        ruby =
+          { symbol = " "; };
+
+        rust =
+          { symbol = " "; };
+
+        os.symbols = {
+          Alpaquita = " ";
+          Alpine = " ";
+          Amazon = " ";
+          Android = " ";
+          Arch = " ";
+          Artix = " ";
+          CentOS = " ";
+          Debian = " ";
+          DragonFly = " ";
+          Emscripten = " ";
+          EndeavourOS = " ";
+          Fedora = " ";
+          FreeBSD = " ";
+          Garuda = "󰛓 ";
+          Gentoo = " ";
+          HardenedBSD = "󰞌 ";
+          Illumos = "󰈸 ";
+          Linux = " ";
+          Mabox = " ";
+          Macos = " ";
+          Manjaro = " ";
+          Mariner = " ";
+          MidnightBSD = " ";
+          Mint = " ";
+          NetBSD = " ";
+          NixOS = " ";
+          OpenBSD = "󰈺 ";
+          openSUSE = " ";
+          OracleLinux = "󰌷 ";
+          Pop = " ";
+          Raspbian = " ";
+          Redhat = " ";
+          RedHatEnterprise = " ";
+          Redox = "󰀘 ";
+          Solus = "󰠳 ";
+          SUSE = " ";
+          Ubuntu = " ";
+          Unknown = " ";
+          Windows = "󰍲 ";
+        };
       };
     };
 
