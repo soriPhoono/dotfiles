@@ -19,8 +19,6 @@
   networking = {
     hostName = "home-server";
     networkmanager.enable = true;
-
-    firewall.allowedTCPPorts = [ 22 ];
   };
 
   console = {
@@ -47,7 +45,27 @@
     unzip
   ];
 
-  services.openssh.enable = true;
+  services = {
+    openssh = {
+      enable = true;
+      permitRootLogin = "no";
+      passwordAuthentication = false;
+    };
+  };
+
+  users.users = {
+    defaultUserShell = pkgs.zsh;
+
+    soriphoono = {
+      name = "soriphoono";
+      isNormalUser = true;
+      initialPassword = "hello";
+
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRfXx+lW++zsz0h3u4heErHHwnagg8/Y2abeKCEDRxn"
+      ];
+    };
+  };
 
   system.stateVersion = "23.05";
 }
