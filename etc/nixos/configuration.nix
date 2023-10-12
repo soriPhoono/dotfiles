@@ -29,20 +29,46 @@
   time.timeZone = "America/Chicago";
 
   programs = {
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      ohMyZsh = {
+        enable = true;
+        plugins = [
+          "git"
+          "history-substring-search"
+        ];
+      };
+    };
+
+    starship = {
+      enable = true;
+      interactiveOnly = true;
+      settings = "$directory $character";
+    };
   };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    tree
-    curl
-    git
-    gnupg
+    dosfstools
+    exfatprogs
+    nano
+    vim
     neovim
     tmux
-    gnumake
-    unzip
+    zsh-history-substring-search
+    neofetch
+    curl
+    less
+    exa
+    bat
+    diff-so-fancy
+    dua
+    duf
+    tre-command
+    scc
+    btop
+    git
   ];
 
   services = {
