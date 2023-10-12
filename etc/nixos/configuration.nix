@@ -203,6 +203,8 @@
         PasswordAuthentication = false;
       };
     };
+
+    openvscode-server.enable = true;
   };
 
   users = {
