@@ -195,6 +195,10 @@
     btop
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "nodejs-16.20.2"
+  ];
+
   services = {
     openssh = {
       enable = true;
