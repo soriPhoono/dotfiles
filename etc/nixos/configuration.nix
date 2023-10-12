@@ -175,6 +175,9 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    # System essentials
+    nodejs_20
+    
     # CLI essential tools
     dosfstools
     exfatprogs
@@ -199,33 +202,12 @@
     cloudflared
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "nodejs-16.20.2"
-  ];
-
   services = {
     openssh = {
       enable = true;
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
-      };
-    };
-
-    cloudflared = {
-      enable = true;
-
-      tunnels = {
-        "74e3e6c6-6e44-42e9-919e-d42ed61e94e5" = {
-          ingress = {
-            "ssh.cryptic-coders.net" = "ssh://localhost:22";
-            "*.cryptic-coders.net" = "http://localhost:80";
-          };
-
-          default = "http_status:404";
-
-          credentialsFile = "~/.cloudflared/74e3e6c6-6e44-42e9-919e-d42ed61e94e5.json";
-        };
       };
     };
   };
