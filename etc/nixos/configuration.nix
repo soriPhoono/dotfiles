@@ -208,7 +208,18 @@
       };
     };
 
-    openvscode-server.enable = true;
+    cloudflared = {
+      enable = true;
+
+      tunnels.home-server = {
+        ingress = {
+          "ssh.cryptic-coders.net" = "ssh://localhost:22";
+          "*.cryptic-coders.net" = "http://localhost:80";
+        };
+
+        default = "http_status:404";
+      };
+    };
   };
 
   users = {
