@@ -53,17 +53,19 @@
     };
   };
 
-  users.users = {
+  users = {
     defaultUserShell = pkgs.zsh;
 
-    soriphoono = {
-      name = "soriphoono";
-      isNormalUser = true;
-      initialPassword = "hello";
+    users = {
+      soriphoono = {
+        name = "soriphoono";
+        isNormalUser = true;
+        initialPassword = "hello";
 
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRfXx+lW++zsz0h3u4heErHHwnagg8/Y2abeKCEDRxn"
-      ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRfXx+lW++zsz0h3u4heErHHwnagg8/Y2abeKCEDRxn"
+        ];
+      };
     };
   };
 
