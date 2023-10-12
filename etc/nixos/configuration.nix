@@ -215,15 +215,17 @@
     cloudflared = {
       enable = true;
 
-      tunnels.home-server = {
-        ingress = {
-          "ssh.cryptic-coders.net" = "ssh://localhost:22";
-          "*.cryptic-coders.net" = "http://localhost:80";
+      tunnels = {
+        "74e3e6c6-6e44-42e9-919e-d42ed61e94e5" = {
+          ingress = {
+            "ssh.cryptic-coders.net" = "ssh://localhost:22";
+            "*.cryptic-coders.net" = "http://localhost:80";
+          };
+
+          default = "http_status:404";
+
+          credentialsFile = "~/.cloudflared/74e3e6c6-6e44-42e9-919e-d42ed61e94e5.json";
         };
-
-        default = "http_status:404";
-
-        credentialsFile = "~/.cloudflared/74e3e6c6-6e44-42e9-919e-d42ed61e94e5.json";
       };
     };
   };
