@@ -175,6 +175,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    # CLI essential tools
     dosfstools
     exfatprogs
     nano
@@ -193,6 +194,9 @@
     tre-command
     scc
     btop
+
+    # Server administration core tools
+    cloudflared
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
