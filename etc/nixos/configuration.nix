@@ -228,6 +228,10 @@
     };
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "nodejs-16.20.2"
+  ];
+
   users = {
     defaultUserShell = pkgs.zsh;
 
