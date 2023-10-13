@@ -212,11 +212,6 @@
       };
     };
 
-    code-server = {
-      enable = true;
-      auth = "none";
-    };
-
     nextcloud = {
       enable = true;
       hostName = "cloud.cryptic-coders.net";
@@ -224,6 +219,10 @@
       config = {
         dbtype = "pgsql";
         adminpassFile = "/var/lib/nextcloud/adminpass";
+
+        extraTrustedDomains = [
+          "localhost"
+        ];
       };
     };
   };
