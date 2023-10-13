@@ -19,6 +19,8 @@
   networking = {
     hostName = "home-server";
     networkmanager.enable = true;
+
+    firewall.allowedTCPPorts = [ 80 443 22 ];
   };
 
   console = {
@@ -177,7 +179,7 @@
   environment.systemPackages = with pkgs; [
     # System essentials
     nodejs_20
-    
+
     # CLI essential tools
     dosfstools
     exfatprogs
@@ -197,9 +199,6 @@
     tre-command
     scc
     btop
-
-    # Server administration core tools
-    cloudflared
   ];
 
   services = {
@@ -208,6 +207,16 @@
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
+      };
+    };
+
+    nextcloud = {
+      enable = true;
+      hostName = "cloud.cryptic-coders.net";
+      database.createLocally = true;
+      config = {
+        dbtype = "pgsql";
+        adminpassFile = "/var/lib/nextcloud/adminpass";
       };
     };
   };
@@ -231,4 +240,11 @@
   };
 
   system.stateVersion = "23.05";
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "00:00";
+    };
+  };
 }
