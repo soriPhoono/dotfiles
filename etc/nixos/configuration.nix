@@ -219,10 +219,6 @@
       config = {
         dbtype = "pgsql";
         adminpassFile = "/var/lib/nextcloud/adminpass";
-
-        extraTrustedDomains = [
-          "localhost"
-        ];
       };
     };
   };
