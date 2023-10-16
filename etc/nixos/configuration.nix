@@ -33,6 +33,20 @@
   programs = {
     zsh = {
       enable = true;
+      interactiveShellInit =
+        "eval \"$(starship init zsh)\"\n
+\n
+alias update=\"paru && paru -c\"\n
+alias du=\"dua i\"
+alias df=\"duf\"
+alias ls=\"exa -al --color=auto --icons --group-directories-first --git\"
+alias tree=\"tre -al 4 -c automatic\"
+alias cat=\"bat --theme Catppuccin-mocha --color auto\"
+alias radeontop=\"radeontop -c -T\"
+alias clock=\"scc\"
+alias compare=\"diff --color=always '$@' | diff-so-fancy\"
+
+neofetch";
       ohMyZsh = {
         enable = true;
         plugins = [
