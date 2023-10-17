@@ -72,7 +72,7 @@ run_cmd() {
         elif [[ $1 == '--suspend' ]]; then
             systemctl suspend
         elif [[ $1 == '--logout' ]]; then
-            qtile cmd-obj -o cmd -f shutdown
+            hyprctl dispatch exit
         fi
     else
         exit 0
