@@ -27,25 +27,19 @@ packages=(
     "gvfs-gphoto2"                # Virtual filesystem (camera)
     "xorg-xhost"                  # X11 utility for controlling access to the X server
     "xorg-xauth"                  # X11 authority file management
-    "xorg-xinit"                  # X11 initialisation program
-    "xorg-xmodmap"                # Utility for modifying keymaps and pointer button mappings in X
-    "xorg-xclipboard"             # X11 clipboard manager
-    "xclip"                       # Command line interface to the X11 clipboard
-    "unclutter"                   # Hides cursor when idle
+    "wl-clipboard"                # Command-line copy/paste utilities for Wayland
     "xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
-    "xdg-desktop-portal-gtk"      # GTK backend for xdg-desktop-portal
+    "xdg-desktop-portal-hyprland" # GTK backend for xdg-desktop-portal
     "polkit-gnome"                # PolicyKit authentication agent
     "gnome-keyring"               # Keyring
-    "xgifwallpaper"               # GIF wallpaper (Live wallpaper system)
-    "geoclue"                     # Location information
-    "redshift"                    # Screen temperature adjustment
-    "picom-ftlabs-git"            # Compositor
-    "qtile"                       # Window manager
-    "polybar"                     # Status bar
+    "swww"                        # GIF wallpaper (Live wallpaper system)
+    "gammastep"                   # Night light
+    "hyprland"                    # Window manager
+    "waybar"                      # Status bar
     "dunst"                       # Notification daemon
-    "xidlehook"                   # Idle management daemon
-    "betterlockscreen"            # Lockscreen
-    "rofi"                        # Application launcher
+    "swayidle"                    # Idle management daemon
+    "swaylock-effects"            # Lockscreen
+    "rofi-lbonn-wayland-git"      # Application launcher
     "cava"                        # Audio visualiser
     "font-manager"                # Font manager
     "qt5ct"                       # Qt5 configuration utility
@@ -57,10 +51,8 @@ packages=(
     "gnome-disk-utility"          # Disk utility
     "gparted"                     # Partition manager
     "bleachbit"                   # System cleaner
-    "flameshot"                   # Screenshot utility
     "imv"                         # Image viewer
     "exaile"                      # Music player
-    "mpv"                         # Video player
     "vlc"                         # Video player
     "qbittorrent"                 # Torrent client
 )
@@ -97,7 +89,7 @@ case "$browser" in
     if grep -q "BROWSER" /etc/environment; then
         commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
     else
-        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
+        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment")
     fi
     ;;
 "c")
@@ -105,7 +97,7 @@ case "$browser" in
     if grep -q "BROWSER" /etc/environment; then
         commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=google-chrome/g\" /etc/environment")
     else
-        commands+=("echo \"BROWSER=google-chrome\" | sudo tee -a /etc/environment >/dev/null")
+        commands+=("echo \"BROWSER=google-chrome\" | sudo tee -a /etc/environment")
     fi
     ;;
 "b")
@@ -113,15 +105,15 @@ case "$browser" in
     if grep -q "BROWSER" /etc/environment; then
         commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
     else
-        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment >/dev/null")
+        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment")
     fi
     ;;
 esac
 
 echo "Installing packages..."
-paru -S --noconfirm --needed "${packages[@]}"
+paru -S --needed "${packages[@]}"
 for command in "${commands[@]}"; do
-    eval "$command" >/dev/null
+    eval "$command"
 done
 echo "Finished installing core desktop environment packages"
 
@@ -137,7 +129,7 @@ sudo usermod -aG games "$(whoami)"
 read -p "Enable chevron start page with chatgpt integration? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    paru -S --noconfirm --needed nodejs npm
+    paru -S --needed nodejs npm
 
     cd ~/.config/chevron/
     npm install && npm run build
@@ -152,21 +144,21 @@ fi
 if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
     sudo sed -i "s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g" /etc/environment
 else
-    echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment >/dev/null
+    echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
 fi
 
 if grep -q "TERM" /etc/environment; then
     sudo sed -i "s/TERM=.*/TERM=alacritty/g" /etc/environment
 else
-    echo "TERM=alacritty" | sudo tee -a /etc/environment >/dev/null
+    echo "TERM=alacritty" | sudo tee -a /etc/environment
 fi
 
 if ! grep -q "Path askpass" /etc/sudo.conf; then
-    echo "Path askpass /usr/local/bin/zenity_passphrase" | sudo tee -a /etc/sudo.conf >/dev/null
+    echo "Path askpass /usr/local/bin/zenity_passphrase" | sudo tee -a /etc/sudo.conf
 fi
 
 sudo touch /etc/udev/rules.d/99-mtp.rules
-sudo tee /etc/udev/rules.d/99-mtp.rules >/dev/null <<EOF
+sudo tee /etc/udev/rules.d/99-mtp.rules <<EOF
 # Plug in
 ACTION="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/home/$USER/.Xauthority" RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/mtp-device.sh'"
 # Unplug
@@ -174,7 +166,7 @@ ACTION=="remove", SUBSYSTEM=="usb", ATTRS{idVendor}=="18d1", ENV{XAUTHORITY}="/h
 EOF
 
 sudo touch /etc/udev/rules.d/99-storage.rules
-sudo tee /etc/udev/rules.d/99-storage.rules >/dev/null <<EOF
+sudo tee /etc/udev/rules.d/99-storage.rules <<EOF
 # Plug in usb drive
 KERNEL=="sd?", ACTION=="add", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/bin/notifications/usb.sh'"
 # Unplug usb drive
@@ -182,7 +174,7 @@ KERNEL=="sd?", ACTION=="remove", RUN+="/usr/bin/su $USER -c '/home/$USER/.local/
 EOF
 
 touch ~/.config/qt5ct/qt5ct.conf
-tee ~/.config/qt5ct/qt5ct.conf >/dev/null <<EOF
+tee ~/.config/qt5ct/qt5ct.conf <<EOF
 [Appearance]
 color_scheme_path=/home/$(whoami)/.config/qt5ct/colors/Catppuccin-Mocha.conf
 custom_palette=true
@@ -221,7 +213,7 @@ ignored_applications=@Invalid()
 EOF
 
 touch ~/.config/qt6ct/qt6ct.conf
-tee ~/.config/qt6ct/qt6ct.conf >/dev/null <<EOF
+tee ~/.config/qt6ct/qt6ct.conf <<EOF
 [Appearance]
 color_scheme_path=/home/$(whoami)/.config/qt6ct/colors/Catppuccin-Mocha.conf
 custom_palette=true
@@ -263,7 +255,7 @@ ignored_applications=@Invalid()
 EOF
 
 touch ~/.local/share/applications/clear-ram.desktop
-tee ~/.local/share/applications/clear-ram.desktop >/dev/null <<EOF
+tee ~/.local/share/applications/clear-ram.desktop <<EOF
 [Desktop Entry]
 Type=Application
 Icon=indicator-sensors-chip
@@ -276,7 +268,7 @@ Comment=launch script to wipe ram and swap that is not in use
 EOF
 
 touch ~/.local/share/applications/color-picker.desktop
-tee ~/.local/share/applications/color-picker.desktop >/dev/null <<EOF
+tee ~/.local/share/applications/color-picker.desktop <<EOF
 [Desktop Entry]
 Type=Application
 Exec=/home/$(whoami)/.local/bin/color-picker-gui.sh
@@ -289,7 +281,7 @@ Comment=Activate graphical color picker for getting hex addresses of colors
 EOF
 
 touch ~/.local/share/applications/password-generator.desktop
-tee ~/.local/share/applications/password-generator.desktop >/dev/null <<EOF
+tee ~/.local/share/applications/password-generator.desktop <<EOF
 [Desktop Entry]
 Type=Application
 Exec=/home/$(whoami)/.local/bin/password-generator.sh
@@ -303,4 +295,4 @@ EOF
 
 sudo systemctl enable sddm.service
 
-paru -c --noconfirm >/dev/null
+paru -c 
