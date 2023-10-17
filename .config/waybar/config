@@ -1,0 +1,89 @@
+{
+    "height": 27,
+    "position": "top",
+    "layer": "top",
+    "modules-left": [
+        "custom/power",
+        "wlr/workspaces"
+    ],
+    "modules-center": [
+        "custom/clock"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "custom/spacer",
+        "network",
+        "custom/spacer",
+        "custom/weather",
+        "custom/spacer",
+        "memory",
+        "custom/spacer",
+        "tray"
+    ],
+    "custom/power": {
+        "format": "<span size='12000' foreground='#f38ba8'> </span>",
+        "on-click": "~/.config/rofi/launchers/powermenu/powermenu.sh"
+    },
+    "wlr/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "sort-by-numbers": true,
+        "format-icons": {
+            "default": "󰝦",
+            "active": "󰝥",
+            "urgent": "󰀨"
+        }
+    },
+    "custom/clock": {
+        "format": "<span size='12000' foreground='#cdd6f4'> {} </span>",
+        "exec": "date \"+%A | %y-%m-%d | %T\"",
+        "interval": 1
+    },
+    "network": {
+        "format-wifi": "<span size='11000' foreground='#EBA0AC'>󰤨  </span>{essid}",
+        "format-disconnected": "<span size='11000' foreground='#EBA0AC'>󰤭  </span>Disconnected",
+        "on-click": "~/.config/rofi/launchers/wifi/launch.sh"
+    },
+    "pulseaudio": {
+        "format": "<span size='11000' foreground='#F9E2AF'>{icon} </span>{volume}%",
+        "format-muted": "<span size='11000' foreground='#F9E2AF'>  </span> Muted",
+        "format-icons": {
+            "default": [
+                " "
+            ]
+        }
+    },
+    "custom/weather": {
+        "format": "<span size='12000' foreground='#cdd6f4'> {} </span>",
+        "exec": "python ~/.config/waybar/scripts/weather.py",
+        "interval": 3600
+    },
+    "battery": {
+        "states": {
+            "warning": 20,
+            "critical": 10
+        },
+        "format": "<span size='11000' foreground='#A6E3A1'>{icon} </span>{capacity}%",
+        "format-warning": "<span size='11000' foreground='#FAB387'>{icon} </span>{capacity}%",
+        "format-critical": "<span size='11000' foreground='#F38BA8'>{icon} </span>{capacity}%",
+        "format-icons": [
+            " ",
+            " ",
+            " ,",
+            " ",
+            " "
+        ],
+        "tooltip-format": "{time}"
+    },
+    "memory": {
+        "interval": 30,
+        "format": "{}%",
+        "max-length": 10
+    },
+    "tray": {
+        "spacing": 7
+    },
+    "custom/spacer": {
+        "format": "<span size='12000' foreground='#cdd6f4'> | </span>"
+    }
+}
