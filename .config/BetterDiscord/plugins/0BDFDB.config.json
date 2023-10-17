@@ -1,7 +1,7 @@
 {
 	"all": {
 		"changeLogs": {
-			"BDFDB": "3.3.5",
+			"BDFDB": "3.3.6",
 			"ImageUtilities": "5.2.9",
 			"ReadAllNotificationsButton": "1.7.5",
 			"SplitLargeMessages": "1.8.1",

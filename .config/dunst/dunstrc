@@ -7,7 +7,7 @@ background = "#1e1e2e"
 frame_color = "#f38ba8"
 
 [global]
-monitor = 0
+monitor = 2
 
 font = "Source Code Pro 12"
 frame_width = 3
