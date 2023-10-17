@@ -360,9 +360,8 @@
 		"Paginator": {"strings": ["totalPageCount", "selectedPage"]},
 		"PanelButton": {"strings": ["Masks.PANEL_BUTTON"]},
 		"PopoutFocusLock": {"strings": ["impressionName", "useImperativeHandle"], "funcStrings": ["impressionName"]},
-		"PrivateChannelItems": {"strings": ["handleCloseButtonMouseDown", "LEAVE_GROUP_DM_MANAGED_BODY"], "exported": false, "value": "exports", "map": {
+		"PrivateChannelItems": {"strings": ["getRecipientId", "LEAVE_GROUP_DM_MANAGED_BODY"], "exported": false, "value": "exports", "map": {
 			"DirectMessage": ["getUser", "getRecipientId"],
-			"GroupDM": [".getGuildId", "selected:n,muted"],
 			"LinkButton": [".apply(this"]
 		}},
 		"Scrollers": {"strings": ["().thin", "().none", "().auto", "().fade)}"], "exported": false, "value": "exports"},
@@ -453,7 +452,7 @@
 		"FolderHeader": {"strings": [".folderNode", "expandedFolderIconWrapper", "forceCircular"]},
 		"FolderIcon": {"strings": [".folderNode", "folderIconWrapper", "closedFolderIconWrapper"]},
 		"FolderItem": {"strings": [".folderNode", "expandedFolderBackground", "onExpandCollapse"]},
-		"FolderItemWrapper": {"strings": [".folderNode", "getCurrentUserActiveStream", "currentActiveVoiceType"]},
+		"FolderItemWrapper": {"strings": [".folderNode", "getCurrentUserActiveStream", "defaultFolderName:"]},
 		"FolderSettingsModal": {"strings": [".handleNameChange=", ".handleSubmit", "folderName:"]},
 		"GuildBans": {"strings": [".Messages.BANS_NO_USERS_BANNED", ".Messages.BANS_SEARCH_PLACEHOLDER", ".getSortedBans"]},
 		"GuildChannelListContextMenu": {"strings": ["GUILD_ACTIONS_MENU_LABEL", "\"guild-context\",\"aria-label\""]},
@@ -491,7 +490,7 @@
 		"LazyImage": {"protos": ["loadImage", "getRatio", "getSrc"]},
 		"LazyImageZoomable": {"strings": ["renderLinkComponent", "onCloseImage"]},
 		"ListItemTooltip": {"strings": [".listItemWrapper", "tooltipClassName", "disableWrapper"]},
-		"MemberListItem": {"protos": ["renderOwner", "renderDecorators", "renderPremium"]},
+		"MemberListItem": {"strings": ["ownerTooltipText", ".onClickPremiumGuildIcon", "Messages.GUILD_OWNER"]},
 		"Mention": {"strings": [".iconType", ".color,", "),backgroundColor:"]},
 		"Menu": {"strings": ["\"empty\"", "getItemProps", "isUsingKeyboardNavigation"]},
 		"Message": {"strings": ["childrenMessageContent", "childrenRepliedMessage", "zalgo", ".buttonContainer"]},
@@ -525,7 +524,7 @@
 		"PeopleListSectionedLazy": {"strings": [".statusSections", ".peopleList", "id:\"people-list\""]},
 		"PeopleListSectionedNonLazy": {"strings": [".statusSections", ".peopleList", "id:\"people\""]},
 		"PictureInPictureVideo": {"strings": [".topControls", ".bottomControl", ".screenMessage", ".renderBottomLeftControls"]},
-		"PrivateChannel": {"strings": ["LEAVE_GROUP_DM_MANAGED_BODY", "handleCloseButtonMouseDown", "handleLeaveGroup"]},
+		"PrivateChannel": {"strings": ["LEAVE_GROUP_DM_MANAGED_BODY", "PrivateChannel.renderAvatar"]},
 		"PrivateChannelRecipients": {"strings": [".membersWrap", "recipients"]},
 		"PrivateChannelsList": {"strings": ["privateChannelIds", "privateChannelRecipientsInviteButtonIcon"]},
 		"QuickMessage": {"strings": ["QUICK_DM_USER", ".NORMAL"]},

@@ -17,7 +17,7 @@
 #clock,
 #tray {
     padding: 0px 10px;
-    background: #332E41;
+    background: #1E1E2E;
     color: #CDD6F4
 }
 
@@ -36,7 +36,7 @@
 }
 
 #workspaces button.urgent {
-    color: #332e41;
+    color: #1E1E2E;
     background: #f38ba8;
     border-radius: 10px;
 }

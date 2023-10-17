@@ -5,120 +5,119 @@
 # Author:       Sori Phoono <soriphoono@gmail.com>
 
 packages=(
-    "qt5-graphicaleffects"        # Qt5 graphicaleffects
-    "qt5-quickcontrols2"          # Qt5 quickcontrols2
-    "qt5-svg"                     # Qt5 svg
-    "zenity"                      # Dialog boxes
-    "playerctl"                   # Media player control
-    "imagemagick"                 # Image manipulation
-    "catppuccin-gtk-theme-mocha"  # GTK theme
-    "catppuccin-cursors-mocha"    # Cursor theme
-    "papirus-icon-theme"          # Icon theme
-    "adobe-source-code-pro-fonts" # Monospace font
-    "ttf-sourcecodepro-nerd"      # Monospace font
-    "ttf-nerd-fonts-symbols"      # Icon font
-    "ttf-nerd-fonts-symbols-mono" # Icon font
-    "noto-fonts-emoji"            # Emoji font
-    "sddm"                        # Display manager
-    "sddm-sugar-candy-git"        # SDDM theme
-    "gvfs"                        # Virtual filesystem
-    "gvfs-afc"                    # Virtual filesystem (Apple)
-    "gvfs-mtp"                    # Virtual filesystem (Android)
-    "gvfs-gphoto2"                # Virtual filesystem (camera)
-    "xorg-xhost"                  # X11 utility for controlling access to the X server
-    "xorg-xauth"                  # X11 authority file management
-    "wl-clipboard"                # Command-line copy/paste utilities for Wayland
-    "xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
-    "xdg-desktop-portal-hyprland" # GTK backend for xdg-desktop-portal
-    "polkit-gnome"                # PolicyKit authentication agent
-    "gnome-keyring"               # Keyring
-    "swww"                        # GIF wallpaper (Live wallpaper system)
-    "gammastep"                   # Night light
-    "hyprland"                    # Window manager
-    "waybar"                      # Status bar
-    "dunst"                       # Notification daemon
-    "swayidle"                    # Idle management daemon
-    "swaylock-effects"            # Lockscreen
-    "rofi-lbonn-wayland-git"      # Application launcher
-    "cava"                        # Audio visualiser
-    "font-manager"                # Font manager
-    "qt5ct"                       # Qt5 configuration utility
-    "qt6ct"                       # Qt6 configuration utility
-    "nwg-look"                    # GTK theme switcher
-    "alacritty"                   # Terminal emulator
-    "file-roller"                 # Archive manager
-    "pcmanfm-gtk3"                # File manager
-    "gnome-disk-utility"          # Disk utility
-    "gparted"                     # Partition manager
-    "bleachbit"                   # System cleaner
-    "imv"                         # Image viewer
-    "exaile"                      # Music player
-    "vlc"                         # Video player
-    "qbittorrent"                 # Torrent client
+	"qt5-graphicaleffects"        # Qt5 graphicaleffects
+	"qt5-quickcontrols2"          # Qt5 quickcontrols2
+	"qt5-svg"                     # Qt5 svg
+	"zenity"                      # Dialog boxes
+	"playerctl"                   # Media player control
+	"imagemagick"                 # Image manipulation
+	"catppuccin-gtk-theme-mocha"  # GTK theme
+	"catppuccin-cursors-mocha"    # Cursor theme
+	"papirus-icon-theme"          # Icon theme
+	"adobe-source-code-pro-fonts" # Monospace font
+	"ttf-sourcecodepro-nerd"      # Monospace font
+	"ttf-nerd-fonts-symbols"      # Icon font
+	"ttf-nerd-fonts-symbols-mono" # Icon font
+	"noto-fonts-emoji"            # Emoji font
+	"sddm"                        # Display manager
+	"sddm-sugar-candy-git"        # SDDM theme
+	"gvfs"                        # Virtual filesystem
+	"gvfs-afc"                    # Virtual filesystem (Apple)
+	"gvfs-mtp"                    # Virtual filesystem (Android)
+	"gvfs-gphoto2"                # Virtual filesystem (camera)
+	"xorg-xhost"                  # X11 utility for controlling access to the X server
+	"xorg-xauth"                  # X11 authority file management
+	"wl-clipboard"                # Command-line copy/paste utilities for Wayland
+	"xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
+	"xdg-desktop-portal-hyprland" # GTK backend for xdg-desktop-portal
+	"polkit-gnome"                # PolicyKit authentication agent
+	"gnome-keyring"               # Keyring
+	"swww"                        # GIF wallpaper (Live wallpaper system)
+	"gammastep"                   # Night light
+	"hyprland"                    # Window manager
+	"waybar"                      # Status bar
+	"dunst"                       # Notification daemon
+	"swayidle"                    # Idle management daemon
+	"swaylock-effects"            # Lockscreen
+	"rofi-lbonn-wayland-git"      # Application launcher
+	"cava"                        # Audio visualiser
+	"font-manager"                # Font manager
+	"qt5ct"                       # Qt5 configuration utility
+	"qt6ct"                       # Qt6 configuration utility
+	"nwg-look"                    # GTK theme switcher
+	"alacritty"                   # Terminal emulator
+	"file-roller"                 # Archive manager
+	"pcmanfm-gtk3"                # File manager
+	"gnome-disk-utility"          # Disk utility
+	"gparted"                     # Partition manager
+	"bleachbit"                   # System cleaner
+	"imv"                         # Image viewer
+	"exaile"                      # Music player
+	"vlc"                         # Video player
+	"qbittorrent"                 # Torrent client
 )
 
 commands=()
 
 packages+=("pipewire" "pipewire-audio" "pipewire-alsa" "pipewire-jack" "pipewire-pulse" "wireplumber" "pavucontrol" "carla" "easyeffects")
 packages+=("gstreamer" "gst-libav" "gst-plugins-base" "gst-plugins-good" "gst-plugin-pipewire" "gstreamer-vaapi")
-for line in "$(lspci | grep -e \"3D\" -e \"VGA\")"; do
-    case "$line" in
-    "*NVIDIA*")
-        packages+=("gst-plugins-bad")
-        if grep "GST_PLUGIN_FEATURE_RANK" /etc/environment; then
-            commands+=("sudo sed -i \"s/GST_PLUGIN_FEATURE_RANK=.*/GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" /etc/environment")
-        else
-            commands+=("grep \"GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" | sudo tee -a /etc/environment ")
-        fi
-        ;;
-    esac
+for line in $(lspci | grep -e \"3D\" -e \"VGA\"); do
+	case "$line" in
+	"*NVIDIA*")
+		packages+=("gst-plugins-bad")
+		if grep "GST_PLUGIN_FEATURE_RANK" /etc/environment; then
+			commands+=("sudo sed -i \"s/GST_PLUGIN_FEATURE_RANK=.*/GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" /etc/environment")
+		else
+			commands+=("grep \"GST_PLUGIN_FEATURE_RANK=nvmpegvideodec:MAX,nvmpeg2videodec:MAX,nvmpeg4videodec:MAX,nvh264sldec:MAX,nvh264dec:MAX,nvjpegdec:MAX,nvh265sldec:MAX,nvh265dec:MAX,nvvp9dec:MAX\" | sudo tee -a /etc/environment ")
+		fi
+		;;
+	esac
 done
 
 read -p "Enable bluetooth? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    packages+=("bluez" "bluez-utils" "blueberry")
-    commands+=("sudo systemctl enable bluetooth ")
+	packages+=("bluez" "bluez-utils" "blueberry")
+	commands+=("sudo systemctl enable bluetooth ")
 fi
 
 read -n 1 -rp "Which browser would you like to install (f)irefox, (c)hrome, or (b)oth? " browser
 echo
 case "$browser" in
 "f")
-    packages+=("firefox")
-    if grep -q "BROWSER" /etc/environment; then
-        commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
-    else
-        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment")
-    fi
-    ;;
+	packages+=("firefox")
+	if grep -q "BROWSER" /etc/environment; then
+		commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
+	else
+		commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment")
+	fi
+	;;
 "c")
-    packages+=("google-chrome")
-    if grep -q "BROWSER" /etc/environment; then
-        commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=google-chrome/g\" /etc/environment")
-    else
-        commands+=("echo \"BROWSER=google-chrome\" | sudo tee -a /etc/environment")
-    fi
-    ;;
+	packages+=("google-chrome")
+	if grep -q "BROWSER" /etc/environment; then
+		commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=google-chrome/g\" /etc/environment")
+	else
+		commands+=("echo \"BROWSER=google-chrome\" | sudo tee -a /etc/environment")
+	fi
+	;;
 "b")
-    packages+=("firefox" "google-chrome")
-    if grep -q "BROWSER" /etc/environment; then
-        commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
-    else
-        commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment")
-    fi
-    ;;
+	packages+=("firefox" "google-chrome")
+	if grep -q "BROWSER" /etc/environment; then
+		commands+=("sudo sed -i \"s/BROWSER=.*/BROWSER=firefox/g\" /etc/environment")
+	else
+		commands+=("echo \"BROWSER=firefox\" | sudo tee -a /etc/environment")
+	fi
+	;;
 esac
 
 echo "Installing packages..."
 paru -S --needed "${packages[@]}"
 for command in "${commands[@]}"; do
-    eval "$command"
+	eval "$command"
 done
 echo "Finished installing core desktop environment packages"
 
 systemctl --user enable pipewire.service
-systemctl --user enable redshift.service
 
 sudo usermod -aG video "$(whoami)"
 sudo usermod -aG input "$(whoami)"
@@ -129,32 +128,32 @@ sudo usermod -aG games "$(whoami)"
 read -p "Enable chevron start page with chatgpt integration? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    paru -S --needed nodejs npm
+	paru -S --needed nodejs npm
 
-    cd ~/.config/chevron/
-    npm install && npm run build
+	cd ~/.config/chevron/
+	npm install && npm run build
 
-    cd ~/.config/chevron/dist/
-    sudo npm install -g node-linux && npm link node-linux
-    sudo npm run register_linux
+	cd ~/.config/chevron/dist/
+	sudo npm install -g node-linux && npm link node-linux
+	sudo npm run register_linux
 
-    sudo systemctl enable chevron.service
+	sudo systemctl enable chevron.service
 fi
 
 if grep -q "QT_QPA_PLATFORMTHEME" /etc/environment; then
-    sudo sed -i "s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g" /etc/environment
+	sudo sed -i "s/QT_QPA_PLATFORMTHEME=.*/QT_QPA_PLATFORMTHEME=qt5ct/g" /etc/environment
 else
-    echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
+	echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
 fi
 
 if grep -q "TERM" /etc/environment; then
-    sudo sed -i "s/TERM=.*/TERM=alacritty/g" /etc/environment
+	sudo sed -i "s/TERM=.*/TERM=alacritty/g" /etc/environment
 else
-    echo "TERM=alacritty" | sudo tee -a /etc/environment
+	echo "TERM=alacritty" | sudo tee -a /etc/environment
 fi
 
 if ! grep -q "Path askpass" /etc/sudo.conf; then
-    echo "Path askpass /usr/local/bin/zenity_passphrase" | sudo tee -a /etc/sudo.conf
+	echo "Path askpass /usr/local/bin/zenity_passphrase" | sudo tee -a /etc/sudo.conf
 fi
 
 sudo touch /etc/udev/rules.d/99-mtp.rules
@@ -295,4 +294,4 @@ EOF
 
 sudo systemctl enable sddm.service
 
-paru -c 
+paru -c

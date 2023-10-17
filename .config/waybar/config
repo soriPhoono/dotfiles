@@ -3,6 +3,7 @@
     "position": "top",
     "layer": "top",
     "modules-left": [
+        "custom/space",
         "custom/power",
         "wlr/workspaces"
     ],
@@ -17,7 +18,6 @@
         "custom/weather",
         "custom/spacer",
         "memory",
-        "custom/spacer",
         "tray"
     ],
     "custom/power": {
@@ -27,7 +27,7 @@
     "wlr/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
-        "sort-by-numbers": true,
+        "sort-by-numbers": false,
         "format-icons": {
             "default": "󰝦",
             "active": "󰝥",
@@ -83,7 +83,10 @@
     "tray": {
         "spacing": 7
     },
+    "custom/space": {
+        "format": "   "
+    },
     "custom/spacer": {
-        "format": "<span size='12000' foreground='#cdd6f4'> | </span>"
+        "format": "<span size='12000' foreground='#cdd6f4'>   |   </span>"
     }
 }
