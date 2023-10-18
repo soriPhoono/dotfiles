@@ -1,7 +1,6 @@
 # Folders
 .vscode/
-journal/
-__pycache__/
+logseq/
 
 # Files
 .editorconfig
