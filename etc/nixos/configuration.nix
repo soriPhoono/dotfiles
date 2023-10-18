@@ -34,10 +34,7 @@
     zsh = {
       enable = true;
       interactiveShellInit =
-        "eval \"$(starship init zsh)\"\n
-\n
-alias update=\"paru && paru -c\"\n
-alias du=\"dua i\"
+        "alias du=\"dua i\"
 alias df=\"duf\"
 alias ls=\"exa -al --color=auto --icons --group-directories-first --git\"
 alias tree=\"tre -al 4 -c automatic\"
