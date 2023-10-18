@@ -250,7 +250,7 @@ neofetch";
         extraGroups = [ "wheel" "networkmanager" ];
 
         openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILRfXx+lW++zsz0h3u4heErHHwnagg8/Y2abeKCEDRxn"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP+NeXFiQRntORT8b4Usk+NPvZvSdftgvRMtPD9KnTmK"
         ];
       };
     };
