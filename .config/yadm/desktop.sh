@@ -309,6 +309,8 @@ force_raster_widgets=1
 ignored_applications=@Invalid()
 EOF
 
+mkdir -p ~/.local/share/applications
+
 touch ~/.local/share/applications/clear-ram.desktop
 tee ~/.local/share/applications/clear-ram.desktop <<EOF
 [Desktop Entry]
