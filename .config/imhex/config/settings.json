@@ -32,10 +32,10 @@
         "hex.builtin.setting.interface.restore_window_pos": 0,
         "hex.builtin.setting.interface.scaling": 0,
         "hex.builtin.setting.interface.wiki_explain_language": "en",
-        "hex.builtin.setting.interface.window.": 1090,
-        "hex.builtin.setting.interface.window.height": 1021,
+        "hex.builtin.setting.interface.window.": 19,
+        "hex.builtin.setting.interface.window.height": 1012,
         "hex.builtin.setting.interface.window.maximized": 0,
-        "hex.builtin.setting.interface.window.width": 1900,
+        "hex.builtin.setting.interface.window.width": 1882,
         "hex.builtin.setting.interface.window.y": 49
     },
     "hex.builtin.setting.proxy": {

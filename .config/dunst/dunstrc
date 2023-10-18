@@ -12,14 +12,13 @@ monitor = 2
 font = "Source Code Pro 12"
 frame_width = 3
 gap_size = 5
-transparency = 50
 separator_height = 4
 separator_color = foreground
 corner_radius = 7
 padding = 4
 horizontal_padding = 4
 origin = top-right
-offset = 6x46
+offset = 16x16
 width = 400
 height = 400
 
@@ -47,7 +46,7 @@ ignore_newline = no
 stack_duplicates = false
 indicate_hidden = false
 show_indicators = false
-browser = /usr/bin/google-chrome-stable
+browser = /usr/bin/firefox
 title = Dunst
 class = dunst
 

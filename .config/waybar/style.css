@@ -1,78 +1,51 @@
+@import "colors.css";
+
 * {
-    font-family: 'Source Code Pro Bold';
-    font-size: 12px;
+    font-family: 'SauceCodeProNFM';
+    font-size: 16px;
     min-height: 0;
+
+    color: #94e2d5;
 }
 
-#window-waybar {
+window#waybar.top {
+    background-color: transparent;
+}
+
+.modules-left {
     background: #1E1E2E;
-    color: #CDD6F4
-}
-
-#workspaces,
-#custom-spotify,
-#network,
-#pulseaudio,
-#battery,
-#clock,
-#tray {
     padding: 0px 10px;
+    border-radius: 15px 15px 15px 15px;
+}
+
+.modules-center {
     background: #1E1E2E;
-    color: #CDD6F4
+    padding-left: 10px;
+    border-radius: 15px 15px 15px 15px;
 }
 
-#workspaces {
-    padding-left: 0px;
-    border-radius: 0px 15px 15px 0px;
-}
-
-#workspaces button {
-    min-width: 0;
-    color: #DADAE8;
-}
-
-#workspaces button.active {
-    color: #A4B9EF;
-}
-
-#workspaces button.urgent {
-    color: #1E1E2E;
-    background: #f38ba8;
-    border-radius: 10px;
+.modules-right {
+    background: #1E1E2E;
+    border-radius: 15px 15px 15px 15px;
 }
 
 #workspaces button:hover {
     background: #332e41;
     border-color: #332e41;
-    border-radius: 10px;
-    color: #A4B9EF;
+    border-radius: 15px;
 }
 
-#custom-spotify {
-    border-radius: 15px 15px 15px 15px
-}
-
-#network {
-    border-radius: 15px 0px 0px 15px;
-}
-
-#pulseaudio {
-    border-radius: 0px 0px 0px 0px;
-}
-
-#battery {
-    border-radius: 0px 0px 0px 0px;
+#workspaces button.urgent {
+    color: #f38ba8;
+    border-radius: 15px;
 }
 
 #clock {
-    border-radius: 0px 15px 15px 0px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 #tray {
-    padding-left: 5px;
+    padding-left: 20px;
     padding-right: 10px;
-    padding-left: 10px;
-    margin-right: 0px;
-    margin-left: 10px;
-    border-radius: 15px 0px 0px 15px;
 }

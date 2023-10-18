@@ -1,64 +1,106 @@
 [
     {
+        "id": "top",
         "output": [
             "DP-2"
         ],
-        "height": 30,
-        "position": "top",
+        "height": 0,
+        "margin": "0px 0px 0px 0px",
+        "name": "top",
         "layer": "top",
+        "position": "top",
         "modules-left": [
-            "custom/space",
             "custom/power",
-            "wlr/workspaces"
+            "hyprland/workspaces"
         ],
         "modules-center": [
-            "custom/clock"
+            "clock"
         ],
         "modules-right": [
+            "tray",
+            "custom/tab",
             "pulseaudio",
-            "custom/spacer",
+            "custom/tab",
+            "bluetooth",
             "network",
-            "custom/spacer",
-            "custom/weather",
-            "custom/spacer",
-            "memory",
-            "tray"
+            "custom/tab",
+            "custom/weather"
         ],
         "custom/power": {
-            "format": "<span size='12000' foreground='#f38ba8'> </span>",
+            "format": "<span size='12000' foreground='#f38ba8'>  </span>",
             "on-click": "~/.config/rofi/launchers/powermenu/powermenu.sh"
         },
-        "wlr/workspaces": {
+        "hyprland/workspaces": {
             "format": "{icon}",
             "on-click": "activate",
-            "sort-by-numbers": false,
+            "all-outputs": true,
             "format-icons": {
-                "default": "󰝦",
-                "active": "󰝥",
-                "urgent": "󰀨"
+                "1": "",
+                "2": "",
+                "3": "",
+                "default": "󰝦"
+            },
+            "sort-by-numbers": true
+        },
+        "clock": {
+            "format": "{:%H:%M} <span size='12000' foreground='#fab387'> </span>",
+            "format-alt": "{:%A | %B %d, %Y} <span size='12000' foreground='#fab387'> </span>",
+            "interval": 1,
+            "tooltip-format": "<tt><small>{calendar}</small></tt>",
+            "calendar": {
+                "mode": "year",
+                "mode-mon-col": 3,
+                "weeks-pos": "right",
+                "on-scroll": 1,
+                "on-click-right": "mode",
+                "format": {
+                    "months": "<span color='#ffead3'><b>{}</b></span>",
+                    "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                    "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                    "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                    "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+                }
+            },
+            "actions": {
+                "on-click-right": "mode",
+                "on-click-forward": "tz_up",
+                "on-click-backward": "tz_down",
+                "on-scroll-up": "shift_up",
+                "on-scroll-down": "shift_down"
             }
-        },
-        "custom/clock": {
-            "format": "<span size='12000' foreground='#cdd6f4'> {} </span>",
-            "exec": "date \"+%A | %y-%m-%d | %T\"",
-            "interval": 1
-        },
-        "network": {
-            "format-wifi": "<span size='11000' foreground='#EBA0AC'>󰤨  </span>{essid}",
-            "format-disconnected": "<span size='11000' foreground='#EBA0AC'>󰤭  </span>Disconnected",
-            "on-click": "~/.config/rofi/launchers/wifi/launch.sh"
         },
         "pulseaudio": {
-            "format": "<span size='11000' foreground='#F9E2AF'>{icon} </span>{volume}%",
-            "format-muted": "<span size='11000' foreground='#F9E2AF'>  </span> Muted",
+            "format": "<span size='12000' foreground='#f9e2af'> {icon}</span>{volume}% ",
+            "format-muted": "<span size='12000' foreground='#f9e2af'> 󰖁</span> Muted ",
             "format-icons": {
                 "default": [
-                    " "
+                    "󰕿 ",
+                    "󰖀 ",
+                    "󰕾 "
                 ]
-            }
+            },
+            "on-click": "pavucontrol",
+            "on-click-middle": "helvum",
+            "on-click-right": "~/.local/bin/notifications/volume.sh mute",
+            "on-scroll-up": "~/.local/bin/notifications/volume.sh up",
+            "on-scroll-down": "~/.local/bin/notifications/volume.sh down"
+        },
+        "bluetooth": {
+            "format": "<span size='12000' foreground='#74c7ec'>  </span>{status}",
+            "format-disabled": "<span size='12000' foreground='#f38ba8'>  </span>Disabled",
+            "tooltip-format": "{controller_alias}\t{controller_address}",
+            "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+            "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+            "on-click": "blueberry"
+        },
+        "network": {
+            "format-wifi": "<span size='12000' foreground='#a6e3a1'> 󰤨 </span>{essid} ",
+            "format-ethernet": "<span size='12000' foreground='#a6e3a1'> 󰈁 </span>Ethernet ",
+            "format-disconnected": "<span size='12000' foreground='#f38ba8'> 󰈂 </span>Disconnected ",
+            "on-click": "~/.config/rofi/launchers/wifi/launch.sh"
         },
         "custom/weather": {
-            "format": "<span size='12000' foreground='#cdd6f4'> {} </span>",
+            "format": " {} ",
             "exec": "python ~/.config/waybar/scripts/weather.py",
             "interval": 3600
         },
@@ -67,31 +109,23 @@
                 "warning": 20,
                 "critical": 10
             },
-            "format": "<span size='11000' foreground='#A6E3A1'>{icon} </span>{capacity}%",
-            "format-warning": "<span size='11000' foreground='#FAB387'>{icon} </span>{capacity}%",
-            "format-critical": "<span size='11000' foreground='#F38BA8'>{icon} </span>{capacity}%",
+            "format": "<span size='12000' foreground='#A6E3A1'>{icon}</span>{capacity}%",
+            "format-warning": "<span size='12000' foreground='#FAB387'>{icon}</span>{capacity}%",
+            "format-critical": "<span size='12000' foreground='#F38BA8'>{icon}</span>{capacity}%",
             "format-icons": [
                 " ",
                 " ",
-                " ,",
+                " ",
                 " ",
                 " "
             ],
             "tooltip-format": "{time}"
         },
-        "memory": {
-            "interval": 30,
-            "format": "{}%",
-            "max-length": 10
-        },
         "tray": {
             "spacing": 7
         },
-        "custom/space": {
-            "format": "   "
-        },
-        "custom/spacer": {
-            "format": "<span size='12000' foreground='#cdd6f4'>   |   </span>"
+        "custom/tab": {
+            "format": "|"
         }
     }
 ]
