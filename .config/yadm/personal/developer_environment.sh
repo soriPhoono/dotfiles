@@ -131,12 +131,12 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Text Editors/Markdown writers
-read -p "Install visual studio code and obsidian notation software? [y/N] " -n 1 -r
+read -p "Install visual studio code and logseq notation software? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
         "visual-studio-code-bin" # Visual studio code
-        "obsidian"               # Obsidian
+        "logseq-desktop-bin"     # FOSS Obsidian alternative
     )
 fi
 
@@ -144,8 +144,8 @@ read -p "Install imhex hex viewer? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     packages+=(
-        "imhex"    # Hex viewer
-        "glfw-x11" # GLFW
+        "imhex"        # Hex viewer
+        "glfw-wayland" # GLFW
     )
 fi
 
@@ -166,7 +166,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # QMK
-read -p "Install qmk firmware development tools? [y/N] " -n 1 -r
+read -p "Install keyboard firmware development tools? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     paru -U --noconfirm --needed https://archive.archlinux.org/packages/a/avr-gcc/avr-gcc-8.3.0-1-x86_64.pkg.tar.xz
@@ -174,7 +174,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         sudo sed -i "s/IgnorePkg = /IgnorePkg = avr-gcc /" /etc/pacman.conf
     else
         sudo sed -i "s/#IgnorePkg = /IgnorePkg = avr-gcc /" /etc/pacman.conf
-    fi
+    fi # Special version of avr-gcc to compile qmk firmware with small compile sizes (balloons otherwise)
 
     packages+=(
         "qmk" # QMK firmware development tools
@@ -210,6 +210,7 @@ if $MULTILIB && read -p "Install android studio? [y/N] " -n 1 -r; then
 fi
 
 # Docker
+# TODO: switch to podman
 read -p "Install docker and docker-compose? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
