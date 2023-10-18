@@ -154,6 +154,54 @@ else
 	echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
 fi
 
+if grep -q "QT_QPA_PLATFORM" /etc/environment; then
+	sudo sed -i "s/QT_QPA_PLATFORM=.*/QT_QPA_PLATFORM=wayland/g" /etc/environment
+else
+	echo "QT_QPA_PLATFORM=wayland" | sudo tee -a /etc/environment
+fi
+
+if grep -q "QT_AUTO_SCREEN_SCALE_FACTOR" /etc/environment; then
+	sudo sed -i "s/QT_AUTO_SCREEN_SCALE_FACTOR=.*/QT_AUTO_SCREEN_SCALE_FACTOR=1/g" /etc/environment
+else
+	echo "QT_AUTO_SCREEN_SCALE_FACTOR=1" | sudo tee -a /etc/environment
+fi
+
+if grep -q "QT_WAYLAND_DISABLE_WINDOWDECORATION" /etc/environment; then
+	sudo sed -i "s/QT_WAYLAND_DISABLE_WINDOWDECORATION=.*/QT_WAYLAND_DISABLE_WINDOWDECORATION=1/g" /etc/environment
+else
+	echo "QT_WAYLAND_DISABLE_WINDOWDECORATION=1" | sudo tee -a /etc/environment
+fi
+
+if grep -q "GDK_BACKEND" /etc/environment; then
+	sudo sed -i "s/GDK_BACKEND=.*/GDK_BACKEND=wayland/g" /etc/environment
+else
+	echo "GDK_BACKEND=wayland" | sudo tee -a /etc/environment
+fi
+
+if grep -q "SDL_VIDEODRIVER" /etc/environment; then
+	sudo sed -i "s/SDL_VIDEODRIVER=.*/SDL_VIDEODRIVER=wayland/g" /etc/environment
+else
+	echo "SDL_VIDEODRIVER=wayland" | sudo tee -a /etc/environment
+fi
+
+if grep -q "CLUTTER_BACKEND" /etc/environment; then
+	sudo sed -i "s/CLUTTER_BACKEND=.*/CLUTTER_BACKEND=wayland/g" /etc/environment
+else
+	echo "CLUTTER_BACKEND=wayland" | sudo tee -a /etc/environment
+fi
+
+if grep -q "XDG_CURRENT_DESKTOP" /etc/environment; then
+	sudo sed -i "s/XDG_CURRENT_DESKTOP=.*/XDG_CURRENT_DESKTOP=sway/g" /etc/environment
+else
+	echo "XDG_CURRENT_DESKTOP=sway" | sudo tee -a /etc/environment
+fi
+
+if grep -q "XDG_CURRENT_TYPE" /etc/environment; then
+	sudo sed -i "s/XDG_CURRENT_TYPE=.*/XDG_CURRENT_TYPE=wayland/g" /etc/environment
+else
+	echo "XDG_CURRENT_TYPE=wayland" | sudo tee -a /etc/environment
+fi
+
 if grep -q "TERM" /etc/environment; then
 	sudo sed -i "s/TERM=.*/TERM=alacritty/g" /etc/environment
 else
