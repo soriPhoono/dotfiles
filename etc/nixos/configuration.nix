@@ -255,7 +255,7 @@ neofetch";
 
     vaultwarden = {
       enable = true;
-      dbBackend = "mysql";
+      dbBackend = "sqlite";
       backupDir = "/var/lib/vaultwarden/backups";
       # TODO: finish this
     };
