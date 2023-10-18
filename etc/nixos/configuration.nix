@@ -229,12 +229,7 @@ neofetch";
 
       settings = {
         WebService = {
-          Origins = [
-            "https://admin.cryptic-coders.net"
-            "wss://admin.cryptic-coders.net"
-            "http://localhost:9090"
-            "wss://localhost:9090"
-          ];
+          Origins = "https://admin.cryptic-coders.net";
           ProtocolHeader = "X-Forwarded-Proto";
           AllowUnencrypted = true;
         };
