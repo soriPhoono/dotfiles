@@ -27,9 +27,13 @@ packages=(
 	"gvfs-gphoto2"                # Virtual filesystem (camera)
 	"xorg-xhost"                  # X11 utility for controlling access to the X server
 	"xorg-xauth"                  # X11 authority file management
+	"xorg-xlsclients"             # X11 utility for listing client applications
+	"xwaylandvideobridge-bin"     # XWayland video bridge
 	"wl-clipboard"                # Command-line copy/paste utilities for Wayland
+	"cliphist"                    # Clipboard history
 	"xdg-desktop-portal"          # Desktop integration portals for sandboxed apps
 	"xdg-desktop-portal-hyprland" # GTK backend for xdg-desktop-portal
+	"python-geocoder"             # Geocoding toolbox for Python
 	"polkit-gnome"                # PolicyKit authentication agent
 	"gnome-keyring"               # Keyring
 	"swww"                        # GIF wallpaper (Live wallpaper system)
@@ -40,9 +44,13 @@ packages=(
 	"swayidle"                    # Idle management daemon
 	"swaylock-effects"            # Lockscreen
 	"rofi-lbonn-wayland-git"      # Application launcher
+	"grim"                        # Screenshot utility
+	"slurp"                       # Screenshot utility
 	"cava"                        # Audio visualiser
 	"font-manager"                # Font manager
+	"qt5-wayland"                 # Qt5 wayland
 	"qt5ct"                       # Qt5 configuration utility
+	"qt6-wayland"                 # Qt6 wayland
 	"qt6ct"                       # Qt6 configuration utility
 	"nwg-look"                    # GTK theme switcher
 	"alacritty"                   # Terminal emulator
