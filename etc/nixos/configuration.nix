@@ -223,6 +223,26 @@ neofetch";
       };
     };
 
+    cockpit = {
+      enable = true;
+      openFirewall = false; # Set to true to open port 9090 in firewall
+
+      settings = {
+        WebService = {
+          Origins = [
+            "https://admin.cryptic-coders.net"
+            "wss://admin.cryptic-coders.net"
+            "http://localhost:9090"
+            "wss://localhost:9090"
+          ];
+          ProtocolHeader = "X-Forwarded-Proto";
+          AllowUnencrypted = true;
+        };
+      };
+
+      # TODO: test this
+    };
+
     nextcloud = {
       enable = true;
       hostName = "cloud.cryptic-coders.net";
@@ -231,6 +251,13 @@ neofetch";
         dbtype = "pgsql";
         adminpassFile = "/var/lib/nextcloud/adminpass";
       };
+    };
+
+    vaultwarden = {
+      enable = true;
+      dbBackend = "mysql";
+      backupDir = "/var/lib/vaultwarden/backups";
+      # TODO: finish this
     };
   };
 
