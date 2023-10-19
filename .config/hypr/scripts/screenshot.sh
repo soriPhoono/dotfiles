@@ -15,7 +15,7 @@ while [ $# -gt 0 ]; do
   key="$1"
 
   case $key in
-  -c|--cursor)
+  -c | --cursor)
     CURSOR=yes
     shift
     ;;
