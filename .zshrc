@@ -3,7 +3,7 @@
 # Path to your oh-my-zsh installation.
 export PATH=$PATH:~/.local/bin
 export ZSH="/usr/share/oh-my-zsh"
-export SHELL=zsh
+export SHELL=/usr/bin/zsh
 
 export $(dbus-launch)
 
