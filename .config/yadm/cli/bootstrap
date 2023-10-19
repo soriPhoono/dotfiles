@@ -1,79 +1,42 @@
 #!/bin/bash
 
-kernels=(
-    "linux",          # default kernel
-    "linux-lts",      # long term support kernel
-    "linux-hardened", # hardened kernel
-    "linux-zen",      # zen kernel (optimized for throughput) (unneeded in like 90% of cases)
-)
-
-kernel_supporting=(
-    "linux-firmware",          # firmware for linux kernel
-    "linux-firmware-qlogic",   # firmware for qlogic devices
-    "linux-firmware-bnx2x",    # firmware for bnx2x broadcom ethernet devices
-    "linux-firmware-liquidio", # firmware for liquidio cavium liquidio server devices
-    "linux-firmware-mellanox", # firmware for mellanox spectrum switches
-    "linux-firmware-nfp",      # firmware for nfp netronome flow processors
-)
-
 packages=(
-    "base-devel",     # base development tools
-    "dosfstools",     # dos filesystem tools
-    "exfatprogs",     # exfat filesystem tools
-    "xdg-user-dirs",  # xdg user directories
-    "pacman-contrib", # pacman contrib (needed for paccache cache cleaner)
-    "nano",           # nano text editor (simple text editor)
-    "neovim",         # neovim text editor (advanced text editor)
-    "tmux",           # tmux terminal multiplexer
-    "zsh",            # zsh shell
-    "oh-my-zsh-git",  # oh-my-zsh (zsh configuration framework)
-    "starship",       # starship (shell prompt)
-    "neofetch",       # neofetch (system information tool)
-    "usbutils",       # usbutils (usb tools)
-    "curl",           # curl (file transfer tool)
-    "eza",            # eza (better ls command, community maintained fork of exa)
-    "bat",            # bat (better cat command)
-    "diff-so-fancy",  # diff-so-fancy (better git diff)
-    "dua-cli",        # dua-cli (better du command)
-    "duf",            # duf (better df command)
-    "tre-command",    # tre-command (better tree command)
-    "scc",            # scc (better cloc command)
-    "jq",             # jq (json processor)
-    "btop",           # btop (better htop)
-    "cava",           # cava (audio visualizer)
+    "dosfstools",    # dos filesystem tools
+    "exfatprogs",    # exfat filesystem tools
+    "cargo"          # cargo (rust package manager)
+    "nano",          # nano text editor (simple text editor)
+    "neovim",        # neovim text editor (advanced text editor)
+    "tmux",          # tmux terminal multiplexer
+    "zsh",           # zsh shell
+    "neofetch",      # neofetch (system information tool)
+    "usbutils",      # usbutils (usb tools)
+    "curl",          # curl (file transfer tool)
+    "eza",           # eza (better ls command, community maintained fork of exa)
+    "bat",           # bat (better cat command)
+    "diff-so-fancy", # diff-so-fancy (better git diff)
+    "dua-cli",       # dua-cli (better du command)
+    "duf",           # duf (better df command)
+    "tre-command",   # tre-command (better tree command)
+    "golang",        # scc (better cloc command)
+    "jq",            # jq (json processor)
+    "btop",          # btop (better htop)
+    "cava",          # cava (audio visualizer)
 )
-
-# Install kernel for linux
-while true; do
-    i=1
-
-    echo "Available kernels:"
-    for kernel in "${kernels[@]}"; do
-        echo "    $i: $kernel"
-        i=$((i + 1))
-    done
-
-    read -p "Select kernel: " -n 1 -r
-    echo
-
-    if [[ $kernel -ge 0 && $kernel -lt ${#kernels[@]} ]]; then
-        paru -S --noconfirm --needed "${kernels[$REPLY - 1]} ${kernels[$REPLY - 1]}-headers" >/dev/null
-        paru -S --noconfirm --needed "${kernel_supporting[@]}" >/dev/null
-        break
-    fi
-done
 
 # Install packages from list
-paru -S --noconfirm --needed "${packages[@]}" >/dev/null
+sudo apt install "${packages[@]}"
 
-mkdir -p ~/D{ownloads,ocuments,esktop} ~/Music ~/Videos ~/P{ictures,ublic} ~/Templates >/dev/null
-xdg-user-dirs-update >/dev/null
+# Install zsh plugin manager
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-chsh -s /bin/zsh $(whoami) >/dev/null
+# Install starship prompt
+sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
-sudo systemctl enable paccache.timer >/dev/null
+# Install scc code counting tool
+go install github.com/boyter/scc/v3@latest
+
+chsh -s /usr/bin/zsh $(whoami) >/dev/null
 
 bat cache --build >/dev/null
 
-sh git.sh
-sh networking.sh
+sh ~/.config/yadm/cli/git.sh
