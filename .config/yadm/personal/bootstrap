@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Author: Sori Phoono
+# Description: This script is used to bootstrap a new system with yadm (personal packages)
+# Date: 2023-10-21
+
+# Install packages
