@@ -10,9 +10,6 @@ packages=(
     "discord"              # Discord desktop client
     "betterdiscordctl-git" # BetterDiscord installer
     "python-spotdl"        # Spotify downloader (also installes youtube-dl as dependency) (AUR)
-    "spotify"              # Spotify desktop client
-    "spicetify-cli"        # Spotify theme manager (AUR)
-    "spotifywm-git"        # Spotify window manager (AUR)
 )
 
 read -p "Install openrgb [y/N]: " -n 1 -r
