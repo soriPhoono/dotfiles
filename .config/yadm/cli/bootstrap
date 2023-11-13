@@ -1,26 +1,25 @@
 #!/bin/bash
 
 packages=(
-    "dosfstools",    # dos filesystem tools
-    "exfatprogs",    # exfat filesystem tools
-    "cargo"          # cargo (rust package manager)
-    "nano",          # nano text editor (simple text editor)
-    "neovim",        # neovim text editor (advanced text editor)
-    "tmux",          # tmux terminal multiplexer
-    "zsh",           # zsh shell
-    "neofetch",      # neofetch (system information tool)
-    "usbutils",      # usbutils (usb tools)
-    "curl",          # curl (file transfer tool)
-    "eza",           # eza (better ls command, community maintained fork of exa)
-    "bat",           # bat (better cat command)
-    "diff-so-fancy", # diff-so-fancy (better git diff)
-    "dua-cli",       # dua-cli (better du command)
-    "duf",           # duf (better df command)
-    "tre-command",   # tre-command (better tree command)
-    "golang",        # scc (better cloc command)
-    "jq",            # jq (json processor)
-    "btop",          # btop (better htop)
-    "cava",          # cava (audio visualizer)
+	"dosfstools"    # dos filesystem tools
+	"exfatprogs"    # exfat filesystem tools
+	"cargo"         # cargo (rust package manager)
+	"nano"          # nano text editor (simple text editor)
+	"neovim"        # neovim text editor (advanced text editor)
+	"tmux"          # tmux terminal multiplexer
+	"zsh"           # zsh shell
+	"neofetch"      # neofetch (system information tool)
+	"usbutils"      # usbutils (usb tools)
+	"curl"          # curl (file transfer tool)
+	"eza"           # eza (better ls command, community maintained fork of exa)
+	"bat"           # bat (better cat command)
+	"diff-so-fancy" # diff-so-fancy (better git diff)
+	"dua-cli"       # dua-cli (better du command)
+	"duf"           # duf (better df command)
+	"tre-command"   # tre-command (better tree command)
+	"golang"        # scc (better cloc command)
+	"jq"            # jq (json processor)
+	"btop"          # btop (better htop)
 )
 
 # Install packages from list
@@ -35,7 +34,7 @@ sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 # Install scc code counting tool
 go install github.com/boyter/scc/v3@latest
 
-chsh -s /usr/bin/zsh $(whoami) >/dev/null
+chsh -s /usr/bin/zsh "$(whoami)" >/dev/null
 
 bat cache --build >/dev/null
 
