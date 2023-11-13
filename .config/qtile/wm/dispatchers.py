@@ -67,6 +67,7 @@ keys = [
     # Application launchers
     Key([mod], "b", lazy.spawn(browser), desc="Launch browser"),
     Key([mod], "c", lazy.spawn("code"), desc="Launch VSCode"),
+    Key([mod], "l", lazy.spawn("logseq"), desc="Launch notes app"),
     Key([mod], "d", lazy.spawn("discord"), desc="Launch Discord"),
     Key([mod], "s", lazy.spawn("spotify"), desc="Launch Spotify music player"),
     Key([mod], "m", lazy.spawn("exaile"), desc="Launch music player"),

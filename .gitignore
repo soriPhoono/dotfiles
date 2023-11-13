@@ -20,6 +20,7 @@ __pycache__/
 .config/Google/
 .config/JetBrains/
 .config/LanguageTool/
+.config/Logseq/
 .config/Meltytech/
 .config/Signal/
 .config/VirtualBox/
@@ -30,6 +31,7 @@ __pycache__/
 .config/chromium/
 .config/dconf/
 .config/discord/
+.config/eww/
 .config/exaile/
 .config/falkTX/
 .config/flutter/
@@ -39,6 +41,7 @@ __pycache__/
 .config/google-chrome/
 .config/gtk-2.0/
 .config/gtk-3.0/
+.config/gtk-4.0/
 .config/heroic/
 .config/imhex/
 .config/libfm/
@@ -78,7 +81,9 @@ __pycache__/
 .lemminx/
 .local/share/
 .local/state/
+.logseq/
 .mozilla/
+.m2/
 .npm/
 .pki/
 .pub-cache/
@@ -91,6 +96,7 @@ __pycache__/
 .thunderbird/
 .wine/
 go/
+AndroidStudioProjects/
 Desktop/
 Documents/
 Downloads/
@@ -110,7 +116,15 @@ VirtualBox VMs/
 .config/user-dirs.dirs
 .config/user-dirs.locale
 .config/yadm/drivers/vendors
+.config/Trolltech.conf
+.config/akregatorrc
+.config/baloofilerc
+.config/bluedevilglobalrc
+.config/discoverrc
+.config/gtkrc
+.config/gtkrc-2.0
 .flutter
+.fonts.conf
 .gitconfig
 .gtkrc-2.0
 .lesshst
