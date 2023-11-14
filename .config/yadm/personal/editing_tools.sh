@@ -11,9 +11,9 @@ packages=()
 categories=(
     "image editing"
     "video editing"
+    "audio editing"
     "2d animation"
     "3d modeling/animation"
-    "audio editing"
 )
 
 i=1
@@ -37,17 +37,17 @@ for category in $categories; do
         ;;
     "3")
         packages+=(
-            "synfigstudio" # 2d animation software
+            "audacity" # Audio editor
         )
         ;;
     "4")
         packages+=(
-            "blender" # 3d modeling and animation software
+            "synfigstudio" # 2d animation software
         )
         ;;
     "5")
         packages+=(
-            "audacity" # Audio editor
+            "blender" # 3d modeling and animation software
         )
         ;;
     esac
