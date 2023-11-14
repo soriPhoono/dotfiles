@@ -24,7 +24,7 @@
             "bluetooth",
             "network",
             "custom/tab",
-            "custom/weather",
+            "battery",
             "custom/tab",
             "memory"
         ],
