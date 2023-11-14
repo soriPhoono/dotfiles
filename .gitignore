@@ -75,7 +75,6 @@ logseq/
 .gradle/
 .java/
 .lemminx/
-.local/share/
 .local/state/
 .mozilla/
 .npm/

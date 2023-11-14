@@ -25,7 +25,6 @@ languages=(
     "Python"
     "Lua"
     "HTML/CSS/JS"
-    "Nix"
 )
 
 packages=()
@@ -107,11 +106,6 @@ for language in $languages; do
         packages+=(
             "nodejs" # NodeJS interpreter
             "npm"    # NodeJS package manager
-        )
-        ;;
-    "10")
-        packages+=(
-            "rnix-lsp" # Nix language server
         )
         ;;
     esac
