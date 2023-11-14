@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Icon=google-drive
+Name=Google Drive
+Exec=firefox --new-window drive.google.com
+Terminal=false
+Hidden=false
+Categories=Office; Utility
+Comment=Opens google drive cloud application in firefox

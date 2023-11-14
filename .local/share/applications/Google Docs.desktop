@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Icon=google-drive
+Name=Google Docs
+Exec=firefox --new-window docs.google.com
+Terminal=false
+Hidden=false
+Categories=Office; Utility
+Comment=Opens google docs writer application in firefox
