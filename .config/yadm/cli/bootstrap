@@ -30,7 +30,10 @@ packages=(
 )
 
 # Install kernel supporting packages for linux
-paru -S --noconfirm --needed linux-headers linux-firmware
+paru -S --noconfirm --needed linux-g14 linux-g14-headers linux-firmware asusctl
+
+sudo sed -i 's/\/vmlinuz-linux.*/\/vmlinuz-linux-g14/g' /boot/loader/entries/*.conf
+sudo sed -i 's/\/initramfs-linux\(.*\)\.img/\/initramfs-linux-g14.img/g' /boot/loader/entries/*.conf
 
 # Install packages from list
 paru -S --noconfirm --needed "${packages[@]}"
