@@ -24,7 +24,9 @@
             "bluetooth",
             "network",
             "custom/tab",
-            "custom/weather"
+            "battery",
+            "custom/tab",
+            "memory"
         ],
         "custom/power": {
             "format": "<span size='12000' foreground='#f38ba8'>  </span>",
@@ -120,6 +122,9 @@
                 " "
             ],
             "tooltip-format": "{time}"
+        },
+        "memory": {
+            "format": "<span size='12000' foreground='#f9e2af'> 󰍛 </span>{percentage}% "
         },
         "tray": {
             "spacing": 7
