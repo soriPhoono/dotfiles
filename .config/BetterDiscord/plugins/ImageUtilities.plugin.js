@@ -2,7 +2,7 @@
  * @name ImageUtilities
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 5.2.9
+ * @version 5.3.3
  * @description Adds several Utilities for Images/Videos (Gallery, Download, Reverse Search, Zoom, Copy, etc.)
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -843,7 +843,7 @@ module.exports = (_ => {
 							label: BDFDB.LanguageUtils.LanguageStrings.COPY_LINK,
 							id: BDFDB.ContextMenuUtils.createItemId(this.name, "copy-link"),
 							action: _ => {
-								let url = urlData.original.split("?width=")[0].split("?height=")[0].split("?size=")[0];
+								let url = this.removeSizeInUrl(urlData.original);
 								url = url.indexOf("discordapp.com/avatars/") > 0 || url.indexOf("discordapp.com/icons/") > 0 ? `${url}?size=4096` : url;
 								BDFDB.LibraryModules.WindowUtils.copy(url);
 								BDFDB.NotificationUtils.toast(BDFDB.LanguageUtils.LanguageStrings.LINK_COPIED, {type: "success"});
@@ -853,7 +853,7 @@ module.exports = (_ => {
 							label: BDFDB.LanguageUtils.LanguageStrings.COPY_MEDIA_LINK,
 							id: BDFDB.ContextMenuUtils.createItemId(this.name, "copy-media-link"),
 							action: _ => {
-								let url = urlData.file.split("?width=")[0].split("?height=")[0].split("?size=")[0];
+								let url = this.removeSizeInUrl(urlData.file);
 								url = url.indexOf("discordapp.com/avatars/") > 0 || url.indexOf("discordapp.com/icons/") > 0 ? `${url}?size=4096` : url;
 								BDFDB.LibraryModules.WindowUtils.copy(url);
 								BDFDB.NotificationUtils.toast(BDFDB.LanguageUtils.LanguageStrings.LINK_COPIED, {type: "success"});
@@ -1105,7 +1105,7 @@ module.exports = (_ => {
 								className: BDFDB.disCN._imageutilitiesdetailswrapper,
 								children: [
 									e.instance.props.alt && {label: "Alt", text: e.instance.props.alt},
-									{label: "Source", text: url.split("?width=")[0].split("?height=")[0].split("?size=")[0]},
+									{label: "Source", text: this.removeSizeInUrl(url)},
 									{label: "Size", text: `${e.instance.props.width}x${e.instance.props.height}px`},
 									cachedImages && cachedImages.amount && cachedImages.amount > 1 && {label: filterForVideos ? "Video" : "Image", text: `${cachedImages.index + 1 || 1} of ${cachedImages.amount}`}
 								].filter(n => n).map(data => BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TextElement, {
@@ -1217,6 +1217,11 @@ module.exports = (_ => {
 							ele.style.setProperty("max-width", e.instance.props.width + "px");
 							ele.style.setProperty("height", e.instance.props.height + "px");
 							ele.style.setProperty("max-height", e.instance.props.height + "px");
+						}
+						for (let ele of [e.node.src && e.node, ...e.node.querySelectorAll("[src]")].filter(n => n)) ele.src = this.removeSizeInUrl(ele.src);
+						if (e.instance.state.readyState != BDFDB.DiscordConstants.ImageReadyStates.READY) {
+							e.instance.state.readyState = BDFDB.DiscordConstants.ImageReadyStates.READY;
+							BDFDB.ReactUtils.forceUpdate(e.instance);
 						}
 					}
 					if (e.methodname == "componentWillUnmount" && BDFDB.DOMUtils.getParent(BDFDB.dotCNC.imagemodal + BDFDB.dotCN.modalcarouselmodal, e.node)) {
@@ -1490,20 +1495,12 @@ module.exports = (_ => {
 				if (!urls || typeof onLoad != "function") return typeof onError == "function" && onError();
 				let url = urls.url.startsWith("/assets") ? (window.location.origin + urls.url) : urls.url;
 				let isResized = !config.orignalSizeChecked && (url.indexOf("?width=") > -1 || url.indexOf("?height=") > -1 || url.indexOf("?size=") > -1);
-				url = isResized ? url.split("?width=")[0].split("?height=")[0].split("?size=")[0] : url;
+				url = isResized ? this.removeSizeInUrl(url) : url;
 				url = url.indexOf("discordapp.com/avatars/") > 0 || url.indexOf("discordapp.com/icons/") > 0 ? `${url}?size=4096` : url;
-				if (!config.fallbackToRequest) BDFDB.DiscordUtils.requestFileData(url, (error, buffer) => {
-					if (error || !buffer) {
-						if (isResized) this.requestFile(urls, onLoad, onError, {orignalSizeChecked: true});
-						else if (urls.fallbackUrl && urls.url != urls.fallbackUrl) this.requestFile({url: urls.fallbackUrl, oldUrl: urls.url}, onLoad, onError);
-						else this.requestFile({url: urls.oldUrl || urls.url, fallbackUrl: urls.oldUrl ? urls.url : undefined}, onLoad, onError, {fallbackToRequest: true});
-					}
-					else onLoad(url, buffer);
-				});
-				else BDFDB.LibraryRequires.request(url, {agentOptions: {rejectUnauthorized: false}, headers: {"Content-Type": "application/json"}}, (error, response, buffer) => {
+				BDFDB.LibraryRequires.request(url, {toBuffer: true}, (error, response, buffer) => {
 					if (error || response.statusCode != 200 || response.headers["content-type"].indexOf("text/html") > -1) {
-						if (isResized) this.requestFile(urls, onLoad, onError, {orignalSizeChecked: true, fallbackToRequest: true});
-						else if (urls.fallbackUrl && urls.url != urls.fallbackUrl) this.requestFile({url: urls.fallbackUrl}, onLoad, onError, {fallbackToRequest: true});
+						if (isResized) this.requestFile(urls, onLoad, onError, {orignalSizeChecked: true});
+						else if (urls.fallbackUrl && urls.url != urls.fallbackUrl) this.requestFile({url: urls.fallbackUrl}, onLoad, onError);
 						else if (typeof onError == "function") onError();
 					}
 					else onLoad(url, buffer);
@@ -1516,7 +1513,7 @@ module.exports = (_ => {
 					if (!extension) BDFDB.NotificationUtils.toast(this.labels.toast_save_failed.replace("{{var0}}", BDFDB.LanguageUtils.LanguageStrings.IMAGE).replace("{{var1}}", path || "PC"), {type: "danger"});
 					else {
 						let type = fileTypes[extension].video ? BDFDB.LanguageUtils.LanguageStrings.VIDEO : BDFDB.LanguageUtils.LanguageStrings.IMAGE;
-						if (path) BDFDB.LibraryRequires.fs.writeFile(this.getFileName(path, (alternativeName || url.split("/").pop().split(".").slice(0, -1).join(".") || "unknown").slice(0, 35), extension, 0), Buffer.from(buffer), error => {
+						if (path) BDFDB.LibraryRequires.fs.writeFile(this.getFileName(path, (alternativeName || url.split("/").pop().split(".").slice(0, -1).join(".") || "unknown").slice(0, 35), extension, 0), new Uint8Array(buffer), error => {
 							if (error) BDFDB.NotificationUtils.toast(this.labels.toast_save_failed.replace("{{var0}}", type).replace("{{var1}}", path), {type: "danger"});
 							else BDFDB.NotificationUtils.toast(this.labels.toast_save_success.replace("{{var0}}", type).replace("{{var1}}", path), {type: "success"});
 						});
@@ -1535,7 +1532,7 @@ module.exports = (_ => {
 			}
 			
 			copyFile (urls) {
-				this.requestFile(urls, (url, buffer) => {
+				this.requestFile(urls, url => {
 					let type = this.isValid(url, "video") ? BDFDB.LanguageUtils.LanguageStrings.VIDEO : BDFDB.LanguageUtils.LanguageStrings.IMAGE;
 					BDFDB.LibraryModules.WindowUtils.copyImage(url);
 					BDFDB.NotificationUtils.toast(this.labels.toast_copy_success.replace("{{var0}}", type), {type: "success"});
@@ -1688,6 +1685,10 @@ module.exports = (_ => {
 				let filtered = [];
 				for (let message of messages) if (!filtered.find(n => n.messageId == message.messageId && n.id == message.id)) filtered.push(message);
 				return filtered;
+			}
+			
+			removeSizeInUrl (url) {
+				return (url || "").split("?width=")[0].split("?height=")[0].split("?size=")[0].split("&width=")[0].split("&height=")[0].split("&size=")[0];
 			}
 			
 			addListener (eventType, type, callback) {

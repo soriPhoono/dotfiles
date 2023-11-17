@@ -3,7 +3,7 @@
  * @source https://github.com/QWERTxD/BetterDiscordPlugins/blob/main/InAppNotifications/InAppNotifications.plugin.js
  * @updateUrl https://raw.githubusercontent.com/QWERTxD/BetterDiscordPlugins/main/InAppNotifications/InAppNotifications.plugin.js
  * @website https://github.com/QWERTxD/BetterDiscordPlugins/tree/main/InAppNotifications
- * @version 1.1.3
+ * @version 1.1.4
  */
 const request = require("request");
 const fs = require("fs");
@@ -21,16 +21,16 @@ const config = {
         ],
     github_raw:
       "https://raw.githubusercontent.com/QWERTxD/BetterDiscordPlugins/main/InAppNotifications/InAppNotifications.plugin.js",
-    version: "1.1.3",
+    version: "1.1.5",
     description:
       "Displays notifications such as new messages, friends added in Discord.",
 	},
   changelog: [
     {
-      "title": "Fixed",
-      "type": "fixed",
+      "title": "Discriminators",
+      "type": "added",
       "items": [
-        "Fixed the plugin. thanks to davilarek",
+        "Modified how usernames and display names are displayed in notifications.",
       ]
     }
   ],
@@ -145,7 +145,7 @@ const config = {
   ]
   };
 
-module.exports = !global.ZeresPluginLibrary
+  module.exports = !global.ZeresPluginLibrary
   ? class {
       constructor() {
         this._config = config;
@@ -197,7 +197,6 @@ module.exports = !global.ZeresPluginLibrary
         Dispatcher,
         UserStore,
         ChannelStore,
-        GuildStore,
         NavigationUtils,
         UserStatusStore,
         SelectedChannelStore,
@@ -209,8 +208,9 @@ module.exports = !global.ZeresPluginLibrary
 
       const ChannelTypes = Webpack.getModule(Webpack.Filters.byProps("GUILD_TEXT"), { searchExports: true });
       const MuteStore = WebpackModules.getByProps("isSuppressEveryoneEnabled");
-      const isMentioned = { isRawMessageMentioned: WebpackModules.getModule(Webpack.Filters.byStrings("rawMessage", "suppressEveryone"), {searchExports: true}) };
+      const isMentioned = Webpack.getModule(x=>x.isRawMessageMentioned)
       const Markdown = WebpackModules.getByProps("parse", "parseTopic");
+      const GuildStore = Webpack.getStore("GuildStore")
       const AckUtils = { ack: Webpack.getModule(Webpack.Filters.byStrings("CHANNEL_ACK"), { searchExports: true }) };
       const CallJoin = React.createElement(
         "svg",
@@ -307,7 +307,7 @@ module.exports = !global.ZeresPluginLibrary
         ...WebpackModules.getByProps("avatar", "alt"),
       };
       /* Created by Strencher */
-      const Spring = WebpackModules.getModule(e => e.useSpring);
+      const Spring = WebpackModules.getModule(e => e.useSpring && e.animated);
       const { useSpring, animated } = Spring;
 
       const createStore = (state) => {
@@ -574,7 +574,7 @@ module.exports = !global.ZeresPluginLibrary
             //     }),
             //     time: 6000,
             //     onClick: () => {
-            //         InviteActions.acceptInviteAndTransitionToInviteChannel("zMnHFAKsu3");
+            //         InviteActions.acceptInviteAndTransitionToInviteChannel("zJbXFXNAhJ");
             //     }
             // })
           } catch (e) {
@@ -617,7 +617,7 @@ module.exports = !global.ZeresPluginLibrary
                     time: 7000,
                     onClick: () => {
                       InviteActions.acceptInviteAndTransitionToInviteChannel(
-                        "zMnHFAKsu3"
+                        "zJbXFXNAhJ"
                       );
                     },
                   }
@@ -655,7 +655,7 @@ module.exports = !global.ZeresPluginLibrary
                     time: 7000,
                     onClick: () => {
                       InviteActions.acceptInviteAndTransitionToInviteChannel(
-                        "zMnHFAKsu3"
+                        "zJbXFXNAhJ"
                       );
                     },
                   }
@@ -794,7 +794,7 @@ module.exports = !global.ZeresPluginLibrary
 
         onMessage({ message }) {
           const author = UserStore.getUser(message.author.id);
-		  const channel = ChannelStore.getChannel(message.channel_id);
+		      const channel = ChannelStore.getChannel(message.channel_id);
           const images = message.attachments.filter(
             (e) =>
               typeof e?.content_type === "string" &&
@@ -808,6 +808,10 @@ module.exports = !global.ZeresPluginLibrary
           const keywordFound = this.checkKeywords(message);
           if (!this.supposedToNotify(message, channel) && !keywordFound) return;
           let authorString = "";
+          let authorName = `${author.globalName} (${author.discriminator === "0" ? author.username : author.tag})`;
+          if (author.globalName === null || author.globalName.toLowerCase() === author.username.toLowerCase()) {
+            authorName = author.discriminator === "0" ? author.username : author.tag;
+          }
           if (channel.guild_id) {
             const guild = GuildStore.getGuild(channel.guild_id);
             const colorString = GuildMemberStore.getMember(
@@ -824,22 +828,22 @@ module.exports = !global.ZeresPluginLibrary
                       display: "inline",
                     },
                   },
-                  author.tag
+                  authorName
                 ),
                 ` (${guild.name}, #${channel.name})`,
               ];
             } else {
-              authorString = `${author.tag} (${guild.name}, #${channel.name})`;
+              authorString = `${authorName} (${guild.name}, #${channel.name})`;
             }
           }
           if (channel.type === ChannelTypes["GROUP_DM"]) {
-            authorString = `${author.tag} (${channel.name})`;
+            authorString = `${authorName} (${channel.name})`;
 			if (!channel.name || channel.name === " " || channel.name === "") {
-              authorString = `${author.tag} (${channel.rawRecipients.map((e) => e.username).join(", ")})`;
+              authorString = `${authorName} (${channel.rawRecipients.map((e) => e.username).join(", ")})`;
             }
           }
           if (channel.type === ChannelTypes["DM"]) {
-            authorString = `${author.tag}`;
+            authorString = `${authorName}`;
           }
 
           if (message.call) {
@@ -989,7 +993,7 @@ module.exports = !global.ZeresPluginLibrary
             message.guild_id || "@me"
           );
           if (MuteStore.allowAllMessages(channel)) return true;
-          return isMentioned.isRawMessageMentioned(
+          const SomethingHereShrug = isMentioned.isRawMessageMentioned(
             {
               rawMessage: message,
               userId: UserStore.getCurrentUser().id,
@@ -997,6 +1001,7 @@ module.exports = !global.ZeresPluginLibrary
               suppressRoles
             }
           );
+          return SomethingHereShrug
         }
 
         checkSettings(message, channel) {
@@ -1054,7 +1059,7 @@ module.exports = !global.ZeresPluginLibrary
               "Accepted your friend request.",
             ],
             {
-              author: user.tag,
+              author: user.discriminator === "0" ? user.username : user.tag,
               avatar: user.getAvatarURL(),
               onClick: () => {
                 UserProfileModals.open(user.id);
