@@ -15,21 +15,14 @@ done
 
 # Install core packages for gaming environment
 packages=(
-	"soundfont-fluid"     # FluidR3 soundfont
-	"boxtron"             # DOSBox fork for Steam Play compatibility
-	"steamtinkerlaunch"   # Steam Tinker Launcher
-	"replay-sorcery"      # Replay Sorcery (game replay tool)
-	"protonup-git"        # Proton updater
-	"protontricks-git"    # Proton tricks (configuration tool)
-	"wine"                # Wine
-	"winetricks"          # Wine tricks (configuration tool)
-	"vkbasalt"            # VKBasalt (Vulkan post processing layer)
-	"reshade-shaders-git" # ReShade shaders
-	"gamemode"            # Game mode
-	"mangohud"            # MangoHud (game overlay)
-	"dxvk-async-git"      # DXVK async (DirectX to Vulkan translation layer)
-	"vkd3d"               # VKD3D (DirectX 12 to Vulkan translation layer)
-	"gamescope"           # Gamescope fork with added patches for stability (for fixing issues in window manager on wayland based compositors) (AUR)
+	"protonup-git"     # Proton updater
+	"protontricks-git" # Proton tricks (configuration tool)
+	"wine"             # Wine
+	"winetricks"       # Wine tricks (configuration tool)
+	"gamemode"         # Game mode
+	"dxvk-async-git"   # DXVK async (DirectX to Vulkan translation layer)
+	"vkd3d"            # VKD3D (DirectX 12 to Vulkan translation layer)
+	"gamescope"        # Gamescope fork with added patches for stability (for fixing issues in window manager on wayland based compositors) (AUR)
 )
 
 # Install proton and it's dependencies
@@ -37,7 +30,6 @@ if $MULTILIB; then
 	packages+=(
 		"lib32-gamemode" # Game mode (32-bit)
 		"lib32-vkd3d"    # VKD3D (32-bit)
-		"lib32-vkbasalt" # VKBasalt (32-bit)
 	)
 fi
 
