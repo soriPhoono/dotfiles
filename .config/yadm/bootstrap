@@ -1,62 +1,18 @@
 #!/bin/bash
 
-# Setup pacman.conf and paru.conf
-# Create pacman.conf.bak or restore it if it exists
-if [[ -f /etc/pacman.conf.bak ]]; then
-    sudo mv /etc/pacman.conf.bak /etc/pacman.conf
-fi
-sudo cp /etc/pacman.conf /etc/pacman.conf.bak
-echo "Created pacman.conf backup file"
+# Install dependencies
+required_packages=(
+    "python"        # For running general script
+    "python-pyyaml" # For reading and interpreting module configuration
+    "git"           # For installing yadm
+    "yadm"          # For installing dotfiles
+)
 
-# Setup parallel downloads and colored output
-sudo sed -i 's/#Color/Color/g' /etc/pacman.conf
-sudo sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/g' /etc/pacman.conf
-echo "Setup parallel downloads and colored output for pacman"
+sudo pacman -Syu --noconfirm --needed "${required_packages[@]}"
 
-sh ~/.config/yadm/core/repos.sh
+# Report to user
+echo "Dependencies installed"
+echo "Running general installation script"
 
-# Update system
-sudo pacman -Syu --noconfirm >/dev/null
-
-# Install paru
-sudo pacman -S --noconfirm --needed paru >/dev/null
-echo "Installed paru aur helper"
-
-# Create paru.conf.bak or restore it if it exists
-if [[ -f /etc/paru.conf.bak ]]; then
-    sudo mv /etc/paru.conf.bak /etc/paru.conf
-fi
-sudo cp /etc/paru.conf /etc/paru.conf.bak
-echo "Created paru.conf backup file"
-
-# Setup bottom up reading of available packages for paru.conf
-sudo sed -i 's/#BottomUp/BottomUp/g' /etc/paru.conf
-echo "Setup bottom up reading of available packages for paru.conf"
-
-# Configure mirrors using reflector
-paru -S --noconfirm --needed reflector rsync
-sudo mv /etc/xdg/reflector/reflector.conf /etc/xdg/reflector/reflector.conf.bak
-echo -e "--save /etc/pacman.d/mirrorlist\n--sort rate\n--protocol https\n--latest 15" | sudo tee /etc/xdg/reflector/reflector.conf >/dev/null
-sudo systemctl start reflector.service >/dev/null
-sudo systemctl enable --now reflector.timer >/dev/null
-echo "Enabled reflector.timer"
-
-# Install submodules
-yadm submodule init >/dev/null
-yadm submodule update >/dev/null
-echo "Installed submodules"
-
-paru -c --noconfirm >/dev/null
-
-# Install cli packages
-sh ~/.config/yadm/drivers/bootstrap --multilib
-sh ~/.config/yadm/cli/bootstrap --multilib
-sh ~/.config/yadm/desktop.sh --multilib
-sh ~/.config/yadm/personal/bootstrap --multilib
-
-# Copy configuration files
-sudo cp -r ~/.config/yadm/conf/* /
-
-# Reboot system
-read -p "Press any key to reboot..." -n 1 -r
-reboot
+# Run general installation script
+python "${HOME}/.config/yadm/installer/general.py"

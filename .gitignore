@@ -66,6 +66,7 @@ logseq/
 .config/systemd/
 .config/synfig/
 .config/unity3d/
+.config/yadm-back/
 .config/xfce4/
 .config/xsettingsd/
 .dart-tool/
