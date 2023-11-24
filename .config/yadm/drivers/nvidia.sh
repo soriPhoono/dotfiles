@@ -45,12 +45,6 @@ if $HWACCEL; then
     if $MULTILIB; then
         packages+=("lib32-opencl-nvidia")
     fi
-
-    if grep -q "VDPAU_DRIVER" /etc/environment >/dev/null; then
-        commands+=("sudo sed -i 's/VDPAU_DRIVER=.*/VDPAU_DRIVER=nvidia/' /etc/environment")
-    else
-        commands+=("echo 'VDPAU_DRIVER=nvidia' | sudo tee -a /etc/environment >/dev/null")
-    fi
 fi
 
 # Install packages
