@@ -2,6 +2,8 @@
 
 source "$HOME/.local/bin/environment.sh"
 
+swww init
+
 # Get all wallpapers
 wallpapers=$(find ~/.config/hypr/wallpapers/ -type f)
 

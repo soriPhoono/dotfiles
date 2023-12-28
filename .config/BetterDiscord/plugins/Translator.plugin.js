@@ -2,7 +2,7 @@
  * @name Translator
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 2.5.8
+ * @version 2.6.1
  * @description Allows you to translate Messages and your outgoing Messages within Discord
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -14,8 +14,8 @@
 
 module.exports = (_ => {
 	const changeLog = {
-		"fixed": {
-			"Papago": "works again"
+		"added": {
+			"Microsoft Translate": "Added"
 		}
 	};
 	
@@ -113,7 +113,7 @@ module.exports = (_ => {
 				}))).filter(isOutput && this.isOnlyBackup(languages[_this.getLanguageChoice(languageTypes.INPUT, place, this.props.channelId)]) ? (n => n.backup) : (n => n));
 			}
 			isOnlyBackup(lang) {
-				return lang && (lang.auto && !translationEngines[_this.settings.engines.translator].auto || !lang.auto && !lang.special && !translationEngines[_this.settings.engines.translator].languages.includes(lang.id));
+				return lang && (lang.auto && translationEngines[_this.settings.engines.translator] && !translationEngines[_this.settings.engines.translator].auto || !lang.auto && !lang.special && translationEngines[_this.settings.engines.translator] && !translationEngines[_this.settings.engines.translator].languages.includes(lang.id));
 			}
 			render() {
 				return [
@@ -290,6 +290,17 @@ module.exports = (_ => {
 				auto: true,
 				funcName: "googleApiTranslate",
 				languages: googleLanguages
+			},
+			microsoft: {
+				name: "Microsoft",
+				auto: true,
+				funcName: "microsoftTranslate",
+				languages: ["af","am","ar","az","ba","bg","bn","bs","ca","cs","cy","da","de","el","en","es","et","eu","fa","fi","fil","fr","fr-CA","ga","gl","gu","ha","he","hi","hr","ht","hu","hy","id","ig","is","it","ja","ka","kk","km","kn","ko","ku","ky","lo","lt","lv","mg","mi","mk","ml","mr","ms","mt","my","ne","nl","or","pa","pl","ps","pt","pt-PT","ro","ru","rw","sd","si","sk","sl","sm","sn","so","sq","st","sv","sw","ta","te","th","tk","tr","tt","ug","uk","ur","uz","vi","xh","yo","zh-CN","zh-TW","zu"],
+				parser: {
+					"zh-CN": "zh-Hans",
+					"zh-TW": "zh-Hant"
+				},
+				key: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 			},
 			deepl: {
 				name: "DeepL",
@@ -544,7 +555,7 @@ module.exports = (_ => {
 					let translated = !!translatedMessages[e.instance.props.message.id];
 					let hint = BDFDB.BDUtils.isPluginEnabled("MessageUtilities") ? BDFDB.BDUtils.getPlugin("MessageUtilities").getActiveShortcutString("__Translate_Message") : null;
 					let [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: ["pin", "unpin"]});
-					if (index == -1) [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: ["edit", "add-reaction", "quote"]});
+					if (index == -1) [children, index] = BDFDB.ContextMenuUtils.findItem(e.returnvalue, {id: ["edit", "add-reaction", "add-reaction-1", "quote"]});
 					children.splice(index > -1 ? index + 1 : 0, 0, BDFDB.ContextMenuUtils.createItem(BDFDB.LibraryComponents.MenuItems.MenuItem, {
 						label: translated ? this.labels.context_messageuntranslateoption : this.labels.context_messagetranslateoption,
 						id: BDFDB.ContextMenuUtils.createItemId(this.name, translated ? "untranslate-message" : "translate-message"),
@@ -727,7 +738,7 @@ module.exports = (_ => {
 				if (!e.instance.props.message) return;
 				let translation = translatedMessages[e.instance.props.message.id];
 				if (translation && translation.content) e.returnvalue.props.children.push(BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
-					text: `${BDFDB.LanguageUtils.getName(translation.input)} ➝ ${BDFDB.LanguageUtils.LibraryStrings.to} ${BDFDB.LanguageUtils.getName(translation.output)}`,
+					text: `${BDFDB.LanguageUtils.getName(translation.input)} ➝ ${BDFDB.LanguageUtils.getName(translation.output)}`,
 					tooltipConfig: {style: "max-width: 400px"},
 					children: BDFDB.ReactUtils.createElement("span", {
 						className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.messagetimestamp, BDFDB.disCN.messagetimestampinline, BDFDB.disCN._translatortranslated),
@@ -958,7 +969,17 @@ module.exports = (_ => {
 			}
 			
 			googleApiTranslate (data, callback) {
-				BDFDB.LibraryRequires.request(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=${data.input.id}&tl=${data.output.id}&dt=t&dj=1&source=input&q=${encodeURIComponent(data.text)}`, (error, response, body) => {
+				BDFDB.LibraryRequires.request("https://translate.googleapis.com/translate_a/single", {
+					form: {
+						"client": "gtx",
+						"dt": "t",
+						"dj": "1",
+						"source": "input",
+						"sl": data.input.id,
+						"tl": data.output.id,
+						"q": encodeURIComponent(data.text)
+					}
+				}, (error, response, body) => {
 					if (!error && body && response.statusCode == 200) {
 						try {
 							body = JSON.parse(body);
@@ -984,8 +1005,56 @@ module.exports = (_ => {
 				});
 			}
 			
+			microsoftTranslate (data, callback) {
+				BDFDB.LibraryRequires.request("https://api.cognitive.microsofttranslator.com/translate", {
+					method: "post",
+					headers: {
+						"Content-Type": "application/json",
+						"Ocp-Apim-Subscription-Key": authKeys.microsoft && authKeys.microsoft.key || "1ea861033a56423f860fd6f5ff33e308"
+					},
+					body: JSON.stringify([{"Text": data.text}]),
+					form: Object.assign({
+						"api-version": "3.0",
+						"to": data.output.id
+					}, data.input.auto ? {} : {"from": data.input.id})
+				}, (error, response, body) => {
+					if (!error && body && response.statusCode == 200) {
+						try {
+							body = JSON.parse(body)[0];
+							if (!data.specialCase && body.detectedLanguage && body.detectedLanguage.language && languages[body.detectedLanguage.language.toLowerCase()]) {
+								data.input.name = languages[body.detectedLanguage.language.toLowerCase()].name;
+								data.input.ownlang = languages[body.detectedLanguage.language.toLowerCase()].ownlang;
+							}
+							callback(body.translations.map(n => n && n.text).filter(n => n).join(""));
+						}
+						catch (err) {callback("");}
+					}
+					else {
+						if (response.statusCode == 403 || response.statusCode == 429) BDFDB.NotificationUtils.toast(`${this.labels.toast_translating_failed}. ${this.labels.toast_translating_tryanother}. ${this.labels.error_dailylimit}`, {
+							type: "danger",
+							position: "center"
+						});
+						else if (response.statusCode == 401) BDFDB.NotificationUtils.toast(`${this.labels.toast_translating_failed}. ${this.labels.toast_translating_tryanother}. ${this.labels.error_keyoutdated}`, {
+							type: "danger",
+							position: "center"
+						});
+						else BDFDB.NotificationUtils.toast(`${this.labels.toast_translating_failed}. ${this.labels.toast_translating_tryanother}. ${this.labels.error_serverdown}`, {
+							type: "danger",
+							position: "center"
+						});
+						callback("");
+					}
+				});
+			}
+			
 			deepLTranslate (data, callback) {
-				BDFDB.LibraryRequires.request(`${authKeys.deepl && authKeys.deepl.paid ? "https://api.deepl.com/v2/translate" : "https://api-free.deepl.com/v2/translate"}?auth_key=${authKeys.deepl && authKeys.deepl.key || "75cc2f40-fdae-14cd-7242-6a384e2abb9c:fx"}&text=${encodeURIComponent(data.text)}${data.input.auto ? "" : `&source_lang=${data.input.id}`}&target_lang=${data.output.id}`, (error, response, body) => {
+				BDFDB.LibraryRequires.request(authKeys.deepl && authKeys.deepl.paid ? "https://api.deepl.com/v2/translate" : "https://api-free.deepl.com/v2/translate", {
+					form: Object.assign({
+						"auth_key": authKeys.deepl && authKeys.deepl.key || "75cc2f40-fdae-14cd-7242-6a384e2abb9c:fx",
+						"text": encodeURIComponent(data.text),
+						"target_lang": data.output.id
+					}, data.input.auto ? {} : {"source_lang": data.input.id})
+				}, (error, response, body) => {
 					if (!error && body && response.statusCode == 200) {
 						try {
 							body = JSON.parse(body);
@@ -1075,7 +1144,14 @@ module.exports = (_ => {
 			}
 			
 			yandexTranslate (data, callback) {
-				BDFDB.LibraryRequires.request(`https://translate.yandex.net/api/v1.5/tr/translate?key=${authKeys.yandex && authKeys.yandex.key || "trnsl.1.1.20191206T223907Z.52bd512eca953a5b.1ec123ce4dcab3ae859f312d27cdc8609ab280de"}&text=${encodeURIComponent(data.text)}&lang=${data.specialCase || data.input.auto ? data.output.id : (data.input.id + "-" + data.output.id)}&options=1`, (error, response, body) => {
+				BDFDB.LibraryRequires.request("https://translate.yandex.net/api/v1.5/tr/translate", {
+					form: {
+						"key": authKeys.yandex && authKeys.yandex.key || "trnsl.1.1.20191206T223907Z.52bd512eca953a5b.1ec123ce4dcab3ae859f312d27cdc8609ab280de",
+						"text": encodeURIComponent(data.text),
+						"lang": data.specialCase || data.input.auto ? data.output.id : (data.input.id + "-" + data.output.id),
+						"options": "1"
+					}
+				}, (error, response, body) => {
 					if (!error && body && response.statusCode == 200) {
 						try {
 							body = BDFDB.DOMUtils.create(body);
@@ -1115,15 +1191,15 @@ module.exports = (_ => {
 				const doTranslate = langCode => {
 					BDFDB.LibraryRequires.request("https://openapi.naver.com/v1/papago/n2mt", {
 						method: "post",
-						form: {
-							source: langCode,
-							target: data.output.id,
-							text: data.text
-						},
 						headers: {
 							"X-Naver-Client-Id": credentials[0],
 							"X-Naver-Client-Secret": credentials[1],
 							"Content-Type": "application/x-www-form-urlencoded"
+						},
+						form: {
+							source: langCode,
+							target: data.output.id,
+							text: data.text
 						}
 					}, (error, response, body) => {
 						if (!error && body && response.statusCode == 200) {
@@ -1151,14 +1227,14 @@ module.exports = (_ => {
 				if (data.input.auto) {
 					BDFDB.LibraryRequires.request("https://openapi.naver.com/v1/papago/detectLangs", {
 						method: "post",
-						form: {
-							query: data.text,
-						},
 						headers: {
 							"X-Naver-Client-Id": credentials[0],
 							"X-Naver-Client-Secret": credentials[1],
 							"Content-Type": "application/x-www-form-urlencoded"
 						},
+						form: {
+							query: data.text,
+						}
 					}, (error, response, body) => {
 						let langCode = "en";
 						if (!error && body && response.statusCode == 200) {
@@ -1180,6 +1256,7 @@ module.exports = (_ => {
 				const credentials = (authKeys.baidu && authKeys.baidu.key || "20221009001380882 TOPnUKz8jJ32AZNOuUhX").split(" ");
 				const salt = BDFDB.NumberUtils.generateId();
 				BDFDB.LibraryRequires.request("https://fanyi-api.baidu.com/api/trans/vip/translate", {
+					bdVersion: true,
 					method: "post",
 					form: {
 						from: translationEngines.baidu.parser[data.input.id] || data.input.id,
@@ -1199,7 +1276,11 @@ module.exports = (_ => {
 								else {callback("");}
 							}
 							else {
-								BDFDB.NotificationUtils.toast(`${this.labels.toast_translating_failed}. ${this.labels.toast_translating_tryanother}. ${result.error_code} : ${result.error_msg}.`, {
+								if (result.error_code == 54004) BDFDB.NotificationUtils.toast(`${this.labels.toast_translating_failed}. ${this.labels.toast_translating_tryanother}. ${this.labels.error_monthlylimit}.`, {
+									type: "danger",
+									position: "center"
+								});
+								else BDFDB.NotificationUtils.toast(`${this.labels.toast_translating_failed}. ${this.labels.toast_translating_tryanother}. ${result.error_code} : ${result.error_msg}.`, {
 									type: "danger",
 									position: "center"
 								});

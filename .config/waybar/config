@@ -1,9 +1,6 @@
 [
     {
         "id": "top",
-        "output": [
-            "DP-2"
-        ],
         "height": 0,
         "margin": "0px 0px 0px 0px",
         "name": "top",
