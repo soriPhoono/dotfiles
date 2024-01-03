@@ -171,7 +171,41 @@ function install_desktop() {
         wlsunset-git \
         hyprpicker-git \
         sddm \
-        # TODO: Finish adding packages from personal codebase
+        sddm-sugar-candy-git \
+        gvfs \
+        gvfs-mtp \
+        xorg-xlsclients \
+        xwaylandvideobridge-bin \
+        xdg-desktop-portal \
+        xdg-desktop-portal-hyprland \
+        qt5-wayland \
+        qt5ct \
+        qt6-wayland \
+        qt6ct \
+        file-roller \
+        gnome-disk-utility \
+        imv \
+        mpv \
+        pipewire \
+        pipewire-audio \
+        pipewire-alsa \
+        pipewire-jack \
+        pipewire-pulse \
+        easyeffects \
+        gstreamer \
+        gst-plugins-base \
+        gst-plugins-good \
+        gst-plugins-pipewire \
+        bluez \
+        bluez-utils \
+        firefox
+
+    sudo systemctl enable bluetooth.service
+    sudo usermod -aG video "$(whoami)"
+    sudo usermod -aG input "$(whoami)"
+    sudo usermod -aG disk "$(whoami)"
+    sudo usermod -aG audio "$(whoami)"
+    sudo usermod -aG games "$(whoami)"
 }
 
 configure_pacman
