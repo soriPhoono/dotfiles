@@ -1,6 +1,6 @@
 export const quickLaunchItems = [
     {
-        "name": "Youtube + Logseq + Github + Code",
+        "name": "Development workflow",
         "command": "xdg-open 'https://youtube.com/' && logseq --enable-features=UseOzonePlatform --ozone-platform=wayland & && xdg-open 'https://github.com/' && code --password-store=gnome --enable-features=UseOzonePlatform --ozone-platform=wayland &"
     }, // development tools
     {
