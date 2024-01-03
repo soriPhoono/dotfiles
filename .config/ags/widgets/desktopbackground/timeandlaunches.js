@@ -65,7 +65,7 @@ export default () => Box({
     className: 'bg-time-box spacing-h--10',
     children: [
         TimeAndDate(),
-        // QuickLaunches(),
+        QuickLaunches(),
     ],
 })
 
