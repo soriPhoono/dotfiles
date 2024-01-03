@@ -16,4 +16,6 @@ if status is-interactive
 
     # Set the prompt (starship)
     source (/usr/bin/starship init fish --print-full-init | psub)
+
+    neofetch
 end
