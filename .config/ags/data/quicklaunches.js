@@ -1,14 +1,14 @@
 export const quickLaunchItems = [
     {
-        "name": "GitHub + Files×2",
-        "command": "github-desktop & nautilus --new-window & nautilus --new-window &"
-    },
+        "name": "Youtube + Logseq + Github + Code",
+        "command": "xdg-open 'https://youtube.com/' && logseq --enable-features=UseOzonePlatform --ozone-platform=wayland & && xdg-open 'https://github.com/' && code --password-store=gnome --enable-features=UseOzonePlatform --ozone-platform=wayland &"
+    }, // development tools
     {
         "name": "Terminal×2",
-        "command": "foot & foot &"
-    },
+        "command": "foot & && foot &"
+    }, // default terminal emulator window config for system work
     {
-        "name": "Discord + Youtube + Github",
-        "command": "xdg-open 'https://discord.com/app' && xdg-open 'https://youtube.com/' && xdg-open 'https://github.com/' &"
-    },
+        "name": "Steam",
+        "command": "steam-native &"
+    } // Gaming setup for steam
 ]
