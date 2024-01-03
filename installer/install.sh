@@ -200,12 +200,15 @@ function install_desktop() {
         bluez-utils \
         firefox
 
-    sudo systemctl enable bluetooth.service
     sudo usermod -aG video "$(whoami)"
     sudo usermod -aG input "$(whoami)"
     sudo usermod -aG disk "$(whoami)"
     sudo usermod -aG audio "$(whoami)"
     sudo usermod -aG games "$(whoami)"
+
+    sudo systemctl enable bluetooth.service
+    systemctl --user enable pipewire.service
+    sudo systemctl enable sddm.service
 }
 
 configure_pacman
@@ -214,3 +217,6 @@ git submodule update --init --recursive -- "$(dirname $ROOT_DIR)"
 
 install_drivers
 configure_cli
+install_desktop
+
+paru -c
