@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Icon=application-vnd.google-apps.spreadsheet
+Name=Google Sheets
+Exec=firefox --new-window sheets.google.com
+Terminal=false
+Hidden=false
+Categories=Office; Utility
+Comment=Opens google sheets math application in firefox

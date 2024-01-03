@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Icon=google-drive
+Name=Google Slides
+Exec=firefox --new-window slides.google.com
+Terminal=false
+Hidden=false
+Categories=Office; Utility
+Comment=Opens google slides slideshow application in firefox

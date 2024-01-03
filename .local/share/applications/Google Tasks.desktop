@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Icon=google-tasks-desktop
+Name=Google Tasks
+Exec=firefox --new-window tasks.google.com
+Terminal=false
+Hidden=false
+Categories=Office; Utility
+Comment=Opens google tasks todo application in firefox
