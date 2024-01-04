@@ -236,13 +236,13 @@ export default () => {
         transition: 'slide_up',
         transitionDuration: 200,
         child: dockContent,
-        // setup: (self) => self
-        //     .hook(Hyprland, (self) => self._updateShow(self))
-        //     .hook(Hyprland.active.workspace, (self) => self._updateShow(self))
-        //     .hook(Hyprland.active.client, (self) => self._updateShow(self))
-        //     .hook(Hyprland, (self) => self._updateShow(self), 'client-added')
-        //     .hook(Hyprland, (self) => self._updateShow(self), 'client-removed')
-        // ,
+        setup: (self) => self
+            .hook(Hyprland, (self) => self._updateShow(self))
+            .hook(Hyprland.active.workspace, (self) => self._updateShow(self))
+            .hook(Hyprland.active.client, (self) => self._updateShow(self))
+            .hook(Hyprland, (self) => self._updateShow(self), 'client-added')
+            .hook(Hyprland, (self) => self._updateShow(self), 'client-removed')
+        ,
     })
     return EventBox({
         onHover: () => {
