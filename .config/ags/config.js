@@ -6,7 +6,6 @@ import { App, Utils } from './imports.js';
 import Bar from './widgets/bar/main.js';
 import Cheatsheet from './widgets/cheatsheet/main.js';
 import DesktopBackground from './widgets/desktopbackground/main.js';
-// import Dock from './widgets/dock/main.js';
 import { CornerTopleft, CornerTopright, CornerBottomleft, CornerBottomright } from './widgets/screencorners/main.js';
 import Indicator from './widgets/indicators/main.js';
 import Osk from './widgets/onscreenkeyboard/main.js';
@@ -43,7 +42,6 @@ export default {
         CornerBottomleft(),
         CornerBottomright(),
         DesktopBackground(),   // If you're going to uncomment these,
-        // Dock(), // Buggy       // uncomment the import statement too.
         Overview(),
         Indicator(),
         Cheatsheet(),
