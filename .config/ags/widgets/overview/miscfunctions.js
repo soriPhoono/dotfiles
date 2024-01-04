@@ -1,6 +1,6 @@
 const { Gio, GLib } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
+import { App, Utils } from '../../imports.js';
+const { execAsync } = Utils;
 import Todo from "../../services/todo.js";
 
 export function hasUnterminatedBackslash(inputString) {
@@ -11,55 +11,27 @@ export function hasUnterminatedBackslash(inputString) {
 
 export function launchCustomCommand(command) {
     const args = command.split(' ');
-    if (args[0] == '>raw') { // Mouse raw input
-        execAsync([`bash`, `-c`, `hyprctl keyword input:force_no_accel $(( 1 - $(hyprctl getoption input:force_no_accel -j | gojq ".int") ))`, `&`]).catch(print);
-    }
-    else if (args[0] == '>img') { // Change wallpaper
-        execAsync([`bash`, `-c`, `${App.configDir}/scripts/color_generation/switchwall.sh`, `&`]).catch(print);
-    }
-    else if (args[0] == '>color') { // Generate colorscheme from color picker
-        execAsync([`bash`, `-c`, `${App.configDir}/scripts/color_generation/switchcolor.sh`, `&`]).catch(print);
-    }
-    else if (args[0] == '>light') { // Light mode
-        execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && echo "-l" > ${GLib.get_user_cache_dir()}/ags/user/colormode.txt`])
-            .then(execAsync(['bash', '-c', `${App.configDir}/scripts/color_generation/switchwall.sh --noswitch`]).catch(print))
-            .catch(print);
-    }
-    else if (args[0] == '>dark') { // Dark mode
-        execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && echo "" > ${GLib.get_user_cache_dir()}/ags/user/colormode.txt`])
-            .then(execAsync(['bash', '-c', `${App.configDir}/scripts/color_generation/switchwall.sh --noswitch`]).catch(print))
-            .catch(print);
-    }
-    else if (args[0] == '>badapple') { // Light mode
-        execAsync([`bash`, `-c`, `${App.configDir}/scripts/color_generation/applycolor.sh --bad-apple`]).catch(print);
-    }
-    else if (args[0] == '>material') { // Light mode
-        execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && echo "material" > ${GLib.get_user_cache_dir()}/ags/user/colorbackend.txt`]).catch(print);
-    }
-    else if (args[0] == '>pywal') { // Dark mode
-        execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && echo "pywal" > ${GLib.get_user_cache_dir()}/ags/user/colorbackend.txt`]).catch(print);
-    }
-    else if (args[0] == '>todo') { // Todo
+    if (args[0] == '>todo') { // Todo
         Todo.add(args.slice(1).join(' '));
     }
     else if (args[0] == '>shutdown') { // Shut down
-        execAsync([`bash`, `-c`, `systemctl poweroff`]).catch(print);
+        execAsync(`systemctl poweroff`).catch(print);
     }
     else if (args[0] == '>reboot') { // Reboot
-        execAsync([`bash`, `-c`, `systemctl reboot`]).catch(print);
+        execAsync(`systemctl reboot`).catch(print);
     }
     else if (args[0] == '>sleep') { // Sleep
-        execAsync([`bash`, `-c`, `systemctl suspend`]).catch(print);
+        execAsync(`systemctl suspend`).catch(print);
     }
     else if (args[0] == '>logout') { // Log out
-        execAsync([`bash`, `-c`, `loginctl terminate-user $USER`]).catch(print);
+        execAsync(`loginctl terminate-user $USER`).catch(print);
     }
 }
 
 export function execAndClose(command, terminal) {
     App.closeWindow('overview');
     if (terminal) {
-        execAsync([`bash`, `-c`, `foot fish -C "${command}"`, `&`]).catch(print);
+        execAsync(`foot fish -C "${command}" &`).catch(print);
     }
     else
         execAsync(command).catch(print);
