@@ -1,8 +1,7 @@
-const { Gdk, Gtk } = imports.gi;
+const { Gtk } = imports.gi;
 const Lang = imports.lang;
-import { App, Service, Utils, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
-const { execAsync, exec } = Utils;
-const { Box, Label } = Widget;
+import { Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
+const { Box } = Widget;
 
 const NUM_OF_VERTICES = 30;
 const NUM_OF_EDGES = 29;

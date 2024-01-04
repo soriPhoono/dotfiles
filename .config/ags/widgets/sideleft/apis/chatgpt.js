@@ -1,7 +1,6 @@
-const { Gdk, GLib, Gtk, Pango } = imports.gi;
+const { Gtk } = imports.gi;
 import { App, Utils, Widget } from '../../../imports.js';
-const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, Icon, Label, Revealer, Scrollable } = Widget;
 import ChatGPT from '../../../services/chatgpt.js';
 import { MaterialIcon } from "../../../lib/materialicon.js";
 import { setupCursorHover, setupCursorHoverInfo } from "../../../lib/cursorhover.js";
@@ -139,7 +138,7 @@ export const openaiApiKeyInstructions = Box({
             }),
             setup: setupCursorHover,
             onClicked: () => {
-                Utils.execAsync(['bash', '-c', `xdg-open https://platform.openai.com/api-keys &`]);
+                Utils.execAsync(`xdg-open https://platform.openai.com/api-keys`);
             }
         })
     })]
@@ -197,7 +196,7 @@ export const chatGPTView = Scrollable({
         const vScrollbar = scrolledWindow.get_vscrollbar();
         vScrollbar.get_style_context().add_class('sidebar-scrollbar');
         // Avoid click-to-scroll-widget-to-view behavior
-        Utils.timeout(1, () => { 
+        Utils.timeout(1, () => {
             const viewport = scrolledWindow.child;
             viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined));
         })

@@ -1,4 +1,4 @@
-import { Utils, Widget } from '../imports.js';
+import { Utils } from '../imports.js';
 import Service from 'resource:///com/github/Aylur/ags/service.js';
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';

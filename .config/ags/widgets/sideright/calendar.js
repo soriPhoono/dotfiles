@@ -1,6 +1,6 @@
-const { Gio, Gdk, GLib, Gtk } = imports.gi;
-import { App, Widget, Utils } from '../../imports.js';
-const { Box, Button, CenterBox, Label, Revealer } = Widget;
+const { Gio } = imports.gi;
+import { Widget, Utils } from '../../imports.js';
+const { Box, Button, Label } = Widget;
 import { MaterialIcon } from "../../lib/materialicon.js";
 import { getCalendarLayout } from "../../lib/calendarlayout.js";
 import { setupCursorHover } from "../../lib/cursorhover.js";

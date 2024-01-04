@@ -1,5 +1,5 @@
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
+import { Utils, Widget } from '../../imports.js';
+const { execAsync } = Utils;
 const { Box, EventBox, Label, Revealer, Overlay } = Widget;
 import { AnimatedCircProg } from '../../lib/animatedcircularprogress.js'
 import { MaterialIcon } from '../../lib/materialicon.js';
@@ -96,7 +96,7 @@ export default () => Box({
                     const firstChild = child.get_children()[0];
                     firstChild.revealChild = !firstChild.revealChild;
                 }
-                
+
             },
         })
     ],

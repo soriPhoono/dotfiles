@@ -1,12 +1,10 @@
-const { Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
+const { Gtk } = imports.gi;
+import { Utils, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
-const { execAsync, exec } = Utils;
-const { Box, EventBox, Label, Revealer, Overlay } = Widget;
-import { AnimatedCircProg } from '../../lib/animatedcircularprogress.js'
-import { MaterialIcon } from '../../lib/materialicon.js';
-import { setupCursorHover, setupCursorHoverAim } from "../../lib/cursorhover.js";
+const { exec } = Utils;
+const { Box, EventBox, Revealer } = Widget;
+import { setupCursorHover } from "../../lib/cursorhover.js";
 
 const ANIMATION_TIME = 150;
 const pinnedApps = [
@@ -208,7 +206,6 @@ export default () => {
                 const dockBottom = dockAt[1] + dockSize[1];
 
                 const currentWorkspace = Hyprland.active.workspace.id;
-                var toReveal = true;
                 const hyprlandClients = JSON.parse(exec('hyprctl clients -j'));
                 for (const index in hyprlandClients) {
                     const client = hyprlandClients[index];

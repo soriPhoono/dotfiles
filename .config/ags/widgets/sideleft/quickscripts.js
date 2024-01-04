@@ -1,11 +1,10 @@
-const { Gdk, Gtk } = imports.gi;
-import { Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
-const { Box, Button, EventBox, Label, Scrollable } = Widget;
+import { Widget } from '../../imports.js';
+const { Box } = Widget;
 import { SidebarModule } from './module.js';
 
 export const QuickScripts = () => SidebarModule({
     name: 'Quick scripts',
     child: Box({
+        // TODO: Add entries to this list
     })
 })

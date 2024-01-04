@@ -1,4 +1,3 @@
-const { Gdk, Gtk } = imports.gi;
 import { Widget } from '../../imports.js';
 import SessionScreen from "./sessionscreen.js";
 

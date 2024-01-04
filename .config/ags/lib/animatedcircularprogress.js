@@ -1,5 +1,4 @@
-const { Gdk, Gtk } = imports.gi;
-const GObject = imports.gi.GObject;
+const { Gtk } = imports.gi;
 const Lang = imports.lang;
 import { Utils, Widget } from '../imports.js';
 

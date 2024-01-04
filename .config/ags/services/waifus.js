@@ -1,5 +1,4 @@
-const { Gdk, Gio, GLib } = imports.gi;
-import { Utils, Widget } from '../imports.js';
+import { Utils } from '../imports.js';
 import Service from 'resource:///com/github/Aylur/ags/service.js';
 
 // Usage from my python waifu fetcher, for reference
@@ -95,7 +94,7 @@ class WaifuService extends Service {
             else if (thisArg.includes('segs') || thisArg.includes('sex') || thisArg.includes('lewd')) this._nsfw = true;
             else {
                 taglist.push(thisArg);
-                if(['ecchi', 'hentai', 'ero', 'ass', 'paizuri', 'oral', 'milf'].includes(thisArg)) this._nsfw = true;
+                if (['ecchi', 'hentai', 'ero', 'ass', 'paizuri', 'oral', 'milf'].includes(thisArg)) this._nsfw = true;
             }
         }
         const newMessageId = this._queries.length;
@@ -109,7 +108,7 @@ class WaifuService extends Service {
         const paramString = paramStringFromObj(params);
         // Fetch
         // Note: body isn't included since passing directly to url is more reliable
-        const options = { 
+        const options = {
             method: 'GET',
             headers: this._headers[this._mode],
         };

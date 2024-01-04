@@ -2,7 +2,7 @@
 
 const { GLib, Gdk, Gtk } = imports.gi;
 import { Utils, Widget } from '../imports.js';
-const { lookUpIcon, timeout } = Utils;
+const { lookUpIcon } = Utils;
 const { Box, EventBox, Icon, Overlay, Label, Button, Revealer } = Widget;
 import { MaterialIcon } from "./materialicon.js";
 import { setupCursorHover } from "./cursorhover.js";

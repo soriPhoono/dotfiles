@@ -1,9 +1,9 @@
-const { Gdk, Gio, Gtk } = imports.gi;
-import { App, Service, Utils, Variable, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
+const { Gdk, Gtk } = imports.gi;
+import { App, Utils, Variable, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 const { execAsync, exec } = Utils;
-import { setupCursorHover, setupCursorHoverGrab } from "../../lib/cursorhover.js";
+import { setupCursorHoverGrab } from "../../lib/cursorhover.js";
 import { DoubleRevealer } from "../../lib/advancedwidgets.js";
 import { execAndClose, expandTilde, hasUnterminatedBackslash, startsWithNumber, launchCustomCommand, ls } from './miscfunctions.js';
 import {
@@ -106,7 +106,6 @@ const ContextWorkspaceArray = ({ label, actionFunc, thisWorkspace }) => Widget.M
                 label: `Workspace ${i}`
             });
             button.connect("activate", () => {
-                // execAsync([`${onClickBinary}`, `${thisWorkspace}`, `${i}`]).catch(print);
                 actionFunc(thisWorkspace, i);
                 overviewTick.value = !overviewTick.value;
             });
@@ -399,7 +398,7 @@ export const SearchAndWindows = () => {
                 try {
                     const fullResult = eval(text);
                     // copy
-                    execAsync(['wl-copy', `${fullResult}`]).catch(print);
+                    execAsync(`wl-copy ${fullResult}`).catch(print);
                     App.closeWindow('overview');
                     return;
                 } catch (e) {
@@ -408,7 +407,7 @@ export const SearchAndWindows = () => {
             }
             if (isDir) {
                 App.closeWindow('overview');
-                execAsync(['bash', '-c', `xdg-open "${expandTilde(text)}"`, `&`]).catch(print);
+                execAsync(`xdg-open "${expandTilde(text)}"`).catch(print);
                 return;
             }
             if (_appSearchResults.length > 0) {
@@ -431,7 +430,7 @@ export const SearchAndWindows = () => {
 
             else {
                 App.closeWindow('overview');
-                execAsync(['bash', '-c', `xdg-open 'https://www.google.com/search?q=${text} -site:quora.com' &`]).catch(print); // quora is useless
+                execAsync(`xdg-open 'https://www.google.com/search?q=${text}`).catch(print); // quora is useless
             }
         },
         // Actually onChange but this is ta workaround for a bug

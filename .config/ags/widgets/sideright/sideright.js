@@ -1,6 +1,5 @@
-const { GLib, Gdk, Gtk } = imports.gi;
 import { Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
+const { execAsync } = Utils;
 const { Box, EventBox } = Widget;
 import {
     ToggleIconBluetooth,
@@ -9,7 +8,6 @@ import {
     ModuleNightLight,
     ModuleInvertColors,
     ModuleIdleInhibitor,
-    ModuleEditIcon,
     ModuleReloadIcon,
     ModuleSettingsIcon,
     ModulePowerIcon

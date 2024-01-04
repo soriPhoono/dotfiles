@@ -1,6 +1,5 @@
 "use strict";
 // Import
-const { GLib } = imports.gi;
 import { App, Utils } from './imports.js';
 // Widgets
 import Bar from './widgets/bar/main.js';

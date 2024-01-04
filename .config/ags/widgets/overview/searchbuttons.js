@@ -1,8 +1,8 @@
-const { Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
+const { Gtk } = imports.gi;
+import { App, Utils, Widget } from '../../imports.js';
+const { execAsync } = Utils;
 import { searchItem } from './searchitem.js';
-import { execAndClose, startsWithNumber, launchCustomCommand } from './miscfunctions.js';
+import { execAndClose, launchCustomCommand } from './miscfunctions.js';
 
 export const DirectoryButton = ({ parentPath, name, type, icon }) => {
     const actionText = Widget.Revealer({
@@ -24,7 +24,7 @@ export const DirectoryButton = ({ parentPath, name, type, icon }) => {
         className: 'overview-search-result-btn',
         onClicked: () => {
             App.closeWindow('overview');
-            execAsync(['bash', '-c', `xdg-open '${parentPath}/${name}'`, `&`]).catch(print);
+            execAsync(`xdg-open '${parentPath}/${name}'`).catch(print);
         },
         child: Widget.Box({
             children: [
@@ -74,7 +74,7 @@ export const CalculationResultButton = ({ result, text }) => searchItem({
     content: `${result}`,
     onActivate: () => {
         App.closeWindow('overview');
-        execAsync(['wl-copy', `${result}`]).catch(print);
+        execAsync(`wl-copy ${result}`).catch(print);
     },
 });
 
@@ -167,6 +167,6 @@ export const SearchButton = ({ text = '' }) => searchItem({
     content: `${text}`,
     onActivate: () => {
         App.closeWindow('overview');
-        execAsync(['bash', '-c', `xdg-open 'https://www.google.com/search?q=${text} -site:quora.com' &`]).catch(print); // quora is useless
+        execAsync(`xdg-open 'https://www.google.com/search?q=${text}`).catch(print); // fuck quora
     },
 });

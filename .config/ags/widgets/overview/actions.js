@@ -1,10 +1,8 @@
-const { Gio, GLib } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
+import { Utils } from '../../imports.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 
 function moveClientToWorkspace(address, workspace) {
-    Utils.execAsync(['bash', '-c', `hyprctl dispatch movetoworkspacesilent ${workspace},address:${address} &`]);
+    Utils.execAsync(`hyprctl dispatch movetoworkspacesilent ${workspace},address:${address}`);
 }
 
 export function dumpToWorkspace(from, to) {

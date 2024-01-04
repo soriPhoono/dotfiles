@@ -1,8 +1,7 @@
-const { GLib, Gio } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-import Variable from 'resource:///com/github/Aylur/ags/variable.js';
-const { execAsync, exec } = Utils;
-const { Box, Label, Button, Revealer, EventBox } = Widget;
+const { GLib } = imports.gi;
+import { Utils, Widget } from '../../imports.js';
+const { execAsync } = Utils;
+const { Box, Label, Button } = Widget;
 import { setupCursorHover } from '../../lib/cursorhover.js';
 
 import { quickLaunchItems } from '../../data/quicklaunches.js'

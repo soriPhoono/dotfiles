@@ -1,7 +1,7 @@
-const { Gdk, Gio, GLib, Gtk, Pango } = imports.gi;
+const { Gdk, Gio, GLib, Gtk } = imports.gi;
 import { App, Utils, Widget } from '../../../imports.js';
-const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, Label, Scrollable } = Widget;
+const { execAsync } = Utils;
 import { MaterialIcon } from "../../../lib/materialicon.js";
 import md2pango from "../../../lib/md2pango.js";
 import GtkSource from "gi://GtkSource?version=3.0";
@@ -103,7 +103,7 @@ const CodeBlock = (content = '', lang = 'txt') => {
                 onClicked: (self) => {
                     const buffer = sourceView.get_buffer();
                     const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false); // TODO: fix this
-                    execAsync([`wl-copy`, `${copyContent}`]).catch(print);
+                    execAsync([`wl-copy ${copyContent}`]).catch(print);
                 },
             }),
         ]

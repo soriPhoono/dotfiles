@@ -2,11 +2,10 @@
 // For the popup notifications, see onscreendisplay.js
 // The actual widget for each single notification is in lib/notification.js
 
-const { GLib, Gtk } = imports.gi;
-import { Service, Utils, Widget } from '../../imports.js';
+const { Gtk } = imports.gi;
+import { Widget } from '../../imports.js';
 import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
-const { lookUpIcon, timeout } = Utils;
-const { Box, Icon, Scrollable, Label, Button, Revealer } = Widget;
+const { Box, Scrollable, Label, Button, Revealer } = Widget;
 import { MaterialIcon } from "../../lib/materialicon.js";
 import { setupCursorHover } from "../../lib/cursorhover.js";
 import Notification from "../../lib/notification.js";

@@ -1,7 +1,5 @@
-import { App, Service, Utils, Widget } from '../../imports.js';
+import { App, Widget } from '../../imports.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-const { CONFIG_DIR, exec, execAsync } = Utils;
-import { setupCursorHover } from "../../lib/cursorhover.js";
 import { RoundedCorner } from "../../lib/roundedcorner.js";
 import Brightness from '../../services/brightness.js';
 import Indicator from '../../services/indicator.js';

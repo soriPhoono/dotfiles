@@ -1,5 +1,5 @@
 import { Service, Utils } from '../imports.js';
-const { exec, execAsync } = Utils;
+const { exec } = Utils;
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 

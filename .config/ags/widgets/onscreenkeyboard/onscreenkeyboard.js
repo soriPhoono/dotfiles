@@ -1,8 +1,8 @@
-const { GLib, Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
+const { Gtk } = imports.gi;
+import { App, Utils, Widget } from '../../imports.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-const { Box, EventBox, Button, Revealer } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, EventBox, Button } = Widget;
+const { execAsync } = Utils;
 import { MaterialIcon } from '../../lib/materialicon.js';
 import { separatorLine } from '../../lib/separator.js';
 import { defaultOskLayout, oskLayouts } from '../../data/keyboardlayouts.js';
@@ -10,7 +10,7 @@ import { setupCursorHoverGrab } from '../../lib/cursorhover.js';
 
 const keyboardLayout = defaultOskLayout;
 const keyboardJson = oskLayouts[keyboardLayout];
-execAsync(`ydotoold`).catch(print); // Start ydotool daemon
+execAsync(`ydotoold`).catch(print); // Start ydotool daemon TODO: ensure that ydotool is installed from installer script
 
 function releaseAllKeys() {
     const keycodes = Array.from(Array(249).keys());
@@ -58,10 +58,6 @@ const keyboardControls = Box({
                 App.toggleWindow('osk');
             },
             label: 'keyboard_hide',
-        }),
-        Button({
-            className: 'osk-control-button txt-norm',
-            label: `${keyboardJson['name_short']}`,
         }),
         Button({
             className: 'osk-control-button txt-norm icon-material',

@@ -1,5 +1,5 @@
-const { Gdk, Gtk } = imports.gi;
-import { Service, Widget } from '../../imports.js';
+const { Gtk } = imports.gi;
+import { Widget } from '../../imports.js';
 import { Keybinds } from "./keybinds.js";
 import { setupCursorHover } from "../../lib/cursorhover.js";
 

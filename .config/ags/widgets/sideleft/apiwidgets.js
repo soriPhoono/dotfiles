@@ -1,8 +1,6 @@
-const { Gtk, Gdk } = imports.gi;
-import { App, Utils, Widget } from '../../imports.js';
-const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
-import { setupCursorHover, setupCursorHoverInfo } from "../../lib/cursorhover.js";
+import { Widget } from '../../imports.js';
+const { Box, Button, Entry, Stack } = Widget;
+import { setupCursorHover } from "../../lib/cursorhover.js";
 // APIs
 import ChatGPT from '../../services/chatgpt.js';
 import { chatGPTView, chatGPTCommands, sendMessage as chatGPTSendMessage, chatGPTTabIcon } from './apis/chatgpt.js';
@@ -83,7 +81,7 @@ function switchToTab(id) {
     apiContentStack.shown = APIS[id].name;
     apiCommandStack.shown = APIS[id].name;
     chatEntry.placeholderText = APIS[id].placeholderText,
-    currentApiId = id;
+        currentApiId = id;
 }
 const apiSwitcher = Box({
     homogeneous: true,
@@ -106,7 +104,7 @@ const apiSwitcher = Box({
 export default Widget.Box({
     properties: [
         ['nextTab', () => switchToTab(Math.min(currentApiId + 1, APIS.length - 1))],
-        ['prevTab', () => switchToTab(Math.max(0, currentApiId-1))],
+        ['prevTab', () => switchToTab(Math.max(0, currentApiId - 1))],
     ],
     vertical: true,
     className: 'spacing-v-10',

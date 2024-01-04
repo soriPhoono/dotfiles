@@ -1,7 +1,4 @@
 import { Service, Utils } from '../imports.js';
-const { exec, execAsync } = Utils;
-
-const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
 
 class IndicatorService extends Service {
     static {

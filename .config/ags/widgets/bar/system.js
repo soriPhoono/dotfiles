@@ -1,8 +1,7 @@
 // This is for the right pill of the bar. 
 // For the cool memory indicator on the sidebar, see sysinfo.js
-import { Service, Utils, Widget } from '../../imports.js';
-const { Box, Label, Button, Overlay, Revealer, Scrollable, Stack, EventBox } = Widget;
-const { exec, execAsync } = Utils;
+import { Utils, Widget } from '../../imports.js';
+const { Box, Label, Button, Overlay, Revealer } = Widget;
 const { GLib } = imports.gi;
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
@@ -72,7 +71,7 @@ const Utilities = () => Box({
         }),
         UtilButton({
             name: 'Color picker', icon: 'colorize', onClicked: () => {
-                Utils.execAsync(['hyprpicker', '-a']).catch(print)
+                Utils.execAsync('hyprpicker -a &').catch(print)
             }
         }),
         UtilButton({
@@ -182,7 +181,7 @@ export const ModuleSystem = () => Widget.EventBox({
         children: [
             BarGroup({ child: BarClock() }),
             BarGroup({ child: Utilities() }),
-            BarGroup({ child: BarBattery() }),
+            BarGroup({ child: BarBattery() }), // NOTE: Change this to weather widget later for desktop implementation
         ]
     })
 });

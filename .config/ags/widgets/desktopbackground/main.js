@@ -1,10 +1,7 @@
-const { Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
+import { Widget } from '../../imports.js';
 
 import TimeAndLaunchesWidget from './timeandlaunches.js'
 import SystemWidget from './system.js'
-import GraphWidget from './graph.js'
 
 export default () => Widget.Window({
     name: 'desktopbackground',

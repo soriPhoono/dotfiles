@@ -1,6 +1,6 @@
-const { Gio, Gdk, GLib, Gtk } = imports.gi;
-import { App, Widget, Utils } from '../../imports.js';
-const { Box, Button, CenterBox, Label, Revealer } = Widget;
+const { Gtk } = imports.gi;
+import { Widget, Utils } from '../../imports.js';
+const { Box, Button, Label, Revealer } = Widget;
 import { MaterialIcon } from "../../lib/materialicon.js";
 import Todo from "../../services/todo.js";
 import { setupCursorHover } from "../../lib/cursorhover.js";

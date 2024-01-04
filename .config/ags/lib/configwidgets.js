@@ -1,8 +1,7 @@
-const { Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Variable, Widget } from '../imports.js';
+import { Utils, Widget } from '../imports.js';
 import { MaterialIcon } from './materialicon.js';
 import { setupCursorHover } from './cursorhover.js';
-const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack } = Widget;
+const { Box, Button, Label, Revealer } = Widget;
 
 export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, ...rest }) => {
     let value = initValue;

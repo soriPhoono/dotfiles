@@ -1,6 +1,5 @@
-const { Gdk, Gtk } = imports.gi;
-import { App, SCREEN_WIDTH, SCREEN_HEIGHT, Service, Utils, Variable, Widget } from '../imports.js';
-const { Box, Button, EventBox, Label, Overlay, Revealer, Scrollable, Stack } = Widget;
+import { Widget } from '../imports.js';
+const { Revealer, Scrollable } = Widget;
 
 export const MarginRevealer = ({
     transition = 'slide_down',

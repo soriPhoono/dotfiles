@@ -1,13 +1,12 @@
-const { Gdk, Gtk } = imports.gi;
+const { Gdk } = imports.gi;
 import { Utils, Widget } from '../../imports.js';
-const { Box, Button, EventBox, Label, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Box, Button, EventBox, Label, Stack } = Widget;
 import { MaterialIcon } from "../../lib/materialicon.js";
 import { setupCursorHover } from "../../lib/cursorhover.js";
 import { NavigationIndicator } from "../../lib/navigationindicator.js";
 import toolBox from './toolbox.js';
 import apiWidgets from './apiwidgets.js';
-import apiwidgets, { chatEntry } from './apiwidgets.js';
+import { chatEntry } from './apiwidgets.js';
 
 const contents = [
     {
@@ -186,8 +185,8 @@ export default () => Box({
                     event.get_keyval()[1] >= 32 && event.get_keyval()[1] <= 126 &&
                     widget != chatEntry && event.get_keyval()[1] != Gdk.KEY_space)
                     ||
-                    ((event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) && 
-                    event.get_keyval()[1] === Gdk.KEY_v)
+                    ((event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
+                        event.get_keyval()[1] === Gdk.KEY_v)
                 ) {
                     chatEntry.grab_focus();
                     chatEntry.set_text(chatEntry.text + String.fromCharCode(event.get_keyval()[1]));

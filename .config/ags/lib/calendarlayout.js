@@ -1,5 +1,3 @@
-const { GLib, Gio } = imports.gi;
-
 function checkLeapYear(year) {
     return (
         year % 400 == 0 ||
@@ -46,7 +44,7 @@ export function getCalendarLayout(dateObject, highlight) {
     // Fill
     var monthDiff = (weekdayOfMonthFirst == 0 ? 0 : -1);
     var toFill, dim;
-    if(weekdayOfMonthFirst == 0) {
+    if (weekdayOfMonthFirst == 0) {
         toFill = 1;
         dim = daysInMonth;
     }

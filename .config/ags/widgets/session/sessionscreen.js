@@ -1,8 +1,8 @@
 // This is for the cool memory indicator on the sidebar
 // For the right pill of the bar, see system.js
 const { Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
-const { exec, execAsync } = Utils;
+import { App, Utils, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
+const { execAsync } = Utils;
 
 const SessionButton = (name, icon, command, props = {}) => {
     const buttonDescription = Widget.Revealer({
@@ -58,7 +58,7 @@ const SessionButton = (name, icon, command, props = {}) => {
 export default () => {
     // lock, logout, sleep
     const lockButton = SessionButton('Lock', 'lock', () => { App.closeWindow('session'); execAsync('gtklock') });
-    const logoutButton = SessionButton('Logout', 'logout', () => { App.closeWindow('session'); execAsync(['bash', '-c', 'loginctl terminate-user $USER']) });
+    const logoutButton = SessionButton('Logout', 'logout', () => { App.closeWindow('session'); execAsync('loginctl terminate-user $USER') });
     const sleepButton = SessionButton('Sleep', 'sleep', () => { App.closeWindow('session'); execAsync('systemctl suspend') });
     // hibernate, shutdown, reboot
     const hibernateButton = SessionButton('Hibernate', 'downloading', () => { App.closeWindow('session'); execAsync('systemctl hibernate') });

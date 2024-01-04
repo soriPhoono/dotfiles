@@ -1,5 +1,5 @@
 const { GLib } = imports.gi;
-import { Widget, Utils, Service } from '../../imports.js';
+import { Widget, Utils } from '../../imports.js';
 import Bluetooth from 'resource:///com/github/Aylur/ags/service/bluetooth.js';
 import Network from 'resource:///com/github/Aylur/ags/service/network.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
@@ -22,7 +22,7 @@ export const ToggleIconWifi = (props = {}) => Widget.Button({
     tooltipText: 'Wifi | Right-click to configure',
     onClicked: Network.toggleWifi,
     onSecondaryClickRelease: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center wifi', '&']);
+        execAsync('XDG_CURRENT_DESKTOP="gnome" gnome-control-center wifi');
     },
     child: NetworkIndicator(),
     connections: [
@@ -48,7 +48,7 @@ export const ToggleIconBluetooth = (props = {}) => Widget.Button({
             exec('rfkill unblock bluetooth');
     },
     onSecondaryClickRelease: () => {
-        execAsync(['bash', '-c', 'blueberry &']);
+        execAsync('blueberry &');
     },
     child: BluetoothIndicator(),
     connections: [
@@ -67,7 +67,7 @@ export const HyprToggleIcon = (icon, name, hyprlandConfigValue, props = {}) => W
         // Set the value to 1 - value
         Utils.execAsync(`hyprctl -j getoption ${hyprlandConfigValue}`).then((result) => {
             const currentOption = JSON.parse(result).int;
-            execAsync(['bash', '-c', `hyprctl keyword ${hyprlandConfigValue} ${1 - currentOption} &`]).catch(print);
+            execAsync(`hyprctl keyword ${hyprlandConfigValue} ${1 - currentOption} &`).catch(print);
             button.toggleClassName('sidebar-button-active', currentOption == 0);
         }).catch(print);
     },
@@ -89,7 +89,6 @@ export const ModuleNightLight = (props = {}) => Widget.Button({ // TODO: Make th
     onClicked: (self) => {
         self._enabled = !self._enabled;
         self.toggleClassName('sidebar-button-active', self._enabled);
-        // if (self._enabled) Utils.execAsync(['bash', '-c', 'wlsunset & disown'])
         if (self._enabled) Utils.execAsync('wlsunset')
         else Utils.execAsync('pkill wlsunset');
     },
@@ -102,11 +101,11 @@ export const ModuleNightLight = (props = {}) => Widget.Button({ // TODO: Make th
     ...props,
 });
 
+// TODO: change this to use chromatic aberration shader or something else
 export const ModuleInvertColors = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Color inversion',
     onClicked: (button) => {
-        // const shaderPath = JSON.parse(exec('hyprctl -j getoption decoration:screen_shader')).str;
         Hyprland.sendMessage('j/getoption decoration:screen_shader')
             .then((output) => {
                 const shaderPath = JSON.parse(output)["str"].trim();
@@ -159,7 +158,7 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({ // TODO: Make this
     ...props,
     className: 'txt-small sidebar-iconbutton',
     onClicked: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
+        execAsync('XDG_CURRENT_DESKTOP="gnome" gnome-control-center');
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('edit', 'norm'),
@@ -173,7 +172,7 @@ export const ModuleReloadIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Reload Hyprland',
     onClicked: () => {
-        execAsync(['bash', '-c', 'hyprctl reload &']);
+        execAsync('hyprctl reload &');
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('refresh', 'norm'),
@@ -187,7 +186,7 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Open Settings',
     onClicked: () => {
-        execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']);
+        execAsync('XDG_CURRENT_DESKTOP="gnome" gnome-control-center &');
         App.toggleWindow('sideright');
     },
     child: MaterialIcon('settings', 'norm'),

@@ -1,12 +1,11 @@
-const { Gio, GLib, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
+const { Gio, GLib } = imports.gi;
+import { App, Utils, Widget } from '../../imports.js';
 const { exec, execAsync } = Utils;
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 
-const { Box, EventBox, Icon, Scrollable, Label, Button, Revealer } = Widget;
+const { Box, Label, Button } = Widget;
 import { MarginRevealer } from '../../lib/advancedwidgets.js';
 import { AnimatedCircProg } from "../../lib/animatedcircularprogress.js";
-import { MaterialIcon } from '../../lib/materialicon.js';
 import { showMusicControls } from '../../variables.js';
 
 function expandTilde(path) {
@@ -167,8 +166,8 @@ const CoverArt = ({ player, ...rest }) => Box({
                             }
 
                             // Generate colors
-                            execAsync(['bash', '-c',
-                                `${App.configDir}/scripts/color_generation/generate_colors_material.py --path '${coverPath}' > ${App.configDir}/scss/_musicmaterial.scss ${lightDark}`])
+                            execAsync(
+                                `${App.configDir}/scripts/color_generation/generate_colors_material.py --path '${coverPath}' > ${App.configDir}/scss/_musicmaterial.scss ${lightDark}`)
                                 .then(() => {
                                     exec(`wal -i "${player.coverPath}" -n -t -s -e -q ${lightDark}`)
                                     exec(`cp ${GLib.get_user_cache_dir()}/wal/colors.scss ${App.configDir}/scss/_musicwal.scss`);
@@ -380,7 +379,7 @@ export default () => MarginRevealer({
     }),
     connections: [
         [showMusicControls, (revealer) => {
-            if(showMusicControls.value) revealer._show();
+            if (showMusicControls.value) revealer._show();
             else revealer._hide();
         }],
     ],

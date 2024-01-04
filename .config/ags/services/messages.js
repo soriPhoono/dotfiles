@@ -1,4 +1,4 @@
-const { Notify, GLib, Gio } = imports.gi;
+const { GLib, Gio } = imports.gi;
 import { Utils } from '../imports.js';
 import Battery from 'resource:///com/github/Aylur/ags/service/battery.js';
 
@@ -14,7 +14,7 @@ const FIRST_RUN_FILE_CONTENT = "Just a file to confirm that you have been greete
 const APP_NAME = "ags";
 const FIRST_RUN_NOTIF_TITLE = "Welcome!";
 const FIRST_RUN_NOTIF_BODY = `Looks like this is your first run.\nHit <span foreground="#c06af1" font_weight="bold">Super + /</span> for a list of keybinds.`;
- 
+
 export async function firstRunWelcome() {
     if (!fileExists(FIRST_RUN_PATH)) {
         console.log('uuwuwuwuwuwuwuwuu');
@@ -36,16 +36,16 @@ var batteryWarned = false;
 async function batteryMessage() {
     const perc = Battery.percent;
     const charging = Battery.charging;
-    if(charging) {
+    if (charging) {
         batteryWarned = false;
         return;
     }
     for (let i = BATTERY_WARN_LEVELS.length - 1; i >= 0; i--) {
         if (perc <= BATTERY_WARN_LEVELS[i] && !charging && !batteryWarned) {
             batteryWarned = true;
-            Utils.execAsync(['bash', '-c',
-                `notify-send "${BATTERY_WARN_TITLES[i]}" "${BATTERY_WARN_BODIES[i]}" -u critical -a 'ags' &`
-            ]).catch(print);
+            Utils.execAsync(
+                `notify-send "${BATTERY_WARN_TITLES[i]}" "${BATTERY_WARN_BODIES[i]}" -u critical -a "${APP_NAME}"`
+            ).catch(print);
             break;
         }
     }

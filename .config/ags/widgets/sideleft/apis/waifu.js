@@ -1,17 +1,19 @@
-const { Gdk, Gio, GLib, Gtk, Pango } = imports.gi;
-import { App, Utils, Widget } from '../../../imports.js';
-const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack } = Widget;
-const { execAsync, exec } = Utils;
+const { Gio, GLib, Gtk } = imports.gi;
+import { Utils, Widget } from '../../../imports.js';
+const { Box, Button, Label, Revealer, Scrollable, Stack } = Widget;
+const { execAsync } = Utils;
 import { MaterialIcon } from "../../../lib/materialicon.js";
 import { MarginRevealer } from '../../../lib/advancedwidgets.js';
-import { setupCursorHover, setupCursorHoverInfo } from "../../../lib/cursorhover.js";
+import { setupCursorHover } from "../../../lib/cursorhover.js";
 import WaifuService from '../../../services/waifus.js';
 
 const IMAGE_REVEAL_DELAY = 13; // Some wait for inits n other weird stuff
 
+// TODO: replace waifu generator with midjourney image generation api
+
 // Create cache folder and clear pics from previous session
-Utils.exec(`bash -c 'mkdir -p ${GLib.get_user_cache_dir()}/ags/media/waifus'`);
-Utils.exec(`bash -c 'rm ${GLib.get_user_cache_dir()}/ags/media/waifus/*'`);
+Utils.exec(`mkdir -p ${GLib.get_user_cache_dir()}/ags/media/waifus`);
+Utils.exec(`rm ${GLib.get_user_cache_dir()}/ags/media/waifus/*`);
 
 export function fileExists(filePath) {
     let file = Gio.File.new_for_path(filePath);
@@ -90,17 +92,17 @@ const WaifuImage = (taglist) => {
             ImageAction({
                 name: 'Go to source',
                 icon: 'link',
-                action: () => execAsync(['xdg-open', `${thisBlock._imageData.source}`]).catch(print),
+                action: () => execAsync(`xdg-open ${thisBlock._imageData.source}`).catch(print),
             }),
             ImageAction({
                 name: 'Hoard',
                 icon: 'save',
-                action: () => execAsync(['bash', '-c', `mkdir -p ~/Pictures/waifus && cp ${thisBlock._imagePath} ~/Pictures/waifus`]).catch(print),
+                action: () => execAsync(`mkdir -p ~/Pictures/waifus && cp ${thisBlock._imagePath} ~/Pictures/waifus`).catch(print),
             }),
             ImageAction({
                 name: 'Open externally',
                 icon: 'open_in_new',
-                action: () => execAsync(['xdg-open', `${thisBlock._imagePath}`]).catch(print),
+                action: () => execAsync(`xdg-open ${thisBlock._imagePath}`).catch(print),
             }),
         ]
     })
@@ -158,12 +160,12 @@ const WaifuImage = (taglist) => {
                     downloadIndicator._hide();
                 }
                 if (!force && fileExists(thisBlock._imagePath)) showImage();
-                else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock._imagePath}' '${url}'`])
+                else Utils.execAsync(`wget -O '${thisBlock._imagePath}' '${url}'`)
                     .then(showImage)
                     .catch(print);
                 blockHeading.get_children().forEach((child) => {
                     child.setCss(`border-color: ${dominant_color};`);
-                }) 
+                })
                 colorIndicator.css = `background-color: ${dominant_color};`;
             }],
         ],

@@ -1,6 +1,5 @@
-import { Service, Utils, Widget } from '../../imports.js';
+import { Utils, Widget } from '../../imports.js';
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
-import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 const { execAsync, exec } = Utils;
 import { AnimatedCircProg } from "../../lib/animatedcircularprogress.js";
@@ -34,7 +33,7 @@ export const ModuleMusic = () => Widget.EventBox({
     onScrollUp: () => Hyprland.sendMessage(`dispatch workspace -1`),
     onScrollDown: () => Hyprland.sendMessage(`dispatch workspace +1`),
     onPrimaryClickRelease: () => showMusicControls.setValue(!showMusicControls.value),
-    onSecondaryClickRelease: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']),
+    onSecondaryClickRelease: () => execAsync('playerctl next'),
     onMiddleClickRelease: () => Mpris.getPlayer('')?.playPause(),
     child: Widget.Box({
         className: 'bar-group-margin bar-sides',

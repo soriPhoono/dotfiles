@@ -1,11 +1,6 @@
-const { Gio, GLib, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { exec, execAsync } = Utils;
-import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
+import { Widget } from '../../imports.js';
 
-const { Box, EventBox, Icon, Scrollable, Label, Button, Revealer } = Widget;
-import { AnimatedCircProg } from "../../lib/animatedcircularprogress.js";
-import { MaterialIcon } from '../../lib/materialicon.js';
+const { Box, Label } = Widget;
 import { showColorScheme } from '../../variables.js';
 
 const ColorBox = ({
