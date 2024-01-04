@@ -430,7 +430,7 @@ export const SearchAndWindows = () => {
 
             else {
                 App.closeWindow('overview');
-                execAsync(`xdg-open 'https://www.google.com/search?q=${text}`).catch(print); // quora is useless
+                execAsync(`xdg-open 'https://www.google.com/search?q=${text}'`).catch(print); // quora is useless
             }
         },
         // Actually onChange but this is ta workaround for a bug
