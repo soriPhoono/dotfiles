@@ -167,7 +167,7 @@ const CoverArt = ({ player, ...rest }) => Box({
 
                             // Generate colors
                             execAsync(
-                                `${App.configDir}/scripts/color_generation/generate_colors_material.py --path '${coverPath}' > ${App.configDir}/scss/_musicmaterial.scss ${lightDark}`)
+                                `${App.configDir}/scripts/generate_colors_material.py --path '${coverPath}' > ${App.configDir}/scss/_musicmaterial.scss ${lightDark}`)
                                 .then(() => {
                                     exec(`wal -i "${player.coverPath}" -n -t -s -e -q ${lightDark}`)
                                     exec(`cp ${GLib.get_user_cache_dir()}/wal/colors.scss ${App.configDir}/scss/_musicwal.scss`);
