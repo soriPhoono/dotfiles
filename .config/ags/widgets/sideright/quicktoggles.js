@@ -22,7 +22,7 @@ export const ToggleIconWifi = (props = {}) => Widget.Button({
     tooltipText: 'Wifi | Right-click to configure',
     onClicked: Network.toggleWifi,
     onSecondaryClickRelease: () => {
-        execAsync('XDG_CURRENT_DESKTOP="gnome" gnome-control-center wifi');
+        execAsync(`bash -c "XDG_CURRENT_DESKTOP='gnome' gnome-control-center wifi" &`).catch(print);
     },
     child: NetworkIndicator(),
     connections: [
@@ -116,7 +116,7 @@ export const ModuleInvertColors = (props = {}) => Widget.Button({
                     button.toggleClassName('sidebar-button-active', false);
                 }
                 else {
-                    Hyprland.sendMessage(`j/keyword decoration:screen_shader ${expandTilde('~/.config/hypr/shaders/invert.frag')}`)
+                    Hyprland.sendMessage(`j/keyword decoration:screen_shader ${expandTilde('~/.config/hypr/shaders/chromatic_abberation.frag')}`)
                         .catch(print);
                     button.toggleClassName('sidebar-button-active', true);
                 }
@@ -208,6 +208,3 @@ export const ModulePowerIcon = (props = {}) => Widget.Button({
         setupCursorHover(button);
     }
 })
-
-
-

@@ -33,7 +33,7 @@ export const ModuleRightSpace = () => {
         // onHover: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', true) },
         // onHoverLost: () => { barStatusIcons.toggleClassName('bar-statusicons-hover', false) },
         onPrimaryClick: () => App.toggleWindow('sideright'),
-        onSecondaryClickRelease: () => execAsync('playerctl next'),
+        onSecondaryClickRelease: () => execAsync('bash -c "playerctl next"'),
         onMiddleClickRelease: () => Mpris.getPlayer('')?.playPause(),
         child: Widget.Box({
             homogeneous: false,

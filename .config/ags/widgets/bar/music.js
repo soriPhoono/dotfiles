@@ -33,7 +33,7 @@ export const ModuleMusic = () => Widget.EventBox({
     onScrollUp: () => Hyprland.sendMessage(`dispatch workspace -1`),
     onScrollDown: () => Hyprland.sendMessage(`dispatch workspace +1`),
     onPrimaryClickRelease: () => showMusicControls.setValue(!showMusicControls.value),
-    onSecondaryClickRelease: () => execAsync('playerctl next'),
+    onSecondaryClickRelease: () => execAsync('bash -c "playerctl next"'),
     onMiddleClickRelease: () => Mpris.getPlayer('')?.playPause(),
     child: Widget.Box({
         className: 'bar-group-margin bar-sides',
