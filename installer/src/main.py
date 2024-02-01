@@ -11,7 +11,7 @@ from installer.utils import run_command, get_output
 async def main():
     '''Main function of installer'''
 
-
+    
 
     pass
 
