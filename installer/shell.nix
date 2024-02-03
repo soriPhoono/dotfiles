@@ -3,8 +3,7 @@ let
 in pkgs.mkShell {
     packages = [
         (pkgs.python3.withPackages (python-pkgs: [
-            python-pkgs.rich
-            python-pkgs.textual
+            python-pkgs.pyyaml
         ]))
     ];
 }
