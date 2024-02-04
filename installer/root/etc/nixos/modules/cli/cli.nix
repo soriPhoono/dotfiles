@@ -1,8 +1,15 @@
 { pkgs, ... }: {
-  networking = {
-    hostName = "home_desktop"; # Set the hostname to ‘nixos’
+  imports = [
+    # Include the results of the hardware scan
+    ./networking.nix
+  ];
 
-    networkmanager.enable = true; # Enable NetworkManager to manage network connections
+  time.timeZone = "America/Chicago"; # Set the time zone to America/Chicago
+  i18n.defaultLocale = "en_US.UTF-8"; # Set the default locale to en_US.UTF-8
+
+  console = {
+    font = "Lat2-Terminus16"; # Set the console font to Lat2-Terminus16
+    keyMap = "us"; # Set the console keymap to us
   };
 
   programs = {
@@ -52,11 +59,14 @@
   };
 
   environment.systemPackages = with pkgs; [
-    pkgs.man
-    pkgs.man-pages # Install the man pages core package
-    pkgs.texinfo # Install the texinfo package
+    man
+    man-pages # Install the man pages core package
+    texinfo # Install the texinfo package
 
-    pkgs.ntfs3g # Install the NTFS-3G driver for windows NTFS partitions
+    ntfs3g # Install the NTFS-3G driver for windows NTFS partitions
+
+    nano # Install the nano text editor
+    neovim # Install the neovim text editor
   ];
 
   users = {
