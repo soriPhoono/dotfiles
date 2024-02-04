@@ -75,14 +75,12 @@
   ];
 
   users = {
-    mutableUsers = false;
-
     defaultUserShell = pkgs.zsh;
 
     users.soriphoono = {
       name = "soriphoono";
       description = "Sori Phoono";
-      initialPassword = "password";
+      password = "password";
       isNormalUser = true;
 
       extraGroups = [
@@ -93,6 +91,8 @@
 
   # Enable automatic updates and set the reboot window.
   system = {
+    stateVersion = "23.11";
+
     autoUpgrade = {
       enable = true;
       allowReboot = true;
