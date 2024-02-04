@@ -1,16 +1,33 @@
 { config, pkgs, ... }: {
+  imports = [
+
+  ];
+
   home.username = "soriphoono";
   home.homeDirectory = "/home/soriphoono";
 
   home.stateVersion = "23.11";
 
   home.packages = [
-    pkgs.htop
+
   ];
 
   programs.home-manager.enable = true;
 
   programs = {
+    bat = {
+      enable = true;
+
+      extraPackages = with pkgs.bat-extras; [
+        batman
+        batpipe
+        batgrep
+        batdiff
+        batwatch
+        prettybat
+      ];
+    };
+
     git = {
       enable = true; # Enable git
 
