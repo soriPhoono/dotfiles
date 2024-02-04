@@ -83,6 +83,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    pkgs.man
+    pkgs.man-pages
+    pkgs.texinfo
     pkgs.ntfs3g
   ];
 
@@ -93,6 +96,7 @@
       name = "soriphoono";
       description = "Sori Phoono";
       password = "password";
+
       isNormalUser = true;
 
       extraGroups = [
