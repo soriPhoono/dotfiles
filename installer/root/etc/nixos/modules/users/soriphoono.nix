@@ -1,11 +1,6 @@
-{ pkgs, ... }:
-let
-  user = "soriphoono";
-  full_name = "Sori Phoono";
-in
-{
-  users.users.${user} = {
-    description = ${full_name}; # Full name
+{ pkgs, ... }: {
+  users.users.soriphoono = {
+    description = "Sori Phoono"; # Full name
     password = "password"; # Initial password
 
     isNormalUser = true; # Create a user account
