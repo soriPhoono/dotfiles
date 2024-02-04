@@ -15,7 +15,8 @@
     };
 
     plymouth = {
-      enable = true;
+      # TODO: reenable plymouth once the login manager is set up
+      # enable = true;
       # themePackages = [ pkgs.catppuccin-plymouth ];
       # theme = "catppuccin-mocha";
     };
