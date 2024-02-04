@@ -62,11 +62,8 @@
 
     git = {
       enable = true;
-
-      config = {
-        userName = "soriphoono";
-        userEmail = "soriphoono@gmail.com";
-      };
+      userName = "soriphoono";
+      userEmail = "soriphoono@gmail.com";
     };
   };
 
