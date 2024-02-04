@@ -2,107 +2,18 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # Include other system configurations.
+    ./modules/boot.nix
+    ./modules/cli.nix
+
+    # Include the user configuration(s).
+    ./modules/users/soriphoono.nix
   ];
 
-  # Use the systemd-boot bootloader.
-  boot = {
-    loader = {
-      timeout = 3;
-      systemd-boot = {
-        enable = true;
-        consoleMode = "max";
-      };
-    };
-
-    plymouth = {
-      # TODO: reenable plymouth once the login manager is set up
-      # enable = true;
-      # themePackages = [ pkgs.catppuccin-plymouth ];
-      # theme = "catppuccin-mocha";
-    };
-
-    tmp = {
-      useTmpfs = true;
-      tmpfsSize = "50%"; # 50% of RAM, increase this if nix builds start to fail due to lack of space
-      cleanOnBoot = true;
-    };
-  };
-
-  zramSwap.enable = true;
-
-  networking = {
-    networkmanager.enable = true;
-  };
-
-  programs = {
-    zsh = {
-      enable = true;
-
-      autosuggestions = {
-        enable = true;
-        strategy = [
-          "history"
-          "completion"
-          "match_prev_cmd"
-        ];
-      };
-
-      syntaxHighlighting = {
-        enable = true;
-        highlighters = [
-          "main"
-          "brackets"
-          "pattern"
-          "cursor"
-          "regexp"
-          "root"
-          "line"
-        ];
-      };
-    };
-
-    git = {
-      enable = true;
-      config = {
-        user = {
-          name = "soriphoono";
-          email = "soriphoono@gmail.com";
-        };
-        init = {
-          defaultBranch = "main";
-        };
-        url = {
-          "https://github.com/" = {
-            insteadOf = [
-              "gh:"
-              "github:"
-            ];
-          };
-        };
-      };
-    };
-  };
-
-  environment.systemPackages = with pkgs; [
-    pkgs.man
-    pkgs.man-pages
-    pkgs.texinfo
-    pkgs.ntfs3g
-  ];
-
-  users = {
-    defaultUserShell = pkgs.zsh;
-
-    users.soriphoono = {
-      name = "soriphoono";
-      description = "Sori Phoono";
-      password = "password";
-
-      isNormalUser = true;
-
-      extraGroups = [
-        "networkmanager"
-      ];
+  nix = {
+    settings = {
+      auto-optimise-store = true;
     };
   };
 
