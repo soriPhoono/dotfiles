@@ -1,9 +1,0 @@
-Author:
-  Name: "soriphoono"
-  Description: "A simple dotfiles installer for a nixos rice system"
-  Email: "soriphoono@gmail.com"
-  Repo: "https://www.github.com/soriphoono/dotfiles.git"
-  Version: "1.0.0"
-
-Supported:
-  - "NixOS"

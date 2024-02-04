@@ -6,7 +6,7 @@ import logging
 import datetime
 
 from argparse import ArgumentParser, Namespace
-from yaml import safe_load
+from json import load
 
 from utils import run_command, check_not_root, check_os_release
 
@@ -58,8 +58,8 @@ def main() -> None:
 
     # Load the metadata file
     try:
-        with open('meta.yml', 'r', encoding='utf-8') as file:
-            metadata = safe_load(file)
+        with open('meta.json', 'r', encoding='utf-8') as file:
+            metadata = load(file)
     except FileNotFoundError:
         logging.error('Installation failed: Missing metadata file')
 
@@ -68,8 +68,12 @@ def main() -> None:
     # Parse the command line arguments
     args = parse_args()
 
-    if os.getenv('USER') == metadata['Author']['Name'] or args.verbose:
+    if os.getenv('USER') == metadata['author']['name'] and args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
+    elif args.verbose:
+        logging.getLogger().setLevel(logging.INFO)
+    else:
+        logging.getLogger().setLevel(logging.WARNING)
 
     # Initialize the installer
     if check_not_root():
@@ -78,7 +82,7 @@ def main() -> None:
 
         return
 
-    if check_os_release(metadata['Supported']):
+    if check_os_release(metadata['supported']):
         logging.critical(
             'Installation failed: Unsupported operating system')
 

@@ -1,0 +1,14 @@
+{
+  "author": {
+    "name": "Sori Phoono",
+    "description": "A simple dotfiles installer for a nixos rice system",
+    "email": "soriphoono@gmail.com",
+    "repo": "https://www.github.com/soriphoono/dotfiles.git",
+    "license": "BSL",
+    "version": "1.0.0"
+  },
+
+  "supported": [
+    "nixos"
+  ]
+}
