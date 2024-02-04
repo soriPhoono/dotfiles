@@ -8,7 +8,7 @@
     ./modules/cli.nix
 
     # Include the user configuration(s).
-    ./modules/users/soriphoono.nix
+    ./modules/users/users.nix
   ];
 
   nix = {
