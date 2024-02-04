@@ -62,6 +62,23 @@
 
     git = {
       enable = true;
+      config = {
+        user = {
+          name = "soriphoono";
+          email = "soriphoono@gmail.com";
+        };
+        init = {
+          defaultBranch = "main";
+        };
+        url = {
+          "https://github.com/" = {
+            insteadOf = [
+              "gh:"
+              "github:"
+            ];
+          };
+        };
+      };
     };
   };
 
