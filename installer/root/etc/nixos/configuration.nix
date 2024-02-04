@@ -17,6 +17,7 @@
       auto-optimise-store = true; # Automatically optimise the Nix store.
     };
   };
+  nixpkgs.config.allowUnfree = true; # Allow unfree packages.
 
   # Enable automatic updates and set the reboot window.
   system = {
