@@ -11,22 +11,6 @@ from yaml import safe_load
 from utils import check_not_root, check_os_release
 
 
-def parse_args() -> Namespace:
-    '''Parse the command line arguments'''
-
-    # Parse the command line arguments
-    parser = ArgumentParser(
-        prog='Installer',
-        description='Installer for rice files targeting a NixOS',
-        epilog='This program is licensed under the BSL-1.0 license'
-    )
-
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='Enable debug output')
-
-    return parser.parse_args()
-
-
 def init_logger() -> None:
     '''Initialize the logger'''
 
@@ -50,7 +34,23 @@ def init_logger() -> None:
     )
 
 
-def main():
+def parse_args() -> Namespace:
+    '''Parse the command line arguments'''
+
+    # Parse the command line arguments
+    parser = ArgumentParser(
+        prog='Installer',
+        description='Installer for rice files targeting a NixOS',
+        epilog='This program is licensed under the BSL-1.0 license'
+    )
+
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='Enable debug output')
+
+    return parser.parse_args()
+
+
+def main() -> None:
     '''Main function of the installer'''
 
     # Initialize the logger
@@ -62,6 +62,8 @@ def main():
             metadata = safe_load(file)
     except FileNotFoundError:
         logging.error('Installation failed: Missing metadata file')
+
+        return
 
     # Parse the command line arguments
     args = parse_args()
