@@ -8,7 +8,7 @@ import datetime
 from argparse import ArgumentParser, Namespace
 from yaml import safe_load
 
-from utils import check_not_root, check_os_release
+from utils import run_command, check_not_root, check_os_release
 
 
 def init_logger() -> None:
@@ -89,6 +89,8 @@ def main() -> None:
 
     # Install dotfiles and system configuration
     logging.info('Installing dotfiles and system configuration')
+    run_command('sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager')
+    run_command('sudo nix-channel --update')
 
 
 if __name__ == '__main__':
