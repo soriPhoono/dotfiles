@@ -2,10 +2,10 @@
   # Use the systemd-boot bootloader.
   boot = {
     loader = {
-      timeout = 3;
+      timeout = 3; # Reduce the timeout to 3 seconds
       systemd-boot = {
-        enable = true;
-        consoleMode = "max";
+        enable = true; # This is the default, but let's be explicit
+        consoleMode = "max"; # Enable more detailed output
       };
     };
 
@@ -17,11 +17,11 @@
     };
 
     tmp = {
-      useTmpfs = true;
+      useTmpfs = true; # Use a tmpfs for /tmp
       tmpfsSize = "50%"; # 50% of RAM, increase this if nix builds start to fail due to lack of space
-      cleanOnBoot = true;
+      cleanOnBoot = true; # Clean /tmp on boot
     };
   };
 
-  zramSwap.enable = true;
+  zramSwap.enable = true; # Enable zram swap
 }

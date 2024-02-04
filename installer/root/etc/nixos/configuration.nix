@@ -13,17 +13,19 @@
 
   nix = {
     settings = {
-      auto-optimise-store = true;
+      auto-optimise-store = true; # Automatically optimise the Nix store.
     };
   };
 
   # Enable automatic updates and set the reboot window.
   system = {
-    stateVersion = "23.11";
+    stateVersion = "23.11"; # NixOS version to use.
 
     autoUpgrade = {
-      enable = true;
-      allowReboot = true;
+      enable = true; # Enable automatic upgrades.
+      allowReboot = true; # Allow automatic reboots.
+
+      # Reboot window from 3am to 5am.
       rebootWindow = {
         lower = "03:00";
         upper = "05:00";

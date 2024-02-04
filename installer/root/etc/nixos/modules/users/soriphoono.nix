@@ -4,15 +4,15 @@
   ];
 
   users.users.soriphoono = {
-    name = "soriphoono";
-    description = "Sori Phoono";
-    password = "password";
+    name = "soriphoono"; # User name
+    description = "Sori Phoono"; # Full name
+    password = "password"; # Initial password
 
-    isNormalUser = true;
+    isNormalUser = true; # Create a user account
 
     extraGroups = [
-      "wheel"
-      "networkmanager"
+      "wheel" # Enable ‘sudo’ for the user
+      "networkmanager" # Enable ‘networkmanager’ for the user
     ];
   };
 
@@ -23,21 +23,21 @@
 
     programs = {
       git = {
-        enable = true;
+        enable = true; # Enable git
 
         config = {
           user = {
-            name = "soriphoono";
-            email = "soriphoono@gmail.com";
+            name = "soriphoono"; # Git user name
+            email = "soriphoono@gmail.com"; # Git user email
           };
           init = {
-            defaultBranch = "main";
+            defaultBranch = "main"; # Use ‘main’ as the default branch
           };
           url = {
             "https://github.com/" = {
               insteadOf = [
-                "gh:"
-                "github:"
+                "gh:" # Use ‘gh:’ as a prefix for GitHub URLs
+                "github:" # Use ‘github:’ as a prefix for GitHub URLs
               ];
             };
           };
@@ -45,6 +45,6 @@
       };
     };
 
-    home.stateVersion = "23.11";
+    home.stateVersion = "23.11"; # Version of the state format
   };
 }
