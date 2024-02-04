@@ -21,8 +21,8 @@ def init_logger() -> None:
 
     # Get logfile name
     logfile_prefix = datetime.datetime.now().strftime('%Y-%m-%d')
-    logfile_index = len(
-        list(filter(lambda x: logfile_prefix in x, os.walk(logfile_dir)[2])))
+    logfile_index = len([f for f in os.listdir(logfile_dir) if os.path.isfile(
+        f'{logfile_dir}/{f}') and f.startswith(logfile_prefix)])
     logfile_suffix = '' if logfile_index == 0 else f'_{logfile_index}'
 
     # Set up the logger
