@@ -2,7 +2,6 @@
 
 import os
 import os.path
-import asyncio
 import logging
 import datetime
 
@@ -28,7 +27,7 @@ def parse_args() -> Namespace:
     return parser.parse_args()
 
 
-async def init_logger(debug: bool) -> bool:
+def init_logger() -> None:
     '''Initialize the logger'''
 
     # Create the log directory
@@ -47,14 +46,15 @@ async def init_logger(debug: bool) -> bool:
         format='%(asctime)s - %(levelname)s - %(message)s',
         filename=logfile_name,
         encoding='utf-8',
-        level=(logging.DEBUG if debug else logging.INFO),
+        level=logging.INFO,
     )
 
-    return True
 
-
-async def main():
+def main():
     '''Main function of the installer'''
+
+    # Initialize the logger
+    init_logger()
 
     # Load the metadata file
     try:
@@ -66,19 +66,19 @@ async def main():
     # Parse the command line arguments
     args = parse_args()
 
+    if os.getenv('USER') == metadata['Author']['Name'] or args.verbose:
+        logging.getLogger().setLevel(logging.DEBUG)
+
     # Initialize the installer
-    if len(
-        filter(
-            lambda x: not x,
-            await asyncio.gather(
-                init_logger(os.getenv('USER') ==
-                            metadata['Author']['Name'] or args.verbose),
-                check_not_root(),
-                check_os_release(metadata['Supported']),
-            )
-        )
-    ) > 0:
-        logging.critical('Installation failed: Aborting')
+    if check_not_root():
+        logging.critical(
+            'Installation failed: Please run the installer as root')
+
+        return
+
+    if check_os_release(metadata['Supported']):
+        logging.critical(
+            'Installation failed: Unsupported operating system')
 
         return
 
@@ -91,4 +91,4 @@ async def main():
 
 if __name__ == '__main__':
     # Run the main function
-    asyncio.run(main())
+    main()
