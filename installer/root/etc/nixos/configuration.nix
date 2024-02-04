@@ -62,7 +62,6 @@
 
     git = {
       enable = true;
-      userName = "soriphoono";
     };
   };
 
