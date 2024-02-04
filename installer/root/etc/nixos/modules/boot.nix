@@ -1,6 +1,8 @@
 { pkgs, ... }: {
   # Use the systemd-boot bootloader.
   boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_7;
+
     loader = {
       timeout = 3; # Reduce the timeout to 3 seconds
 
@@ -11,7 +13,6 @@
         consoleMode = "max"; # Enable more detailed output
       };
 
-      kernelPackages = pkgs.linuxKernel.packages.linux_6_7;
     };
 
     plymouth = {
