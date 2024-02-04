@@ -70,7 +70,7 @@
         git_branch = {
           truncation_length = 4; # Set the truncation length to 4
           truncation_symbol = "…"; # Set the truncation symbol to an ellipsis
-        }
+        };
       };
     };
 
