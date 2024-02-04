@@ -3,10 +3,15 @@
   boot = {
     loader = {
       timeout = 3; # Reduce the timeout to 3 seconds
+
+      efi.canTouchEfiVariables = true;
+
       systemd-boot = {
         enable = true; # This is the default, but let's be explicit
         consoleMode = "max"; # Enable more detailed output
       };
+
+      kernelPackages = pkgs.linuxKernel.packages.linux_6_7;
     };
 
     plymouth = {
