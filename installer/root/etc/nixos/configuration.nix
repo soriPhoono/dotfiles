@@ -6,15 +6,19 @@
     # Include other system configurations.
     ./modules/boot.nix
     ./modules/cli/cli.nix
-    ./modules/desktop.nix
 
     # Include the user configuration(s).
-    ./modules/users/users.nix
+    ./modules/users/soriphoono.nix
   ];
 
   nix = {
     settings = {
       auto-optimise-store = true; # Automatically optimise the Nix store.
+    };
+    gc = {
+      automatic = true; # Enable automatic garbage collection.
+      dates = "weekly"; # Run garbage collection weekly.
+      options = "--delete-older-than 7d"; # Delete generations older than 30 days.
     };
   };
   nixpkgs.config.allowUnfree = true; # Allow unfree packages.

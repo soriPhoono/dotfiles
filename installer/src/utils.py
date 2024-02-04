@@ -24,7 +24,7 @@ def check_os_release(supported_distros: list[str]) -> bool:
     )).split('=')[1].replace('"', '').lower() in supported_distros
 
 
-def run_command(cmd: str, get_output: bool = False) -> tuple[bool, str]:
+def run_command(cmd: str, get_output: bool = True) -> tuple[bool, str]:
     '''Execute a command with the optional return of its output'''
 
     proc = subprocess.run(

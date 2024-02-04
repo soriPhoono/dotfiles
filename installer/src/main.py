@@ -93,9 +93,6 @@ def main() -> None:
 
     # Install dotfiles and system configuration
     logging.info('Installing dotfiles and system configuration')
-    run_command(
-        'sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager')
-    run_command('sudo nix-channel --update')
 
 
 if __name__ == '__main__':
