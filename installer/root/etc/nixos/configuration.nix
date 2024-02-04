@@ -32,6 +32,10 @@
 
   zramSwap.enable = true;
 
+  networking = {
+    networkmanager.enable = true;
+  };
+
   programs = {
     zsh = {
       enable = true;
@@ -72,6 +76,23 @@
   environment.systemPackages = with pkgs; [
     pkgs.ntfs3g
   ];
+
+  users = {
+    mutableUsers = false;
+
+    defaultUserShell = pkgs.zsh;
+
+    users.soriphoono = {
+      name = "soriphoono";
+      description = "Sori Phoono";
+      initialPassword = "password";
+      isNormalUser = true;
+
+      extraGroups = [
+        "networkmanager"
+      ];
+    };
+  };
 
   # Enable automatic updates and set the reboot window.
   system = {
