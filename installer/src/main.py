@@ -14,21 +14,22 @@ from utils import run_command, check_not_root, check_os_release
 def init_logger() -> None:
     '''Initialize the logger'''
 
+    logfile_dir = 'logs'
+
     # Create the log directory
-    os.makedirs('logs', exist_ok=True)
+    os.makedirs(logfile_dir, exist_ok=True)
 
     # Get logfile name
-    logfile_prepend = datetime.datetime.now().strftime('%Y-%m-%d')
-    _, _, logfile_files = os.walk("logs/")
+    logfile_prefix = datetime.datetime.now().strftime('%Y-%m-%d')
+    _, _, logfile_files = os.walk(logfile_dir)
     logfile_index = len(
-        list(filter(lambda x: logfile_prepend in x, logfile_files)))
-    logfile_name = f'logs/{logfile_prepend}{"" if logfile_index ==
-                                            0 else f"_{logfile_index}"}.log'
+        list(filter(lambda x: logfile_prefix in x, logfile_files)))
+    logfile_suffix = '' if logfile_index == 0 else f'_{logfile_index}'
 
     # Set up the logger
     logging.basicConfig(
         format='%(asctime)s - %(levelname)s - %(message)s',
-        filename=logfile_name,
+        filename=f'{logfile_dir}/{logfile_prefix}{logfile_suffix}.log',
         encoding='utf-8',
         level=logging.INFO,
     )
@@ -89,7 +90,8 @@ def main() -> None:
 
     # Install dotfiles and system configuration
     logging.info('Installing dotfiles and system configuration')
-    run_command('sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager')
+    run_command(
+        'sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz home-manager')
     run_command('sudo nix-channel --update')
 
 
