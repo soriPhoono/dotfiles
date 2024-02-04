@@ -16,8 +16,8 @@
 
     plymouth = {
       enable = true;
-      themePackages = [ pkgs.catppuccin-plymouth ];
-      theme = "catppuccin-mocha";
+      # themePackages = [ pkgs.catppuccin-plymouth ];
+      # theme = "catppuccin-mocha";
     };
 
     tmp = {
