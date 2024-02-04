@@ -2,9 +2,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
-    # Import the rest of the configuration.
-    ./modules/boot.nix
   ];
 
   # Use the systemd-boot bootloader.
