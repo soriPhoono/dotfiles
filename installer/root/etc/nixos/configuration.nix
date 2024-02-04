@@ -5,7 +5,8 @@
 
     # Include other system configurations.
     ./modules/boot.nix
-    ./modules/cli.nix
+    ./modules/cli/cli.nix
+    ./modules/desktop.nix
 
     # Include the user configuration(s).
     ./modules/users/users.nix
