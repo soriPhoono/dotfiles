@@ -38,6 +38,8 @@
   nix = {
     settings = {
       auto-optimise-store = true; # Automatically optimise the Nix store.
+
+      experimental-features = [ "nix-command" "flakes" ]; # Enable experimental features.
     };
 
     gc = {
@@ -46,13 +48,13 @@
       options = "--delete-older-than 2d"; # Delete generations older than 30 days.
     };
 
-    package = pkgs.nixFlakes; # Use the new Nix flakes system.
-    registry.nixpkgs.flake = inputs.nixpkgs; # Use the Nixpkgs flake registry.
-    extraOptions = ''
-      experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
-    '';
+    # package = pkgs.nixFlakes; # Use the new Nix flakes system.
+    # registry.nixpkgs.flake = inputs.nixpkgs; # Use the Nixpkgs flake registry.
+    # extraOptions = ''
+    #   experimental-features = nix-command flakes
+    #   keep-outputs = true
+    #   keep-derivations = true
+    # '';
   };
   nixpkgs.config.allowUnfree = true; # Allow unfree packages.
 
