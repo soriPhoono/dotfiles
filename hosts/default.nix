@@ -28,7 +28,7 @@ in
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.${user} = {
+        home-manager.users.${vars.user} = {
           imports = [(import ./home.nix)]; # Include the core user's home.nix
         };
       }
