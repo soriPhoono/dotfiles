@@ -85,21 +85,6 @@
       home-manager.enable = true; # Enable home-manager.
     };
 
-    xdg = {
-      mime.enable = true;
-      mimeApps = {
-        enable = true;
-        defaultApplications = {
-          # TODO: add default open links for system file types
-        };
-      };
-      desktopEntries.image-roll = {
-        name = "image-roll";
-        exec = "${pkgs.image-roll}/bin/image-roll %F";
-        mimeTypes = [ "image/*" ];
-      };
-    };
-
     nixpkgs.config.allowUnfree = true; # Allow unfree packages.
   };
 }
