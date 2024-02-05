@@ -56,6 +56,11 @@
   };
   nixpkgs.config.allowUnfree = true; # Allow unfree packages.
 
+  networking = {
+    hostName = hostName;
+    networkmanager.enable = true;
+  };
+
   environment = {
     systemPackages = with pkgs; [
       tldr # Install community maintained simplified man pages
