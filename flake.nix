@@ -23,7 +23,7 @@
     };                                                                # home-manager for user configurations
   };
 
-  outputs = inputs @ { self, nixpkgs, nixos-hardware, home-manager, ... }:
+  outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
     let
       vars = {
         user = "soriphoono";

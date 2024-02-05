@@ -1,4 +1,4 @@
-{ lib, pkgs, vars, ... }:
+{ lib, inputs, pkgs, vars, ... }:
 let
   terminal = pkgs.${vars.terminal}; # Extract the terminal from the variables package.
 in
