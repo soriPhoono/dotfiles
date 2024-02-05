@@ -1,8 +1,12 @@
-{ pkgs, vars, ... }: {
-  home-manager.users.${vars.user} = {
+{ pkgs, vars, ... }:
+let
+  user = "${vars.user}"; # Set the user to the user’s username.
+in
+{
+  home-manager.users."${user}" = {
     home = {
-      username = "${vars.user}"; # Set the username to the user’s username.
-      homeDirectory = "/home/${vars.user}"; # Set the home directory to the user’s home directory.
+      username = "${user}"; # Set the username to the user’s username.
+      homeDirectory = "/home/${user}"; # Set the home directory to the user’s home directory.
 
       packages = with pkgs; [
         usbutils # Install the usbutils package
@@ -84,7 +88,5 @@
 
       home-manager.enable = true; # Enable home-manager.
     };
-
-    nixpkgs.config.allowUnfree = true; # Allow unfree packages.
   };
 }

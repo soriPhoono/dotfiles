@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, vars, ... }:
+{ lib, pkgs, vars, ... }:
 let
   terminal = pkgs.${vars.terminal}; # Extract the terminal from the variables package.
 in
@@ -36,6 +36,7 @@ in
   };
 
   networking = {
+    hostName = "home_desktop"; # Set the hostname to nixos
     useDHCP = false; # Disable DHCP
     networkmanager.enable = true; # Enable NetworkManager to manage network connections
   };
@@ -140,7 +141,6 @@ in
       keep-derivations = true
     '';
   };
-  nixpkgs.config.allowUnfree = true; # Allow unfree packages.
 
   # Enable automatic updates and set the reboot window.
   system.stateVersion = "23.11"; # NixOS version to use.

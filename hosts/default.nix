@@ -1,5 +1,17 @@
-{ lib, inputs, nixpkgs, nixos-hardware, home-manager, nur, nixvim, hyprland, vars, ... }:
+#
+#   Author: Soriphoono
+#   Date: 2024-02-04
+#   Description: NixOS configuration flake for my personal computers/home-server
+#
+#   flake.nix
+#    └─ ./hosts
+#        ├─ default.nix *
+#        ├─ configuration.nix
+#        └─ ./<host>.nix
+#            └─ default.nix
+#
 
+{ lib, nixpkgs, nixos-hardware, home-manager, vars, ... }:
 let
   system = "x86_64-linux";
 
@@ -11,10 +23,11 @@ let
   lib = nixpkgs.lib;
 in
 {
+  # Define hardware configurations here.
   home_desktop = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit inputs system hyprland vars;
+      inherit lib pkgs nixos-hardware home-manager vars;
       host = {
         hostName = "home_desktop";
       };
@@ -22,6 +35,7 @@ in
     modules = [
       nur.nixosModules.nur
       nixvim.nixosModules.nixvim
+
       # ./home_desktop
       ./configuration.nix
 
@@ -29,7 +43,9 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.${vars.user} = {
-          imports = [(import ./home.nix)]; # Include the core user's home.nix
+          imports = [
+            # ./home.nix # Include the core user's home.nix
+          ];
         };
       }
     ];
