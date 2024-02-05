@@ -128,11 +128,13 @@ in
     settings = {
       auto-optimise-store = true; # Automatically optimise the Nix store.
     };
+
     gc = {
       automatic = true; # Enable automatic garbage collection.
       dates = "weekly"; # Run garbage collection weekly.
       options = "--delete-older-than 2d"; # Delete generations older than 30 days.
     };
+
     package = pkgs.nixFlakes; # Use the new Nix flakes system.
     registry.nixpkgs.flake = inputs.nixpkgs; # Use the Nixpkgs flake registry.
     extraOptions = ''

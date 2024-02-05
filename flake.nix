@@ -14,7 +14,7 @@
   description = "Personal NixOS configurations for my personal computers/home-server";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";            # main packages repository
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";                 # main packages repository
     nixos-hardware.url = "github:nixos/nixos-hardware/master";        # hardware specific packages/additions
 
     home-manager = {
@@ -34,7 +34,7 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit nixpkgs nixos-hardware home-manager vars;
+          inherit inputs nixpkgs nixos-hardware home-manager vars;
         }
       );
     };

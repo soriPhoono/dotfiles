@@ -11,7 +11,7 @@
 #            └─ default.nix
 #
 
-{ lib, nixpkgs, nixos-hardware, home-manager, vars, ... }:
+{ lib, inputs, nixpkgs, nixos-hardware, home-manager, vars, ... }:
 let
   system = "x86_64-linux";
 
@@ -27,24 +27,21 @@ in
   home_desktop = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit lib pkgs nixos-hardware home-manager vars;
+      inherit inputs system vars;
       host = {
         hostName = "home_desktop";
       };
     };
     modules = [
-      nur.nixosModules.nur
-      nixvim.nixosModules.nixvim
-
-      # ./home_desktop
       ./configuration.nix
+      # ./home_desktop
 
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.${vars.user} = {
           imports = [
-            # ./home.nix # Include the core user's home.nix
+            ./home.nix # Include the core user's home.nix
           ];
         };
       }
