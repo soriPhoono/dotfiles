@@ -29,9 +29,7 @@ in
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.${user} = {
-          imports = [(import ./home.nix)] ++    # Include the core user's home.nix
-            # [(import ./home_desktop/home.nix)]  # Include the desktop modifications to default userspace
-            ;
+          imports = [(import ./home.nix)]; # Include the core user's home.nix
         };
       }
     ];
