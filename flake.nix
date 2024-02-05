@@ -7,9 +7,6 @@
 #    └─ ./hosts
 #
 
-let
-  release = "23.11";
-in
 {
   # This is the main entry point to your NixOS configuration(s).
 
@@ -17,11 +14,11 @@ in
   description = "Personal NixOS configurations for my personal computers/home-server";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-${release}";            # main packages repository
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";            # main packages repository
     nixos-hardware.url = "github:nixos/nixos-hardware/master";        # hardware specific packages/additions
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-${release}";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };                                                                # home-manager for user configurations
   };
