@@ -37,8 +37,15 @@ in
       # ./home_desktop
 
       home-manager.nixosModules.home-manager {
+        inherit vars;
+
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
+        home-manager.users.${vars.user} = {
+          imports = [
+            ./home.nix # Include the core user's home.nix
+          ];
+        };
       }
     ];
   };
