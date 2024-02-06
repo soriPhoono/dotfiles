@@ -23,7 +23,7 @@ in {
         home-manager.useUserPackages = true;
 
         home-manager.users."${user}" = import ./home.nix; # Import the default home.nix file
-      };
+      }
     ];
   };
 }
