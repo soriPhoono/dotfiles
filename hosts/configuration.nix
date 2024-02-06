@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... }: {
+{ pkgs, user, ... }: {
   imports = [  ];
 
   zramSwap.enable = true; # Enable zram swap.
@@ -89,7 +89,7 @@
       options = "--delete-older-than 2d"; # Delete generations older than 30 days.
     };
   };
-  nixpkgs.config.allowUnfree = true; # Allow unfree packages.
+  # nixpkgs.config.allowUnfree = true; # Allow unfree packages.
 
   # Enable automatic updates and set the reboot window.
   system.stateVersion = "23.11"; # NixOS version to use.

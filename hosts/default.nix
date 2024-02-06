@@ -22,7 +22,7 @@ in {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 
-        home-manager.users."${user}" = import ./home.nix { inherit user; }; # Import the home.nix file
+        home-manager.users."${user}" = import ./home.nix { inherit pkgs user; }; # Import the home.nix file
       }
     ];
   };
