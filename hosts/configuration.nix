@@ -1,6 +1,12 @@
 { pkgs, user, ... }: {
   imports = [  ];
 
+  boot.tmp = {
+    useTmpfs = true; # Use a tmpfs for /tmp.
+    tmpfsSize = "50%"; # 50% of RAM, increase this if nix builds start to fail due to lack of space.
+    cleanOnBoot = true; # Clean /tmp on boot.
+  };
+
   zramSwap.enable = true; # Enable zram swap.
 
   time.timeZone = "America/Chicago"; # Set the time zone to America/Chicago
@@ -28,9 +34,6 @@
 
       nix-tree # Install the nix-tree package for viewing the Nix store
 
-      xdg-user-dirs # Install the xdg-user-dirs package
-      xdg-utils # Install the xdg-utils package
-
       zip # Install the zip package
       unzip # Install the unzip package
       p7zip # Install the p7zip package
@@ -54,14 +57,9 @@
 
   programs = {
     nano.enable = true; # Enable nano
-    neovim = {
-      enable = true; # Enable neovim
-      defaultEditor = true; # Set neovim as the default editor
-    };
   };
 
-  users.users.soriphoono = {
-    description = "Sori Phoono"; # Set the user’s description to "Sori Phoono" for /etc/passwd.
+  users.users."${user}" = {
     password = "password"; # Set the user’s password to ‘password’. Change this using passwd after installation.
 
     isNormalUser = true; # Set the user as a normal user.
@@ -89,7 +87,6 @@
       options = "--delete-older-than 2d"; # Delete generations older than 30 days.
     };
   };
-  # nixpkgs.config.allowUnfree = true; # Allow unfree packages.
 
   # Enable automatic updates and set the reboot window.
   system.stateVersion = "23.11"; # NixOS version to use.

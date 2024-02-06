@@ -1,24 +1,54 @@
 { pkgs, user, ... }: {
+  imports = [
+    ../modules/cli
+  ];
+
   home = {
     username = "${user}";
     homeDirectory = "/home/${user}";
 
     packages = with pkgs; [
-      eza # Install the eza ls replacement
-      bat # Install the bat cat replacement
       dua # Install the dua disk usage analyzer
       duf # Install the duf disk usage finder
       tre-command # Install the tre command
       scc # Install the scc command
-      jq # Install the jq package
     ];
 
     stateVersion = "23.11";
   };
 
   programs = {
+    eza = {
+      enable = true;
 
+      enableAliases = true;
+
+      icons = true;
+      git = true;
+    };
+
+    bat = {
+      enable = true;
+
+      extraPackages = with pkgs.bat-extras; [
+        batdiff
+        batman
+        batgrep
+        batwatch
+      ];
+    };
+
+    jq.enable = true;
 
     home-manager.enable = true;
+  };
+
+  xdg = {
+    enable = true;
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
   };
 }
