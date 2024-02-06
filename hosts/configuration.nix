@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, user, ... }: {
   imports = [  ];
 
   zramSwap.enable = true; # Enable zram swap.
@@ -49,14 +49,6 @@
 
       usbutils # Install the usbutils package
       pciutils # Install the pciutils package
-
-      eza # Install the eza ls replacement
-      bat # Install the bat cat replacement
-      dua # Install the dua disk usage analyzer
-      duf # Install the duf disk usage finder
-      tre-command # Install the tre command
-      scc # Install the scc command
-      jq # Install the jq package
     ];
   };
 
