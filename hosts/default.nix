@@ -22,9 +22,7 @@ in {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 
-        home-manager.users."${user}" =
-          (import ./home.nix);        # Import the default home.nix file
-          # (import ./vm/home.nix);   # Import the home.nix file for the VM configuration
+        home-manager.users."${user}" = import ./home.nix; # Import the default home.nix file
       };
     ];
   };
