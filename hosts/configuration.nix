@@ -11,20 +11,6 @@
     keyMap = "us"; # Set the console keymap to us
   };
 
-  nix = {
-    settings = {
-      auto-optimise-store = true; # Automatically optimise the Nix store.
-
-      experimental-features = [ "nix-command" "flakes" ]; # Enable experimental features.
-    };
-
-    gc = {
-      automatic = true; # Enable automatic garbage collection.
-      dates = "weekly"; # Run garbage collection weekly.
-      options = "--delete-older-than 2d"; # Delete generations older than 30 days.
-    };
-  };
-
   networking = {
     networkmanager.enable = true; # Enable NetworkManager.
   };
@@ -96,6 +82,20 @@
     ]; # Add the user to the wheel, video, audio, and networkmanager groups.
 
     shell = pkgs.zsh; # Set the user’s shell to zsh.
+  };
+
+  nix = {
+    settings = {
+      auto-optimise-store = true; # Automatically optimise the Nix store.
+
+      experimental-features = [ "nix-command" "flakes" ]; # Enable experimental features.
+    };
+
+    gc = {
+      automatic = true; # Enable automatic garbage collection.
+      dates = "weekly"; # Run garbage collection weekly.
+      options = "--delete-older-than 2d"; # Delete generations older than 30 days.
+    };
   };
 
   # Enable automatic updates and set the reboot window.

@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ./zsh.nix
+    ./shells/zsh.nix
     ./starship.nix
-  ]
+  ];
 }

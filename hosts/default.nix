@@ -12,6 +12,7 @@ in {
   test_vm = lib.nixosSystem {
     inherit system;
     modules = [
+      ./vm
       ./configuration.nix
     ];
   };
