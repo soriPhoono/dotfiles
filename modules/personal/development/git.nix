@@ -7,10 +7,6 @@
         init = {
           defaultBranch = "main"; # Use ‘main’ as the default branch
         };
-        user = {
-          name = "soriphoono";
-          email = "soriphoono@gmail.com";
-        };
         url = {
           "https://github.com/" = {
             insteadOf = [
