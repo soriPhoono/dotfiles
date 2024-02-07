@@ -1,5 +1,7 @@
 { pkgs, user, ... }: {
-  imports = [  ];
+  imports = [
+    ../modules/cli
+  ];
 
   boot.tmp = {
     useTmpfs = true; # Use a tmpfs for /tmp.

@@ -24,15 +24,6 @@
           "line" # Enable line highlighter
         ];
       };
-
-      shellAliases = {
-        ls = "eza"; # Use eza as the replacement for ls
-        cat = "bat"; # Use bat as the replacement for cat
-        du = "dua"; # Use dua as the replacement for du
-        df = "duf"; # Use duf as the replacement for df
-        tree = "tre"; # Use tre as the replacement for tree
-        clock = "scc"; # Use scc as the replacement for clock
-      };
     };
   };
 }

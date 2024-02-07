@@ -1,8 +1,4 @@
 { pkgs, user, ... }: {
-  imports = [
-    ../modules/cli
-  ];
-
   home = {
     username = "${user}";
     homeDirectory = "/home/${user}";
@@ -14,10 +10,21 @@
       scc # Install the scc command
     ];
 
+    shellAliases = {
+      ls = "eza"; # Use eza as the replacement for ls
+      cat = "bat"; # Use bat as the replacement for cat
+      du = "dua"; # Use dua as the replacement for du
+      df = "duf"; # Use duf as the replacement for df
+      tree = "tre"; # Use tre as the replacement for tree
+      clock = "scc"; # Use scc as the replacement for clock
+    };
+
     stateVersion = "23.11";
   };
 
   programs = {
+    zsh.history.extended = true;
+
     eza = {
       enable = true;
 
