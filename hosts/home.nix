@@ -43,7 +43,8 @@
     git = {
       enable = true;
 
-      userName =
+      userName = "soriphoono";
+      userEmail = "soriphoono@gmail.com";
 
       diff-so-fancy = {
         enable = true;
