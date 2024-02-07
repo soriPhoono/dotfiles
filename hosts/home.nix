@@ -40,6 +40,16 @@
 
     jq.enable = true;
 
+    git = {
+      enable = true;
+
+      userName =
+
+      diff-so-fancy = {
+        enable = true;
+      };
+    };
+
     home-manager.enable = true;
   };
 
