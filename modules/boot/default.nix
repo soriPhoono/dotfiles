@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   boot = {
     loader.timeout = 3; # Reduce the timeout to 3 seconds.
 
