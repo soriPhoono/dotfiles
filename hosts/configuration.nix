@@ -1,6 +1,6 @@
 { pkgs, vars, ... }:
 let
-  user = "${vars.user}"
+  user = "${vars.user}";
 in {
   imports = [
     ../modules # Import the system module (default system configuration).
