@@ -24,9 +24,8 @@ in {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 
-        home-manager.users."${user}" = [
-          (import ../user/home.nix { inherit pkgs vars; }) # Import the home.nix file
-        ];
+        home-manager.users."${user}" =
+          (import ../user/home.nix { inherit pkgs vars; }); # Import the home.nix file
       }
     ];
   };
