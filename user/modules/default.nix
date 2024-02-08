@@ -1,8 +1,6 @@
 { ... }: {
   imports = [
-    ./boot
-    ./cli
-    ./user_env
+    ./cli/zsh.nix
     ./personal
   ];
 }

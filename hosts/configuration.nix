@@ -1,4 +1,7 @@
-{ pkgs, user, ... }: {
+{ pkgs, vars, ... }:
+let
+  user = "${vars.user}"
+in {
   imports = [
     ../modules # Import the system module (default system configuration).
   ];
@@ -34,4 +37,10 @@
   };
 
   system.stateVersion = "23.11"; # NixOS version to use.
+
+  # ---------------------------------
+  # Future module config staging section
+  # ---------------------------------
+
+
 }

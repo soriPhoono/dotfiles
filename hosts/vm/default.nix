@@ -1,16 +1,21 @@
-{ pkgs, user, ... }: {
+{ pkgs, vars, ... }:
+let
+  user = "${vars.user}";
+in {
   imports = [
     ./hardware-configuration.nix  # Include the results of the hardware scan.
+
+    ../../modules/boot/uefi.nix   # Include the UEFI boot loader.
   ];
-
-  boot = {
-    loader.timeout = 3; # Reduce the timeout to 3 seconds.
-
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_7; # Use the 6.7 kernel.
-  };
 
   networking = {
     hostName = "virtual-machine"; # Set the hostname to "virtual-machine".
+
+    firewall = {
+      enable = true; # Enable the firewall.
+
+      allowPing = false; # Disable ping requests.
+    };
 
     networkmanager.enable = true; # Enable NetworkManager.
   };

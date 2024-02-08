@@ -1,4 +1,4 @@
-{ lib, nixpkgs, home-manager, user, ... }:
+{ lib, nixpkgs, home-manager, vars, ... }:
 let
   system = "x86_64-linux";
 
@@ -12,17 +12,19 @@ in {
   test_vm = lib.nixosSystem {
     inherit system;
     specialArgs = {
-      inherit system pkgs user;
+      inherit pkgs vars;
     };
     modules = [
-      ./vm
       ./configuration.nix
+      ./vm
 
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
 
-        home-manager.users."${user}" = import ../user/home.nix; # Import the home.nix file
+        home-manager.users."${user}" = [
+          (import ../user/home.nix { inherit pkgs vars; }) # Import the home.nix file
+        ];
       }
     ];
   };
