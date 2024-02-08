@@ -18,7 +18,5 @@
   users.users."${user}".extraGroups = [
     "wheel" # Add the user to the "wheel" group.
     "networkmanager" # Add the user to the "networkmanager" group.
-  ]
-
-  networking.hostName = "virtual-machine"; # Set the hostname to "virtual-machine".
+  ];
 }
