@@ -1,4 +1,7 @@
-{ ... }: {
+{ ... }:
+let
+  user = "${vars.user}";
+in {
   programs = {
     git = {
       enable = true;
