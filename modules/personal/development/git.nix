@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, vars, ... }:
+let
+  user = "${vars.user}";
+in {
   programs = {
     git = {
       enable = true; # Enable git
