@@ -8,6 +8,8 @@ let
   };
 
   lib = nixpkgs.lib;
+
+  user = "${vars.user}";
 in {
   test_vm = lib.nixosSystem {
     inherit system;
