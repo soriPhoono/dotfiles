@@ -1,6 +1,6 @@
 { pkgs, user, ... }: {
   imports = [
-    ../modules/system # Import the system module (default system configuration).
+    ../modules # Import the system module (default system configuration).
   ];
 
   time.timeZone = "America/Chicago"; # Set the time zone to America/Chicago.
