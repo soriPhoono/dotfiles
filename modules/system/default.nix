@@ -1,5 +1,7 @@
 { ... }: {
   imports = [
     ./boot
+    ./cli
+    ./personal
   ];
 }

@@ -1,9 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, user, ... }: {
   imports = [
     ./hardware-configuration.nix  # Include the results of the hardware scan.
-
-    ../../modules/boot/uefi.nix   # Include the UEFI boot loader.
-    ../../modules/personal/development/git.nix # Include git configuration.
   ];
 
   boot = {
@@ -11,6 +8,17 @@
 
     kernelPackages = pkgs.linuxKernel.packages.linux_6_7; # Use the 6.7 kernel.
   };
+
+  networking = {
+    hostName = "virtual-machine"; # Set the hostname to "virtual-machine".
+
+    networkmanager.enable = true; # Enable NetworkManager.
+  };
+
+  users.users."${user}".extraGroups = [
+    "wheel" # Add the user to the "wheel" group.
+    "networkmanager" # Add the user to the "networkmanager" group.
+  ]
 
   networking.hostName = "virtual-machine"; # Set the hostname to "virtual-machine".
 }
