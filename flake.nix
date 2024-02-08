@@ -14,12 +14,17 @@
 
   outputs = { self, nixpkgs, home-manager, ... }:
   let
-    user = "soriphoono";
+    vars = {
+      user = "soriphoono";
+      shell = "zsh";
+      editor = "nvim";
+      terminal = "alacritty";
+    };
   in {
     nixosConfigurations = (
       import ./hosts {
         inherit (nixpkgs) lib;
-        inherit nixpkgs home-manager user;
+        inherit nixpkgs home-manager vars;
       }
     );
   };
