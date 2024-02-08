@@ -1,4 +1,4 @@
-{ ... }:
+{ vars, ... }:
 let
   user = "${vars.user}";
 in {

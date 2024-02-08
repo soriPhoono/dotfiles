@@ -1,4 +1,4 @@
-{ pkgs, vars, ... }: {
+{ ... }: {
   programs = {
     git = {
       enable = true; # Enable git
