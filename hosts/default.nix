@@ -7,8 +7,6 @@ let
     config.allowUnfree = true;
   };
 
-  lib = nixpkgs.lib;
-
   user = "${vars.user}";
 in {
   test_vm = lib.nixosSystem {
