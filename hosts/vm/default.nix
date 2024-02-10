@@ -4,7 +4,6 @@
 
     ../../modules/boot/uefi.nix   # Include the UEFI boot loader.
     ../../modules/development     # Include the development environment.
-    ../../modules/gaming          # Include the gaming requirements.
   ];
 
   networking = {
