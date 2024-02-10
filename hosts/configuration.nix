@@ -10,12 +10,12 @@
 
   # NOTE: Change user password using passwd after installation.
   users = {
-    defaultUserShell = pkgs.zsh;
-
     users."${username}" = {
       password = "password"; # Set the user’s password to ‘password’.
 
       isNormalUser = true; # Set the user as a normal user.
+
+      shell = pkgs.zsh; # Set the user’s shell to Zsh.
     };
   };
 
