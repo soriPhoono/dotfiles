@@ -22,7 +22,7 @@ in {
         home-manager.useUserPackages = true;
 
         home-manager.users."${username}" =
-          (import ../modules/home.nix { inherit pkgs vars; }); # Import the home.nix file
+          (import ../modules/home.nix { inherit pkgs username; }); # Import the home.nix file
       }
     ];
   };
