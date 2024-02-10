@@ -1,8 +1,6 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./boot
     ./cli
-    ./user_env
-    ./personal
   ];
 }

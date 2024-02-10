@@ -1,11 +1,10 @@
-{ vars, ... }:
-let
-  user = "${vars.user}";
-in {
+{ username, ... }: {
   imports = [
     ./hardware-configuration.nix  # Include the results of the hardware scan.
 
     ../../modules/boot/uefi.nix   # Include the UEFI boot loader.
+    ../../modules/development     # Include the development environment.
+    ../../modules/gaming          # Include the gaming requirements.
   ];
 
   networking = {
@@ -20,7 +19,7 @@ in {
     networkmanager.enable = true; # Enable NetworkManager.
   };
 
-  users.users."${user}".extraGroups = [
+  users.users."${username}".extraGroups = [
     "wheel" # Add the user to the "wheel" group.
     "networkmanager" # Add the user to the "networkmanager" group.
   ];

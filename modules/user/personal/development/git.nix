@@ -1,13 +1,10 @@
-{ vars, ... }:
-let
-  user = "${vars.user}";
-in {
+{ username, ... }: {
   programs = {
     git = {
       enable = true;
 
-      userName = "${user}";
-      userEmail = "${user}@gmail.com";
+      userName = "${username}";
+      userEmail = "${username}@gmail.com";
 
       diff-so-fancy = {
         enable = true;

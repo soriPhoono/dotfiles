@@ -1,7 +1,4 @@
-{ pkgs, vars, ... }:
-let
-  user = "${vars.user}";
-in {
+{ pkgs, username, ... }: {
   imports = [
     ../modules # Import the system module (default system configuration).
   ];
@@ -15,7 +12,7 @@ in {
   users = {
     defaultUserShell = pkgs.zsh;
 
-    users."${user}" = {
+    users."${username}" = {
       password = "password"; # Set the user’s password to ‘password’.
 
       isNormalUser = true; # Set the user as a normal user.
@@ -37,10 +34,4 @@ in {
   };
 
   system.stateVersion = "23.11"; # NixOS version to use.
-
-  # ---------------------------------
-  # Future module config staging section
-  # ---------------------------------
-
-
 }

@@ -1,9 +1,6 @@
-{ vars, ... }:
-let
-  user = "${vars.user}";
-in {
+{ username, ... }: {
   imports = [
-    ./modules
+    ./user
   ];
 
   programs = {
@@ -20,8 +17,8 @@ in {
   };
 
   home = {
-    username = "${user}";
-    homeDirectory = "/home/${user}";
+    username = "${username}";
+    homeDirectory = "/home/${username}";
 
     stateVersion = "23.11";
   };
