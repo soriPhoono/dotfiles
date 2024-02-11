@@ -24,10 +24,9 @@
       enableCompletion = true;
       enableVteIntegration = true;
       historySubstringSearch.enable = true;
+      history.extended = true;
       syntaxHighlighting.enable = true;
     };
-
-    zsh.history.extended = true;
 
     starship = {
       enable = true;
@@ -69,10 +68,7 @@
       enable = true;
 
       extraPackages = with pkgs.bat-extras; [
-        batdiff
         batman
-        batgrep
-        batwatch
       ];
     };
 

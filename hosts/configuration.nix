@@ -9,14 +9,12 @@
   console.font = "Lat2-Terminus16"; # Set the console font to Lat2-Terminus16.
 
   # NOTE: Change user password using passwd after installation.
-  users = {
-    users."${username}" = {
-      password = "password"; # Set the user’s password to ‘password’.
+  users.users."${username}" = {
+    password = "password"; # Set the user’s password to ‘password’.
 
-      isNormalUser = true; # Set the user as a normal user.
+    isNormalUser = true; # Set the user as a normal user.
 
-      shell = pkgs.zsh; # Set the user’s shell to Zsh.
-    };
+    shell = pkgs.zsh; # Set the user’s shell to Zsh.
   };
 
   nix = {
