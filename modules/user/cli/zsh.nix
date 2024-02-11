@@ -8,7 +8,7 @@
     ];
 
     shellAliases = {
-      # ls = "eza"; # Use eza as the replacement for ls
+      ls = "eza"; # Use eza as the replacement for ls
       cat = "bat"; # Use bat as the replacement for cat
       du = "dua"; # Use dua as the replacement for du
       df = "duf"; # Use duf as the replacement for df
@@ -18,6 +18,15 @@
   };
 
   programs = {
+    zsh = {
+      enable = true;
+      enableAutosuggestions = true;
+      enableCompletion = true;
+      enableVteIntegration = true;
+      historySubstringSearch.enable = true;
+      syntaxHighlighting.enable = true;
+    };
+
     zsh.history.extended = true;
 
     starship = {
