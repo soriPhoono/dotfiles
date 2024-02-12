@@ -19,15 +19,15 @@ in {
 
       ./vm
 
-      home-manager.nixosModules.home-manager {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
+      inputs.home-manager.nixosModules.home-manager {
+        inputs.home-manager.useGlobalPkgs = true;
+        inputs.home-manager.useUserPackages = true;
 
-        home-manager.extraSpecialArgs = {
+        inputs.home-manager.extraSpecialArgs = {
           inherit inputs pkgs username;
         };
 
-        home-manager.users."${username}" = {
+        inputs.home-manager.users."${username}" = {
           imports = [
             (import ../modules/home.nix)
             (import ./vm/home.nix)
