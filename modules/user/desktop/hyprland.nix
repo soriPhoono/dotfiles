@@ -1,30 +1,15 @@
 { ... }: {
-  wayland.windowManager.hyprland = {
-    enable = true;
+  wayland.windowManager.hyprland.enable = true;
 
-    settings = {
-      # Environment variables
-      env = {
-        "XCURSOR_SIZE" = 24;
-      };
-
-      # Monitor configurations
-
-      # General configuration options
-
-      # Decoration configuration options
-
-      # Animation configuration options
-
-      # Layout configuration options (master, dwindle)
-
-      # Input configuration options
-
-      # Miscellaneous configuration options
-
-      # Keybinding configuration options
-
-      # Window rules and opacity configuration options
-    };
-  };
+  # TODO: Change this to declarative configuration after debugging
+  xdg.configFile."hypr/hyprland.conf".source =
+    ../../../config/hypr/hyprland.conf;
+  xdg.configFile."hypr/modules/environment.conf".source =
+    ../../../config/hypr/modules/environment.conf;
+  xdg.configFile."hypr/modules/dispatchers.conf".source =
+    ../../../config/hypr/modules/dispatchers.conf;
+  xdg.configFile."hypr/modules/rules.conf".source =
+    ../../../config/hypr/modules/rules.conf;
+  xdg.configFile."hypr/modules/autostart.conf".source =
+    ../../../config/hypr/modules/autostart.conf;
 }
