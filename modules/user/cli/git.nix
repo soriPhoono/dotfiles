@@ -10,24 +10,22 @@
         enable = true;
 
         options = {
+          features = "decorations";
+
+          true-color = "always";
+          whitespace-error-style = "22 reverse";
+
+          line-numbers = true;
+
           side-by-side = true;
+          line-numbers-left-format = "";
+          line-numbers-right-format = "| ";
 
           hyperlinks = true;
           hyperlinks-file-link-format = "vscode://file/{path}:{line}"; # TODO: possible bad code
 
-          colorMoved = "default";
-
-          features = "unobtrusive-line-numbers decorations";
-
-          unobtrusive-line-numbers = {
-            line-numbers = true;
-            line-numbers-minus-style = "#444444";
-            line-numbers-zero-style = "#444444";
-            line-numbers-plus-style = "#444444";
-            line-numbers-left-format = "{nm:>4}┊";
-            line-numbers-right-format = "{np:>4}│";
-            line-numbers-left-style = "blue";
-            line-numbers-right-style = "blue";
+          merge = {
+            conflictstyle = "diff3";
           };
 
           decorations = {

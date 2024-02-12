@@ -1,7 +1,5 @@
 { ... }: {
   imports = [
     ./cli
-
-    ./development
   ];
 }
