@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   home = {
     packages = with pkgs; [
       dua # Install the dua disk usage analyzer
