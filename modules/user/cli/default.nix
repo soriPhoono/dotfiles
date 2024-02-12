@@ -53,6 +53,16 @@
           };
         };
       };
+
+      git-cliff = {
+        enable = true;
+
+        settings = {
+
+        };
+      };
+
+      git-credential-oauth.enable = true;
     };
 
     eza = {
