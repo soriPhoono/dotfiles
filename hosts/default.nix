@@ -1,4 +1,4 @@
-{ lib, nixpkgs, home-manager, username, ... }:
+{ lib, inputs, nixpkgs, username, ... }:
 let
   system = "x86_64-linux";
 
@@ -9,9 +9,11 @@ let
 in {
   test_vm = lib.nixosSystem {
     inherit system;
+
     specialArgs = {
-      inherit pkgs username;
+      inherit inputs pkgs username;
     };
+
     modules = [
       ./configuration.nix
 
@@ -20,12 +22,16 @@ in {
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
+
         home-manager.extraSpecialArgs = {
-          inherit pkgs username;
+          inherit inputs pkgs username;
         };
 
         home-manager.users."${username}" = {
-          imports = [(import ../modules/home.nix)] ++ [(import ./vm/home.nix)];
+          imports = [
+            (import ../modules/home.nix)
+            (import ./vm/home.nix)
+          ];
         };
       }
     ];

@@ -8,18 +8,16 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # TODO: add home manager for personal rice
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, ... } @inputs:
   let
     username = "soriphoono";
   in {
     nixosConfigurations = (
       import ./hosts {
         inherit (nixpkgs) lib;
-        inherit nixpkgs home-manager username;
+        inherit inputs nixpkgs username;
       }
     );
   };
