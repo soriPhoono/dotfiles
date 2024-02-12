@@ -19,8 +19,6 @@
       };
     };
 
-    systemDirs.enable = true;
-
     userDirs = {
       enable = true;
       createDirectories = true;
