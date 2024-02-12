@@ -26,8 +26,8 @@
             line-numbers-plus-style = "#444444";
             line-numbers-left-format = "{nm:>4}┊";
             line-numbers-right-format = "{np:>4}│";
-            line-numbers-left-style = blue;
-            line-numbers-right-style = blue;
+            line-numbers-left-style = "blue";
+            line-numbers-right-style = "blue";
           };
 
           decorations = {
