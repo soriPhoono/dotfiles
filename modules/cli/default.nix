@@ -23,10 +23,6 @@
 
       neofetch # Install the neofetch package.
 
-      btop # Install the btop system monitor.
-      ranger # Install the ranger file manager.
-      smartmontools # Install the smartmontools package for monitoring hard drives.
-
       curl # Install the curl package.
       wget # Install the wget package.
 
@@ -34,6 +30,10 @@
 
       usbutils # Install the usbutils package.
       pciutils # Install the pciutils package.
+
+      btop # Install the btop system monitor.
+      ranger # Install the ranger file manager.
+      smartmontools # Install the smartmontools package for monitoring hard drives.
     ];
   };
 
