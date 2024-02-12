@@ -10,6 +10,7 @@
   xdg = {
     enable = true;
 
+    # TODO: migrate this to desktop level unless file type is strictly cli accessable
     mime.enable = true;
     mimeApps = {
       enable = true;
@@ -18,16 +19,11 @@
       };
     };
 
+    systemDirs.enable = true;
+
     userDirs = {
       enable = true;
       createDirectories = true;
-    };
-
-    systemDirs.enable = true;
-
-    portal = {
-      enable = true;
-      xdgOpenUsePortal = true;
     };
   };
 
