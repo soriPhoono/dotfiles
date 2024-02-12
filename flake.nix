@@ -10,14 +10,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... } @inputs:
-  let
-    username = "soriphoono";
-  in {
+  outputs = { self, nixpkgs, ... } @inputs: {
     nixosConfigurations = (
       import ./hosts {
         inherit (nixpkgs) lib;
-        inherit inputs nixpkgs username;
+        inherit inputs nixpkgs;
       }
     );
   };

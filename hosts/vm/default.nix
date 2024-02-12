@@ -19,7 +19,6 @@
   };
 
   users.users."${username}".extraGroups = [
-    "wheel" # Add the user to the "wheel" group.
     "networkmanager" # Add the user to the "networkmanager" group.
   ];
 }
