@@ -9,6 +9,8 @@
       dosfstools # Install the dosfstools package.
       exfatprogs # Install the exfatprogs package.
       ntfs3g # Install the NTFS-3G driver for windows NTFS partitions.
+      apfs-fuse # Install the apfs-fuse package for reading APFS partitions.
+      hfsprogs # Install the hfsprogs package for reading HFS partitions.
 
       nix-tree # Install the nix-tree package for viewing the Nix store.
 
