@@ -10,9 +10,24 @@
   xdg = {
     enable = true;
 
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "image/png" = "imv.desktop";
+      };
+    };
+
     userDirs = {
       enable = true;
       createDirectories = true;
+    };
+
+    systemDirs.enable = true;
+
+    portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
     };
   };
 
