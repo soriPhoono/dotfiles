@@ -1,6 +1,7 @@
 { pkgs, username, ... }: {
   imports = [
-    ../modules # Import the system module (default system configuration).
+    ../modules              # Import the system module (default system configuration).
+    ../modules/cli/zsh.nix  # Import the Zsh module.
   ];
 
   time.timeZone = "America/Chicago"; # Set the time zone to America/Chicago.

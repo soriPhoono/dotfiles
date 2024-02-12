@@ -1,8 +1,4 @@
 { pkgs, ... }: {
-  imports = [
-    ./shells/zsh.nix
-  ];
-
   environment = {
     systemPackages = with pkgs; [
       tldr # Install community maintained simplified man pages.
@@ -39,5 +35,23 @@
 
   programs = {
     nano.enable = true; # Enable nano text editor.
+
+    git = {
+      enable = true; # Enable git
+
+      config = {
+        init = {
+          defaultBranch = "main"; # Use ‘main’ as the default branch
+        };
+        url = {
+          "https://github.com/" = {
+            insteadOf = [
+              "gh:" # Use ‘gh:’ as a prefix for GitHub URLs
+              "github:" # Use ‘github:’ as a prefix for GitHub URLs
+            ];
+          };
+        };
+      };
+    };
   };
 }

@@ -3,9 +3,7 @@
     ./hardware-configuration.nix        # Include the results of the hardware scan.
 
     ../../modules/boot/uefi.nix         # Include the UEFI boot loader.
-    ../../modules/desktop               # Include the desktop environment.
     ../../modules/desktop/hyprland.nix  # Include the Hyprland desktop environment.
-    ../../modules/development           # Include the development environment.
   ];
 
   networking = {

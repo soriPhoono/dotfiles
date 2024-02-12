@@ -1,6 +1,9 @@
 { username, ... }: {
   imports = [
     ./user
+
+    ./user/cli/zsh.nix
+    ./user/desktop/hyprland.nix
   ];
 
   programs = {

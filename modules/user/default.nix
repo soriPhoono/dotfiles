@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
-    ./cli/zsh.nix
-    ./personal
+    ./cli
+
+    ./development
   ];
 }
