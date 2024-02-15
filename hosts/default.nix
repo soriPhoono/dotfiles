@@ -15,8 +15,6 @@ in {
     };
 
     modules = [
-      ./configuration.nix
-
       ./vm
 
       inputs.home-manager.nixosModules.home-manager {
@@ -27,7 +25,7 @@ in {
           inherit inputs pkgs;
         };
 
-        home-manager.users."${username}" = {
+        home-manager.users.soriphoono = {
           imports = [
             (import ../modules/home.nix)
             (import ./vm/home.nix)

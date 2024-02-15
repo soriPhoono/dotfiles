@@ -1,5 +1,7 @@
 { ... }: {
   programs = {
+    less.enable = true;
+
     zsh = {
       enable = true; # Enable zsh
 

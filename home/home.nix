@@ -1,8 +1,7 @@
 { username, ... }: {
   imports = [
-    ./user
-
-    ./user/cli/zsh.nix
+    ./cli
+    ./cli/zsh.nix
   ];
 
   programs = {

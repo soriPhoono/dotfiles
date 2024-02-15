@@ -1,8 +1,11 @@
 { ... }: {
   import = [
-    ./core        # Import the core NixOS modules.
-    ./networking  # Import the networking NixOS modules.
-    ./
+    ./core                # Import the core NixOS modules.
+
+    ./programs/common.nix # Import the common programs.
+    ./programs/zsh.nix    # Import the Zsh program.
+
+    ./services            # Import the services.
   ];
 
   nix = {

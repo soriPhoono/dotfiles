@@ -1,9 +1,14 @@
 { username, ... }: {
   imports = [
-    ./hardware-configuration.nix        # Include the results of the hardware scan.
+    ./hardware-configuration.nix            # Include the results of the hardware scan.
 
-    ../../modules/boot/uefi.nix         # Include the UEFI boot loader.
-    ../../modules/desktop/hyprland.nix  # Include the Hyprland desktop environment.
+    ../system                               # Import the system configuration.
+    ../system/networking/networkmanager.nix # Import the NetworkManager configuration.
+    ../system/programs/hyprland.nix         # Import the Hyprland configuration.
+    ../system/services/location.nix         # Import the location service.
+    ../system/services/pipewire.nix         # Import the PipeWire service.
+    ../system/services/power.nix            # Import the power management service.
+    ../system/services/brightness.nix       # Import the brightness service.
   ];
 
   networking = {
@@ -14,8 +19,6 @@
 
       allowPing = false; # Disable ping requests.
     };
-
-    networkmanager.enable = true; # Enable NetworkManager.
   };
 
   users.users."${username}".extraGroups = [
