@@ -17,6 +17,8 @@ in {
     modules = [
       ./vm
 
+      ../system
+
       inputs.home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
@@ -27,7 +29,7 @@ in {
 
         home-manager.users.soriphoono = {
           imports = [
-            (import ../modules/home.nix)
+            (import ../home/home.nix)
             (import ./vm/home.nix)
           ];
         };

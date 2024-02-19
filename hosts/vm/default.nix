@@ -2,7 +2,6 @@
   imports = [
     ./hardware-configuration.nix            # Include the results of the hardware scan.
 
-    ../system                               # Import the system configuration.
     ../system/networking/networkmanager.nix # Import the NetworkManager configuration.
     ../system/programs/hyprland.nix         # Import the Hyprland configuration.
     ../system/services/location.nix         # Import the location service.
