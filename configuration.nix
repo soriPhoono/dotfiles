@@ -66,8 +66,6 @@
     };
 
     systemPackages = [
-      config.boot.kernelPackages.cpupower
-
       tldr # Install community maintained simplified man pages.
 
       coreutils # Install the coreutils package.
