@@ -2,7 +2,7 @@
   imports = [
     ./vm/hardware-configuration.nix
 
-    inputs.hyprland.nixosModules.default;
+    inputs.hyprland.nixosModules.default
   ];
 
   documentation.dev.enable = true;
