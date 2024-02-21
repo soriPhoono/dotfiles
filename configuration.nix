@@ -24,7 +24,7 @@
         catppuccin-plymouth
       ];
 
-      theme = "catppuccin-mocha";
+      theme = "catppuccin-macchiato";
     };
   };
 
