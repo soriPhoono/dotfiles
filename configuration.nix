@@ -65,7 +65,7 @@
 
     };
 
-    systemPackages = [
+    systemPackages = with pkgs; [
       tldr # Install community maintained simplified man pages.
 
       coreutils # Install the coreutils package.
