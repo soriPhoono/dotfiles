@@ -2,18 +2,13 @@
   imports = [
     ./vm/hardware-configuration.nix
 
-    inputs.lanzaboote.nixosModules.lanzaboote
+    # inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
   documentation.dev.enable = true;
 
   boot = {
     bootspec.enable = true; # TODO: this could be a nonexistant paramenter.
-
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
 
     kernelPackages = pkgs.linuxPackages_latest; # Use the 6.7 kernel. TODO: this should target linux 6.7. fix if otherwise.
 
@@ -34,7 +29,7 @@
       efi.canTouchEfiVariables = true; # Allow the bootloader to modify EFI variables.
 
       systemd-boot = {
-        enable = lib.mkForce false; # This is the default, but let's be explicit.
+        enable = true; # This is the default, but let's be explicit.
         consoleMode = "max"; # Enable more detailed output.
       };
     };
@@ -67,8 +62,6 @@
   environment = {
     systemPackages = with pkgs; [
       config.boot.kernelPackages.cpupower
-
-      sbctl
     ];
   };
 
