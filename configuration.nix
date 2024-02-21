@@ -21,7 +21,7 @@
       enable = true;
 
       themePackages = with pkgs; [
-        catppuccin-plymouth
+        catppuccin-plymouth { variant = "mocha"; }
       ];
 
       theme = "catppuccin-macchiato";
