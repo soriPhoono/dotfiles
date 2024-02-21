@@ -21,7 +21,7 @@
       enable = true;
 
       themePackages = with pkgs; [
-        catppuccin-plymouth { variant = "mocha"; }
+        (catppuccin-plymouth.override { variant = "mocha"; })
       ];
 
       theme = "catppuccin-macchiato";
