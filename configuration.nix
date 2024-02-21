@@ -16,6 +16,14 @@
       tmpfsSize = "50%"; # 50% of RAM
       cleanOnBoot = true;
     };
+
+    plymouth = {
+      enable = true;
+
+      themePackages = with pkgs; [
+        catppuccin-plymouth
+      ];
+    };
   };
 
   zramSwap.enable = true;
