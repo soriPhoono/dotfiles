@@ -2,7 +2,7 @@
   description = "Set of personal NixOS configurations";
 
   inputs = {
-    fu.url = "github:numtide/flake-utils";
+    # fu.url = "github:numtide/flake-utils";
 
     nixpkgs.url = "nixpkgs/nixos-23.11";
 
