@@ -23,6 +23,8 @@
       themePackages = with pkgs; [
         catppuccin-plymouth
       ];
+
+      theme = "catppuccin-mocha";
     };
   };
 
