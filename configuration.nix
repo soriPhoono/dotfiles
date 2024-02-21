@@ -15,7 +15,7 @@
       useTmpfs = true;
       tmpfsSize = "50%"; # 50% of RAM
       cleanOnBoot = true;
-    }
+    };
   };
 
   zramSwap.enable = true;
@@ -65,7 +65,7 @@
 
     };
 
-    systemPackages = {
+    systemPackages = [
       config.boot.kernelPackages.cpupower
 
       tldr # Install community maintained simplified man pages.
@@ -99,7 +99,7 @@
       btop # Install the btop system monitor.
       ranger # Install the ranger file manager.
       smartmontools # Install the smartmontools package for monitoring hard drives.
-    };
+    ];
   };
 
   programs = {
