@@ -1,6 +1,8 @@
 { config, pkgs, ... }: {
   imports = [
     ./core
+
+    ./hardware
   ];
 
   nix = {
