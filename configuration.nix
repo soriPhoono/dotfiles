@@ -23,6 +23,8 @@
     };
   };
 
+  services.resolved.enable = true;
+
   console.font = "Lat2-Terminus16";
 
   environment = {
