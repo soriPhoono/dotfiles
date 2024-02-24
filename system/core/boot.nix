@@ -20,7 +20,7 @@
         (catppuccin-plymouth.override { variant = "mocha"; })
       ];
 
-      theme = "catppuccin-macchiato";
+      theme = "catppuccin-mocha";
     };
   };
 
