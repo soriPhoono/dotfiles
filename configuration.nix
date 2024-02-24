@@ -7,14 +7,6 @@
     ./system/desktops/gnome.nix
   ];
 
-  hardware = {
-    pulseaudio.enable = false;
-  };
-
-  security = {
-    rtkit.enable = true;
-  };
-
   networking = {
     hostName = "test";
 
@@ -118,19 +110,6 @@
   };
 
   services = {
-    pipewire = {
-      enable = true;
-
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-
-      pulse.enable = true;
-
-      jack.enable = true;
-    };
-
     printing = {
       enable = true;
 
@@ -148,6 +127,4 @@
       firefox
     ];
   };
-
-  sound.enable = true;
 }
