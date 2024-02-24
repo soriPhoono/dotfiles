@@ -1,34 +1,11 @@
 { config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+
+    ./system
+
+    ./system/desktops/gnome.nix
   ];
-
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-
-    tmp = {
-      useTmpfs = true;
-      tmpfsSize = "50%"; # 50% of RAM
-      cleanOnBoot = true;
-    };
-
-    plymouth = {
-      enable = true;
-
-      themePackages = with pkgs; [
-        (catppuccin-plymouth.override { variant = "mocha"; })
-      ];
-
-      theme = "catppuccin-macchiato";
-    };
-  };
-
-  zramSwap.enable = true;
 
   hardware = {
     pulseaudio.enable = false;
@@ -47,24 +24,6 @@
       enable = true;
 
       allowPing = false;
-    };
-  };
-
-  time.timeZone = "America/Chicago";
-
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
     };
   };
 
@@ -159,21 +118,6 @@
   };
 
   services = {
-    xserver = {
-      enable = true;
-
-      layout = "us";
-      xkbVariant = "";
-
-      displayManager = {
-        gdm.enable = true;
-      };
-
-      desktopManager = {
-        gnome.enable = true;
-      };
-    };
-
     pipewire = {
       enable = true;
 
@@ -206,23 +150,4 @@
   };
 
   sound.enable = true;
-
-
-  nix = {
-    settings = {
-      auto-optimise-store = true; # Automatically optimise the Nix store.
-
-      # TODO: Will reactivate later
-      # experimental-features = [ "nix-command" "flakes" ]; # Enable experimental features.
-    };
-
-    gc = {
-      automatic = true; # Enable automatic garbage collection.
-      dates = "weekly"; # Run garbage collection weekly.
-      options = "--delete-older-than 2d"; # Delete generations older than 30 days.
-    };
-  };
-  nixpkgs.config.allowUnfree = true;
-
-  system.stateVersion = "23.11";
 }
