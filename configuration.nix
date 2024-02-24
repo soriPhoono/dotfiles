@@ -10,7 +10,11 @@
   networking = {
     hostName = "test";
 
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      dns = "systemd-resolved";
+      wifi.powersave = true;
+    };
 
     firewall = {
       enable = true;
