@@ -7,24 +7,6 @@
     ./system/desktops/gnome.nix
   ];
 
-  networking = {
-    hostName = "test";
-
-    networkmanager = {
-      enable = true;
-      dns = "systemd-resolved";
-      wifi.powersave = true;
-    };
-
-    firewall = {
-      enable = true;
-
-      allowPing = false;
-    };
-  };
-
-  services.resolved.enable = true;
-
   console.font = "Lat2-Terminus16";
 
   environment = {
@@ -65,54 +47,6 @@
       ranger # Install the ranger file manager.
       smartmontools # Install the smartmontools package for monitoring hard drives.
     ];
-  };
-
-  programs = {
-    less.enable = true;
-
-    zsh = {
-      enable = true;
-
-      autosuggestions = {
-        enable = true; # Enable zsh-autosuggestions
-        strategy = [
-          "history" # Use history to determine suggestions
-          "completion" # Use completion to determine suggestions
-          "match_prev_cmd" # Use previous command to determine suggestions
-        ];
-      };
-
-      syntaxHighlighting = {
-        enable = true; # Enable zsh-syntax-highlighting
-        highlighters = [
-          "main" # Enable main highlighter
-          "brackets" # Enable bracket highlighter
-          "pattern" # Enable pattern highlighter
-          "cursor" # Enable cursor highlighter
-          "regexp" # Enable regexp highlighter
-          "root" # Enable root highlighter
-          "line" # Enable line highlighter
-        ];
-      };
-    };
-
-    git = {
-      enable = true; # Enable git
-
-      config = {
-        init = {
-          defaultBranch = "main"; # Use ‘main’ as the default branch
-        };
-        url = {
-          "https://github.com/" = {
-            insteadOf = [
-              "gh:" # Use ‘gh:’ as a prefix for GitHub URLs
-              "github:" # Use ‘github:’ as a prefix for GitHub URLs
-            ];
-          };
-        };
-      };
-    };
   };
 
   services = {

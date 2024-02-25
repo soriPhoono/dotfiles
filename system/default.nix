@@ -3,6 +3,8 @@
     ./core
 
     ./hardware
+
+    ./programs
   ];
 
   nix = {
