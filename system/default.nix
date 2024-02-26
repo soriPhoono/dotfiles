@@ -2,8 +2,6 @@
   imports = [
     ./core
 
-    ./hardware
-
     ./programs
   ];
 
