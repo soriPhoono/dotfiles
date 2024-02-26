@@ -8,7 +8,7 @@
       settings = {
         default_session = {
           # TODO: change the wayland compositor to hyprland
-          command = "cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
+          command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
         };
       };
     };
