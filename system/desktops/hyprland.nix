@@ -4,7 +4,7 @@
   ];
 
   environment.etc."greetd/hyprland.conf".text = ''
-    exec-once = ${pkgs.regreet}/bin/regreet; hyprctl dispatch exit;
+    exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit;
   '';
 
   services = {
