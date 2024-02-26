@@ -7,7 +7,7 @@
     enable = true;
   };
 
-  environment.etc."greetd/hyprland.conf".text = ''
-    exec-once = regreetd; hyprctl dispatch exit;
-  '';
+  services.greetd
+    .settings.default_session
+    .command = "cage -s -- regreet";
 }
