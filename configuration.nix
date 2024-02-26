@@ -4,7 +4,10 @@
 
     ./system
 
-    ./system/desktops/gnome.nix
+    ./system/hardware/pipewire.nix
+    ./system/hardware/opengl.nix
+
+    ./system/desktops/regreet.nix
   ];
 
   console.font = "Lat2-Terminus16";
