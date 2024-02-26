@@ -7,6 +7,7 @@
     enable = true;
   };
 
-  environment.etc."greetd/hyprland.conf".source
-    = ../../config/greetd/hyprland.conf;
+  environment.etc."greetd/hyprland.conf".text = ''
+    exec-once = regreetd; hyprctl dispatch exit;
+  '';
 }
