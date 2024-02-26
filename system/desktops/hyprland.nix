@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
-    ./regreet.nix
+    # ./regreet.nix
   ];
 
   programs.hyprland = {
