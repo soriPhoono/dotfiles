@@ -7,7 +7,7 @@
     ./system/hardware/pipewire.nix
     ./system/hardware/opengl.nix
 
-    ./system/desktops/hyprland.nix
+    ./system/desktops/kde.nix
   ];
 
   console.font = "Lat2-Terminus16";
