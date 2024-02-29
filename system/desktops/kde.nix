@@ -2,10 +2,9 @@
   services.xserver = {
     enable = true;
 
+    displayManager.defaultSession = "plasmawayland";
     displayManager.sddm = {
       enable = true;
-
-      defaultSession = "plasmawayland";
 
       wayland.enable = true;
     };
