@@ -5,9 +5,6 @@
     ./system
 
     ./system/hardware/pipewire.nix
-    ./system/hardware/opengl.nix
-
-    ./system/desktops/hyprland.nix
   ];
 
   console.font = "Lat2-Terminus16";
@@ -50,13 +47,5 @@
       ranger # Install the ranger file manager.
       smartmontools # Install the smartmontools package for monitoring hard drives.
     ];
-  };
-
-  services = {
-    printing = {
-      enable = true;
-
-      # TODO: Add extra options
-    };
   };
 }

@@ -1,27 +1,20 @@
 { config, pkgs, ... }: {
-  services.xserver = {
-    enable = true;
+  imports = [
+    ./gdm.nix
+  ];
 
-    layout = "us";
-    xkbVariant = "";
+  services = {
+    xserver = {
+      enable = true;
 
-    libinput.enable = true;
+      layout = "us";
+      xkbVariant = "";
 
-    videoDrivers = [ "modesetting" "nvidia" ];
+      libinput.enable = true;
 
-    displayManager = {
-      gdm.enable = true;
-
-      defaultSession = "gnome";
-
-      autoLogin = {
-        enable = true;
-        user = "soriphoono";
+      desktopManager = {
+        gnome.enable = true;
       };
-    };
-
-    desktopManager = {
-      gnome.enable = true;
     };
   };
 }
