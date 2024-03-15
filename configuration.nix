@@ -5,6 +5,8 @@
     ./system
 
     ./system/hardware/pipewire.nix
+
+    ./system/desktops/gnome.nix
   ];
 
   console.font = "Lat2-Terminus16";
