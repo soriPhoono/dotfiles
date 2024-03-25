@@ -87,6 +87,7 @@ function install-dev {
   # Install Rust
   inform_user "Installing Rust"
   sudo snap install rustup --classic
+  rustup default stable
 
   # Install QMK development tools
   inform_user "Installing QMK development tools for keyboard development"
