@@ -36,7 +36,7 @@ inform_user "Installing stow and git to manage dotfiles in the home directory"
 sudo apt install "${packages[@]}"
 
 # Install all relevant features
-for entry in */; do
+for entry in ~/.dotfiles/installer/*/; do
   debug_print "Checking $entry"
 
   if [[ $entry != "~/.dotfiles/installer" ]] && [[ -d ~/.dotfiles/installer/$entry ]] && [[ -f ~/.dotfiles/installer/$entry/module.sh ]]; then
