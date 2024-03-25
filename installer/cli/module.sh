@@ -88,6 +88,7 @@ function install-dev {
   inform_user "Installing Rust"
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   rustup default stable
+  source ~/.cargo/env
 
   # Install QMK development tools
   inform_user "Installing QMK development tools for keyboard development"
