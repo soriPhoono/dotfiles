@@ -98,13 +98,17 @@ function install-dev {
 function install-user {
   packages=(
     # Media downloaders
-    "python-spotdl"
     "yt-dlp"
   )
 
   # Install basic packages from the list
   inform_user "Installing user packages, such as media downloaders"
   sudo apt install "${packages[@]}"
+
+  # Install spotdl
+  inform_user "Installing spotdl"
+  pip install --user spotdl
+  spotdl --download-ffmpeg
 }
 
 # Module entry point
