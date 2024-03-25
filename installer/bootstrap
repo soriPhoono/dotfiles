@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./util.sh
+source ~/.dotfiles/installerutil.sh
 
 function quit {
   echo "Exiting..."
