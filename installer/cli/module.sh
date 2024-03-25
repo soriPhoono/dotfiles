@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 
+source ../util.sh
+
 function install-git {
+  # install git
   packages=(
     "git"
   )
 
+  inform_user "Installing git"
   sudo apt install "${packages[@]}"
 
   # Configure git
+  inform_user "Configuring git"
+
   # Set git username and email
   git config --global user.name "soriphoono" >/dev/null
   git config --global user.email "soriphoono@gmail.com" >/dev/null
@@ -71,28 +77,39 @@ function install-dev {
   )
 
   # Install basic packages from the list
+  inform_user "Installing development tools"
   sudo apt install "${packages[@]}"
 
+  # Installing extra development tools
+  inform_user "Installing special development tools"
+
   # Install Zig
+  inform_user "Installing Zig"
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
   echo "deb https://dl.bintray.com/dryzig/zig-ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/zig.list
   sudo apt install zig
 
   # Install Rust
+  inform_user "Installing Rust"
   curl https://sh.rustup.rs -sSf | sh
 
   rustup default stable
 
   # Install QMK development tools
+  inform_user "Installing QMK development tools for keyboard development"
   pip install --user qmk
 }
 
+# Install user packages
 function install-user {
   packages=(
+    # Media downloaders
     "python-spotdl"
+    "yt-dlp"
   )
 
   # Install basic packages from the list
+  inform_user "Installing user packages, such as media downloaders"
   sudo apt install "${packages[@]}"
 }
 
@@ -103,17 +120,20 @@ function module-cli {
   install-user
 
   packages=(
+    # Terminal tools
     "zsh"
     "neofetch"
   )
 
   # Install basic packages from the list
+  inform_user "Installing terminal tools"
   sudo apt install "${packages[@]}"
 
   # Install starship
+  inform_user "Installing starship"
   cargo install starship --locked
 
   # Set zsh as the default shell
-  echo "Setting zsh as the default shell"
+  inform_user "Setting zsh as the default shell"
   chsh -s $(which zsh)
 }
