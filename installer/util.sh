@@ -3,3 +3,11 @@ function inform_user {
 
   echo -e "\n> $1"
 }
+
+function debug_print {
+  prompt=$1
+
+  if [[ $(whoami) == "soriphoono" ]]; then
+    inform_user $prompt
+  fi
+}
