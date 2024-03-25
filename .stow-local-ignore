@@ -1,0 +1,9 @@
+# Package ignore list for deployment
+
+/installer/
+
+.editorconfig
+.gitignore
+.stow-local-ignore
+LICENSE
+README.md
