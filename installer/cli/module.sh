@@ -49,9 +49,6 @@ function install-dev {
     "clang-format-15"
     "clangd-15"
 
-    # Zig development
-    "gnupg2"
-
     # Java development
     "openjdk-8-jdk"
     "openjdk-11-jdk"
@@ -85,15 +82,11 @@ function install-dev {
 
   # Install Zig
   inform_user "Installing Zig"
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-  echo "deb https://dl.bintray.com/dryzig/zig-ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/zig.list
-  sudo apt install zig
+  sudo snap install zig --classic --beta
 
   # Install Rust
   inform_user "Installing Rust"
-  curl https://sh.rustup.rs -sSf | sh
-
-  rustup default stable
+  sudo snap install rustup --classic
 
   # Install QMK development tools
   inform_user "Installing QMK development tools for keyboard development"
