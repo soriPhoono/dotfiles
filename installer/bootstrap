@@ -36,15 +36,12 @@ inform_user "Installing stow and git to manage dotfiles in the home directory"
 sudo apt install "${packages[@]}"
 
 # Install all relevant features
-for entry in ~/.dotfiles/installer/*/; do
-  debug_print "Checking $entry"
+inform_user "Installing all features"
 
-  if [[ $entry != "~/.dotfiles/installer" ]] && [[ -d ~/.dotfiles/installer/$entry ]] && [[ -f ~/.dotfiles/installer/$entry/module.sh ]]; then
-    inform_user "Installing $(basename $entry)"
-    source ./$entry/module.sh
-    module-$(basename $entry)
-  fi
-done
+# Install cli modules
+inform_user "Installing cli modules"
+source ~/.dotfiles/installer/cli/module.sh
+module-cli
 
 # Copy dotfiles for current user using gnu stow
 inform_user "Copying dotfiles to home directory"
