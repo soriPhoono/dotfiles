@@ -86,7 +86,7 @@ function install-dev {
 
   # Install Rust
   inform_user "Installing Rust"
-  sudo snap install rustup --classic
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
   rustup default stable
 
   # Install QMK development tools
