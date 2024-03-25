@@ -2,6 +2,19 @@
 
 source ./util.sh
 
+function quit {
+  echo "Exiting..."
+  exit 0
+}
+
+function confirm_quit {
+  echo "SIGINT received, press CTRL+C again to quit"
+
+  trap "quit" SIGINT
+}
+
+trap "confirm_quit" SIGINT
+
 # Check if the script is run as root, this is bad
 if [[ "$(whoami)" == "root" ]]; then
   echo "Please run this script as a normal user"
