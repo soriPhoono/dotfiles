@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Check if the script is run as root, this is bad
-if [[ $(whoami) == "root" ]];
-then
+if [[ $(whoami) == "root" ]]; then
   echo "Please run this script as a normal user"
   exit 1
 fi
@@ -21,14 +20,12 @@ packages=(
 sudo apt install "${packages[@]}"
 
 # Install all relevant features
-for entry in $(find ./ -type d);
-do
-    if [[ -f ./$entry/module.sh ]];
-    then
-        source ./$entry/module.sh
+for entry in $(find ./ -type d); do
+  if [[ -f ./$entry/module.sh ]]; then
+    source ./$entry/module.sh
 
-        module-$(basename $entry)
-    fi
+    module-$(basename $entry)
+  fi
 done
 
 # Copy dotfiles for current user using gnu stow
