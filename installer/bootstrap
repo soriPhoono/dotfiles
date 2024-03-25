@@ -36,8 +36,10 @@ inform_user "Installing stow and git to manage dotfiles in the home directory"
 sudo apt install "${packages[@]}"
 
 # Install all relevant features
-for entry in "$(find ~/.dotfiles/installer -type d)"; do
-  if [[ -f ./$entry/module.sh ]]; then
+for entry in */; do
+  debug_print "Checking $entry"
+
+  if [[ $entry != "~/.dotfiles/installer" ]] && [[ -d ~/.dotfiles/installer/$entry ]] && [[ -f ~/.dotfiles/installer/$entry/module.sh ]]; then
     inform_user "Installing $(basename $entry)"
     source ./$entry/module.sh
     module-$(basename $entry)
