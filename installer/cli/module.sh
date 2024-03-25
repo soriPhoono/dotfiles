@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ../util.sh
+source ~/.dotfiles/installer/util.sh
 
 function install-git {
   # install git
@@ -44,10 +44,10 @@ function install-dev {
     "gdb"
     "ninja-build"
     "cmake"
-    "clang-18"
-    "clang-tools-18"
-    "clang-format-18"
-    "clangd-18"
+    "clang-15"
+    "clang-tools-15"
+    "clang-format-15"
+    "clangd-15"
 
     # Zig development
     "gnupg2"
