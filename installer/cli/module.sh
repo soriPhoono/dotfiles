@@ -38,6 +38,13 @@ function install-dev {
     "gdb"
     "ninja-build"
     "cmake"
+    "clang-18"
+    "clang-tools-18"
+    "clang-format-18"
+    "clangd-18"
+
+    # Zig development
+    "gnupg2"
 
     # Java development
     "openjdk-8-jdk"
@@ -67,6 +74,9 @@ function install-dev {
   sudo apt install "${packages[@]}"
 
   # Install Zig
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+  echo "deb https://dl.bintray.com/dryzig/zig-ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/zig.list
+  sudo apt install zig
 
   # Install Rust
   curl https://sh.rustup.rs -sSf | sh
@@ -77,15 +87,28 @@ function install-dev {
   pip install --user qmk
 }
 
+function install-user {
+  packages=(
+    "python-spotdl"
+  )
+
+  # Install basic packages from the list
+  sudo apt install "${packages[@]}"
+}
+
 # Module entry point
 function module-cli {
   install-git
   install-dev
+  install-user
 
   packages=(
     "zsh"
     "neofetch"
   )
+
+  # Install basic packages from the list
+  sudo apt install "${packages[@]}"
 
   # Install starship
   cargo install starship --locked
