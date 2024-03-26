@@ -8,9 +8,6 @@
   conflictStyle = diff3
 [diff]
   colorMoved = default
-[user]
-	email = soriphoono@gmail.com
-	name = soriphoono
 [color]
 	ui = true
 [color "diff-highlight"]
