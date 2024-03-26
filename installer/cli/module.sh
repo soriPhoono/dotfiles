@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-source ~/.dotfiles/installer/util.sh
+project_root=$(dirname $0)/../../
+
+source $project_root/installer/util.sh
 
 function install-git {
   # install git
@@ -109,7 +111,7 @@ function install-user {
   # Install spotdl
   inform_user "Installing spotdl"
   pip install --user spotdl
-  spotdl --download-ffmpeg
+  zsh -c "spotdl --download-ffmpeg"
 }
 
 # Module entry point
@@ -135,17 +137,15 @@ function module-cli {
 
   # Install starship
   inform_user "Installing starship"
-  cargo install starship --locked
+  cargo install starship bat --locked
+
+  # Install advanced tool replacements
+  cargo install cargo-update \
+                eza dua-cli \
+                tre-command \
+                git-delta
 
   # Set zsh as the default shell
   inform_user "Setting zsh as the default shell"
   chsh -s $(which zsh)
-
-  # Install advanced tool replacements
-  cargo install cargo-update
-  cargo install eza
-  cargo install --locked bat
-  cargo install dua-cli
-  cargo install tre-command
-  cargo install git-delta
 }
