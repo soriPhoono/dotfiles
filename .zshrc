@@ -5,6 +5,11 @@ export PATH="~/.local/bin:$PATH"
 autoload -U compinit; compinit
 
 alias update="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y && cargo install-update -a"
+alias du="dua i"
+alias ls="exa -al --color=auto --icons --group-directories-first --git"
+alias tree="tre -al 4 -c automatic"
+alias cat="bat --theme Catppuccin-mocha --color auto"
+alias radeontop="radeontop -c -T"
 
 neofetch
 eval "$(starship init zsh)"
