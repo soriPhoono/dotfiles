@@ -23,7 +23,7 @@ fi
 
 echo "WSL Dotfiles Installer"
 echo "Running as $(whoami)"
-cd # Go to home directory
+cd $(dirname $0)../
 
 # Update
 inform_user "Updating system to ensure no broken package dependencies"
@@ -45,5 +45,4 @@ module-cli
 
 # Copy dotfiles for current user using gnu stow
 inform_user "Copying dotfiles to home directory"
-cd ~/.dotfiles
 stow .
