@@ -17,26 +17,11 @@ function install-git {
   inform_user "Configuring git"
 
   # Set git username and email
-  git config --global user.name "soriphoono" >/dev/null
-  git config --global user.email "soriphoono@gmail.com" >/dev/null
+  read -p "Enter your git username: " username
+  read -p "Enter your git email: " email
 
-  # Setup color in git user interface
-  git config --global color.ui true >/dev/null
-
-  # Setup change highlighting in git diff
-  git config --global color.diff-highlight.oldNormal "red bold" >/dev/null
-  git config --global color.diff-highlight.oldHighlight "red bold 52" >/dev/null
-  git config --global color.diff-highlight.newNormal "green bold" >/dev/null
-  git config --global color.diff-highlight.newHighlight "green bold 22" >/dev/null
-
-  # Setup color in git diff
-  git config --global color.diff.meta "11" >/dev/null
-  git config --global color.diff.frag "magenta bold" >/dev/null
-  git config --global color.diff.func "146 bold" >/dev/null
-  git config --global color.diff.commit "yellow bold" >/dev/null
-  git config --global color.diff.old "red bold" >/dev/null
-  git config --global color.diff.new "green bold" >/dev/null
-  git config --global color.diff.whitespace "red reverse" >/dev/null
+  git config --global user.name "$username"
+  git config --global user.email "$email"
 }
 
 function install-dev {
