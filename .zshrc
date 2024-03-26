@@ -9,7 +9,6 @@ alias du="dua i"
 alias ls="eza -al --color=auto --icons --group-directories-first --git"
 alias tree="tre -al 4 -c automatic"
 alias cat="bat --theme Catppuccin-mocha --color auto"
-alias radeontop="radeontop -c -T"
 
 neofetch
 eval "$(starship init zsh)"
