@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 
-export PATH="/snap/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
+source ~/.cargo/env
 
 autoload -U compinit; compinit
 
