@@ -1,6 +1,7 @@
 # Package ignore list for deployment
 
-/installer/
+^/.git$
+^/installer$
 
 .editorconfig
 .gitignore
