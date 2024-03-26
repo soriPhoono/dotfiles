@@ -136,7 +136,7 @@ function module-cli {
   sudo apt install "${packages[@]}"
 
   # Install starship
-  inform_user "Installing starship"
+  inform_user "Installing starship and other tools for a better experience in the terminal"
   cargo install starship bat --locked
 
   # Install advanced tool replacements
