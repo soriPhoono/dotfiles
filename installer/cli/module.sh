@@ -122,6 +122,11 @@ function module-cli {
     # Terminal tools
     "zsh"
     "neofetch"
+
+    # Terminal environment
+    "duf"
+    "btop"
+    "jq"
   )
 
   # Install basic packages from the list
@@ -135,4 +140,12 @@ function module-cli {
   # Set zsh as the default shell
   inform_user "Setting zsh as the default shell"
   chsh -s $(which zsh)
+
+  # Install advanced tool replacements
+  cargo install cargo-update
+  cargo install eza
+  cargo install --locked bat
+  cargo install dua-cli
+  cargo install tre-command
+  cargo install git-delta
 }
