@@ -16,10 +16,10 @@ function confirm_installation {
   p=$1
   callback=$2
 
-  echo "$p"
+  inform_user $p
   read -n 1 -p "(Y/n) >> " response
 
-  if [[ $(echo $response | tr '[:upper:]' '[:lower:]') == "y" ]]; then
+  if [[ $response ~= [Yy ] ]]; then
     echo -e "\nInstallation confirmed. Proceeding...\n"
 
     command $callback
