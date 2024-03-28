@@ -2,6 +2,8 @@
 
 export PATH="~/.local/bin:$PATH"
 
+fpath=(~/.zsh/completions $fpath)
+
 HISTFILE=~/.zsh_history
 
 HISTSIZE=10000
