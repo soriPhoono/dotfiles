@@ -1,25 +1,26 @@
 [core]
   pager = delta
+
 [interactive]
   diffFilter = delta --color-only
+
 [delta]
   navigate = true
+
+  side-by-side = true
+
+  line-numbers = true
+  line-numbers-left-format = ""
+  line-numbers-right-format = "| "
+
+  hyperlinks = true
+  hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+
 [merge]
   conflictStyle = diff3
+
 [diff]
   colorMoved = default
+
 [color]
 	ui = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-	func = 146 bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
