@@ -9,7 +9,7 @@ in lib.nixosSystem {
 
   modules = [
     inputs.nixos-wsl.nixosModules.default {
-      stateVersion = "${vars.stateVersion}";
+      system.stateVersion = "${vars.stateVersion}";
 
       wsl = {
         enable = true;

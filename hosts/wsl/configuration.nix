@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, vars, ... }: {
   environment.systemPackages = with pkgs; [
     man
     man-pages
@@ -52,5 +52,5 @@
     '';
   };
 
-  stateVersion = "24.05";
+  system.stateVersion = "${vars.stateVersion}";
 }
