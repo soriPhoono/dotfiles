@@ -25,9 +25,9 @@ in lib.nixosSystem {
         useGlobalPkgs = true;
         useUserPackages = true;
 
-        extraSpecialArgs = [
+        extraSpecialArgs = {
           inherit inputs pkgs vars;
-        ];
+        };
 
         users.${vars.defaultUser} = import ../users/${vars.defaultUser}.nix;
       };
