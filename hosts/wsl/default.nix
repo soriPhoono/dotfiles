@@ -1,0 +1,21 @@
+{ inputs, pkgs, vars, ... }: lib.nixosSystem {
+  inherit (vars) system;
+
+  specialArgs = {
+    inherit inputs pkgs vars;
+  };
+
+  modules = [
+    inputs.nixos-wsl.nixosModules.default {
+      stateVersion = "${vars.stateVersion}";
+
+      wsl = {
+        enable = true;
+
+        defaultUser = "${vars.defaultUser}";
+      };
+    }
+
+    ./configuration.nix
+  ];
+}
