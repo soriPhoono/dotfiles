@@ -29,7 +29,7 @@ in lib.nixosSystem {
           inherit inputs pkgs vars;
         };
 
-        users.${vars.defaultUser} = import ../users/${vars.defaultUser}.nix;
+        users.${vars.defaultUser} = import ../../users/${vars.defaultUser}.nix;
       };
     }
   ];
