@@ -51,4 +51,6 @@
       keep-derivations      = true
     '';
   };
+
+  stateVersion = "24.05";
 }

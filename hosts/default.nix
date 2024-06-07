@@ -1,6 +1,4 @@
-{ inputs }: let
-  inherit (inputs.nixpkgs) lib;
-in {
+{ inputs }: {
   wsl = let
     vars = {
       system = "x86_64-linux";

@@ -1,4 +1,6 @@
-{ inputs, pkgs, vars, ... }: lib.nixosSystem {
+{ inputs, pkgs, vars, ... }: let
+  inherit (inputs.nixpkgs) lib;
+in lib.nixosSystem {
   inherit (vars) system;
 
   specialArgs = {
