@@ -19,5 +19,18 @@ in lib.nixosSystem {
     }
 
     ./configuration.nix
+
+    inputs.home-manager.nixosModules.home-manager {
+      home-manager {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+
+        extraSpecialArgs = [
+          inherit inputs pkgs vars;
+        ];
+
+        users.${vars.defaultUser} = import ../users/${vars.defaultUser}.nix;
+      };
+    }
   ];
 }
