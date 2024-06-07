@@ -51,6 +51,4 @@
       keep-derivations      = true
     '';
   };
-
-  system.stateVersion = "${vars.stateVersion}";
 }
