@@ -1,7 +1,36 @@
 { inputs, pkgs, ... }: {
-  home.packages = [
-
+  home.packages = with pkgs; [
+    # System
+    polkit-gnome
+    gnome-keyring
+    playerctl
+    xwaylandvideobridge
+    grimblast
+    # Visuals
+    swww # Wallpaper
+    gammastep # Monitor brightness
+    wlsunset # Nightcolor
+    # Clipboard
+    wl-clipboard
+    cliphist
+    # Applications
+    font-manager
+    gnome.nautilus
+    gnome.file-roller
+    gnome.gnome-disk-utility
   ];
+
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
+
+    configPackages = with pkgs; [
+      xdg-desktop-portal-hyprland
+    ];
+  };
 
   programs.ags = {
     enable = true;
