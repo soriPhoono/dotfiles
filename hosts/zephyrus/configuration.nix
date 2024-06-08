@@ -18,6 +18,8 @@
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
     ../../modules/nixos/services/zram-generator.nix
+
+    ../../modules/nixos/desktops/kde.nix
   ];
 
   environment.systemPackages = with pkgs; [
