@@ -1,4 +1,18 @@
 { inputs, pkgs, ... }: {
+  home.packages = [
+
+  ];
+
+  programs.ags = {
+    enable = true;
+
+    configDir = ../../../ags;
+
+    extraPackages = with pkgs; [
+
+    ];
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
 

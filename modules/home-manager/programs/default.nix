@@ -2,6 +2,7 @@
   imports = [
     ./alacritty.nix
     ./bat.nix
+    ./development-deps.nix
     ./eza.nix
     ./fastfetch.nix
     ./fish.nix
