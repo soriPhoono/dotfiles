@@ -2,10 +2,12 @@
   imports = [
     inputs.ags.homeManagerModule.default
 
-    ../modules/home-manager/core/xdg.nix
+    ../modules/home-manager/core
 
     ../modules/home-manager/programs
     ../modules/home-manager/services
+
+    ../modules/home-manager/desktops/hyprland.nix
 
     ../modules/home-manager/themes/catppuccin.nix
   ];
