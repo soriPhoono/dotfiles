@@ -1,13 +1,13 @@
 { ... }: {
   programs = {
-    regreet = { };
+    regreet.enable = true;
 
     hyprland.enable = true;
     hyprlock.enable = true;
   };
 
   services = {
-    greetd = { };
+    greetd.enable = true;
 
     hypridle.enable = true;
   };
