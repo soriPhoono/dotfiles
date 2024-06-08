@@ -1,8 +1,8 @@
 { inputs, pkgs, ... }: {
   home.packages = with pkgs; [
     # System
-    polkit-gnome
-    gnome-keyring
+    polkit_gnome
+    libgnome-keyring
     playerctl
     xwaylandvideobridge
     grimblast
