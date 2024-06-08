@@ -3,7 +3,7 @@
     man
     man-pages
     nix-tree
-    
+
     wget
   ];
 
@@ -14,14 +14,15 @@
       enable = true;
       package = pkgs.nix-ld-rs;
     };
-
-    git = {
-      enable = true;
-      config.init.defaultBranch = "main";
-    };
   };
 
-  users.defaultUserShell = pkgs.fish;
+  users = {
+    defaultUserShell = pkgs.fish;
+    users = {
+      root.ignoreShellProgramCheck = true;
+      nixos.ignoreShellProgramCheck = true;
+    };
+  };
 
   nix = {
     package = pkgs.nix;

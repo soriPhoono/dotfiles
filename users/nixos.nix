@@ -1,14 +1,14 @@
 { pkgs, vars, ... }: {
   imports = [
-    ./modules/core/xdg-user-dirs.nix
+    ../modules/home-manager/core/xdg-user-dirs.nix
 
-    ./modules/programs/bat.nix
-    ./modules/programs/eza.nix
-    ./modules/programs/fastfetch.nix
-    ./modules/programs/fish.nix
-    ./modules/programs/git.nix
-    ./modules/programs/nvim.nix
-    ./modules/programs/starship.nix
+    ../modules/home-manager/programs/bat.nix
+    ../modules/home-manager/programs/eza.nix
+    ../modules/home-manager/programs/fastfetch.nix
+    ../modules/home-manager/programs/fish.nix
+    ../modules/home-manager/programs/git.nix
+    ../modules/home-manager/programs/nvim.nix
+    ../modules/home-manager/programs/starship.nix
   ];
 
   home.packages = with pkgs; [
