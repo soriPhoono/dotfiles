@@ -47,8 +47,10 @@
         ",1920x1080@144,0x0,1.5"
       ];
 
-
       exec-once = [
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+
         "swww-daemon"
         "swww img ${../../../assets/wallpapers/1.png}"
       ];
