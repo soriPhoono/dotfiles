@@ -16,22 +16,22 @@
     inherit inputs pkgs vars;
   });
 
-  framework = let
-    vars = {
-      system = "x86_64-linux";
-      stateVersion = "24.05";
+  # framework = let
+  #   vars = {
+  #     system = "x86_64-linux";
+  #     stateVersion = "24.05";
 
-      defaultUser = "soriphoono";
-    };
+  #     defaultUser = "soriphoono";
+  #   };
 
-    pkgs = import inputs.nixpkgs {
-      inherit (vars) system;
+  #   pkgs = import inputs.nixpkgs {
+  #     inherit (vars) system;
 
-      config.allowUnfree = true;
-    };
-  in (import ./framework {
-    inherit inputs pkgs vars;
-  });
+  #     config.allowUnfree = true;
+  #   };
+  # in (import ./framework {
+  #   inherit inputs pkgs vars;
+  # });
 
   zephyrus = let
     vars = {
