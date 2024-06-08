@@ -1,12 +1,10 @@
 { ... }: {
+  imports = [
+    ./xdg-user-dirs.nix
+  ];
+
   xdg = {
     enable = true;
-
-    userDirs = {
-      enable = true;
-
-      createDirectories = true;
-    };
 
     desktopEntries = {
       google-docs = {
@@ -25,4 +23,5 @@
         ];
       };
     };
-  }
+  };
+}

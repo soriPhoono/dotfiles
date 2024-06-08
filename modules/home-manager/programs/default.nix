@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./alacritty.nix
     ./bat.nix
     ./eza.nix
     ./fastfetch.nix
