@@ -1,18 +1,12 @@
-{ vars, ... }: {
+{ pkgs, vars, ... }: {
   imports = [
-    ./modules/cli.nix
-    ./modules/development
+    
   ];
 
-  xdg = {
-    enable = true;
-
-    userDirs = {
-      enable = true;
-
-      createDirectories = true;
-    };
-  };
+  home.packages = with pkgs; [
+    nil
+    nixpkgs-fmt
+  ];
 
   programs.home-manager.enable = true;
   
