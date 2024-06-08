@@ -19,7 +19,7 @@
       treesitter.enable = true;
 
       nix.enable = true;
-      zigvim.enable = true;
+      zig.enable = true;
     };
   };
 }
