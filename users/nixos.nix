@@ -1,6 +1,8 @@
 { pkgs, vars, ... }: {
   imports = [
-    
+    ./modules/core/xdg-user-dirs.nix
+
+    ./modules/programs
   ];
 
   home.packages = with pkgs; [

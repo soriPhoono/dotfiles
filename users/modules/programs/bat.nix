@@ -1,3 +1,7 @@
 { ... }: {
-  programs.bat.enable = true;
+  programs = {
+    bat.enable = true;
+
+    fish.shellAliases.cat = "bat";
+  };
 }

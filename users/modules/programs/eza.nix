@@ -1,13 +1,21 @@
 { ... }: {
-  programs.eza = {
-    enable = true;
+  programs = {
+    fish.shellAliases = {
+      ls = "eza";
+      ll = "eza -l";
+      lt = "eza -T";
+    };
 
-    extraOptions = [
-      "--group-directories-first"
-      "--hyperlink"
-    ];
+    eza = {
+      enable = true;
 
-    git = true;
-    icons = true;
+      extraOptions = [
+        "--group-directories-first"
+        "--hyperlink"
+      ];
+
+      git = true;
+      icons = true;
+    };
   };
 }

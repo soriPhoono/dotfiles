@@ -1,5 +1,9 @@
 { ... }: {
-  programs.fastfetch = {
-    enable = true;
+  programs = {
+    fastfetch.enable = true;
+
+    fish.interactiveShellInit = ''
+      fastfetch
+    '';
   };
 }
