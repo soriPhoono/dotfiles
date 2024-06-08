@@ -8,8 +8,6 @@
   ];
 
   programs = {
-    fish.enable = true;
-
     nano.enable = true;
 
     nix-ld = {

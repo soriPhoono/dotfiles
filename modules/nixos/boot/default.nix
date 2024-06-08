@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ./systemd-boot.nix
-    ./zram-generator.nix
     ./plymouth.nix
   ];
   
