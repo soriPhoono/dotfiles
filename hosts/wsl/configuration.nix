@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, vars, ... }: {
   environment.systemPackages = with pkgs; [
     man
     man-pages
@@ -20,7 +20,7 @@
     defaultUserShell = pkgs.fish;
     users = {
       root.ignoreShellProgramCheck = true;
-      nixos.ignoreShellProgramCheck = true;
+      ${vars.defaultUser}.ignoreShellProgramCheck = true;
     };
   };
 
