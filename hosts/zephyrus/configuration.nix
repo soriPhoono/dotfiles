@@ -1,4 +1,4 @@
-{ vars, ... }: {
+{ pkgs, vars, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -21,6 +21,8 @@
 
     ../../modules/nixos/desktops/kde.nix
   ];
+
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
   system.stateVersion = "${vars.stateVersion}";
 }
