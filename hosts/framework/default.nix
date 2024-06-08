@@ -8,7 +8,7 @@ in lib.nixosSystem {
   };
 
   modules = [
-    inputs.nixos-hardware.nixosModules.framework-16-inch-7040-amd
+    inputs.nixos-hardware.nixosModules.framework-16-7040-amd
 
     ./configuration.nix
 
