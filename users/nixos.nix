@@ -1,4 +1,4 @@
-{ inputs, pkgs, vars, ... }: {
+{ vars, ... }: {
   imports = [
     ./modules/cli.nix
     ./modules/development
