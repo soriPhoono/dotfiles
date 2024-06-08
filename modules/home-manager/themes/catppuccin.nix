@@ -1,10 +1,14 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 let
   opacity = .8;
 
   default_font = 14;
   focus_font = 16;
 in {
+  imports = [
+    inputs.stylix.homeManagerModules.stylix
+  ];
+
   stylix = {
     opacity = {
       applications = opacity;
@@ -15,12 +19,7 @@ in {
 
     image = ../../assets/wallpaper.png;
 
-    base16Scheme = pkgs.fetchFromGitHub {
-      owner = "tinted-theming";
-      repo = "base16-schemes";
-      rev = "2b6f2d0677216ddda50c9cabd6ee70fae4665f81";
-      sha256 = "VTczZi1C4WSzejpTFbneMonAdarRLtDnFehVxWs6ad0=";
-    } + "/catppuccin-mocha.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
     fonts = {
       serif = {
