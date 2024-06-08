@@ -59,7 +59,6 @@
 
         "nix.enableLanguageServer" = "true";
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
-        "nix.serverSettings.nil.formatting.command" = [ "nixpkgs-fmt" ];
       };
     };
   };
