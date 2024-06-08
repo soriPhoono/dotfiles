@@ -1,5 +1,5 @@
 { ... }: {
-  gamemode = {
+  programs.gamemode = {
     enable = true;
 
     enableRenice = true;

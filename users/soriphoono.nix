@@ -1,6 +1,6 @@
 { inputs, pkgs, vars, ... }: {
   imports = [
-    inputs.ags.homeManagerModule.default
+    inputs.ags.homeManagerModules.default
 
     ../modules/home-manager/core
 

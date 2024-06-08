@@ -1,4 +1,4 @@
-{ ... }: {
+{ vars, ... }: {
   imports = [
     ../../modules/nixos/boot
     ../../modules/nixos/core
@@ -17,4 +17,6 @@
     ../../modules/nixos/services/pipewire.nix
     ../../modules/nixos/services/zram-generator.nix
   ];
+
+  system.stateVersion = "${vars.stateVersion}";
 }

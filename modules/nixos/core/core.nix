@@ -13,7 +13,10 @@
     defaultUserShell = pkgs.fish;
     users = {
       root.ignoreShellProgramCheck = true;
-      ${vars.defaultUser}.ignoreShellProgramCheck = true;
+      ${vars.defaultUser} = {
+        isNormalUser = true;
+        ignoreShellProgramCheck = true;
+      };
     };
   };
 

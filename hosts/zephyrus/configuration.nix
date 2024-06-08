@@ -1,5 +1,7 @@
-{ ... }: {
+{ vars, ... }: {
   imports = [
+    ./hardware-configuration.nix
+
     ../../modules/nixos/boot
     ../../modules/nixos/core
 
@@ -19,4 +21,6 @@
 
     ../../modules/nixos/desktops/kde.nix
   ];
+
+  system.stateVersion = "${vars.stateVersion}";
 }
