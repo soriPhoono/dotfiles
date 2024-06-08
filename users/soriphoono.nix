@@ -13,9 +13,16 @@
   home.packages = with pkgs; [
     # Core development packages
     gitkraken
+
+    # Applications
+    font-manager
+    gnome.nautilus
+    gnome.file-roller
+    gnome.gnome-disk-utility
+    gparted
   ];
 
   programs.home-manager.enable = true;
-  
+
   home.stateVersion = "${vars.stateVersion}";
 }

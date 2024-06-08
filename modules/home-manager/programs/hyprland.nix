@@ -13,11 +13,6 @@
     # Clipboard
     wl-clipboard
     cliphist
-    # Applications
-    font-manager
-    gnome.nautilus
-    gnome.file-roller
-    gnome.gnome-disk-utility
   ];
 
   xdg.portal = {
