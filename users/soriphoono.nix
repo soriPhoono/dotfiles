@@ -1,5 +1,7 @@
-{ pkgs, vars, ... }: {
+{ inputs, pkgs, vars, ... }: {
   imports = [
+    inputs.ags.homeManagerModule.default
+
     ../modules/home-manager/core/xdg.nix
 
     ../modules/home-manager/programs
