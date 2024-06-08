@@ -7,6 +7,13 @@
     nil
     nixpkgs-fmt
 
+    # Bash development deps
+    nodePackages.bash-language-server
+    shfmt
+
+    # C/C++ development deps
+    
+
     # Rust development deps
     cargo
     clippy
