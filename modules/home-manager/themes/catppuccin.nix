@@ -18,7 +18,7 @@ in
       terminal = opacity;
     };
 
-    image = ../../../assets/wallpaper.png;
+    image = ../../../assets/wallpapers/1.png;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
