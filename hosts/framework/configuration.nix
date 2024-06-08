@@ -1,4 +1,4 @@
-{ pkgs, vars, ... }: {
+{ ... }: {
   imports = [
     ../../modules/nixos/boot
     ../../modules/nixos/core

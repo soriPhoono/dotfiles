@@ -10,11 +10,7 @@
     pkgs = import inputs.nixpkgs {
       inherit (vars) system;
 
-      config = {
-        allowUnfree = true;
-
-        replaceStdenv = ({ pkgs }: pkgs.clangStdenv);
-      };
+      config.allowUnfree = true;
     };
   in (import ./wsl {
     inherit inputs pkgs vars;
