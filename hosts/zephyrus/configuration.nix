@@ -13,7 +13,7 @@
     ../../modules/nixos/programs/prism-launcher.nix
     ../../modules/nixos/programs/steam.nix
 
-    ../../modules/nixos/services/fwupd.nix
+    ../../modules/nixos/services/fprintd.nix
     ../../modules/nixos/services/openrgb.nix
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
