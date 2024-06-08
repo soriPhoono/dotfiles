@@ -13,10 +13,12 @@
 
     plugins = {
       lualine.enable = true;
-      surround.enable = true;
-      telescope.enable = true;
       toggleterm.enable = true;
+      telescope.enable = true;
+
+      cmp.enable = true;
       treesitter.enable = true;
+      surround.enable = true;
 
       nix.enable = true;
       zig.enable = true;

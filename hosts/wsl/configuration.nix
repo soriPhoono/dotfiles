@@ -1,4 +1,4 @@
-{ pkgs, vars, ... }: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     man
     man-pages
