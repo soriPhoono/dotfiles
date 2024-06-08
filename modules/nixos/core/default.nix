@@ -1,13 +1,9 @@
 { ... }: {
   imports = [
+    ./core.nix
     ./file-system.nix
     ./localization.nix
     ./network-manager.nix
+    ./power-handling.nix
   ];
-
-  services.logind.extraConfig = ''
-    HandlePowerKey=ignore
-    HandleLidSwitch=suspend
-    HandleLidSwitchExternalPower=suspend
-  ''
 }
