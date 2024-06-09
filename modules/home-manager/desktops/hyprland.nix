@@ -87,12 +87,6 @@
         preserve_split = "yes";
       };
 
-      cursor = {
-        no_hardware_cursors = true;
-        inactive_timeout = 5;
-        hide_on_keypress = true;
-      };
-
       master.new_is_master = true;
       misc.force_default_wallpaper = 1;
       gestures.workspace_swipe = true;
