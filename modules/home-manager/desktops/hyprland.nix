@@ -8,8 +8,6 @@
     xwaylandvideobridge
     grimblast
     # Visuals
-    lz4
-    swww # Wallpaper
     gammastep # Monitor brightness
     wlsunset # Nightcolor
     # Clipboard
@@ -97,8 +95,6 @@
       exec-once = [
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-
-        "swww-daemon && swww img ${../../../assets/wallpapers/1.png}"
       ];
 
       exec = [
