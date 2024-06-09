@@ -7,7 +7,7 @@
     ./fastfetch.nix
     ./fish.nix
     ./git.nix
-    # ./nvim.nix
+    # ./helix.nix
     # ./prism-launcher.nix
     ./starship.nix
     ./vscode.nix

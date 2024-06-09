@@ -3,10 +3,6 @@
     # Core development packages
     mkdocs
 
-    # Nix development deps
-    nil
-    nixpkgs-fmt
-
     # Bash development deps
     nodePackages.bash-language-server
     shfmt
