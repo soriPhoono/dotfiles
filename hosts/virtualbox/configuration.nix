@@ -1,14 +1,13 @@
 { vars, ... }: {
   imports = [
-    ../../modules/nixos/boot
-    ../../modules/nixos/core
-
-    ../../modules/nixos/programs/gpg.nix
-    ../../modules/nixos/programs/gamemode.nix
-    ../../modules/nixos/programs/steam.nix
-
-    ../../modules/nixos/desktops/kde.nix
   ];
+
+  virtualisation.virtualbox.guest = {
+    enable = true;
+    seamless = true;
+    clipboard = true;
+    dragAndDrop = true;
+  };
 
   system.stateVersion = "${vars.stateVersion}";
 }
