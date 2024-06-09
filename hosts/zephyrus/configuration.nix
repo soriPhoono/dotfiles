@@ -1,0 +1,21 @@
+{ ... }: {
+  imports = [
+    ./hardware-configuration.nix
+
+    ../../modules/nixos/boot
+    ../../modules/nixos/core
+
+    ../../modules/nixos/hardware/opengl.nix
+
+    ../../modules/nixos/services/fprintd.nix
+    ../../modules/nixos/services/openssh.nix
+    ../../modules/nixos/services/pipewire.nix
+    ../../modules/nixos/services/zram-generator.nix
+  ];
+
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+    HandleLidSwitch=suspend
+    HandleLidSwitchExternalPower=suspend
+  '';
+}
