@@ -4,9 +4,7 @@
     dconf
     polkit_gnome
     libgnome-keyring
-    playerctl
-    xwaylandvideobridge
-    grimblast
+    libnotify
     # Visuals
     gammastep # Monitor brightness
     wlsunset # Nightcolor
