@@ -8,6 +8,7 @@
     xwaylandvideobridge
     grimblast
     # Visuals
+    lz4
     swww # Wallpaper
     gammastep # Monitor brightness
     wlsunset # Nightcolor
@@ -38,7 +39,7 @@
       "$mod" = "SUPER";
 
       monitor = [
-        ",1920x1080@144,0x0,1.5"
+        "eDP-1,1920x1080@144,0x0,1.5,vrr,1"
       ];
 
       input = {
@@ -97,7 +98,7 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
 
-        "swww-daemon"
+        "swww-daemon &"
         "swww img ${../../../assets/wallpapers/1.png}"
       ];
 
