@@ -10,6 +10,8 @@
     pkgs = import inputs.nixpkgs {
       inherit (vars) system;
 
+      overlays = ../overlays;
+
       config.allowUnfree = true;
     };
   in (import ./wsl {
