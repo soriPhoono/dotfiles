@@ -51,7 +51,6 @@
           disable_while_typing = true;
           clickfinger_behavior = true;
         };
-        sensitivity = 0.1;
       };
 
       general = {
