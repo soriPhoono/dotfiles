@@ -10,7 +10,7 @@
     # ./nvim.nix
     # ./prism-launcher.nix
     ./starship.nix
-    ./vscode.nix
+    # ./vscode.nix
     # ./wine.nix
     # ./yt-dlp.nix
   ];
