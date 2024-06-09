@@ -4,6 +4,5 @@
     ./file-system.nix
     ./localization.nix
     ./network-manager.nix
-    ./power-handling.nix
   ];
 }
