@@ -61,7 +61,6 @@
         rounding = 7;
         drop_shadow = "yes";
         shadow_range = 4;
-        shadow_range_power = 3;
         blur = {
           enabled = true;
           size = 3;
@@ -116,8 +115,8 @@
               in
                 builtins.toString (x + 1 - (c * 10));
             in [
-              "$mainMod, ${ws}, workspace, ${toString (x + 1)}"
-              "$mainMod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
+              "$mod, ${ws}, workspace, ${toString (x + 1)}"
+              "$mod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
             ]
           )
             10)

@@ -6,6 +6,7 @@
 
       # mutableExtensionsDir = false; # TODO: uncomment this when vscode setup is finished
 
+/*
       extensions = with pkgs.vscode-extensions; [
         # Themes
         catppuccin.catppuccin-vsc
@@ -48,7 +49,7 @@
         # Python
         ms-python.python
       ];
-
+*/
       userSettings = {
         "editor.smoothScrolling" = true;
         "window.titleBarStyle" = "custom";
