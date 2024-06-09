@@ -89,7 +89,6 @@
       };
 
       master.new_is_master = true;
-      misc.force_default_wallpaper = 1;
       gestures.workspace_swipe = true;
       xwayland.force_zero_scaling = true;
       opengl.nvidia_anti_flicker = true;
