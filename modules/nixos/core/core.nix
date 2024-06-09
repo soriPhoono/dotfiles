@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     man
     man-pages
+    coreutils
     nix-tree
 
     wget
@@ -14,8 +15,17 @@
     users = {
       root.ignoreShellProgramCheck = true;
       ${vars.defaultUser} = {
+        description = "Sori Phoono";
+
         isNormalUser = true;
         ignoreShellProgramCheck = true;
+
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+          "audio"
+          "video"
+        ];
       };
     };
   };
