@@ -1,8 +1,6 @@
 { ... }: {
   services.fprintd = {
     enable = true;
-    tod = {
-      enable = true;
-    };
+    tod.enable = true;
   };
 }
