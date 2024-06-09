@@ -89,6 +89,7 @@
       };
 
       master.new_is_master = true;
+      misc.disable_hyprland_logo = true;
       gestures.workspace_swipe = true;
       xwayland.force_zero_scaling = true;
       opengl.nvidia_anti_flicker = true;
