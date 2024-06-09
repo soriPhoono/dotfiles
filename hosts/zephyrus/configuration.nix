@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -18,4 +18,8 @@
     HandleLidSwitch=suspend
     HandleLidSwitchExternalPower=suspend
   '';
+
+  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+
+  system.stateVersion = "24.05";
 }
