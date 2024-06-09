@@ -8,8 +8,6 @@
     wget
   ];
 
-  programs.nano.enable = true;
-
   programs = {
     nano.enable = true;
 
