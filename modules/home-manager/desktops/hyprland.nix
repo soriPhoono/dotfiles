@@ -43,9 +43,13 @@
 
       input = {
         kb_layout = "us";
+        repeat_delay = 400;
+        sensitivity = 0.1;
+        accel_profile = "flat";
         touchpad = {
-          natural_scroll = "yes";
-          disable_while_typing = "yes";
+          natural_scroll = true;
+          disable_while_typing = true;
+          clickfinger_behavior = true;
         };
         sensitivity = 0.1;
       };
@@ -60,7 +64,7 @@
 
       decoration = {
         rounding = 7;
-        drop_shadow = "yes";
+        drop_shadow = true;
         shadow_range = 4;
         blur = {
           enabled = true;
@@ -75,7 +79,7 @@
         animation = [
           "fade,1,4,default"
           "workspaces,1,4,default,fade"
-          "windows,1,4,overshot,popin 95%"
+          "windows,1,4,overshot,popin 80%"
         ];
       };
 
@@ -84,9 +88,17 @@
         preserve_split = "yes";
       };
 
+      cursor = {
+        no_hardware_cursors = true;
+        inactive_timeout = 5;
+        hide_on_keypress = true;
+      };
+
       master.new_is_master = true;
-      gestures.workspace_swipe = "on";
       misc.force_default_wallpaper = 1;
+      gestures.workspace_swipe = true;
+      xwayland.force_zero_scaling = true;
+      opengl.nvidia_anti_flicker = true;
 
       exec-once = [
         "wl-paste --type text --watch cliphist store"
