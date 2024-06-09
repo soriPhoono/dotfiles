@@ -10,7 +10,7 @@
     pkgs = import inputs.nixpkgs {
       inherit (vars) system;
 
-      overlays = ../overlays;
+      overlays = import ../overlays;
 
       config.allowUnfree = true;
     };
@@ -18,7 +18,7 @@
     inherit inputs pkgs vars;
   });
 
-  virtualbox = let
+  zephyrus = let
     vars = {
       system = "x86_64-linux";
       stateVersion = "24.05";
@@ -29,11 +29,11 @@
     pkgs = import inputs.nixpkgs {
       inherit (vars) system;
 
-      overlays = ../overlays;
+      overlays = import ../overlays;
 
       config.allowUnfree = true;
     };
-  in (import ./virtualbox {
+  in (import ./zephyrus {
     inherit inputs pkgs vars;
   });
 }
