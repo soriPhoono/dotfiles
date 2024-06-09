@@ -13,9 +13,7 @@
   ];
 
   home.packages = with pkgs; [
-    # Applications
-    gnome.nautilus
-    gnome.file-roller
+
   ];
 
   programs.home-manager.enable = true;

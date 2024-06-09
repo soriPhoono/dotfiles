@@ -13,6 +13,9 @@
     # Clipboard
     wl-clipboard
     cliphist
+    # Applications
+    gnome.nautilus
+    gnome.file-roller
   ];
 
   xdg.portal = {
@@ -25,12 +28,6 @@
     configPackages = with pkgs; [
       xdg-desktop-portal-hyprland
     ];
-  };
-
-  programs.ags = {
-    enable = true;
-
-    configDir = ../../../ags;
   };
 
   wayland.windowManager.hyprland = {
@@ -155,6 +152,25 @@
         "blur, *"
         "blurpopups, *"
       ];
+    };
+  };
+
+  programs.waybar = {
+    enable = true;
+
+    settings = {
+      layer = "top";
+      position = "top";
+      height = 30;
+      output = [
+        "eDP-1"
+      ];
+
+      modules = {
+        left = [
+          "hyprland/workspaces"
+        ];
+      };
     };
   };
 }

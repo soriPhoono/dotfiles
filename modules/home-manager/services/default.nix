@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./mpris-proxy.nix
+    # ./mpris-proxy.nix
     ./mako.nix
   ];
 }
