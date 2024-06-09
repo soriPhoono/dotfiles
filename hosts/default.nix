@@ -18,24 +18,7 @@
     inherit inputs pkgs vars;
   });
 
-  # framework = let
-  #   vars = {
-  #     system = "x86_64-linux";
-  #     stateVersion = "24.05";
-
-  #     defaultUser = "soriphoono";
-  #   };
-
-  #   pkgs = import inputs.nixpkgs {
-  #     inherit (vars) system;
-
-  #     config.allowUnfree = true;
-  #   };
-  # in (import ./framework {
-  #   inherit inputs pkgs vars;
-  # });
-
-  zephyrus = let
+  virtualbox = let
     vars = {
       system = "x86_64-linux";
       stateVersion = "24.05";
@@ -44,11 +27,13 @@
     };
 
     pkgs = import inputs.nixpkgs {
-      inherit (vars) system; 
+      inherit (vars) system;
+
+      overlays = ../overlays;
 
       config.allowUnfree = true;
     };
-  in (import ./zephyrus {
+  in (import ./virtualbox {
     inherit inputs pkgs vars;
   });
 }
