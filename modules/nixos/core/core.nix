@@ -10,6 +10,12 @@
 
   programs.nano.enable = true;
 
+  programs = {
+    nano.enable = true;
+
+    firefox.enable = true;
+  };
+
   users = {
     defaultUserShell = pkgs.fish;
     users = {

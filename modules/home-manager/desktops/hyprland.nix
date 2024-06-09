@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     # System
+    dconf
     polkit_gnome
     libgnome-keyring
     playerctl
