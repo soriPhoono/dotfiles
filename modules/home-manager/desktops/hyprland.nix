@@ -111,6 +111,7 @@
         "$mod_SHIFT, Q, exit, "
 
         "$mod, Return, exec, alacritty"
+        "$mod, E, exec, nautilus"
         "$mod, B, exec, firefox"
       ] ++ (
           # workspaces
