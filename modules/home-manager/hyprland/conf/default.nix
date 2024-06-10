@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
-    ./autostart.nix
+    ./monitors.nix
+    ./input.nix
     ./binds.nix
   ];
 
@@ -10,25 +11,9 @@
     settings = {
       "$mod" = "SUPER";
 
-      monitor = [
-        "eDP-1,1920x1080@144,0x0,1.5,vrr,2"
-      ];
-
       env = [
         "NIXOS_OZONE_WL = 1"
       ];
-
-      input = {
-        kb_layout = "us";
-        repeat_delay = 400;
-        sensitivity = 0.1;
-        accel_profile = "flat";
-        touchpad = {
-          natural_scroll = true;
-          disable_while_typing = true;
-          clickfinger_behavior = true;
-        };
-      };
 
       general = {
         gaps_in = 5;
@@ -52,10 +37,16 @@
       animations = {
         enabled = 1;
         bezier = [
-          "slidein,0,0,0,1"
+          "myBezier, 0, 0, 0, 1"
         ];
         animation = [
-          "windowsIn,1,4,slidein,slide 80%"
+          "windowsIn, 1, 4, myBezier, slide"
+          "fadeIn, 1, 4, myBezier"
+          "windowsOut, 1, 2, myBezier, popin 80%"
+          "fadeOut, 1, 2, myBezier"
+          "windowsMove, 1, 8, myBezier, slide"
+
+          "workspaces, 1, 2, myBezier, slidefade 30%"
         ];
       };
 
@@ -64,20 +55,23 @@
         preserve_split = "yes";
       };
 
+      exec-once = [
+        "wl-paste --type text --watch cliphist store"
+        "wl-paste --type image --watch cliphist store"
+
+        "swww-daemon"
+        "swww img ~/Pictures/wallpapers/2.jpg"
+      ];
+
+      exec = [
+
+      ];
+
+      gestures.workspace_swipe = true;
       master.new_is_master = true;
       misc.disable_hyprland_logo = true;
-      gestures.workspace_swipe = true;
-      xwayland.force_zero_scaling = true;
       opengl.nvidia_anti_flicker = true;
-
-      windowrulev2 = [
-        "opacity .8, class:(.*)"
-      ];
-
-      layerrule = [
-        "blur, *"
-        "blurpopups, *"
-      ];
+      xwayland.force_zero_scaling = true;
     };
   };
 }
