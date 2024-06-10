@@ -11,7 +11,7 @@
       "$mod" = "SUPER";
 
       monitor = [
-        "eDP-1,1920x1080@144,0x0,1.5"
+        "eDP-1,1920x1080@144,0x0,1.5,vrr,2"
       ];
 
       env = [
@@ -56,6 +56,7 @@
           "fade,1,4,default"
           "workspaces,1,4,default,fade"
           "windows,1,4,overshot,popin 80%"
+          "windowsIn,1,4,default,slidefade 20%"
         ];
       };
 
