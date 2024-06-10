@@ -15,6 +15,7 @@
 
       env = [
         "NIXOS_OZONE_WL = 1"
+        "XCURSOR_SIZE = 32"
       ];
 
       general = {
