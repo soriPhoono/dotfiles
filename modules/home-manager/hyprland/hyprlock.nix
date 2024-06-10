@@ -12,7 +12,7 @@
       background = [
         {
           monitor = "eDP-1";
-          path = "${../../../assets/wallpapers/1.png}";
+          path = "${../../../assets/wallpapers/1.jpg}";
 
           blur_passes = 1;
           blur_size = 3;
@@ -31,7 +31,7 @@
           text_align = "center";
           rotate = 0;
 
-          position = "20, 20";
+          position = "-20, 20";
           halign = "right";
           valign = "bottom";
         }
