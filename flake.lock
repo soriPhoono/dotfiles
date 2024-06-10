@@ -479,8 +479,29 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
+        "sakaya": "sakaya",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
+      }
+    },
+    "sakaya": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1715569474,
+        "narHash": "sha256-2W5oYJLusTxBztQ9FyyxvM7HM/XxjRs0qe4mhNeBfR8=",
+        "owner": "donovanglover",
+        "repo": "sakaya",
+        "rev": "848c0485300b5c62f0fd360701b26c3219e4f339",
+        "type": "github"
+      },
+      "original": {
+        "owner": "donovanglover",
+        "repo": "sakaya",
+        "type": "github"
       }
     },
     "sops-nix": {
