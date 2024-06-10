@@ -3,7 +3,8 @@ let
   opacity = .8;
 
   default_font = 14;
-  focus_font = 15;
+  focus_font = 16;
+  terminal_font = 15;
 in
 {
   imports = [
@@ -50,7 +51,7 @@ in
         applications = focus_font;
         desktop = default_font;
         popups = default_font;
-        terminal = focus_font;
+        terminal = terminal_font;
       };
     };
   };
