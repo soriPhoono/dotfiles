@@ -7,5 +7,8 @@
     
     btop
     nvtopPackages.full
+
+    libva-utils
+    vdpauinfo
   ];
 }
