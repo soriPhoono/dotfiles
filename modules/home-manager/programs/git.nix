@@ -12,13 +12,11 @@
 
       extraConfig = {
         init.defaultBranch = "main";
-        url = {
-          "git@github.com/" = {
-            insteadOf = [
-              "gh:"
-              "github:"
-            ];
-          };
+        url."git@github.com/" = {
+          insteadOf = [
+            "gh:"
+            "github:"
+          ];
         };
       };
 
@@ -30,19 +28,13 @@
           line-numbers = true;
           side-by-side = true;
           hyperlinks = true;
+
           # TODO: add to nixpkgs the github repo open-in-editor and replace this line
           hyperlinks-file-link-format = "vscode://file/{path}:{line}";
 
-          # features = "catppuccin-mocha";
-          true-color = "always";
-
-          diff = {
-            colorMoved = "default";
-          };
-
-          merge = {
-            conflictstyle = "diff3";
-          };
+          # true-color = "always";
+          diff.colorMoved = "default";
+          merge.conflictstyle = "diff3";
         };
       };
     };

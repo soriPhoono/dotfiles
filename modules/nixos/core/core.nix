@@ -9,20 +9,18 @@
   ];
 
   programs = {
+    fish.enable = true;
     nano.enable = true;
-
     firefox.enable = true;
   };
 
   users = {
     defaultUserShell = pkgs.fish;
     users = {
-      root.ignoreShellProgramCheck = true;
       ${vars.defaultUser} = {
         description = "Sori Phoono";
 
         isNormalUser = true;
-        ignoreShellProgramCheck = true;
 
         extraGroups = [
           "wheel"

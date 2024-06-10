@@ -1,9 +1,14 @@
 # TODO: configure dnsmasq
 
-{ vars, ... }: {
+{ pkgs, vars, ... }: {
   networking = {
     networkmanager = {
       enable = true;
+
+      plugins = with pkgs; [
+        networkmanager-openvpn
+        networkmanager-openconnect
+      ];
 
       ethernet.macAddress = "random";
 
