@@ -1,4 +1,5 @@
 { ... }: {
+  wayland.windowManager.hyprland.settings = {
   bind = [
     "$mod, Q, killactive, "
     "$mod_SHIFT, Q, exit, "
@@ -43,4 +44,5 @@
     "$mod, mouse:272, movewindow"
     "$mod, mouse:273, resizewindow"
   ];
+  };
 }
