@@ -4,8 +4,7 @@
     ./gtk.nix
     ./qt.nix
     ./mako.nix
-    
-    ./hyprpaper.nix
+
     ./hypridle.nix
     ./hyprlock.nix
 
@@ -27,6 +26,5 @@
     networkmanagerapplet
     # Wallpaper
     swww
-    waypaper
   ];
 }
