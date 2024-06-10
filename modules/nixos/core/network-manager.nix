@@ -1,3 +1,5 @@
+# TODO: configure dnsmasq
+
 { ... }: {
   networking = {
     networkmanager = {
