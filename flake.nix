@@ -30,7 +30,7 @@
         nix-darwin.follows = "";
       };
     };
-    
+
     # Desktop inputs
     stylix = {
       url = "github:danth/stylix";
