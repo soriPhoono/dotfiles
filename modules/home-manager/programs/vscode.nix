@@ -52,6 +52,7 @@
 
         # BUG: possible stylux conflict
         "workbench.iconTheme" = "catppuccin-mocha";
+        "workbench.editor.editorActionsLocation" = "hidden";
 
         "editor.smoothScrolling" = true;
 
