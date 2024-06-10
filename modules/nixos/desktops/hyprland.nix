@@ -1,7 +1,11 @@
 { pkgs, ... }: {
-  programs.dconf.enable = true;
-  security.polkit.enable = true;
+  programs = {
+    dconf.enable = true;
+
+    hyprland.enable = true;
+  };
   services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
