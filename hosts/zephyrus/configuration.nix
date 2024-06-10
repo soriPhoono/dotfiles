@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, vars, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -9,7 +9,21 @@
     ../../modules/nixos/core/localization.nix
     ../../modules/nixos/core/networkmanager.nix
 
-    
+    ../../modules/nixos/hardware/bluetooth.nix
+    ../../modules/nixos/hardware/opengl.nix
+    ../../modules/nixos/hardware/xbox.nix
+
+    ../../modules/nixos/programs/gamemode.nix
+    ../../modules/nixos/programs/gpg.nix
+    ../../modules/nixos/programs/steam.nix
+
+    ../../modules/nixos/services/fprintd.nix
+    ../../modules/nixos/services/openrgb.nix
+    ../../modules/nixos/services/openssh.nix
+    ../../modules/nixos/services/pipewire.nix
+    ../../modules/nixos/zram-generator.nix
+
+    ../../modules/nixos/desktops/hyprland.nix
   ];
 
   services.logind.extraConfig = ''
@@ -20,5 +34,5 @@
 
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "${vars.stateVersion}";
 }
