@@ -4,6 +4,8 @@
     ./gtk.nix
     ./qt.nix
     ./mako.nix
+    
+    ./hyprpaper.nix
 
     ./conf
   ];
