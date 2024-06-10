@@ -53,11 +53,12 @@
       userSettings = {
         "window.titleBarStyle" = "custom";
 
-        # BUG: possible stylux conflict
         "workbench.iconTheme" = "catppuccin-mocha";
         "workbench.editor.editorActionsLocation" = "hidden";
 
         "editor.smoothScrolling" = true;
+
+        "explorer.confirmDelete" = false;
 
         "git.autofetch" = true;
         "git.enableSmartCommit" = true;
