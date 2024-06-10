@@ -13,8 +13,6 @@
         {
           monitor = "eDP-1";
           path = "${../../../assets/wallpapers/1.png}";
-          rounding = 7;
-          border_size = 3;
 
           blur_passes = 1;
           blur_size = 3;
@@ -39,7 +37,6 @@
         }
         {
           monitor = "eDP-1";
-          size = "200, 50";
           text = "Welcome $DESC, please enter your password";
           text_align = "center";
           rotate = 0;
