@@ -13,8 +13,8 @@
 
   home.packages = with pkgs; [
     # Visuals
-    gammastep # Monitor brightness
-    wlsunset # Nightcolor
+    brightnessctl # Monitor and device brightness
+    gammastep # Nightcolor
     # Clipboard
     wl-clipboard
     cliphist

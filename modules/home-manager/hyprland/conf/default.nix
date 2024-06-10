@@ -51,12 +51,11 @@
 
       animations = {
         enabled = 1;
-        bezier = "overshot,0.13,0.99,0.29,1.1,";
+        bezier = [
+          "slidein,0,0,0,1"
+        ];
         animation = [
-          "fade,1,4,default"
-          "workspaces,1,4,default,fade"
-          "windows,1,4,overshot,popin 80%"
-          "windowsIn,1,4,default,slidefade 20%"
+          "windowsIn,1,4,slidein,slide 80%"
         ];
       };
 

@@ -2,7 +2,7 @@
 let
   opacity = .8;
 
-  default_font = 14;
+  default_font = 15;
   focus_font = 16;
   terminal_font = 15;
 in
