@@ -14,6 +14,10 @@
         "eDP-1,1920x1080@144,0x0,1.5"
       ];
 
+      env = {
+        NIXOS_OZONE_WL = "1";
+      };
+
       input = {
         kb_layout = "us";
         repeat_delay = 400;
