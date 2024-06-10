@@ -1,6 +1,6 @@
 # TODO: enable low latency for gaming, make sure discord calls still work
 
-{ ... }: {
+{ vars, ... }: {
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -13,4 +13,8 @@
 
     jack.enable = true;
   };
+
+  users.users.${vars.defaultUser}.extraGroups = [
+    "audio"
+  ];
 }

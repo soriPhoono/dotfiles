@@ -1,6 +1,6 @@
 # TODO: configure dnsmasq
 
-{ ... }: {
+{ vars, ... }: {
   networking = {
     networkmanager = {
       enable = true;
@@ -14,4 +14,8 @@
       };
     };
   };
+
+  users.users.${vars.defaultUser}.extraGroups = [
+    "networkmanager"
+  ];
 }
