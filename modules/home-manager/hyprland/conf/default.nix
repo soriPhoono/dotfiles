@@ -1,5 +1,8 @@
 { ... }: {
   imports = [
+    ./hypridle.nix
+    ./hyprlock.nix
+
     ./monitors.nix
     ./input.nix
     ./binds.nix

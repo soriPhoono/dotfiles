@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-# TODO: fix the script not recognizing the value of the system variable, I'm kinda dumb lol
-
 # This script is used to apply changes to the system
 
 # Get the system configuration name from the flake
+nix flake show | grep "NixOS configuration" | awk '{print $2}'
+read -rp "Enter the system configuration name: " system
 
 # Check if any files in the flake have been modified
 if [[ $(git status --porcelain) ]]; then
-  echo "[WARN]: There are uncommitted changes in the flake"
+  echo "[WARN]: There are uncommitted changes in the flake, adding them now..."
 
   git add -A
 fi
@@ -19,7 +19,7 @@ if [[ $REPLY == "apply" ]]; then
   echo "[INFO]: Applying changes..."
 
   # Update the system
-  if [[ $(sudo nixos-rebuild switch --flake '.#$system') && $(hyprctl reload) ]]; then
+  if [[ ! $(sudo nixos-rebuild switch --flake ".#$system") && $(hyprctl reload) ]]; then
     echo "[ERROR]: Changes could not be applied."
 
     exit 1
@@ -30,7 +30,7 @@ else
   echo "[INFO]: Building system configuration..."
 
   # Update the system
-  if [[ $(sudo nixos-rebuild build --flake .#$system) ]]; then
+  if [[ ! $(sudo nixos-rebuild build --flake ".#$system") ]]; then
     echo "[ERROR]: Changes could not be applied."
 
     exit 1
