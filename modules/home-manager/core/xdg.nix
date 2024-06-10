@@ -6,6 +6,12 @@
   xdg = {
     enable = true;
 
+    userDirs = {
+      enable = true;
+
+      createDirectories = true;
+    };
+
     desktopEntries = {
       google-calendar = {
         name = "Google Calendar";

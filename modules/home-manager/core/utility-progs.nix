@@ -1,7 +1,8 @@
-{ lib, pkgs, ... }: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     usbutils
     usbtop
+    
     pciutils
     
     btop
