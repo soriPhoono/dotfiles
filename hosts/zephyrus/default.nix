@@ -23,7 +23,7 @@ in lib.nixosSystem {
 
         users.${vars.defaultUser} = 
           (import ../../users/${vars.defaultUser}.nix)
-           ++ (import ./modules/hyprland/home-manager.nix);
+           ++ (import ./modules/hyprland);
       };
     }
   ];
