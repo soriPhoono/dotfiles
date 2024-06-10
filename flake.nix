@@ -41,6 +41,12 @@
       };
     };
 
+    sakaya = {
+      url = "github:donovanglover/sakaya";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Per desktop inputs
   };
 
