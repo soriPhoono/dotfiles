@@ -1,4 +1,5 @@
 [
+/*
   (final: prev: {
     vscode = prev.vscode.override {
       _ = {
@@ -6,6 +7,7 @@
       };
     };
   })
+*/
   (final: prev: {
     discord = prev.discord.override {
       _ = {

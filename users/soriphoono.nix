@@ -1,6 +1,7 @@
 { vars, ... }: {
   imports = [
-    ../modules/home-manager/core
+    ../modules/home-manager/core/xdg.nix
+    ../modules/home-manager/core/utility-progs.nix
 
     ../modules/home-manager/programs/alacritty.nix
     ../modules/home-manager/programs/bat.nix

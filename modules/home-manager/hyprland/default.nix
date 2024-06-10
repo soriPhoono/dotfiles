@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   imports = [
     ./xdg-portal.nix
-    ./icons.nix
+    ./gtk.nix
+    ./qt.nix
     ./mako.nix
 
     ./conf

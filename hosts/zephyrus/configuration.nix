@@ -7,7 +7,7 @@
     ../../modules/nixos/core/core.nix
     ../../modules/nixos/core/file-system.nix
     ../../modules/nixos/core/localization.nix
-    ../../modules/nixos/core/networkmanager.nix
+    ../../modules/nixos/core/network-manager.nix
 
     ../../modules/nixos/hardware/bluetooth.nix
     ../../modules/nixos/hardware/opengl.nix
@@ -21,7 +21,7 @@
     ../../modules/nixos/services/openrgb.nix
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
-    ../../modules/nixos/zram-generator.nix
+    ../../modules/nixos/services/zram-generator.nix
 
     ../../modules/nixos/desktops/hyprland.nix
   ];

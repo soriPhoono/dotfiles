@@ -7,7 +7,7 @@
     ../../modules/nixos/core/core.nix
     ../../modules/nixos/core/file-system.nix
     ../../modules/nixos/core/localization.nix
-    ../../modules/nixos/core/networkmanager.nix
+    ../../modules/nixos/core/network-manager.nix
 
     ../../modules/nixos/hardware/bluetooth.nix
     ../../modules/nixos/hardware/opengl.nix

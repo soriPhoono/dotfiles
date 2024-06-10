@@ -3,7 +3,7 @@
     enable = true;
     layer = "top";
     margin = "20";
-    maxVisible = "3";
+    maxVisible = 3;
     actions = true;
     anchor = "bottom-right";
 
