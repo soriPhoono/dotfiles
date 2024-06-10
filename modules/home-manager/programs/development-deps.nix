@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     # Core development packages
+    imagemagick
     mkdocs
 
     # Bash development deps
