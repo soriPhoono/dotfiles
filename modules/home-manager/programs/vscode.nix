@@ -10,6 +10,9 @@
         # Themes
         catppuccin.catppuccin-vsc-icons
 
+        # Core extensions
+        editorconfig.editorconfig
+
         # Copilot
         github.copilot
 
