@@ -21,9 +21,12 @@ in lib.nixosSystem {
           inherit inputs pkgs vars;
         };
 
-        users.${vars.defaultUser} = 
-          (import ../../users/${vars.defaultUser}.nix)
-           ++ (import ./modules/hyprland);
+        users.${vars.defaultUser} = {
+          imports = [
+            ../../users/${vars.defaultUser}.nix
+            ./modules/hyprland
+          ];
+        };
       };
     }
   ];
