@@ -3,16 +3,13 @@
     ./hardware-configuration.nix
 
     ../../modules/nixos/boot
-    ../../modules/nixos/core
 
-    ../../modules/nixos/hardware/opengl.nix
+    ../../modules/nixos/core/core.nix
+    ../../modules/nixos/core/file-system.nix
+    ../../modules/nixos/core/localization.nix
+    ../../modules/nixos/core/networkmanager.nix
 
-    ../../modules/nixos/services/fprintd.nix
-    ../../modules/nixos/services/openssh.nix
-    ../../modules/nixos/services/pipewire.nix
-    ../../modules/nixos/services/zram-generator.nix
-
-    ../../modules/nixos/desktops/hyprland.nix
+    
   ];
 
   services.logind.extraConfig = ''

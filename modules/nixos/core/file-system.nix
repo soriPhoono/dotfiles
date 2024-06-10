@@ -1,8 +1,6 @@
-{ pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    glib
-  ];
+# TODO: add glib to home.packages
 
+{ ... }: {
   services = {
     devmon.enable = true;
     gvfs.enable = true;
