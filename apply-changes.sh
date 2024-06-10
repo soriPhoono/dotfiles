@@ -44,3 +44,9 @@ else
   # Wait till next reboot
   echo "Changes will be applied on the next reboot."
 fi
+
+# Copy over scripts to the system
+cp -r scripts/* ~/.local/bin/
+
+# Exit successfully
+exit 0

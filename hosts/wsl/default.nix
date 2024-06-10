@@ -1,7 +1,7 @@
-{ inputs, pkgs, vars, ... }: let
+{ system, inputs, pkgs, vars, stateVersion }: let
   inherit (inputs.nixpkgs) lib;
 in lib.nixosSystem {
-  inherit (vars) system;
+  inherit system;
 
   specialArgs = {
     inherit inputs pkgs vars;
@@ -9,7 +9,7 @@ in lib.nixosSystem {
 
   modules = [
     inputs.nixos-wsl.nixosModules.default {
-      system.stateVersion = "${vars.stateVersion}";
+      system.stateVersion = "${stateVersion}";
 
       wsl = {
         enable = true;
@@ -26,7 +26,7 @@ in lib.nixosSystem {
         useUserPackages = true;
 
         extraSpecialArgs = {
-          inherit inputs pkgs vars;
+          inherit inputs pkgs vars stateVersion;
         };
 
         users.${vars.defaultUser} = import ../../users/${vars.defaultUser}.nix;

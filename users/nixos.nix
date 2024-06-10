@@ -1,4 +1,4 @@
-{ vars, ... }: {
+{ vars, stateVersion, ... }: {
   imports = [
     ../modules/home-manager/core/xdg-user-dirs.nix
 
@@ -15,5 +15,5 @@
 
   programs.home-manager.enable = true;
 
-  home.stateVersion = "${vars.stateVersion}";
+  home.stateVersion = "${stateVersion}";
 }

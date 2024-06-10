@@ -1,10 +1,10 @@
-{ inputs, pkgs, vars, ... }: let
+{ system, inputs, pkgs, vars, stateVersion }: let
   inherit (inputs.nixpkgs) lib;
 in lib.nixosSystem {
-  inherit (vars) system;
+  inherit system;
 
   specialArgs = {
-    inherit inputs pkgs vars;
+    inherit inputs pkgs vars stateVersion;
   };
 
   modules = [
@@ -18,7 +18,7 @@ in lib.nixosSystem {
         useUserPackages = true;
 
         extraSpecialArgs = {
-          inherit inputs pkgs vars;
+          inherit inputs pkgs vars stateVersion;
         };
 
         users.${vars.defaultUser} = {
