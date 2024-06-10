@@ -8,12 +8,10 @@
 
       extensions = with pkgs.vscode-extensions; [
         # Themes
-        catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
 
         # Copilot
         github.copilot
-        github.copilot-chat
 
         # Git support
         eamodio.gitlens
@@ -50,8 +48,12 @@
       ];
 
       userSettings = {
-        "editor.smoothScrolling" = true;
         "window.titleBarStyle" = "custom";
+
+        # BUG: possible stylux conflict
+        "workbench.iconTheme" = "catppuccin-mocha";
+
+        "editor.smoothScrolling" = true;
 
         "git.autofetch" = true;
         "git.enableSmartCommit" = true;
@@ -59,7 +61,7 @@
 
         "nix.enableLanguageServer" = "true";
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
-        # TODO: write formatter command
+        "nix.formatterPath" = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
       };
     };
   };
