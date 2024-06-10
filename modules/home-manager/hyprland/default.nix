@@ -18,5 +18,7 @@
     # Applications
     gnome.nautilus
     gnome.file-roller
+    blueberry
+    networkmanagerapplet
   ];
 }
