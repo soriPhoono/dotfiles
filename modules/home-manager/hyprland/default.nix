@@ -6,6 +6,8 @@
     ./mako.nix
     
     ./hyprpaper.nix
+    ./hypridle.nix
+    ./hyprlock.nix
 
     ./conf
   ];
