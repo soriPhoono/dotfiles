@@ -12,21 +12,32 @@ in
   ];
 
   stylix = {
-    opacity = {
-      applications = opacity;
-      desktop = opacity;
-      popups = opacity;
-      terminal = opacity;
+    enable = true;
+
+    targets = {
+      nixvim.transparent_bg = {
+        main = true;
+        sign_column = true;
+      };
     };
 
     image = ../../../assets/wallpapers/1.png;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
+    polarity = "dark";
+
     cursor = {
       package = pkgs.catppuccin-cursors.mochaTeal;
       size = 64;
       name = "Catppuccin-Mocha-Teal-Cursors";
+    };
+
+    opacity = {
+      applications = opacity;
+      desktop = opacity;
+      popups = opacity;
+      terminal = opacity;
     };
 
     fonts = {
