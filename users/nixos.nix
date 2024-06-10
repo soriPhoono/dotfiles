@@ -10,9 +10,10 @@
     ../modules/home-manager/programs/git.nix
     ../modules/home-manager/programs/nvim.nix
     ../modules/home-manager/programs/starship.nix
+    ../modules/home-manager/programs/yt-dlp.nix
   ];
 
   programs.home-manager.enable = true;
-  
+
   home.stateVersion = "${vars.stateVersion}";
 }
