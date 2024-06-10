@@ -1,4 +1,4 @@
-{ ... }: {
+{ vars, ... }: {
   programs.hyprlock = {
     enable = true;
 
@@ -12,7 +12,7 @@
       background = [
         {
           monitor = "eDP-1";
-          path = "${../../../assets/wallpapers/1.jpg}";
+          path = "${vars.wallpaper_path}";
 
           blur_passes = 1;
           blur_size = 3;

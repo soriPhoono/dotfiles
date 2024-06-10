@@ -2,6 +2,11 @@
 
 # This script is used to apply changes to the system
 
+# Backup wallpaper collection
+if [[ -d ~/Pictures/wallpapers ]]; then
+  cp ~/Pictures/wallpapers/* assets/wallpapers/
+fi
+
 # Get the system configuration name from the flake
 nix flake show | grep "NixOS configuration" | awk '{print $2}'
 read -rp "Enter the system configuration name: " system

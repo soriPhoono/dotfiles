@@ -3,9 +3,8 @@
     ./hypridle.nix
     ./hyprlock.nix
 
-    ./monitors.nix
-    ./input.nix
     ./binds.nix
+    ./rules.nix
   ];
 
   wayland.windowManager.hyprland = {
