@@ -15,10 +15,14 @@
     # Clipboard
     wl-clipboard
     cliphist
-    # Applications
+    # File manager
     gnome.nautilus
     gnome.file-roller
+    # Wireless
     blueberry
     networkmanagerapplet
+    # Wallpaper
+    swww
+    waypaper
   ];
 }
