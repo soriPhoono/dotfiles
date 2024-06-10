@@ -3,7 +3,7 @@ let
   opacity = .8;
 
   default_font = 14;
-  focus_font = 16;
+  focus_font = 15;
 in
 {
   imports = [

@@ -1,10 +1,5 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    # System
-    dconf
-    polkit_gnome
-    libgnome-keyring
-    libnotify
     # Visuals
     gammastep # Monitor brightness
     wlsunset # Nightcolor
@@ -35,7 +30,7 @@
       "$mod" = "SUPER";
 
       monitor = [
-        "eDP-1,1920x1080@144,0x0,1.5,vrr,1"
+        "eDP-1,1920x1080@144,0x0,1"
       ];
 
       input = {
@@ -91,6 +86,8 @@
       opengl.nvidia_anti_flicker = true;
 
       exec-once = [
+        ""
+
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
       ];
@@ -155,6 +152,4 @@
       ];
     };
   };
-
-  services.hyprpaper.enable = true;
 }
