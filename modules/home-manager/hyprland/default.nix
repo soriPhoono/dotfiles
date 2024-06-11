@@ -20,7 +20,6 @@
     gnome.nautilus
     gnome.file-roller
     # Wireless
-    blueberry
     networkmanagerapplet
     # Wallpaper
     swww

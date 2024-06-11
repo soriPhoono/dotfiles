@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.waybar = {
     enable = true;
 
@@ -44,6 +44,19 @@
             warning = 30;
             critical = 10;
           };
+        };
+
+        bluetooth = {
+          format-disabled = "󰜺";
+          format-off = "󰂲";
+          format-on = "󰂯";
+          format-connected = "󰂱";
+
+          tooltip-format = "{status} {num_connections}\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}";
+          tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage})";
+
+          on-click = "${pkgs.blueberry}/bin/blueberry";
         };
       };
     };
