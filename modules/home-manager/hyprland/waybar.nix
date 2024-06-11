@@ -11,9 +11,9 @@
         layer = "top";
         position = "top";
         height = 30;
-        margin-top = 20;
-        margin-left = 20;
-        margin-right = 20;
+        margin-top = 15;
+        margin-left = 15;
+        margin-right = 15;
 
         modules-left = [
           "hyprland/window"
@@ -33,8 +33,8 @@
       };
     };
 
-/*     style = ''
+    style = ''
 
-    ''; */
+    '';
   };
 }
