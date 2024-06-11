@@ -4,6 +4,7 @@
     ./gtk.nix
     ./qt.nix
     ./notifications.nix
+    ./waybar.nix
 
     ./conf
   ];
