@@ -1,3 +1,7 @@
 { ... }: {
-  qt.platformTheme = "gtk3";
+  qt = {
+    enable = true;
+
+    platformTheme = "gtk3";
+  };
 }
