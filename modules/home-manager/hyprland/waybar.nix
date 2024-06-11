@@ -33,8 +33,8 @@
 
         battery = {
           format = "{icon}";
-          format-icons = ["󰁺" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
-          tooltip-format = "{percentage}% ({timeTo})";
+          format-icons = [ "󰁺" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹" ];
+          tooltip-format = "{capacity}% ({time})";
 
           stages = {
             full = 100;
