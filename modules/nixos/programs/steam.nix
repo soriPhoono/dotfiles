@@ -1,7 +1,7 @@
 { ... }: {
   programs.steam = {
-      enable = true;
+    enable = true;
 
-      extest.enable = true;
-    };
+    extest.enable = true;
+  };
 }

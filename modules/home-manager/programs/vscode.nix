@@ -12,6 +12,7 @@
 
         # Core extensions
         editorconfig.editorconfig
+        christian-kohler.path-intellisense
 
         # Copilot
         github.copilot
@@ -66,7 +67,14 @@
 
         "nix.enableLanguageServer" = "true";
         "nix.serverPath" = "${pkgs.nil}/bin/nil";
-        "nix.formatterPath" = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+        "nix.serverSettings" = {
+          "autofetch" = true;
+          "nil" = {
+            "formatting" = {
+              "command" = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ];
+            };
+          };
+        };
       };
     };
   };

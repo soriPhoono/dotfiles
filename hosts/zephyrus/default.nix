@@ -1,6 +1,8 @@
-{ system, inputs, pkgs, vars, stateVersion }: let
+{ system, inputs, pkgs, vars, stateVersion }:
+let
   inherit (inputs.nixpkgs) lib;
-in lib.nixosSystem {
+in
+lib.nixosSystem {
   inherit system;
 
   specialArgs = {
@@ -12,7 +14,8 @@ in lib.nixosSystem {
 
     ./configuration.nix
 
-    inputs.home-manager.nixosModules.home-manager {
+    inputs.home-manager.nixosModules.home-manager
+    {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;

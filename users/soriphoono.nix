@@ -1,4 +1,4 @@
-{ vars, stateVersion, ... }: {
+{ stateVersion, ... }: {
   imports = [
     ../modules/home-manager/core/xdg.nix
     ../modules/home-manager/core/utility-progs.nix

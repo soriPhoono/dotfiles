@@ -1,4 +1,4 @@
-{ vars, stateVersion, ... }: {
+{ stateVersion, ... }: {
   imports = [
     ../modules/home-manager/core/xdg-user-dirs.nix
 
