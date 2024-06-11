@@ -37,12 +37,12 @@
           tooltip-format = "{percentage}% ({timeTo})";
 
           stages = {
-            "full" = 100;
-            "high" = 90;
-            "medium" = 70;
-            "low" = 50;
-            "warning" = 30;
-            "critical" = 10;
+            full = 100;
+            high = 90;
+            medium = 70;
+            low = 50;
+            warning = 30;
+            critical = 10;
           };
         };
       };
