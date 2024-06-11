@@ -14,10 +14,12 @@
     mpd-discord-rpc = {
       enable = true;
 
-      hosts = [ "localhost:6600" ];
-      format = {
-        details = "$title";
-        state = "On $album by $artist";
+      settings = {
+        hosts = [ "localhost:6600" ];
+        format = {
+          details = "$title";
+          state = "On $album by $artist";
+        };
       };
     };
   };
