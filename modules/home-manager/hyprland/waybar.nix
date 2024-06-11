@@ -10,7 +10,7 @@
 
         layer = "top";
         position = "top";
-        height = 30;
+        height = 40;
         margin-top = 15;
         margin-left = 15;
         margin-right = 15;
@@ -30,6 +30,21 @@
           "battery"
           "clock"
         ];
+
+        "battery" = {
+          format = "{icon}";
+          format-icons = ["󰁺" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
+          tooltip-format = "{percentage}% ({timeTo})";
+
+          stages = {
+            "full" = 100;
+            "high" = 90;
+            "medium" = 70;
+            "low" = 50;
+            "warning" = 30;
+            "critical" = 10;
+          };
+        };
       };
     };
 
