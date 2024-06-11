@@ -3,6 +3,7 @@
     ./xdg-portal.nix
     ./gtk.nix
     ./qt.nix
+    ./mpd.nix
     ./notifications.nix
     ./waybar.nix
 
@@ -16,7 +17,5 @@
     gnome.file-roller
     # Wireless
     networkmanagerapplet
-    # Music
-    mpd
   ];
 }
