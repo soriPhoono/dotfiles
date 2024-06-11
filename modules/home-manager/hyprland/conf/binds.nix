@@ -19,6 +19,26 @@
       "$mod, 6, workspace, 6"
       "$mod_SHIFT, 6, movetoworkspacesilent, 6"
 
+      ", XF86Launch2, exec, "
+      ", XF86Launch3, exec,"
+
+      ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+
+      ", XF86Launch1, exec, rog-control-center"
+
+      ", XF86AudioNext, exec, playerctl next"
+      ", XF86AudioPrev, exec, playerctl previous"
+      ", XF86AudioPlay, exec, playerctl play-pause"
+
+      ", XF86Launch4, exec, asusctl profile -n"
+
+      ", XF86KbdBrightnessDown, exec, asusctl -p"
+      ", XF86KbdBrightnessUp, exec, asusctl -n"
+
+      ", XF86TouchpadToggle, exec, hyprctl keyword \"device:elan1201:00-04f3:3098-touchpad:enabled\" false"
+      "CTRL, XF86TouchpadToggle, exec, hyprctl keyword \"device:elan1201:00-04f3:3098-touchpad:enabled\" true"
+
       "$mod, Return, exec, alacritty"
       "$mod, E, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
       "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
@@ -35,12 +55,8 @@
       "$mod_SHIFT, right, swapnext, right"
       "$mod_SHIFT, down, swapnext, down"
 
-      ", XF86AudioRaiseVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%"
-      ", XF86AudioLowerVolume, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%"
-      ", XF86AudioMute, exec, ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle"
-      ", XF86AudioNext, exec, playerctl next"
-      ", XF86AudioPrev, exec, playerctl previous"
-      ", XF86AudioPlay, exec, playerctl play-pause"
+      ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
 
       ", XF86MonBrightnessUp, exec, brightnessctl set +10%"
       ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
