@@ -162,7 +162,7 @@
           ];
 
           on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
-          on-right-click = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          on-right-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         };
       };
     };
