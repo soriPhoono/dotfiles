@@ -15,7 +15,5 @@
     gammastep # Nightcolor
     # File manager
     gnome.file-roller
-    # Wireless
-    networkmanagerapplet
   ];
 }
