@@ -16,6 +16,15 @@
       };
     };
 
+    env = [
+      "GBM_BACKEND = nvidia-drm"
+      "__GLX_VENDOR_LIBRARY_NAME = nvidia"
+      "LIBVA_DRIVER_NAME = nvidia"
+      "__GL_GSYNC_ALLOWED = 1"
+      "__GL_VRR_ALLOWED = 0"
+      "WLR_DRM_NO_ATOMIC = 1"
+    ];
+
     bindl = [
       # TODO: lookup devices and create switch to disable monitor if lid is closed
       ", switch:on:2e65fb40, exec, loginctl lock-session && hyprctl keyword monitor \"eDP-1,disable\""
