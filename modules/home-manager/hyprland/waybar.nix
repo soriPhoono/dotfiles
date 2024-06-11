@@ -31,7 +31,7 @@
           "clock"
         ];
 
-        "battery" = {
+        battery = {
           format = "{icon}";
           format-icons = ["󰁺" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹"];
           tooltip-format = "{percentage}% ({timeTo})";
