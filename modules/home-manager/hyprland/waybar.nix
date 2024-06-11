@@ -58,6 +58,31 @@
 
           on-click = "${pkgs.blueberry}/bin/blueberry";
         };
+
+        clock = {
+          format = "{:%H:%M} 󰥔";
+          format-alt = "{%A, %B %d, %Y (%R)} 󰃭";
+          tooltip-format = "\n<span size='12pt' font='JetBrainsMono Nerd Font Propo'>{calendar}</span>"; # TODO: check font name
+          calendar = {
+            mode = "year";
+            mode-mon-col = 3;
+            weeks-pos = "right";
+            on-scroll = 1;
+            format = {
+              months = "<span color='#f5e0dc'><b>{}</b></span>";
+              days = "<span color='#eba0ac'><b>{}</b></span>";
+              weeks = "<span color='#fab387'><b>W{}</b></span>";
+              weekdays = "<span color='#a6e3a1'><b>{}</b></span>";
+              today = "<span color='#f38ba8'><b><u>{}</u></b></span>";
+            };
+            actions = {
+              on-click = "shift_reset";
+              on-click-right = "mode";
+              on-scroll-up = "shift_up";
+              on-scroll-down = "shift_down";
+            };
+          };
+        };
       };
     };
 
