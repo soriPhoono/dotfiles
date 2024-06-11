@@ -48,10 +48,6 @@
       ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
     ];
 
-    bindl = [
-      # TODO: lookup devices and create switch to disable monitor if lid is closed
-    ];
-
     bindm = [
       "$mod, mouse:272, movewindow"
       "$mod, mouse:273, resizewindow"
