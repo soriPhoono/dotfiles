@@ -112,7 +112,7 @@
           path = ../../../assets/icons/Nix_snowflake.png;
           size = 24;
 
-          on-click = "xdg-open https://nixos.org"; # TODO: change to the right command
+          on-click = "${pkgs.xdg-utils}/bin/xdg-open https://nixos.org"; # TODO: change to the right command
         };
 
         mpd = {
