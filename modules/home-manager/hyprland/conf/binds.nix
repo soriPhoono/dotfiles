@@ -43,6 +43,7 @@
       "$mod, E, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
       "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
       "$mod, C, exec, ${pkgs.vscode}/bin/code"
+      "$mod, D, exec, ${pkgs.discord}/bin/discord"
     ];
 
     binde = [
