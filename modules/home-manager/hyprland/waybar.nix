@@ -28,10 +28,14 @@
         modules-right = [
           "network"
           "bluetooth"
-          "wireplumber"
+          "pulseaudio"
           "battery"
           "clock"
         ];
+
+        "custom/spacer" = {
+          text = " ";
+        };
 
         battery = {
           format = "{icon}";
@@ -56,7 +60,7 @@
 
           tooltip-format = "{status} {num_connections}\n{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}";
-          tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage})";
+          tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage}%)";
 
           on-click = "${pkgs.blueberry}/bin/blueberry";
         };
@@ -105,7 +109,7 @@
         };
 
         "hyprland/window" = {
-          format = "{class}";
+          format = "Active window: {class}";
         };
 
         image = {
@@ -116,15 +120,49 @@
         };
 
         mpris = {
-          format-playing = "󰐊 {artist} - {title} ({position})";
-          format-paused = "󰏤 {artist} - {title} ({position})";
-          format-stopped = "󰓛 {artist} - {title} ({position})";
+          format-playing = "󰐊 {artist} - {title}";
+          format-paused = "󰏤 {artist} - {title}";
+          format-stopped = "󰓛 {artist} - {title}";
 
           on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
         };
 
         network = {
+          format-ethernet = "󰈀";
+          format-wifi = "{icon}";
+          format-disconnected = "󰤮";
 
+          tooltip-format-ethernet = "{ifname} {essid} {ipaddr}";
+          tooltip-format-wifi = "{essid} {ipaddr} {signalStrength}%";
+          tooltip-format-disconnected = "";
+
+          format-icons = [
+            "󰤯"
+            "󰤟"
+            "󰤢"
+            "󰤥"
+            "󰤨"
+          ];
+
+          on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+          on-right-click = "~/.local/bin/nm-toggle.sh";
+        };
+
+        pulseaudio = {
+          format = "{icon}";
+          format-muted = "󰝟";
+          format-bluetooth = "󰂰";
+
+          tooltip-format = "{volume}% {desc}";
+
+          format-icons = [
+            "󰕿"
+            "󰖀"
+            "󰕾"
+          ];
+
+          on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+          on-right-click = "${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
         };
       };
     };
