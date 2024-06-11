@@ -16,11 +16,13 @@
         margin-right = 15;
 
         modules-left = [
+          "image"
+          "hyprland/workspaces"
           "hyprland/window"
         ];
 
         modules-center = [
-          "hyprland/workspaces"
+          "mpd"
         ];
 
         modules-right = [
@@ -82,6 +84,28 @@
               on-scroll-down = "shift_down";
             };
           };
+        };
+
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-icons = {
+            "1" = "";
+            "2" = "󰈹";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            empty = "";
+            active = "";
+            urgent = "󰀨";
+            default = "";
+          };
+          persistent-workspaces = {
+            "*" = 6;
+          };
+        };
+
+        "hyprland/window" = {
+          format = "{class}";
         };
       };
     };
