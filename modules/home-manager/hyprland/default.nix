@@ -3,7 +3,7 @@
     ./xdg-portal.nix
     ./gtk.nix
     ./qt.nix
-    ./mako.nix
+    ./notifications.nix
 
     ./conf
   ];
