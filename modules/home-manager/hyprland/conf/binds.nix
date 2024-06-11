@@ -13,16 +13,16 @@
       "$mod, C, exec, code"
     ] ++ (
       # workspaces
-      # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
+      # binds $mod + [shift +] {1..6} to [move to] workspace {1..6}
       builtins.concatLists (builtins.genList
         (
           x:
           let
             ws =
               let
-                c = (x + 1) / 10;
+                c = (x + 1) / 6;
               in
-              builtins.toString (x + 1 - (c * 10));
+              builtins.toString (x + 1 - (c * 6));
           in
           [
             "$mod, ${ws}, workspace, ${toString (x + 1)}"
