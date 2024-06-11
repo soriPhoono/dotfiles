@@ -122,7 +122,7 @@
 
           tooltip = false;
 
-          on-click = "{pkgs.playerctl}/bin/playerctl play-pause";
+          on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
         };
       };
     };
