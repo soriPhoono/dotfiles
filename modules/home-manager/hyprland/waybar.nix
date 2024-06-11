@@ -1,4 +1,8 @@
 { pkgs, ... }: {
+  home.file = {
+    ".local/bin/nm-toggle.sh".source = ../../../scripts/nm-toggle.sh;
+  };
+
   programs.waybar = {
     enable = true;
 
@@ -10,13 +14,12 @@
 
         layer = "top";
         position = "top";
-        height = 40;
         margin-top = 15;
         margin-left = 15;
         margin-right = 15;
 
         modules-left = [
-          "image"
+          "custom/nixos"
           "hyprland/workspaces"
           "hyprland/window"
         ];
@@ -34,42 +37,41 @@
           "clock"
         ];
 
-        "custom/spacer" = {
-          text = " ";
+        "custom/nixos" = {
+          text = "<span size='14pt'>󱄅</span>";
+
+          on-click = "${pkgs.xdg-utils}/bin/xdg-open https://nixos.org/"; # TODO: change this to proper invocation
         };
 
         battery = {
-          format = "{icon}";
+          format = "<span size='14pt'>{icon}</span>";
           format-icons = [ "󰁺" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹" ];
           tooltip-format = "{capacity}% ({time})";
 
-          stages = {
-            full = 100;
-            high = 90;
-            medium = 70;
-            low = 50;
+          states = {
             warning = 30;
             critical = 10;
           };
         };
 
         bluetooth = {
-          format-disabled = "󰜺";
-          format-off = "󰂲";
-          format-on = "󰂯";
-          format-connected = "󰂱";
+          format-disabled = "<span size='14pt'>󰜺</span>";
+          format-off = "<span size='14pt'>󰂲</span>";
+          format-on = "<span size='14pt'>󰂯</span>";
+          format-connected = "<span size='14pt'>󰂱</span>";
 
           tooltip-format = "{status} {num_connections}\n{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}";
           tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage}%)";
 
           on-click = "${pkgs.blueberry}/bin/blueberry";
+          # TODO: toggle bluetooth on right click
         };
 
         clock = {
-          format = "{:%H:%M} 󰥔";
+          format = "{:%H:%M} <span size='14pt'>󰥔</span>";
           format-alt = "{%A, %B %d, %Y (%R)} 󰃭";
-          tooltip-format = "\n<span size='12pt' font='JetBrainsMono Nerd Font Propo'>{calendar}</span>"; # TODO: check font name
+          tooltip-format = "\n<span size='12pt'>{calendar}</span>"; # TODO: check font name
           calendar = {
             mode = "year";
             mode-mon-col = 3;
@@ -92,7 +94,7 @@
         };
 
         "hyprland/workspaces" = {
-          format = "{icon}";
+          format = "<span size='14pt'>{icon}</span>";
           format-icons = {
             "1" = "";
             "2" = "󰈹";
@@ -110,28 +112,21 @@
         };
 
         "hyprland/window" = {
-          format = "Active window: {class}";
-        };
-
-        image = {
-          path = ../../../assets/icons/Nix_snowflake.png;
-          size = 24;
-
-          on-click = "${pkgs.xdg-utils}/bin/xdg-open https://nixos.org"; # TODO: change to the right command
+          format = "<span size='14pt'>Active window: {class}</span>";
         };
 
         mpris = {
-          format-playing = "󰐊 {artist} - {title}";
-          format-paused = "󰏤 {artist} - {title}";
-          format-stopped = "󰓛 {artist} - {title}";
+          format-playing = "<span size='14pt'>󰐊 {artist} - {title}</span>";
+          format-paused = "<span size='14pt'>󰏤 {artist} - {title}</span>";
+          format-stopped = "<span size='14pt'>󰓛 {artist} - {title}</span>";
 
           on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
         };
 
         network = {
-          format-ethernet = "󰈀";
-          format-wifi = "{icon}";
-          format-disconnected = "󰤮";
+          format-ethernet = "<span size='14pt'>󰈀</span>";
+          format-wifi = "<span size='14pt'>{icon}</span>";
+          format-disconnected = "<span size='14pt'>󰤮</span>";
 
           tooltip-format-ethernet = "{ifname} {essid} {ipaddr}";
           tooltip-format-wifi = "{essid} {ipaddr} {signalStrength}%";
@@ -150,9 +145,9 @@
         };
 
         pulseaudio = {
-          format = "{icon}";
-          format-muted = "󰝟";
-          format-bluetooth = "󰂰";
+          format = "<span size='14pt'>{icon}</span>";
+          format-muted = "<span size='14pt'>󰝟</span>";
+          format-bluetooth = "<span size='14pt'>󰂰 {icon}</span>";
 
           tooltip-format = "{volume}% {desc}";
 
@@ -174,7 +169,48 @@
     };
 
     style = ''
+      * {
+        font-family: "AurulentSansM Nerd Font Propo";
 
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      #battery {
+        font-size: 14pt;
+
+        color: #a6e3a1;
+      }
+
+      #battery.warning {
+        font-size: 14pt;
+
+        color: #f9e2af;
+      }
+
+      #battery.critical {
+        font-size: 14pt;
+
+        color: #f38ba8;
+      }
+
+      #bluetooth.disabled {
+        font-size: 14pt;
+
+        color: #f38ba8;
+      }
+
+      #bluetooth.on {
+        font-size: 14pt;
+
+        color: #89dceb;
+      }
+
+      #bluetooth.connected {
+        font-size: 14pt;
+
+        color: #89b4fa;
+      }
     '';
   };
 }
