@@ -28,14 +28,14 @@
     );
 
     binde = [
-      "$mod, up, movefocus, up"
-      "$mod, left, movefocus, left"
-      "$mod, right, movefocus, right"
-      "$mod, down, movefocus, down"
-      "$mod_SHIFT, up, swapwindow, up"
-      "$mod_SHIFT, left, swapwindow, left"
-      "$mod_SHIFT, right, swapwindow, right"
-      "$mod_SHIFT, down, swapwindow, down"
+      "$mod, up, cyclenext, up"
+      "$mod, left, cyclenext, left"
+      "$mod, right, cyclenext, right"
+      "$mod, down, cyclenext, down"
+      "$mod_SHIFT, up, swapnext, up"
+      "$mod_SHIFT, left, swapnext, left"
+      "$mod_SHIFT, right, swapnext, right"
+      "$mod_SHIFT, down, swapnext, down"
 
       ", XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +5%"
       ", XF86AudioLowerVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ -5%"
