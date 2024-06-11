@@ -1,12 +1,12 @@
 { ... }: {
   wayland.windowManager.hyprland.settings = {
     windowrulev2 = [
-      "opacity .8, class:(.*)"
+      "opacity .95, class:(.*)"
     ];
 
     layerrule = [
-      "blur, *"
-      "blurpopups, *"
+      # "blur, *"
+      # "blurpopups, *"
     ];
   };
 }

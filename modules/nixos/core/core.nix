@@ -3,7 +3,9 @@
     man
     man-pages
     coreutils
+
     nix-tree
+    killall
 
     wget
   ];
