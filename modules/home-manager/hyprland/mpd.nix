@@ -4,6 +4,8 @@
       enable = true;
 
       network.startWhenNeeded = true;
+
+      musicDirectory = "~/Music";
     };
 
     mpd-mpris = {

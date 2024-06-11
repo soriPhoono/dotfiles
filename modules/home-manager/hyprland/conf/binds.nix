@@ -6,30 +6,24 @@
       "$mod, F, togglefloating, "
       "$mod, P, pin, "
       "$mod, Space, centerwindow, "
+      "$mod, 1, workspace, 1"
+      "$mod, 1, movetoworkspacesilent, 1"
+      "$mod, 2, workspace, 2"
+      "$mod, 2, movetoworkspacesilent, 2"
+      "$mod, 3, workspace, 3"
+      "$mod, 3, movetoworkspacesilent, 3"
+      "$mod, 4, workspace, 4"
+      "$mod, 4, movetoworkspacesilent, 4"
+      "$mod, 5, workspace, 5"
+      "$mod, 5, movetoworkspacesilent, 5"
+      "$mod, 6, workspace, 6"
+      "$mod, 6, movetoworkspacesilent, 6"
 
       "$mod, Return, exec, alacritty"
       "$mod, E, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
       "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
       "$mod, C, exec, ${pkgs.vscode}/bin/code"
-    ] ++ (
-      # workspaces
-      # binds $mod + [shift +] {1..6} to [move to] workspace {1..6}
-      builtins.concatLists (builtins.genList
-        (
-          x:
-          let
-            ws =
-              let
-                c = (x + 1) / 6;
-              in
-              builtins.toString (x + 1 - (c * 6));
-          in
-          [
-            "$mod, ${ws}, workspace, ${toString (x + 1)}"
-            "$mod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
-          ]
-        ) 10)
-    );
+    ];
 
     binde = [
       "$mod, up, cyclenext, up"
