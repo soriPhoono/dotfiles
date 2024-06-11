@@ -10,7 +10,7 @@
       "$mod, Return, exec, alacritty"
       "$mod, E, exec, nautilus"
       "$mod, B, exec, firefox"
-      "$mod, C, exec, code --enable-features=UseOzonePlatform --ozone-platform=wayland"
+      "$mod, C, exec, code"
     ] ++ (
       # workspaces
       # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
