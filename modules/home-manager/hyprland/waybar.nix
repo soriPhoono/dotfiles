@@ -22,7 +22,7 @@
         ];
 
         modules-center = [
-          "mpd"
+          "mpris"
         ];
 
         modules-right = [
@@ -115,14 +115,16 @@
           on-click = "${pkgs.xdg-utils}/bin/xdg-open https://nixos.org"; # TODO: change to the right command
         };
 
-        mpd = {
-          format = "󰝚 {artist} - {title}";
-          format-paused = "󰏤 {artist} - {title}";
-          format-stopped = "󰓛 {artist} - {title}";
-
-          tooltip = false;
+        mpris = {
+          format-playing = "󰐊 {artist} - {title} ({position})";
+          format-paused = "󰏤 {artist} - {title} ({position})";
+          format-stopped = "󰓛 {artist} - {title} ({position})";
 
           on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
+        };
+
+        network = {
+
         };
       };
     };
