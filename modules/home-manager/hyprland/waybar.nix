@@ -107,6 +107,23 @@
         "hyprland/window" = {
           format = "{class}";
         };
+
+        image = {
+          path = ../../../assets/icons/Nix_snowflake.png;
+          size = 24;
+
+          on-click = "xdg-open https://nixos.org"; # TODO: change to the right command
+        };
+
+        mpd = {
+          format = "󰝚 {artist} - {title}";
+          format-paused = "󰏤 {artist} - {title}";
+          format-stopped = "󰓛 {artist} - {title}";
+
+          tooltip = false;
+
+          on-click = "playerctl play-pause";
+        };
       };
     };
 
