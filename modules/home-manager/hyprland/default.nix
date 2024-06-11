@@ -11,17 +11,12 @@
 
   home.packages = with pkgs; [
     # Visuals
-    brightnessctl # Monitor and device brightness
     gammastep # Nightcolor
-    # Clipboard
-    wl-clipboard
-    cliphist
     # File manager
-    gnome.nautilus
     gnome.file-roller
     # Wireless
     networkmanagerapplet
-    # Wallpaper
-    swww
+    # Music
+    mpd
   ];
 }

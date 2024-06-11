@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hypridle.nix
     ./hyprlock.nix
@@ -68,10 +68,10 @@
       };
 
       exec-once = [
-        "wl-paste --type text --watch cliphist store"
-        "wl-paste --type image --watch cliphist store"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
 
-        "swww-daemon & sleep 0.1 && swww img ~/Pictures/wallpapers/2.jpg"
+        "${pkgs.swww}/bin/swww-daemon & sleep 0.1 && ${pkgs.swww}/bin/swww img ~/Pictures/wallpapers/2.jpg"
       ];
 
       exec = [

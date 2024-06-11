@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   wayland.windowManager.hyprland.settings = {
     bind = [
       "$mod, Q, exec, ~/.local/bin/kill_window.sh"
@@ -8,9 +8,9 @@
       "$mod, Space, centerwindow, "
 
       "$mod, Return, exec, alacritty"
-      "$mod, E, exec, nautilus"
-      "$mod, B, exec, firefox"
-      "$mod, C, exec, code"
+      "$mod, E, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
+      "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
+      "$mod, C, exec, ${pkgs.vscode}/bin/code"
     ] ++ (
       # workspaces
       # binds $mod + [shift +] {1..6} to [move to] workspace {1..6}
