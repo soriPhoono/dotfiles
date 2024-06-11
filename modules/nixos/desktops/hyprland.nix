@@ -4,7 +4,17 @@
 
     hyprland.enable = true;
   };
-  services.gnome.gnome-keyring.enable = true;
+
+  services = {
+    gnome.gnome-keyring.enable = true;
+
+    mpd = {
+      enable = true;
+
+      startWhenNeeded = true;
+    };
+  };
+
   security.polkit.enable = true;
 
   systemd = {
