@@ -16,21 +16,25 @@
         margin-right = 20;
 
         modules-left = [
-
+          "hyprland/window"
         ];
 
         modules-center = [
-
+          "hyprland/workspaces"
         ];
 
         modules-right = [
-
+          "network"
+          "bluetooth"
+          "wireplumber"
+          "battery"
+          "clock"
         ];
       };
     };
 
-    style = ''
+/*     style = ''
 
-    '';
+    ''; */
   };
 }
