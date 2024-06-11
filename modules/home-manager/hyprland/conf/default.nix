@@ -71,8 +71,7 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
 
-        "swww-daemon"
-        "swww img ~/Pictures/wallpapers/2.jpg"
+        "swww-daemon & sleep 0.1 && swww img ~/Pictures/wallpapers/2.jpg"
       ];
 
       exec = [
