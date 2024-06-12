@@ -1,9 +1,11 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    winetricks
+    protontricks
     lutris
     heroic
     bottles
-    winetricks
-    protontricks
+    prismlauncher
+    path-of-building
   ];
 }
