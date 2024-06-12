@@ -12,6 +12,10 @@
     haskell.package-list
 
     # C/C++ development deps
+    gcc
+    gdb
+    ninja
+    cmake
     clang-tools
     lldb
     meson
