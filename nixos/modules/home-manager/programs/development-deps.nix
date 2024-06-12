@@ -38,6 +38,10 @@
     sass
     bun
     nodePackages.typescript-language-server
+
+    # GUI development tools
+    logseq
+    gimp
   ];
 
   programs = {
