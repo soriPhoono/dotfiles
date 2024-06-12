@@ -2,7 +2,7 @@
   home.packages = with pkgs; [
     # Core development packages
     imagemagick
-    gparted
+    kdePackages.partitionmanager
     mkdocs
 
     # Bash development deps
