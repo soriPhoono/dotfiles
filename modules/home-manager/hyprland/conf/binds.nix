@@ -1,9 +1,4 @@
-{ pkgs, ... }: {
-  home.file = {
-    ".local/bin/volume.sh".source = ../../../../scripts/volume.sh;
-    ".local/bin/kill_window.sh".source = ../../../../scripts/kill_window.sh;
-  };
-
+{ ... }: {
   wayland.windowManager.hyprland.settings = {
     bind = [
       "$mod, Q, exec, ~/.local/bin/kill_window.sh"
@@ -27,14 +22,14 @@
       ", XF86Launch2, exec, "
       ", XF86Launch3, exec,"
 
-      ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+      ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 
       ", XF86Launch1, exec, rog-control-center"
 
-      ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-      ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
-      ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+      ", XF86AudioNext, exec, playerctl next"
+      ", XF86AudioPrev, exec, playerctl previous"
+      ", XF86AudioPlay, exec, playerctl play-pause"
 
       ", XF86Launch4, exec, asusctl profile -n"
 
@@ -44,11 +39,11 @@
       ", XF86TouchpadToggle, exec, hyprctl keyword \"device:elan1201:00-04f3:3098-touchpad:enabled\" false"
       "CTRL, XF86TouchpadToggle, exec, hyprctl keyword \"device:elan1201:00-04f3:3098-touchpad:enabled\" true"
 
-      "$mod, Return, exec, ${pkgs.alacritty}/bin/alacritty"
-      "$mod, E, exec, ${pkgs.gnome.nautilus}/bin/nautilus"
-      "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
-      "$mod, C, exec, ${pkgs.vscode}/bin/code"
-      "$mod, D, exec, ${pkgs.discord}/bin/discord"
+      "$mod, Return, exec, alacritty"
+      "$mod, E, exec, nautilus"
+      "$mod, B, exec, firefox"
+      "$mod, C, exec, code"
+      "$mod, D, exec, discord"
     ];
 
     binde = [
@@ -64,8 +59,8 @@
       ", XF86AudioRaiseVolume, exec, ~/.local/share/scripts/volume.sh up"
       ", XF86AudioLowerVolume, exec, ~/.local/share/scripts/volume.sh down"
 
-      ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set +10%"
-      ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 10%-"
+      ", XF86MonBrightnessUp, exec, brightnessctl set +10%"
+      ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
     ];
 
     bindm = [

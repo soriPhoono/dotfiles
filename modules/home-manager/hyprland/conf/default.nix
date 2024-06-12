@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, vars, ... }: {
   imports = [
     ./hypridle.nix
     ./hyprlock.nix
@@ -29,7 +29,7 @@
 
       general = {
         gaps_in = 5;
-        gaps_out = 15;
+        gaps_out = 10;
         border_size = 3;
         layout = "dwindle";
         allow_tearing = false;
@@ -68,10 +68,11 @@
       };
 
       exec-once = [
-        "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
-        "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch cliphist store"
+        "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch cliphist store"
 
-        "${pkgs.swww}/bin/swww-daemon & sleep 0.1 && ${pkgs.swww}/bin/swww img ~/Pictures/wallpapers/2.jpg"
+        "${pkgs.swww}/bin/swww-daemon & sleep 0.1 && ${pkgs.swww}/bin/swww img ${vars.wallpaper_path}"
+        "waybar"
       ];
 
       exec = [

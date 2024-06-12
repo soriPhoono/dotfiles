@@ -11,11 +11,13 @@
   ];
 
   home.packages = with pkgs; [
+    # System
+    playerctl
     # Visuals
+    brightnessctl # Brightness
     gammastep # Nightcolor
     # File manager
     gnome.file-roller
-
-
+    gnome.nautilus
   ];
 }

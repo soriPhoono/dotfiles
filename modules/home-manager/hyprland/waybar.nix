@@ -1,8 +1,4 @@
 { pkgs, ... }: {
-  home.file = {
-    ".local/bin/nm-toggle.sh".source = ../../../scripts/nm-toggle.sh;
-  };
-
   programs.waybar = {
     enable = true;
 
@@ -14,64 +10,53 @@
 
         layer = "top";
         position = "top";
-        margin-top = 15;
-        margin-left = 15;
-        margin-right = 15;
 
         modules-left = [
-          "custom/nixos"
-          "hyprland/workspaces"
+          "custom/logo"
+          "clock"
           "hyprland/window"
         ];
 
         modules-center = [
-          "mpris"
+          "hyprland/workspaces"
         ];
 
         modules-right = [
           "tray"
-          "network"
           "bluetooth"
           "pulseaudio"
+          "network"
           "battery"
-          "clock"
         ];
 
-        "custom/nixos" = {
-          text = "<span size='14pt'>󱄅</span>";
+        reload_style_on_change = true;
 
-          on-click = "${pkgs.xdg-utils}/bin/xdg-open https://nixos.org/"; # TODO: change this to proper invocation
+        "custom/logo" = {
+          format = "󱄅";
+          tooltip = false;
         };
 
-        battery = {
+        "hyprland/workspaces" = {
           format = "<span size='14pt'>{icon}</span>";
-          format-icons = [ "󰁺" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹" ];
-          tooltip-format = "{capacity}% ({time})";
-
-          states = {
-            warning = 30;
-            critical = 10;
+          format-icons = {
+            "1" = "";
+            "2" = "";
+            "3" = "";
+            "4" = "";
+            "5" = "";
+            "6" = "";
+            active = "";
+            default = "";
+          };
+          persistent-workspaces = {
+            "*" = 6;
           };
         };
 
-        bluetooth = {
-          format-disabled = "<span size='14pt'>󰜺</span>";
-          format-off = "<span size='14pt'>󰂲</span>";
-          format-on = "<span size='14pt'>󰂯</span>";
-          format-connected = "<span size='14pt'>󰂱</span>";
-
-          tooltip-format = "{status} {num_connections}\n{device_enumerate}";
-          tooltip-format-enumerate-connected = "{device_alias}";
-          tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage}%)";
-
-          on-click = "${pkgs.blueberry}/bin/blueberry";
-          # TODO: toggle bluetooth on right click
-        };
-
         clock = {
-          format = "{:%H:%M} <span size='14pt'>󰥔</span>";
-          format-alt = "{%A, %B %d, %Y (%R)} 󰃭";
-          tooltip-format = "\n<span size='12pt'>{calendar}</span>"; # TODO: check font name
+          format = "{:%I:%M:%S %p}";
+          interval = 1;
+          tooltip-format = "\n<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"; # TODO: check font name
           calendar = {
             mode = "year";
             mode-mon-col = 3;
@@ -86,46 +71,29 @@
             };
             actions = {
               on-click = "shift_reset";
-              on-click-right = "mode";
               on-scroll-up = "shift_up";
               on-scroll-down = "shift_down";
             };
           };
         };
 
-        "hyprland/workspaces" = {
-          format = "<span size='14pt'>{icon}</span>";
-          format-icons = {
-            "1" = "";
-            "2" = "󰈹";
-            "3" = "";
-            "4" = "";
-            "5" = "";
-            empty = "";
-            active = "";
-            urgent = "󰀨";
-            default = "";
-          };
-          persistent-workspaces = {
-            "*" = 6;
-          };
-        };
+        bluetooth = {
+          format-on = "<span size='14pt'>󰂯</span>";
+          format-off = "";
+          format-disabled = "<span size='14pt'>󰂲</span>";
+          format-connected = "<span size='14pt'>󰂱</span>";
 
-        "hyprland/window" = {
-          format = "<span size='14pt'>Active window: {class}</span>";
-        };
+          tooltip-format = "{status} {num_connections}\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}";
+          tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage}%)";
 
-        mpris = {
-          format-playing = "<span size='14pt'>󰐊 {artist} - {title}</span>";
-          format-paused = "<span size='14pt'>󰏤 {artist} - {title}</span>";
-          format-stopped = "<span size='14pt'>󰓛 {artist} - {title}</span>";
-
-          on-click = "${pkgs.playerctl}/bin/playerctl play-pause";
+          on-click = "${pkgs.blueberry}/bin/blueberry";
+          # TODO: toggle bluetooth on right click
         };
 
         network = {
-          format-ethernet = "<span size='14pt'>󰈀</span>";
           format-wifi = "<span size='14pt'>{icon}</span>";
+          format-ethernet = "<span size='14pt'>󰈀</span>";
           format-disconnected = "<span size='14pt'>󰤮</span>";
 
           tooltip-format-ethernet = "{ifname} {essid} {ipaddr}";
@@ -140,8 +108,19 @@
             "󰤨"
           ];
 
-          on-click = "${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+          on-click = "";
           on-right-click = "~/.local/bin/nm-toggle.sh";
+        };
+
+        battery = {
+          format = "<span size='14pt'>{icon}</span>";
+          format-icons = [ "󰁺" "󰁼" "󰁾" "󰂀" "󰂂" "󰁹" ];
+          tooltip-format = "{capacity}% ({time})";
+
+          states = {
+            warning = 30;
+            critical = 10;
+          };
         };
 
         pulseaudio = {
@@ -162,7 +141,7 @@
         };
 
         tray = {
-          icon-size = 24;
+          icon-size = 14;
           spacing = 10;
         };
       };
@@ -170,46 +149,101 @@
 
     style = ''
       * {
-        font-family: "AurulentSansM Nerd Font Propo";
-
-        padding-left: 5px;
-        padding-right: 5px;
+        border: none;
+        font-size: 14px;
+        font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
+        min-height: 25px;
       }
 
-      #battery {
-        font-size: 14pt;
-
-        color: #a6e3a1;
+      window#waybar {
+      background: transparent;
+      margin: 5px;
       }
 
-      #battery.warning {
-        font-size: 14pt;
-
-        color: #f9e2af;
+      #custom-logo {
+      padding: 0 10px;
       }
 
-      #battery.critical {
-        font-size: 14pt;
-
-        color: #f38ba8;
+      .modules-right {
+      padding-left: 5px;
+      border-radius: 15px 0 0 15px;
+      margin-top: 2px;
+      background: #000000;
       }
 
-      #bluetooth.disabled {
-        font-size: 14pt;
-
-        color: #f38ba8;
+      .modules-center {
+      padding: 0 15px;
+      margin-top: 2px;
+      border-radius: 15px 15px 15px 15px;
+      background: #000000;
       }
 
-      #bluetooth.on {
-        font-size: 14pt;
-
-        color: #89dceb;
+      .modules-left {
+      border-radius: 0 15px 15px 0;
+      margin-top: 2px;
+      background: #000000;
       }
 
-      #bluetooth.connected {
-        font-size: 14pt;
+      #battery,
+      #custom-clipboard,
+      #custom-colorpicker,
+      #custom-powerDraw,
+      #bluetooth,
+      #pulseaudio,
+      #network,
+      #disk,
+      #memory,
+      #backlight,
+      #cpu,
+      #temperature,
+      #custom-weather,
+      #idle_inhibitor,
+      #jack,
+      #tray,
+      #window,
+      #workspaces,
+      #clock {
+      padding: 0 5px;
+      }
+      #pulseaudio {
+      padding-top: 3px;
+      }
 
-        color: #89b4fa;
+      #temperature.critical,
+      #pulseaudio.muted {
+      color: #FF0000;
+      padding-top: 0;
+      }
+
+      #clock{
+      color: #5fd1fa;
+      }
+
+      #battery.charging {
+        color: #ffffff;
+        background-color: #26A65B;
+      }
+
+      #battery.warning:not(.charging) {
+        background-color: #ffbe61;
+        color: black;
+      }
+
+      #battery.critical:not(.charging) {
+        background-color: #f53c3c;
+        color: #ffffff;
+        animation-name: blink;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
+
+      @keyframes blink {
+        to {
+            background-color: #ffffff;
+            color: #000000;
+        }
       }
     '';
   };
