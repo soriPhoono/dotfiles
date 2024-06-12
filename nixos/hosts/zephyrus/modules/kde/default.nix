@@ -22,6 +22,4 @@
   home.packages = with pkgs; [
     blender
   ];
-
-  programs.partition-manager.enable = true;
 }
