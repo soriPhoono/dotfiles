@@ -48,11 +48,12 @@
     };
 
     # Per desktop inputs
+    ags.url = "github:Aylur/ags";
   };
 
   outputs = inputs: {
     nixosConfigurations = (
-      import ./hosts {
+      import ./nixos/hosts {
         inherit inputs;
       }
     );

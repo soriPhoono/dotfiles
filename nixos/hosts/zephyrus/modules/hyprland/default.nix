@@ -26,7 +26,6 @@
     ];
 
     bindl = [
-      # TODO: lookup devices and create switch to disable monitor if lid is closed
       ", switch:on:2e65fb40, exec, loginctl lock-session && hyprctl keyword monitor \"eDP-1,disable\""
       ", switch:2e65fb40, exec, hyprctl keyword monitor \"eDP-1,1920x1080@144,0x0,1,vrr,2\""
     ];

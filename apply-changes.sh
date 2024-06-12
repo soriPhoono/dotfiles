@@ -4,7 +4,7 @@
 
 # Backup wallpaper collection
 if [[ -d ~/Pictures/wallpapers ]]; then
-  cp ~/Pictures/wallpapers/* assets/wallpapers/
+  cp assets/wallpapers/* ~/Pictures/wallpapers/
 fi
 
 # Get the system configuration name from the flake

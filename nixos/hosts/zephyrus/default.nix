@@ -20,8 +20,6 @@ lib.nixosSystem {
         useGlobalPkgs = true;
         useUserPackages = true;
 
-        backupFileExtension = "~";
-
         extraSpecialArgs = {
           inherit inputs pkgs vars stateVersion;
         };
