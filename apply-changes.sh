@@ -11,11 +11,6 @@ function confirm_exit() {
 
 trap confirm_exit SIGINT
 
-# Backup wallpaper collection
-if [[ -d ~/Pictures/wallpapers ]]; then
-  cp assets/wallpapers/* ~/Pictures/wallpapers/
-fi
-
 # Get the system configuration name from the flake
 nix flake show | grep "NixOS configuration" | awk '{print $2}'
 read -rp "Enter the system configuration name: " system

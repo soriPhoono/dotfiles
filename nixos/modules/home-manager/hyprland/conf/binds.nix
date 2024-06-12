@@ -1,7 +1,7 @@
 { ... }: {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "$mod, Q, exec, ${../../../../../scripts/kill_window.sh}"
+      "$mod, Q, exec, ${../scripts/kill_window.sh}"
       "$mod_SHIFT, Q, exit, "
       "$mod, F, togglefloating, "
       "$mod, P, pin, "
@@ -56,8 +56,8 @@
       "$mod_SHIFT, right, swapnext, right"
       "$mod_SHIFT, down, swapnext, down"
 
-      ", XF86AudioRaiseVolume, exec, ${../../../../../scripts/volume.sh} up"
-      ", XF86AudioLowerVolume, exec, ${../../../../../scripts/volume.sh} down"
+      ", XF86AudioRaiseVolume, exec, ${../scripts/volume.sh} up"
+      ", XF86AudioLowerVolume, exec, ${../scripts/volume.sh} down"
 
       ", XF86MonBrightnessUp, exec, brightnessctl set +10%"
       ", XF86MonBrightnessDown, exec, brightnessctl set 10%-"
