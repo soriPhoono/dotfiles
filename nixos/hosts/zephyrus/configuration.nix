@@ -23,7 +23,7 @@
     ../../modules/nixos/services/pipewire.nix
     ../../modules/nixos/services/zram-generator.nix
 
-    ../../modules/nixos/desktops/hyprland.nix
+    ../../modules/nixos/desktops/kde.nix
   ];
 
   services.logind.extraConfig = ''

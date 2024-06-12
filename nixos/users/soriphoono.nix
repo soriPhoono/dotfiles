@@ -18,8 +18,6 @@
 
     ../modules/home-manager/services/mpris-proxy.nix
 
-    ../modules/home-manager/hyprland
-
     ../modules/home-manager/themes/catppuccin.nix
   ];
 
