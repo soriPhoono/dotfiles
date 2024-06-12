@@ -2,6 +2,15 @@
 
 # This script is used to apply changes to the system
 
+function confirm_exit() {
+  read -rp "Do you want to exit? [y/n] "
+  if [[ $REPLY == "y" ]]; then
+    exit 1
+  fi
+}
+
+trap confirm_exit SIGINT
+
 # Backup wallpaper collection
 if [[ -d ~/Pictures/wallpapers ]]; then
   cp assets/wallpapers/* ~/Pictures/wallpapers/
@@ -13,9 +22,14 @@ read -rp "Enter the system configuration name: " system
 
 # Check if any files in the flake have been modified
 if [[ $(git status --porcelain) ]]; then
-  echo "[WARN]: There are uncommitted changes in the flake, adding them now..."
+  echo "[WARN]: There are uncommitted changes in the flake"
 
-  git add -A
+  read -rp "Do you want to commit the changes? [y/n] "
+  if [[ $REPLY == "y" ]]; then
+    git add -A
+    read -rp "Enter the commit message: "
+    git commit -m $REPLY
+  fi
 fi
 
 read -rp "Do you want to apply the changes, or wait till the next reboot? [apply/wait] "
@@ -44,9 +58,6 @@ else
   # Wait till next reboot
   echo "Changes will be applied on the next reboot."
 fi
-
-# Copy over scripts to the system
-cp -r scripts/* ~/.local/bin/
 
 # Exit successfully
 exit 0
