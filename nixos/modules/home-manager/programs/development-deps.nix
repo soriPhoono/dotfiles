@@ -39,4 +39,8 @@
     bun
     nodePackages.typescript-language-server
   ];
+
+  programs = {
+    jq.enable = true;
+  };
 }
