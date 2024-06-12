@@ -56,7 +56,7 @@
         clock = {
           format = "{:%I:%M:%S %p}";
           interval = 1;
-          tooltip-format = "\n<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"; # TODO: check font name
+          tooltip-format = "\n<big>{:%Y %B}</big>\n<tt>{calendar}</tt>";
           calendar = {
             mode = "year";
             mode-mon-col = 3;
