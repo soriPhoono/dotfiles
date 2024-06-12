@@ -19,7 +19,7 @@
     ../../../../modules/home-manager/services/mpris-proxy.nix
   ];
 
-  home.programs = with pkgs; [
+  home.packages = with pkgs; [
     blender
   ];
 }
