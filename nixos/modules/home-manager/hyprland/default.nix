@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     # System
+    glib
     playerctl
     # Visuals
     brightnessctl # Brightness
