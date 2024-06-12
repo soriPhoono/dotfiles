@@ -48,6 +48,12 @@
     };
 
     # Per desktop inputs
+    plasma-manager = {
+      url = "github:pjones/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     ags.url = "github:Aylur/ags";
   };
 
