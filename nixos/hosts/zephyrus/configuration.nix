@@ -13,9 +13,8 @@
     ../../modules/nixos/hardware/opengl.nix
     ../../modules/nixos/hardware/xbox.nix
 
-    ../../modules/nixos/programs/gamemode.nix
     ../../modules/nixos/programs/gpg.nix
-    ../../modules/nixos/programs/steam.nix
+    ../../modules/nixos/programs/gaming.nix
 
     ../../modules/nixos/services/fprintd.nix
     ../../modules/nixos/services/openrgb.nix

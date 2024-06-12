@@ -12,7 +12,7 @@
       enableRenice = true;
     };
 
-    programs.gamescope = {
+    gamescope = {
       enable = true;
       capSysNice = true;
 
@@ -25,9 +25,9 @@
         "-fbe"
       ];
 
-      env = [
+      env = {
 
-      ];
+      };
     };
   };
 }
