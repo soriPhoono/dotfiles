@@ -3,7 +3,6 @@
     ./xdg-portal.nix
     ./gtk.nix
     ./qt.nix
-    ./playerctl.nix
     ./notifications.nix
     ./waybar.nix
 
