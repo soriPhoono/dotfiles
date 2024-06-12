@@ -1,5 +1,3 @@
-# TODO: configure dnsmasq
-
 { pkgs, vars, ... }: {
   networking = {
     networkmanager = {
