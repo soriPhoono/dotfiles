@@ -21,7 +21,7 @@ in
       };
     };
 
-    image = ../../../assets/wallpapers/2.jpg;
+    image = ../../../../assets/wallpapers/2.jpg;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
