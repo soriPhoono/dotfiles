@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     # Core development packages
     imagemagick
+    gparted
     mkdocs
 
     # Bash development deps
