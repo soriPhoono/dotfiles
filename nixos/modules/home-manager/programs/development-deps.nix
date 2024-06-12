@@ -21,11 +21,7 @@
     zls
 
     # Rust development deps
-    rustc
-    clippy
-    rustfmt
-    cargo
-    rust-analyzer
+    rustup
 
     # OpenJDK development deps
     jdk

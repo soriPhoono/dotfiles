@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{
   programs.plasma = {
     enable = true;
     shortcuts = {
@@ -237,7 +237,7 @@
       "kcminputrc"."Libinput/1267/12440/ELAN1201:00 04F3:3098 Touchpad"."ClickMethod" = 2;
       "kcminputrc"."Libinput/1267/12440/ELAN1201:00 04F3:3098 Touchpad"."NaturalScroll" = true;
       "kcminputrc"."Libinput/1267/12440/ELAN1201:00 04F3:3098 Touchpad"."PointerAccelerationProfile" = 1;
-      "kcminputrc"."Libinput/5426/171/Razer Razer Basilisk V3 Pro"."NaturalScroll" = true;
+      "kcminputrc"."Libinput/5426/171/Razer Razer Basilisk V3 Pro"."NaturalScroll" = false;
       "kcminputrc"."Libinput/5426/171/Razer Razer Basilisk V3 Pro"."PointerAccelerationProfile" = 1;
       "kded5rc"."Module-browserintegrationreminder"."autoload" = false;
       "kded5rc"."Module-device_automounter"."autoload" = false;
@@ -255,10 +255,10 @@
       "kglobalshortcutsrc"."kaccess"."_k_friendly_name" = "Accessibility";
       "kglobalshortcutsrc"."kcm_touchpad"."_k_friendly_name" = "Touchpad";
       "kglobalshortcutsrc"."kmix"."_k_friendly_name" = "Audio Volume";
-      "kglobalshortcutsrc"."ksmserver"."_k_friendly_name" = "KWin";
+      "kglobalshortcutsrc"."ksmserver"."_k_friendly_name" = "Session Management";
       "kglobalshortcutsrc"."kwin"."_k_friendly_name" = "KWin";
       "kglobalshortcutsrc"."mediacontrol"."_k_friendly_name" = "Media Controller";
-      "kglobalshortcutsrc"."org_kde_powerdevil"."_k_friendly_name" = "Power Management";
+      "kglobalshortcutsrc"."org_kde_powerdevil"."_k_friendly_name" = "KDE Power Management System";
       "kglobalshortcutsrc"."plasmashell"."_k_friendly_name" = "plasmashell";
       "kwalletrc"."Wallet"."First Use" = false;
       "kwinrc"."Desktops"."Id_1" = "fc525c66-b8e0-45bc-9ff3-2f6a3281f385";
