@@ -58,6 +58,7 @@
         "workbench.editor.editorActionsLocation" = "hidden";
 
         "editor.smoothScrolling" = true;
+        "editor.fontSize" = 16;
 
         "explorer.confirmDelete" = false;
 
