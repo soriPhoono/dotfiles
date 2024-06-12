@@ -42,6 +42,7 @@
     # GUI development tools
     logseq
     gimp
+    blender-hip
   ];
 
   programs = {
