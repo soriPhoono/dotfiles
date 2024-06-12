@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     inputs.plasma-manager.homeManagerModules.plasma-manager
 
@@ -13,9 +13,13 @@
     ../../../../modules/home-manager/programs/gaming.nix
     ../../../../modules/home-manager/programs/git.nix
     ../../../../modules/home-manager/programs/nvim.nix
+    ../../../../modules/home-manager/programs/utilities.nix
     ../../../../modules/home-manager/programs/vscode.nix
-    ../../../../modules/home-manager/programs/yt-dlp.nix
 
     ../../../../modules/home-manager/services/mpris-proxy.nix
+  ];
+
+  home.programs = with pkgs; [
+    blender
   ];
 }
