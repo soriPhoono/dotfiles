@@ -1,7 +1,7 @@
 { inputs }:
 let
-  stateVersion = "24.05";
   system = "x86_64-linux";
+  stateVersion = "24.05";
 
   pkgs = import inputs.nixpkgs {
     inherit system;
@@ -28,9 +28,10 @@ in
   zephyrus =
     let
       inherit system stateVersion;
+
       vars = {
         defaultUser = "soriphoono";
-        wallpaper_path = "~/Pictures/wallpapers/2.jpg";
+        wallpaper_path = ../../assets/wallpapers/1.jpg;
       };
     in
     (import ./zephyrus {
