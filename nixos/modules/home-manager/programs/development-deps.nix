@@ -3,6 +3,7 @@
     # Core development packages
     imagemagick
     unzip
+    unrar
     p7zip
     mkdocs
 
