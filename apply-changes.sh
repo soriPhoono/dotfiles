@@ -46,7 +46,7 @@ else
   echo "[INFO]: Building system configuration..."
 
   # Update the system
-  if [[ ! $(sudo nixos-rebuild build --flake ".#$system") ]]; then
+  if [[ ! $(sudo nixos-rebuild boot --flake ".#$system") ]]; then
     echo "[ERROR]: Changes could not be applied."
 
     exit 1
