@@ -25,6 +25,8 @@
     ../../modules/nixos/desktops/kde.nix
   ];
 
+  hardware.nvidia.open = true;
+
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
     HandleLidSwitch=suspend
