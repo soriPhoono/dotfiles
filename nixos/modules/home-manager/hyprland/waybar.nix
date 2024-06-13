@@ -88,7 +88,6 @@
           tooltip-format-enumerate-connected-battery = "{device_alias} ({device_battery_percentage}%)";
 
           on-click = "${pkgs.blueberry}/bin/blueberry";
-          # TODO: toggle bluetooth on right click
         };
 
         network = {

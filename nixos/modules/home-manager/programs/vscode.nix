@@ -4,7 +4,7 @@
       enable = true;
       package = pkgs.vscode;
 
-      # mutableExtensionsDir = false; # TODO: uncomment this when vscode setup is finished
+      mutableExtensionsDir = false; # TODO: uncomment this when vscode setup is finished
 
       extensions = with pkgs.vscode-extensions; [
         # Themes
@@ -13,12 +13,12 @@
         # Core extensions
         editorconfig.editorconfig
         christian-kohler.path-intellisense
+        gruntfuggly.todo-tree
 
-        # Copilot
+        visualstudioexptteam.vscodeintellicode
+        visualstudioexptteam.intellicode-api-usage-examples
+
         github.copilot
-
-        # Git support
-        eamodio.gitlens
 
         # Nix support
         jnoortheen.nix-ide
@@ -34,6 +34,7 @@
         sumneko.lua
 
         # C/C++
+        ms-vscode.cpptools
         ms-vscode.cmake-tools
         llvm-vs-code-extensions.vscode-clangd
         vadimcn.vscode-lldb
@@ -43,12 +44,53 @@
 
         # Rust
         rust-lang.rust-analyzer
+        tamasfe.even-better-toml
 
         # Java
-        vscjava.vscode-java-pack
+        redhat.java
+        vscjava.vscode-java-debug
+        vscjava.vscode-maven
+        vscjava.vscode-java-test
 
         # Python
         ms-python.python
+        ms-python.isort
+        ms-python.vscode-pylance
+        ms-python.debugpy
+
+        ms-toolsai.vscode-jupyter-cell-tags
+        ms-toolsai.jupyter-keymap
+        ms-toolsai.jupyter-renderers
+        ms-toolsai.vscode-jupyter-slideshow
+
+        # Ruby
+        shopify.ruby-lsp
+
+        # Go
+        golang.go
+
+        # Lua
+        sumneko.lua
+
+        # Flutter
+        dart-code.dart-code
+        dart-code.flutter
+
+        # JavaScript/TypeScript
+        vscjava.vscode-gradle
+        bradlc.vscode-tailwindcss
+        svelte.svelte-vscode
+
+        # XML
+        redhat.vscode-xml
+
+        # YAML
+        redhat.vscode-yaml
+
+        # Markdown
+        bierner.markdown-mermaid
+        bierner.markdown-emoji
+        bierner.markdown-checkbox
       ];
 
       userSettings = {

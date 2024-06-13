@@ -40,6 +40,7 @@
     nodePackages.typescript-language-server
 
     # GUI development tools
+    gitkraken
     logseq
     gimp
   ];

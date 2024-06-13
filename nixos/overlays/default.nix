@@ -8,7 +8,7 @@
         };
       }
     );
-  }) # Discord update system
+  }) # vscode update system
   (self: super: {
     discord = super.discord.overrideAttrs (
       _: {
