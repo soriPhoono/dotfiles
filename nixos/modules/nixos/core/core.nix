@@ -16,6 +16,8 @@
     firefox.enable = true;
   };
 
+  time.timeZone = "America/Chicago";
+
   users = {
     defaultUserShell = pkgs.fish;
     users = {
