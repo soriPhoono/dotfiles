@@ -1,5 +1,3 @@
-# TODO: add glib to home.packages
-
 { ... }: {
   services = {
     devmon.enable = true;
