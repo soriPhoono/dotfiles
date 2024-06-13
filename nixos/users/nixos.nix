@@ -9,8 +9,8 @@
     ../modules/home-manager/programs/fish.nix
     ../modules/home-manager/programs/git.nix
     ../modules/home-manager/programs/nvim.nix
-    ../modules/home-manager/programs/starship.nix
-    ../modules/home-manager/programs/yt-dlp.nix
+
+    ../modules/home-manager/themes/catppuccin.nix
   ];
 
   programs.home-manager.enable = true;

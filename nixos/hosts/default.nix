@@ -18,7 +18,7 @@ in
 
       vars = {
         defaultUser = "nixos";
-        wallpaper_path = "~/Pictures/wallpapers/2.jpg";
+        wallpaper_path = ../../assets/wallpapers/1.jpg;
       };
     in
     (import ./wsl {
