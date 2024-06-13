@@ -10,5 +10,10 @@
 
     libva-utils
     vdpauinfo
+    clinfo
+    glxinfo
+    vulkan-tools
+
+    wayland-utils
   ];
 }
