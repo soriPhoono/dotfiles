@@ -3,7 +3,8 @@
 # This script is used to apply changes to the system
 
 function confirm_exit() {
-  read -rp "Do you want to exit? [y/n] "
+  read -n 1 -rp "Do you want to exit? [y/n] "
+  echo
   if [[ $REPLY == "y" ]]; then
     exit 1
   fi
@@ -19,11 +20,12 @@ read -rp "Enter the system configuration name: " system
 if [[ $(git status --porcelain) ]]; then
   echo "[WARN]: There are uncommitted changes in the flake"
 
-  read -rp "Do you want to commit the changes? [y/n] "
+  read -n 1 -rp "Do you want to commit the changes? [y/n] "
+  echo
   if [[ $REPLY == "y" ]]; then
     git add -A
     read -rp "Enter the commit message: "
-    git commit -m $REPLY
+    git commit -m "$REPLY"
   fi
 fi
 
@@ -53,6 +55,12 @@ else
   # Wait till next reboot
   echo "Changes will be applied on the next reboot."
 fi
+
+echo "[INFO]: Cleaning up..."
+sudo nix-collect-garbage --delete-old
+
+echo "[INFO]: Done."
+echo "[INFO]: Exiting..."
 
 # Exit successfully
 exit 0

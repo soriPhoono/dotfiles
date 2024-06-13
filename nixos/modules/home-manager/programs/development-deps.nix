@@ -2,6 +2,8 @@
   home.packages = with pkgs; [
     # Core development packages
     imagemagick
+    unzip
+    p7zip
     mkdocs
 
     # Bash development deps
