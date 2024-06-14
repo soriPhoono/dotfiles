@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-# This script is used to apply changes to the system
-
 function confirm_exit() {
   read -n 1 -rp "Do you want to exit? [y/n] "
   echo

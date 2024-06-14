@@ -16,6 +16,7 @@
     ../../modules/nixos/programs/gpg.nix
     ../../modules/nixos/programs/gaming.nix
 
+    ../../modules/nixos/services/auto-cpufreq.nix
     ../../modules/nixos/services/fprintd.nix
     ../../modules/nixos/services/openrgb.nix
     ../../modules/nixos/services/openssh.nix
