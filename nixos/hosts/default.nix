@@ -12,19 +12,6 @@ let
   };
 in
 {
-  wsl =
-    let
-      inherit system stateVersion;
-
-      vars = {
-        defaultUser = "nixos";
-        wallpaper_path = ../../assets/wallpapers/1.jpg;
-      };
-    in
-    (import ./wsl {
-      inherit system inputs pkgs vars stateVersion;
-    });
-
   zephyrus =
     let
       inherit system stateVersion;
