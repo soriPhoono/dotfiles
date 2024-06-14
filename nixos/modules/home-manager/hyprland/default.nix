@@ -4,6 +4,7 @@
     ./gtk.nix
     ./qt.nix
     ./notifications.nix
+    ./alacritty.nix
     ./waybar.nix
 
     ./conf

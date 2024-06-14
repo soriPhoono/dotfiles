@@ -1,5 +1,82 @@
 { pkgs, ... }: {
+  home.packages = with pkgs; [
+    # Core development packages
+    imagemagick
+
+    unzip
+    unrar
+    p7zip
+
+    mkdocs
+
+    # C/C++ development deps
+    gcc
+    gdb
+    ninja
+    cmake
+
+    # Zig development deps
+    zig
+    zls
+
+    # Rust development deps
+    rustup
+
+    # OpenJDK development deps
+    jdk
+
+    # Python development deps
+    python3
+
+    # Web/JavaScript
+    sass
+
+    # GUI development tools
+    gitkraken
+    obsidian
+    gimp
+  ];
+
   programs = {
+    git = {
+      enable = true;
+
+      userName = "soriphoono";
+      userEmail = "soriphoono@gmail.com";
+
+      includes = [
+        # TODO: setup sops-nix to store school git data
+      ];
+
+      extraConfig = {
+        init.defaultBranch = "main";
+        url."git@github.com/" = {
+          insteadOf = [
+            "gh:"
+            "github:"
+          ];
+        };
+      };
+
+      delta = {
+        enable = true;
+
+        options = {
+          dark = true;
+          line-numbers = true;
+          side-by-side = true;
+          hyperlinks = true;
+
+          # TODO: add to nixpkgs the github repo open-in-editor and replace this line
+          hyperlinks-file-link-format = "vscode://file/{path}:{line}";
+
+          # true-color = "always";
+          diff.colorMoved = "default";
+          merge.conflictstyle = "diff3";
+        };
+      };
+    };
+
     vscode = {
       enable = true;
       package = pkgs.vscode;
@@ -27,20 +104,16 @@
         mads-hartmann.bash-ide-vscode
         foxundermoon.shell-format
 
-        # Haskell
-        haskell.haskell
-
         # Lua
         sumneko.lua
 
         # C/C++
         ms-vscode.cpptools
         ms-vscode.cmake-tools
-        llvm-vs-code-extensions.vscode-clangd
-        vadimcn.vscode-lldb
 
         # Zig
         ziglang.vscode-zig
+        vadimcn.vscode-lldb
 
         # Rust
         rust-lang.rust-analyzer
@@ -63,21 +136,14 @@
         ms-toolsai.jupyter-renderers
         ms-toolsai.vscode-jupyter-slideshow
 
-        # Ruby
-        shopify.ruby-lsp
-
         # Go
         golang.go
-
-        # Lua
-        sumneko.lua
 
         # Flutter
         dart-code.dart-code
         dart-code.flutter
 
         # JavaScript/TypeScript
-        vscjava.vscode-gradle
         bradlc.vscode-tailwindcss
         svelte.svelte-vscode
 
@@ -86,11 +152,6 @@
 
         # YAML
         redhat.vscode-yaml
-
-        # Markdown
-        bierner.markdown-mermaid
-        bierner.markdown-emoji
-        bierner.markdown-checkbox
       ];
 
       userSettings = {

@@ -5,7 +5,17 @@
 
       interactiveShellInit = ''
         set fish_greeting
+
+        fastfetch
       '';
+
+      shellAliases = {
+        ls = "eza";
+        ll = "eza -l";
+        lt = "eza -T";
+
+        cat = "bat";
+      };
     };
 
     starship = {
@@ -23,5 +33,21 @@
         };
       };
     };
+
+    fastfetch.enable = true;
+
+    eza = {
+      enable = true;
+
+      extraOptions = [
+        "--group-directories-first"
+        "--hyperlink"
+      ];
+
+      git = true;
+      icons = true;
+    };
+
+    bat.enable = true;
   };
 }
