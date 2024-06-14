@@ -44,7 +44,7 @@
 
     # GUI development tools
     gitkraken
-    logseq
+    obsidian
     gimp
   ];
 
