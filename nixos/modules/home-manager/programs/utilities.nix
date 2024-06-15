@@ -9,4 +9,6 @@
   programs = {
     yt-dlp.enable = true;
   };
+
+  # TODO: Setup torrent client
 }

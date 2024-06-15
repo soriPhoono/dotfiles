@@ -1,4 +1,8 @@
 { pkgs, vars, ... }: {
+  imports = [
+    ./boot
+  ];
+
   environment.systemPackages = with pkgs; [
     man
     man-pages

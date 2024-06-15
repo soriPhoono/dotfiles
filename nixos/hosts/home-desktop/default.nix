@@ -10,7 +10,7 @@ lib.nixosSystem {
   };
 
   modules = [
-    inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
+    # TODO: setup nixos-hardware for home-desktop
 
     ./configuration.nix
 
@@ -28,6 +28,7 @@ lib.nixosSystem {
           imports = [
             ../../users/${vars.defaultUser}.nix
             ./modules/kde.nix
+            ./modules/hyprland.nix
           ];
         };
       };

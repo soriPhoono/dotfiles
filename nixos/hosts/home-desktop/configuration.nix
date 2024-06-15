@@ -1,4 +1,4 @@
-{ pkgs, stateVersion, ... }: {
+{ stateVersion, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -15,7 +15,6 @@
     ../../modules/nixos/programs/gaming.nix
 
     ../../modules/nixos/services/auto-cpufreq.nix
-    ../../modules/nixos/services/fprintd.nix
     ../../modules/nixos/services/openrgb.nix
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
@@ -25,15 +24,11 @@
     ../../modules/nixos/desktops/kde.nix
   ];
 
-  hardware.nvidia.open = true;
-
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
     HandleLidSwitch=suspend
     HandleLidSwitchExternalPower=suspend
   '';
-
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
   system.stateVersion = "${stateVersion}";
 }

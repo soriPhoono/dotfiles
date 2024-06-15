@@ -13,6 +13,9 @@
     ../../../../modules/home-manager/programs/utilities.nix
 
     ../../../../modules/home-manager/services/mpris-proxy.nix
+
+    ../../../../modules/home-manager/kde
+    ../../../../modules/home-manager/hyprland
   ];
 
   home.packages = with pkgs; [
