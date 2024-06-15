@@ -9,6 +9,7 @@
     ../../../../modules/home-manager/programs/git.nix
     ../../../../modules/home-manager/programs/development.nix
     ../../../../modules/home-manager/programs/gaming.nix
+    ../../../../modules/home-manager/programs/streaming.nix
     ../../../../modules/home-manager/programs/utilities.nix
 
     ../../../../modules/home-manager/services/mpris-proxy.nix
