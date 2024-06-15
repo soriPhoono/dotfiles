@@ -21,6 +21,7 @@
     ../../modules/nixos/services/openrgb.nix
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
+    ../../modules/nixos/services/printing.nix
     ../../modules/nixos/services/zram-generator.nix
 
     ../../modules/nixos/desktops/kde.nix
