@@ -1,4 +1,9 @@
-{ ... }: {
+{ pkgs, ... }: {
+  home.packages = with pkgs; [
+    dua-cli
+    duf
+  ];
+
   programs = {
     fish = {
       enable = true;
@@ -15,6 +20,9 @@
         lt = "eza -T";
 
         cat = "bat";
+
+        df = "duf";
+        du = "dua i";
       };
     };
 

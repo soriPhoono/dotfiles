@@ -13,7 +13,7 @@
     ../../modules/nixos/hardware/opengl.nix
     ../../modules/nixos/hardware/xbox.nix
 
-    ../../modules/nixos/programs/gpg.nix
+    ../../modules/nixos/programs
     ../../modules/nixos/programs/gaming.nix
 
     ../../modules/nixos/services/auto-cpufreq.nix
