@@ -19,16 +19,6 @@
       }
     );
   }) # Discord update system
-  (self: super: {
-    path-of-building = super.path-of-building.overrideAttrs (
-      _: {
-        src = builtins.fetchTarball {
-          url = "https://github.com/PathOfBuildingCommunity/PathOfBuilding/archive/refs/tags/v2.42.0.tar.gz";
-          sha256 = "";
-        };
-      }
-    );
-  })
   (final: prev: {
     nerdfonts = prev.nerdfonts.override {
       fonts = [

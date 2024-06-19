@@ -16,6 +16,7 @@
     gdb
     ninja
     cmake
+    meson
 
     # Zig development deps
     zig
