@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 
-function confirm_exit() {
-  read -n 1 -rp "[INFO] Do you want to exit? [y/n] "
-  echo
-  if [[ $REPLY == "y" ]]; then
-    exit 1
-  fi
-}
-
-trap confirm_exit SIGINT
+source scripts/util.sh
 
 # Get the system configuration name from the flake
 nix flake show | grep "NixOS configuration" | awk '{print $2}'
