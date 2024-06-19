@@ -32,7 +32,6 @@
           # TODO: add to nixpkgs the github repo open-in-editor and replace this line
           hyperlinks-file-link-format = "vscode://file/{path}:{line}";
 
-          # true-color = "always";
           diff.colorMoved = "default";
           merge.conflictstyle = "diff3";
         };

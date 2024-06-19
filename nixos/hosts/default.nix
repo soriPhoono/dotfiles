@@ -24,4 +24,17 @@ in
     (import ./zephyrus {
       inherit system inputs pkgs vars stateVersion;
     });
+
+  home-desktop =
+    let
+      inherit system stateVersion;
+
+      vars = {
+        defaultUser = "soriphoono";
+        wallpaper_path = ../../assets/wallpapers/1.jpg;
+      };
+    in
+    (import ./home-desktop {
+      inherit system inputs pkgs vars stateVersion;
+    });
 }

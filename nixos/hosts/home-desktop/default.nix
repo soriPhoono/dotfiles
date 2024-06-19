@@ -28,7 +28,6 @@ lib.nixosSystem {
           imports = [
             ../../users/${vars.defaultUser}.nix
             ./modules/kde.nix
-            ./modules/hyprland.nix
           ];
         };
       };
