@@ -11,6 +11,7 @@
     ../../modules/nixos/hardware/i2c.nix
     ../../modules/nixos/hardware/logitech.nix
     ../../modules/nixos/hardware/opengl.nix
+    ../../modules/nixos/hardware/qmk.nix
     ../../modules/nixos/hardware/xbox.nix
 
     ../../modules/nixos/programs

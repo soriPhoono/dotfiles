@@ -9,6 +9,8 @@
 
     mkdocs
 
+    qmk
+
     # C/C++ development deps
     gcc
     gdb
