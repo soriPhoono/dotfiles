@@ -4,7 +4,7 @@
       _: {
         src = builtins.fetchTarball {
           url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64";
-          sha256 = "1q6ajy7kn6dxh07gcnwz5bz90sqqyy3w515g73p2vmnkr940agrq";
+          sha256 = "0k1sh8v3fnfpdc16y0ci00c7y9fadkr1sy676l3wgy3jhwbihwr2";
         };
       }
     );
@@ -14,7 +14,7 @@
       _: {
         src = builtins.fetchTarball {
           url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-          sha256 = "00rhcra846m6walm10y4352c3gibd4p82czsvklgafbcxs84zndq";
+          sha256 = "0k9sk5pmjw7xq68h2s80q8fg48p31albrqrqafmmrxik5f8f96rn";
         };
       }
     );

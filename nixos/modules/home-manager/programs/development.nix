@@ -77,6 +77,14 @@
       };
     };
 
+    nixvim = {
+      enable = true;
+
+      defaultEditor = true;
+
+      colorschemes.catppuccin.enable = true;
+    };
+
     vscode = {
       enable = true;
       package = pkgs.vscode;
