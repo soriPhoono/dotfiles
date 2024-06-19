@@ -8,6 +8,8 @@
     ../../modules/nixos/core/network-manager.nix
 
     ../../modules/nixos/hardware/bluetooth.nix
+    ../../modules/nixos/hardware/i2c.nix
+    ../../modules/nixos/hardware/logitech.nix
     ../../modules/nixos/hardware/opengl.nix
     ../../modules/nixos/hardware/xbox.nix
 
@@ -19,6 +21,7 @@
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
     ../../modules/nixos/services/printing.nix
+    ../../modules/nixos/services/ratbagd.nix
     ../../modules/nixos/services/zram-generator.nix
 
     ../../modules/nixos/desktops/kde.nix
