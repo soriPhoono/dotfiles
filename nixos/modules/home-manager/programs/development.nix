@@ -56,6 +56,7 @@
             "github:"
           ];
         };
+        pull.rebase = false;
       };
 
       delta = {
