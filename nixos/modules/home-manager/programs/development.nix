@@ -1,8 +1,4 @@
-{ inputs, pkgs, ... }: {
-  imports = [
-    inputs.nixvim.homeManagerModules.nixvim
-  ];
-
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     # Core development packages
     imagemagick
@@ -78,32 +74,6 @@
           diff.colorMoved = "default";
           merge.conflictstyle = "diff3";
         };
-      };
-    };
-
-    nixvim = {
-      enable = true;
-
-      defaultEditor = true;
-
-      colorschemes.catppuccin.enable = true;
-
-      plugins = {
-        startify.enable = true;
-        lualine.enable = true;
-        neotree.enable = true;
-        telescope.enable = true;
-        tagbar.enable = true;
-        floatterm.enable = true;
-        undotree.enable = true;
-
-        nvim-autopairs = true;
-        commentary.enable = true;
-        surround.enable = true;
-        treesitter.enable = true;
-
-        cmp.enable = true;
-        cmp-buffer.enable = true;
       };
     };
 
