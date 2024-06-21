@@ -47,18 +47,11 @@
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
-  environment = {
-    sessionVariables = {
-      KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card2";
+  environment.sessionVariables = {
+    KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card2";
 
-      LIBVA_DRIVER_NAME = "iHD";
-      VDPAU_DRIVER = "va_gl";
-    };
-
-    systemPackages = with pkgs; [
-      intel-gpu-tools
-      radeontop
-    ];
+    LIBVA_DRIVER_NAME = "iHD";
+    VDPAU_DRIVER = "va_gl";
   };
 
   system.stateVersion = "${stateVersion}";

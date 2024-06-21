@@ -17,6 +17,8 @@
   ];
 
   home.packages = with pkgs; [
+    intel-gpu-tools
+
     blender-hip
   ];
 }
