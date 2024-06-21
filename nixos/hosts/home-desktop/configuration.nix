@@ -1,4 +1,4 @@
-{ stateVersion, ... }: {
+{ pkgs, stateVersion, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -10,7 +10,6 @@
     ../../modules/nixos/hardware/bluetooth.nix
     ../../modules/nixos/hardware/i2c.nix
     ../../modules/nixos/hardware/logitech.nix
-    ../../modules/nixos/hardware/opengl.nix
     ../../modules/nixos/hardware/qmk.nix
     ../../modules/nixos/hardware/xbox.nix
 
@@ -22,17 +21,32 @@
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
     ../../modules/nixos/services/printing.nix
-    ../../modules/nixos/services/ratbagd.nix
     ../../modules/nixos/services/zram-generator.nix
 
     ../../modules/nixos/desktops/kde.nix
   ];
 
-  services.logind.extraConfig = ''
-    HandlePowerKey=ignore
-    HandleLidSwitch=suspend
-    HandleLidSwitchExternalPower=suspend
-  '';
+  hardware.opengl = {
+    enable = true;
+
+    driSupport = true;
+    driSupport32Bit = true;
+
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vaapiVdpau
+      libvdpau-va-gl
+
+      intel-compute-runtime
+
+      rocmPackages.clr.icd
+    ];
+  };
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+    VDPAU_DRIVER = "va_gl";
+  };
 
   system.stateVersion = "${stateVersion}";
 }

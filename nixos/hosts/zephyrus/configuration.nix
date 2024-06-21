@@ -25,7 +25,15 @@
     ../../modules/nixos/desktops/kde.nix
   ];
 
-  hardware.nvidia.open = true;
+  hardware = {
+    nvidia.open = true;
+
+    opengl = {
+      enable = true;
+
+      driSupport32Bit = true;
+    };
+  };
 
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
