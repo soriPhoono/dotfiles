@@ -2,7 +2,7 @@
   imports = [
     ./boot
 
-    ./filesystem.nix
+    ./file-system.nix
     ./localization.nix
     ./network-manager.nix
   ];

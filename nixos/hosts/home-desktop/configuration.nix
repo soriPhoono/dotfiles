@@ -4,7 +4,6 @@
 
     ../../modules/nixos/core
     ../../modules/nixos/hardware
-    ../../modules/nixos/programs
 
     ../../modules/nixos/programs/gnupg.nix
     ../../modules/nixos/programs/gaming.nix
