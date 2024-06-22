@@ -4,6 +4,7 @@
 
     ../../modules/nixos/core
     ../../modules/nixos/hardware
+    ../../modules/nixos/hardware/fancontrol.nix
 
     ../../modules/nixos/programs/gnupg.nix
     ../../modules/nixos/programs/gaming.nix
@@ -18,21 +19,25 @@
     ../../modules/nixos/desktops/kde.nix
   ];
 
-  hardware.opengl = {
-    enable = true;
+  hardware = {
+    opengl = {
+      enable = true;
 
-    driSupport = true;
-    driSupport32Bit = true;
+      driSupport = true;
+      driSupport32Bit = true;
 
-    extraPackages = with pkgs; [
-      intel-media-driver
-      vaapiVdpau
-      libvdpau-va-gl
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
 
-      intel-compute-runtime
+        intel-compute-runtime
 
-      rocmPackages.clr.icd
-    ];
+        rocmPackages.clr.icd
+      ];
+    };
+
+    intel-gpu-tools.enable = true;
   };
 
   systemd.tmpfiles.rules = [
