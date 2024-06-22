@@ -13,7 +13,6 @@
     clinfo
     glxinfo
     vulkan-tools
-
     wayland-utils
   ];
 }

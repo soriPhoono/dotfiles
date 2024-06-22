@@ -10,8 +10,6 @@ lib.nixosSystem {
   };
 
   modules = [
-    # TODO: setup nixos-hardware for home-desktop
-
     ./configuration.nix
 
     inputs.home-manager.nixosModules.home-manager

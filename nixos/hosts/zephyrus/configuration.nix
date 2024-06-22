@@ -1,17 +1,13 @@
+# TODO: Setup vaapi on zephyrus laptop, cuda too
+
 { pkgs, stateVersion, ... }: {
   imports = [
     ./hardware-configuration.nix
 
     ../../modules/nixos/core
-    ../../modules/nixos/core/file-system.nix
-    ../../modules/nixos/core/localization.nix
-    ../../modules/nixos/core/network-manager.nix
+    ../../modules/nixos/hardware
 
-    ../../modules/nixos/hardware/bluetooth.nix
-    ../../modules/nixos/hardware/opengl.nix
-    ../../modules/nixos/hardware/xbox.nix
-
-    ../../modules/nixos/programs
+    ../../modules/nixos/programs/gnupg.nix
     ../../modules/nixos/programs/gaming.nix
 
     ../../modules/nixos/services/auto-cpufreq.nix

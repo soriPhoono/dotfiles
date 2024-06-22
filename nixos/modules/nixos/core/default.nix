@@ -1,6 +1,10 @@
 { pkgs, vars, ... }: {
   imports = [
     ./boot
+
+    ./filesystem.nix
+    ./localization.nix
+    ./network-manager.nix
   ];
 
   environment.systemPackages = with pkgs; [

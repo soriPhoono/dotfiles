@@ -18,7 +18,7 @@ in
 
       vars = {
         defaultUser = "soriphoono";
-        wallpaper_path = ../../assets/wallpapers/1.jpg;
+        wallpaper_path = ../../assets/wallpapers/2.jpg;
       };
     in
     (import ./zephyrus {
@@ -31,7 +31,7 @@ in
 
       vars = {
         defaultUser = "soriphoono";
-        wallpaper_path = ../../assets/wallpapers/1.jpg;
+        wallpaper_path = ../../assets/wallpapers/2.jpg;
       };
     in
     (import ./home-desktop {
