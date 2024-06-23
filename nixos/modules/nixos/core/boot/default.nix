@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   imports = [
     ./systemd-boot.nix
-    # ./plymouth.nix
+    ./plymouth.nix
   ];
 
   boot = {
