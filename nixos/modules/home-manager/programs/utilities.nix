@@ -4,6 +4,8 @@
 
     discord
     betterdiscordctl
+
+    google-chrome
   ];
 
   programs = {

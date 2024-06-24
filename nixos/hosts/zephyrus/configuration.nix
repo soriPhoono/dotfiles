@@ -1,5 +1,3 @@
-# TODO: Setup vaapi on zephyrus laptop, cuda too
-
 { pkgs, stateVersion, ... }: {
   imports = [
     ./hardware-configuration.nix
@@ -28,6 +26,8 @@
       enable = true;
 
       driSupport32Bit = true;
+
+      # TODO: setup vaapi/vdpau/cuda/nvdec/nvenc
     };
   };
 
