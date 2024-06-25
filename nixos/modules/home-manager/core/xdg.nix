@@ -1,4 +1,8 @@
 { ... }: {
+  imports = [
+    ./xdg-user-dirs.nix
+  ];
+
   xdg = {
     enable = true;
 
