@@ -1,19 +1,10 @@
-{ pkgs, vars, ... }: {
+{ vars, ... }: {
   networking = {
     networkmanager = {
       enable = true;
 
-      plugins = with pkgs; [
-        networkmanager-openvpn
-        networkmanager-openconnect
-      ];
-
-      ethernet.macAddress = "random";
-
       wifi = {
         powersave = false;
-
-        macAddress = "random";
       };
     };
   };
