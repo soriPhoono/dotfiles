@@ -8,7 +8,6 @@
     ../../modules/nixos/programs/gnupg.nix
     ../../modules/nixos/programs/gaming.nix
 
-    ../../modules/nixos/services/auto-cpufreq.nix
     ../../modules/nixos/services/openrgb.nix
     ../../modules/nixos/services/openssh.nix
     ../../modules/nixos/services/pipewire.nix
@@ -19,11 +18,9 @@
   ];
 
   hardware = {
-    opengl = {
+    graphics = {
       enable = true;
-
-      driSupport = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
 
       extraPackages = with pkgs; [
         intel-media-driver

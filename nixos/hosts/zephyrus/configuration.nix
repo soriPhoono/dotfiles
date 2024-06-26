@@ -8,7 +8,6 @@
     ../../modules/nixos/programs/gnupg.nix
     ../../modules/nixos/programs/gaming.nix
 
-    ../../modules/nixos/services/auto-cpufreq.nix
     ../../modules/nixos/services/fprintd.nix
     ../../modules/nixos/services/openrgb.nix
     ../../modules/nixos/services/openssh.nix
@@ -22,10 +21,9 @@
   hardware = {
     nvidia.open = true;
 
-    opengl = {
+    graphics = {
       enable = true;
-
-      driSupport32Bit = true;
+      enable32Bit = true;
 
       # TODO: setup vaapi/vdpau/cuda/nvdec/nvenc
     };
