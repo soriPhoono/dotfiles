@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, vars, ... }: {
   home.packages = with pkgs; [
     # Core development packages
     imagemagick
@@ -40,6 +40,15 @@
     gimp
   ];
 
+  virtualisation.libvirtd.enable = true;
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
+  };
+  users.users.${vars.defaultUser}.extraGroups = [ "libvirtd" ];
+
   programs = {
     git = {
       enable = true;
@@ -80,6 +89,8 @@
         };
       };
     };
+
+    virt-manager.enable = true;
 
     vscode = {
       enable = true;
