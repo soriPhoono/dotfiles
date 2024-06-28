@@ -107,8 +107,8 @@
           "<esc>" = ":noh<CR>";
 
           # close via ctrl-q, save via ctrl-s
-          "<C-q>" = ":close<CR>";
-          "<C-s>" = ":w<CR>";
+          "<leader>q" = ":close<CR>";
+          "<leader>s" = ":w<CR>";
 
           # navigate to left/right window
           "<leader>Left" = "<C-w>h";
@@ -126,7 +126,7 @@
           "<M-Down>" = ":move+<CR>";
 
           # plugins
-          "<C-e>" = ":NeoTree";
+          "<C-e>" = ":NeoTree<CR>";
         };
       in
         config.nixvim.helpers.keymaps.mkKeymaps
