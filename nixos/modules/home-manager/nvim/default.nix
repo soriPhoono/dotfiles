@@ -32,7 +32,7 @@
     colorschemes.catppuccin = {
       enable = true;
 
-      settings.transparent_background.enable = true;
+      settings.transparent_background = true;
     };
 
     highlight = {

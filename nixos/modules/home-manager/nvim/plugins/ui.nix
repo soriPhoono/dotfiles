@@ -1,5 +1,7 @@
 { ... }: {
   programs.nixvim.plugins = {
+    zen-mode.enable = true;
+
     gitsigns = {
       enable = true;
       settings.signs = {
@@ -116,6 +118,22 @@
       enable = true;
       settings.width = 50;
     };
+
+    which-key.enable = true;
+
+    trim = {
+        enable = true;
+        settings = {
+          highlight = true;
+          ft_blocklist = [
+            "checkhealth"
+            "floaterm"
+            "lspinfo"
+            "neo-tree"
+            "TelescopePrompt"
+          ];
+        };
+      };
 
     startify = {
       enable = true;

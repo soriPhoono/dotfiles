@@ -1,37 +1,5 @@
-{ inputs, lib, config, ... }: {
-  programs.nixvim = {
-    plugins = {
-      markdown-preview = {
-        enable = true;
-
-        settings = {
-          auto_close = false;
-          theme = "dark";
-        };
-      };
-
-      treesitter = {
-        enable = true;
-
-        nixvimInjections = true;
-
-        folding = true;
-        indent = true;
-      };
-
-      treesitter-refactor = {
-        enable = true;
-        highlightDefinitions = {
-          enable = true;
-          # Set to false if you have an `updatetime` of ~100.
-          clearOnCursorMove = false;
-        };
-      };
-
-      hmts.enable = true;
-
-      luasnip.enable = true;
-
+{ ... }: {
+  programs.nixvim.plugins = {
       lspkind = {
         enable = true;
 
@@ -49,6 +17,8 @@
           };
         };
       };
+
+      luasnip.enable = true;
 
       cmp = {
         enable = true;
@@ -79,38 +49,7 @@
           ];
         };
       };
-
-      comment = {
-        enable = true;
-
-        settings = {
-          opleader.line = "<C-b>";
-          toggler.line = "<C-b>";
-        };
-      };
-
-      nvim-autopairs.enable = true;
-
-      nvim-colorizer = {
-        enable = true;
-        userDefaultOptions.names = false;
-      };
-
-      trim = {
-        enable = true;
-        settings = {
-          highlight = true;
-          ft_blocklist = [
-            "checkhealth"
-            "floaterm"
-            "lspinfo"
-            "neo-tree"
-            "TelescopePrompt"
-          ];
-        };
-      };
-
-      lsp = {
+    lsp = {
         enable = true;
 
         keymaps = {
@@ -147,19 +86,6 @@
 
       lsp-format = {
         enable = true;
-
-        lspServersToEnable = [  ];
       };
-    };
-
-    files = {
-      "after/ftplugin/markdown.lua".keymaps = [
-        {
-          mode = "n";
-          key = "<leader>m";
-          action = ":MarkdownPreview<cr>";
-        }
-      ];
-    };
   };
 }
