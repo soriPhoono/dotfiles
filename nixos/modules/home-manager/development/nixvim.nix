@@ -52,7 +52,7 @@
 
       cursorline = false;
       cursorcolumn = false;
-      signcolumn = true;
+      signcolumn = "yes";
       colorcolumn = "100";
 
       laststatus = 3;
