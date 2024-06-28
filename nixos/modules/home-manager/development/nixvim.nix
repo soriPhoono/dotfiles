@@ -96,7 +96,7 @@
     ];
 
     keymaps = let
-      normal =
+      normal_keymap =
         lib.mapAttrsToList
         (key: action: {
           mode = "n";
@@ -128,13 +128,14 @@
 
           # plugins
           "<leader>e" = ":Neotree reveal toggle<CR>";
+          "<leader>g" = ":TagbarToggle<CR>";
         };
       in
         config.nixvim.helpers.keymaps.mkKeymaps
         {
           options.silent = true;
         }
-        (normal);
+        (normal_keymap);
 
     colorschemes.catppuccin = {
       enable = true;
@@ -168,6 +169,11 @@
 
           position = "float";
         };
+      };
+
+      tagbar = {
+        enable = true;
+        settings.width = 50;
       };
 
       markdown-preview = {
@@ -210,9 +216,56 @@
         };
       };
 
-      telescope.enable = true;
+      telescope = {
+        enable = true;
 
-      treesitter.enable = true;
+        keymaps = {
+          # Find files using Telescope command-line sugar.
+          "<leader>ff" = "find_files";
+          "<leader>fg" = "live_grep";
+          "<leader>b" = "buffers";
+          "<leader>fh" = "help_tags";
+          "<leader>fd" = "diagnostics";
+
+          # FZF like bindings
+          "<C-p>" = "git_files";
+          "<leader>p" = "oldfiles";
+          "<C-f>" = "live_grep";
+        };
+
+        settings.defaults = {
+          file_ignore_patterns = [
+            "^.git/"
+            "^.mypy_cache/"
+            "^__pycache__/"
+            "^output/"
+            "^data/"
+            "%.ipynb"
+          ];
+          set_env.COLORTERM = "truecolor";
+        };
+      };
+
+      treesitter = {
+        enable = true;
+
+        nixvimInjections = true;
+
+        folding = true;
+        indent = true;
+      };
+
+      treesitter-refactor = {
+        enable = true;
+        highlightDefinitions = {
+          enable = true;
+          # Set to false if you have an `updatetime` of ~100.
+          clearOnCursorMove = false;
+        };
+      };
+
+      hmts.enable = true;
+
       luasnip.enable = true;
 
       lspkind = {
@@ -407,6 +460,37 @@
         enable = true;
 
         lspServersToEnable = [  ];
+      };
+
+      startify = {
+        enable = true;
+
+        settings = {
+          custom_header = [
+            ""
+            "     ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
+            "     ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
+            "     ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
+            "     ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
+            "     ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
+            "     ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
+          ];
+
+          # When opening a file or bookmark, change to its directory.
+          change_to_dir = false;
+
+          # By default, the fortune header uses ASCII characters, because they work for everyone.
+          # If you set this option to 1 and your 'encoding' is "utf-8", Unicode box-drawing characters will
+          # be used instead.
+          use_unicode = true;
+
+          lists = [{type = "dir";}];
+          files_number = 30;
+
+          skiplist = [
+            "flake.lock"
+          ];
+        };
       };
     };
 
