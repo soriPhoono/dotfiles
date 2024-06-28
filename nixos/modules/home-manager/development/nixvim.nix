@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, lib, config, ... }: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
   ];
@@ -174,7 +174,7 @@
             luasnip = "[snip]";
             buffer = "[buffer]";
             neorg = "[neorg]";
-            cmp_tabby = "[Tabby]";
+            cmp_tabby = "[Tabby]";
           };
         };
       };
