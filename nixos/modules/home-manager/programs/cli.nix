@@ -57,5 +57,6 @@
     };
 
     bat.enable = true;
+    ripgrep.enable = true;
   };
 }
