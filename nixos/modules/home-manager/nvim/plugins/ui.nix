@@ -1,7 +1,5 @@
 { ... }: {
   programs.nixvim.plugins = {
-    zen-mode.enable = true;
-
     gitsigns = {
       enable = true;
       settings.signs = {
@@ -55,13 +53,23 @@
       };
     };
 
-    barbar = {
+    bufferline = {
       enable = true;
-      keymaps = {
-        next.key = "<TAB>";
-        previous.key = "<S-TAB>";
-        close.key = "<C-w>";
-      };
+
+      separatorStyle = "padded_slant";
+
+      diagnostics = "nvim_lsp";
+      diagnosticsIndicator = ''
+        function(count, level, diagnostics_dict, context)
+            local s = " "
+            for e, n in pairs(diagnostics_dict) do
+                local sym = e == "error" and " "
+                or (e == "warning" and " " or "" )
+                s = s .. n .. sym
+            end
+            return s
+        end
+      '';
     };
 
     neo-tree = {
