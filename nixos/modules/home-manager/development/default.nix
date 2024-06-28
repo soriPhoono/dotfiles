@@ -1,7 +1,8 @@
 { pkgs, ... }: {
   imports = [
     ./git.nix
-    ./nixvim.nix
+
+    ../nvim
   ];
 
   home.packages = with pkgs; [
