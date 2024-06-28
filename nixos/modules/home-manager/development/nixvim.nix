@@ -107,8 +107,9 @@
           "<esc>" = ":noh<CR>";
 
           # close via ctrl-q, save via ctrl-s
+          "<C-q>" = ":qa<CR>";
           "<leader>q" = ":close<CR>";
-          "<leader>s" = ":w<CR>";
+          "<leader>w" = ":w<CR>";
 
           # navigate to left/right window
           "<leader>Left" = "<C-w>h";
@@ -126,11 +127,13 @@
           "<M-Down>" = ":move+<CR>";
 
           # plugins
-          "<C-e>" = ":NeoTree<CR>";
+          "<leader>e" = ":Neotree reveal toggle<CR>";
         };
       in
         config.nixvim.helpers.keymaps.mkKeymaps
-        {options.silent = true;}
+        {
+          options.silent = true;
+        }
         (normal);
 
     colorschemes.catppuccin = {
@@ -157,6 +160,54 @@
         enable = true;
 
         popupBorderStyle = "rounded";
+        closeIfLastWindow = true;
+
+        window = {
+          width = 30;
+          autoExpandWidth = true;
+
+          position = "float";
+        };
+      };
+
+      markdown-preview = {
+        enable = true;
+
+        settings = {
+          auto_close = false;
+          theme = "dark";
+        };
+      };
+
+      neorg = {
+        enable = false; # TODO re-enable when neorg is fixed
+
+        modules = {
+          "core.defaults".__empty = null;
+
+          "core.keybinds".config.hook.__raw = ''
+            function(keybinds)
+              keybinds.unmap('norg', 'n', '<C-s>')
+
+              keybinds.map(
+                'norg',
+                'n',
+                '<leader>c',
+                ':Neorg toggle-concealer<CR>',
+                {silent=true}
+              )
+            end
+          '';
+
+          "core.dirman".config.workspaces = {
+            notes = "~/notes";
+            nix = "~/perso/nix/notes";
+          };
+
+          "core.concealer".__empty = null;
+          "core.completion".config.engine = "nvim-cmp";
+          "core.qol.toc".config.close_after_use = true;
+        };
       };
 
       telescope.enable = true;
@@ -250,6 +301,134 @@
             "TelescopePrompt"
           ];
         };
+      };
+
+      barbar = {
+        enable = true;
+        keymaps = {
+          next.key = "<TAB>";
+          previous.key = "<S-TAB>";
+          close.key = "<C-w>";
+        };
+      };
+
+      lualine = {
+        enable = true;
+
+        globalstatus = true;
+
+        # +-------------------------------------------------+
+        # | A | B | C                             X | Y | Z |
+        # +-------------------------------------------------+
+        sections = {
+          lualine_a = ["mode"];
+          lualine_b = ["branch"];
+          lualine_c = ["filename" "diff"];
+
+          lualine_x = [
+            "diagnostics"
+
+            # Show active language server
+            {
+              name.__raw = ''
+                function()
+                    local msg = ""
+                    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+                    local clients = vim.lsp.get_active_clients()
+                    if next(clients) == nil then
+                        return msg
+                    end
+                    for _, client in ipairs(clients) do
+                        local filetypes = client.config.filetypes
+                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                            return client.name
+                        end
+                    end
+                    return msg
+                end
+              '';
+              icon = "";
+              color.fg = "#ffffff";
+            }
+            "encoding"
+            "fileformat"
+            "filetype"
+          ];
+        };
+      };
+
+      floaterm = {
+        enable = true;
+
+        width = 0.8;
+        height = 0.8;
+
+        title = "";
+
+        keymaps.toggle = "<leader>,";
+      };
+
+      lsp = {
+        enable = true;
+
+        keymaps = {
+          silent = true;
+
+          diagnostic = {
+            "<C-Left>" = "goto_prev";
+            "<C-Right>" = "goto_next";
+          };
+
+          lspBuf = {
+            gd = "definition";
+            gD = "references";
+            gt = "type_definition";
+            gi = "implementation";
+            K = "hover";
+            "<F2>" = "rename";
+          };
+        };
+
+        servers = {
+          nil-ls.enable = true;
+          bashls.enable = true;
+
+          clangd.enable = true;
+          cmake.enable = true;
+
+          dartls.enable = true;
+
+          cssls.enable = true;
+          denols.enable = true;
+        };
+      };
+
+      lsp-format = {
+        enable = true;
+
+        lspServersToEnable = [  ];
+      };
+    };
+
+    files = {
+      "after/ftplugin/markdown.lua".keymaps = [
+        {
+          mode = "n";
+          key = "<leader>m";
+          action = ":MarkdownPreview<cr>";
+        }
+      ];
+      "after/ftplugin/norg.lua" = {
+        localOpts.conceallevel = 1;
+
+        keymaps = [
+          {
+            mode = "n";
+            key = "<C-g>";
+            action = ":Neorg toc<CR>";
+            options.silent = true;
+          }
+        ];
       };
     };
   };
