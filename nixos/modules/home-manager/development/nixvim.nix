@@ -111,8 +111,8 @@
           "<C-s>" = ":w<CR>";
 
           # navigate to left/right window
-          "<leader>h" = "<C-w>h";
-          "<leader>l" = "<C-w>l";
+          "<leader>Left" = "<C-w>h";
+          "<leader>Right" = "<C-w>l";
 
           # resize with arrows
           "<C-Up>" = ":resize -2<CR>";
@@ -122,8 +122,11 @@
 
           # move current line up/down
           # M = Alt key
-          "<M-k>" = ":move-2<CR>";
-          "<M-j>" = ":move+<CR>";
+          "<M-Up>" = ":move-2<CR>";
+          "<M-Down>" = ":move+<CR>";
+
+          # plugins
+          "<C-e>" = ":NeoTree"
         };
       in
         config.nixvim.helpers.keymaps.mkKeymaps
