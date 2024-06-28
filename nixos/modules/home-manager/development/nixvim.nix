@@ -126,7 +126,7 @@
           "<M-Down>" = ":move+<CR>";
 
           # plugins
-          "<C-e>" = ":NeoTree"
+          "<C-e>" = ":NeoTree";
         };
       in
         config.nixvim.helpers.keymaps.mkKeymaps
