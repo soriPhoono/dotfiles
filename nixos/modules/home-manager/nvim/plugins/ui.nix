@@ -89,6 +89,20 @@
           };
         };
 
+        offsets = [
+          {
+            filetype = "Neotree";
+            text = ''
+              function()
+                  return vim.fn.getcwd()
+              end
+            '';
+            text_align = "left";
+            highlight = "Directory";
+            separator = true;
+          }
+        ];
+
         separatorStyle = "slant";
 
         diagnostics = "nvim_lsp";
@@ -111,14 +125,11 @@
       neo-tree = {
         enable = true;
 
-        popupBorderStyle = "rounded";
         closeIfLastWindow = true;
 
         window = {
           width = 30;
           autoExpandWidth = true;
-
-          position = "float";
         };
       };
 
@@ -138,11 +149,11 @@
 
         keymaps = {
           # Find files using Telescope command-line sugar.
-          "<leader>ff" = "find_files";
-          "<leader>fg" = "live_grep";
+          "<leader>f" = "find_files";
+          "<leader>g" = "live_grep";
           "<leader>b" = "buffers";
-          "<leader>fh" = "help_tags";
-          "<leader>fd" = "diagnostics";
+          "<leader>h" = "help_tags";
+          "<leader>d" = "diagnostics";
         };
 
         settings.defaults = {
