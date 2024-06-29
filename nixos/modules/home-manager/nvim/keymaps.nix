@@ -13,7 +13,7 @@
 
             # close via ctrl-q, save via ctrl-s
             "<C-q>" = ":qa<CR>";
-            "<leader>q" = "";
+            "<leader>q" = ":bdelete<CR>";
             "<leader>w" = ":w<CR>";
 
             # navigate to left/right window

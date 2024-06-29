@@ -3,25 +3,17 @@
     ./ui.nix
     ./treesitter.nix
     ./lsp.nix
+    ./dap.nix
   ];
 
   programs.nixvim = {
     plugins = {
-      markdown-preview = {
-        enable = true;
-
-        settings = {
-          auto_close = false;
-          theme = "dark";
-        };
-      };
-
       comment = {
         enable = true;
 
         settings = {
-          opleader.line = "<C-b>";
-          toggler.line = "<C-b>";
+          opleader.line = "<leader>c";
+          toggler.line = "<leader>c";
         };
       };
 
@@ -33,7 +25,6 @@
       };
     };
 
-
     files = {
       "after/ftplugin/markdown.lua".keymaps = [
         {
@@ -44,5 +35,4 @@
       ];
     };
   };
-
 }

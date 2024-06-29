@@ -91,13 +91,8 @@
 
         offsets = [
           {
-            filetype = "Neotree";
-            text = ''
-              function()
-                  return vim.fn.getcwd()
-              end
-            '';
-            text_align = "left";
+            filetype = "neo-tree";
+            text = "File Explorer";
             highlight = "Directory";
             separator = true;
           }
@@ -135,6 +130,9 @@
 
       floaterm = {
         enable = true;
+        giteditor = true;
+
+        autoclose = 2;
 
         width = 0.8;
         height = 0.8;
@@ -171,24 +169,18 @@
 
       tagbar = {
         enable = true;
-        settings.width = 50;
+        settings = {
+          autoclose = true;
+          autofocus = false;
+          autoshowtag = true;
+
+          foldlevel = 2;
+
+          width = 50;
+        };
       };
 
       which-key.enable = true;
-
-      trim = {
-        enable = true;
-        settings = {
-          highlight = true;
-          ft_blocklist = [
-            "checkhealth"
-            "floaterm"
-            "lspinfo"
-            "neo-tree"
-            "TelescopePrompt"
-          ];
-        };
-      };
 
       startify = {
         enable = true;
