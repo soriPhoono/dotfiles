@@ -4,7 +4,7 @@ let
 
   default_font = 15;
   focus_font = 16;
-  terminal_font = 15;
+  terminal_font = 18;
 in
 {
   imports = [
