@@ -7,6 +7,7 @@
 
     ../../modules/nixos/programs/gnupg.nix
     ../../modules/nixos/programs/gaming.nix
+    ../../modules/nixos/programs/qemu.nix
 
     ../../modules/nixos/services/fprintd.nix
     ../../modules/nixos/services/openrgb.nix
