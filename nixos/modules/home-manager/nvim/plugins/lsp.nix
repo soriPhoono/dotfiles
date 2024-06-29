@@ -1,54 +1,118 @@
 { pkgs, ... }: {
   programs.nixvim.plugins = {
-    lspkind = {
-      enable = true;
+    luasnip.enable = true;
 
-      cmp = {
+    copilot-lua =
+      {
         enable = true;
 
-        menu = {
-          nvim_lsp = "[LSP]";
-          nvim_lua = "[api]";
-          path = "[path]";
-          luasnip = "[snip]";
-          buffer = "[buffer]";
-          neorg = "[neorg]";
-          cmp_tabby = "[Tabby]";
+        suggestion.enabled = true;
+        panel.enabled = false;
+
+        filetypes = {
+          yaml = false;
+          markdown = false;
+          gitcommit = false;
+          gitrebase = false;
+          cvs = false;
+          help = false;
+          "." = false;
         };
       };
-    };
-
-    luasnip.enable = true;
 
     cmp = {
       enable = true;
 
       settings = {
-        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+        experimental.ghost_text = true;
+
+        snippet.expand =
+          # lua
+          ''
+            function(args)
+                require('luasnip').lsp_expand(args.body)
+            end
+          '';
 
         mapping = {
-          "<C-d>" = "cmp.mapping.scroll_docs(-4)";
-          "<C-f>" = "cmp.mapping.scroll_docs(4)";
           "<C-Space>" = "cmp.mapping.complete()";
-          "<C-e>" = "cmp.mapping.close()";
-          "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
-          "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
-          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<ESC>" = "cmp.mapping.close()";
+          "<Tab>" =
+            # lua
+            ''
+              function(fallback)
+                local line = vim.api.nvim_get_current_line()
+                if line:match("^%s*$") then
+                  fallback()
+                elseif cmp.visible() then
+                  cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })
+                else
+                  fallback()
+                end
+              end
+            '';
+          "<Down>" =
+            # lua
+            ''
+              function(fallback)
+                if cmp.visible() then
+                  cmp.select_next_item()
+                elseif require("luasnip").expand_or_jumpable() then
+                  vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+                else
+                  fallback()
+                end
+              end
+            '';
+          "<Up>" =
+            # lua
+            ''
+              function(fallback)
+                if cmp.visible() then
+                  cmp.select_prev_item()
+                elseif require("luasnip").jumpable(-1) then
+                  vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+                else
+                  fallback()
+                end
+              end
+            '';
         };
 
         sources = [
-          { name = "path"; }
-          { name = "nvim_lsp"; }
-          { name = "cmp_tabby"; }
           { name = "luasnip"; }
+          { name = "path"; }
           {
             name = "buffer";
             option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
           }
-          { name = "neorg"; }
+          { name = "nvim_lsp"; }
+          { name = "copilot"; }
         ];
+
+        window = {
+          completion = {
+            winhighlight =
+              "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
+            scrollbar = false;
+            sidePadding = 0;
+            border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
+          };
+
+          settings.documentation = {
+            border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
+            winhighlight =
+              "FloatBorder:CmpBorder,Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel";
+          };
+        };
       };
     };
+
+    cmp_luasnip.enable = true;
+    cmp-path.enable = true;
+    cmp-buffer.enable = true;
+    cmp-nvim-lsp.enable = true;
+
     lsp = {
       enable = true;
 
@@ -71,29 +135,69 @@
       };
 
       servers = {
-        nil-ls = {
-          enable = true;
-
-          settings = {
-            formatting.command = [
-              "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
-            ];
-          };
-        };
+        nil-ls.enable = true;
         bashls.enable = true;
 
         clangd.enable = true;
         cmake.enable = true;
 
-        dartls.enable = true;
+        gopls.enable = true;
 
-        cssls.enable = true;
-        denols.enable = true;
+        kotlin-language-server.enable = true;
       };
     };
 
-    lsp-format = {
+    lsp-format.enable = true;
+
+    lsp-lines = {
       enable = true;
+      currentLine = true;
     };
+
+    lspkind = {
+      enable = true;
+
+      cmp = {
+        enable = true;
+
+        menu = {
+          nvim_lsp = "[LSP]";
+          nvim_lua = "[api]";
+          path = "[path]";
+          luasnip = "[snip]";
+          buffer = "[buffer]";
+          neorg = "[neorg]";
+          cmp_tabby = "[Tabby]";
+        };
+      };
+    };
+
+    none-ls = {
+      enable = true;
+      sources = {
+        diagnostics = {
+          statix.enable = true;
+
+          golangci_lint.enable = true;
+
+          ktlint.enable = true;
+        };
+        formatting = {
+          nixfmt.enable = true;
+
+          shfmt.enable = true;
+          shellharden.enable = true;
+
+          goimports.enable = true;
+          gofmt.enable = true;
+
+          ktlint.enable = true;
+
+          markdownlint.enable = true;
+        };
+      };
+    };
+
+    rust-tools.enable = true;
   };
 }

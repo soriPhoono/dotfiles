@@ -19,9 +19,28 @@
 
       nvim-autopairs.enable = true;
 
+      plugins.auto-save = {
+        enable = true;
+        settings.enabled = true;
+      };
+
       nvim-colorizer = {
         enable = true;
         userDefaultOptions.names = false;
+      };
+
+      indent-blankline = {
+        enable = true;
+        settings = {
+          indent = {
+            smart_indent_cap = true;
+            char = " ";
+          };
+          scope = {
+            enabled = true;
+            char = "│";
+          };
+        };
       };
     };
 

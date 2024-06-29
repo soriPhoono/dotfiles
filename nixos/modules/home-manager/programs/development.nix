@@ -10,6 +10,10 @@
     # C/C++ development deps
     gcc
     gdb
+
+    clang-tools
+    lldb
+
     ninja
     cmake
     # TODO: setup clangd and meson

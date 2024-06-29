@@ -1,8 +1,11 @@
 { ... }: {
   programs.nixvim.plugins = {
+    hmts.enable = true;
+
     treesitter = {
       enable = true;
 
+      nixGrammars = true;
       nixvimInjections = true;
 
       folding = true;
@@ -20,6 +23,11 @@
       };
     };
 
-    hmts.enable = true;
+    treesitter-context = {
+      enable = true;
+      settings.max_lines = 2;
+    };
+
+    rainbow_delimiters.enable = true;
   };
 }

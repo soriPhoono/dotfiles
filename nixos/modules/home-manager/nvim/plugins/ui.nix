@@ -21,6 +21,15 @@
         (ui_map);
 
     plugins = {
+      fidget = {
+        enable = true;
+        progress = {
+          suppressOnInsert = true;
+          ignoreDoneAlready = true;
+          pollRate = 0.5;
+        };
+      };
+
       gitsigns = {
         enable = true;
         settings.signs = {
@@ -165,6 +174,8 @@
           ];
           set_env.COLORTERM = "truecolor";
         };
+
+        extensions.fzf-native = { enable = true; };
       };
 
       tagbar = {
@@ -180,7 +191,16 @@
         };
       };
 
+      copilot-chat.enable = true;
+
+      trouble.enable = true;
+
       which-key.enable = true;
+
+      wilder = {
+        enable = true;
+        modes = [ ":" "/" "?" ];
+      };
 
       startify = {
         enable = true;

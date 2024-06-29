@@ -4,12 +4,16 @@
       enable = true;
 
       extensions = {
-        dap-ui.enable = true;
+        dap-ui = {
+          enable = true;
+
+          floating.mappings = {
+            close = [ "<ESC>" "q" ];
+          };
+        };
       };
 
-      adapters.servers = {
-
-      };
+      configurations = { };
     };
   };
 }
