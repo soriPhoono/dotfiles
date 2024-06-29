@@ -1,9 +1,7 @@
 { pkgs, ... }: {
-  hardware.xpadneo.enable = true;
+  hardware = {
+    xone.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    xboxdrv
-  ];
-
-  boot.extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
+    uinput.enable = true;
+  };
 }
