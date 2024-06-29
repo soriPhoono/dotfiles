@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.nixvim.plugins = {
       lspkind = {
         enable = true;
@@ -71,7 +71,15 @@
         };
 
         servers = {
-          nil-ls.enable = true;
+          nil-ls = {
+            enable = true;
+
+            settings = {
+              formatting.command = [
+                "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
+              ];
+            };
+          };
           bashls.enable = true;
 
           clangd.enable = true;

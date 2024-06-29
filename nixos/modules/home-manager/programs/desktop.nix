@@ -1,4 +1,12 @@
 { pkgs, ... }: {
+  home.packages = with pkgs; [
+    imagemagick
+
+    unzip
+    unrar
+    p7zip
+  ];
+
   programs = {
     alacritty = {
       enable = true;

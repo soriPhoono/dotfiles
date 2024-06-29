@@ -4,30 +4,23 @@
   ];
 
   home.packages = with pkgs; [
-    # Core development packages
-    imagemagick
-
-    unzip
-    unrar
-    p7zip
-
+    # Documentation generator
     mkdocs
-
-    qmk
 
     # C/C++ development deps
     gcc
     gdb
     ninja
     cmake
-    meson
+    # TODO: setup clangd and meson
 
     # Zig development deps
     zig
-    zls
 
     # Rust development deps
     rustup
+
+    # TODO: learn how to declare rust compiler declaratively
 
     # OpenJDK development deps
     jdk
@@ -37,6 +30,9 @@
 
     # Web/JavaScript
     sass
+
+    # Keyboard firmware development
+    qmk
 
     # GUI development tools
     gitkraken
