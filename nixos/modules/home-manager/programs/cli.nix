@@ -4,6 +4,7 @@
       dua
       duf
     ];
+
     shellAliases = {
       ls = "eza";
       ll = "eza -l";
