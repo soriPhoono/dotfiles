@@ -1,135 +1,171 @@
-{ ... }: {
-  programs.nixvim.plugins = {
-    gitsigns = {
-      enable = true;
-      settings.signs = {
-        add.text = "+";
-        change.text = "~";
+{ lib, config, ... }: {
+  programs.nixvim = {
+    keymaps =
+      let
+        ui_map =
+          lib.mapAttrsToList
+            (key: action: {
+              mode = "n";
+              inherit action key;
+            })
+            {
+              # Core windows
+              "<leader>e" = ":Neotree reveal toggle<CR>";
+              "<leader>g" = ":TagbarToggle<CR>";
+            };
+      in
+      config.nixvim.helpers.keymaps.mkKeymaps
+        {
+          options.silent = true;
+        }
+        (ui_map);
+
+    plugins = {
+      gitsigns = {
+        enable = true;
+        settings.signs = {
+          add.text = "+";
+          change.text = "~";
+        };
       };
-    };
 
-    lualine = {
-      enable = true;
+      lualine = {
+        enable = true;
 
-      globalstatus = true;
+        globalstatus = true;
 
-      # +-------------------------------------------------+
-      # | A | B | C                             X | Y | Z |
-      # +-------------------------------------------------+
-      sections = {
-        lualine_a = ["mode"];
-        lualine_b = ["branch"];
-        lualine_c = ["filename" "diff"];
+        # +-------------------------------------------------+
+        # | A | B | C                             X | Y | Z |
+        # +-------------------------------------------------+
+        sections = {
+          lualine_a = [ "mode" ];
+          lualine_b = [ "branch" ];
+          lualine_c = [ "filename" "diff" ];
 
-        lualine_x = [
-          "diagnostics"
+          lualine_x = [
+            "diagnostics"
 
-          # Show active language server
-          {
-            name.__raw = ''
-              function()
-                  local msg = ""
-                  local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                  local clients = vim.lsp.get_active_clients()
-                  if next(clients) == nil then
-                      return msg
-                  end
-                  for _, client in ipairs(clients) do
-                      local filetypes = client.config.filetypes
-                      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                          return client.name
-                      end
-                  end
-                  return msg
+            # Show active language server
+            {
+              name.__raw = ''
+                function()
+                    local msg = ""
+                    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+                    local clients = vim.lsp.get_active_clients()
+                    if next(clients) == nil then
+                        return msg
+                    end
+                    for _, client in ipairs(clients) do
+                        local filetypes = client.config.filetypes
+                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                            return client.name
+                        end
+                    end
+                    return msg
+                end
+              '';
+              icon = "";
+              color.fg = "#ffffff";
+            }
+            "encoding"
+            "fileformat"
+            "filetype"
+          ];
+        };
+      };
+
+      bufferline = {
+        enable = true;
+        hover = {
+          enabled = true;
+
+          reveal = [ "close" ];
+        };
+
+        highlights = {
+          bufferSelected = {
+            underline = true;
+            italic = true;
+          };
+        };
+
+        separatorStyle = "slant";
+
+        diagnostics = "nvim_lsp";
+        diagnosticsIndicator = ''
+          function(count, level, diagnostics_dict, context)
+              if context.buffer:current() then
+                  return ""
               end
-            '';
-            icon = "";
-            color.fg = "#ffffff";
-          }
-          "encoding"
-          "fileformat"
-          "filetype"
-        ];
-      };
-    };
-
-    bufferline = {
-      enable = true;
-
-      separatorStyle = "padded_slant";
-
-      diagnostics = "nvim_lsp";
-      diagnosticsIndicator = ''
-        function(count, level, diagnostics_dict, context)
-            local s = " "
-            for e, n in pairs(diagnostics_dict) do
-                local sym = e == "error" and " "
-                or (e == "warning" and " " or "" )
-                s = s .. n .. sym
-            end
-            return s
-        end
-      '';
-    };
-
-    neo-tree = {
-      enable = true;
-
-      popupBorderStyle = "rounded";
-      closeIfLastWindow = true;
-
-      window = {
-        width = 30;
-        autoExpandWidth = true;
-
-        position = "float";
-      };
-    };
-
-    floaterm = {
-      enable = true;
-
-      width = 0.8;
-      height = 0.8;
-
-      title = "";
-
-      keymaps.toggle = "<leader>,";
-    };
-
-    telescope = {
-      enable = true;
-
-      keymaps = {
-        # Find files using Telescope command-line sugar.
-        "<leader>ff" = "find_files";
-        "<leader>fg" = "live_grep";
-        "<leader>b" = "buffers";
-        "<leader>fh" = "help_tags";
-        "<leader>fd" = "diagnostics";
+              local s = " "
+              for e, n in pairs(diagnostics_dict) do
+                  local sym = e == "error" and " "
+                  or (e == "warning" and " " or "" )
+                  s = s .. n .. sym
+              end
+              return s
+          end
+        '';
       };
 
-      settings.defaults = {
-        file_ignore_patterns = [
-          "^.git/"
-          "^.mypy_cache/"
-          "^__pycache__/"
-          "^output/"
-          "^data/"
-          "%.ipynb"
-        ];
-        set_env.COLORTERM = "truecolor";
+      neo-tree = {
+        enable = true;
+
+        popupBorderStyle = "rounded";
+        closeIfLastWindow = true;
+
+        window = {
+          width = 30;
+          autoExpandWidth = true;
+
+          position = "float";
+        };
       };
-    };
 
-    tagbar = {
-      enable = true;
-      settings.width = 50;
-    };
+      floaterm = {
+        enable = true;
 
-    which-key.enable = true;
+        width = 0.8;
+        height = 0.8;
 
-    trim = {
+        title = "";
+
+        keymaps.toggle = "<leader>,";
+      };
+
+      telescope = {
+        enable = true;
+
+        keymaps = {
+          # Find files using Telescope command-line sugar.
+          "<leader>ff" = "find_files";
+          "<leader>fg" = "live_grep";
+          "<leader>b" = "buffers";
+          "<leader>fh" = "help_tags";
+          "<leader>fd" = "diagnostics";
+        };
+
+        settings.defaults = {
+          file_ignore_patterns = [
+            "^.git/"
+            "^.mypy_cache/"
+            "^__pycache__/"
+            "^output/"
+            "^data/"
+            "%.ipynb"
+          ];
+          set_env.COLORTERM = "truecolor";
+        };
+      };
+
+      tagbar = {
+        enable = true;
+        settings.width = 50;
+      };
+
+      which-key.enable = true;
+
+      trim = {
         enable = true;
         settings = {
           highlight = true;
@@ -143,34 +179,35 @@
         };
       };
 
-    startify = {
-      enable = true;
+      startify = {
+        enable = true;
 
-      settings = {
-        custom_header = [
-          ""
-          "     ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
-          "     ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
-          "     ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
-          "     ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
-          "     ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
-          "     ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
-        ];
+        settings = {
+          custom_header = [
+            ""
+            "     ███╗   ██╗██╗██╗  ██╗██╗   ██╗██╗███╗   ███╗"
+            "     ████╗  ██║██║╚██╗██╔╝██║   ██║██║████╗ ████║"
+            "     ██╔██╗ ██║██║ ╚███╔╝ ██║   ██║██║██╔████╔██║"
+            "     ██║╚██╗██║██║ ██╔██╗ ╚██╗ ██╔╝██║██║╚██╔╝██║"
+            "     ██║ ╚████║██║██╔╝ ██╗ ╚████╔╝ ██║██║ ╚═╝ ██║"
+            "     ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝"
+          ];
 
-        # When opening a file or bookmark, change to its directory.
-        change_to_dir = false;
+          # When opening a file or bookmark, change to its directory.
+          change_to_dir = false;
 
-        # By default, the fortune header uses ASCII characters, because they work for everyone.
-        # If you set this option to 1 and your 'encoding' is "utf-8", Unicode box-drawing characters will
-        # be used instead.
-        use_unicode = true;
+          # By default, the fortune header uses ASCII characters, because they work for everyone.
+          # If you set this option to 1 and your 'encoding' is "utf-8", Unicode box-drawing characters will
+          # be used instead.
+          use_unicode = true;
 
-        lists = [{type = "dir";}];
-        files_number = 30;
+          lists = [{ type = "dir"; }];
+          files_number = 30;
 
-        skiplist = [
-          "flake.lock"
-        ];
+          skiplist = [
+            "flake.lock"
+          ];
+        };
       };
     };
   };
