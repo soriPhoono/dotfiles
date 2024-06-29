@@ -22,9 +22,7 @@
     zig
 
     # Rust development deps
-    rustup
-
-    # TODO: learn how to declare rust compiler declaratively
+    rustup # TODO: learn how to declare rust compiler declaratively
 
     # OpenJDK development deps
     jdk
@@ -38,8 +36,7 @@
     # Keyboard firmware development
     qmk
 
-    # GUI development tools
-    gitkraken
+    # markdown tools
     obsidian
   ];
 
