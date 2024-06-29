@@ -1,10 +1,9 @@
-{ config, ... }: {
+{ pkgs, ... }: {
   hardware.xpadneo.enable = true;
 
-  boot = {
-    extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
+  environment.systemPackages = with pkgs; [
+    xboxdrv
+  ];
 
-    extraModulePackages = with config.boot.kernelPackages; [ xpadneo ];
-    kernelModules = [ "hid_xpadneo" ];
-  };
+  boot.extraModprobeConfig = '' options bluetooth disable_ertm=1 '';
 }
