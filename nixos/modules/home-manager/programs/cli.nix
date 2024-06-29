@@ -1,8 +1,20 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    dua
-    duf
-  ];
+  home = {
+    packages = with pkgs; [
+      dua
+      duf
+    ];
+    shellAliases = {
+      ls = "eza";
+      ll = "eza -l";
+      lt = "eza -T";
+
+      cat = "bat";
+
+      df = "duf";
+      du = "dua i";
+    };
+  };
 
   programs = {
     fish = {
@@ -13,17 +25,6 @@
 
         fastfetch
       '';
-
-      shellAliases = {
-        ls = "eza";
-        ll = "eza -l";
-        lt = "eza -T";
-
-        cat = "bat";
-
-        df = "duf";
-        du = "dua i";
-      };
     };
 
     starship = {
@@ -58,23 +59,5 @@
 
     bat.enable = true;
     ripgrep.enable = true;
-
-    alacritty = {
-      enable = true;
-
-      settings = {
-        window = {
-          opacity = 0.8;
-
-
-          blur = true;
-
-          decorations = "None";
-          startup_mode = "Maximized";
-        };
-
-        cursor.style = "Beam";
-      };
-    };
   };
 }

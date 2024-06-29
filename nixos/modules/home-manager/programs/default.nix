@@ -5,5 +5,6 @@
     ./gaming.nix
     ./streaming.nix
     ./utilities.nix
+    ./desktop.nix
   ];
 }
