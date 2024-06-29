@@ -10,6 +10,14 @@ let
 
     config.allowUnfree = true;
   };
+
+  pkgs-stable = import inputs.nixpkgs-stable {
+    inherit system;
+
+    overlays = import ../overlays;
+
+    config.allowUnfree = true;
+  };
 in
 {
   zephyrus =
@@ -22,7 +30,7 @@ in
       };
     in
     (import ./zephyrus {
-      inherit system inputs pkgs vars stateVersion;
+      inherit system inputs pkgs pkgs-stable vars stateVersion;
     });
 
   home-desktop =
@@ -35,6 +43,6 @@ in
       };
     in
     (import ./home-desktop {
-      inherit system inputs pkgs vars stateVersion;
+      inherit system inputs pkgs pkgs-stable vars stateVersion;
     });
 }

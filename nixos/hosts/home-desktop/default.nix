@@ -1,4 +1,4 @@
-{ system, inputs, pkgs, vars, stateVersion }:
+{ system, inputs, pkgs, pkgs-stable, vars, stateVersion }:
 let
   inherit (inputs.nixpkgs) lib;
 in
@@ -6,7 +6,7 @@ lib.nixosSystem {
   inherit system;
 
   specialArgs = {
-    inherit inputs pkgs vars stateVersion;
+    inherit inputs pkgs pkgs-stable vars stateVersion;
   };
 
   modules = [
@@ -21,7 +21,7 @@ lib.nixosSystem {
         backupFileExtension = "~";
 
         extraSpecialArgs = {
-          inherit inputs pkgs vars stateVersion;
+          inherit inputs pkgs pkgs-stable vars stateVersion;
         };
 
         users.${vars.defaultUser} = {

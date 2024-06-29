@@ -32,8 +32,6 @@
         rocmPackages.clr.icd
       ];
     };
-
-    intel-gpu-tools.enable = true;
   };
 
   systemd.tmpfiles.rules = [
