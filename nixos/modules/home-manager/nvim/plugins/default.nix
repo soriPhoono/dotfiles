@@ -1,10 +1,5 @@
-{ ... }: {
-  imports = [
-    ./ui.nix
-    ./treesitter.nix
-    ./lsp.nix
-    ./dap.nix
-  ];
+{
+  imports = [ ./ui.nix ./treesitter.nix ./lsp.nix ./dap.nix ];
 
   programs.nixvim = {
     plugins = {
@@ -19,7 +14,7 @@
 
       nvim-autopairs.enable = true;
 
-      plugins.auto-save = {
+      auto-save = {
         enable = true;
         settings.enabled = true;
       };
@@ -42,16 +37,6 @@
           };
         };
       };
-    };
-
-    files = {
-      "after/ftplugin/markdown.lua".keymaps = [
-        {
-          mode = "n";
-          key = "<leader>m";
-          action = ":MarkdownPreview<cr>";
-        }
-      ];
     };
   };
 }

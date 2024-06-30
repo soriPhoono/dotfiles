@@ -1,24 +1,16 @@
 { lib, config, ... }: {
   programs.nixvim = {
-    keymaps =
-      let
-        ui_map =
-          lib.mapAttrsToList
-            (key: action: {
-              mode = "n";
-              inherit action key;
-            })
-            {
-              # Core windows
-              "<leader>e" = ":Neotree reveal toggle<CR>";
-              "<leader>g" = ":TagbarToggle<CR>";
-            };
-      in
-      config.nixvim.helpers.keymaps.mkKeymaps
-        {
-          options.silent = true;
-        }
-        (ui_map);
+    keymaps = let
+      ui_map = lib.mapAttrsToList (key: action: {
+        mode = "n";
+        inherit action key;
+      }) {
+        # Core windows
+        "<leader>e" = ":Neotree reveal toggle<CR>";
+        "<leader>t" = ":TagbarToggle<CR>";
+      };
+    in config.nixvim.helpers.keymaps.mkKeymaps { options.silent = true; }
+    ui_map;
 
     plugins = {
       fidget = {
@@ -98,14 +90,12 @@
           };
         };
 
-        offsets = [
-          {
-            filetype = "neo-tree";
-            text = "File Explorer";
-            highlight = "Directory";
-            separator = true;
-          }
-        ];
+        offsets = [{
+          filetype = "neo-tree";
+          text = "File Explorer";
+          highlight = "Directory";
+          separator = true;
+        }];
 
         separatorStyle = "slant";
 
@@ -227,9 +217,7 @@
           lists = [{ type = "dir"; }];
           files_number = 30;
 
-          skiplist = [
-            "flake.lock"
-          ];
+          skiplist = [ "flake.lock" ];
         };
       };
     };

@@ -1,4 +1,4 @@
-{ ... }: {
+{
   boot = {
     loader = {
       systemd-boot = {
@@ -10,8 +10,6 @@
       efi.canTouchEfiVariables = true;
     };
 
-    tmp = {
-      cleanOnBoot = true;
-    };
+    tmp = { cleanOnBoot = true; };
   };
 }

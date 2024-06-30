@@ -8,17 +8,17 @@
       swtpm.enable = true;
       ovmf = {
         enable = true;
-        packages = [(pkgs.OVMF.override {
-          secureBoot = true;
-          tpmSupport = true;
-        }).fd];
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          }).fd
+        ];
       };
     };
   };
 
   programs.virt-manager.enable = true;
 
-  users.users."${vars.defaultUser}".extraGroups = [
-    "libvirtd"
-  ];
+  users.users."${vars.defaultUser}".extraGroups = [ "libvirtd" ];
 }

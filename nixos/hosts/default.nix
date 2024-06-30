@@ -18,31 +18,26 @@ let
 
     config.allowUnfree = true;
   };
-in
-{
-  zephyrus =
-    let
-      inherit system stateVersion;
+in {
+  zephyrus = let
+    inherit system stateVersion;
 
-      vars = {
-        defaultUser = "soriphoono";
-        wallpaper_path = ../../assets/wallpapers/2.jpg;
-      };
-    in
-    (import ./zephyrus {
-      inherit system inputs pkgs pkgs-stable vars stateVersion;
-    });
+    vars = {
+      defaultUser = "soriphoono";
+      wallpaper_path = ../../assets/wallpapers/2.jpg;
+    };
+  in import ./zephyrus {
+    inherit system inputs pkgs pkgs-stable vars stateVersion;
+  };
 
-  home-desktop =
-    let
-      inherit system stateVersion;
+  home-desktop = let
+    inherit system stateVersion;
 
-      vars = {
-        defaultUser = "soriphoono";
-        wallpaper_path = ../../assets/wallpapers/2.jpg;
-      };
-    in
-    (import ./home-desktop {
-      inherit system inputs pkgs pkgs-stable vars stateVersion;
-    });
+    vars = {
+      defaultUser = "soriphoono";
+      wallpaper_path = ../../assets/wallpapers/2.jpg;
+    };
+  in import ./home-desktop {
+    inherit system inputs pkgs pkgs-stable vars stateVersion;
+  };
 }

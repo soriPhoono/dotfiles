@@ -1,4 +1,4 @@
-{ ... }: {
+{
   programs.nixvim.plugins = {
     hmts.enable = true;
 
@@ -28,6 +28,6 @@
       settings.max_lines = 2;
     };
 
-    rainbow_delimiters.enable = true;
+    rainbow-delimiters.enable = true;
   };
 }

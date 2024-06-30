@@ -1,24 +1,23 @@
-{ pkgs, ... }: {
+{
   programs.nixvim.plugins = {
     luasnip.enable = true;
 
-    copilot-lua =
-      {
-        enable = true;
+    copilot-lua = {
+      enable = true;
 
-        suggestion.enabled = true;
-        panel.enabled = false;
+      suggestion.enabled = false;
+      panel.enabled = false;
 
-        filetypes = {
-          yaml = false;
-          markdown = false;
-          gitcommit = false;
-          gitrebase = false;
-          cvs = false;
-          help = false;
-          "." = false;
-        };
+      filetypes = {
+        yaml = false;
+        markdown = false;
+        gitcommit = false;
+        gitrebase = false;
+        cvs = false;
+        help = false;
+        "." = false;
       };
+    };
 
     cmp = {
       enable = true;
@@ -149,10 +148,7 @@
 
     lsp-format.enable = true;
 
-    lsp-lines = {
-      enable = true;
-      currentLine = true;
-    };
+    lsp-lines.enable = true;
 
     lspkind = {
       enable = true;

@@ -1,4 +1,4 @@
-{ ... }: {
+{
   programs.nixvim.plugins = {
     dap = {
       enable = true;
@@ -7,9 +7,7 @@
         dap-ui = {
           enable = true;
 
-          floating.mappings = {
-            close = [ "<ESC>" "q" ];
-          };
+          floating.mappings = { close = [ "<ESC>" "q" ]; };
         };
       };
 

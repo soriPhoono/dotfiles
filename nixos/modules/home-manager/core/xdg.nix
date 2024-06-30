@@ -1,7 +1,5 @@
-{ ... }: {
-  imports = [
-    ./xdg-user-dirs.nix
-  ];
+{
+  imports = [ ./xdg-user-dirs.nix ];
 
   xdg = {
     enable = true;
@@ -13,13 +11,8 @@
 
         exec = "firefox https://calendar.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Office"
-        ];
-        mimeType = [
-          "text/calendar"
-        ];
+        categories = [ "Application" "Office" ];
+        mimeType = [ "text/calendar" ];
       };
       google-drive = {
         name = "Google Drive";
@@ -27,14 +20,8 @@
 
         exec = "firefox https://drive.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Office"
-        ];
-        mimeType = [
-          "text/pdf"
-          "application/vnd.google-apps.file"
-        ];
+        categories = [ "Application" "Office" ];
+        mimeType = [ "text/pdf" "application/vnd.google-apps.file" ];
       };
       gmail = {
         name = "Gmail";
@@ -42,14 +29,8 @@
 
         exec = "firefox https://mail.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Network"
-          "Email"
-        ];
-        mimeType = [
-          "message/rfc822"
-        ];
+        categories = [ "Application" "Network" "Email" ];
+        mimeType = [ "message/rfc822" ];
       };
       google-docs = {
         name = "Google Docs";
@@ -57,10 +38,7 @@
 
         exec = "firefox https://docs.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Office"
-        ];
+        categories = [ "Application" "Office" ];
         mimeType = [
           "text/pdf"
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -72,10 +50,7 @@
 
         exec = "firefox https://slides.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Office"
-        ];
+        categories = [ "Application" "Office" ];
         mimeType = [
           "text/pdf"
           "application/vnd.openxmlformats-officedocument.presentationml.presentation"
@@ -87,10 +62,7 @@
 
         exec = "firefox https://sheets.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Office"
-        ];
+        categories = [ "Application" "Office" ];
         mimeType = [
           "text/pdf"
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -102,10 +74,7 @@
 
         exec = "firefox https://tasks.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Office"
-        ];
+        categories = [ "Application" "Office" ];
       };
       google-keep = {
         name = "Google Keep";
@@ -113,10 +82,7 @@
 
         exec = "firefox https://keep.google.com/";
         terminal = false;
-        categories = [
-          "Application"
-          "Office"
-        ];
+        categories = [ "Application" "Office" ];
       };
     };
   };
