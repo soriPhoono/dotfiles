@@ -15,6 +15,13 @@
     plugins = {
       fidget = {
         enable = true;
+
+        notification.window = {
+          align = "top";
+
+          border = [ "╭" "─" "╮" "│" " " "│" "╰" "─" "╯" ];
+        };
+
         progress = {
           suppressOnInsert = true;
           ignoreDoneAlready = true;
