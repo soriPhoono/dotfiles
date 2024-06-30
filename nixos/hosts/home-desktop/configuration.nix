@@ -1,4 +1,4 @@
-{ pkgs, stateVersion, ... }: {
+{ pkgs, vars, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -34,9 +34,8 @@
     };
   };
 
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-  ];
+  systemd.tmpfiles.rules =
+    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
 
   environment.sessionVariables = {
     KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card2";
@@ -45,5 +44,5 @@
     VDPAU_DRIVER = "va_gl";
   };
 
-  system.stateVersion = "${stateVersion}";
+  system.stateVersion = "${vars.stateVersion}";
 }

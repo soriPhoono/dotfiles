@@ -1,10 +1,15 @@
 { inputs }:
 let
-  system = "x86_64-linux";
-  stateVersion = "24.05";
+  vars = {
+    system = "x86_64-linux";
+    stateVersion = "24.05";
+
+    defaultUser = "soriphoono";
+    wallpaper_path = ../../assets/wallpapers/1.jpg;
+  };
 
   pkgs = import inputs.nixpkgs {
-    inherit system;
+    inherit (vars) system;
 
     overlays = import ../overlays;
 
@@ -12,32 +17,16 @@ let
   };
 
   pkgs-stable = import inputs.nixpkgs-stable {
-    inherit system;
+    inherit (vars) system;
 
     overlays = import ../overlays;
 
     config.allowUnfree = true;
   };
 in {
-  zephyrus = let
-    inherit system stateVersion;
+  zephyrus = let inherit (vars) system;
+  in import ./zephyrus { inherit system inputs pkgs pkgs-stable vars; };
 
-    vars = {
-      defaultUser = "soriphoono";
-      wallpaper_path = ../../assets/wallpapers/2.jpg;
-    };
-  in import ./zephyrus {
-    inherit system inputs pkgs pkgs-stable vars stateVersion;
-  };
-
-  home-desktop = let
-    inherit system stateVersion;
-
-    vars = {
-      defaultUser = "soriphoono";
-      wallpaper_path = ../../assets/wallpapers/2.jpg;
-    };
-  in import ./home-desktop {
-    inherit system inputs pkgs pkgs-stable vars stateVersion;
-  };
+  home-desktop = let inherit (vars) system;
+  in import ./home-desktop { inherit system inputs pkgs pkgs-stable vars; };
 }

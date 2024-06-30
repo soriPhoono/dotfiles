@@ -1,13 +1,9 @@
-{ system, inputs, pkgs, pkgs-stable, vars, stateVersion }:
-let
-  inherit (inputs.nixpkgs) lib;
-in
-lib.nixosSystem {
+{ system, inputs, pkgs, pkgs-stable, vars }:
+let inherit (inputs.nixpkgs) lib;
+in lib.nixosSystem {
   inherit system;
 
-  specialArgs = {
-    inherit inputs pkgs pkgs-stable vars stateVersion;
-  };
+  specialArgs = { inherit inputs pkgs pkgs-stable vars; };
 
   modules = [
     ./configuration.nix
@@ -20,15 +16,10 @@ lib.nixosSystem {
 
         backupFileExtension = "~";
 
-        extraSpecialArgs = {
-          inherit inputs pkgs pkgs-stable vars stateVersion;
-        };
+        extraSpecialArgs = { inherit inputs pkgs pkgs-stable vars; };
 
         users.${vars.defaultUser} = {
-          imports = [
-            ../../users/${vars.defaultUser}.nix
-            ./modules/kde.nix
-          ];
+          imports = [ ../../users/${vars.defaultUser}.nix ./modules/kde.nix ];
         };
       };
     }

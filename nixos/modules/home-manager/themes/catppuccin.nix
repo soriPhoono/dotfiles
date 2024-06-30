@@ -1,15 +1,12 @@
 { inputs, config, pkgs, vars, ... }:
 let
-  opacity = .8;
+  opacity = 0.8;
 
-  default_font = 15;
+  default_font = 14;
   focus_font = 16;
   terminal_font = 16;
-in
-{
-  imports = [
-    inputs.stylix.homeManagerModules.stylix
-  ];
+in {
+  imports = [ inputs.stylix.homeManagerModules.stylix ];
 
   stylix = {
     enable = true;
@@ -29,7 +26,7 @@ in
 
     cursor = {
       package = pkgs.catppuccin-cursors.mochaTeal;
-      size = 32;
+      size = 24;
       name = "Catppuccin-Mocha-Teal-Cursors";
     };
 

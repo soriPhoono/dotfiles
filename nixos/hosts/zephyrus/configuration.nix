@@ -1,4 +1,4 @@
-{ pkgs, stateVersion, ... }: {
+{ pkgs, vars, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -38,5 +38,5 @@
 
   services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
 
-  system.stateVersion = "${stateVersion}";
+  system.stateVersion = "${vars.stateVersion}";
 }
