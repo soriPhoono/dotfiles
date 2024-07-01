@@ -19,7 +19,7 @@
         notification.window = {
           align = "top";
 
-          border = [ "╭" "─" "╮" "│" " " "│" "╰" "─" "╯" ];
+          border = "rounded";
         };
 
         progress = {
@@ -55,23 +55,25 @@
 
             # Show active language server
             {
-              name.__raw = ''
-                function()
-                    local msg = ""
-                    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                    local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then
-                        return msg
-                    end
-                    for _, client in ipairs(clients) do
-                        local filetypes = client.config.filetypes
-                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                            return client.name
-                        end
-                    end
-                    return msg
-                end
-              '';
+              name.__raw =
+                # lua
+                ''
+                  function()
+                      local msg = ""
+                      local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+                      local clients = vim.lsp.get_active_clients()
+                      if next(clients) == nil then
+                          return msg
+                      end
+                      for _, client in ipairs(clients) do
+                          local filetypes = client.config.filetypes
+                          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                              return client.name
+                          end
+                      end
+                      return msg
+                  end
+                '';
               icon = "";
               color.fg = "#ffffff";
             }
@@ -82,45 +84,15 @@
         };
       };
 
-      bufferline = {
+      barbar = {
         enable = true;
-        hover = {
-          enabled = true;
 
-          reveal = [ "close" ];
+        settings = { focus_on_close = "previous"; };
+
+        keymaps = {
+          close.key = "<leader>q";
+          pin.key = "<leader>p";
         };
-
-        highlights = {
-          bufferSelected = {
-            underline = true;
-            italic = true;
-          };
-        };
-
-        offsets = [{
-          filetype = "neo-tree";
-          text = "File Explorer";
-          highlight = "Directory";
-          separator = true;
-        }];
-
-        separatorStyle = "slant";
-
-        diagnostics = "nvim_lsp";
-        diagnosticsIndicator = ''
-          function(count, level, diagnostics_dict, context)
-              if context.buffer:current() then
-                  return ""
-              end
-              local s = " "
-              for e, n in pairs(diagnostics_dict) do
-                  local sym = e == "error" and " "
-                  or (e == "warning" and " " or "" )
-                  s = s .. n .. sym
-              end
-              return s
-          end
-        '';
       };
 
       neo-tree = {
