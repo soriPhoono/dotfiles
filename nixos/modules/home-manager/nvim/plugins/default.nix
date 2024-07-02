@@ -1,5 +1,5 @@
 {
-  imports = [ ./ui.nix ./treesitter.nix ./lsp.nix ./dap.nix ];
+  imports = [ ./ui.nix ./treesitter.nix ./lsp.nix ];
 
   programs.nixvim = {
     plugins = {

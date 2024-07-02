@@ -2,29 +2,10 @@
   programs.nixvim.plugins = {
     luasnip.enable = true;
 
-    copilot-lua = {
-      enable = true;
-
-      suggestion.enabled = false;
-      panel.enabled = false;
-
-      filetypes = {
-        yaml = false;
-        markdown = false;
-        gitcommit = false;
-        gitrebase = false;
-        cvs = false;
-        help = false;
-        "." = false;
-      };
-    };
-
     cmp = {
       enable = true;
 
       settings = {
-        experimental.ghost_text = true;
-
         snippet.expand =
           # lua
           ''
@@ -86,7 +67,6 @@
             option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
           }
           { name = "nvim_lsp"; }
-          { name = "copilot"; }
         ];
 
         window = {

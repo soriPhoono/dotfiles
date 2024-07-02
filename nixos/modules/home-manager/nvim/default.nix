@@ -42,11 +42,8 @@
       };
     };
 
-    match = {
-      TODO = "TODO";
-    };
+    match = { TODO = "TODO"; };
 
     editorconfig.enable = true;
-
   };
 }

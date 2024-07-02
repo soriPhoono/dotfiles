@@ -160,8 +160,6 @@
         };
       };
 
-      copilot-chat.enable = true;
-
       trouble.enable = true;
 
       which-key.enable = true;
