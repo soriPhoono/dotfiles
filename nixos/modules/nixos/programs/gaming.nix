@@ -1,10 +1,10 @@
-{ pkgs-stable, ... }: {
+{ pkgs, ... }: {
   hardware.steam-hardware.enable = true;
 
   programs = {
     steam = {
       enable = true;
-      package = pkgs-stable.steam;
+      package = pkgs.steam;
 
       extest.enable = true;
     };

@@ -1,9 +1,9 @@
-{ system, inputs, pkgs, pkgs-stable, vars }:
+{ system, inputs, pkgs, vars }:
 let inherit (inputs.nixpkgs) lib;
 in lib.nixosSystem {
   inherit system;
 
-  specialArgs = { inherit inputs pkgs pkgs-stable vars; };
+  specialArgs = { inherit inputs pkgs vars; };
 
   modules = [
     inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
@@ -18,7 +18,7 @@ in lib.nixosSystem {
 
         backupFileExtension = "~";
 
-        extraSpecialArgs = { inherit inputs pkgs pkgs-stable vars; };
+        extraSpecialArgs = { inherit inputs pkgs vars; };
 
         users.${vars.defaultUser} = {
           imports = [ ../../users/${vars.defaultUser}.nix ./modules/kde.nix ];

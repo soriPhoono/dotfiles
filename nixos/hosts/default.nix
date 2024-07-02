@@ -15,18 +15,10 @@ let
 
     config.allowUnfree = true;
   };
-
-  pkgs-stable = import inputs.nixpkgs-stable {
-    inherit (vars) system;
-
-    overlays = import ../overlays;
-
-    config.allowUnfree = true;
-  };
 in {
   zephyrus = let inherit (vars) system;
-  in import ./zephyrus { inherit system inputs pkgs pkgs-stable vars; };
+  in import ./zephyrus { inherit system inputs pkgs vars; };
 
   home-desktop = let inherit (vars) system;
-  in import ./home-desktop { inherit system inputs pkgs pkgs-stable vars; };
+  in import ./home-desktop { inherit system inputs pkgs vars; };
 }
