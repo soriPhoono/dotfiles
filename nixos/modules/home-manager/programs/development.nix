@@ -1,6 +1,4 @@
 { pkgs, ... }: {
-  imports = [ ../nvim ];
-
   home.packages = with pkgs; [
     # Documentation generator
     mkdocs
