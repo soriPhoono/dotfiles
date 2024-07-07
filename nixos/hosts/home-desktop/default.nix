@@ -1,4 +1,4 @@
-{ system, inputs, pkgs, vars }:
+{ system, inputs, pkgs, pkgs-unstable, vars }:
 let inherit (inputs.nixpkgs) lib;
 in lib.nixosSystem {
   inherit system;

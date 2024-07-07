@@ -13,7 +13,8 @@
 
     ninja
     cmake
-    # TODO: setup clangd and meson
+    meson
+    # TODO: setup meson
 
     # Zig development deps
     zig

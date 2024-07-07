@@ -22,7 +22,7 @@ let
     overlays = import ../overlays;
 
     config.allowUnfree = true;
-  }
+  };
 in {
   zephyrus = let inherit (vars) system;
   in import ./zephyrus { inherit system inputs pkgs pkgs-unstable vars; };
