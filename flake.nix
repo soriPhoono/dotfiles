@@ -9,9 +9,11 @@
 
       imports = [
         ./hosts
-
-        ./modules
       ];
+
+      perSystem = {
+
+      };
     };
 
   inputs = {

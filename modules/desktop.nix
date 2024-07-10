@@ -1,5 +1,0 @@
-{
-  imports = [
-    ./end-user.nix
-  ];
-}

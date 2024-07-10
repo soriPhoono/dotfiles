@@ -7,7 +7,7 @@
   let
     inherit (inputs.nixpkgs) lib;
 
-    modules = ${self}/modules;
+    modules = "${self}/modules";
 
     specialArgs = { inherit self inputs; };
   in {
@@ -15,10 +15,10 @@
       inherit specialArgs;
 
       modules = [
-        ${modules}/desktop.nix
+          "${modules}/system/desktop.nix"
 
-        ./home-desktop
-      ];
+          ./home-desktop
+        ];
     };
   };
 }

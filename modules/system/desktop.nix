@@ -1,5 +1,5 @@
 {
   imports = [
-    ./core
+    ../core
   ];
 }

@@ -1,18 +1,12 @@
-{
+{ lib, pkgs, ... }: {
   imports = [
     ./boot.nix
     ./locale.nix
   ];
 
-  documentation = {
-    man.mandoc.enable = true;
-
-    dev.enable = true;
-  };
+  documentation.dev.enable = true;
 
   security = {
-    rtkit.enable = true;
-
     sudo.wheelNeedsPassword = false;
   };
 
@@ -46,8 +40,6 @@
   };
 
   nix = {
-    package = pkgs.nix;
-
     settings = {
       auto-optimise-store = true;
 
