@@ -5,20 +5,34 @@
 }: {
   flake.nixosConfigurations =
   let
-    inherit (inputs.nixpkgs) lib;
-
-    modules = "${self}/modules";
+    inherit (inputs.nixpkgs.lib) nixosSystem;
 
     specialArgs = { inherit self inputs; };
   in {
-    home-desktop = lib.nixosSystem {
+    home-desktop = nixosSystem {
       inherit specialArgs;
 
       modules = [
-          "${modules}/system/desktop.nix"
+        ./home-desktop
 
-          ./home-desktop
-        ];
+        inputs.hm.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            backupFileExtension = "~";
+
+            extraSpecialArgs = specialArgs;
+
+            users.soriphoono = {
+              imports = [
+                ../users/soriphoono.nix
+              ];
+            };
+          };
+        }
+      ];
     };
   };
 }
