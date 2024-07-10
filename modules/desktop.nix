@@ -1,4 +1,5 @@
 {
   imports = [
+    ./end-user.nix
   ];
 }

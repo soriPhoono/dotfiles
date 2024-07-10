@@ -8,20 +8,10 @@
       ];
 
       imports = [
+        ./hosts
+
         ./modules
       ];
-
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
-        devShells.default = pkgs.mkShell {
-          packages = [
-
-          ];
-        };
-      };
     };
 
   inputs = {
@@ -38,8 +28,6 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     }; # Command-not-found functionality
-
-    lanzaboote.url = "github:nix-community/lanzaboote"; # Secure boot
 
     # User inputs
     hm = {
