@@ -1,10 +1,5 @@
-{
-  self,
-  inputs,
-  ...
-}: {
-  flake.nixosConfigurations =
-  let
+{ self, inputs, ... }: {
+  flake.nixosConfigurations = let
     inherit (inputs.nixpkgs.lib) nixosSystem;
 
     specialArgs = { inherit self inputs; };
@@ -21,15 +16,9 @@
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            backupFileExtension = "~";
-
             extraSpecialArgs = specialArgs;
 
-            users.soriphoono = {
-              imports = [
-                ../users/soriphoono.nix
-              ];
-            };
+            users.soriphoono = { imports = [ ../users/soriphoono.nix ]; };
           };
         }
       ];

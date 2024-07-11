@@ -3,16 +3,16 @@
 
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        "x86_64-linux"
-      ];
+      systems = [ "x86_64-linux" ];
 
-      imports = [
-        ./hosts
-      ];
+      imports = [ ./hosts ];
 
-      perSystem = {
-
+      perSystem = { system, ... }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [ inputs.foo.overlays.default (final: prev: { }) ];
+          config.allowUnfree = true;
+        };
       };
     };
 
