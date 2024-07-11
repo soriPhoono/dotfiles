@@ -6,7 +6,7 @@
   boot = {
     initrd.supportedFilesystems = [ "ext4" "vfat" "ntfs" "exfat" ];
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     kernelModules = [ "tcp_brr" ];
 
     consoleLogLevel = 3;
@@ -46,21 +46,10 @@
         };
       };
     };
-
-    logitech.wireless = {
-      enable = true;
-      enableGraphical = true;
-    };
-
-    steam-hardware.enable = true;
-    xone.enable = true;
-    uinput.enable = true;
   };
 
   security = {
     sudo.wheelNeedsPassword = false;
-
-    rtkit.enable = true;
   };
 
   i18n = {
@@ -86,7 +75,7 @@
 
     users = {
       soriphoono = {
-        description = "SoriPhoono";
+        description = "Sori Phoono";
         isNormalUser = true;
         extraGroups = [ "wheel" "networkmanager" "audio" ];
       };
@@ -95,22 +84,10 @@
 
   environment.systemPackages = with pkgs; [
     coreutils
-
-    wget
   ];
 
   programs = {
     fish.enable = true;
-
-    steam = {
-      enable = true;
-
-      protontricks.enable = true;
-
-      remotePlay = { openFirewall = true; };
-
-      extest.enable = true;
-    };
   };
 
   services = {
@@ -158,7 +135,6 @@
         KbdInteractiveAuthentication = false;
       };
     };
-
   };
 
   networking = {
@@ -169,11 +145,24 @@
     };
   };
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+
+    overlays = [
+      
+    ];
+  };
+
   nix = {
     settings = {
       auto-optimise-store = true;
 
       experimental-features = [ "nix-command" "flakes" ];
+
+      keep-derivations= true;
+      keep-outputs = true;
     };
 
     optimise = {
