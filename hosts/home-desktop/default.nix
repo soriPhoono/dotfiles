@@ -46,11 +46,28 @@
         };
       };
     };
+
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+
+      extraPackages = with pkgs; [
+        intel-media-driver
+        vaapiVdpau
+        libvdpau-va-gl
+
+        intel-compute-runtime
+        rocmPackages.clr.icd
+      ];
+    };
   };
 
   security = {
     sudo.wheelNeedsPassword = false;
   };
+
+  systemd.tmpfiles.rules = 
+    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -82,12 +99,29 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    coreutils
-  ];
+  environment = {
+    sessionVariables = {
+      LIBVA_DRIVER_NAME = "iHD";
+      VDPAU_DRIVER = "va_gl";
+    };
+    
+    systemPackages = with pkgs; [
+      coreutils
+
+      wget
+    ];
+  };
 
   programs = {
     fish.enable = true;
+
+    partition-manager.enable = true;
+
+    steam = {
+      enable = true;
+
+      extest.enable = true;
+    };
   };
 
   services = {
@@ -96,7 +130,25 @@
       enable = true;
       mountOnMedia = true;
     };
+    # devmon.enable = true;
 
+    openssh = {
+      enable = true;
+
+      hostKeys = [{
+        comment = "soriphoono zephyrus g14";
+
+        path = "/etc/shh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }];
+
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
+    };
+    
     pipewire = {
       enable = true;
 
@@ -119,22 +171,12 @@
       };
     };
 
-    openssh = {
+    displayManager.sddm = {
       enable = true;
-
-      hostKeys = [{
-        comment = "soriphoono zephyrus g14";
-
-        path = "/etc/shh/ssh_host_ed25519_key";
-        type = "ed25519";
-      }];
-
-      settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
-        KbdInteractiveAuthentication = false;
-      };
+      wayland.enable = true;
     };
+
+    desktopManager.plasma6.enable = true;
   };
 
   networking = {
