@@ -31,5 +31,13 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     }; # Home manager
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "hm";
+      };
+    };
   };
 }

@@ -1,23 +1,14 @@
 { lib, pkgs, ... }: {
+  imports = [
+    ./common
+
+    ./common/themes/catppuccin.nix
+  ];
+
   home = {
     packages = with pkgs; [
       dua
       duf
-  
-      usbutils
-      usbtop
-
-      pciutils
-
-      btop
-      nvtopPackages.full
-
-      libva-utils
-      vdpauinfo
-      clinfo
-      glxinfo
-      vulkan-tools
-      wayland-utils
 
       mkdocs
       obsidian
@@ -60,49 +51,18 @@
       createDirectories = true;
     };
   };
-  
+
   programs = {
-    git = {
-      enable = true;
-
-      userName = "soriphoono";
-      userEmail = "soriphoono@gmail.com";
-
-      includes = [
-        # TODO: setup sops-nix to store school git data
-      ];
-
-      extraConfig = {
-        init.defaultBranch = "main";
-        url."git@github.com/" = { insteadOf = [ "gh:" "github:" ]; };
-        pull.rebase = false;
-      };
-
-      delta = {
-        enable = true;
-
-        options = {
-          dark = true;
-          line-numbers = true;
-          side-by-side = true;
-
-          # true-color = "always";
-          diff.colorMoved = "default";
-          merge.conflictstyle = "diff3";
-        };
-      };
-    };
-  
     fish = {
       enable = true;
 
-      interactiveShellInit = 
-      # fish
-      ''
-        set fish_greeting
+      interactiveShellInit =
+        # fish
+        ''
+          set fish_greeting
 
-        fastfetch
-      '';
+          fastfetch
+        '';
     };
 
     starship = {
@@ -121,18 +81,13 @@
       };
     };
 
-    fastfetch = {
-      enable = true;
-    };
+    fastfetch = { enable = true; };
 
     eza = {
       enable = true;
       enableFishIntegration = true;
 
-      extraOptions = [
-        "--group-directories-first"
-        "--hyperlink"
-      ];
+      extraOptions = [ "--group-directories-first" "--hyperlink" ];
 
       git = true;
       icons = true;
@@ -196,7 +151,7 @@
         cursor.style = "Beam";
       };
     };
-  
+
     home-manager.enable = true;
   };
 
