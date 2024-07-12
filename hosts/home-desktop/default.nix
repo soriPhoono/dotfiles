@@ -64,6 +64,12 @@
 
   security = {
     sudo.wheelNeedsPassword = false;
+
+    rtkit.enable = true;
+
+    polkit = {
+      enable = true;
+    };
   };
 
   systemd.tmpfiles.rules = 
@@ -87,15 +93,14 @@
 
   time.timeZone = lib.mkDefault "America/Chicago";
 
-  users = {
-    defaultUserShell = pkgs.fish;
+  users.users = {
+    soriphoono = {
+      description = "Sori Phoono";
 
-    users = {
-      soriphoono = {
-        description = "Sori Phoono";
-        isNormalUser = true;
-        extraGroups = [ "wheel" "networkmanager" "audio" ];
-      };
+      isNormalUser = true;
+      shell = pkgs.fish;
+      
+      extraGroups = [ "wheel" "networkmanager" "audio" ];
     };
   };
 
@@ -109,18 +114,24 @@
       coreutils
 
       wget
+
+      polkit_gnome
     ];
   };
 
   programs = {
     fish.enable = true;
 
+    gnome-disks.enable = true;
     partition-manager.enable = true;
 
-    steam = {
+    file-roller.enable = true;
+
+    seahorse.enable = true;
+    nautilus-open-any-terminal = {
       enable = true;
 
-      extest.enable = true;
+      terminal = "alacritty";
     };
   };
 
@@ -130,7 +141,7 @@
       enable = true;
       mountOnMedia = true;
     };
-    # devmon.enable = true;
+    devmon.enable = true;
 
     openssh = {
       enable = true;
@@ -171,19 +182,18 @@
       };
     };
 
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
+    gnome = {
+      gnome-keyring.enable = true;
 
-    desktopManager.plasma6.enable = true;
+      sushi.enable = true;
+    };
   };
 
   networking = {
     networkmanager = {
       enable = true;
 
-      wifi = { powersave = false; };
+      wifi.powersave = false;
     };
   };
 
