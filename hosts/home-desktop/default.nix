@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{
   imports = [
     ./hardware-configuration.nix
 
@@ -8,6 +8,4 @@
 
     ../../modules/services/pipewire.nix
   ];
-
-  system.stateVersion = lib.mkDefault "24.11";
 }

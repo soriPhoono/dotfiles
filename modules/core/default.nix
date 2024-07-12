@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./nixpkgs.nix
     ./boot.nix
@@ -19,4 +19,5 @@
 
   programs.nix-index-database.comma.enable = true;
 
+  system.stateVersion = lib.mkDefault "24.11";
 }

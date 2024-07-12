@@ -1,1 +1,7 @@
-{ imports = [ ./modules/core ./services/openssh.nix ]; }
+{
+  imports = [
+    ./core
+
+    ./services/openssh.nix
+  ];
+}
