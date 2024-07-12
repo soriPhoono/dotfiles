@@ -6,4 +6,6 @@
       wifi.powersave = false;
     };
   };
+
+  users.users.soriphoono.extraGroups = [ "networkmanager" ];
 }

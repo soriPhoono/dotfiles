@@ -8,7 +8,7 @@
       isNormalUser = true;
       shell = pkgs.fish;
       
-      extraGroups = [ "wheel" "networkmanager" "audio" ];
+      extraGroups = [ "wheel" ];
     };
   };
 }

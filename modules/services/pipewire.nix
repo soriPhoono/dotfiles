@@ -23,4 +23,5 @@
     };
   };
 
+  users.users.soriphoono.extraGroups = [ "audio" ];
 }
