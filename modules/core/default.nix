@@ -4,6 +4,7 @@
     ./boot.nix
     ./localization.nix
     ./users.nix
+    ./networking.nix
   ];
 
   documentation.dev.enable = true;
@@ -12,7 +13,10 @@
 
   environment.systemPackages = with pkgs; [
     coreutils
-    
+
     wget
   ];
+
+  programs.nix-index-database.comma.enable = true;
+
 }
