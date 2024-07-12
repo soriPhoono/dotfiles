@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: {
-  imports = [ 
+  imports = [
     ./hardware-configuration.nix
-    
+
     ../../modules/core
   ];
 
@@ -37,26 +37,24 @@
   security = {
     rtkit.enable = true;
 
-    polkit = {
-      enable = true;
-    };
+    polkit = { enable = true; };
   };
 
-  systemd.tmpfiles.rules = 
-    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"];
+  systemd.tmpfiles.rules =
+    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
 
   environment = {
     sessionVariables = {
       LIBVA_DRIVER_NAME = "iHD";
       VDPAU_DRIVER = "va_gl";
     };
-    
-    systemPackages = with pkgs; [
-      polkit_gnome
-    ];
+
+    systemPackages = with pkgs; [ polkit_gnome ];
   };
 
   programs = {
+    nix-index-database.comma.enable = true;
+
     gnome-disks.enable = true;
     partition-manager.enable = true;
 
@@ -92,7 +90,7 @@
         KbdInteractiveAuthentication = false;
       };
     };
-    
+
     pipewire = {
       enable = true;
 
