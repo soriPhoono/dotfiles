@@ -17,4 +17,15 @@
       ];
     };
   }) # Selected nerd fonts to install
+  (final: prev: {
+    poetry2nix = prev.poetry2nix.defaultPoetryOverrides.extend
+    (self: super: {
+      rocmPackages.rocm-llvm-compiler-rt = super.rocm-llvm-compiler-rt.overridePythonAttrs
+      (
+        old: {
+          buildInputs = (old.buildInputs or [ ]) ++ [ super.distutils ];
+        }
+      );
+    });
+  })
 ]
