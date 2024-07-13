@@ -1,5 +1,6 @@
 {
   imports = [
+    ./core/mpris.nix
     ./core/xdg.nix
 
     ./programs/cli.nix

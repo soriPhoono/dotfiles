@@ -20,5 +20,37 @@
     unzip
     unrar
     p7zip
+
+    discord
+    betterdiscordctl
+    yt-dlp
+    spotdl
+    ytmdl
+
+    gimp
+    obs-studio
+    audacity
+    davinci-resolve
+
+    lutris
+    heroic
+
+    bottles
+
+    prismlauncher
+
+    path-of-building
   ];
+
+  xdg.desktopEntries.path-of-building = {
+    name = "Path of Building";
+    genericName = "build planner";
+
+    exec = "pobfrontend";
+    terminal = false;
+
+    categories = [
+      "Application"
+    ];
+  };
 }

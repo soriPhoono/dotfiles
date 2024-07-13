@@ -1,20 +1,11 @@
 {
   description = "Personal computer configurations";
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ./hosts ];
-
-      systems = [ "x86_64-linux" ];
-    };
+  outputs = inputs: {
+    nixosConfigurations = import ./hosts { inherit inputs; };
+  };
 
   inputs = {
-    # Schema
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
     # Core
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # Package repo
     nixos-hardware.url =
@@ -26,7 +17,7 @@
     }; # Command-not-found functionality
 
     # User inputs
-    hm = {
+    home-manager = {
       url = "github:nix-community/home-manager";
 
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +27,7 @@
       url = "github:danth/stylix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "hm";
+        home-manager.follows = "home-manager";
       };
     };
   };

@@ -1,36 +1,76 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 let
   inherit (inputs.nixpkgs) lib;
-
-  specialArgs = { inherit lib inputs pkgs; };
-
-  hm = inputs.hm.nixosModules.home-manager {
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-
-      extraSpecialArgs = specialArgs;
-
-      users.soriphoono = { imports = [ ../users/soriphoono.nix ]; };
-    };
-  };
 in {
-  flake.nixosConfigurations = {
-    zephyrus = lib.nixosSystem {
-      inherit specialArgs;
+  zephyrus =
+    let
+      system = "x86_64-linux";
+    
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+
+        config.allowUnfree = true;
+      };
+
+    in lib.nixosSystem {
+      inherit system;
+    
+      specialArgs = { inherit lib inputs pkgs; };
 
       modules = [
         inputs.nixos-hardware.nixosModules.asus-zephyrus-ga401
 
         ./zephyrus
 
-        hm
+        inputs.home-manager.nixosModules.home-manager {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            extraSpecialArgs = { inherit inputs pkgs; };
+
+            backupFileExtension = "~";
+
+            users.soriphoono.imports = [
+              ../users/soriphoono.nix
+            ];
+          };
+        }
       ];
     };
 
-    home-desktop = lib.nixosSystem {
-      inherit specialArgs;
-      modules = [ ./home-desktop hm ];
+    
+    home-desktop =
+    let
+      system = "x86_64-linux";
+    
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+
+        config.allowUnfree = true;
+      };
+    in lib.nixosSystem {
+      inherit system;
+    
+      specialArgs = { inherit inputs pkgs; };
+      
+      modules = [
+        ./zephyrus
+
+        inputs.home-manager.nixosModules.home-manager {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            extraSpecialArgs = { inherit inputs pkgs; };
+
+            backupFileExtension = "~";
+
+            users.soriphoono.imports = [
+              ../users/soriphoono.nix
+            ];
+          };
+        }
+      ];
     };
-  };
 }
