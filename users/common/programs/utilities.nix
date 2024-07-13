@@ -13,5 +13,15 @@
     clinfo
     glxinfo
     vulkan-tools
+    wayland-utils
+
+    imagemagick
+
+    unzip
+    unrar
+    p7zip
+
+    # Graphical
+    obsidian
   ];
 }
