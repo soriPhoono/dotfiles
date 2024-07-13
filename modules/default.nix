@@ -8,6 +8,8 @@
     ./core/users.nix
     ./core/networking.nix
 
+    ./programs/utilities.nix
+
     ./services/openssh.nix
   ];
 

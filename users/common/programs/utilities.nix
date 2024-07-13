@@ -27,9 +27,12 @@
     spotdl
     ytmdl
 
+    obsidian
+
     gimp
     obs-studio
     audacity
+    blender
     davinci-resolve
 
     lutris
