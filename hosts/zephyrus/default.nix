@@ -1,8 +1,8 @@
-{ pkgs, vars, ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
 
-    ../../modules/core
+    ../../modules
     ../../modules/hardware/bluetooth.nix
     ../../modules/hardware/graphics.nix
 

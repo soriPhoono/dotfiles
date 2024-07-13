@@ -20,8 +20,5 @@
     unzip
     unrar
     p7zip
-
-    # Graphical
-    obsidian
   ];
 }

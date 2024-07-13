@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   home = {
-    shellAliases = with pkgs; {
+    shellAliases = {
       cat = "bat";
 
       df = "${pkgs.duf}/bin/duf";
@@ -41,7 +41,7 @@
       settings = {
         logo = {
           type = "file";
-          source = ../../../assets/text/cli.logo
+          source = ../../../assets/text/cli.logo;
         };
       };
     };

@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, vars, ... }:
+{ inputs, pkgs, ... }:
 let
   opacity = 0.8;
 
@@ -18,7 +18,7 @@ in {
       };
     };
 
-    image = vars.wallpaper_path;
+    image = ../../../assets/wallpapers/2.jpg;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
@@ -43,7 +43,10 @@ in {
         name = "AurulentSansM Nerd Font Propo";
       };
 
-      sansSerif = config.stylix.fonts.serif;
+      sansSerif = {
+        package = pkgs.nerdfonts;
+        name = "AurulentSansM Nerd Font Propo";
+      };
 
       monospace = {
         package = pkgs.nerdfonts;
