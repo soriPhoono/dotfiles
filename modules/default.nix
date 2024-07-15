@@ -3,6 +3,8 @@
     ./core/locale.nix
     ./core/users.nix
     ./core/util-programs.nix
+
+    ./services/openssh.nix
   ];
 
   nix = {

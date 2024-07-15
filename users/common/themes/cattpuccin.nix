@@ -1,4 +1,4 @@
-{ inputs, pkgs, vars, ... }:
+{ inputs, pkgs, ... }:
 let
   opacity = 0.8;
 
@@ -18,7 +18,7 @@ in {
       };
     };
 
-    image = vars.wallpaperPath;
+    image = ../../../assets/wallpapers/2.jpg;
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 

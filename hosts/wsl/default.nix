@@ -1,9 +1,11 @@
-{ lib, inputs, vars, ... }:
+{ lib, inputs, ... }:
 let
   system = "x86_64-linux";
 
   pkgs = import inputs.nixpkgs {
     inherit system;
+
+    overlays = import ../../overlays.nix;
 
     config.allowUnfree = true;
   };
@@ -13,7 +15,7 @@ in lib.nixosSystem {
   inherit system;
 
   specialArgs = {
-    inherit lib inputs pkgs vars;
+    inherit lib inputs pkgs;
   };
 
   modules = with inputs; [
@@ -29,9 +31,9 @@ in lib.nixosSystem {
         useGlobalPkgs = true;
         useUserPackages = true;
 
-        extraSpecialArgs = { inherit inputs pkgs vars; };
+        extraSpecialArgs = { inherit inputs pkgs; };
 
-        users.${vars.defaultUser} = {
+        users.soriphoono = {
           imports = cli ++ [
             ../../users/soriphoono.nix
           ];
