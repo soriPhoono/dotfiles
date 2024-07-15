@@ -1,5 +1,5 @@
-{
-  imports = [
+let
+  cli = [
     ./core/xdg.nix
 
     ./programs/git.nix
@@ -9,4 +9,6 @@
 
     ./programs/helix.nix
   ];
+in {
+  inherit cli;
 }

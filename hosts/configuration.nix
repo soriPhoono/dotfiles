@@ -1,5 +1,0 @@
-{ lib, pkgs, ... }: {
-  imports = [
-    ../modules
-  ];
-}

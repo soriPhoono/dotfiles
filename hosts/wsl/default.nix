@@ -7,6 +7,8 @@ let
 
     config.allowUnfree = true;
   };
+
+  inherit (import ../../users/common) cli;
 in lib.nixosSystem {
   inherit system;
 
@@ -17,7 +19,8 @@ in lib.nixosSystem {
   modules = with inputs; [
     nixos-wsl.nixosModules.default
 
-    ../configuration.nix
+    ../../modules
+
     ./configuration.nix
 
     inputs.home-manager.nixosModules.home-manager
@@ -26,12 +29,12 @@ in lib.nixosSystem {
         useGlobalPkgs = true;
         useUserPackages = true;
 
-        backupFileExtension = "~";
-
         extraSpecialArgs = { inherit inputs pkgs vars; };
 
         users.${vars.defaultUser} = {
-          imports = [ ../../users/${vars.defaultUser}.nix ];
+          imports = cli ++ [
+            ../../users/soriphoono.nix
+          ];
         };
       };
     }
