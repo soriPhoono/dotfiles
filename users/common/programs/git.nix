@@ -24,7 +24,6 @@
           line-numbers = true;
           side-by-side = true;
 
-          # true-color = "always";
           diff.colorMoved = "default";
           merge.conflictstyle = "diff3";
         };
