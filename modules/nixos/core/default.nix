@@ -1,25 +1,44 @@
-{ lib, ... }: {
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-    };
-  };
-
-  time.timeZone = lib.mkDefault "America/Chicago";
+{ pkgs, ... }: {
+  imports = [
+    ./locale.nix
+    ./users.nix
+  ];
 
   environment.systemPackages = with pkgs; [
     coreutils
 
     wget
   ];
+
+  programs = {
+    fish.enable = true;
+
+    dconf.enable = true;
+
+    nix-index-database.comma.enable = true;
+  };
+
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+
+    optimise = {
+      dates = [
+        "daily"
+      ];
+      automatic = true;
+    };
+
+    gc = {
+      automatic = true;
+      dates = "daily";
+      options = "--delete-older-than 2d";
+    };
+  };
 }

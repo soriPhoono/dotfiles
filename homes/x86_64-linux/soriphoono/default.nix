@@ -75,7 +75,7 @@ in {
       df = "${duf}/bin/duf";
       du = "${dua}/bin/dua i";
 
-      top = "${btop}/bin/btop";
+      btop = "${btop}/bin/btop";
     };
 
     stateVersion = "24.11";
