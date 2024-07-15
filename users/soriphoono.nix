@@ -1,7 +1,6 @@
 {
   imports = [
-    ./common/programs/git.nix
-    ./common/programs/helix.nix
+    ./common
   ];
 
   home.stateVersion = "24.11";
