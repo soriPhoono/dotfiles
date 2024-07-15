@@ -1,5 +1,6 @@
-[
-  (self: super: {
+{
+  ...
+}: self: super: {
     discord = super.discord.overrideAttrs (
       _: {
         src = builtins.fetchTarball {
@@ -8,13 +9,4 @@
         };
       }
     );
-  }) # Discord update system
-  (final: prev: {
-    nerdfonts = prev.nerdfonts.override {
-      fonts = [
-        "AurulentSansMono"
-        "JetBrainsMono"
-      ];
-    };
-  }) # Selected nerd fonts to install
-]
+  }
