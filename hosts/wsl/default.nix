@@ -21,6 +21,8 @@ in lib.nixosSystem {
   modules = with inputs; [
     nixos-wsl.nixosModules.default
 
+    nix-index-db.nixosModules.nix-index
+
     ../../modules
 
     ./configuration.nix
