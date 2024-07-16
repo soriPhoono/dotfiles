@@ -22,14 +22,20 @@
           nix-index-db.nixosModules.nix-index
         ];
 
-        hosts.wsl.modules = with inputs; [
-          nixos-wsl.nixosModules.default {
-            wsl.enable = true;
-            wsl.defaultUser = "soriphoono";
+        hosts = {
+          wsl.modules = with inputs; [
+            nixos-wsl.nixosModules.default {
+              wsl.enable = true;
+              wsl.defaultUser = "soriphoono";
 
-            system.stateVersion = "24.11";
-          }
-        ];
+              system.stateVersion = "24.11";
+            }
+          ];
+
+          zephyrus.modules = with inputs; [
+            nixos-hardware.nixosModules.asus-zephyrus-ga401
+          ];
+        };
       };
 
       homes = {

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   imports = [
     ./locale.nix
     ./users.nix
@@ -43,4 +43,6 @@
       options = "--delete-older-than 2d";
     };
   };
+
+  system.stateVersion = lib.mkDefault "24.11";
 }
