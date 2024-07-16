@@ -1,18 +1,18 @@
-{
+{ pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  boot.enable = true;
   boot.kernelParams = [ "i915.force_probe=a780" ];
 
-  hardware = {
-    bluetooth.enable = true;
-    graphics.enable = true;
+  boot.enable = true;
+  bluetooth.enable = true;
+  opengl.enable = true;
+  logitech.enable = true;
+  xbox.enable = true;
 
-    logitech.enable = true;
-    xbox.enable = true;
-  };
+  core.cli.enable = true;
+  networking.networkManager.enable = true;
 
   systemd.tmpfiles.rules =
     [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];

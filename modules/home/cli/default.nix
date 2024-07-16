@@ -2,12 +2,10 @@
 let cfg = config.home.cli;
 in {
   options = {
-    home.cli = {
-      enable = lib.mkEnableOption "Enable the home CLI module";
-    };
+    home.cli.enable = lib.mkEnableOption "Enable the home CLI module";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     xdg = {
       enable = true;
 

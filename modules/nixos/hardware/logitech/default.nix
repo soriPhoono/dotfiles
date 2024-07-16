@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.hardware.logitech;
+let cfg = config.logitech;
 in {
   options = {
     logitech.enable = lib.mkEnableOption "Enable Logitech services";

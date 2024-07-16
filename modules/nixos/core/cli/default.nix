@@ -2,12 +2,13 @@
 let cfg = config.core.cli;
 in {
   options = {
-    core.cli.enable = lib.mkEnableOption "Home CLI";
+    core.cli.enable = lib.mkEnableOption "Core CLI";
   };
 
   config = lib.mkIf cfg.enable {
-    fish.enable = true;
+    users.defaultUserShell = pkgs.fish;
 
-    dconf.enable = true;
-  }
+    programs.fish.enable = true;
+    programs.dconf.enable = true;
+  };
 }

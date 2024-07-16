@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.hardware.bluetooth;
+let cfg = config.bluetooth;
 in {
   options = {
     bluetooth.enable = lib.mkEnableOption "Enable bluetooth services";
@@ -9,6 +9,7 @@ in {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
+      hsphfpd.enable = true;
 
       settings = {
         General = {
