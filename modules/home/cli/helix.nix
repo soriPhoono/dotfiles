@@ -4,15 +4,9 @@
       enable = true;
       defaultEditor = true;
 
-      ignores = [
-
-      ];
-
       settings = {
         editor = {
           auto-save = true;
-
-          bufferline = "multiple";
 
           statusline = {
             left = [
