@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.bluetooth;
+let cfg = config.hardware.bluetooth;
 in {
   options = {
     bluetooth.enable = lib.mkEnableOption "Enable bluetooth services";

@@ -1,9 +1,11 @@
-{ lib, config, ... }: {
+{ lib, config, ... }:
+let cfg = config.hardware.xbox;
+in {
   options = {
     xbox.enable = lib.mkEnableOption "Enable Xbox controller services";
   };
 
-  config = lib.mkIf config.xbox.enable {
+  config = lib.mkIf cfg.enable {
     hardware = {
       xone.enable = true;
       steam-hardware.enable = true;
