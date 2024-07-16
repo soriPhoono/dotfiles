@@ -12,13 +12,7 @@
     wget
   ];
 
-  programs = {
-    fish.enable = true;
-
-    dconf.enable = true;
-
-    nix-index-database.comma.enable = true;
-  };
+  programs.nix-index-database.comma.enable = true;
 
   nix = {
     settings = {

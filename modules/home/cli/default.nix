@@ -1,65 +1,143 @@
-{ pkgs, ... }: {
-  imports = [
-    ./git.nix
-    ./helix.nix
-  ];
-
-  home.shellAliases = with pkgs; {
-    ls = "eza";
-    ll = "eza -l";
-    lt = "eza -T";
-
-    cat = "${bat}/bin/bat";
-
-    df = "${duf}/bin/duf";
-    du = "${dua}/bin/dua i";
-
-    btop = "${btop}/bin/btop";
+{ lib, pkgs, config, ... }:
+let cfg = config.home.cli;
+in {
+  options = {
+    home.cli = {
+      enable = lib.mkEnableOption "Enable the home CLI module";
+    };
   };
 
-  programs = {
-    fish = {
+  config = {
+    xdg = {
       enable = true;
 
-      interactiveShellInit = ''
-        set fish_greeting
+      userDirs = {
+        enable = true;
 
-        fastfetch
-      '';
-    };
-
-    starship = {
-      enable = true;
-
-      settings = {
-        add_newline = true;
-
-        format = "$character";
-        right_format = "$all";
-
-        character = {
-          success_symbol = "[➜](bold green) ";
-          error_symbol = "[➜](bold red) ";
-        };
+        createDirectories = true;
       };
     };
 
-    fastfetch = {
-      enable = true;
+    home.shellAliases = with pkgs; {
+      ls = "eza";
+      ll = "eza -l";
+      lt = "eza -T";
+
+      cat = "${bat}/bin/bat";
+
+      df = "${duf}/bin/duf";
+      du = "${dua}/bin/dua i";
+
+      btop = "${btop}/bin/btop";
     };
 
-    eza = {
-      enable = true;
+    programs = {
+      git = {
+        enable = true;
 
-      extraOptions = [
-        "--group-directories-first"
-        "--hyperlink"
-      ];
+        userName = "soriphoono";
+        userEmail = "soriphoono@gmail.com";
 
-      git = true;
-      icons = true;
+        includes = [
+          # TODO: setup sops-nix to store school git data
+        ];
+
+        extraConfig = {
+          init.defaultBranch = "main";
+          url."git@github.com/" = { insteadOf = [ "gh:" "github:" ]; };
+          pull.rebase = false;
+        };
+
+        delta = {
+          enable = true;
+
+          options = {
+            dark = true;
+            line-numbers = true;
+            side-by-side = true;
+
+            diff.colorMoved = "default";
+            merge.conflictstyle = "diff3";
+          };
+        };
+      };
+
+      fish = {
+        enable = true;
+
+        interactiveShellInit = ''
+          set fish_greeting
+
+          fastfetch
+        '';
+      };
+
+      starship = {
+        enable = true;
+
+        settings = {
+          add_newline = true;
+
+          format = "$character";
+          right_format = "$all";
+
+          character = {
+            success_symbol = "[➜](bold green) ";
+            error_symbol = "[➜](bold red) ";
+          };
+        };
+      };
+
+      fastfetch = {
+        enable = true;
+      };
+
+      eza = {
+        enable = true;
+
+        extraOptions = [
+          "--group-directories-first"
+          "--hyperlink"
+        ];
+
+        git = true;
+        icons = true;
+      };
+
+      bat.enable = true;
+
+      helix = {
+        enable = true;
+        defaultEditor = true;
+
+        settings = {
+          editor = {
+            auto-save = true;
+
+            statusline = {
+              left = [
+                "mode"
+                "version-control"
+                "file-base-name"
+                "file-modification-indicator"
+              ];
+              right = [ "diagnostics" "file-type" "position-percentage" ];
+
+              mode = {
+                normal = "󰋜";
+                insert = "󰏪";
+                select = "󰍉";
+              };
+            };
+
+            cursor-shape = {
+              normal = "block";
+              insert = "bar";
+              select = "underline";
+            };
+          };
+        };
+      };
     };
-
-    bat.enable = true;
   };
 }
