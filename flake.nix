@@ -15,6 +15,8 @@
         };
       };
 
+      channels-config.allowUnfree = true;
+
       systems = {
         modules.nixos = with inputs; [
           nix-index-db.nixosModules.nix-index

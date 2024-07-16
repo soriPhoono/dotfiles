@@ -1,5 +1,11 @@
 {
-  imports = [
-    ./xdg.nix
-  ];
+  xdg = {
+    enable = true;
+
+    userDirs = {
+      enable = true;
+
+      createDirectories = true;
+    };
+  };
 }

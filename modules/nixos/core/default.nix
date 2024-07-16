@@ -2,6 +2,8 @@
   imports = [
     ./locale.nix
     ./users.nix
+
+    ./openssh.nix
   ];
 
   environment.systemPackages = with pkgs; [

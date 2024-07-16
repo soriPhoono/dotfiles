@@ -1,20 +1,21 @@
 { pkgs, ... }: {
   imports = [
     ./git.nix
+    ./helix.nix
   ];
 
   home.shellAliases = with pkgs; {
-      ls = "eza";
-      ll = "eza -l";
-      lt = "eza -T";
+    ls = "eza";
+    ll = "eza -l";
+    lt = "eza -T";
 
-      cat = "${bat}/bin/bat";
+    cat = "${bat}/bin/bat";
 
-      df = "${duf}/bin/duf";
-      du = "${dua}/bin/dua i";
+    df = "${duf}/bin/duf";
+    du = "${dua}/bin/dua i";
 
-      btop = "${btop}/bin/btop";
-    };
+    btop = "${btop}/bin/btop";
+  };
 
   programs = {
     fish = {
