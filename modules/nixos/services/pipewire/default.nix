@@ -1,5 +1,5 @@
-{ lib, config }:
-let cfg = config.services.pipewire;
+{ lib, config, ... }:
+let cfg = config.pipewire;
 in {
   options = {
     pipewire.enable = lib.mkEnableOption "Enable PipeWire";
@@ -14,8 +14,6 @@ in {
         alsa.enable = true;
         alsa.support32Bit = true;
         jack.enable = true;
-
-        wireplumber.enable = true;
       };
     };
 
