@@ -18,10 +18,6 @@
       channels-config.allowUnfree = true;
 
       systems = {
-        modules.nixos = with inputs; [
-          nix-index-db.nixosModules.nix-index
-        ];
-
         hosts = {
           wsl.modules = with inputs; [
             nixos-wsl.nixosModules.default {
@@ -77,10 +73,5 @@
         home-manager.follows = "home-manager";
       };
     };
-
-    nix-index-db = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    }; # Command-not-found functionality
   };
 }

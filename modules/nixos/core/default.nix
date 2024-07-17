@@ -6,13 +6,13 @@
     ./openssh.nix
   ];
 
+  core.cli.enable = true;
+
   environment.systemPackages = with pkgs; [
     coreutils
 
     wget
   ];
-
-  programs.nix-index-database.comma.enable = true;
 
   nix = {
     settings = {

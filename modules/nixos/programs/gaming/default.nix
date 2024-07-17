@@ -1,15 +1,23 @@
-{ lib, pkgs, config, ... }: {
-  programs.steam = {
-    enable = true;
-    extest.enable = true;
+{ lib, pkgs, config, ... }:
+let cfg = config.programs.gaming;
+in {
+  options = {
+    programs.gaming.enable = lib.mkEnableOption "Enable gaming programs";
+  };
 
-    protontricks.enable = true;
+  config = lib.mkIf cfg.enable {
+    programs.steam = {
+      enable = true;
+      extest.enable = true;
 
-    remotePlay.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
+      protontricks.enable = true;
 
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
+      remotePlay.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
   };
 }
