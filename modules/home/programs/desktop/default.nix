@@ -1,12 +1,12 @@
-{ lib, pkgs, config, enable, ... }:
+{ lib, pkgs, config, ... }:
 let cfg = config.programs.desktop;
 in {
   options = {
-    programs.development.enable = lib.mkEnableOption "Enable development programs";
+    programs.desktop.enable = lib.mkEnableOption "Enable development programs";
   };
 
-  config = lib.mkIf cfg.desktop.enable {
-    home.packages = with pkgs; lib.mkIf enable [
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
       usbutils
       pciutils
 
