@@ -19,6 +19,7 @@
   programs.enable = true;
   programs.gaming.enable = true;
   services.openrgb.enable = true;
+  services.pipewire.enable = true;
 
   services.logind.extraConfig = ''
     HandlePowerKey=poweroff

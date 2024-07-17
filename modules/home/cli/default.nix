@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.home.cli;
+let cfg = config.cli;
 in {
   options = {
-    home.cli.enable = lib.mkEnableOption "Enable the home CLI module";
+    cli.enable = lib.mkEnableOption "Enable the home CLI module";
   };
 
   config = lib.mkIf cfg.enable {

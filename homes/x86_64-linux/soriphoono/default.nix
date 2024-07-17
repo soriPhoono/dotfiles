@@ -1,5 +1,5 @@
 {
-  home.cli.enable = true;
+  cli.enable = true;
   programs.enable = true;
   themes.catppuccin.enable = true;
 
