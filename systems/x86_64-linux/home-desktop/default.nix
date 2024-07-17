@@ -14,6 +14,16 @@
   core.cli.enable = true;
   networking.networkManager.enable = true;
 
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-media-driver
+    vaapiVdpau
+    libvdpau-va-gl
+
+    intel-compute-runtime
+
+    rocmPackages.clr.icd
+  ];
+
   systemd.tmpfiles.rules =
     [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
 

@@ -8,6 +8,10 @@
 
   core.cli.enable = true;
 
+  documentation.dev.enable = true;
+
+  security.sudo.wheelNeedsPassword = false;
+
   environment.systemPackages = with pkgs; [
     coreutils
 

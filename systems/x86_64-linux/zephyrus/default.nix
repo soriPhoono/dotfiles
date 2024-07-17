@@ -15,6 +15,8 @@
   xbox.enable = true;
 
   core.cli.enable = true;
+  programs.enable = true;
+  programs.gaming.enable = true;
   networking.networkManager.enable = true;
 
   services.logind.extraConfig = ''
