@@ -6,7 +6,7 @@
     development.enable = host != "wsl";
     desktop.enable = host != "wsl";
   };
-  themes.catppuccin.enable = true;
+  themes.catppuccin.enable = host != "wsl";
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
