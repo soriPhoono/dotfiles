@@ -1,5 +1,5 @@
 { lib, pkgs, config, ... }:
-let cfg = config.services.kde;
+let cfg = config.kde;
 in {
   options = {
     kde.enable = lib.mkEnableOption "Enable KDE Plasma Desktop";
