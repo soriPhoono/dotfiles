@@ -19,7 +19,7 @@
   networking.networkManager.enable = true;
   programs.enable = true;
   programs.gaming.enable = true;
-  services.openrgb.enable = true;
+  openrgb.enable = true;
   pipewire.enable = true;
 
   kde.enable = true;
