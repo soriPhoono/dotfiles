@@ -1,12 +1,12 @@
 { lib, pkgs, config, ... }:
-let cfg = config.programs
+let cfg = config.programs;
 in {
   options = {
     programs.enable = lib.mkEnableOption "Enable userspace default programs";
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
+    home.packages = with pkgs; [
       usbutils
       pciutils
 
