@@ -13,13 +13,16 @@
   opengl.enable = true;
   logitech.enable = true;
   xbox.enable = true;
+  qmk.enable = true;
 
   core.cli.enable = true;
   networking.networkManager.enable = true;
   programs.enable = true;
   programs.gaming.enable = true;
   services.openrgb.enable = true;
-  services.pipewire.enable = true;
+  pipewire.enable = true;
+
+  kde.enable = true;
 
   services.logind.extraConfig = ''
     HandlePowerKey=poweroff

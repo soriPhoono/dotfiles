@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, pkgs, config, ... }:
 let cfg = config.programs.development;
 in {
   options = {
@@ -6,8 +6,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    hardware.keyboard.qmk.enable = true;
-
     home.packages = with pkgs; [
 
     ];
