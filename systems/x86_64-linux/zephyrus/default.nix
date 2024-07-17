@@ -15,9 +15,10 @@
   xbox.enable = true;
 
   core.cli.enable = true;
+  networking.networkManager.enable = true;
   programs.enable = true;
   programs.gaming.enable = true;
-  networking.networkManager.enable = true;
+  services.openrgb.enable = true;
 
   services.logind.extraConfig = ''
     HandlePowerKey=poweroff
