@@ -1,10 +1,10 @@
-{ host, ... }: {
+{ lib, host, ... }: {
   cli.enable = true;
   programs = {
     enable = true;
 
-    development.enable = lib.mkIf host != "wsl";
-    desktop.enable = lib.mkIf host != "wsl";
+    development.enable = host != "wsl";
+    desktop.enable = host != "wsl";
   };
   themes.catppuccin.enable = true;
 
