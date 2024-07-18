@@ -24,7 +24,7 @@ in {
     programs.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${system}.hyprland;
-    }
+    };
 
     environment.systemPackages = with pkgs; [
       kitty
