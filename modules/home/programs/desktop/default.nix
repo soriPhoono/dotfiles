@@ -42,5 +42,7 @@ in {
 
       path-of-building
     ];
+
+    programs.firefox.enable = true;
   };
 }
