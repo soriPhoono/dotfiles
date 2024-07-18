@@ -22,7 +22,7 @@
   openrgb.enable = true;
   pipewire.enable = true;
 
-  kde.enable = true;
+  hyprland.enable = true;
 
   services.logind.extraConfig = ''
     HandlePowerKey=poweroff
