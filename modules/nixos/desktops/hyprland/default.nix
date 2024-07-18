@@ -19,9 +19,9 @@ in {
         ];
         theme = "catppuccin-sddm-corners";
       }; */
-
-      programs.hyprland.enable = true;
     };
+    
+    programs.hyprland.enable = true;
 
     environment.systemPackages = with pkgs; [
       kitty
