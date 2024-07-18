@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ inputs, lib, pkgs, config, system, ... }:
 let cfg = config.hyprland;
 in {
   options = {
@@ -21,7 +21,10 @@ in {
       }; */
     };
     
-    programs.hyprland.enable = true;
+    programs.hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${system}.hyprland;
+    }
 
     environment.systemPackages = with pkgs; [
       kitty
