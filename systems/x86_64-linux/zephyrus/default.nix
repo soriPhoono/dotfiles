@@ -17,7 +17,7 @@
 
   core.cli.enable = true;
   networking.networkManager.enable = true;
-  programs.enable = true;
+
   programs.gaming.enable = true;
   openrgb.enable = true;
   pipewire.enable = true;

@@ -16,26 +16,14 @@ in {
         };
       };
 
-      image = ../../../../assets/wallpapers/soulful_anime.jpg;
+      image = ../../../../assets/wallpapers/cutie_dino.png;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-
-      polarity = "dark";
 
       cursor = {
         package = pkgs.catppuccin-cursors.mochaTeal;
         size = 24;
         name = "Catppuccin-Mocha-Teal-Cursors";
-      };
-
-      opacity =
-      let
-        opacity = 0.8;
-      in {
-        applications = opacity;
-        desktop = opacity;
-        popups = opacity;
-        terminal = opacity;
       };
 
       fonts = {

@@ -6,6 +6,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.partition-manager.enable = true;
+    
   };
 }

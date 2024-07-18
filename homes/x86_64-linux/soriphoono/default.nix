@@ -1,5 +1,6 @@
 { lib, host, ... }: {
   cli.enable = true;
+  hyprland.enable = host != "wsl";
   programs = {
     enable = true;
 
