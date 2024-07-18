@@ -7,7 +7,7 @@ in {
 
   config = {
     services = {
-      /* displayManager.sddm = {
+      displayManager.sddm = {
         enable = true;
         wayland = {
           enable = true;
@@ -18,7 +18,7 @@ in {
           catppuccin-sddm-corners
         ];
         theme = "catppuccin-sddm-corners";
-      }; */
+      };
     };
     
     programs.hyprland = {

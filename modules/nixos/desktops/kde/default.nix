@@ -5,7 +5,7 @@ in {
     kde.enable = lib.mkEnableOption "Enable KDE Plasma Desktop";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     services = {
       displayManager.sddm = {
         enable = true;

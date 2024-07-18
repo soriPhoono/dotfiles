@@ -70,7 +70,11 @@ in {
         '';
       };
 
-      nix-index.enableFishIntegration = true;
+      nix-index = {
+        enable = true;
+      
+        enableFishIntegration = true;
+      };
 
       starship = {
         enable = true;

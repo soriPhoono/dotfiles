@@ -38,10 +38,6 @@
         modules = with inputs; [
           stylix.homeManagerModules.stylix
         ];
-
-        users.soriphoono.modules = with inputs; [
-
-        ];
       };
     };
 
