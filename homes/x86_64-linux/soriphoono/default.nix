@@ -1,15 +1,15 @@
 { lib, host, ... }: {
   cli.enable = true;
-  hyprland.enable = host != "wsl";
+  hyprland.enable = true;
 
   programs = {
     enable = true;
 
-    development.enable = host != "wsl";
-    desktop.enable = host != "wsl";
+    development.enable = true;
+    desktop.enable = true;
   };
 
-  themes.catppuccin.enable = host != "wsl";
+  themes.catppuccin.enable = true;
 
   programs.home-manager.enable = true;
   home.stateVersion = "24.11";
