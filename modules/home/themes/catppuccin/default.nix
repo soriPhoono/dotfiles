@@ -51,12 +51,11 @@ in {
         let
           default_font = 14;
           focus_font = 16;
-          terminal_font = 14;
         in {
           applications = focus_font;
           desktop = default_font;
           popups = default_font;
-          terminal = terminal_font;
+          terminal = focus_font;
         };
       };
     };
