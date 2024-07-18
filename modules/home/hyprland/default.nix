@@ -5,7 +5,10 @@ in {
     hyprland.enable = lib.mkEnableOption "Enable personal hyprland configuration";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = 
+  let
+    opacity = 0.8;
+  in lib.mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -19,12 +22,13 @@ in {
       };
     };
 
+    programs = {
     alacritty = {
       enable = true;
 
       settings = {
         window = {
-          opacity = config.home.hyprland.opacity;
+          inherit opacity;
 
           blur = true;
 
@@ -34,5 +38,7 @@ in {
 
         cursor.style = "Beam";
       };
-    };  };
+    };
+    };
+  };
 }
