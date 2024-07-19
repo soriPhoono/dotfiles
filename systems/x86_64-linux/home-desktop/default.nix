@@ -36,6 +36,6 @@
     VDPAU_DRIVER = "va_gl";
   };
 
-  programs.gaming.enable = true;
+  programs.steam.enable = true;
   services.openrgb.enable = true;
 }
