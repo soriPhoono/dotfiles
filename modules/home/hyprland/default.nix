@@ -22,6 +22,23 @@ in {
           inactive_opacity = 0.8;
 
           dim_inactive = true;
+
+          blur.xray = true;
+        };
+
+        input = {
+          repeat_rate = 20;
+          repeat_delay = 300;
+
+          accel_profile = "flat";
+
+          natural_scroll = true;
+
+          touchpad = {
+            natural_scroll = true;
+            clickfinger_behavior = true;
+            tap-to-click = true;
+          };
         };
         
         # Keybindings

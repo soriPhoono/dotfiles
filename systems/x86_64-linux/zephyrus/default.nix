@@ -18,7 +18,7 @@
 
   hyprland.enable = true;
 
-  programs.steam.enable = true;
+  programs.desktop.steam.enable = true;
   services.openrgb.enable = true;
 
   services.logind.extraConfig = ''
