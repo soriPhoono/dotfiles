@@ -19,6 +19,14 @@
 
       systems = {
         hosts = {
+          wsl.modules = with inputs; [
+            nixos-wsl.nixosModules.wsl {
+              wsl = {
+                enable = true;
+                defaultUser = "soriphoono";
+              };
+            }
+          ];
           zephyrus.modules = with inputs; [
             nixos-hardware.nixosModules.asus-zephyrus-ga401
           ];
@@ -39,6 +47,7 @@
     };
 
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixos-wsl.url = "github:nix-community/nixos-wsl/main";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {

@@ -9,25 +9,36 @@ in {
     services = {
       displayManager.sddm = {
         enable = true;
+
         wayland = {
           enable = true;
           compositor = "weston";
         };
 
-        extraPackages = with pkgs; [
-          catppuccin-sddm-corners
-        ];
         theme = "catppuccin-sddm-corners";
       };
+
+      pipewire = {
+        enable = true;
+
+        pulse.enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        jack.enable = true;
+      };
     };
-    
+
+    environment.systemPackages = with pkgs; [
+      catppuccin-sddm-corners
+    ];
+
     programs.hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${system}.hyprland;
     };
 
-    environment.systemPackages = with pkgs; [
-      kitty
+    users.users.soriphoono.extraGroups = [
+      "audio"
     ];
   };
 }

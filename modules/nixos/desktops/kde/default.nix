@@ -13,10 +13,23 @@ in {
       };
 
       desktopManager.plasma6.enable = true;
+
+      pipewire = {
+        enable = true;
+
+        pulse.enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        jack.enable = true;
+      };
     };
 
     environment.plasma6.excludePackages = with pkgs; [
       oxygen
+    ];
+
+    users.users.soriphoono.extraGroups = [
+      "audio"
     ];
   };
 }

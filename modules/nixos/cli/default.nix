@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.core.cli;
+let cfg = config.cli;
 in {
   options = {
-    core.cli.enable = lib.mkEnableOption "Core CLI";
+    cli.enable = lib.mkEnableOption "Core CLI";
   };
 
   config = lib.mkIf cfg.enable {

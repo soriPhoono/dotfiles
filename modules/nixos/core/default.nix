@@ -6,7 +6,7 @@
     ./openssh.nix
   ];
 
-  core.cli.enable = true;
+  cli.enable = true;
 
   documentation.dev.enable = true;
 
