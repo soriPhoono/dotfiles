@@ -10,9 +10,24 @@ in {
       enable = true;
 
       settings = {
+        # Variables
         "$mod" = "SUPER";
 
+        general.border_size = 3;
+
+        decoration = {
+          rounding = 10;
+
+          active_opacity = 0.8;
+          inactive_opacity = 0.8;
+
+          dim_inactive = true;
+        };
+        
+        # Keybindings
         bind = [
+          # "$mod, Q, kill"
+        
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList (
