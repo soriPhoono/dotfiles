@@ -49,7 +49,7 @@ in {
 
         # Keybindings
         bind = [
-          # "$mod, Q, kill"
+          "$mod, Q, killactive,"
 
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
@@ -93,15 +93,124 @@ in {
       hyprlock = {
         enable = true;
 
-        settings = {};
+        settings = {
+          general = {
+            disable_loading_bar = true;
+            hide_cursor = true;
+            grace = 5;
+            ignore_empty_input = true;
+            text_trim = true;
+          };
+
+          background = [
+            {
+              path = "screenshot";
+
+              blur_passes = 1;
+              blur_size = 7;
+              noise = 0.0117;
+              contrast = 0.8916;
+              brightness = 0.8172;
+              vibrancy = 0.1696;
+              vibrancy_darkness = 0.0;
+            }
+          ];
+
+          label = [
+            {
+              text = "Hello, $USER!\nAttempts: $ATTEMPTS[None]";
+              text_align = "center";
+              halign = "center";
+              valign = "center";
+            }
+            {
+              text = "$TIME";
+              text_align = "center";
+              halign = "right";
+              valign = "bottom";
+            }
+          ];
+
+          input-field = [
+            {
+              fade_on_empty = true;
+              placeholder_text = "Input password...";
+              hide_input = true;
+              halign = "center";
+              valign = "center";
+            }
+          ];
+        };
+      };
+
+      anyrun = {
+        enable = true;
+        config = {
+          plugins = [
+            # An array of all the plugins you want, which either can be paths to the .so files, or their packages
+            inputs.anyrun.packages.${pkgs.system}.applications
+            inputs.anyrun.packages.${pkgs.system}.websearch
+          ];
+          x = { fraction = 0.5; };
+          y = { fraction = 0.3; };
+          width = { fraction = 0.3; };
+          hideIcons = false;
+          ignoreExclusiveZones = false;
+          layer = "overlay";
+          hidePluginInfo = false;
+          closeOnClick = false;
+          showResultsImmediately = false;
+          maxEntries = null;
+        };
+        extraCss = ''
+          .some_class {
+            background: red;
+          }
+        '';
+
+        extraConfigFiles."some-plugin.ron".text = ''
+          Config(
+            // for any other plugin
+            // this file will be put in ~/.config/anyrun/some-plugin.ron
+            // refer to docs of xdg.configFile for available options
+          )
+        '';
       };
     };
 
     services = {
       hypridle = {
-        enable = true;
+        # enable = true;
 
-        settings = {};
+        settings = {
+          general = {
+            ignore_dbus_inhibit = false;
+            lock_cmd = "pidof hyprlock || hyprlock";
+            before_sleep_cmd = "loginctl lock-session";
+            after_sleep_cmd = "hyprctl dispatch dpms on";
+          };
+
+          listener = [
+            {
+              timeout = 300;
+              on-timeout = "brightnessctl -s set 10 && brightnessctl -sd asus:kbd_backlight set 0";
+              on-resume = "brightnessctl -r && brightnessctl -rd asus:kbd_backlight";
+            }
+            {
+              timeout = 900;
+              on-timeout = "loginctl lock-session";
+            }
+            {
+              timeout = 1200;
+              on-timeout = "hyprctl dispatch dpms off";
+              on-resume = "hyprctl dispatch dpms on";
+            }
+            {
+              timeout = 1800;
+              on-timeout = "systemctl suspend";
+            }
+          ];
+        };
       };
 
       mako = {
@@ -110,7 +219,7 @@ in {
         anchor = "bottom-right";
         borderRadius = 10;
         borderSize = 3;
-      }
+      };
     };
   };
 }

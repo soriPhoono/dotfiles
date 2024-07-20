@@ -37,6 +37,10 @@
         modules = with inputs; [
           stylix.homeManagerModules.stylix
         ];
+
+        users."soriphoono@zephyrus".modules = with inputs; [
+          anyrun.homeManagerModules.default
+        ];
       };
     };
 
@@ -77,6 +81,11 @@
         hyprland.follows = "hyprland";
         nixpkgs.follows = "nixpkgs";
       };
+    };
+
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

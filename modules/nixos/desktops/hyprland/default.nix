@@ -39,7 +39,7 @@ in {
         theme = "catppuccin-sddm-corners";
       };
 
-      hypridle.enable = true
+      hypridle.enable = true;
     };
 
     security.polkit.enable = true;
