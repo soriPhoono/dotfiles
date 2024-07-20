@@ -6,6 +6,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      polkit_gnome
+      libnotify
+      brightnessctl
+    ];
+  
     qt.enable = true;
 
     wayland.windowManager.hyprland = {
@@ -51,6 +57,7 @@ in {
         bind = [
           "$mod, Q, killactive,"
 
+          "$mod, A, exec, anyrun"
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList (
@@ -118,7 +125,7 @@ in {
 
           label = [
             {
-              text = "Hello, $USER!\nAttempts: $ATTEMPTS[None]";
+              text = "Hello, $USER!";
               text_align = "center";
               halign = "center";
               valign = "center";
@@ -162,25 +169,12 @@ in {
           showResultsImmediately = false;
           maxEntries = null;
         };
-        extraCss = ''
-          .some_class {
-            background: red;
-          }
-        '';
-
-        extraConfigFiles."some-plugin.ron".text = ''
-          Config(
-            // for any other plugin
-            // this file will be put in ~/.config/anyrun/some-plugin.ron
-            // refer to docs of xdg.configFile for available options
-          )
-        '';
       };
     };
 
     services = {
       hypridle = {
-        # enable = true;
+        enable = true;
 
         settings = {
           general = {
@@ -216,9 +210,10 @@ in {
       mako = {
         enable = true;
 
-        anchor = "bottom-right";
+        anchor = "top-right";
         borderRadius = 10;
         borderSize = 3;
+        margin = "20,20,20,20";
       };
     };
   };

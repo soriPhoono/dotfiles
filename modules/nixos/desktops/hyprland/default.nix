@@ -8,7 +8,6 @@ in {
   config = {
     environment.systemPackages = with pkgs; [
       catppuccin-sddm-corners
-      polkit_gnome
     ];
 
     programs = {
@@ -38,8 +37,6 @@ in {
 
         theme = "catppuccin-sddm-corners";
       };
-
-      hypridle.enable = true;
     };
 
     security.polkit.enable = true;
