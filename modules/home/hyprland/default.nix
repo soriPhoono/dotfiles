@@ -6,6 +6,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    qt.enable = true;
+
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -80,6 +82,28 @@ in {
           cursor.style = "Beam";
         };
       };
+
+      hyprlock = {
+        enable = true;
+
+        settings = {};
+      };
+    };
+
+    services = {
+      hypridle = {
+        enable = true;
+
+        settings = {};
+      };
+
+      mako = {
+        enable = true;
+
+        anchor = "bottom-right";
+        borderRadius = 10;
+        borderSize = 3;
+      }
     };
   };
 }

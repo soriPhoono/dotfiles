@@ -6,7 +6,28 @@ in {
   };
 
   config = {
+    environment.systemPackages = with pkgs; [
+      catppuccin-sddm-corners
+      polkit_gnome
+    ];
+
+    programs = {
+      hyprland = {
+        enable = true;
+        package = inputs.hyprland.packages.${system}.hyprland;
+      };
+    };
+
     services = {
+      pipewire = {
+        enable = true;
+
+        pulse.enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        jack.enable = true;
+      };
+
       displayManager.sddm = {
         enable = true;
 
@@ -18,24 +39,10 @@ in {
         theme = "catppuccin-sddm-corners";
       };
 
-      pipewire = {
-        enable = true;
-
-        pulse.enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        jack.enable = true;
-      };
+      hypridle.enable = true
     };
 
-    environment.systemPackages = with pkgs; [
-      catppuccin-sddm-corners
-    ];
-
-    programs.hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${system}.hyprland;
-    };
+    security.polkit.enable = true;
 
     users.users.soriphoono.extraGroups = [
       "audio"
