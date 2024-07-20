@@ -62,6 +62,11 @@ in {
             "$mod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
           ]
         ) 10));
+
+        bindm = [
+          "$mod, mouse:272, movewindow"
+          "$mod, mouse:273, resizewindow"
+        ];
       };
     };
 
