@@ -40,11 +40,15 @@ in {
             tap-to-click = true;
           };
         };
-        
+
+        misc.disable_hyprland_logo = false;
+        xwayland.force_zero_scaling = true;
+        cursor.no_hardware_cursors = true;
+
         # Keybindings
         bind = [
           # "$mod, Q, kill"
-        
+
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList (
