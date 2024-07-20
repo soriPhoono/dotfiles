@@ -49,6 +49,9 @@ in {
         bind = [
           # "$mod, Q, kill"
 
+          "$mod, Control_L, movewindow"
+          "$mod, ALT_L, resizewindow"
+
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList (
