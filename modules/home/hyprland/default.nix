@@ -49,7 +49,10 @@ in {
           };
         };
 
-        misc.disable_hyprland_logo = false;
+        misc = {
+          disable_hyprland_logo = false;
+          vfr = true;
+        };
         xwayland.force_zero_scaling = true;
         cursor.no_hardware_cursors = true;
 
@@ -57,7 +60,7 @@ in {
         bind = [
           "$mod, Q, killactive,"
 
-          "$mod, A, exec, anyrun"
+          "$mod, A, exec, walker"
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList (
@@ -150,25 +153,29 @@ in {
         };
       };
 
-      anyrun = {
+      walker = {
         enable = true;
+        runAsService = true;
+
+        # All options from the config.json can be used here.
         config = {
-          plugins = [
-            # An array of all the plugins you want, which either can be paths to the .so files, or their packages
-            inputs.anyrun.packages.${pkgs.system}.applications
-            inputs.anyrun.packages.${pkgs.system}.websearch
-          ];
-          x = { fraction = 0.5; };
-          y = { fraction = 0.3; };
-          width = { fraction = 0.3; };
-          hideIcons = false;
-          ignoreExclusiveZones = false;
-          layer = "overlay";
-          hidePluginInfo = false;
-          closeOnClick = false;
-          showResultsImmediately = false;
-          maxEntries = null;
+          search.placeholder = "Type here...";
+          fullscreen = true;
+          list = {
+            height = 200;
+          };
+          websearch.prefix = "?";
+          switcher.prefix = "/";
         };
+
+        # If this is not set the default styling is used.
+        style = 
+        # css
+        ''
+          * {
+            color: #dcd7ba;
+          }
+        '';
       };
     };
 

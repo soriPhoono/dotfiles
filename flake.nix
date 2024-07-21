@@ -39,7 +39,7 @@
         ];
 
         users."soriphoono@zephyrus".modules = with inputs; [
-          anyrun.homeManagerModules.default
+          walker.homeManagerModules.walker
         ];
       };
     };
@@ -83,9 +83,6 @@
       };
     };
 
-    anyrun = {
-      url = "github:anyrun-org/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
+    walker.url = "github:abenz1267/walker";
+ };
 }

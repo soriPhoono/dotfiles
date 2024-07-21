@@ -15,6 +15,8 @@ in {
         enable = true;
         package = inputs.hyprland.packages.${system}.hyprland;
       };
+
+      hyprlock.enable = true;
     };
 
     services = {
@@ -37,6 +39,8 @@ in {
 
         theme = "catppuccin-sddm-corners";
       };
+
+      hypridle.enable = true;
     };
 
     security.polkit.enable = true;
