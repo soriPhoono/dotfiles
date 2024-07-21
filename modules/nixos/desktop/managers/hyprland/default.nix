@@ -6,6 +6,13 @@ in {
   };
 
   config = {
+    security.polkit.enable = true;
+
+    desktop.managers = {
+      pipewire.enable = true;
+      sddm.enable = true;
+    };
+
     environment.systemPackages = with pkgs; [
       catppuccin-sddm-corners
     ];
@@ -22,20 +29,13 @@ in {
     };
 
     services = {
-      pipewire = {
+      udisks2 = {
         enable = true;
-
-        pulse.enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        jack.enable = true;
+        mountOnMedia = true;
       };
 
       displayManager.sddm = {
-        enable = true;
-
         wayland = {
-          enable = true;
           compositor = "weston";
         };
 
@@ -44,11 +44,5 @@ in {
 
       hypridle.enable = true;
     };
-
-    security.polkit.enable = true;
-
-    users.users.soriphoono.extraGroups = [
-      "audio"
-    ];
   };
 }

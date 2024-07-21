@@ -6,8 +6,6 @@
     ./openssh.nix
   ];
 
-  cli.enable = true;
-
   documentation.dev.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
@@ -34,12 +32,10 @@
       # extra substituters to add
       extra-substituters = [
         "https://anyrun.cachix.org"
-        "https://walker.cachix.org"
       ];
 
       extra-trusted-public-keys = [
         "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
-        "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
       ];
     };
 

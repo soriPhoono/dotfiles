@@ -3,18 +3,19 @@
     ./hardware-configuration.nix
   ];
 
-  boot.enable = true;
   hardware.nvidia.open = true;
 
-  cli.enable = true;
+  core = {
+    boot.enable = true;
 
-  bluetooth.enable = true;
-  opengl.enable = true;
-  logitech.enable = true;
-  xbox.enable = true;
-  qmk.enable = true;
+    hardware = {
+      bluetooth.enable = true;
+      opengl.enable = true;
+      xbox.enable = true;
+    };
 
-  networking.networkManager.enable = true;
+    networking.networkManager.enable = true;
+  };
 
   hyprland.enable = true;
 

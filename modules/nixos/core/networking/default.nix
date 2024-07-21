@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.networking;
+let cfg = config.core.networking;
 in {
   options = {
-    networking = {
+    core.networking = {
       networkManager.enable = lib.mkEnableOption "Enable NetworkManager";
       serverNetworking.enable = lib.mkEnableOption "Enable server networking";
     };
@@ -11,6 +11,7 @@ in {
   config = lib.mkIf cfg.networkManager.enable {
     networking.networkmanager = {
       enable = true;
+
       wifi.powersave = false;
     };
 
