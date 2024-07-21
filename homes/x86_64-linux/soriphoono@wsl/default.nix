@@ -1,4 +1,4 @@
-{ lib, host, ... }: {
+{
   programs.home-manager.enable = true;
 
   themes.catppuccin.enable = true;
