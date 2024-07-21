@@ -11,7 +11,6 @@ in {
       brightnessctl
       clipman
       blueberry
-      nm-applet
     ];
   
     qt.enable = true;
@@ -72,7 +71,7 @@ in {
         bind = [
           "$mod, Q, killactive,"
 
-          "$mod, A, exec, walker"
+          "$mod, A, exec, anyrun"
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList (
@@ -191,11 +190,6 @@ in {
     };
 
     services = {
-      udisks2 = {
-        enable = true;
-        mountOnMedia = true;
-      };
-    
       hypridle = {
         enable = true;
 
