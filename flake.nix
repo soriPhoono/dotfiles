@@ -27,6 +27,7 @@
               };
             }
           ];
+
           zephyrus.modules = with inputs; [
             nixos-hardware.nixosModules.asus-zephyrus-ga401
           ];
@@ -39,7 +40,7 @@
         ];
 
         users."soriphoono@zephyrus".modules = with inputs; [
-          walker.homeManagerModules.walker
+          anyrun.homeManagerModules.default
         ];
       };
     };
@@ -83,6 +84,9 @@
       };
     };
 
-    walker.url = "github:abenz1267/walker";
- };
+    anyrun = {
+      url = "github:anyrun-org/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 }
