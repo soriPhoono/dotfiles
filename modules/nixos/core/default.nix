@@ -18,6 +18,8 @@
     wget
   ];
 
+  programs.dconf.enable = true;
+
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -28,7 +30,7 @@
       ];
 
       builders-use-substitutes = true;
-      
+
       # extra substituters to add
       extra-substituters = [
         "https://anyrun.cachix.org"
