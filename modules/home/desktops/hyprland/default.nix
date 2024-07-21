@@ -1,0 +1,115 @@
+{ lib, pkgs, config, ... }:
+let cfg = config.desktops.hyprland;
+in {
+  options = {
+    desktops.hyprland.enable = lib.mkEnableOption "Enable personal hyprland configuration";
+  };
+
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      libnotify
+      brightnessctl
+      clipman
+      blueberry
+      networkmanagerapplet
+    ];
+
+    qt.enable = true;
+
+    wayland.windowManager.hyprland = {
+      enable = true;
+
+      systemd.variables = ["--all"];
+
+      settings = {
+        # Variables
+        "$mod" = "SUPER";
+
+        general.border_size = 3;
+
+        decoration = {
+          rounding = 10;
+
+          active_opacity = 0.8;
+          inactive_opacity = 0.8;
+
+          dim_inactive = true;
+
+          blur.xray = true;
+        };
+
+        input = {
+          repeat_rate = 20;
+          repeat_delay = 300;
+
+          accel_profile = "flat";
+
+          natural_scroll = true;
+
+          touchpad = {
+            natural_scroll = true;
+            clickfinger_behavior = true;
+            tap-to-click = true;
+          };
+        };
+
+        misc = {
+          disable_hyprland_logo = false;
+          vfr = true;
+        };
+        xwayland.force_zero_scaling = true;
+        cursor.no_hardware_cursors = true;
+
+        exec = [
+
+        ];
+
+        exec-once = [
+          "${pkgs.polkit_gnome}/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        ];
+
+        # Keybindings
+        bind = [
+          "$mod, Q, killactive,"
+
+          "$mod, A, exec, walker"
+          "$mod, B, exec, firefox"
+          "$mod, RETURN, exec, alacritty"
+        ] ++ (builtins.concatLists (builtins.genList (
+          x: let
+            ws = let
+              c = (x + 1) / 10;
+            in
+              builtins.toString (x + 1 - (c * 10));
+          in [
+            "$mod, ${ws}, workspace, ${toString (x + 1)}"
+            "$mod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
+          ]
+        ) 10));
+
+        bindm = [
+          "$mod, mouse:272, movewindow"
+          "$mod, Control_L, movewindow"
+          "$mod, mouse:273, resizewindow"
+          "$mod, ALT_L, resizewindow"
+        ];
+      };
+    };
+
+    terminal.emulators.alacritty.enable = true;
+
+    desktops = {
+      programs.util = {
+        hyprlock.enable = true;
+
+        anyrun.enable = true;
+      };
+
+      services = {
+        hypridle.enable = true;
+
+        mako.enable = true;
+      };
+    };
+  };
+}

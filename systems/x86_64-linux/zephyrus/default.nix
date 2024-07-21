@@ -3,23 +3,29 @@
     ./hardware-configuration.nix
   ];
 
-  boot.enable = true;
   hardware.nvidia.open = true;
 
-  cli.enable = true;
+  core = {
+    boot.enable = true;
 
-  bluetooth.enable = true;
-  opengl.enable = true;
-  logitech.enable = true;
-  xbox.enable = true;
-  qmk.enable = true;
+    hardware = {
+      bluetooth.enable = true;
+      opengl.enable = true;
+      xbox.enable = true;
+    };
 
-  networking.networkManager.enable = true;
+    networking.networkManager.enable = true;
 
-  hyprland.enable = true;
+    programs.enable = true;
+  };
 
-  programs.desktop.steam.enable = true;
-  services.openrgb.enable = true;
+  desktop = {
+    managers.hyprland.enable = true;
+
+    programs.steam.enable = true;
+    services.openrgb.enable = true;
+  };
+
 
   services.logind.extraConfig = ''
     HandlePowerKey=poweroff
