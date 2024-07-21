@@ -37,9 +37,6 @@
       homes = {
         modules = with inputs; [
           stylix.homeManagerModules.stylix
-        ];
-
-        users."soriphoono@zephyrus".modules = with inputs; [
           anyrun.homeManagerModules.default
         ];
       };

@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 let cfg = config.desktops.hyprland;
 in {
   options = {
@@ -11,7 +11,7 @@ in {
       brightnessctl
       clipman
       blueberry
-      nm-applet
+      networkmanagerapplet
     ];
 
     qt.enable = true;
@@ -100,13 +100,6 @@ in {
 
     desktops.programs.util = {
       hyprlock.enable = true;
-    };
-
-    services = {
-      udisks2 = {
-        enable = true;
-        mountOnMedia = true;
-      };
     };
   };
 }

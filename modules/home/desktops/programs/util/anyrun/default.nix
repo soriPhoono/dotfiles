@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ inputs, lib, pkgs, config, ... }:
 let cfg = config.desktops.programs.util.anyrun;
 in {
   options = {
@@ -28,6 +28,5 @@ in {
         maxEntries = null;
       };
     };
-
-  }
+  };
 }

@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.desktops.services.util.hyprlock;
+let cfg = config.desktops.services.util.hypridle;
 in {
   options = {
     desktops.services.util.hypridle.enable = lib.mkEnableOption "Enable hypridle";
