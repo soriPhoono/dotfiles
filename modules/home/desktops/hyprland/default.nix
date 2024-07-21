@@ -72,7 +72,7 @@ in {
         bind = [
           "$mod, Q, killactive,"
 
-          "$mod, A, exec, walker"
+          "$mod, A, exec, anyrun"
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList (
