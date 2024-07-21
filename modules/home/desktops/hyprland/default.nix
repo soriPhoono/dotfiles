@@ -98,8 +98,18 @@ in {
 
     terminal.emulators.alacritty.enable = true;
 
-    desktops.programs.util = {
-      hyprlock.enable = true;
+    desktops = {
+      programs.util = {
+        hyprlock.enable = true;
+
+        anyrun.enable = true;
+      };
+
+      services = {
+        hypridle.enable = true;
+
+        mako.enable = true;
+      };
     };
   };
 }
