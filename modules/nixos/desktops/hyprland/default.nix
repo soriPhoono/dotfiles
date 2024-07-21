@@ -17,6 +17,8 @@ in {
       };
 
       hyprlock.enable = true;
+
+      gnome-disks.enable = true;
     };
 
     services = {

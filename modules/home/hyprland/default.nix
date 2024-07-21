@@ -7,15 +7,19 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      polkit_gnome
       libnotify
       brightnessctl
+      clipman
+      blueberry
+      nm-applet
     ];
   
     qt.enable = true;
 
     wayland.windowManager.hyprland = {
       enable = true;
+
+      systemd.variables = ["--all"];
 
       settings = {
         # Variables
@@ -55,6 +59,14 @@ in {
         };
         xwayland.force_zero_scaling = true;
         cursor.no_hardware_cursors = true;
+
+        exec = [
+          
+        ];
+
+        exec-once = [
+          "${pkgs.polkit_gnome}/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        ];
 
         # Keybindings
         bind = [
@@ -159,6 +171,10 @@ in {
           plugins = [
             # An array of all the plugins you want, which either can be paths to the .so files, or their packages
             inputs.anyrun.packages.${pkgs.system}.applications
+            inputs.anyrun.packages.${pkgs.system}.rink
+            inputs.anyrun.packages.${pkgs.system}.shell
+            inputs.anyrun.packages.${pkgs.system}.kidex
+            inputs.anyrun.packages.${pkgs.system}.websearch
           ];
           x = { fraction = 0.5; };
           y = { fraction = 0.3; };
@@ -175,6 +191,11 @@ in {
     };
 
     services = {
+      udisks2 = {
+        enable = true;
+        mountOnMedia = true;
+      };
+    
       hypridle = {
         enable = true;
 
