@@ -19,6 +19,7 @@ in {
         catppuccin.catppuccin-vsc-icons
 
         jnoortheen.nix-ide
+        kamadorueda.alejandra
       ];
 
       userSettings = {
@@ -27,6 +28,8 @@ in {
 
         "editor.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
+
+        "git.autofetch" = true;
       };
     };
   };
