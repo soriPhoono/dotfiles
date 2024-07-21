@@ -1,11 +1,11 @@
 { inputs, lib, pkgs, config, system, ... }:
-let cfg = config.hyprland;
+let cfg = config.desktop.managers.hyprland;
 in {
   options = {
-    hyprland.enable = lib.mkEnableOption "Enable Hyprland Desktop";
+    desktop.managers.hyprland.enable = lib.mkEnableOption "Enable Hyprland Desktop";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     security.polkit.enable = true;
 
     desktop.managers = {

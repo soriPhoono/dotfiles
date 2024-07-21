@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.programs.development;
+let cfg = config.terminal.programs.development;
 in {
   options = {
-    programs.development.enable = lib.mkEnableOption "Enable development programs";
+    terminal.programs.development.enable = lib.mkEnableOption "Enable development programs";
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,6 +17,8 @@ in {
       cmake
       meson
 
+      qmk
+
       zig
 
       rustup
@@ -25,9 +27,8 @@ in {
 
       python3
 
+      nodejs_22
       sass
-
-      qmk
     ];
   };
 }

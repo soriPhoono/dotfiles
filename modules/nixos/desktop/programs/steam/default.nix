@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.programs.desktop.steam;
+let cfg = config.desktop.programs.steam;
 in {
   options = {
-    programs.desktop.steam.enable = lib.mkEnableOption "Enable steam programs";
+    desktop.programs.steam.enable = lib.mkEnableOption "Enable steam programs";
   };
 
   config = lib.mkIf cfg.enable {

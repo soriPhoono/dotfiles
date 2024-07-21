@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.services.openrgb;
+let cfg = config.desktop.services.openrgb;
 in {
   options = {
-    services.openrgb.enable = lib.mkEnableOption "Enable OpenRGB service";
+    desktop.services.openrgb.enable = lib.mkEnableOption "Enable OpenRGB service";
   };
 
   config = lib.mkIf cfg.enable {

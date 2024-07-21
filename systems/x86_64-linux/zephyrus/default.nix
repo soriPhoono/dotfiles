@@ -15,12 +15,17 @@
     };
 
     networking.networkManager.enable = true;
+
+    programs.enable = true;
   };
 
-  hyprland.enable = true;
+  desktop = {
+    managers.hyprland.enable = true;
 
-  programs.desktop.steam.enable = true;
-  services.openrgb.enable = true;
+    programs.steam.enable = true;
+    services.openrgb.enable = true;
+  };
+
 
   services.logind.extraConfig = ''
     HandlePowerKey=poweroff

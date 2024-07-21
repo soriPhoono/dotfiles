@@ -1,8 +1,8 @@
 { inputs, lib, pkgs, config, ... }:
-let cfg = config.hyprland;
+let cfg = config.desktops.hyprland;
 in {
   options = {
-    hyprland.enable = lib.mkEnableOption "Enable personal hyprland configuration";
+    desktops.hyprland.enable = lib.mkEnableOption "Enable personal hyprland configuration";
   };
 
   config = lib.mkIf cfg.enable {
@@ -13,7 +13,7 @@ in {
       blueberry
       nm-applet
     ];
-  
+
     qt.enable = true;
 
     wayland.windowManager.hyprland = {
@@ -61,7 +61,7 @@ in {
         cursor.no_hardware_cursors = true;
 
         exec = [
-          
+
         ];
 
         exec-once = [
@@ -195,7 +195,7 @@ in {
         enable = true;
         mountOnMedia = true;
       };
-    
+
       hypridle = {
         enable = true;
 
