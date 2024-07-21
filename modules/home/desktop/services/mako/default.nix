@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.desktops.services.mako;
+let cfg = config.desktop.services.mako;
 in {
   options = {
-    desktops.services.mako.enable = lib.mkEnableOption "Enable mako";
+    desktop.services.mako.enable = lib.mkEnableOption "Enable mako";
   };
 
   config = lib.mkIf cfg.enable {

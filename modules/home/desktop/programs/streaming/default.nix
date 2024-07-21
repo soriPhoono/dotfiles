@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktops.programs.streaming;
+let cfg = config.desktop.programs.streaming;
 in {
   options = {
-    desktops.programs.streaming.enable = lib.mkEnableOption "Enable streaming programs";
+    desktop.programs.streaming.enable = lib.mkEnableOption "Enable streaming programs";
   };
 
   config = lib.mkIf cfg.enable {

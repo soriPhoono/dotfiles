@@ -1,11 +1,12 @@
 { lib, host, ... }: {
   terminal.programs.development.enable = true;
 
-  desktops = {
+  desktop = {
     hyprland.enable = true;
 
     programs = {
       enable = true;
+      development.enable = true;
       gaming.enable = true;
       streaming.enable = true;
     };

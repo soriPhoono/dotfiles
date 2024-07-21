@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.desktops.programs.util.hyprlock;
+let cfg = config.desktop.programs.util.hyprlock;
 in {
   options = {
-    desktops.programs.util.hyprlock.enable = lib.mkEnableOption "Enable hyprlock";
+    desktop.programs.util.hyprlock.enable = lib.mkEnableOption "Enable hyprlock";
   };
 
   config = lib.mkIf cfg.enable {

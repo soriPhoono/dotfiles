@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktops.programs;
+let cfg = config.desktop.programs;
 in {
   options = {
-    desktops.programs.enable = lib.mkEnableOption "Enable development programs";
+    desktop.programs.enable = lib.mkEnableOption "Enable development programs";
   };
 
   config = lib.mkIf cfg.enable {

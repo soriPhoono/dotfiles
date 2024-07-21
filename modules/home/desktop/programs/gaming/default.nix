@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktops.programs.gaming;
+let cfg = config.desktop.programs.gaming;
 in {
   options = {
-    desktops.programs.gaming.enable = lib.mkEnableOption "Enable gaming programs";
+    desktop.programs.gaming.enable = lib.mkEnableOption "Enable gaming programs";
   };
 
   config = lib.mkIf cfg.enable {

@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktops.hyprland;
+let cfg = config.desktop.hyprland;
 in {
   options = {
-    desktops.hyprland.enable = lib.mkEnableOption "Enable personal hyprland configuration";
+    desktop.hyprland.enable = lib.mkEnableOption "Enable personal hyprland configuration";
   };
 
   config = lib.mkIf cfg.enable {
@@ -27,8 +27,8 @@ in {
         decoration = {
           rounding = 10;
 
-          active_opacity = 0.8;
-          inactive_opacity = 0.8;
+          active_opacity = 0.9;
+          inactive_opacity = 0.9;
 
           dim_inactive = true;
 
@@ -96,7 +96,7 @@ in {
 
     terminal.emulators.alacritty.enable = true;
 
-    desktops = {
+    desktop = {
       programs.util.anyrun.enable = true;
 
       services = {

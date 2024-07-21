@@ -1,8 +1,8 @@
 { inputs, lib, pkgs, config, ... }:
-let cfg = config.desktops.programs.util.anyrun;
+let cfg = config.desktop.programs.util.anyrun;
 in {
   options = {
-    desktops.programs.util.anyrun.enable = lib.mkEnableOption "Enable anyrun";
+    desktop.programs.util.anyrun.enable = lib.mkEnableOption "Enable anyrun";
   };
 
   config = lib.mkIf cfg.enable {
