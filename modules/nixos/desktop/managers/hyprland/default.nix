@@ -25,6 +25,7 @@ in {
 
       hyprlock.enable = true;
       gnome-disks.enable = true;
+      nm-applet.enable = true;
     };
 
     services = {

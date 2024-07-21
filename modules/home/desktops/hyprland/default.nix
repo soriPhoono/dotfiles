@@ -10,9 +10,7 @@ in {
       libnotify
       brightnessctl
       clipman
-      blueberry
-      networkmanagerapplet
-    ];
+   ];
 
     qt.enable = true;
 
