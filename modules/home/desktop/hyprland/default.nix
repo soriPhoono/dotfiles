@@ -9,7 +9,6 @@ in {
     home.packages = with pkgs; [
       libnotify
       brightnessctl
-      clipman
    ];
 
     qt.enable = true;
@@ -62,8 +61,9 @@ in {
 
         ];
 
-        exec-once = [
-          "${pkgs.polkit_gnome}/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+        exec-once = with pkgs; [
+          "${polkit_gnome}/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+          "${wl-clipboard-rs}/bin/wl-paste --watch ${clipman}/bin/clipman store"
         ];
 
         # Keybindings
@@ -97,11 +97,7 @@ in {
     terminal.emulators.alacritty.enable = true;
 
     desktops = {
-      programs.util = {
-        hyprlock.enable = true;
-
-        anyrun.enable = true;
-      };
+      programs.util.anyrun.enable = true;
 
       services = {
         hypridle.enable = true;
