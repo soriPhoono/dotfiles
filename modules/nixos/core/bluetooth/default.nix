@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.bluetooth;
+let cfg = config.core.bluetooth;
 in {
   options = {
-    bluetooth.enable = lib.mkEnableOption "Enable bluetooth services";
+    core.bluetooth.enable = lib.mkEnableOption "Enable bluetooth services";
   };
 
   config = lib.mkIf cfg.enable {

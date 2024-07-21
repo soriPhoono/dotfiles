@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.qmk;
+let cfg = config.core.qmk;
 in {
   options = {
-    qmk.enable = lib.mkEnableOption "Enable userspace qmk driver support";
+    core.qmk.enable = lib.mkEnableOption "Enable userspace qmk driver support";
   };
 
   config = lib.mkIf cfg.enable {

@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.boot;
+let cfg = config.core.boot;
 in {
   options = {
-    boot.enable = lib.mkEnableOption "Enable boot services";
+    core.boot.enable = lib.mkEnableOption "Enable boot services";
   };
 
   config = lib.mkIf cfg.enable {

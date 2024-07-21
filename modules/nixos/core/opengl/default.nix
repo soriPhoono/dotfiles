@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.opengl;
+let cfg = config.core.opengl;
 in {
   options = {
-    opengl.enable = lib.mkEnableOption "Enable opengl drivers";
+    core.opengl.enable = lib.mkEnableOption "Enable opengl drivers";
   };
 
   config = lib.mkIf cfg.enable {

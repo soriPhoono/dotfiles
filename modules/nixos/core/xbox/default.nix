@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.xbox;
+let cfg = config.core.xbox;
 in {
   options = {
-    xbox.enable = lib.mkEnableOption "Enable Xbox controller services";
+    core.xbox.enable = lib.mkEnableOption "Enable Xbox controller services";
   };
 
   config = lib.mkIf cfg.enable {
