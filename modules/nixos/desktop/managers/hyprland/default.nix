@@ -24,7 +24,6 @@ in {
       };
 
       hyprlock.enable = true;
-
       gnome-disks.enable = true;
     };
 
@@ -43,6 +42,7 @@ in {
       };
 
       hypridle.enable = true;
+      blueman.enable = true;
     };
   };
 }
