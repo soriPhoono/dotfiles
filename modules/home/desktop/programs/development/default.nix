@@ -29,6 +29,8 @@ in
 
       userSettings = {
         "window.titleBarStyle" = "custom";
+        "window.dialogStyle" = "custom";
+        "window.menuBarVisibility" = "compact";
 
         "workbench.colorTheme" = "Stylix";
         "workbench.iconTheme" = "catppuccin-mocha";
