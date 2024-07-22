@@ -43,6 +43,7 @@ in
 
         "git.autofetch" = true;
         "git.confirmSync" = false;
+        "git.enableSmartCommit" = true;
 
         "nix.serverSettings" = {
           "nixd" = {
