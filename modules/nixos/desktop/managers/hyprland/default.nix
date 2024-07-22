@@ -23,7 +23,18 @@ in {
         package = inputs.hyprland.packages.${system}.hyprland;
       };
 
+      thunar = {
+        enable = true;
+
+        plugins = with pkgs.xfce; [
+          thunar-volman
+          thunar-archive-plugin
+          thunar-media-tags-plugin
+        ];
+      };
+
       hyprlock.enable = true;
+      file-roller.enable = true;
       gnome-disks.enable = true;
       nm-applet.enable = true;
     };
@@ -43,6 +54,8 @@ in {
       };
 
       hypridle.enable = true;
+      gvfs.enable = true;
+      tumbler.enable = true;
       blueman.enable = true;
     };
   };
