@@ -28,7 +28,7 @@ in
 
       cursor = {
         package = pkgs.catppuccin-cursors.mochaTeal;
-        size = 24;
+        size = 32;
         name = "catppuccin-mocha-teal-cursors";
       };
 

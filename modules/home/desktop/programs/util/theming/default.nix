@@ -14,5 +14,7 @@ in {
         name = "ePapirus-Dark";
       };
     };
+
+    qt.enable = true;
   };
 }
