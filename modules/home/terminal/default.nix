@@ -58,45 +58,6 @@
 
     fastfetch = {
       enable = true;
-
-      settings = {
-        logo = {
-          padding = {
-            top = 2;
-          };
-        };
-
-        display = {
-          separator = " ➜  ";
-        };
-
-        modules = [
-          "break"
-          "break"
-          "break"
-          {
-            type = "os";
-            key = "OS   ";
-            keyColor = 31;
-          }
-          {
-            type = "kernel";
-            key = " ├  ";
-            keyColor = 31;
-          }
-          {
-            type = "shell";
-            key = "key": " └  ";
-            keyColor = 31;
-          }
-          "break"
-          {
-            type = "wm";
-            key = "WM   ";
-            keyColor = 32;
-          }
-        ];
-      };
     };
 
     eza = {
