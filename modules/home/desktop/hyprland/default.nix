@@ -9,14 +9,14 @@ in {
     home.packages = with pkgs; [
       libnotify
       brightnessctl
-   ];
+    ];
 
     qt.enable = true;
 
     wayland.windowManager.hyprland = {
       enable = true;
 
-      systemd.variables = ["--all"];
+      systemd.variables = [ "--all" ];
 
       settings = {
         # Variables
@@ -73,17 +73,21 @@ in {
           "$mod, A, exec, anyrun"
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
-        ] ++ (builtins.concatLists (builtins.genList (
-          x: let
-            ws = let
-              c = (x + 1) / 10;
+        ] ++ (builtins.concatLists (builtins.genList
+          (
+            x:
+            let
+              ws =
+                let
+                  c = (x + 1) / 10;
+                in
+                builtins.toString (x + 1 - (c * 10));
             in
-              builtins.toString (x + 1 - (c * 10));
-          in [
-            "$mod, ${ws}, workspace, ${toString (x + 1)}"
-            "$mod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
-          ]
-        ) 10));
+            [
+              "$mod, ${ws}, workspace, ${toString (x + 1)}"
+              "$mod SHIFT, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
+            ]
+          ) 10));
 
         bindm = [
           "$mod, mouse:272, movewindow"

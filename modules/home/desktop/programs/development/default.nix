@@ -1,6 +1,12 @@
-{ lib, pkgs, config, ... }:
-let cfg = config.desktop.programs.development;
-in {
+{ lib
+, pkgs
+, config
+, ...
+}:
+let
+  cfg = config.desktop.programs.development;
+in
+{
   options = {
     desktop.programs.development = {
       enable = lib.mkEnableOption "Enable development suite of gui applications";
@@ -19,17 +25,31 @@ in {
         catppuccin.catppuccin-vsc-icons
 
         jnoortheen.nix-ide
-        kamadorueda.alejandra
       ];
 
       userSettings = {
+        "window.titleBarStyle" = "custom";
+
         "workbench.colorTheme" = "Stylix";
         "workbench.iconTheme" = "catppuccin-mocha";
 
+        "files.autoSave" = "onFocusChange";
+
         "editor.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
+        "editor.formatOnSave" = true;
+        "editor.formatOnPaste" = true;
+
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
 
         "git.autofetch" = true;
+
+        "nix.serverSettings" = {
+          "nixd" = {
+            "formatting" = {
+              "command" = "nixpkgs-fmt";
+            };
+          };
+        };
       };
     };
   };

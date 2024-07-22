@@ -1,6 +1,12 @@
-{ lib, pkgs, config, ... }:
-let cfg = config.terminal.programs.development;
-in {
+{ lib
+, pkgs
+, config
+, ...
+}:
+let
+  cfg = config.terminal.programs.development;
+in
+{
   options = {
     terminal.programs.development.enable = lib.mkEnableOption "Enable development programs";
   };
@@ -8,6 +14,9 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       mkdocs
+
+      nixd
+      nixpkgs-fmt
 
       gcc
       gdb

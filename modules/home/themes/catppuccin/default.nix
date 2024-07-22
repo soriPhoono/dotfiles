@@ -1,6 +1,12 @@
-{ lib, pkgs, config, ... }:
-let cfg = config.themes.catppuccin;
-in {
+{ lib
+, pkgs
+, config
+, ...
+}:
+let
+  cfg = config.themes.catppuccin;
+in
+{
   options = {
     themes.catppuccin.enable = lib.mkEnableOption "Home Catppuccin Theme";
   };
@@ -48,15 +54,16 @@ in {
         };
 
         sizes =
-        let
-          default_font = 14;
-          focus_font = 16;
-        in {
-          applications = focus_font;
-          desktop = default_font;
-          popups = default_font;
-          terminal = focus_font;
-        };
+          let
+            default_font = 14;
+            focus_font = 16;
+          in
+          {
+            applications = focus_font;
+            desktop = focus_font;
+            popups = default_font;
+            terminal = focus_font;
+          };
       };
     };
   };

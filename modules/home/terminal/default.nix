@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./git.nix
     ./helix.nix

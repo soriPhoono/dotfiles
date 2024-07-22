@@ -7,7 +7,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     desktop.programs.util.hyprlock.enable = true;
-  
+
     services.hypridle = {
       enable = true;
 

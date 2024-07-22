@@ -20,7 +20,8 @@
       systems = {
         hosts = {
           wsl.modules = with inputs; [
-            nixos-wsl.nixosModules.wsl {
+            nixos-wsl.nixosModules.wsl
+            {
               wsl = {
                 enable = true;
                 defaultUser = "soriphoono";
