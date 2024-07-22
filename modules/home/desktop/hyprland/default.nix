@@ -71,6 +71,7 @@ in {
           "$mod, Q, killactive,"
 
           "$mod, A, exec, anyrun"
+          "$mod, E, exec, thunar"
           "$mod, B, exec, firefox"
           "$mod, RETURN, exec, alacritty"
         ] ++ (builtins.concatLists (builtins.genList
