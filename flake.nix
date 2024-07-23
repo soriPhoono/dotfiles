@@ -50,7 +50,10 @@
     };
 
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    nixos-wsl.url = "github:nix-community/nixos-wsl/main";
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
@@ -80,6 +83,11 @@
         hyprland.follows = "hyprland";
         nixpkgs.follows = "nixpkgs";
       };
+    };
+
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     anyrun = {
