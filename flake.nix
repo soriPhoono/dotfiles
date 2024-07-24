@@ -38,6 +38,7 @@
       homes = {
         modules = with inputs; [
           stylix.homeManagerModules.stylix
+          ags.homeManagerModules.default
           anyrun.homeManagerModules.default
         ];
       };
