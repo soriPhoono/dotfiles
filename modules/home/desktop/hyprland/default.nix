@@ -108,6 +108,8 @@ in {
       programs.util.anyrun.enable = true;
 
       services = {
+        gnome-keyring.enable = true;
+
         hypridle.enable = true;
 
         mako.enable = true;
