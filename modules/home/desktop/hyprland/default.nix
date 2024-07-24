@@ -51,8 +51,14 @@ in {
         };
 
         misc = {
-          disable_hyprland_logo = false;
           vfr = true;
+          vrr = 1;
+          animate_manual_resizes = false;
+          animate_mouse_windowdragging = false;
+          focus_on_activate = true;
+          disable_hyprland_logo = true;
+          enable_swallow = false;
+          swallow_regex = (foot|kitty|allacritty|Alacritty);
         };
         xwayland.force_zero_scaling = true;
         cursor.no_hardware_cursors = true;
