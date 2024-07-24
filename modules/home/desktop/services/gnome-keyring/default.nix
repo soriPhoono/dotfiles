@@ -6,7 +6,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    security.pam.services.soriphoono.enableGnomeKeyring = true;
-    services.gnome.gnome-keyring.enable = true;
+    services.gnome-keyring.enable = true;
   };
 }
