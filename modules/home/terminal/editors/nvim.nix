@@ -4,5 +4,7 @@
 
     clipboard.providers.wl-copy.enable = true;
     colorschemes.catppuccin.enable = true;
+
+
   }
 }
