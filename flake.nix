@@ -37,6 +37,7 @@
 
       homes = {
         modules = with inputs; [
+          nixvim.homeManagerModules.nixvim
           stylix.homeManagerModules.stylix
           anyrun.homeManagerModules.default
         ];
@@ -61,6 +62,12 @@
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    }
 
     stylix = {
       url = "github:danth/stylix";

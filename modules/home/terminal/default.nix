@@ -1,9 +1,4 @@
 { pkgs, ... }: {
-  imports = [
-    ./git.nix
-    ./helix.nix
-  ];
-
   xdg = {
     enable = true;
 
