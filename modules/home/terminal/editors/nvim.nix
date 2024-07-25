@@ -6,5 +6,5 @@
     colorschemes.catppuccin.enable = true;
 
 
-  }
+  };
 }
