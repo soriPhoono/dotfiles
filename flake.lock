@@ -802,11 +802,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1721916035,
-        "narHash": "sha256-wDxt0+qwAbCZg8GXUNyRNR5syBhXo2gRHRMvzf8CS/U=",
+        "lastModified": 1721923854,
+        "narHash": "sha256-jzF3hoXJYYZW+eJIKxCy2iXTYnBAUWGsF4Hct+pHHLE=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "4d874f6c115b59ad763838b1d12c1067844163ba",
+        "rev": "faff876ee6b45cb58b4983471623e3421ba11ce0",
         "type": "github"
       },
       "original": {
