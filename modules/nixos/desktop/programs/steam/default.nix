@@ -6,18 +6,25 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.steam = {
-      enable = true;
-      extest.enable = true;
+    programs = {
+      steam = {
+        enable = true;
+        extest.enable = true;
 
-      protontricks.enable = true;
+        protontricks.enable = true;
 
-      remotePlay.openFirewall = true;
-      localNetworkGameTransfers.openFirewall = true;
+        remotePlay.openFirewall = true;
+        localNetworkGameTransfers.openFirewall = true;
 
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
-      ];
+        extraCompatPackages = with pkgs; [
+          proton-ge-bin
+        ];
+      };
+
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+      };
     };
   };
 }
