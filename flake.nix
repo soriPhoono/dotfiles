@@ -39,6 +39,7 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           stylix.homeManagerModules.stylix
+          ags.homeManagerModules.default
           anyrun.homeManagerModules.default
         ];
       };

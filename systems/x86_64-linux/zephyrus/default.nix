@@ -20,7 +20,7 @@
   };
 
   desktop = {
-    managers.hyprland.enable = true;
+    managers.kde.enable = true;
 
     programs.steam.enable = true;
     services.openrgb.enable = true;
