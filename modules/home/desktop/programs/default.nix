@@ -7,6 +7,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      google-chrome
+
       obsidian
 
       discord
@@ -15,9 +17,5 @@ in {
       telegram-desktop
       signal-desktop
     ];
-
-    programs = {
-      firefox.enable = true;
-    };
   };
 }
