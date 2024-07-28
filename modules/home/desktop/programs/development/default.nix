@@ -24,6 +24,9 @@ in
       extensions = with pkgs.vscode-extensions; [
         catppuccin.catppuccin-vsc-icons
 
+        github.copilot
+        github.copilot-chat
+
         jnoortheen.nix-ide
       ];
 
