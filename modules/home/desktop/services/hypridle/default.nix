@@ -21,21 +21,21 @@ in {
 
         listener = [
           {
-            timeout = 300;
+            timeout = 150;
             on-timeout = "brightnessctl -s set 10 && brightnessctl -sd asus:kbd_backlight set 0";
             on-resume = "brightnessctl -r && brightnessctl -rd asus:kbd_backlight";
           }
           {
-            timeout = 900;
+            timeout = 300;
             on-timeout = "loginctl lock-session";
           }
           {
-            timeout = 1200;
+            timeout = 450;
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
           }
           {
-            timeout = 1800;
+            timeout = 600;
             on-timeout = "systemctl suspend";
           }
         ];
