@@ -7,8 +7,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      clipman
       libnotify
       brightnessctl
+      wl-clipboard-rs
+      lxqt.lxqt-policykit
     ];
 
     wayland.windowManager.hyprland = {
@@ -66,7 +69,8 @@ in {
         ];
 
         exec-once = with pkgs; [
-          "${wl-clipboard-rs}/bin/wl-paste --watch ${clipman}/bin/clipman store"
+          "lxqt-policykit-agent"
+          "wl-paste --watch clipman store"
         ];
 
         # Keybindings
