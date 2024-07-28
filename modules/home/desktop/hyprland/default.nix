@@ -114,8 +114,9 @@ in {
 
     desktop = {
       programs.util = {
-        anyrun.enable = true;
         ui_toolkits.enable = true;
+        anyrun.enable = true;
+        wlogout.enable = true;
       };
 
       services = {

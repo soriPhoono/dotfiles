@@ -2,8 +2,6 @@
   terminal.programs.development.enable = true;
 
   desktop = {
-    hyprland.enable = true;
-
     programs = {
       enable = true;
       development.enable = true;
