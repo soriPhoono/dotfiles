@@ -78,6 +78,7 @@ in {
           "$mod, Q, killactive,"
 
           "$mod, A, exec, anyrun"
+          "$mod, L, exec, wlogout"
           "$mod, E, exec, thunar"
           "$mod, RETURN, exec, alacritty"
 
