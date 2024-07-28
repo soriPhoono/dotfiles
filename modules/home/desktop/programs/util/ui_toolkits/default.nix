@@ -2,7 +2,7 @@
 let cfg = config.desktop.programs.util.gtk;
 in {
   options = {
-    desktop.programs.util.gtk.enable = lib.mkEnableOption "Enable gtk configuration";
+    desktop.programs.util.ui_toolkits.enable = lib.mkEnableOption "Enable gtk configuration";
   };
 
   config = {

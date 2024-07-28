@@ -26,7 +26,6 @@
     services.openrgb.enable = true;
   };
 
-
   services.logind.extraConfig = ''
     HandlePowerKey=poweroff
     HandleLidSwitch=suspend

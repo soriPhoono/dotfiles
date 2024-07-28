@@ -11,8 +11,6 @@ in {
       brightnessctl
     ];
 
-    qt.enable = true;
-
     wayland.windowManager.hyprland = {
       enable = true;
 
@@ -68,7 +66,6 @@ in {
         ];
 
         exec-once = with pkgs; [
-          "${polkit_gnome}/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
           "${wl-clipboard-rs}/bin/wl-paste --watch ${clipman}/bin/clipman store"
         ];
 
@@ -111,9 +108,13 @@ in {
     terminal.emulators.alacritty.enable = true;
 
     desktop = {
-      programs.util.anyrun.enable = true;
+      programs.util = {
+        anyrun.enable = true;
+        ui_toolkits.enable = true;
+      };
 
       services = {
+        polkit_gnome.enable = true;
         gnome-keyring.enable = true;
 
         hypridle.enable = true;
