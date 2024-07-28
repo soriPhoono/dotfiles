@@ -8,8 +8,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    security.polkit.enable = true;
-
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
