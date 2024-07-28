@@ -81,7 +81,7 @@ in {
           "$mod, E, exec, thunar"
           "$mod, RETURN, exec, alacritty"
 
-          "$mod, B, exec, firefox"
+          "$mod, B, exec, google-chrome-stable"
           "$mod, C, exec, code"
           "$mod, N, exec, obsidian"
         ] ++ (builtins.concatLists (builtins.genList
