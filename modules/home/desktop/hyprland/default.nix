@@ -118,7 +118,6 @@ in {
       };
 
       services = {
-        polkit_gnome.enable = true;
         gnome-keyring.enable = true;
 
         hypridle.enable = true;

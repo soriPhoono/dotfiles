@@ -46,10 +46,6 @@ in {
       };
 
       displayManager.sddm = {
-        wayland = {
-          compositor = "weston";
-        };
-
         theme = "catppuccin-sddm-corners";
       };
 
