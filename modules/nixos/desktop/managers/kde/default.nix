@@ -6,15 +6,27 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    desktop.managers = {
-      pipewire.enable = true;
-      sddm.enable = true;
+    services = {
+      pipewire = lib.mkIf cfg.pipewire.enable {
+        enable = true;
+
+        pulse.enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        jack.enable = true;
+      };
+
+      displayManager.sddm = lib.mkIf cfg.sddm.enable {
+        enable = true;
+
+        wayland.enable = true;
+      };
+
+      desktopManager.plasma6.enable = true;
     };
 
-    services.desktopManager.plasma6.enable = true;
-
-    environment.plasma6.excludePackages = with pkgs; [
-      oxygen
+    users.users.soriphoono.extraGroups = lib.mkIf cfg.pipewire.enable [
+      "audio"
     ];
   };
 }
