@@ -7,7 +7,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     services = {
-      pipewire = lib.mkIf cfg.pipewire.enable {
+      pipewire = {
         enable = true;
 
         pulse.enable = true;
@@ -16,7 +16,7 @@ in {
         jack.enable = true;
       };
 
-      displayManager.sddm = lib.mkIf cfg.sddm.enable {
+      displayManager.sddm = {
         enable = true;
 
         wayland.enable = true;
@@ -25,7 +25,7 @@ in {
       desktopManager.plasma6.enable = true;
     };
 
-    users.users.soriphoono.extraGroups = lib.mkIf cfg.pipewire.enable [
+    users.users.soriphoono.extraGroups = [
       "audio"
     ];
   };

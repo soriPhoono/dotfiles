@@ -8,7 +8,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    hardware.logitech.wireless = lib.mkIf cfg.enable {
+    hardware.logitech.wireless = {
       enable = true;
       enableGraphical = true;
     };

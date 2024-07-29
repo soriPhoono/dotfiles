@@ -8,7 +8,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    hardware.bluetooth = lib.mkIf cfg.bluetooth.enable {
+    hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
 
@@ -21,7 +21,7 @@ in {
       };
     };
 
-    services.pipewire.wireplumber.extraConfig = lib.mkIf cfg.bluetooth.enable {
+    services.pipewire.wireplumber.extraConfig = {
       "monitor.bluez.properties" = {
         "bluez5.enable-sbc-xq" = true;
         "bluez5.enable-msbc" = true;

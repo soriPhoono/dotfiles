@@ -4,11 +4,11 @@
 , ...
 }:
 let
-  cfg = config.desktop.programs.development;
+  cfg = config.desktop.programs.development.vscode;
 in
 {
   options = {
-    desktop.programs.development = {
+    desktop.programs.development.vscode = {
       enable = lib.mkEnableOption "Enable development suite of gui applications";
     };
   };
@@ -23,8 +23,6 @@ in
 
       extensions = with pkgs.vscode-extensions; [
         catppuccin.catppuccin-vsc-icons
-
-        tuttieee.emacs-mcx
 
         github.copilot
         github.copilot-chat

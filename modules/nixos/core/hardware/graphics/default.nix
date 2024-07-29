@@ -8,7 +8,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    hardware.graphics = lib.mkIf cfg.opengl.enable {
+    hardware.graphics = {
       enable = true;
       enable32Bit = true;
     };

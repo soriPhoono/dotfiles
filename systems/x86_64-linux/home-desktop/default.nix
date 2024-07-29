@@ -9,7 +9,7 @@
     hardware = {
       bluetooth.enable = true;
       logitech.enable = true;
-      opengl.enable = true;
+      graphics.enable = true;
       qmk.enable = true;
       xbox.enable = true;
     };
