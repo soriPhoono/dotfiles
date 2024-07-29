@@ -1,6 +1,5 @@
 { lib, config, ... }:
-let
-  cfg = config.core.hardware.xbox;
+let cfg = config.core.hardware.xbox;
 in
 {
   options = {

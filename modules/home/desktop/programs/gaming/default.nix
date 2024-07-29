@@ -7,10 +7,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      lutris
-      heroic
-
-      bottles
+      gzdoom
 
       prismlauncher
 

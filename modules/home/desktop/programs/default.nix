@@ -12,7 +12,6 @@ in {
       obsidian
 
       discord
-      betterdiscordctl
 
       telegram-desktop
       signal-desktop
