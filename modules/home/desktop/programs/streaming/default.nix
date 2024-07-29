@@ -9,7 +9,6 @@ in {
     home.packages = with pkgs; [
       gimp
       audacity
-      blender
       davinci-resolve
     ];
 
