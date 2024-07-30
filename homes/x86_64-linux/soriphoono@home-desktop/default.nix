@@ -4,7 +4,7 @@
   desktop = {
     programs = {
       enable = true;
-      development.enable = true;
+      development.vscode.enable = true;
       gaming.enable = true;
       streaming.enable = true;
     };
