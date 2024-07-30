@@ -3,6 +3,8 @@
     ./hardware-configuration.nix
   ];
 
+  boot.kernelParams = [ "i915.force_probe=a780" ];
+
   core = {
     boot.enable = true;
 
