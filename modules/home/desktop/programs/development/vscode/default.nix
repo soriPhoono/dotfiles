@@ -30,6 +30,11 @@ in
         eamodio.gitlens
 
         jnoortheen.nix-ide
+
+        ziglang.vscode-zig
+
+        rust-lang.rust-analyzer
+        tamasfe.even-better-toml
       ];
 
       userSettings = {
