@@ -31,6 +31,8 @@ in
 
         jnoortheen.nix-ide
 
+        vadimcn.vscode-lldb
+
         ziglang.vscode-zig
 
         rust-lang.rust-analyzer
