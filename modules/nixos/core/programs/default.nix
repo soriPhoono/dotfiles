@@ -23,5 +23,7 @@ in {
     programs = {
       usbtop.enable = true;
     };
+
+    programs.corectrl.enable = true;
   };
 }
