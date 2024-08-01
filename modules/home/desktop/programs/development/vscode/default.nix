@@ -35,6 +35,13 @@ in
 
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
+
+        ms-python.python
+        ms-python.debugpy
+        ms-python.vscode-pylance
+        ms-pyright.pyright
+        ms-python.isort
+        ms-python.black-formatter
       ];
 
       userSettings = {
