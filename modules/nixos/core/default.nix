@@ -4,6 +4,7 @@
     ./users.nix
 
     ./openssh.nix
+    ./gpg.nix
   ];
 
   documentation.dev.enable = true;
