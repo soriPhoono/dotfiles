@@ -54,5 +54,9 @@
     };
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
+  ];
+
   system.stateVersion = lib.mkDefault "24.11";
 }
