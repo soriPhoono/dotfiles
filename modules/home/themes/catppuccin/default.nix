@@ -15,13 +15,6 @@ in
     stylix = {
       enable = true;
 
-      targets = {
-        nixvim.transparent_bg = {
-          main = true;
-          sign_column = true;
-        };
-      };
-
       image = ../../../../assets/wallpapers/cutie_dino.png;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";

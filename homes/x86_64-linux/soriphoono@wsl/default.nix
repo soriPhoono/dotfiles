@@ -1,7 +1,8 @@
 {
-  programs.home-manager.enable = true;
+  terminal.programs.development.enable = true;
 
   themes.catppuccin.enable = true;
 
+  programs.home-manager.enable = true;
   home.stateVersion = "24.11";
 }
