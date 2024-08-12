@@ -9,9 +9,7 @@ in {
     home.packages = with pkgs; [
       google-chrome
 
-      (logseq.override {
-        electron = pkgs.electron;
-      })
+      logseq
 
       discord
 
