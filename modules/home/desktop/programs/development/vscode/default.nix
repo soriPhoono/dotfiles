@@ -24,12 +24,26 @@ in
       extensions = with pkgs.vscode-extensions; [
         catppuccin.catppuccin-vsc-icons
 
+        ms-vscode.hexeditor
+
+        ms-vsliveshare.vsliveshare
+
         github.copilot
         github.copilot-chat
 
         eamodio.gitlens
 
+        ms-vscode-remote.remote-ssh
+        ms-vscode-remote.remote-ssh-edit
+
+        mads-hartmann.bash-ide-vscode
+        ms-vscode.powershell
+
         jnoortheen.nix-ide
+
+        ms-vscode.cpptools-extension-pack
+        llvm-vs-code-extensions.vscode-clangd
+        mesonbuild.mesonbuild
 
         vadimcn.vscode-lldb
 
@@ -38,12 +52,26 @@ in
         rust-lang.rust-analyzer
         tamasfe.even-better-toml
 
+        vscjava.vscode-java-pack
+
         ms-python.python
-        ms-python.debugpy
-        ms-python.vscode-pylance
-        ms-pyright.pyright
-        ms-python.isort
-        ms-python.black-formatter
+        # Pylint
+        # Autodocstring
+        # Autopep8
+        # ISort
+        # Python indent
+        # MyPy type checker
+        # Django
+        # Jinja
+        # Jupyter
+
+        # ESLint
+        # Sass
+
+        # Go plugin
+
+        # Dart plugin
+        # Flutter plugin
       ];
 
       userSettings = {
