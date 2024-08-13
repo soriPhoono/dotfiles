@@ -21,7 +21,6 @@ in
       enableExtensionUpdateCheck = true;
 
       extensions = with pkgs.vscode-extensions; [
-        catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
 
         ms-vsliveshare.vsliveshare
@@ -80,7 +79,6 @@ in
         "window.dialogStyle" = "custom";
         "window.menuBarVisibility" = "compact";
 
-        "workbench.colorTheme" = "Catppuccin Mocha";
         "workbench.iconTheme" = "catppuccin-mocha";
 
         "files.autoSave" = "onFocusChange";
