@@ -28,10 +28,6 @@
               };
             }
           ];
-
-          zephyrus.modules = with inputs; [
-            nixos-hardware.nixosModules.asus-zephyrus-ga401
-          ];
         };
       };
 
