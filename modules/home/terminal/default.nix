@@ -14,6 +14,8 @@
 
     df = "${duf}/bin/duf";
     du = "${dua}/bin/dua i";
+
+    top = "${btop}/bin/btop";
   };
 
   programs = {
@@ -66,8 +68,5 @@
       git = true;
       icons = true;
     };
-
-    bat.enable = true;
-    btop.enable = true;
   };
 }

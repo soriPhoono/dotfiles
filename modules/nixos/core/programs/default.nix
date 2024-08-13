@@ -20,10 +20,6 @@ in {
       unrar
     ];
 
-    programs = {
-      usbtop.enable = true;
-    };
-
     programs.corectrl.enable = true;
   };
 }
