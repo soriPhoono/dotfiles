@@ -16,7 +16,6 @@ in
   config = lib.mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      package = pkgs.vscode;
 
       enableUpdateCheck = true;
       enableExtensionUpdateCheck = true;
@@ -81,7 +80,7 @@ in
         "window.dialogStyle" = "custom";
         "window.menuBarVisibility" = "compact";
 
-        "workbench.colorTheme" = "Stylix";
+        "workbench.colorTheme" = "Catppuccin Mocha";
         "workbench.iconTheme" = "catppuccin-mocha";
 
         "files.autoSave" = "onFocusChange";
