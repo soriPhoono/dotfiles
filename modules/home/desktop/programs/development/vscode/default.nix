@@ -22,15 +22,17 @@ in
       enableExtensionUpdateCheck = true;
 
       extensions = with pkgs.vscode-extensions; [
+        catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
 
-        ms-vscode.hexeditor
-
         ms-vsliveshare.vsliveshare
+
+        ms-vscode.hexeditor
 
         github.copilot
         github.copilot-chat
 
+        editorconfig.editorconfig
         eamodio.gitlens
 
         ms-vscode-remote.remote-ssh
