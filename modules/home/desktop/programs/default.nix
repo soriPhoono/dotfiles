@@ -9,7 +9,7 @@ in {
     home.packages = with pkgs; [
       google-chrome
 
-      logseq
+      obsidian
 
       discord
 
