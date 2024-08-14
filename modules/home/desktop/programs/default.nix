@@ -9,6 +9,7 @@ in {
     home.packages = with pkgs; [
       google-chrome
 
+      lite
       obsidian
 
       discord
