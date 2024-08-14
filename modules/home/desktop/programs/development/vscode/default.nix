@@ -17,9 +17,6 @@ in
     programs.vscode = {
       enable = true;
 
-      enableUpdateCheck = true;
-      enableExtensionUpdateCheck = true;
-
       extensions = with pkgs.vscode-extensions; [
         catppuccin.catppuccin-vsc-icons
 
@@ -93,13 +90,8 @@ in
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
 
-        "nix.serverSettings" = {
-          "nixd" = {
-            "formatting" = {
-              "command" = "nixpkgs-fmt";
-            };
-          };
-        };
+        "nix.enableLanguageServer" = true; // Enable LSP.
+        "nix.serverPath" = "nil"; // The path to the LSP server executable.
       };
     };
   };

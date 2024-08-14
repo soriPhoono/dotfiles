@@ -16,7 +16,6 @@ in
       mkdocs
 
       nixd
-      nixpkgs-fmt
 
       gcc
       gdb
