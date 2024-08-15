@@ -11,10 +11,6 @@ in
     terminal.programs.development.enable = lib.mkEnableOption "Enable development programs";
   };
 
-  imports = [
-    ./nvim.nix
-  ];
-
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs;
       [
