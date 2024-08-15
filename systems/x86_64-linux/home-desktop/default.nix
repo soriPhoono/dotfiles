@@ -1,8 +1,6 @@
 { inputs, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
-
-    "${inputs.nix-mineral}/nix-mineral.nix"
   ];
 
   boot.kernelParams = [ "i915.force_probe=a780" ];
@@ -19,10 +17,6 @@
     };
 
     networking.networkManager.enable = true;
-  };
-
-  terminal = {
-    programs.enable = true;
   };
 
   desktop = {

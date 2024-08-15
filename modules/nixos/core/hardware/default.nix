@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.core.hardware.bluetooth;
+let cfg = config.core.hardware;
 in {
   options = {
     core.hardware = {
@@ -26,7 +26,7 @@ in {
         };
       };
 
-      hardware.graphics = lib.mkIf cfg.graphics.enable {
+      graphics = lib.mkIf cfg.graphics.enable {
         enable = true;
         enable32Bit = true;
       };

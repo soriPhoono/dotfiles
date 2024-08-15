@@ -18,12 +18,12 @@ in {
       unrar
     ];
 
-    home.shellAliases = with pkgs; [
+    home.shellAliases = with pkgs; {
       df = "${duf}/bin/duf";
       du = "${dua}/bin/dua i";
 
       top = "${btop}/bin/btop";
       gtop = "${nvtopPackages.full}/bin/nvtop";
-    ];
+    };
   };
 }

@@ -52,12 +52,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-mineral = {
-      url = "github:cynicsketch/nix-mineral";
-
-      flake = false;
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager";
 
