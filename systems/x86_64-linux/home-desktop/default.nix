@@ -19,14 +19,20 @@
     };
 
     networking.networkManager.enable = true;
+  };
 
+  terminal = {
     programs.enable = true;
   };
 
   desktop = {
     managers.kde.enable = true;
 
-    programs.steam.enable = true;
+    programs = {
+      enable = true;
+      steam.enable = true;
+    };
+
     services.openrgb.enable = true;
   };
 
@@ -40,10 +46,9 @@
     rocmPackages.clr.icd
   ];
 
-  systemd.tmpfiles.rules =
-    [
-      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-    ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
 
   environment.sessionVariables = {
     KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card2";

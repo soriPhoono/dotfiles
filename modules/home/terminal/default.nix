@@ -11,11 +11,6 @@
 
   home.shellAliases = with pkgs; {
     cat = "${bat}/bin/bat";
-
-    df = "${duf}/bin/duf";
-    du = "${dua}/bin/dua i";
-
-    top = "${btop}/bin/btop";
   };
 
   programs = {
