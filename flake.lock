@@ -396,6 +396,22 @@
         "type": "github"
       }
     },
+    "nix-mineral": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722804891,
+        "narHash": "sha256-CGQMSLlqO6D5yDXYNZTfDqv2RqifC4WTP9RxiRBaCX0=",
+        "owner": "cynicsketch",
+        "repo": "nix-mineral",
+        "rev": "477ef3395dc6fd69237d717edcc6f4274364b745",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cynicsketch",
+        "repo": "nix-mineral",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -490,6 +506,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "nix-mineral": "nix-mineral",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
