@@ -11,33 +11,38 @@ in
     terminal.programs.development.enable = lib.mkEnableOption "Enable development programs";
   };
 
+  imports = [
+    ./nvim.nix
+  ];
+
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      mkdocs
+    home.packages = with pkgs;
+      [
+        mkdocs
 
-      nixd
+        nixd
 
-      gcc
-      gdb
-      clang-tools
-      lldb
-      ninja
-      cmake
-      meson
+        gcc
+        gdb
+        clang-tools
+        lldb
+        ninja
+        cmake
+        meson
 
-      qmk
+        qmk
 
-      zig
+        zig
 
-      rustup
+        rustup
 
-      jdk
+        jdk
 
-      python3
+        python3
 
-      nodejs_22
-      sass
-    ];
+        nodejs_22
+        sass
+      ];
 
     programs.helix = {
       enable = true;
