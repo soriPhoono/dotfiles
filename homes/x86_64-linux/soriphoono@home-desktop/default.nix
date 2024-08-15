@@ -1,5 +1,11 @@
 { lib, host, ... }: {
-  terminal.programs.development.enable = true;
+  terminal = {
+    programs = {
+      system.enable = true;
+      archiving.enable = true;
+      development.enable = true;
+    };
+  };
 
   desktop = {
     programs = {

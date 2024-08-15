@@ -12,10 +12,6 @@ in {
       clinfo
       glxinfo
       vulkan-tools
-
-      unzip
-      p7zip
-      unrar
     ];
 
     home.shellAliases = with pkgs; {

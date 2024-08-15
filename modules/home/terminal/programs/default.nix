@@ -1,8 +1,4 @@
 { pkgs, ... }: {
-  home.packages = with pkgs; [
-    imagemagick
-  ];
-
   programs.git = {
     enable = true;
 
