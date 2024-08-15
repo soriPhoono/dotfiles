@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.core.programs;
+let cfg = config.terminal.programs;
 in {
   options = {
-    core.programs.enable = lib.mkEnableOption "Enable core programs";
+    terminal.programs.enable = lib.mkEnableOption "Enable terminal programs";
   };
 
   config = lib.mkIf cfg.enable {
@@ -19,7 +19,5 @@ in {
       p7zip
       unrar
     ];
-
-    programs.corectrl.enable = true;
   };
 }

@@ -2,9 +2,6 @@
   imports = [
     ./locale.nix
     ./users.nix
-
-    ./openssh.nix
-    ./gpg.nix
   ];
 
   documentation.dev.enable = true;
@@ -53,10 +50,6 @@
       options = "--delete-older-than 2d";
     };
   };
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-27.3.11"
-  ];
 
   system.stateVersion = lib.mkDefault "24.11";
 }

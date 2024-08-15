@@ -1,6 +1,8 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+
+    "${inputs.nix-mineral}/nix-mineral.nix"
   ];
 
   boot.kernelParams = [ "i915.force_probe=a780" ];
@@ -39,7 +41,9 @@
   ];
 
   systemd.tmpfiles.rules =
-    [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
+    [
+      "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+    ];
 
   environment.sessionVariables = {
     KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card2";
