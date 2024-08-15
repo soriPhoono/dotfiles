@@ -5,7 +5,7 @@
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
 
-      src = ./nixos;
+      src = ./.;
 
       snowfall = {
         namespace = "soriphoono";

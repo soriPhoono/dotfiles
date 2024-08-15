@@ -15,7 +15,7 @@ in
     stylix = {
       enable = true;
 
-      image = ../../../../assets/wallpapers/cutie_dino.png;
+      image = ../../../assets/wallpapers/soulful_anime.jpg;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
