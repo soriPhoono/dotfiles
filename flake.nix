@@ -35,6 +35,8 @@
       homes = {
         modules = with inputs; [
           stylix.homeManagerModules.stylix
+
+          nixvim.homeManagerModules.nixvim
         ];
       };
     };
