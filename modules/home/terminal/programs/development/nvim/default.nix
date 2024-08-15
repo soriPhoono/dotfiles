@@ -19,7 +19,7 @@ in {
 
       plugins = {
         lualine.enable = true;
-        neotree = {
+        neo-tree = {
           enable = true;
 
           autoCleanAfterSessionRestore = true;
