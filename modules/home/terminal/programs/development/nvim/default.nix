@@ -19,6 +19,12 @@ in {
 
       plugins = {
         lualine.enable = true;
+        neotree = {
+          enable = true;
+
+          autoCleanAfterSessionRestore = true;
+          closeIfLastWindow = true;
+        };
       };
     };
   };
