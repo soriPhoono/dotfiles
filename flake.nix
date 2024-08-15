@@ -4,6 +4,7 @@
   outputs = inputs:
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
+
       src = ./nixos;
 
       snowfall = {
@@ -45,11 +46,17 @@
     };
 
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    nix-mineral = {
+      url = "github:cynicsketch/nix-mineral";
+
+      flake = false;
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -63,6 +70,16 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
+      };
+    };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        nix-darwin.follows = "";
       };
     };
   };
