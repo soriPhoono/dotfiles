@@ -40,34 +40,62 @@ in
         sass
       ];
 
-    programs.helix = {
-      enable = true;
-      defaultEditor = true;
+    programs = {
+      helix = {
+        enable = true;
+        defaultEditor = true;
 
-      settings = {
-        editor = {
-          auto-save = true;
+        settings = {
+          editor = {
+            auto-save = true;
 
-          statusline = {
-            left = [
-              "mode"
-              "version-control"
-              "file-base-name"
-              "file-modification-indicator"
-            ];
-            right = [ "diagnostics" "file-type" "position-percentage" ];
+            statusline = {
+              left = [
+                "mode"
+                "version-control"
+                "file-base-name"
+                "file-modification-indicator"
+              ];
+              right = [ "diagnostics" "file-type" "position-percentage" ];
 
-            mode = {
-              normal = "󰋜";
-              insert = "󰏪";
-              select = "󰍉";
+              mode = {
+                normal = "󰋜";
+                insert = "󰏪";
+                select = "󰍉";
+              };
+            };
+
+            cursor-shape = {
+              normal = "block";
+              insert = "bar";
+              select = "underline";
             };
           };
+        };
+      };
 
-          cursor-shape = {
-            normal = "block";
-            insert = "bar";
-            select = "underline";
+      nixvim = {
+        enable = true;
+
+        colorschemes.catppuccin = {
+          enable = true;
+
+          settings = {
+            flavour = "mocha";
+
+            transparent_background = true;
+          };
+        };
+
+        editorconfig.enable = true;
+
+        plugins = {
+          lualine.enable = true;
+          neo-tree = {
+            enable = true;
+
+            autoCleanAfterSessionRestore = true;
+            closeIfLastWindow = true;
           };
         };
       };
