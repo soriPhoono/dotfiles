@@ -17,6 +17,8 @@
     wget
   ];
 
+  programs.dconf.enable = true;
+
   nix = {
     package = pkgs.lix;
 

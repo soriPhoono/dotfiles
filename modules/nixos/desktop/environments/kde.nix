@@ -2,7 +2,7 @@
 let cfg = config.desktop.environments.kde;
 in {
   imports = [
-    ../common/pipewire.nix
+    ./common/pipewire.nix
   ];
 
   options = {
