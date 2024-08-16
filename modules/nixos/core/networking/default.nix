@@ -7,14 +7,17 @@ in {
     };
   };
 
-  config = {
-    networking.networkmanager = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
+    networking.networkmanager = {
       enable = true;
 
-      wifi.powersave = false;
+      wifi = {
+        powersave = false;
+        macAddress = "random";
+      };
     };
 
-    users.users.soriphoono.extraGroups = lib.mkIf cfg.enable [
+    users.users.soriphoono.extraGroups = [
       "networkmanager"
     ];
   };

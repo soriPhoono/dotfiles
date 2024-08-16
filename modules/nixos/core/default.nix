@@ -6,15 +6,16 @@
 
   documentation.dev.enable = true;
 
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo = {
+    execWheelOnly = true;
+    wheelNeedsPassword = false;
+  };
 
   environment.systemPackages = with pkgs; [
     coreutils
 
     wget
   ];
-
-  programs.dconf.enable = true;
 
   nix = {
     package = pkgs.lix;
