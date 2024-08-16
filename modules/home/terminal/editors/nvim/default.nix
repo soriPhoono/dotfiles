@@ -7,30 +7,29 @@ in {
 
   config = lib.mkIf cfg.enable {
     nixvim = {
+      enable = true;
+
+      colorschemes.catppuccin = {
         enable = true;
 
-        colorschemes.catppuccin = {
+        settings = {
+          flavour = "mocha";
+
+          transparent_background = true;
+        };
+      };
+
+      editorconfig.enable = true;
+
+      plugins = {
+        lualine.enable = true;
+        neo-tree = {
           enable = true;
 
-          settings = {
-            flavour = "mocha";
-
-            transparent_background = true;
-          };
-        };
-
-        editorconfig.enable = true;
-
-        plugins = {
-          lualine.enable = true;
-          neo-tree = {
-            enable = true;
-
-            autoCleanAfterSessionRestore = true;
-            closeIfLastWindow = true;
-          };
+          autoCleanAfterSessionRestore = true;
+          closeIfLastWindow = true;
         };
       };
     };
-  };
+  }
 }
