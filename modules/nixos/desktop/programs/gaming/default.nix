@@ -16,6 +16,10 @@ in {
         gamescopeSession = {
           enable = true;
 
+          env = {
+
+          };
+
           args = [
             "-w 1920"
             "-h 1080"
