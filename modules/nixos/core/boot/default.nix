@@ -31,7 +31,7 @@ in {
             (adi1090x-plymouth-themes.override { selected_themes = [ "rings" ]; })
           ];
 
-        theme = "rings";
+        theme = "pixels";
       };
 
       tmp.cleanOnBoot = true;
