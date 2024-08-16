@@ -12,34 +12,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs;
-      [
-        mkdocs
-
-        nixd
-
-        gcc
-        gdb
-        clang-tools
-        lldb
-        ninja
-        cmake
-        meson
-
-        qmk
-
-        zig
-
-        rustup
-
-        jdk
-
-        python3
-
-        nodejs_22
-        sass
-      ];
-
     programs = {
       helix = {
         enable = true;
@@ -70,32 +42,6 @@ in
               insert = "bar";
               select = "underline";
             };
-          };
-        };
-      };
-
-      nixvim = {
-        enable = true;
-
-        colorschemes.catppuccin = {
-          enable = true;
-
-          settings = {
-            flavour = "mocha";
-
-            transparent_background = true;
-          };
-        };
-
-        editorconfig.enable = true;
-
-        plugins = {
-          lualine.enable = true;
-          neo-tree = {
-            enable = true;
-
-            autoCleanAfterSessionRestore = true;
-            closeIfLastWindow = true;
           };
         };
       };
