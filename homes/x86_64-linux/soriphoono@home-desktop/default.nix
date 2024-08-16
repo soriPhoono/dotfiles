@@ -1,9 +1,14 @@
 { lib, host, ... }: {
   terminal = {
+    editors = {
+      helix.enable = true;
+
+      nvim.enable = true;
+    };
+
     programs = {
       system.enable = true;
       archiving.enable = true;
-      development.enable = true;
     };
   };
 

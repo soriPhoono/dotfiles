@@ -1,5 +1,9 @@
 {
-  terminal.programs.development.enable = true;
+  terminal.editors = {
+    helix.enable = true;
+
+    nvim.enable = true;
+  };
 
   themes.catppuccin.enable = true;
 

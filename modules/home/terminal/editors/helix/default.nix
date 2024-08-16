@@ -6,7 +6,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    helix = {
+    programs.helix = {
       enable = true;
       defaultEditor = true;
 

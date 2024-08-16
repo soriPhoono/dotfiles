@@ -1,12 +1,12 @@
 { lib, config, ... }:
-let cfg = config.terminal.nvim;
+let cfg = config.terminal.editors.nvim;
 in {
   options = {
     terminal.nvim.enable = lib.mkEnableOption "Enable NeoVim editor environment";
   };
 
   config = lib.mkIf cfg.enable {
-    nixvim = {
+    programs.nixvim = {
       enable = true;
 
       colorschemes.catppuccin = {
@@ -31,5 +31,5 @@ in {
         };
       };
     };
-  }
+  };
 }
