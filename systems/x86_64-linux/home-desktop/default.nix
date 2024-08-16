@@ -20,7 +20,7 @@
   };
 
   desktop = {
-    managers.kde.enable = true;
+    environments.kde.enable = true;
 
     programs = {
       enable = true;
