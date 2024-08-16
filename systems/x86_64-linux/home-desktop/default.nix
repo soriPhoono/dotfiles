@@ -12,8 +12,8 @@
       bluetooth.enable = true;
       logitech.enable = true;
       graphics.enable = true;
-      qmk.enable = true;
-      xbox.enable = true;
+      qmk_keyboard.enable = true;
+      xbox_controller.enable = true;
     };
 
     networking.networkManager.enable = true;

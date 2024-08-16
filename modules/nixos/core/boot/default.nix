@@ -7,6 +7,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     boot = {
+      consoleLogLevel = 0;
       kernelPackages = pkgs.linuxPackages_zen;
       kernelParams = [ "quiet" "systemd.show_status=auto" "rd.udev.log_level=3" ];
 
@@ -21,8 +22,9 @@ in {
 
         systemd-boot = {
           enable = true;
-
           memtest86.enable = true;
+
+          editor.enable = false;
         };
       };
 
