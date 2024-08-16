@@ -2,7 +2,7 @@
 let cfg = config.terminal.editors.nvim;
 in {
   options = {
-    terminal.nvim.enable = lib.mkEnableOption "Enable NeoVim editor environment";
+    terminal.editors.nvim.enable = lib.mkEnableOption "Enable NeoVim editor environment";
   };
 
   config = lib.mkIf cfg.enable {
