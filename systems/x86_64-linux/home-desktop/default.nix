@@ -24,7 +24,7 @@
 
     programs = {
       enable = true;
-      steam.enable = true;
+      gaming.enable = true;
     };
 
     services.openrgb.enable = true;

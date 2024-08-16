@@ -7,11 +7,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     boot = {
-      initrd.supportedFilesystems = [ "ext4" "vfat" "ntfs" "exfat" ];
-
       kernelPackages = pkgs.linuxPackages_zen;
-      kernelModules = [ "tcp_brr" ];
       kernelParams = [ "quiet" "systemd.show_status=auto" "rd.udev.log_level=3" ];
+
+      initrd = {
+        verbose = false;
+
+        supportedFilesystems = [ "vfat" "btrfs" "ntfs" "apfs" "exfat" ];
+      };
 
       loader = {
         efi.canTouchEfiVariables = true;
