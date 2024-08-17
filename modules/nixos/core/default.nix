@@ -2,6 +2,9 @@
   imports = [
     ./locale.nix
     ./users.nix
+
+    ./boot.nix
+    ./networkmanager.nix
   ];
 
   documentation.dev.enable = true;
