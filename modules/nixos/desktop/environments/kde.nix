@@ -1,10 +1,6 @@
 { lib, pkgs, config, ... }:
 let cfg = config.desktop.environments.kde;
 in {
-  imports = [
-    ./common/pipewire.nix
-  ];
-
   options = {
     desktop.environments.kde.enable = lib.mkEnableOption "Enable KDE Plasma Desktop";
   };
