@@ -68,6 +68,8 @@
               deno.enable = true;
             };
           };
+
+          devshells = import ./devshells { inherit pkgs; };
         };
     };
 
