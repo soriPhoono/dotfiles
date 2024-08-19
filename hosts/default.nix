@@ -18,7 +18,7 @@
           };
 
           modules = [
-
+            { networking.hostName = "${hostname}"; }
           ] ++ nixpkgs.lib.optional hmEnable [
             inputs.home-manager.nixosModules.home-manager
             {
