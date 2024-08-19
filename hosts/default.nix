@@ -6,7 +6,8 @@
         , username
         , nixpkgs ? inputs.nixpkgs
         , system ? "x86_64-linux"
-        , defaultModules ? true
+        , desktopModules ? true
+        , serverModules ? false # For later
         , hmEnable ? true
         , extraModules ? [ ]
         }: nixpkgs.lib.nixosSystem {
@@ -36,7 +37,7 @@
                 users.${username} = ../homes/${username};
               };
             }
-          ] ++ nixpkgs.lib.optionals defaultModules [
+          ] ++ nixpkgs.lib.optionals desktopModules [
           ] ++ extraModules;
         };
     in
@@ -45,7 +46,7 @@
         hostname = "wsl";
         username = "soriphoono";
 
-        defaultModules = false;
+        desktopModules = false;
 
         extraModules = [
           ./wsl
