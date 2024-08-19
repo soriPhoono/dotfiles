@@ -9,7 +9,6 @@
         , defaultModules ? true
         , hmEnable ? true
         , extraModules ? [ ]
-        ,
         }: nixpkgs.lib.nixosSystem {
           inherit system;
 
@@ -19,8 +18,25 @@
 
           modules = [
             { networking.hostName = "${hostname}"; }
-          ]  ++ nixpkgs.lib.optional defaultModules [
 
+            ../modules/core
+          ] ++ nixpkgs.lib.optionals hmEnable [
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+
+                backupFileExtension = "~";
+
+                extraSpecialArgs = {
+                  inherit inputs;
+                };
+
+                users.${username} = ../homes/${username};
+              };
+            }
+          ] ++ nixpkgs.lib.optionals defaultModules [
           ] ++ extraModules;
         };
     in

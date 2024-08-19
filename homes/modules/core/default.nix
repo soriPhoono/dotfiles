@@ -1,0 +1,23 @@
+{ nixosConfig, ... }:
+{
+  imports = [
+    ./shell.nix
+
+    ./git.nix
+    ./gpg.nix
+  ];
+
+  xdg = {
+    enable = true;
+
+    userDirs = {
+      enable = true;
+
+      createDirectories = true;
+    };
+  };
+
+  programs.home-manager.enable = true;
+
+  home.stateVersion = nixosConfig.system.stateVersion;
+}
