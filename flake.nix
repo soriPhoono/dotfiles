@@ -1,40 +1,44 @@
 {
   description = "Personal dotfiles for NixOS";
 
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , flake-parts
-    , ...
-    }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" ];
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    flake-parts,
+    ...
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["x86_64-linux"];
 
-      imports = [
+      imports = with inputs; [
         ./hosts
+
+        treefmt-nix.flakeModule
       ];
 
-      perSystem =
-        { inputs'
-        , pkgs
-        , system
-        , ...
-        }:
-        {
-          _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
+      perSystem = {
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: {
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
 
-            config = {
-              allowUnfree = true;
-            };
+          config = {
+            allowUnfree = true;
           };
+        };
 
-          treefmt = {
-            enableDefaultExcludes = true;
+        treefmt = {
+          projectRootFile = "flake.nix";
+          enableDefaultExcludes = true;
 
+          programs = {
             alejandra.enable = true;
           };
         };
+      };
     };
 
   inputs = {
@@ -62,7 +66,11 @@
 
     # Development environment imports
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     devshell.url = "github:numtide/devshell";
   };

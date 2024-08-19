@@ -1,5 +1,11 @@
-{ config, lib, pkgs, username, hostname, ... }:
 {
+  config,
+  lib,
+  pkgs,
+  username,
+  hostname,
+  ...
+}: {
   imports = [
     ./nixpkgs.nix
 

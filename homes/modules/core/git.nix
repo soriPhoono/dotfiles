@@ -11,7 +11,7 @@
 
     extraConfig = {
       init.defaultBranch = "main";
-      url."git@github.com/" = { insteadOf = [ "gh:" "github:" ]; };
+      url."git@github.com/" = {insteadOf = ["gh:" "github:"];};
       pull.rebase = false;
     };
 
