@@ -19,23 +19,7 @@
 
           modules = [
             { networking.hostName = "${hostname}"; }
-          ] ++ nixpkgs.lib.optional hmEnable [
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-
-                backupFileExtension = ".bak";
-
-                extraSpecialArgs = {
-                  inherit inputs;
-                };
-
-                users.${username} = ../homes/${username};
-              };
-            }
-          ] ++ nixpkgs.lib.optional defaultModules [
+          ]  ++ nixpkgs.lib.optional defaultModules [
 
           ] ++ extraModules;
         };
