@@ -16,7 +16,7 @@
     };
 
     delta = {
-      enable = false;
+      enable = true;
 
       options = {
         dark = true;

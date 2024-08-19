@@ -10,7 +10,6 @@
         , nixpkgs ? inputs.nixpkgs
         , system ? "x86_64-linux"
         , extraModules ? [ ]
-        ,
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
