@@ -1,4 +1,4 @@
-{pkgs}: {
+{ pkgs }: {
   # Nix development shell
 
   default = {

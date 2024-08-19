@@ -1,4 +1,4 @@
-{nixosConfig, ...}: {
+{ nixosConfig, ... }: {
   imports = [
     ./shell.nix
 

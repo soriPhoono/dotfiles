@@ -1,13 +1,13 @@
 {
   description = "Personal dotfiles for NixOS";
 
-  outputs = inputs @ {
-    nixpkgs,
-    flake-parts,
-    ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = ["x86_64-linux"];
+  outputs =
+    inputs @ { nixpkgs
+    , flake-parts
+    , ...
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [ "x86_64-linux" ];
 
       imports = with inputs; [
         ./hosts
@@ -15,59 +15,59 @@
         treefmt-nix.flakeModule
       ];
 
-      perSystem = {
-        pkgs,
-        system,
-        ...
-      }: {
-        _module.args.pkgs = import inputs.nixpkgs {
-          inherit system;
+      perSystem =
+        { pkgs
+        , system
+        , ...
+        }: {
+          _module.args.pkgs = import inputs.nixpkgs {
+            inherit system;
 
-          config = {
-            allowUnfree = true;
+            config = {
+              allowUnfree = true;
+            };
+          };
+
+          treefmt = {
+            projectRootFile = "flake.nix";
+            enableDefaultExcludes = true;
+
+            programs = {
+              # Workflow formatters
+              actionlint.enable = true;
+
+              mdformat.enable = true;
+
+              # System script formatters
+              nixpkgs-fmt.enable = true;
+              deadnix.enable = true;
+              statix.enable = true;
+
+              shfmt.enable = true;
+              shellcheck.enable = true;
+
+              # Desktop formatters
+              clang-format.enable = true;
+
+              zig.enable = true;
+
+              rustfmt.enable = true;
+
+              google-java-format.enable = true;
+
+              black.enable = true;
+              isort.enable = true;
+              mypy.enable = true;
+
+              stylua.enable = true;
+
+              yamlfmt.enable = true;
+
+              # Web development formatters
+              deno.enable = true;
+            };
           };
         };
-
-        treefmt = {
-          projectRootFile = "flake.nix";
-          enableDefaultExcludes = true;
-
-          programs = {
-            # Workflow formatters
-            actionlint.enable = true;
-
-            mdformat.enable = true;
-
-            # System script formatters
-            alejandra.enable = true;
-            deadnix.enable = true;
-            statix.enable = true;
-
-            shfmt.enable = true;
-            shellcheck.enable = true;
-
-            # Desktop formatters
-            clang-format.enable = true;
-
-            zig.enable = true;
-
-            rustfmt.enable = true;
-
-            google-java-format.enable = true;
-
-            black.enable = true;
-            isort.enable = true;
-            mypy.enable = true;
-
-            stylua.enable = true;
-
-            yamlfmt.enable = true;
-
-            # Web development formatters
-            deno.enable = true;
-          };
-        };
-      };
     };
 
   inputs = {
