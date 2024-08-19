@@ -2,7 +2,6 @@
   description = "Personal dotfiles for NixOS";
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     flake-parts,
     ...
@@ -17,7 +16,6 @@
       ];
 
       perSystem = {
-        inputs',
         pkgs,
         system,
         ...
@@ -39,12 +37,12 @@
             actionlint.enable = true;
 
             mdformat.enable = true;
-            
+
             # System script formatters
             alejandra.enable = true;
             deadnix.enable = true;
             statix.enable = true;
-            
+
             shfmt.enable = true;
             shellcheck.enable = true;
 
