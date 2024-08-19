@@ -13,6 +13,7 @@
         ./hosts
 
         treefmt-nix.flakeModule
+        devshell.flakeModule
       ];
 
       perSystem =
