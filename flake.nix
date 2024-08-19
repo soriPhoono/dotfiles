@@ -35,7 +35,38 @@
           enableDefaultExcludes = true;
 
           programs = {
+            # Workflow formatters
+            actionlint.enable = true;
+
+            mdformat.enable = true;
+            
+            # System script formatters
             alejandra.enable = true;
+            deadnix.enable = true;
+            statix.enable = true;
+            
+            shfmt.enable = true;
+            shellcheck.enable = true;
+
+            # Desktop formatters
+            clang-format.enable = true;
+
+            zig.enable = true;
+
+            rustfmt.enable = true;
+
+            google-java-format.enable = true;
+
+            black.enable = true;
+            isort.enable = true;
+            mypy.enable = true;
+
+            stylua.enable = true;
+
+            yamlfmt.enable = true;
+
+            # Web development formatters
+            deno.enable = true;
           };
         };
       };
