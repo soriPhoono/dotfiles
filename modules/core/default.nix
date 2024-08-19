@@ -1,4 +1,4 @@
-{ config, lib, pkgs, username, ... }:
+{ config, lib, pkgs, username, hostname, ... }:
 {
   imports = [
     ./nixpkgs.nix
@@ -20,6 +20,8 @@
 
     wget
   ];
+
+  networking.hostName = "${hostname}";
 
   programs.command-not-found.enable = true;
 

@@ -29,7 +29,11 @@
             };
           };
 
-          formatter = pkgs.nixpkgs-fmt;
+          treefmt = {
+            enableDefaultExcludes = true;
+
+            alejandra.enable = true;
+          };
         };
     };
 
@@ -57,6 +61,8 @@
     };
 
     # Development environment imports
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     devshell.url = "github:numtide/devshell";
   };

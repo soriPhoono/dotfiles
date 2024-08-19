@@ -14,14 +14,12 @@
           inherit system;
 
           specialArgs = {
-            inherit self inputs username;
+            inherit self inputs hostname username;
           };
 
-          modules = [
-            { networking.hostName = "${hostname}"; }
-
+          modules = with inputs; [
             ../modules/core
-          ] ++ nixpkgs.lib.optionals hmEnable [
+
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -37,7 +35,8 @@
                 users.${username} = ../homes/${username};
               };
             }
-          ] ++ nixpkgs.lib.optionals desktopModules [
+
+            inputs.treefmt-nix.flakeModule
           ] ++ extraModules;
         };
     in
