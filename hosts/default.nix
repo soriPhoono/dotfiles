@@ -17,9 +17,8 @@
         };
 
         modules = [
-
-        ]
-        ++ nixpkgs.lib.optional hmEnable [
+          
+        ] ++ nixpkgs.lib.optional hmEnable [
           inputs.home-manager.nixosModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
@@ -34,11 +33,9 @@
               users.${username} = ../homes/${username};
             };
           }
-        ]
-        ++ nixpkgs.lib.optional defaultModules [
+        ] ++ nixpkgs.lib.optional defaultModules [
 
-        ]
-        ++ extraModules;
+        ] ++ extraModules;
       };
     in
     {
