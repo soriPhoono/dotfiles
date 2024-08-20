@@ -9,6 +9,7 @@
         , username
         , nixpkgs ? inputs.nixpkgs
         , system ? "x86_64-linux"
+        , defaultModules ? true
         , extraModules ? [ ]
         }:
         nixpkgs.lib.nixosSystem {
@@ -21,8 +22,6 @@
           modules = with inputs;
             [
               { networking.hostName = "${hostname}"; }
-
-              self.nixosModules.default
 
               home-manager.nixosModules.home-manager
               {
@@ -40,7 +39,9 @@
                 };
               }
             ]
-            ++ extraModules;
+            ++ nixpkgs.lib.optionals defaultModules [
+              self.nixosModules.default
+            ] ++ extraModules;
         };
     in
     {

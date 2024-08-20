@@ -3,6 +3,7 @@
     default = {
       imports = [
         ./core
+        ./cli
       ];
     };
   };
