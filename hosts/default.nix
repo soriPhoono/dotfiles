@@ -37,6 +37,8 @@
                   users.${username} = ../homes/${username};
                 };
               }
+
+              # Add stylix's modules
             ]
             ++ extraModules;
         };
