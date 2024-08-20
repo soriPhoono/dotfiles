@@ -15,12 +15,14 @@
           inherit system;
 
           specialArgs = {
-            inherit self inputs hostname username;
+            inherit self inputs username;
           };
 
           modules = with inputs;
             [
-              ../modules/core
+              { networking.hostName = "${hostname}"; }
+
+              self.nixosModules.default
 
               home-manager.nixosModules.home-manager
               {

@@ -11,9 +11,7 @@
 
       imports = with inputs; [
         ./hosts
-
-        treefmt-nix.flakeModule
-        devshell.flakeModule
+        ./modules
       ];
 
       perSystem =
@@ -29,47 +27,7 @@
             };
           };
 
-          treefmt = {
-            projectRootFile = "flake.nix";
-            enableDefaultExcludes = true;
-
-            programs = {
-              # Workflow formatters
-              actionlint.enable = true;
-
-              mdformat.enable = true;
-
-              # System script formatters
-              nixpkgs-fmt.enable = true;
-              deadnix.enable = true;
-              statix.enable = true;
-
-              shfmt.enable = true;
-              shellcheck.enable = true;
-
-              # Desktop formatters
-              clang-format.enable = true;
-
-              zig.enable = true;
-
-              rustfmt.enable = true;
-
-              google-java-format.enable = true;
-
-              black.enable = true;
-              isort.enable = true;
-              mypy.enable = true;
-
-              stylua.enable = true;
-
-              yamlfmt.enable = true;
-
-              # Web development formatters
-              deno.enable = true;
-            };
-          };
-
-          devShells = import ./devshells { inherit pkgs; };
+          formatter = pkgs.nixpkgs-fmt;
         };
     };
 
@@ -104,15 +62,5 @@
         home-manager.follows = "home-manager";
       };
     };
-
-    # Development environment imports
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    devshell.url = "github:numtide/devshell";
   };
 }

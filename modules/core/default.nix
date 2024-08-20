@@ -1,7 +1,6 @@
 { config
 , lib
 , pkgs
-, hostname
 , ...
 }: {
   imports = [
@@ -24,8 +23,6 @@
 
     wget
   ];
-
-  networking.hostName = "${hostname}";
 
   programs.command-not-found.enable = true;
 
