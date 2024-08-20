@@ -1,4 +1,9 @@
+{ inputs, ... }:
 {
+  imports = with inputs; [
+    stylix.homeManagerModules.stylix
+  ];
+
   stylix = {
     enable = true;
 
