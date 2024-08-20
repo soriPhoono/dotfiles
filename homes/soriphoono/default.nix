@@ -3,6 +3,6 @@
   imports = [
     ../modules/core
 
-    ../themes/catppuccin.nix
+    ../modules/themes/catppuccin.nix
   ];
 }

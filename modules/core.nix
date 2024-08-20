@@ -20,6 +20,7 @@
 
   programs = {
     fish.enable = true;
+    dconf.enable = true;
 
     command-not-found.enable = true;
   };

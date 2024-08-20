@@ -1,5 +1,7 @@
-{ inputs, ... }:
-{
+{ inputs
+, pkgs
+, ...
+}: {
   imports = with inputs; [
     stylix.homeManagerModules.stylix
   ];
