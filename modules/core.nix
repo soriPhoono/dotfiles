@@ -4,10 +4,6 @@
 , username
 , ...
 }: {
-  imports = [
-    ./users.nix
-  ];
-
   time.timeZone = lib.mkDefault "America/Chicago";
 
   users.users.${username} = {
@@ -70,6 +66,6 @@
       options = "--delete-older-than 2d";
     };
   };
-  
+
   system.stateVersion = lib.mkDefault "24.11";
 }

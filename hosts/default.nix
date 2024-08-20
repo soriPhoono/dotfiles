@@ -49,8 +49,6 @@
         hostname = "wsl";
         username = "soriphoono";
 
-        defaultModules = false;
-
         extraModules = with inputs; [
           nixos-wsl.nixosModules.default
 
