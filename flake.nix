@@ -69,7 +69,7 @@
             };
           };
 
-          devshells = import ./devshells { inherit pkgs; };
+          devShells = import ./devshells { inherit pkgs; };
         };
     };
 

@@ -1,15 +1,16 @@
 { pkgs }: {
   # Nix development shell
 
-  default = {
-    name = "nix";
-    motd = ''
-      Welcome to the devshell!
-    '';
+  default = pkgs.mkShell {
+    name = "startup";
 
     packages = with pkgs; [
       nil
       nixpkgs-fmt
     ];
+
+    shellHook = ''
+      fish && exit
+    '';
   };
 }
