@@ -9,6 +9,7 @@
         , username
         , nixpkgs ? inputs.nixpkgs
         , system ? "x86_64-linux"
+        , homeManager ? true
         , defaultModules ? true
         , extraModules ? [ ]
         }:
@@ -22,7 +23,7 @@
           modules = with inputs;
             [
               { networking.hostName = "${hostname}"; }
-
+            ] ++ nixpkgs.lib.optionals homeManager [
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
@@ -38,8 +39,7 @@
                   users.${username} = ../homes/${username};
                 };
               }
-            ]
-            ++ nixpkgs.lib.optionals defaultModules [
+            ] ++ nixpkgs.lib.optionals defaultModules [
               self.nixosModules.default
             ] ++ extraModules;
         };
@@ -52,9 +52,9 @@
         defaultModules = false;
 
         extraModules = with inputs; [
-          ./wsl
-
           nixos-wsl.nixosModules.default
+
+          ./wsl
         ];
       };
     };
