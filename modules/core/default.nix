@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./boot.nix
+    ./hardware
   ];
 
   time.timeZone = lib.mkDefault "America/Chicago";

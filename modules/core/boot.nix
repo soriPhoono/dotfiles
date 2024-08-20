@@ -10,7 +10,7 @@ in {
     core.boot.systemd-boot.enable = lib.mkEnableOption "Enable bootloader";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.systemd-boot.enable {
     boot = {
       consoleLogLevel = 0;
       kernelPackages = pkgs.linuxPackages_zen;

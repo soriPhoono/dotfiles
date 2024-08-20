@@ -3,7 +3,6 @@
     default = {
       imports = [
         ./core
-        ./hardware
       ];
     };
   };
