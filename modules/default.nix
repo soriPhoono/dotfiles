@@ -2,7 +2,7 @@
   flake.nixosModules = {
     default = {
       imports = [
-        ./core.nix
+        ./core
         ./hardware
       ];
     };
