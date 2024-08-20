@@ -2,10 +2,11 @@
 , pkgs
 , config
 , ...
-}: 
-let 
+}:
+let
   cfg = config.core.hardware.bluetooth;
-in {
+in
+{
   options = {
     core.hardware.bluetooth.enable = lib.mkEnableOption "Enable bluetooth support";
   };

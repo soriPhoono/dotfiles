@@ -3,9 +3,10 @@
 , config
 , ...
 }:
-let 
+let
   cfg = config.core.boot;
-in {
+in
+{
   options = {
     core.boot.systemd-boot.enable = lib.mkEnableOption "Enable bootloader";
   };
