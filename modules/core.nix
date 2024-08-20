@@ -8,10 +8,14 @@
 
   users.users.${username} = {
     name = "${username}";
+    description = "Sori Phoono";
 
     isNormalUser = true;
-
     shell = pkgs.fish;
+
+    extraGroups = [
+      "wheel"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -66,6 +70,16 @@
       dates = "daily";
       options = "--delete-older-than 2d";
     };
+  };
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+
+    overlays = [
+      
+    ];
   };
 
   system.stateVersion = lib.mkDefault "24.11";
