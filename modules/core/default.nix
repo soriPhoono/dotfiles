@@ -4,6 +4,10 @@
 , username
 , ...
 }: {
+  imports = [
+    ./boot.nix
+  ];
+
   time.timeZone = lib.mkDefault "America/Chicago";
 
   users.users.${username} = {
