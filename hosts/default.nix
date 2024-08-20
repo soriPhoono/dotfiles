@@ -49,6 +49,8 @@
         hostname = "wsl";
         username = "soriphoono";
 
+        defaultModules = false;
+
         extraModules = with inputs; [
           ./wsl
 
