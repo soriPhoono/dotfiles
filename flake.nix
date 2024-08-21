@@ -63,5 +63,18 @@
         home-manager.follows = "home-manager";
       };
     };
+
+    # Development environment imports
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        nix-darwin.follows = "";
+      };
+    };
   };
 }
