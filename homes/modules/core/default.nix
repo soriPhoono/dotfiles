@@ -3,7 +3,6 @@
     ./shell.nix
 
     ./git.nix
-    ./gpg.nix
   ];
 
   xdg = {

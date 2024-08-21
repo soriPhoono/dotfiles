@@ -14,5 +14,5 @@
 
     globals.mapleader = " ";
     globals.maplocalleader = ",";
-  }
-    }
+  };
+}
