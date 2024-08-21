@@ -26,7 +26,7 @@
   };
 
   sops = {
-    defaultSopsFile = ./homes/soriphoono/example.yaml;
+    defaultSopsFile = ../../homes/soriphoono/example.yaml;
 
     age = {
       sshKeyPaths = [
@@ -38,9 +38,7 @@
     };
 
     secrets = {
-      example_key = {
-        
-      };
+      example_key = { };
     };
   };
 }
