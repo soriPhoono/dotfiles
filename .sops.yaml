@@ -1,0 +1,9 @@
+keys:
+  - &admin_soriphoono age1zs9hr8cqgzxyhuqpqurn9te0yzud3y93cfepstden26lf4gm2y8sqzgp9k
+  - &system_wsl age1fmhxa0ar77t8prfxcglt6uc8drdv2klqar54zdff6tskqn8llaxsmq0kq5
+creation_rules:
+  - path_regex: homes/soriphoono/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+    - age:
+      - *admin_soriphoono
+      - *system_wsl

@@ -1,7 +1,8 @@
+{ inputs, ... }:
 {
   flake.nixosModules = {
     default = {
-      imports = [
+      imports = with inputs; [
         ./core
       ];
     };
