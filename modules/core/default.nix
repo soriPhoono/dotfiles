@@ -10,8 +10,8 @@
     ./hardware
 
     ./boot.nix
+    ./system-keys.nix
     ./users.nix
-    ./secrets.nix
   ];
 
   time.timeZone = lib.mkDefault "America/Chicago";

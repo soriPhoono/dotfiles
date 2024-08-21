@@ -1,8 +1,13 @@
 { config
+, inputs
 , pkgs
 , username
 , ...
 }: {
+  imports = with inputs; [
+    nixos-wsl.nixosModules.default
+  ];
+
   wsl = {
     enable = true;
     defaultUser = "${username}";

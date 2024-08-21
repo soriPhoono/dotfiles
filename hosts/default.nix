@@ -7,9 +7,9 @@
       mkHost =
         { hostname
         , username
+        , systemModule
         , nixpkgs ? inputs.nixpkgs
         , system ? "x86_64-linux"
-        , extraModules ? [ ]
         }:
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -24,6 +24,8 @@
 
               self.nixosModules.default
 
+              systemModule
+
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
@@ -33,13 +35,13 @@
                   backupFileExtension = "~";
 
                   extraSpecialArgs = {
-                    inherit inputs;
+                    inherit inputs username;
                   };
 
                   users.${username} = ../homes/${username};
                 };
               }
-            ] ++ extraModules;
+            ];
         };
     in
     {
@@ -47,11 +49,7 @@
         hostname = "wsl";
         username = "soriphoono";
 
-        extraModules = with inputs; [
-          nixos-wsl.nixosModules.default
-
-          ./wsl
-        ];
+        systemModule = ./wsl;
       };
     };
 }
