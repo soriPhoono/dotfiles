@@ -33,7 +33,5 @@
     git-cliff = {
       # TODO: setup changelog generator
     };
-
-    gitui.enable = true;
   };
 }
