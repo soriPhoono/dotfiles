@@ -73,5 +73,31 @@
       git = true;
       icons = true;
     };
+
+    fd = {
+      enable = true;
+      hidden = true;
+
+      extraOptions = [
+        "--type file"
+        "--follow"
+        "--color=always"
+      ];
+
+      ignores = [
+        ".git"
+        "*.bak"
+      ];
+    };
+
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+
+      defaultCommand = "fd";
+      defaultOptions = [
+        "--ansi"
+      ];
+    };
   };
 }
