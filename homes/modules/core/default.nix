@@ -1,7 +1,7 @@
 { nixosConfig, ... }: {
   imports = [
     ./shell.nix
-
+    ./utils.nix
     ./git.nix
   ];
 
