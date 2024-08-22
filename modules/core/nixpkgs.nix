@@ -28,8 +28,6 @@
       allowUnfree = true;
     };
 
-    overlays = [
-
-    ];
+    overlays = import ../../overlays; # TODO: check this for errors
   };
 }
