@@ -9,7 +9,7 @@
           color = {
             "1" = "cyan";
           };
-          
+
           padding = {
             right = 1;
           };
