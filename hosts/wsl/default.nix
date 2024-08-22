@@ -11,6 +11,9 @@
   wsl = {
     enable = true;
     defaultUser = "${username}";
+
+    startMenuLaunchers = true;
+    useWindowsDriver = true;
   };
 
   documentation = {
