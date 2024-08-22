@@ -39,9 +39,25 @@
             key = "Time";
             format = "{14}:{17}:{20}";
           }
+
           "break"
-          "player"
-          "media"
+          "os"
+          "wm"
+          {
+            type = "users";
+            key = "User";
+            myselfOnly = true;
+          }
+          {
+            type = "cpu";
+            key = "CPU";
+            temp = true;
+          }
+          {
+            type = "gpu";
+            key = "GPU";
+            temp = true;
+          }
         ];
       };
     };
