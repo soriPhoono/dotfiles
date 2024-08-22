@@ -51,12 +51,5 @@
 
         systemModule = ./wsl;
       };
-
-      hp-14 = mkHost {
-        hostname = "testbench";
-        username = "soriphoono";
-
-        systemModule = ./hp-14;
-      };
     };
 }
