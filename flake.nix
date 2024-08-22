@@ -47,6 +47,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+
     # User environment imports
 
     home-manager = {

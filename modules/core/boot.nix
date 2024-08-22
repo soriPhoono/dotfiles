@@ -29,7 +29,7 @@ in
         systemd-boot = {
           enable = true;
 
-          editor.enable = false;
+          editor = false;
         };
       };
 
