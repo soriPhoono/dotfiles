@@ -1,6 +1,7 @@
 { config
 , nixosConfig
 , inputs
+, lib
 , username
 , ...
 }: {
@@ -11,5 +12,7 @@
     ../modules/editors
 
     ../modules/themes/catppuccin.nix
+  ] + lib.optionals  [
+
   ];
 }
