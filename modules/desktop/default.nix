@@ -3,8 +3,12 @@
 , config
 , ...
 }:
-let cfg = config.desktop.enable;
+let cfg = config.desktop;
 in  {
+  imports = [
+    ./hyprland.nix
+  ];
+
   options = {
     desktop.enable = lib.mkEnableOption "Enable desktop support";
   };
