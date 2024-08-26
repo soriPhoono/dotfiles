@@ -1,4 +1,8 @@
 {
+  home.shellAliases = {
+    find = "fd";
+  };
+
   programs = {
     fastfetch = {
       enable = true;
@@ -79,7 +83,6 @@
       hidden = true;
 
       extraOptions = [
-        "--type file"
         "--follow"
         "--color=always"
       ];
@@ -94,7 +97,7 @@
       enable = true;
       enableFishIntegration = true;
 
-      defaultCommand = "fd";
+      defaultCommand = "fd --type file";
       defaultOptions = [
         "--ansi"
       ];
