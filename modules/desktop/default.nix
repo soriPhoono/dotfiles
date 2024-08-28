@@ -1,6 +1,7 @@
 { lib
 , pkgs
 , config
+, username
 , ...
 }:
 let cfg = config.desktop;
@@ -13,5 +14,11 @@ in {
     desktop.enable = lib.mkEnableOption "Enable desktop support";
   };
 
-  config = lib.mkIf cfg.enable { };
+  config = lib.mkIf cfg.enable {
+    networking.networkmanager.enable = true;
+
+    users.users.${username}.extraGroups = [
+      "networkmanager"
+    ];
+  };
 }
