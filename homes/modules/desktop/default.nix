@@ -1,5 +1,5 @@
 { pkgs
-
+, ...
 }: {
   gtk = {
     enable = true;

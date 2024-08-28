@@ -4,6 +4,8 @@
 }: {
   flake.nixosConfigurations =
     let
+      inherit (inputs.nixpkgs) lib;
+
       mkHost =
         { hostname
         , username
@@ -11,11 +13,11 @@
         , nixpkgs ? inputs.nixpkgs
         , system ? "x86_64-linux"
         }:
-        nixpkgs.lib.nixosSystem {
+        lib.nixosSystem {
           inherit system;
 
           specialArgs = {
-            inherit self inputs username;
+            inherit self inputs lib username;
           };
 
           modules = with inputs;
@@ -50,6 +52,12 @@
         username = "soriphoono";
 
         systemModule = ./wsl;
+      };
+      zephyrus = mkHost {
+        hostname = "zephyrus";
+        username = "soriphoono";
+
+        systemModule = ./zephyrus;
       };
     };
 }

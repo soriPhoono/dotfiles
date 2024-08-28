@@ -1,4 +1,6 @@
-{}: {
+{ lib
+, ...
+}: {
   imports = [
     ../desktop
   ];
@@ -6,7 +8,7 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
-    systemd.variables = ["--all"];
+    systemd.variables = [ "--all" ];
 
     settings = {
       "$mod" = "SUPER";
