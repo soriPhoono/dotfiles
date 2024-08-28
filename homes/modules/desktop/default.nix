@@ -9,4 +9,10 @@
       name = "Papirus-Dark";
     };
   };
+
+  qt = {
+    enable = true;
+
+    platformTheme.name = "gtk";
+  };
 }

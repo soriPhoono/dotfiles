@@ -1,4 +1,8 @@
 {}: {
+  imports = [
+    ../desktop
+  ];
+
   wayland.windowManager.hyprland = {
     enable = true;
 
