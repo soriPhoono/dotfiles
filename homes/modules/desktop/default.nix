@@ -1,6 +1,12 @@
 { pkgs
 , ...
 }: {
+  imports = [
+    ./alacritty.nix
+
+    ./alacritty.nix
+  ];
+
   gtk = {
     enable = true;
 

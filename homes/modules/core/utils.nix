@@ -1,4 +1,9 @@
 {
+  imports = [
+    ../editors/neovim
+    ../editors/helix
+  ];
+
   home.shellAliases = {
     find = "fd";
   };

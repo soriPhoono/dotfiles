@@ -3,7 +3,6 @@
 }: {
   imports = [
     ../desktop
-    ../terminals/alacritty.nix
   ];
 
   wayland.windowManager.hyprland = {
