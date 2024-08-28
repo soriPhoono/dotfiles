@@ -5,6 +5,7 @@
     default = {
       imports = with inputs; [
         ./core
+        ./desktop
       ];
     };
   };

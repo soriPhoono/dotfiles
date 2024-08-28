@@ -4,7 +4,7 @@
 , ...
 }:
 let cfg = config.desktop;
-in  {
+in {
   imports = [
     ./hyprland.nix
   ];
@@ -13,7 +13,5 @@ in  {
     desktop.enable = lib.mkEnableOption "Enable desktop support";
   };
 
-  config = lib.mkIf cfg.enable {
-    
-  };
+  config = lib.mkIf cfg.enable { };
 }

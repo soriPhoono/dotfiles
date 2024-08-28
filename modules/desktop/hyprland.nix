@@ -5,7 +5,7 @@
 , ...
 }:
 let cfg = config.desktop.hyprland;
-in  {
+in {
   options = {
     desktop.hyprland.enable = lib.mkEnableOption "Enable desktop support";
   };

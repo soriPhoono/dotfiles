@@ -12,7 +12,7 @@
     ../modules/editors
 
     ../modules/themes/catppuccin.nix
-  ] + lib.optionals  [
-
+  ] ++ lib.optionals nixosConfig.desktop.enable [
+    ../modules/hyprland
   ];
 }

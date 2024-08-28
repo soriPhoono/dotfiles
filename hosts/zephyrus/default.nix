@@ -8,4 +8,6 @@
   ];
 
   core.boot.systemd-boot.enable = true;
+
+  desktop.hyprland.enable = true;
 }
