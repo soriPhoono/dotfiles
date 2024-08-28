@@ -2,6 +2,10 @@
   programs.alacritty = {
     enable = true;
 
-    settings = { };
+    settings = {
+      cursor = {
+        style = "Beam";
+      };
+    };
   };
 }
