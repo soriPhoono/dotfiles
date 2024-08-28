@@ -4,7 +4,7 @@
   imports = [
     ./alacritty.nix
 
-    ./alacritty.nix
+    ./firefox.nix
   ];
 
   gtk = {

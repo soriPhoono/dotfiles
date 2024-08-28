@@ -15,6 +15,8 @@
 
       bind = [
         "$mod, RETURN, exec, alacritty"
+
+        "$mod, B, exec, firefox"
       ] ++ (
         builtins.concatLists (builtins.genList
           (
