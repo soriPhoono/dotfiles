@@ -4,11 +4,19 @@
     ../editors/helix
   ];
 
-  home.shellAliases = {
+  home.shellAliases = with pkgs; {
+    df = "${duf}/bin/duf";
+    du = "${dua}/bin/dua";
     find = "fd";
   };
 
   programs = {
+    nix-index = {
+      enable = true;
+
+      enableFishIntegration = true;
+    };
+  
     fastfetch = {
       enable = true;
 

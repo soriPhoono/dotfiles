@@ -20,7 +20,5 @@
     coreutils
   ];
 
-  programs.command-not-found.enable = true;
-
   system.stateVersion = lib.mkDefault "24.11";
 }
