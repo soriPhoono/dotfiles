@@ -17,12 +17,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    pipewire = {
+    services.pipewire = {
       enable = true;
 
       jack.enable = true;
       alsa.enable = true;
-      alsa.enable32Bit = true;
+      alsa.support32Bit = true;
       pulse.enable = true;
     };
 

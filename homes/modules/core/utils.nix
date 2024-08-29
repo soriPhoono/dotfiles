@@ -1,4 +1,6 @@
-{
+{ pkgs
+, ...
+}: {
   imports = [
     ../editors/neovim
     ../editors/helix
