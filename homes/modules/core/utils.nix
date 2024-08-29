@@ -41,10 +41,6 @@
 
           color = "cyan";
           separator = "  ";
-
-          temp = {
-            unit = "F";
-          };
         };
 
         modules = [
