@@ -9,8 +9,9 @@
       mkHost =
         { hostname
         , username
-        , systemModule
+        , systemModules ? []
         , nixpkgs ? inputs.nixpkgs
+        , defaultModules ? true
         , system ? "x86_64-linux"
         }:
         lib.nixosSystem {
@@ -23,10 +24,6 @@
           modules = with inputs;
             [
               { networking.hostName = "${hostname}"; }
-
-              self.nixosModules.default
-
-              systemModule
 
               home-manager.nixosModules.home-manager
               {
@@ -43,7 +40,9 @@
                   users.${username} = ../homes/${username};
                 };
               }
-            ];
+            ] ++ lib.optionals defaultModules [
+              self.nixosModules.default
+            ] ++ systemModules;
         };
     in
     {
@@ -51,13 +50,17 @@
         hostname = "wsl";
         username = "soriphoono";
 
-        systemModule = ./wsl;
+        systemModules = [
+          ./wsl
+        ];
       };
       zephyrus = mkHost {
         hostname = "zephyrus";
         username = "soriphoono";
 
-        systemModule = ./zephyrus;
+        systemModules = [
+          ./zephyrus
+        ];
       };
     };
 }
