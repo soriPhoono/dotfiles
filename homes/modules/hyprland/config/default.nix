@@ -20,6 +20,15 @@
       repeat_delay = 300;
 
       accel_profile = "flat";
+
+      touchpad = {
+        natural_scroll = true;
+
+        clickfinger_behavior = true;
+        tap-to-click = true;
+        drag_lock = true;
+        tap-and-drag = true;
+      };
     };
   };
 }
