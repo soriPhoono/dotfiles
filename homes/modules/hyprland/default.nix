@@ -3,6 +3,8 @@
 }: {
   imports = [
     ../desktop
+
+    ./config
   ];
 
   wayland.windowManager.hyprland = {
