@@ -1,4 +1,6 @@
-{
+{ pkgs
+, ...
+}: {
   home.packages = with pkgs; [
     libva-utils
     vdpauinfo
