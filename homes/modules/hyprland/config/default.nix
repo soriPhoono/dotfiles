@@ -27,12 +27,13 @@
         clickfinger_behavior = true;
         tap-to-click = true;
         drag_lock = true;
-        tap-and-drag = true;
       };
     };
 
     gestures = {
       workspace_swipe = true;
+      workspace_swipe_cancel_ratio = 0.3;
+      workspace_swipe_create_new = false;
     };
 
     misc = {
@@ -42,7 +43,6 @@
       vrr = 1;
 
       mouse_move_enables_dpms = true;
-      key_press_enables_dpms = true;
 
       animate_manual_resizes = true;
       animate_mouse_windowdragging = true;

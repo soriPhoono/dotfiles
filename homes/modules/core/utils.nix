@@ -6,10 +6,28 @@
     ../editors/helix
   ];
 
-  home.shellAliases = with pkgs; {
-    df = "${duf}/bin/duf";
-    du = "${dua}/bin/dua";
-    find = "fd";
+  home = {
+    packages = with pkgs; [
+      imagemagick
+
+      zip
+      unzip
+      p7zip
+      unrar
+
+      yt-dlp
+      spotdl
+      ytmdl
+    ];
+
+    shellAliases = with pkgs; {
+      df = "${duf}/bin/duf";
+      du = "${dua}/bin/dua";
+
+      find = "fd";
+      top = "${btop}/bin/btop";
+      gtop = "${nvtopPackages.full}/bin/nvtop";
+    };
   };
 
   programs = {

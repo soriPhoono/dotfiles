@@ -6,6 +6,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    hardware.keyboard.qmk.enable = lib.mkIf cfg.enable true;
+    hardware = {
+      xone.enable = true;
+      steam-hardware.enable = true;
+      uinput.enable = true;
+    };
   };
 }
