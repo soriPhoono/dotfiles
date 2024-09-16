@@ -37,7 +37,7 @@
                     inherit inputs username;
                   };
 
-                  users.${username} = ../homes/${username}@${hostname};
+                  users.${username} = ../homes/${username}_${hostname};
                 };
               }
             ] ++ lib.optionals defaultModules [
