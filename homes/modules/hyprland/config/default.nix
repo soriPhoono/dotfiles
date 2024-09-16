@@ -1,4 +1,9 @@
 {
+  imports = [
+    ./binds.nix
+    ./animations.nix
+  ];
+
   wayland.windowManager.hyprland.settings = {
     general = {
       border_size = 3;

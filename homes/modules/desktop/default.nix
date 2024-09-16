@@ -8,6 +8,15 @@
     ./utils.nix
   ];
 
+  xdg = {
+    portal = {
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-hyprland
+        xdg-desktop-portal-gtk
+      ];
+    };
+  };
+
   gtk = {
     enable = true;
 
