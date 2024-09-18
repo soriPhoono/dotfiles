@@ -4,6 +4,7 @@
   imports = [
     ./alacritty.nix
     ./firefox.nix
+    ./dunst.nix
 
     ./utils.nix
   ];
