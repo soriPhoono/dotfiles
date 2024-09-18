@@ -36,7 +36,7 @@
 
       enableFishIntegration = true;
     };
-  
+
     fastfetch = {
       enable = true;
 

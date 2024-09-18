@@ -9,7 +9,7 @@
       mkHost =
         { hostname
         , username
-        , systemModules ? []
+        , systemModules ? [ ]
         , nixpkgs ? inputs.nixpkgs
         , defaultModules ? true
         , system ? "x86_64-linux"

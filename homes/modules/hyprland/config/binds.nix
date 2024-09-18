@@ -1,7 +1,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
-  
+
     bind = [
       "$mod SHIFT, Q, exit, "
       "$mod, Q, killactive,"
@@ -19,7 +19,7 @@
       "$mod SHIFT, left, swapwindow, l"
       "$mod SHIFT, right, swapwindow, r"
       "$mod SHIFT, down, swapwindow, d"
-    
+
       "$mod, RETURN, exec, alacritty" # Terminal
       "$mod, B, exec, firefox"
     ] ++ (
@@ -30,11 +30,11 @@
             ws =
               let c = (x + 1) / 10;
               in builtins.toString (x + 1 - (c * 10));
-            in
-            [
-              "$mod, ${ws}, workspace, ${toString (x + 1)}"
-              "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-            ]
+          in
+          [
+            "$mod, ${ws}, workspace, ${toString (x + 1)}"
+            "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+          ]
         ) 10)
     );
 

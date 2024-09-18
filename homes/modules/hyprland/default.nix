@@ -17,7 +17,7 @@
 
       "HYPRCURSOR_SIZE,24"
       "XCURSOR_SIZE,24"
-    
+
       "GDK_BACKEND,wayland,x11,*"
       "QT_QPA_PLATFORM,wayland;xcb"
       "SDL_VIDEODRIVER,wayland"

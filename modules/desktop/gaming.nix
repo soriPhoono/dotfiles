@@ -9,9 +9,7 @@
       gamescopeSession = {
         enable = true;
 
-        env = {
-          
-        };
+        env = { };
 
         args = [
           "-w 1920"
@@ -31,9 +29,7 @@
       enable = true;
       capSysNice = true;
 
-      env = {
-        
-      };
+      env = { };
 
       args = [
         "-w 1920"

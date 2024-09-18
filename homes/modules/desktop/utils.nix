@@ -7,22 +7,22 @@
     clinfo
     glxinfo
     vulkan-tools
-  
-  	obsidian
 
-  	discord
-  	telegram-desktop
-  	signal-desktop
+    obsidian
 
-  	gzdoom
-  	prismlauncher
-  	path-of-building
+    discord
+    telegram-desktop
+    signal-desktop
 
-  	gimp
-  	audacity
-  	davinci-resolve
+    gzdoom
+    prismlauncher
+    path-of-building
 
-  	obs-studio
+    gimp
+    audacity
+    davinci-resolve
+
+    obs-studio
   ];
 
   programs.vscode.enable = true;
