@@ -25,6 +25,8 @@
       du = "${dua}/bin/dua";
 
       find = "fd";
+      cat = "${bat}/bin/bat";
+      
       top = "${btop}/bin/btop";
       gtop = "${nvtopPackages.full}/bin/nvtop";
     };
