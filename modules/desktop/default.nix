@@ -8,8 +8,6 @@ let cfg = config.desktop;
 in {
   imports = [
     ./hyprland.nix
-
-    ./gaming.nix
   ];
 
   options = {
