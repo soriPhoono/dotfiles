@@ -4,7 +4,7 @@
 }: {
   imports = [
     ../desktop
-    ./supporting.nix
+    ./supporting
     
     ./config
   ];
