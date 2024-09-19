@@ -22,8 +22,8 @@
       "$mod SHIFT, right, swapwindow, r"
       "$mod SHIFT, down, swapwindow, d"
 
-      "$mod, RETURN, exec, ${alacritty}" # Terminal
-      "$mod, B, exec, ${firefox}"
+      "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
+      "$mod, B, exec, ${firefox}/bin/firefox"
     ] ++ (
       builtins.concatLists (builtins.genList
         (
