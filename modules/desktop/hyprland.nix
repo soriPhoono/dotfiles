@@ -17,5 +17,7 @@ in {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     };
+
+    security.polkit.enable = true;
   };
 }
