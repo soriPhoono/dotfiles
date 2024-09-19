@@ -15,6 +15,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    programs.dconf.enable = true;
+  
     services.pipewire = {
       enable = true;
 

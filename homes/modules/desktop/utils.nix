@@ -24,6 +24,4 @@
 
     obs-studio
   ];
-
-  programs.vscode.enable = true;
 }

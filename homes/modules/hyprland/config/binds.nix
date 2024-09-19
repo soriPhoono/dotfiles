@@ -1,8 +1,10 @@
-{
+{ pkgs
+, ...
+}: {
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
 
-    bind = [
+    bind = with pkgs; [
       "$mod SHIFT, Q, exit, "
       "$mod, Q, killactive,"
 
@@ -20,8 +22,8 @@
       "$mod SHIFT, right, swapwindow, r"
       "$mod SHIFT, down, swapwindow, d"
 
-      "$mod, RETURN, exec, alacritty" # Terminal
-      "$mod, B, exec, firefox"
+      "$mod, RETURN, exec, ${alacritty}" # Terminal
+      "$mod, B, exec, ${firefox}"
     ] ++ (
       builtins.concatLists (builtins.genList
         (
