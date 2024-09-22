@@ -7,14 +7,12 @@
         layer = "top";
         position = "top";
 
-        margin-top = 20;
-        margin-left = 20;
-        margin-right = 20;
-        margin-bottom = 0;
-        
+        spacing = 8;
+        height = 40;
+
         modules-left = [
           "custom/power"
-          "hyprland/workspaces"
+          "hyprland/window"
         ];
 
         modules-center = [
@@ -22,7 +20,12 @@
         ];
 
         modules-right = [
-          
+          "tray"
+          "network"
+          "bluetooth"
+          "wireplumber"
+          "battery"
+          "clock"
         ];
 
         "custom/power" = {
@@ -31,38 +34,80 @@
           tooltip-format = "Session controls";
         };
 
-        "hyprland/workspaces" = {
-          all-outputs = true;
-          persistent-workspaces = {
-            "*" = 6;
-          };
-          
-          format-icons = {
-            default = "";
-            active = "";
-          };
+        "hyprland/window" = {
+          max-length = 20;
+        };
 
+        battery = {
           format = "{icon}";
+          format-icons = [
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁾"
+            "󰂀"
+            "󰂂"
+            "󰁹"
+          ];
+        };
+
+        network = {
+          format-icons = [
+            "󰤟"
+            "󰤢"
+            "󰤥"
+            "󰤨"
+          ];
+
+          format-ethernet = "󰈀";
+          format-wifi = "{icon}";
+          format-disconnected = "󰤭";
+
+          tooltip-format-ethernet = "{ifname} {ipaddr}";
+          tooltip-format-wifi = "{ifname} {ipaddr} {essid}";
+          tooltip-format-disconnected = "{ifname} Disconnected";
+        };
+
+        bluetooth = {
+          format-connected-battery = "󰂱";
+          format-connected = "󰂱";
+          format-on = "󰂯";
+          format-off = "󰂲";
+
+          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}";
+          tooltip-format-enumerate-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+          tooltip-format-on = "{controller_alias}\t{controller_address}";
+          tooltip-format-off = "Disconnected";
         };
       };
+
       bottomBar = {
         layer = "top";
         position = "bottom";
-        mode = "overlay";
-        start_hidden = true;
-        fixed-center = true;
 
         modules-left = [
           
         ];
 
         modules-center = [
-          
+          "hyprland/workspaces"
         ];
 
         modules-right = [
           
         ];
+
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-icons = {
+            default = "";
+            active = "";
+          };
+
+          persistent-workspaces = {
+            "*" = 6;
+          };
+        };
       };
     };
   };

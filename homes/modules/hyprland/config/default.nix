@@ -2,6 +2,7 @@
   imports = [
     ./binds.nix
     ./animations.nix
+    ./autostart.nix
   ];
 
   wayland.windowManager.hyprland.settings = {
