@@ -3,11 +3,11 @@
 }: {
   wayland.windowManager.hyprland.settings = {
     exec-once = with pkgs; [
-      "${polkit_gnome}/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+      "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
     ];
 
     exec = [
-
+      "pidof waybar || waybar &"
     ];
   };
 }
