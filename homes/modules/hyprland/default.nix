@@ -5,7 +5,7 @@
   imports = [
     ../desktop
     ./supporting
-    
+
     ./config
   ];
 

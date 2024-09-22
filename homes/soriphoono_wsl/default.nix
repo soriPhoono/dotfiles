@@ -9,7 +9,6 @@
     sops-nix.homeManagerModules.sops
 
     ../modules/core
-    ../modules/editors
 
     ../modules/themes/catppuccin.nix
   ];

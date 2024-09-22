@@ -1,6 +1,6 @@
 {
   imports = [
-    ./dunst.nix
+    ./mako.nix
     ./alacritty.nix
     ./firefox.nix
   ];

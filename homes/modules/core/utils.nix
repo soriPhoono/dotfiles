@@ -6,30 +6,15 @@
     ../editors/helix
   ];
 
-  home = {
-    packages = with pkgs; [
-      imagemagick
+  home.shellAliases = with pkgs; {
+    df = "${duf}/bin/duf";
+    du = "${dua}/bin/dua";
 
-      zip
-      unzip
-      p7zip
-      unrar
+    find = "fd";
+    cat = "bat";
 
-      yt-dlp
-      spotdl
-      ytmdl
-    ];
-
-    shellAliases = with pkgs; {
-      df = "${duf}/bin/duf";
-      du = "${dua}/bin/dua";
-
-      find = "fd";
-      cat = "${bat}/bin/bat";
-      
-      top = "${btop}/bin/btop";
-      gtop = "${nvtopPackages.full}/bin/nvtop";
-    };
+    top = "btop";
+    gtop = "${nvtopPackages.full}/bin/nvtop";
   };
 
   programs = {
@@ -133,5 +118,9 @@
         "--ansi"
       ];
     };
+
+    bat.enable = true;
+
+    btop.enable = true;
   };
 }
