@@ -32,6 +32,10 @@
       ", XF86KbdBrightnessUp, exec, ${asusctl}/bin/asusctl -p"
       ", XF86KbdBrightnessDown, exec, ${asusctl}/bin/asusctl -n"
 
+      ", PRINT, exec, ${grim}/bin/grim ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
+      "$mod, PRINT, exec, ${grim}/bin/grim -g \"$(${slurp}/bin/slurp)\" ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
+      "$mod CTRL, PRINT, exec, ${grim}/bin/grim -g \"$(${slurp}/bin/slurp)\" - | ${wl-clipboard-rs}/bin/wl-copy"
+
       "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
       "$mod, A, exec, ${wofi}/bin/wofi"
       "$mod, E, exec, ${nautilus}/bin/nautilus"

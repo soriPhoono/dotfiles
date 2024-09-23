@@ -27,7 +27,7 @@
       ", XF86Launch3, exec, "
       ", XF86Launch4, exec, ${asusctl}/bin/asusctl profile -n"
     ];
-    
+
     bindl = with pkgs; [
       ", switch:on:473c56e0, exec, ${hyprland}/bin/hyprctl dispatch dpms off"
       ", switch:off:473c56e0, exec, ${hyprland}/bin/hyprctl dispatch dpms on"

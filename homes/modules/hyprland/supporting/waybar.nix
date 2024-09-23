@@ -16,7 +16,7 @@
         ];
 
         modules-center = [
-          
+
         ];
 
         modules-right = [
@@ -97,7 +97,7 @@
         position = "bottom";
 
         modules-left = [
-          
+
         ];
 
         modules-center = [
@@ -105,7 +105,7 @@
         ];
 
         modules-right = [
-          
+
         ];
 
         "hyprland/workspaces" = {

@@ -2,6 +2,6 @@
   programs.wlogout = {
     enable = true;
 
-    
+
   };
 }
