@@ -6,6 +6,5 @@
     ./wlogout.nix
 
     ./alacritty.nix
-    ./firefox.nix
   ];
 }

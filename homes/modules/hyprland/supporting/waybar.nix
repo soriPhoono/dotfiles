@@ -110,6 +110,30 @@
             "󰁹"
           ];
         };
+
+        clock = {
+          format = "󰥔 {:%H:%M :%p}";
+
+          tooltip-format = "<tt><small>{calendar}</small></tt>";
+
+          calendar = {
+            mode = "year";
+            mode-mon-col = 3;
+            week-pos = "right";
+            on-scroll = 1;
+            format = {
+              months = "<b>{}</b>";
+              days = "<b>{}</b>";
+              weeks = "<b>W{}</b>";
+              weekdays = "<b>{}</b>";
+              today = "<b><u>{}</u></b>";
+            };
+            actions = {
+              on-scroll-up = "shift_up";
+              on-scroll-down = "shift_down";
+            };
+          };
+        };
       };
     };
   };
