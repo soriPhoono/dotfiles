@@ -23,7 +23,7 @@
           "tray"
           "network"
           "bluetooth"
-          "wireplumber"
+          "pulseaudio"
           "battery"
           "clock"
         ];
@@ -35,20 +35,7 @@
         };
 
         "hyprland/window" = {
-          max-length = 20;
-        };
-
-        battery = {
-          format = "{icon}";
-          format-icons = [
-            "󰁺"
-            "󰁻"
-            "󰁼"
-            "󰁾"
-            "󰂀"
-            "󰂂"
-            "󰁹"
-          ];
+          max-length = 30;
         };
 
         network = {
@@ -78,6 +65,30 @@
           tooltip-format-enumerate-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
           tooltip-format-on = "{controller_alias}\t{controller_address}";
           tooltip-format-off = "Disconnected";
+        };
+
+        pulseaudio = {
+          format = "{icon}";
+          format-icons = [
+            "󰕿"
+            "󰖀"
+            "󰕾"
+          ];
+
+          tooltip-format = "{volume}%";
+        };
+
+        battery = {
+          format = "{icon}";
+          format-icons = [
+            "󰁺"
+            "󰁻"
+            "󰁼"
+            "󰁾"
+            "󰂀"
+            "󰂂"
+            "󰁹"
+          ];
         };
       };
 
