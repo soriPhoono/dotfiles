@@ -17,7 +17,7 @@ in {
   config = lib.mkIf cfg.enable {
     desktop = {
       enable = true;
-      windowManager = true;
+      windowManager.enable = true;
     };
 
     programs.hyprland = {
