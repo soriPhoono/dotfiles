@@ -1,4 +1,6 @@
-{
+{ pkgs
+, ...
+}: {
   programs.waybar = {
     enable = true;
 
@@ -8,11 +10,16 @@
         position = "top";
 
         spacing = 8;
-        height = 40;
+        height = 60;
+
+        margin-left = 20;
+        margin-right = 20;
+        margin-top = 10;
 
         modules-left = [
+          "custom/spacer"
           "custom/power"
-          "hyprland/window"
+          "hyprland/workspaces"
         ];
 
         modules-center = [
@@ -26,16 +33,29 @@
           "pulseaudio"
           "battery"
           "clock"
+          "custom/spacer"
         ];
 
-        "custom/power" = {
-          format = "󱄅";
-          on-click = "wlogout";
-          tooltip-format = "Session controls";
+        "custom/spacer" = {
+          format = " ";
         };
 
-        "hyprland/window" = {
-          max-length = 30;
+        "custom/power" = with pkgs; {
+          format = "󱄅";
+          on-click = "${wlogout}/bin/wlogout";
+          tooltip-format = "Session controls";
+        };
+        
+        "hyprland/workspaces" = {
+          format = "{icon}";
+          format-icons = {
+            default = "";
+            active = "";
+          };
+
+          persistent-workspaces = {
+            "*" = 6;
+          };
         };
 
         network = {
@@ -56,13 +76,13 @@
         };
 
         bluetooth = {
-          format-connected-battery = "󰂱";
+          format-disabled = "󰂯";
           format-connected = "󰂱";
           format-on = "󰂯";
           format-off = "󰂲";
 
-          tooltip-format-enumerate-connected-battery = "{device_alias}\t{device_address}";
-          tooltip-format-enumerate-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
           tooltip-format-on = "{controller_alias}\t{controller_address}";
           tooltip-format-off = "Disconnected";
         };
@@ -89,35 +109,6 @@
             "󰂂"
             "󰁹"
           ];
-        };
-      };
-
-      bottomBar = {
-        layer = "top";
-        position = "bottom";
-
-        modules-left = [
-
-        ];
-
-        modules-center = [
-          "hyprland/workspaces"
-        ];
-
-        modules-right = [
-
-        ];
-
-        "hyprland/workspaces" = {
-          format = "{icon}";
-          format-icons = {
-            default = "";
-            active = "";
-          };
-
-          persistent-workspaces = {
-            "*" = 6;
-          };
         };
       };
     };

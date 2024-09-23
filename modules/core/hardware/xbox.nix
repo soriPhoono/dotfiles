@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.core.hardware.qmk_keyboard;
+let cfg = config.core.hardware.xbox_controller;
 in {
   options = {
-    core.hardware.qmk_keyboard.enable = lib.mkEnableOption "Enable QMK keyboard support";
+    core.hardware.xbox_controller.enable = lib.mkEnableOption "Enable Xbox controller support";
   };
 
   config = lib.mkIf cfg.enable {
