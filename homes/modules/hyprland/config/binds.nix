@@ -1,6 +1,23 @@
 { pkgs
 , ...
-}: {
+}:
+let
+  volumeScript = with pkgs; writeShellScriptBin "volume.sh" ''
+    operation=$1
+    value=$2
+    current=$(${wireplumber}/bin/wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
+
+    if [[ "$operation" = "raise" ]]; then
+      if [[ $(awk "BEGIN { print $current * 100 + $value }") -gt 100 ]]; then
+        exit 0
+      fi
+ 
+      wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%+
+    elif [[ "$operation" = "lower" ]]; then
+      wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%-
+    fi
+  '';
+in {
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
 
@@ -57,8 +74,8 @@
     );
 
     binde = with pkgs; [
-      ", XF86AudioLowerVolume, exec, ${wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-      ", XF86AudioRaiseVolume, exec, ${wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+      ", XF86AudioLowerVolume, exec, ${volumeScript}/bin/volume.sh lower 5"
+      ", XF86AudioRaiseVolume, exec, ${volumeScript}/bin/volume.sh raise 5"
 
       ", XF86MonBrightnessDown, exec, ${brightnessctl}/bin/brightnessctl set 5%-"
       ", XF86MonBrightnessUp, exec, ${brightnessctl}/bin/brightnessctl set 5%+"
