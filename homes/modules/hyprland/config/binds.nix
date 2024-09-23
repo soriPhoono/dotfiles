@@ -22,7 +22,19 @@
       "$mod SHIFT, right, swapwindow, r"
       "$mod SHIFT, down, swapwindow, d"
 
+      ", XF86AudioMute, exec, ${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+      ", XF86AudioMicMute, exec, ${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+
+      ", XF86AudioPlay, exec, ${playerctl}/bin/playerctl play-pause"
+      ", XF86AudioPrev, exec, ${playerctl}/bin/playerctl previous"
+      ", XF86AudioNext, exec, ${playerctl}/bin/playerctl next"
+
+      ", XF86KbdBrightnessUp, exec, ${asusctl}/bin/asusctl -p"
+      ", XF86KbdBrightnessDown, exec, ${asusctl}/bin/asusctl -n"
+
       "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
+      "$mod, A, exec, ${wofi}/bin/wofi"
+      "$mod, E, exec, ${nautilus}/bin/nautilus"
       "$mod, B, exec, ${firefox}/bin/firefox"
     ] ++ (
       builtins.concatLists (builtins.genList
@@ -40,9 +52,12 @@
         ) 10)
     );
 
-    bindl = [
-      ", switch:on:473c56e0, exec, hyprctl dispatch dpms off"
-      ", switch:off:473c56e0, exec, hyprctl dispatch dpms on"
+    binde = with pkgs; [
+      ", XF86AudioLowerVolume, exec, ${wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+      ", XF86AudioRaiseVolume, exec, ${wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+
+      ", XF86MonBrightnessDown, exec, ${brightnessctl}/bin/brightnessctl set 5%-"
+      ", XF86MonBrightnessUp, exec, ${brightnessctl}/bin/brightnessctl set 5%+"
     ];
 
     bindm = [
