@@ -17,7 +17,8 @@ let
       wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%-
     fi
   '';
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
 
