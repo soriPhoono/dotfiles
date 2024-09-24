@@ -99,7 +99,7 @@ in
         };
 
         "custom/power" = with pkgs; {
-          format = "<span color='#fab387'>󱄅</span>";
+          format = "<span color='#7EBAE4'>󱄅</span>";
           tooltip-format = "Session controls";
 
           on-click = "${wlogout}/bin/wlogout";
@@ -109,7 +109,7 @@ in
           format = "{icon}";
           format-icons = {
             default = "";
-            active = "<span color='#fab387'></span>";
+            active = "<span color='#a6e3a1'></span>";
           };
 
           persistent-workspaces = {
@@ -125,9 +125,9 @@ in
             "<span color='#a6e3a1'>󰤨</span>"
           ];
 
-          format-ethernet = "<span color='#fab387'>󰈀</span>";
+          format-ethernet = "<span color='#a6e3a1'>󰈀</span>";
           format-wifi = "{icon}";
-          format-disconnected = "<span color='#fab387'>󰤭</span>";
+          format-disconnected = "<span color='#f38ba8'>󰤭</span>";
 
           tooltip-format-ethernet = "{ifname} {ipaddr}";
           tooltip-format-wifi = "{ifname} {ipaddr} {essid}";
@@ -139,7 +139,7 @@ in
 
         bluetooth = {
           format-disabled = "<span color='#f38ba8'>󰂯</span>";
-          format-connected = "<span color='#fab387'>󰂱</span>";
+          format-connected = "<span color='#89b4fa'>󰂱</span>";
           format-on = "<span color='#fab387'>󰂯</span>";
           format-off = "<span color='#6c7086'>󰂲</span>";
 
@@ -153,7 +153,7 @@ in
         };
 
         pulseaudio = {
-          format = "{icon}";
+          format = "<span color='#f9e2af'>{icon}</span>";
           format-icons = [
             "󰕿"
             "󰖀"
@@ -167,15 +167,15 @@ in
         };
 
         battery = {
-          format = "<span color='#6c7086'>{icon}</span>";
+          format = "{icon}";
           format-icons = [
-            "󰁺"
-            "󰁻"
-            "󰁼"
-            "󰁾"
-            "󰂀"
-            "󰂂"
-            "󰁹"
+            "<span color='#f38ba8'>󰁺</span>"
+            "<span color='#eba0ac'>󰁻</span>"
+            "<span color='#fab387'>󰁼</span>"
+            "<span color='#fab387'>󰁾</span>"
+            "<span color='#f9e2af'>󰂀</span>"
+            "<span color='#a6e3a1'>󰂂</span>"
+            "<span color='#a6e3a1'>󰁹</span>"
           ];
         };
 
