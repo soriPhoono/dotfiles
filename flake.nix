@@ -21,7 +21,11 @@
         }: {
           formatter = pkgs.nixpkgs-fmt;
 
-          devShells.default = (import ./shell.nix { inherit pkgs; });
+          devShells.default = pkgs.mkShell {
+            packages = with pkgs; [
+              nil
+            ];
+          };
         };
     };
 
