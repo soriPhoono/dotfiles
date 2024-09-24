@@ -4,6 +4,7 @@
 
     ./waybar.nix
     ./wlogout.nix
+    ./fuzzel.nix
 
     ./alacritty.nix
   ];

@@ -55,7 +55,7 @@ in
       "$mod CTRL, PRINT, exec, ${grim}/bin/grim -g \"$(${slurp}/bin/slurp)\" - | ${wl-clipboard-rs}/bin/wl-copy"
 
       "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
-      "$mod, A, exec, ${wofi}/bin/wofi"
+      "$mod, A, exec, ${fuzzel}/bin/fuzzel"
       "$mod, E, exec, ${nautilus}/bin/nautilus"
       "$mod, B, exec, ${firefox}/bin/firefox"
     ] ++ (
