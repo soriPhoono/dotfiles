@@ -4,5 +4,11 @@
 
 pkgs.mkShell
 {
-  
+  nativeBuildInputs = with pkgs; [
+    nil
+  ];
+
+  shellHook = ''
+    fish
+  '';
 }

@@ -29,6 +29,8 @@
           }; */
 
           formatter = pkgs.nixpkgs-fmt;
+
+          devShells.default = (import ./shell.nix { inherit pkgs; });
         };
     };
 
