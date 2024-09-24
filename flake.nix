@@ -19,15 +19,6 @@
         , system
         , ...
         }: {
-          # TODO: Restore this if unfree packages break
-          /* _module.args.pkgs = import inputs.nixpkgs {
-            inherit system;
-
-            config = {
-              allowUnfree = true;
-            };
-          }; */
-
           formatter = pkgs.nixpkgs-fmt;
 
           devShells.default = (import ./shell.nix { inherit pkgs; });
