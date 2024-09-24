@@ -25,6 +25,12 @@
             packages = with pkgs; [
               nil
             ];
+
+            shellHook = 
+            # bash
+            ''
+              echo "Welcome to the system flake devshell"
+            '';
           };
         };
     };
