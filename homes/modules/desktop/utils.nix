@@ -8,7 +8,7 @@
     glxinfo
     vulkan-tools
 
-    gnome.gnome-disk-utility
+    gnome-disk-utility
 
     discord
     telegram-desktop

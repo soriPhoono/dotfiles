@@ -16,6 +16,7 @@
     globals.maplocalleader = ",";
 
     plugins = {
+      web-devicons.enable = true;
       telescope.enable = true;
     };
   };
