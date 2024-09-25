@@ -14,5 +14,9 @@
 
     globals.mapleader = " ";
     globals.maplocalleader = ",";
+
+    plugins = {
+      telescope.enable = true;
+    };
   };
 }

@@ -2,7 +2,9 @@
 , ...
 }: {
   imports = [
-    ./firefox.nix
+    ./development.nix
+    ./office.nix
+    
     ./utils.nix
   ];
 

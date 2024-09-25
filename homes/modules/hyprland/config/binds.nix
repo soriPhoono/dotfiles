@@ -46,17 +46,14 @@ in
       ", XF86AudioPlay, exec, ${playerctl}/bin/playerctl play-pause"
       ", XF86AudioPrev, exec, ${playerctl}/bin/playerctl previous"
       ", XF86AudioNext, exec, ${playerctl}/bin/playerctl next"
-
-      ", XF86KbdBrightnessUp, exec, ${asusctl}/bin/asusctl -p"
-      ", XF86KbdBrightnessDown, exec, ${asusctl}/bin/asusctl -n"
-
+    
       ", PRINT, exec, ${grim}/bin/grim ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
       "$mod, PRINT, exec, ${grim}/bin/grim -g \"$(${slurp}/bin/slurp)\" ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
       "$mod CTRL, PRINT, exec, ${grim}/bin/grim -g \"$(${slurp}/bin/slurp)\" - | ${wl-clipboard-rs}/bin/wl-copy"
 
       "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
       "$mod, A, exec, ${fuzzel}/bin/fuzzel"
-      "$mod, E, exec, ${nautilus}/bin/nautilus"
+      "$mod, E, exec, ${spacedrive}/bin/spacedrive"
       "$mod, B, exec, ${firefox}/bin/firefox"
     ] ++ (
       builtins.concatLists (builtins.genList

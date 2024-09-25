@@ -17,13 +17,19 @@ in {
   config = lib.mkIf cfg.enable {
     programs.dconf.enable = true;
 
-    services.pipewire = {
-      enable = true;
+    services = {
+      pipewire = {
+        enable = true;
+  
+        jack.enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
 
-      jack.enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
+      gvfs.enable = true;
+
+      udisks2.enable = true;
     };
 
     networking.networkmanager.enable = true;

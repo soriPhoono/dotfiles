@@ -26,6 +26,9 @@
       ", XF86Launch2, exec, "
       ", XF86Launch3, exec, "
       ", XF86Launch4, exec, ${asusctl}/bin/asusctl profile -n"
+
+      ", XF86KbdBrightnessUp, exec, ${asusctl}/bin/asusctl -n"
+      ", XF86KbdBrightnessDown, exec, ${asusctl}/bin/asusctl -p"
     ];
 
     bindl = with pkgs; [

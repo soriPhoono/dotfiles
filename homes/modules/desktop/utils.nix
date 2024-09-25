@@ -8,7 +8,7 @@
     glxinfo
     vulkan-tools
 
-    obsidian
+    gnome.gnome-disk-utility
 
     discord
     telegram-desktop
@@ -21,7 +21,6 @@
     gimp
     audacity
     davinci-resolve
-
     obs-studio
   ];
 }

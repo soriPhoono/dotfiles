@@ -2,8 +2,8 @@
 , ...
 }: {
   imports = [
-    ../editors/neovim
     ../editors/helix
+    ../editors/neovim
   ];
 
   home.shellAliases = with pkgs; {
