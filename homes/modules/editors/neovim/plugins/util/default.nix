@@ -1,1 +1,1 @@
-{ imports = [ ./commentary.nix ./autopairs.nix ]; }
+{ imports = [ ./commentary.nix ./autopairs.nix ./fugitive.nix ]; }
