@@ -1,7 +1,16 @@
 {
-  programs.nixvim.plugins.gitsigns = {
-    enable = true;
+  programs.nixvim = {
+    keymaps = builtins.map (v: v // { options.silent = true; }) [{
+      key = "<leader>gt";
+      action = "<cmd>Gitsigns toggle_signs<CR>";
+      mode = [ "n" ];
+      options.desc = "Toggle git gutter signs";
+    }];
 
-    settings.current_line_blame = true;
+    plugins.gitsigns = {
+      enable = true;
+
+      settings.current_line_blame = true;
+    };
   };
 }
