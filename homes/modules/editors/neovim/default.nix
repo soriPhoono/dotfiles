@@ -4,9 +4,8 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
 
-    ./plugins/telescope.nix
-    ./plugins/treesitter.nix
-    ./plugins/fugitive.nix
+    ./config
+    ./plugins
   ];
 
   home.shellAliases.v = "nvim";

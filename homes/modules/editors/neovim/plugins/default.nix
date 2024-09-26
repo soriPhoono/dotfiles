@@ -1,14 +1,24 @@
 {
-  programs.nixvim = {
-  keymaps = [
-    {
-      
-    }
+  imports = [
+    ./telescope.nix
+    ./treesitter.nix
   ];
 
-  plugins = {
-    commentary.enable = true;
-    fugitive.enable = true;
-  };
+  programs.nixvim = {
+    keymaps = [
+      {
+        action = "<cmd>Commentary<CR>";
+        key = "<leader>c";
+        mode = [ "n" ];
+        options = {
+          silent = true;
+        };
+      }
+    ];
+
+    plugins = {
+      commentary.enable = true;
+      gitgutter.enable = true;
+    };
   };
 }
