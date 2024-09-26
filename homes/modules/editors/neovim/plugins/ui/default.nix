@@ -1,23 +1,5 @@
 {
-  imports = [ ./neo-tree.nix ./lualine.nix ./telescope.nix ];
+  imports = [ ./neo-tree.nix ./lualine.nix ./telescope.nix ./gitsigns.nix ];
 
-  programs.nixvim = {
-    keymaps = [{
-      key = "<leader>gs";
-      action = "<cmd>GitGutterBufferToggle<CR>";
-      mode = [ "n" ];
-      options = {
-        desc = "Toggle git gutter status";
-        silent = true;
-      };
-    }];
-
-    plugins = {
-      gitgutter = {
-        enable = true;
-        enableByDefault = false;
-      };
-      which-key.enable = true;
-    };
-  };
+  programs.nixvim.plugins.which-key.enable = true;
 }

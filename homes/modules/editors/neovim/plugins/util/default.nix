@@ -1,5 +1,1 @@
-{
-  imports = [
-    ./commentary.nix
-  ];
-}
+{ imports = [ ./commentary.nix ./autopairs.nix ]; }
