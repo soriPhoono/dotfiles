@@ -1,6 +1,4 @@
-{ pkgs
-, ...
-}: {
+{
   programs.nixvim.plugins = {
     treesitter = {
       enable = true;
@@ -11,9 +9,7 @@
     treesitter-context = {
       enable = true;
 
-      settings = {
-        line_numbers = false;
-      };
+      settings = { line_numbers = false; };
     };
   };
 }
