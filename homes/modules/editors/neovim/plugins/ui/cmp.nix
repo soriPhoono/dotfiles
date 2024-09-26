@@ -25,6 +25,10 @@
           { name = "fuzzy_buffer"; }
           { name = "nvim_lsp"; }
         ];
+        window = {
+          completion.border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
+          documentation.border = [ "╭" "─" "╮" "│" "╯" "─" "╰" "│" ];
+        };
       };
     };
   };
