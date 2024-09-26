@@ -4,6 +4,7 @@
 
     ./ui
     ./lsp
+    ./treesitter
     ./util
   ];
 }

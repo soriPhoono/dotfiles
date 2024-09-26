@@ -9,7 +9,7 @@
     treesitter-context = {
       enable = true;
 
-      settings = { line_numbers = false; };
+      settings = { line-numbers = false; };
     };
   };
 }
