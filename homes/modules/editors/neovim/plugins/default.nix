@@ -19,6 +19,7 @@
     ];
 
     plugins = {
+      lualine.enable = true;
       commentary.enable = true;
       gitgutter.enable = true;
       which-key.enable = true;
