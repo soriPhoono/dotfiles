@@ -3,7 +3,7 @@
     treesitter = {
       enable = true;
 
-      nixvimInjections = true;
+      settings.highlight.enable = true;
     };
 
     treesitter-context = {

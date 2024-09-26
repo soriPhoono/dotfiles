@@ -1,25 +1,13 @@
-{ config
-, nixosConfig
-, inputs
-, lib
-, pkgs
-, username
-, ...
-}: {
+{ inputs, pkgs, ... }: {
   imports = with inputs; [
-    sops-nix.homeManagerModules.sops
-
     ../modules/core
+    ../modules/hyprland
 
     ../modules/themes/catppuccin.nix
-
-    ../modules/hyprland
   ];
 
   wayland.windowManager.hyprland.settings = {
-    monitor = [
-      "eDP-1,1920x1080@144,0x0,1"
-    ];
+    monitor = [ "eDP-1,1920x1080@144,0x0,1" ];
 
     bind = with pkgs; [
       ", XF86Launch1, exec, ${asusctl}/bin/rog-control-center"

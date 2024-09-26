@@ -1,10 +1,22 @@
 {
-  programs.nixvim.plugins = {
-    neo-tree = {
-      enable = true;
+  programs.nixvim = {
+    keymaps = [{
+      key = "<leader>e";
+      action = "<cmd>Neotree toggle<CR>";
+      mode = [ "n" ];
+      options = {
+        desc = "Open/Close the file browser";
+        silent = true;
+      };
+    }];
 
-      autoCleanAfterSessionRestore = true;
-      closeIfLastWindow = true;
+    plugins = {
+      neo-tree = {
+        enable = true;
+
+        autoCleanAfterSessionRestore = true;
+        closeIfLastWindow = true;
+      };
     };
   };
 }

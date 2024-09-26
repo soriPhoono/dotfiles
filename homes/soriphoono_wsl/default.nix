@@ -1,13 +1,5 @@
-{ config
-, nixosConfig
-, inputs
-, lib
-, username
-, ...
-}: {
-  imports = with inputs; [
-    sops-nix.homeManagerModules.sops
-
+{ inputs, ... }: {
+  imports = [
     ../modules/core
 
     ../modules/themes/catppuccin.nix

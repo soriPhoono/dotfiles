@@ -14,17 +14,11 @@
     # Core imports
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # System-specific imports
 
-    nixos-wsl = {
-      url = "github:nix-community/nixos-wsl";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
+    nixos-wsl.url = "github:nix-community/nixos-wsl";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     # User environment imports
@@ -35,38 +29,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    stylix = {
-      url = "github:danth/stylix";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
-
-    hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-
-      inputs = { nixpkgs.follows = "nixpkgs"; };
-    };
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    stylix.url = "github:danth/stylix";
 
     # Development environment imports
 
     nixvim = {
       url = "github:nix-community/nixvim";
-
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-        nix-darwin.follows = "";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
