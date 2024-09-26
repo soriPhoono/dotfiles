@@ -3,9 +3,12 @@
     lsp.servers.nil-ls = {
       enable = true;
 
-      settings.nix.flake = {
-        autoArchive = true;
-        autoEvalInputs = true;
+      settings.nix = {
+        maxMemoryMB = 5120;
+        flake = {
+          autoArchive = true;
+          autoEvalInputs = true;
+        };
       };
     };
 
