@@ -2,7 +2,7 @@
   imports = [
     ./cmp.nix
     ./treesitter.nix
-    ./neo-tee.nix
+    ./neo-tree.nix
     ./lualine.nix
     ./telescope.nix
     ./gitsigns.nix
