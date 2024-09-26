@@ -1,5 +1,5 @@
 { inputs, pkgs, ... }: {
-  imports = with inputs; [
+  imports = [
     ../modules/core
     ../modules/hyprland
 
