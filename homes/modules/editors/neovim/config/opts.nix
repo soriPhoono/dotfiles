@@ -14,7 +14,8 @@
     cursorline = true;
     splitbelow = true;
     splitright = true;
-    
+    showmode = false;
+
     incsearch = true;
     hlsearch = true;
     ignorecase = true;
