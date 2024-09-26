@@ -1,5 +1,5 @@
 {
-  programs.nixvim.autocmd = [
+  programs.nixvim.autoCmd = [
     {
       event = "InsertEnter";
       command = "norm zz";
