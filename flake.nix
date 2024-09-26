@@ -1,38 +1,13 @@
 {
   description = "Personal dotfiles for NixOS";
 
-  outputs =
-    { nixpkgs
-    , flake-parts
-    , ...
-    } @ inputs:
+  outputs = { nixpkgs, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = with inputs; [
-        ./hosts
-        ./modules
-      ];
+      imports = [ ./hosts ./modules ];
 
-      perSystem =
-        { pkgs
-        , system
-        , ...
-        }: {
-          formatter = pkgs.nixpkgs-fmt;
-
-          devShells.default = pkgs.mkShell {
-            packages = with pkgs; [
-              nil
-            ];
-
-            shellHook =
-              # bash
-              ''
-                echo "Welcome to the system flake devshell"
-              '';
-          };
-        };
+      perSystem = { pkgs, system, ... }: { formatter = pkgs.nixpkgs-fmt; };
     };
 
   inputs = {
@@ -78,9 +53,7 @@
     hyprland = {
       url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs = { nixpkgs.follows = "nixpkgs"; };
     };
 
     # Development environment imports
