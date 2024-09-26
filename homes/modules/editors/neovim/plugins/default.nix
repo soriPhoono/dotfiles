@@ -1,7 +1,9 @@
 {
   imports = [
-    ./telescope.nix
     ./treesitter.nix
+
+    ./neo-tree.nix
+    ./telescope.nix
   ];
 
   programs.nixvim = {
@@ -19,6 +21,7 @@
     plugins = {
       commentary.enable = true;
       gitgutter.enable = true;
+      which-key.enable = true;
     };
   };
 }

@@ -1,11 +1,12 @@
 {
-  opts = {
+  programs.nixvim.opts = {
     completeopt = [ "menu" "menuone" "noselect" ];
-    mouse = 'a';
+    mouse = "a";
     tabstop = 2;
     softtabstop = 2;
     shiftwidth = 2;
     expandtab = true;
+    smartindent = true;
 
     number = true;
     relativenumber = false;
