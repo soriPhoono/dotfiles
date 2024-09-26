@@ -5,6 +5,8 @@
     inputs.nixvim.homeManagerModules.nixvim
 
     ./plugins/telescope.nix
+    ./plugins/treesitter.nix
+    ./plugins/fugitive.nix
   ];
 
   home.shellAliases.v = "nvim";
