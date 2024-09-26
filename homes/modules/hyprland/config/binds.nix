@@ -46,7 +46,7 @@ in
       ", XF86AudioPlay, exec, ${playerctl}/bin/playerctl play-pause"
       ", XF86AudioPrev, exec, ${playerctl}/bin/playerctl previous"
       ", XF86AudioNext, exec, ${playerctl}/bin/playerctl next"
-    
+
       ", PRINT, exec, ${grim}/bin/grim ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
       "$mod, PRINT, exec, ${grim}/bin/grim -g \"$(${slurp}/bin/slurp)\" ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
       "$mod CTRL, PRINT, exec, ${grim}/bin/grim -g \"$(${slurp}/bin/slurp)\" - | ${wl-clipboard-rs}/bin/wl-copy"

@@ -26,11 +26,11 @@
               nil
             ];
 
-            shellHook = 
-            # bash
-            ''
-              echo "Welcome to the system flake devshell"
-            '';
+            shellHook =
+              # bash
+              ''
+                echo "Welcome to the system flake devshell"
+              '';
           };
         };
     };

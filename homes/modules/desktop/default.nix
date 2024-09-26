@@ -4,7 +4,7 @@
   imports = [
     ./development.nix
     ./office.nix
-    
+
     ./utils.nix
   ];
 
