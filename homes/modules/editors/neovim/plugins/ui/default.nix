@@ -1,5 +1,5 @@
 {
-  imports = [ ./neo-tree.nix ./lualine.nix ./telescope.nix ];
+  imports = [ ./neo-tree.nix ./lualine.nix ./telescope.nix ./toggleterm.nix];
 
   programs.nixvim = {
     keymaps = [{

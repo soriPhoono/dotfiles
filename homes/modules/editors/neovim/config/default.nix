@@ -1,5 +1,1 @@
-{
-  imports = [
-    ./opts.nix
-  ];
-}
+{ imports = [ ./opts.nix ./autocmd.nix ]; }
