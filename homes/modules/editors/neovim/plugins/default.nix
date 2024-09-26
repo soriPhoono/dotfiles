@@ -3,6 +3,7 @@
     ./treesitter.nix
 
     ./ui
+    ./lsp
     ./util
   ];
 }
