@@ -12,5 +12,18 @@
       mode = [ "n" ];
       options.desc = "Save and quit";
     }
+
+    {
+      key = "<leader>wsh";
+      action = "<cmd>hsplit<CR>";
+      mode = [ "n" ];
+      options.desc = "Split the window pane horizontally";
+    }
+    {
+      key = "<leader>wsv";
+      action = "<cmd>vsplit<CR>";
+      mode = [ "n" ];
+      options.desc = "Split the window pane vertically";
+    }
   ];
 }
