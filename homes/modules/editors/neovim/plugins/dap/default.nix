@@ -1,5 +1,5 @@
 {
-  imports = [ ./adapters.nix ];
+  imports = [ ./adapters ];
 
   programs.nixvim = {
     keymaps = builtins.map (v: v // { options.silent = true; }) [
