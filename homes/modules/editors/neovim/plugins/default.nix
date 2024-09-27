@@ -1,8 +1,1 @@
-{
-  imports = [
-    ./ui
-    ./lsp
-    ./treesitter
-    ./util
-  ];
-}
+{ imports = [ ./ui ./lsp ./cmp ./treesitter ./util ]; }
