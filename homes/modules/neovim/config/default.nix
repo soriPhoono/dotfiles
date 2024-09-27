@@ -1,1 +1,1 @@
-{ imports = [ ./opts.nix ./keymap.nix ]; }
+{ imports = [ ./globals.nix ./opts.nix ./keymap.nix ]; }

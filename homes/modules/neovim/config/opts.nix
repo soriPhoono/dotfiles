@@ -28,7 +28,7 @@
       path = [ "**" ];
       splitbelow = true;
       splitright = true;
-      splitkeep = true;
+      splitkeep = "cursor";
       mouse = "";
 
       formatoptions = [ "r" ];
