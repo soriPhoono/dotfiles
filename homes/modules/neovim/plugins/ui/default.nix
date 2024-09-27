@@ -6,11 +6,10 @@
     ./neo-tree.nix
     ./lualine.nix
     ./telescope.nix
+    ./noice.nix
   ];
 
   programs.nixvim.plugins = {
-    noice.enable = true;
-
     notify.enable = true;
 
     rainbow-delimiters.enable = true;

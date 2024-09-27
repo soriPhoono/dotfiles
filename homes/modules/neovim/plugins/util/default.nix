@@ -12,9 +12,18 @@
       }
       {
         key = "<F2>";
-        action = "<cmd>IncRename <cword><CR>";
+        action =
+          # lua
+          ''
+            function()
+              return ":IncRename " .. vim.fn.expand("<cword>")
+            end
+          '';
         mode = [ "n" ];
-        options.desc = "Rename current token";
+        options = {
+          desc = "Rename current token";
+          expr = true;
+        };
       }
     ];
 
