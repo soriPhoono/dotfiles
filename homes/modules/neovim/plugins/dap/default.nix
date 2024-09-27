@@ -5,7 +5,7 @@
     keymaps = builtins.map (v: v // { options.silent = true; }) [
       {
         key = "<F5>";
-        action = "<cmd>DapContinue<CR>";
+        action = "<cmd>lua require('dapui').open<CR><cmd>DapContinue<CR>";
         mode = [ "n" ];
         options.desc = "Continue or activate debugging session";
       }
