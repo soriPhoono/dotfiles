@@ -16,6 +16,8 @@
 
         autoCleanAfterSessionRestore = true;
         closeIfLastWindow = true;
+
+        window.position = "float";
       };
     };
   };
