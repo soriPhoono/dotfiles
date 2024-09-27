@@ -62,11 +62,6 @@
         groups = {
           items = [
             {
-              highlight = {
-                fg = "#a6da95";
-                sp = "#494d64";
-                underline = true;
-              };
               matcher = {
                 __raw = ''
                   function(buf)
@@ -79,11 +74,6 @@
             }
             {
               auto_close = false;
-              highlight = {
-                fg = "#ffffff";
-                sp = "#494d64";
-                undercurl = true;
-              };
               matcher = {
                 __raw = ''
                   function(buf)

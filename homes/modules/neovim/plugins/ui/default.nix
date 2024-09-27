@@ -5,7 +5,6 @@
     ./treesitter.nix
     ./neo-tree.nix
     ./lualine.nix
-    ./bufferline.nix
     ./telescope.nix
   ];
 
