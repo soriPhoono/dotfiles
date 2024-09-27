@@ -14,10 +14,16 @@
     }
 
     {
-      key = "<leader>wc";
+      key = "<leader>wcc";
       action = "<cmd>close<CR>";
       mode = [ "n" ];
       options.desc = "Close the current window";
+    }
+    {
+      key = "<leader>wca";
+      action = "<cmd>only<CR>";
+      mode = [ "n" ];
+      options.desc = "Close all current windows other than the active";
     }
     {
       key = "<leader>wsh";

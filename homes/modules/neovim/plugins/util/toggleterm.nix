@@ -2,7 +2,7 @@
   programs.nixvim = {
     keymaps = [{
       action = "<cmd>ToggleTerm<CR>";
-      key = "<leader>tt";
+      key = "<leader>t";
       mode = [ "n" ];
       options = { silent = true; };
     }];
