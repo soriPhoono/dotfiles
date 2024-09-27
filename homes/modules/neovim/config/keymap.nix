@@ -1,13 +1,13 @@
 {
   programs.nixvim.keymaps = builtins.map (v: v // { options.silent = true; }) [
     {
-      key = "<leader>ww";
+      key = "<leader>s";
       action = "<cmd>write<CR>";
       mode = [ "n" ];
       options.desc = "Save to disk";
     }
     {
-      key = "<leader>wq";
+      key = "<leader>q";
       action = "<cmd>write<CR><cmd>quit<CR>";
       mode = [ "n" ];
       options.desc = "Save and quit";
