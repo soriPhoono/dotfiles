@@ -14,6 +14,12 @@
         options.desc =
           "Commit the current altered working tree to the repository";
       }
+      {
+        key = "<leader>gp";
+        action = "<cmd>G push<CR>";
+        mode = [ "n" ];
+        options.desc = "Push to registered remote";
+      }
     ];
 
     plugins.fugitive = { enable = true; };
