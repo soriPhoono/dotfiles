@@ -1,9 +1,6 @@
 {
-  imports = [
-    ./commentary.nix
-    ./autopairs.nix
-    ./fugitive.nix
-    ./gitsigns.nix
-    ./toggleterm.nix
-  ];
+  imports =
+    [ ./commentary.nix ./autopairs.nix ./gitsigns.nix ./toggleterm.nix ];
+
+  programs.nixvim.plugins.lazygit.enable = true;
 }

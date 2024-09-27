@@ -10,6 +10,9 @@
 
   programs.nixvim.plugins = {
     noice.enable = true;
+
+    notify.enable = true;
+
     rainbow-delimiters.enable = true;
     which-key.enable = true;
   };
