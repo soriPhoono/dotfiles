@@ -5,6 +5,12 @@
     cmp-fuzzy-buffer.enable = true;
     cmp-vsnip.enable = true;
 
+    lspkind = {
+      enable = true;
+      mode = "symbol";
+      cmp.enable = true;
+    };
+
     cmp = {
       enable = true;
 
