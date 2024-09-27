@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{
   imports = [
     ../modules/core
 

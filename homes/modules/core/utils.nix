@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ../editors/helix ../editors/neovim ];
+  imports = [ ../neovim ];
 
   home = {
     packages = with pkgs; [
