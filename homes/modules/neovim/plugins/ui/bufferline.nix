@@ -3,18 +3,6 @@
     enable = true;
 
     settings = {
-      highlights = {
-        buffer_selected = { bg = "#363a4f"; };
-        fill = { bg = "#1e2030"; };
-        numbers_selected = { bg = "#363a4f"; };
-        separator = { fg = "#1e2030"; };
-        separator_selected = {
-          bg = "#363a4f";
-          fg = "#1e2030";
-        };
-        separator_visible = { fg = "#1e2030"; };
-        tab_selected = { bg = "#363a4f"; };
-      };
       options = {
         always_show_bufferline = true;
         buffer_close_icon = "󰅖";
