@@ -1,26 +1,20 @@
-{ pkgs
-, ...
-}: {
-  home.packages = with pkgs; [
-    libva-utils
-    vdpauinfo
-    clinfo
-    glxinfo
-    vulkan-tools
+{ pkgs, ... }: {
+  home = {
+    packages = with pkgs; [
+      libva-utils
+      vdpauinfo
+      clinfo
+      glxinfo
+      vulkan-tools
 
-    gnome-disk-utility
+      gnome-disk-utility
 
-    discord
-    telegram-desktop
-    signal-desktop
+      discord
+    ];
 
-    gzdoom
-    prismlauncher
-    path-of-building
-
-    gimp
-    audacity
-    davinci-resolve
-    obs-studio
-  ];
+    shellAliases = with pkgs; {
+      top = "${btop}/bin/btop";
+      gtop = "${nvtopPackages.full}/bin/nvtop";
+    };
+  };
 }
