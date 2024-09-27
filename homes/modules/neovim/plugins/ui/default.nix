@@ -6,9 +6,12 @@
     ./neo-tree.nix
     ./lualine.nix
     ./telescope.nix
-    ./gitsigns.nix
-    ./toggleterm.nix
   ];
 
-  programs.nixvim.plugins.which-key.enable = true;
+  programs.nixvim.plugins = {
+    rainbow-delimiters.enable = true;
+    fidget.enable = true;
+    transparent.enable = true;
+    which-key.enable = true;
+  };
 }
