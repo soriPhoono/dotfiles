@@ -14,6 +14,12 @@
     }
 
     {
+      key = "<leader>wc";
+      action = "<cmd>close<CR>";
+      mode = [ "n" ];
+      options.desc = "Close the current window";
+    }
+    {
       key = "<leader>wsh";
       action = "<cmd>hsplit<CR>";
       mode = [ "n" ];
