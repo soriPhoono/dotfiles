@@ -5,9 +5,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = [ ./hosts ./modules ];
-
-      perSystem = { pkgs, system, ... }: { formatter = pkgs.nixpkgs-fmt; };
+      imports = [ ./hosts ./homes/modules ./modules ];
     };
 
   inputs = {

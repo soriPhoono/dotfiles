@@ -1,12 +1,1 @@
-{ inputs
-, ...
-}: {
-  flake.nixosModules = {
-    default = {
-      imports = with inputs; [
-        ./core
-        ./desktop
-      ];
-    };
-  };
-}
+{ flake.nixosModules = { default = { imports = [ ./core ./desktop ]; }; }; }
