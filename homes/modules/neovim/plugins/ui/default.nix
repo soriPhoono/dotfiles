@@ -9,10 +9,8 @@
   ];
 
   programs.nixvim.plugins = {
+    noice.enable = true;
     rainbow-delimiters.enable = true;
-    tagbar.enable = true;
-    fidget.enable = true;
-    transparent.enable = true;
     which-key.enable = true;
   };
 }

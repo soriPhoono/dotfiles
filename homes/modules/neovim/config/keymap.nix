@@ -8,7 +8,7 @@
     }
 
     {
-      key = "<leader>w";
+      key = "<leader>s";
       action = "<cmd>write<CR>";
       mode = [ "n" ];
       options.desc = "Save to disk";
@@ -89,8 +89,42 @@
       options.desc = "Move current window focus right";
     }
 
-    # resize
+    {
+      key = "<leader>wrh";
+      action = "<C-w><";
+      mode = [ "n" ];
+      options.desc = "Expand current window left";
+    }
+    {
+      key = "<leader>wrl";
+      action = "<C-w>>";
+      mode = [ "n" ];
+      options.desc = "Expand current window up";
+    }
+    {
+      key = "<leader>wrk";
+      action = "<C-w>+";
+      mode = [ "n" ];
+      options.desc = "Expand current window down";
+    }
+    {
+      key = "<leader>wrj";
+      action = "<C-w>-";
+      mode = [ "n" ];
+      options.desc = "Expand current window right";
+    }
 
-    # diagnostics
+    {
+      key = "<leader>dp";
+      action =
+        # lua
+        ''
+          function()
+            vim.diagnostic.goto_next()
+          end
+        '';
+      mode = [ "n" ];
+      options.desc = "Go to next problem in the current file";
+    }
   ];
 }
