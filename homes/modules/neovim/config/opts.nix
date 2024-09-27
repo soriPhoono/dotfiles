@@ -1,7 +1,5 @@
 {
   programs.nixvim = {
-    scriptencoding = "utf-8";
-
     opts = {
       encoding = "utf-8";
       fileencoding = "utf-8";

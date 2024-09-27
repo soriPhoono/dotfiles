@@ -1,41 +1,96 @@
 {
   programs.nixvim.keymaps = builtins.map (v: v // { options.silent = true; }) [
     {
-      key = "<leader>s";
+      key = "<leader>va";
+      action = "gg<S-v>G";
+      mode = [ "n" ];
+      options.desc = "Select all";
+    }
+
+    {
+      key = "<leader>w";
       action = "<cmd>write<CR>";
       mode = [ "n" ];
       options.desc = "Save to disk";
     }
     {
       key = "<leader>q";
-      action = "<cmd>write<CR><cmd>quit<CR>";
+      action = "<cmd>quit<CR>";
       mode = [ "n" ];
-      options.desc = "Save and quit";
+      options.desc = "Quit";
+    }
+    {
+      key = "<leader>Q";
+      action = "<cmd>quitall<CR>";
+      mode = [ "n" ];
+      options.desc = "Quit all";
     }
 
     {
-      key = "<leader>wcc";
-      action = "<cmd>close<CR>";
+      key = "<leader>te";
+      action = "<cmd>tabedit<CR>";
       mode = [ "n" ];
-      options.desc = "Close the current window";
+      options.desc = "Open new tab";
     }
     {
-      key = "<leader>wca";
-      action = "<cmd>only<CR>";
+      key = "<Tab>";
+      action = "<cmd>tabnext<CR>";
       mode = [ "n" ];
-      options.desc = "Close all current windows other than the active";
+      options.desc = "Go to next tab";
     }
+    {
+      key = "<S-Tab>";
+      action = "<cmd>tabprev<CR>";
+      mode = [ "n" ];
+      options.desc = "Go to previous tab";
+    }
+    {
+      key = "<leader>tc";
+      action = "<cmd>tabclose<CR>";
+      mode = [ "n" ];
+      options.desc = "Close current tab";
+    }
+
     {
       key = "<leader>wsh";
       action = "<cmd>split<CR>";
       mode = [ "n" ];
-      options.desc = "Split the window pane horizontally";
+      options.desc = "Split current window horizontally";
     }
     {
       key = "<leader>wsv";
       action = "<cmd>vsplit<CR>";
       mode = [ "n" ];
-      options.desc = "Split the window pane vertically";
+      options.desc = "Split current window vertically";
     }
+
+    {
+      key = "<leader>wmh";
+      action = "<C-w>h";
+      mode = [ "n" ];
+      options.desc = "Move current window focus left";
+    }
+    {
+      key = "<leader>wmk";
+      action = "<C-w>k";
+      mode = [ "n" ];
+      options.desc = "Move current window focus up";
+    }
+    {
+      key = "<leader>wmj";
+      action = "<C-w>j";
+      mode = [ "n" ];
+      options.desc = "Move current window focus down";
+    }
+    {
+      key = "<leader>wml";
+      action = "<C-w>l";
+      mode = [ "n" ];
+      options.desc = "Move current window focus right";
+    }
+
+    # resize
+
+    # diagnostics
   ];
 }
