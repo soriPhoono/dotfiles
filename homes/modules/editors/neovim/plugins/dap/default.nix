@@ -1,4 +1,6 @@
 {
+  imports = [ ./adapters.nix ];
+
   programs.nixvim = {
     keymaps = builtins.map (v: v // { options.silent = true; }) [
       {
@@ -29,19 +31,6 @@
 
     plugins.dap = {
       enable = true;
-
-      adapters.executables = {
-        "nix" = {
-          command = "nix";
-          args = [ "flake" "check" ];
-        };
-      };
-
-      configurations."nix" = [{
-        name = "Check nix flake";
-        request = "launch";
-        type = "nix";
-      }];
 
       extensions = {
         dap-ui = {

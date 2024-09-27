@@ -2,7 +2,6 @@
   imports = [
     ./alpha.nix
     ./cmp.nix
-    ./dap.nix
     ./treesitter.nix
     ./neo-tree.nix
     ./lualine.nix
