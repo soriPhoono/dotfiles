@@ -21,7 +21,7 @@
     }
     {
       key = "<leader>wsh";
-      action = "<cmd>hsplit<CR>";
+      action = "<cmd>split<CR>";
       mode = [ "n" ];
       options.desc = "Split the window pane horizontally";
     }
