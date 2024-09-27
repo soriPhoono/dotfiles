@@ -63,6 +63,12 @@
       mode = [ "n" ];
       options.desc = "Split current window vertically";
     }
+    {
+      key = "<leader>wc";
+      action = "<cmd>close<CR>";
+      mode = [ "n" ];
+      options.desc = "Close current window";
+    }
 
     {
       key = "<leader>wmh";
