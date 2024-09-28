@@ -5,7 +5,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = [ ./hosts ./homes/modules ./modules ];
+      imports = [ ./hosts ./modules ];
     };
 
   inputs = {
