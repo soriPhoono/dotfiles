@@ -10,6 +10,6 @@
       options.desc = "Open LazyGit";
     }];
 
-    plugins = { lazygit.enable = true; };
+    plugins.lazygit.enable = true;
   };
 }

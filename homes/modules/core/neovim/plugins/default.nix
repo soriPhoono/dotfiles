@@ -1,1 +1,1 @@
-{ imports = [ ./ui ./lsp ./dap ./util ]; }
+{ imports = [ ./ui ./lsp ./util ]; }

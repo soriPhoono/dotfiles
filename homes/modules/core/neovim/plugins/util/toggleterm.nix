@@ -4,7 +4,7 @@
       action = "<cmd>ToggleTerm<CR>";
       key = "<leader><CR>";
       mode = [ "n" ];
-      options = { silent = true; };
+      options.silent = true;
     }];
 
     plugins = {
