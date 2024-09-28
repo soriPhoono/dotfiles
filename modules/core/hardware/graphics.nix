@@ -1,8 +1,4 @@
-{ lib
-, pkgs
-, config
-, ...
-}:
+{ lib, config, ... }:
 let cfg = config.core.hardware.graphics;
 in {
   options = {
@@ -15,10 +11,6 @@ in {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
-
-      extraPackages = with pkgs; [
-
-      ];
     };
   };
 }

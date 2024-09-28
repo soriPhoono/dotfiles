@@ -1,7 +1,9 @@
-{
-  home.shellAliases = {
+{ pkgs, ... }: {
+  home.shellAliases = with pkgs; {
     find = "fd";
     cat = "bat";
+    df = "${duf}/bin/duf";
+    du = "${dua}/bin/dua";
   };
 
   programs = {
@@ -121,5 +123,11 @@
     };
 
     bat.enable = true;
+
+    direnv = {
+      enable = true;
+
+      nix-direnv.enable = true;
+    };
   };
 }

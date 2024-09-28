@@ -1,9 +1,5 @@
 { nixosConfig, ... }: {
-  imports = [
-    ./shell.nix
-    ./utils.nix
-    ./git.nix
-  ];
+  imports = [ ./shell.nix ./utils.nix ./git.nix ./neovim ];
 
   xdg = {
     enable = true;
