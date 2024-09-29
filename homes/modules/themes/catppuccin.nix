@@ -1,56 +1,59 @@
-{ inputs
-, pkgs
-, ...
-}: {
-  imports = with inputs; [
-    stylix.homeManagerModules.stylix
-  ];
+{ inputs, lib, pkgs, config, ... }:
+let cfg = config.themes.catppuccin;
+in {
+  imports = with inputs; [ stylix.homeManagerModules.stylix ];
 
-  stylix = {
-    enable = true;
+  options = {
+    themes.catppuccin.enable =
+      lib.mkEnableOption "Enable catppuccin desktop theming";
+  };
 
-    image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
+  config = lib.mkIf cfg.enable {
+    stylix = {
+      enable = true;
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
 
-    cursor = {
-      package = pkgs.catppuccin-cursors.mochaTeal;
-      size = 32;
-      name = "catppuccin-mocha-teal-cursors";
-    };
+      base16Scheme =
+        "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
 
-    fonts = {
-      serif = {
-        package = pkgs.nerdfonts;
-        name = "AurulentSansM Nerd Font Propo";
+      cursor = {
+        package = pkgs.catppuccin-cursors.mochaTeal;
+        size = 32;
+        name = "catppuccin-mocha-teal-cursors";
       };
 
-      sansSerif = {
-        package = pkgs.nerdfonts;
-        name = "AurulentSansM Nerd Font Propo";
-      };
+      fonts = {
+        serif = {
+          package = pkgs.nerdfonts;
+          name = "AurulentSansM Nerd Font Propo";
+        };
 
-      monospace = {
-        package = pkgs.nerdfonts;
-        name = "JetBrainsMono Nerd Font Mono";
-      };
+        sansSerif = {
+          package = pkgs.nerdfonts;
+          name = "AurulentSansM Nerd Font Propo";
+        };
 
-      emoji = {
-        package = pkgs.noto-fonts-emoji;
-        name = "Noto Color Emoji";
-      };
+        monospace = {
+          package = pkgs.nerdfonts;
+          name = "JetBrainsMono Nerd Font Mono";
+        };
 
-      sizes =
-        let
+        emoji = {
+          package = pkgs.noto-fonts-emoji;
+          name = "Noto Color Emoji";
+        };
+
+        sizes = let
           default_font = 14;
           focus_font = 16;
-        in
-        {
+        in {
           applications = focus_font;
           desktop = focus_font;
           popups = default_font;
           terminal = focus_font;
         };
+      };
     };
   };
 }

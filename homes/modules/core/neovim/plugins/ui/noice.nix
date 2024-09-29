@@ -1,7 +1,1 @@
-{
-  programs.nixvim.plugins.noice = {
-    enable = true;
-
-    presets = { inc_rename = true; };
-  };
-}
+{ programs.nixvim.plugins.noice.enable = true; }

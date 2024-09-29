@@ -1,12 +1,6 @@
-{ inputs, pkgs, ... }: {
-  imports = [
-    ../modules/core
-    ../modules/hyprland
-
-    ../modules/themes/catppuccin.nix
-  ];
-
-  wayland.windowManager.hyprland.settings = {
+{ pkgs, ... }: {
+  desktop.enable = true;
+  desktop.extraHyprSettings = {
     monitor = [ "eDP-1,1920x1080@144,0x0,1" ];
 
     bind = with pkgs; [
@@ -24,4 +18,6 @@
       ", switch:off:473c56e0, exec, ${hyprland}/bin/hyprctl dispatch dpms on"
     ];
   };
+
+  themes.catppuccin.enable = true;
 }

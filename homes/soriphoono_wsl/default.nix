@@ -1,7 +1,1 @@
-{
-  imports = [
-    ../modules/core
-
-    ../modules/themes/catppuccin.nix
-  ];
-}
+{ themes.catppuccin.enable = true; }

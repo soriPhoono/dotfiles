@@ -1,213 +1,203 @@
-{ pkgs
-, ...
-}:
+{ pkgs, ... }:
 let
-  serviceToggle = with pkgs; writeShellApplication {
-    name = "service_toggle.sh";
+  serviceToggle = with pkgs;
+    writeShellApplication {
+      name = "service_toggle.sh";
 
-    runtimeInputs = [
-      networkmanager
-      tlp
-      libnotify
-    ];
+      runtimeInputs = [ networkmanager tlp libnotify ];
 
-    text = ''
-      #!/bin/bash
-    
-      service=$1
+      text = ''
+        #!/bin/bash
 
-      case $service in
-        "network")
-          status=$(nmcli radio wifi)
-      
-          if [[ "$status" = "enabled" ]]; then
-            nmcli radio wifi off
+        service=$1
 
-            notify-send Disabled wifi
-          else
-            nmcli radio wifi on
+        case $service in
+          "network")
+            status=$(nmcli radio wifi)
 
-            notify-send Enabled wifi
-          fi
-          ;;
-        "bluetooth")
-          status=$(bluetooth | awk '{ print $3 }')
+            if [[ "$status" = "enabled" ]]; then
+              nmcli radio wifi off
 
-          if [[ "$status" = "on" ]]; then
-            bluetooth off
+              notify-send Disabled wifi
+            else
+              nmcli radio wifi on
 
-            notify-send Disabled bluetooth
-          else
-            bluetooth on
+              notify-send Enabled wifi
+            fi
+            ;;
+          "bluetooth")
+            status=$(bluetooth | awk '{ print $3 }')
 
-            notify-send Enabled bluetooth
-          fi
-          ;;
-        *)
-          notify-send Bad argument to service toggle script from waybar
-          ;;
-      esac
-    '';
-  };
-in
-{
-  programs.waybar = {
-    enable = true;
+            if [[ "$status" = "on" ]]; then
+              bluetooth off
 
-    settings = with pkgs; {
-      topBar = {
-        layer = "top";
-        position = "top";
+              notify-send Disabled bluetooth
+            else
+              bluetooth on
 
-        spacing = 8;
+              notify-send Enabled bluetooth
+            fi
+            ;;
+          *)
+            notify-send Bad argument to service toggle script from waybar
+            ;;
+        esac
+      '';
+    };
+in {
+  enable = true;
 
-        margin-left = 20;
-        margin-right = 20;
-        margin-top = 20;
+  settings = with pkgs; {
+    topBar = {
+      layer = "top";
+      position = "top";
 
-        modules-left = [
-          "custom/spacer"
-          "custom/power"
-          "custom/separator"
-          "hyprland/workspaces"
-          "custom/spacer"
+      spacing = 8;
+
+      margin-left = 20;
+      margin-right = 20;
+      margin-top = 20;
+
+      modules-left = [
+        "custom/spacer"
+        "custom/power"
+        "custom/separator"
+        "hyprland/workspaces"
+        "custom/spacer"
+      ];
+
+      modules-right = [
+        "custom/spacer"
+        "tray"
+        "custom/separator"
+        "network"
+        "bluetooth"
+        "pulseaudio"
+        "battery"
+        "custom/separator"
+        "clock"
+        "custom/spacer"
+      ];
+
+      "custom/spacer" = {
+        format = " ";
+
+        tooltip = false;
+      };
+
+      "custom/separator" = {
+        format = " | ";
+
+        tooltip = false;
+      };
+
+      "custom/power" = with pkgs; {
+        format = "<span color='#7EBAE4'>󱄅</span>";
+        tooltip-format = "Session controls";
+
+        on-click = "${wlogout}/bin/wlogout";
+      };
+
+      "hyprland/workspaces" = {
+        format = "{icon}";
+        format-icons = {
+          default = "";
+          active = "<span color='#a6e3a1'></span>";
+        };
+
+        persistent-workspaces = { "*" = 6; };
+      };
+
+      network = {
+        format-icons = [
+          "<span color='#eba0ac'>󰤟</span>"
+          "<span color='#fab387'>󰤢</span>"
+          "<span color='#f9e2af'>󰤥</span>"
+          "<span color='#a6e3a1'>󰤨</span>"
         ];
 
-        modules-right = [
-          "custom/spacer"
-          "tray"
-          "custom/separator"
-          "network"
-          "bluetooth"
-          "pulseaudio"
-          "battery"
-          "custom/separator"
-          "clock"
-          "custom/spacer"
+        format-ethernet = "<span color='#a6e3a1'>󰈀</span>";
+        format-wifi = "{icon}";
+        format-disconnected = "<span color='#f38ba8'>󰤭</span>";
+
+        tooltip-format-ethernet = "{ifname} {ipaddr}";
+        tooltip-format-wifi = "{ifname} {ipaddr} {essid}";
+        tooltip-format-disconnected = "{ifname} Disconnected";
+
+        on-click = "${networkmanagerapplet}/bin/nm-connection-editor";
+        on-right-click = "${serviceToggle}/bin/service_toggle.sh network";
+      };
+
+      bluetooth = {
+        format-disabled = "<span color='#f38ba8'>󰂯</span>";
+        format-connected = "<span color='#89b4fa'>󰂱</span>";
+        format-on = "<span color='#fab387'>󰂯</span>";
+        format-off = "<span color='#6c7086'>󰂲</span>";
+
+        tooltip-format-enumerate-connected = "{device_alias}	{device_address}";
+        tooltip-format-connected = ''
+          {controller_alias}	{controller_address}
+
+          {device_enumerate}'';
+        tooltip-format-on = "{controller_alias}	{controller_address}";
+        tooltip-format-off = "Disconnected";
+
+        on-click = "${blueberry}/bin/blueberry";
+        on-right-click = "${serviceToggle}/bin/service_toggle.sh bluetooth";
+      };
+
+      pulseaudio = {
+        format = "<span color='#f9e2af'>{icon}</span>";
+        format-icons = [ "󰕿" "󰖀" "󰕾" ];
+
+        tooltip-format = "{desc} {volume}% {icon}";
+
+        on-click = "${pavucontrol}/bin/pavucontrol";
+        on-right-click =
+          "${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+      };
+
+      battery = {
+        format = "{icon}";
+        format-icons = [
+          "<span color='#f38ba8'>󰁺</span>"
+          "<span color='#eba0ac'>󰁻</span>"
+          "<span color='#fab387'>󰁼</span>"
+          "<span color='#fab387'>󰁾</span>"
+          "<span color='#f9e2af'>󰂀</span>"
+          "<span color='#a6e3a1'>󰂂</span>"
+          "<span color='#a6e3a1'>󰁹</span>"
         ];
+      };
 
-        "custom/spacer" = {
-          format = " ";
+      clock = {
+        format = "<span color='#fab387'>󰥔</span> {:%H:%M %p}";
 
-          tooltip = false;
-        };
-
-        "custom/separator" = {
-          format = " | ";
-
-          tooltip = false;
-        };
-
-        "custom/power" = with pkgs; {
-          format = "<span color='#7EBAE4'>󱄅</span>";
-          tooltip-format = "Session controls";
-
-          on-click = "${wlogout}/bin/wlogout";
-        };
-
-        "hyprland/workspaces" = {
-          format = "{icon}";
-          format-icons = {
-            default = "";
-            active = "<span color='#a6e3a1'></span>";
-          };
-
-          persistent-workspaces = {
-            "*" = 6;
-          };
-        };
-
-        network = {
-          format-icons = [
-            "<span color='#eba0ac'>󰤟</span>"
-            "<span color='#fab387'>󰤢</span>"
-            "<span color='#f9e2af'>󰤥</span>"
-            "<span color='#a6e3a1'>󰤨</span>"
-          ];
-
-          format-ethernet = "<span color='#a6e3a1'>󰈀</span>";
-          format-wifi = "{icon}";
-          format-disconnected = "<span color='#f38ba8'>󰤭</span>";
-
-          tooltip-format-ethernet = "{ifname} {ipaddr}";
-          tooltip-format-wifi = "{ifname} {ipaddr} {essid}";
-          tooltip-format-disconnected = "{ifname} Disconnected";
-
-          on-click = "${networkmanagerapplet}/bin/nm-connection-editor";
-          on-right-click = "${serviceToggle}/bin/service_toggle.sh network";
-        };
-
-        bluetooth = {
-          format-disabled = "<span color='#f38ba8'>󰂯</span>";
-          format-connected = "<span color='#89b4fa'>󰂱</span>";
-          format-on = "<span color='#fab387'>󰂯</span>";
-          format-off = "<span color='#6c7086'>󰂲</span>";
-
-          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-          tooltip-format-on = "{controller_alias}\t{controller_address}";
-          tooltip-format-off = "Disconnected";
-
-          on-click = "${blueberry}/bin/blueberry";
-          on-right-click = "${serviceToggle}/bin/service_toggle.sh bluetooth";
-        };
-
-        pulseaudio = {
-          format = "<span color='#f9e2af'>{icon}</span>";
-          format-icons = [
-            "󰕿"
-            "󰖀"
-            "󰕾"
-          ];
-
-          tooltip-format = "{desc} {volume}% {icon}";
-
-          on-click = "${pavucontrol}/bin/pavucontrol";
-          on-right-click = "${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-        };
-
-        battery = {
-          format = "{icon}";
-          format-icons = [
-            "<span color='#f38ba8'>󰁺</span>"
-            "<span color='#eba0ac'>󰁻</span>"
-            "<span color='#fab387'>󰁼</span>"
-            "<span color='#fab387'>󰁾</span>"
-            "<span color='#f9e2af'>󰂀</span>"
-            "<span color='#a6e3a1'>󰂂</span>"
-            "<span color='#a6e3a1'>󰁹</span>"
-          ];
-        };
-
-        clock = {
-          format = "<span color='#fab387'>󰥔</span> {:%H:%M %p}";
-
-          tooltip = false;
-        };
+        tooltip = false;
       };
     };
-
-    style =
-      # css
-      ''
-        window#waybar {
-          background-color: transparent;
-        }
-
-        .modules-left {
-          background-color: @theme_base_color;
-          border-radius: 40px;
-        }
-
-        .modules-right {
-          background-color: @theme_base_color;
-          border-radius: 40px;
-        }
-
-        #workspaces button {
-          border-color: transparent;
-          border-radius: 50%;
-        }
-      '';
   };
+
+  style =
+    # css
+    ''
+      window#waybar {
+        background-color: transparent;
+      }
+
+      .modules-left {
+        background-color: @theme_base_color;
+        border-radius: 40px;
+      }
+
+      .modules-right {
+        background-color: @theme_base_color;
+        border-radius: 40px;
+      }
+
+      #workspaces button {
+        border-color: transparent;
+        border-radius: 50%;
+      }
+    '';
 }

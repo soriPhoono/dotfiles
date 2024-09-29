@@ -4,6 +4,11 @@ in {
   options = {
     desktop.enable =
       lib.mkEnableOption "Enable desktop tooling and required configuration";
+
+    desktop.extraHyprSettings = lib.mkOption {
+      type = with lib.types; attrs;
+      description = "Extra hyprland settings";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -74,11 +79,9 @@ in {
 
     programs = {
       hyprlock = import ./hyprlock.nix;
-      hypridle = import ./hypridle.nix;
       alacritty = import ./supporting/alacritty.nix;
       fuzzel = import ./supporting/fuzzel.nix;
-      mako = import ./supporting/mako.nix;
-      waybar = import ./supporting/waybar.nix;
+      waybar = import ./supporting/waybar.nix { inherit pkgs; };
       wlogout = import ./supporting/wlogout.nix;
 
       firefox = {
@@ -87,6 +90,11 @@ in {
         package = pkgs.wrapFirefox
           (pkgs.firefox-unwrapped.override { pipewireSupport = true; }) { };
       };
+    };
+
+    services = {
+      mako = import ./supporting/mako.nix { inherit config pkgs; };
+      hypridle = import ./hypridle.nix;
     };
   };
 }

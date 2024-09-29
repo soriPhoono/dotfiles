@@ -1,1 +1,1 @@
-{ programs.wlogout = { enable = true; }; }
+{ enable = true; }
