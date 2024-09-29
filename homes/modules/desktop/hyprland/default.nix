@@ -38,7 +38,7 @@ in {
         ];
       } // (import ./general.nix) // (import ./autostart.nix { inherit pkgs; })
         // (import ./binds.nix { inherit pkgs; }) // (import ./animations.nix)
-        // cfg.extraHyprSettings;
+        // cfg.extraSettings;
     };
 
     programs = {

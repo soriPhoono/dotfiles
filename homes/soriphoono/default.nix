@@ -1,7 +1,7 @@
 { lib, pkgs, nixosConfig, ... }: {
-  desktop = lib.mkIf nixosConfig.desktop.enable {
+  desktop.hyprland = lib.mkIf nixosConfig.desktop.enable {
     enable = true;
-    extraHyprSettings = {
+    extraSettings = {
       monitor = [ "eDP-1,1920x1080@144,0x0,1" ];
 
       bind = with pkgs; [
