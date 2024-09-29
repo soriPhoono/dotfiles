@@ -14,15 +14,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    xdg = {
-      portal = {
-        extraPortals = with pkgs; [
-          xdg-desktop-portal-hyprland
-          xdg-desktop-portal-gtk
-        ];
-      };
-    };
-
     gtk = {
       enable = true;
 

@@ -52,9 +52,9 @@ in {
         ''
           $mod CTRL, PRINT, exec, ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" - | ${wl-clipboard-rs}/bin/wl-copy''
 
-        "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
+        "$mod, RETURN, exec, ${alacritty}/bin/alacritty"
         "$mod, A, exec, ${fuzzel}/bin/fuzzel"
-        "$mod, E, exec, ${spacedrive}/bin/spacedrive"
+        "$mod, E, exec, ${xfce.thunar}/bin/thunar"
         "$mod, B, exec, ${firefox}/bin/firefox"
       ] ++ (builtins.concatLists (builtins.genList (x:
         let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));

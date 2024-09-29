@@ -6,6 +6,8 @@ in {
   options = { desktop.enable = lib.mkEnableOption "Enable desktop support"; };
 
   config = lib.mkIf cfg.enable {
+    security.rtkit.enable = true;
+
     programs.dconf.enable = true;
 
     services = {

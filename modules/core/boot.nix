@@ -1,12 +1,6 @@
-{ lib
-, pkgs
-, config
-, ...
-}:
-let
-  cfg = config.core.boot;
-in
-{
+{ lib, pkgs, config, ... }:
+let cfg = config.core.boot;
+in {
   options = {
     core.boot.systemd-boot.enable = lib.mkEnableOption "Enable bootloader";
   };
@@ -15,7 +9,8 @@ in
     boot = {
       consoleLogLevel = 0;
       kernelPackages = pkgs.linuxPackages_zen;
-      kernelParams = [ "quiet" "systemd.show_status=auto" "rd.udev.log_level=3" ];
+      kernelParams =
+        [ "quiet" "systemd.show_status=auto" "rd.udev.log_level=3" ];
 
       initrd = {
         verbose = false;
@@ -30,6 +25,7 @@ in
           enable = true;
 
           editor = false;
+          configurationLimit = 10;
         };
       };
 
@@ -38,7 +34,9 @@ in
 
         themePackages = with pkgs;
           [
-            (adi1090x-plymouth-themes.override { selected_themes = [ "pixels" ]; })
+            (adi1090x-plymouth-themes.override {
+              selected_themes = [ "pixels" ];
+            })
           ];
 
         theme = "pixels";
