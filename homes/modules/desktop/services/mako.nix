@@ -1,20 +1,38 @@
-{ config, pkgs, ... }: {
-  enable = true;
+{ lib, config, pkgs, ... }:
+let cfg = config.desktop.services.mako;
+in {
+  options = {
+    desktop.services.mako = {
+      enable = lib.mkEnableOption "Enable mako notification daemon";
+      rounding = lib.mkOption {
+        type = with lib.types; int;
+        description = "Rounding on mako windows";
+      };
+      border_size = lib.mkOption {
+        type = with lib.types; int;
+        description = "Border thickness";
+      };
+    };
+  };
 
-  anchor = "top-right";
-  margin = "20,20,5";
+  config = lib.mkIf cfg.enable {
+    services.mako = {
+      enable = true;
 
-  borderRadius =
-    config.wayland.windowManager.hyprland.settings.decoration.rounding;
-  borderSize =
-    config.wayland.windowManager.hyprland.settings.general.border_size;
+      anchor = "top-right";
+      margin = "20,20,5";
 
-  defaultTimeout = 3000;
+      borderRadius = cfg.rounding;
+      borderSize = cfg.border_size;
 
-  maxVisible = 3;
+      defaultTimeout = 3000;
 
-  height = 180;
-  width = 320;
+      maxVisible = 3;
 
-  iconPath = "${pkgs.papirus-icon-theme}/usr/share/icons";
+      height = 180;
+      width = 320;
+
+      iconPath = "${pkgs.papirus-icon-theme}/usr/share/icons";
+    };
+  };
 }

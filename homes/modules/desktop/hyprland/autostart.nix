@@ -1,5 +1,8 @@
 { pkgs, ... }: {
-  exec-once = with pkgs; [ "${lxqt.lxqt-policykit}/bin/lxqt-policykit-agent" ];
+  wayland.windowManager.hyprland.settings = {
+    exec-once = with pkgs;
+      [ "${lxqt.lxqt-policykit}/bin/lxqt-policykit-agent" ];
 
-  exec = [ "pidof waybar || waybar &" ];
+    exec = [ "pidof waybar || waybar &" ];
+  };
 }

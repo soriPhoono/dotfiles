@@ -1,6 +1,8 @@
 { inputs, lib, pkgs, config, ... }:
 let cfg = config.desktop.hyprland;
 in {
+  imports = [ ./animations.nix ./autostart.nix ./binds.nix ./general.nix ];
+
   options = {
     desktop.hyprland = {
       enable = lib.mkEnableOption "Enable hyprland desktop";
@@ -12,7 +14,26 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    desktop.enable = true;
+    desktop = {
+      enable = true;
+      programs = {
+        enable = true;
+        alacritty.enable = true;
+        firefox.enable = true;
+        fuzzel.enable = true;
+        hyprlock.enable = true;
+        waybar.enable = true;
+        wlogout.enable = true;
+      };
+      services = {
+        hypridle.enable = true;
+        mako = {
+          enable = true;
+          rounding = 10;
+          border_size = 3;
+        };
+      };
+    };
 
     wayland.windowManager.hyprland = {
       enable = true;
@@ -36,23 +57,7 @@ in {
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
           "QT_AUTO_SCREEN_SCALE_FACTOR,1"
         ];
-      } // (import ./general.nix) // (import ./autostart.nix { inherit pkgs; })
-        // (import ./binds.nix { inherit pkgs; }) // (import ./animations.nix)
-        // cfg.extraSettings;
-    };
-
-    programs = {
-      hyprlock = import ../programs/hyprlock.nix;
-      alacritty = import ../programs/alacritty.nix;
-      fuzzel = import ../programs/fuzzel.nix;
-      waybar = import ../programs/waybar.nix { inherit pkgs; };
-      wlogout = import ../programs/wlogout.nix;
-      firefox = import ../programs/firefox.nix { inherit pkgs; };
-    };
-
-    services = {
-      mako = import ../services/mako.nix { inherit config pkgs; };
-      hypridle = import ../services/hypridle.nix;
+      } // cfg.extraSettings;
     };
   };
 }

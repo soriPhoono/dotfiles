@@ -17,64 +17,66 @@ let
       fi
     '';
 in {
-  "$mod" = "SUPER";
+  wayland.windowManager.hyprland.settings = {
+    "$mod" = "SUPER";
 
-  bind = with pkgs;
-    [
-      "$mod SHIFT, Q, exit, "
-      "$mod, Q, killactive,"
+    bind = with pkgs;
+      [
+        "$mod SHIFT, Q, exit, "
+        "$mod, Q, killactive,"
 
-      "$mod, F, togglefloating,"
-      "$mod, P, pin,"
-      "$mod, C, centerwindow, 1"
+        "$mod, F, togglefloating,"
+        "$mod, P, pin,"
+        "$mod, C, centerwindow, 1"
 
-      "$mod, up, movefocus, u"
-      "$mod, left, movefocus, l"
-      "$mod, right, movefocus, r"
-      "$mod, down, movefocus, d"
+        "$mod, up, movefocus, u"
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, down, movefocus, d"
 
-      "$mod SHIFT, up, swapwindow, u"
-      "$mod SHIFT, left, swapwindow, l"
-      "$mod SHIFT, right, swapwindow, r"
-      "$mod SHIFT, down, swapwindow, d"
+        "$mod SHIFT, up, swapwindow, u"
+        "$mod SHIFT, left, swapwindow, l"
+        "$mod SHIFT, right, swapwindow, r"
+        "$mod SHIFT, down, swapwindow, d"
 
-      ", XF86AudioMute, exec, ${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-      ", XF86AudioMicMute, exec, ${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86AudioMute, exec, ${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, exec, ${wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 
-      ", XF86AudioPlay, exec, ${playerctl}/bin/playerctl play-pause"
-      ", XF86AudioPrev, exec, ${playerctl}/bin/playerctl previous"
-      ", XF86AudioNext, exec, ${playerctl}/bin/playerctl next"
+        ", XF86AudioPlay, exec, ${playerctl}/bin/playerctl play-pause"
+        ", XF86AudioPrev, exec, ${playerctl}/bin/playerctl previous"
+        ", XF86AudioNext, exec, ${playerctl}/bin/playerctl next"
 
-      ", PRINT, exec, ${grim}/bin/grim ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
-      ''
-        $mod, PRINT, exec, ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png''
-      ''
-        $mod CTRL, PRINT, exec, ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" - | ${wl-clipboard-rs}/bin/wl-copy''
+        ", PRINT, exec, ${grim}/bin/grim ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png"
+        ''
+          $mod, PRINT, exec, ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" ~/Pictures/screenshot-$(date +%Y%m%d%H%M).png''
+        ''
+          $mod CTRL, PRINT, exec, ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" - | ${wl-clipboard-rs}/bin/wl-copy''
 
-      "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
-      "$mod, A, exec, ${fuzzel}/bin/fuzzel"
-      "$mod, E, exec, ${spacedrive}/bin/spacedrive"
-      "$mod, B, exec, ${firefox}/bin/firefox"
-    ] ++ (builtins.concatLists (builtins.genList (x:
-      let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
-      in [
-        "$mod, ${ws}, workspace, ${toString (x + 1)}"
-        "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-      ]) 10));
+        "$mod, RETURN, exec, ${alacritty}/bin/alacritty" # Terminal
+        "$mod, A, exec, ${fuzzel}/bin/fuzzel"
+        "$mod, E, exec, ${spacedrive}/bin/spacedrive"
+        "$mod, B, exec, ${firefox}/bin/firefox"
+      ] ++ (builtins.concatLists (builtins.genList (x:
+        let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
+        in [
+          "$mod, ${ws}, workspace, ${toString (x + 1)}"
+          "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+        ]) 10));
 
-  binde = with pkgs; [
-    ", XF86AudioLowerVolume, exec, ${volumeScript}/bin/volume.sh lower 5"
-    ", XF86AudioRaiseVolume, exec, ${volumeScript}/bin/volume.sh raise 5"
+    binde = with pkgs; [
+      ", XF86AudioLowerVolume, exec, ${volumeScript}/bin/volume.sh lower 5"
+      ", XF86AudioRaiseVolume, exec, ${volumeScript}/bin/volume.sh raise 5"
 
-    ", XF86MonBrightnessDown, exec, ${brightnessctl}/bin/brightnessctl set 5%-"
-    ", XF86MonBrightnessUp, exec, ${brightnessctl}/bin/brightnessctl set 5%+"
-  ];
+      ", XF86MonBrightnessDown, exec, ${brightnessctl}/bin/brightnessctl set 5%-"
+      ", XF86MonBrightnessUp, exec, ${brightnessctl}/bin/brightnessctl set 5%+"
+    ];
 
-  bindm = [
-    "$mod, mouse:272, movewindow"
-    "$mod, mouse:273, resizewindow"
+    bindm = [
+      "$mod, mouse:272, movewindow"
+      "$mod, mouse:273, resizewindow"
 
-    "$mod, Control_L, movewindow"
-    "$mod, ALT_L, resizewindow"
-  ];
+      "$mod, Control_L, movewindow"
+      "$mod, ALT_L, resizewindow"
+    ];
+  };
 }

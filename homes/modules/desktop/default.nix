@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }:
 let cfg = config.desktop;
 in {
-  imports = [ ./hyprland ];
+  imports = [ ./hyprland ./programs ./services ];
 
   options = {
     desktop.enable =
