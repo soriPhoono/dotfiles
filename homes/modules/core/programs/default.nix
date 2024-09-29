@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./fastfetch.nix ./fish.nix ./git.nix ];
+  imports = [ ./fastfetch.nix ./fish.nix ./git.nix ./yazi.nix ];
 
   home = with pkgs; {
     shellAliases = {
