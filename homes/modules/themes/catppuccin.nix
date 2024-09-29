@@ -12,7 +12,7 @@ in {
     stylix = {
       enable = true;
 
-      image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
+      image = ./assets/catppuccin-mountain.jpg;
 
       base16Scheme =
         "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
