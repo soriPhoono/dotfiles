@@ -74,7 +74,7 @@ in {
       } // (import ./config)
         // (import ./config/autostart.nix { inherit pkgs; })
         // (import ./config/binds.nix { inherit pkgs; })
-        // (import ./config/animations.nix);
+        // (import ./config/animations.nix) // cfg.extraHyprSettings;
     };
 
     programs = {

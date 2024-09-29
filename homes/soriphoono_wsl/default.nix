@@ -1,1 +1,0 @@
-{ themes.catppuccin.enable = true; }

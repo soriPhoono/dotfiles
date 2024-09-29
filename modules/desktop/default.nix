@@ -1,18 +1,9 @@
-{ lib
-, pkgs
-, config
-, username
-, ...
-}:
+{ lib, config, username, ... }:
 let cfg = config.desktop;
 in {
-  imports = [
-    ./hyprland.nix
-  ];
+  imports = [ ./hyprland.nix ];
 
-  options = {
-    desktop.enable = lib.mkEnableOption "Enable desktop support";
-  };
+  options = { desktop.enable = lib.mkEnableOption "Enable desktop support"; };
 
   config = lib.mkIf cfg.enable {
     programs.dconf.enable = true;
@@ -34,8 +25,6 @@ in {
 
     networking.networkmanager.enable = true;
 
-    users.users.${username}.extraGroups = [
-      "networkmanager"
-    ];
+    users.users.${username}.extraGroups = [ "networkmanager" ];
   };
 }
