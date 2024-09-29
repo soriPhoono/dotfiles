@@ -71,30 +71,24 @@ in {
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
           "QT_AUTO_SCREEN_SCALE_FACTOR,1"
         ];
-      } // (import ./config)
-        // (import ./config/autostart.nix { inherit pkgs; })
-        // (import ./config/binds.nix { inherit pkgs; })
-        // (import ./config/animations.nix) // cfg.extraHyprSettings;
+      } // (import ./hyprland/general.nix)
+        // (import ./hyprland/autostart.nix { inherit pkgs; })
+        // (import ./hyprland/binds.nix { inherit pkgs; })
+        // (import ./hyprland/animations.nix) // cfg.extraHyprSettings;
     };
 
     programs = {
-      hyprlock = import ./hyprlock.nix;
-      alacritty = import ./supporting/alacritty.nix;
-      fuzzel = import ./supporting/fuzzel.nix;
-      waybar = import ./supporting/waybar.nix { inherit pkgs; };
-      wlogout = import ./supporting/wlogout.nix;
-
-      firefox = {
-        enable = true;
-
-        package = pkgs.wrapFirefox
-          (pkgs.firefox-unwrapped.override { pipewireSupport = true; }) { };
-      };
+      hyprlock = import ./programs/hyprlock.nix;
+      alacritty = import ./programs/alacritty.nix;
+      fuzzel = import ./programs/fuzzel.nix;
+      waybar = import ./programs/waybar.nix { inherit pkgs; };
+      wlogout = import ./programs/wlogout.nix;
+      firefox = import ./programs/firefox.nix { inherit pkgs; };
     };
 
     services = {
-      mako = import ./supporting/mako.nix { inherit config pkgs; };
-      hypridle = import ./hypridle.nix;
+      mako = import ./services/mako.nix { inherit config pkgs; };
+      hypridle = import ./services/hypridle.nix;
     };
   };
 }
