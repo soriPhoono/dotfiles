@@ -32,103 +32,40 @@ builtins.map (v: v // { options.silent = true; }) [
     options.desc = "Open new tab";
   }
   {
-    key = "<Tab>";
+    key = "<leader>tn";
     action = "<cmd>tabnext<CR>";
     mode = [ "n" ];
     options.desc = "Go to next tab";
   }
   {
-    key = "<S-Tab>";
+    key = "<leader>tp";
     action = "<cmd>tabprev<CR>";
     mode = [ "n" ];
     options.desc = "Go to previous tab";
   }
   {
-    key = "<leader>tc";
+    key = "<leader>tq";
     action = "<cmd>tabclose<CR>";
     mode = [ "n" ];
     options.desc = "Close current tab";
   }
 
   {
-    key = "<leader>wsh";
+    key = "<leader>wh";
     action = "<cmd>split<CR>";
     mode = [ "n" ];
     options.desc = "Split current window horizontally";
   }
   {
-    key = "<leader>wsv";
+    key = "<leader>wv";
     action = "<cmd>vsplit<CR>";
     mode = [ "n" ];
     options.desc = "Split current window vertically";
   }
   {
-    key = "<leader>wc";
+    key = "<leader>wq";
     action = "<cmd>close<CR>";
     mode = [ "n" ];
     options.desc = "Close current window";
-  }
-
-  {
-    key = "<leader>wmh";
-    action = "<C-w>h";
-    mode = [ "n" ];
-    options.desc = "Move current window focus left";
-  }
-  {
-    key = "<leader>wmk";
-    action = "<C-w>k";
-    mode = [ "n" ];
-    options.desc = "Move current window focus up";
-  }
-  {
-    key = "<leader>wmj";
-    action = "<C-w>j";
-    mode = [ "n" ];
-    options.desc = "Move current window focus down";
-  }
-  {
-    key = "<leader>wml";
-    action = "<C-w>l";
-    mode = [ "n" ];
-    options.desc = "Move current window focus right";
-  }
-
-  {
-    key = "<leader>wrh";
-    action = "<C-w><";
-    mode = [ "n" ];
-    options.desc = "Expand current window left";
-  }
-  {
-    key = "<leader>wrl";
-    action = "<C-w>>";
-    mode = [ "n" ];
-    options.desc = "Expand current window up";
-  }
-  {
-    key = "<leader>wrk";
-    action = "<C-w>+";
-    mode = [ "n" ];
-    options.desc = "Expand current window down";
-  }
-  {
-    key = "<leader>wrj";
-    action = "<C-w>-";
-    mode = [ "n" ];
-    options.desc = "Expand current window right";
-  }
-
-  {
-    key = "<leader>dp";
-    action =
-      # lua
-      ''
-        function()
-          vim.diagnostic.goto_next()
-        end
-      '';
-    mode = [ "n" ];
-    options.desc = "Go to next problem in the current file";
   }
 ]
