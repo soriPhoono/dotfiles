@@ -10,7 +10,7 @@
       top = "${btop}/bin/btop";
     };
 
-    packages = [ nvtopPackages.full ];
+    packages = [ nvtopPackages.full nh ];
   };
 
   programs = {
