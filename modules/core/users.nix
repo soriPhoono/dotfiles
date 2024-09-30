@@ -1,7 +1,4 @@
-{ pkgs
-, username
-, ...
-}: {
+{ pkgs, username, ... }: {
   security.sudo.wheelNeedsPassword = false;
 
   programs = {
@@ -17,8 +14,6 @@
     isNormalUser = true;
     shell = pkgs.fish;
 
-    extraGroups = [
-      "wheel"
-    ];
+    extraGroups = [ "wheel" ];
   };
 }

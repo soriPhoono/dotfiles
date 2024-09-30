@@ -1,14 +1,9 @@
-{ lib
-, pkgs
-, config
-, ...
-}:
-let
-  cfg = config.core.hardware.bluetooth;
-in
-{
+{ lib, config, ... }:
+let cfg = config.core.hardware.bluetooth;
+in {
   options = {
-    core.hardware.bluetooth.enable = lib.mkEnableOption "Enable bluetooth support";
+    core.hardware.bluetooth.enable =
+      lib.mkEnableOption "Enable bluetooth support";
   };
 
   config = lib.mkIf cfg.enable {
