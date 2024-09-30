@@ -1,29 +1,61 @@
 { pkgs, ... }:
 let
-  volumeScript = with pkgs;
-    writeShellApplication {
-      name = "volume.sh";
+  volumeScript = pkgs.writeShellApplication {
+    name = "volume.sh";
 
-      runtimeInputs = [ wireplumber ];
+    runtimeInputs = with pkgs; [ wireplumber libnotify ];
 
-      text = ''
-        #!/bin/bash
+    text = ''
+      #!/bin/bash
 
-        operation=$1
-        value=$2
-        current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
+      operation=$1
+      value=$2
+      current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
 
-        if [[ "$operation" = "raise" ]]; then
-          if [[ $(awk "BEGIN { print $current * 100 + $value }") -gt 100 ]]; then
-            exit 0
-          fi
-
-          wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%+
-        elif [[ "$operation" = "lower" ]]; then
-          wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%-
+      if [[ "$operation" = "raise" ]]; then
+        if [[ $(awk "BEGIN { print $current * 100 + $value }") -gt 100 ]]; then
+          exit 0
         fi
-      '';
-    };
+
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%+
+
+      elif [[ "$operation" = "lower" ]]; then
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%-
+      fi
+
+      current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
+      notify-send Changed volume to $current  
+    '';
+  };
+
+  # TODO: finish this
+  brightnessScript = pkgs.writeShellApplication {
+    name = "brightness.sh";
+
+    runtimeInputs = with pkgs; [ brightnessctl libnotify ];
+
+    text = ''
+      #!/bin/bash
+
+      operation=$1
+      value=$2
+      current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
+
+      if [[ "$operation" = "raise" ]]; then
+        if [[ $(awk "BEGIN { print $current * 100 + $value }") -gt 100 ]]; then
+          exit 0
+        fi
+
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%+
+
+      elif [[ "$operation" = "lower" ]]; then
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%-
+      fi
+
+      current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
+      notify-send Changed volume to $current 
+    '';
+  };
 in {
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
