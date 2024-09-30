@@ -1,5 +1,5 @@
 {
-  imports = [ ./nil.nix ./lua.nix ./python.nix ];
+  imports = [ ./bash.nix ./nil.nix ./lua.nix ./python.nix ];
 
   programs.nixvim.plugins = {
     lsp.enable = true;
