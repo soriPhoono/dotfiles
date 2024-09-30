@@ -6,6 +6,8 @@
       systems = [ "x86_64-linux" ];
 
       imports = [ ./hosts ./modules ./homes/modules ];
+
+      perSystem = { pkgs, ... }: { formatter = pkgs.nixpkgs-fmt; };
     };
 
   inputs = {

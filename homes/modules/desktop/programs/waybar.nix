@@ -46,7 +46,8 @@ let
         esac
       '';
     };
-in {
+in
+{
   options = {
     desktop.programs.waybar.enable = lib.mkEnableOption "Enable waybar";
   };

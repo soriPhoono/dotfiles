@@ -1,49 +1,51 @@
 { self, inputs, ... }: {
-  flake.nixosConfigurations = let
-    inherit (inputs.nixpkgs) lib;
+  flake.nixosConfigurations =
+    let
+      inherit (inputs.nixpkgs) lib;
 
-    mkHost =
-      { hostname, username, systemModules ? [ ], system ? "x86_64-linux" }:
-      lib.nixosSystem {
-        inherit system;
+      mkHost =
+        { hostname, username, systemModules ? [ ], system ? "x86_64-linux" }:
+        lib.nixosSystem {
+          inherit system;
 
-        specialArgs = { inherit self inputs lib username; };
+          specialArgs = { inherit self inputs lib username; };
 
-        modules = with inputs;
-          [
-            { networking.hostName = "${hostname}"; }
+          modules = with inputs;
+            [
+              { networking.hostName = "${hostname}"; }
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
 
-                backupFileExtension = "~";
+                  backupFileExtension = "~";
 
-                sharedModules = [ self.homeManagerModules.default ];
-                extraSpecialArgs = { inherit inputs username; };
+                  sharedModules = [ self.homeManagerModules.default ];
+                  extraSpecialArgs = { inherit inputs username; };
 
-                users.${username} = ../homes/${username};
-              };
-            }
+                  users.${username} = ../homes/${username};
+                };
+              }
 
-            self.nixosModules.default
-          ] ++ systemModules;
+              self.nixosModules.default
+            ] ++ systemModules;
+        };
+    in
+    {
+      wsl = mkHost {
+        hostname = "wsl";
+        username = "soriphoono";
+
+        systemModules = [ ./wsl ];
       };
-  in {
-    wsl = mkHost {
-      hostname = "wsl";
-      username = "soriphoono";
 
-      systemModules = [ ./wsl ];
+      zephyrus = mkHost {
+        hostname = "zephyrus";
+        username = "soriphoono";
+
+        systemModules = [ ./zephyrus ];
+      };
     };
-
-    zephyrus = mkHost {
-      hostname = "zephyrus";
-      username = "soriphoono";
-
-      systemModules = [ ./zephyrus ];
-    };
-  };
 }
