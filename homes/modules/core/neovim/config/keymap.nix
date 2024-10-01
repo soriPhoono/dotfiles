@@ -1,12 +1,5 @@
 builtins.map (v: v // { options.silent = true; }) [
   {
-    key = "<leader>va";
-    action = "gg<S-v>G";
-    mode = [ "n" ];
-    options.desc = "Select all";
-  }
-
-  {
     key = "<leader>s";
     action = "<cmd>write<CR>";
     mode = [ "n" ];
@@ -20,9 +13,16 @@ builtins.map (v: v // { options.silent = true; }) [
   }
   {
     key = "<leader>Q";
-    action = "<cmd>quitall<CR>";
+    action = "<cmd>quit!<CR>";
     mode = [ "n" ];
     options.desc = "Quit all";
+  }
+
+  {
+    key = "<leader>va";
+    action = "gg<S-v>G";
+    mode = [ "n" ];
+    options.desc = "Select all";
   }
 
   {
