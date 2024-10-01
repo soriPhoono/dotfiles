@@ -1,4 +1,6 @@
 { lib, pkgs, nixosConfig, ... }: {
+  core.shells.fish.enable = true;
+
   desktop.hyprland = lib.mkIf nixosConfig.desktop.enable {
     enable = true;
     extraSettings = {

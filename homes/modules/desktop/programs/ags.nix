@@ -6,9 +6,6 @@
 
     configDir = ../../../../ags;
 
-    extraPackages = with pkgs;
-      [
-
-      ];
+    extraPackages = with pkgs; [ bun ];
   };
 }

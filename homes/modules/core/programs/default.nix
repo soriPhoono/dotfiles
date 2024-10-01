@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./fastfetch.nix ./fish.nix ./git.nix ./yazi.nix ];
+  imports = [ ./dconf.nix ./git.nix ];
 
   home = with pkgs; {
     shellAliases = {
@@ -10,7 +10,7 @@
       top = "${btop}/bin/btop";
     };
 
-    packages = [ nvtopPackages.full nh ];
+    packages = [ nh ];
   };
 
   programs = {
@@ -39,6 +39,11 @@
 
       defaultCommand = "fd --type file";
       defaultOptions = [ "--ansi" ];
+    };
+
+    yazi = {
+      enable = true;
+      enableFishIntegration = true;
     };
   };
 }

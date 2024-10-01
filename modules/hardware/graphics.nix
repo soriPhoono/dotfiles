@@ -1,0 +1,16 @@
+{ lib, config, ... }:
+let cfg = config.hardware.graphics;
+in {
+  options = {
+    hardware.graphics = {
+      enable = lib.mkEnableOption "Enable opengl support";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
+  };
+}

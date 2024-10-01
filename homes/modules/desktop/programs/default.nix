@@ -18,10 +18,16 @@ in {
   config = lib.mkIf cfg.enable {
     home = {
       packages = with pkgs; [
+        # CLI apps
+        nvtopPackages.full
+
+        # Desktop system level apps
         gnome-disk-utility
 
+        # Desktop user level apps
+        # Office work
         obsidian
-
+        # Communications
         discord
       ];
     };

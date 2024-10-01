@@ -1,13 +1,5 @@
 { lib, pkgs, ... }: {
-  imports = [
-    ./nixpkgs.nix
-
-    ./hardware
-
-    ./boot.nix
-    ./system-keys.nix
-    ./users.nix
-  ];
+  imports = [ ./nixpkgs.nix ./openssh.nix ./users.nix ];
 
   time.timeZone = lib.mkDefault "America/Chicago";
 
