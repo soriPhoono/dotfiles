@@ -22,4 +22,10 @@
     laptop.enable = true;
     hyprland.enable = true;
   };
+
+  services.logind.extraConfig = ''
+    HandlePowerKey=ignore
+    HandleLidSwitch=suspend
+    HandleLidSwitchExternalPower=ignore
+  '';
 }

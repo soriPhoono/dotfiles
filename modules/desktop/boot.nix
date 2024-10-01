@@ -1,11 +1,9 @@
 { lib, pkgs, config, ... }:
 let cfg = config.desktop.boot;
 in {
-  options = {
-    desktop.boot.systemd-boot.enable = lib.mkEnableOption "Enable bootloader";
-  };
+  options = { desktop.boot.enable = lib.mkEnableOption "Enable bootloader"; };
 
-  config = lib.mkIf cfg.systemd-boot.enable {
+  config = lib.mkIf cfg.enable {
     boot = {
       consoleLogLevel = 0;
       kernelPackages = pkgs.linuxPackages_zen;
