@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.hardware.qmk_keyboard;
+let cfg = config.core.hardware.qmk_keyboard;
 in {
   options = {
-    hardware.qmk_keyboard.enable =
+    core.hardware.qmk_keyboard.enable =
       lib.mkEnableOption "Enable QMK keyboard support";
   };
 

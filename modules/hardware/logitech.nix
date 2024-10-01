@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.hardware.logitech;
+let cfg = config.core.hardware.logitech;
 in {
   options = {
-    hardware.logitech = {
+    core.hardware.logitech = {
       enable = lib.mkEnableOption "Enable Logitech support";
       enableGraphical = lib.mkEnableOption "Enable graphical Logitech support";
     };

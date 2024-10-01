@@ -5,15 +5,17 @@
     nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
 
-  hardware = {
-    bluetooth.enable = true;
-    logitech.enable = true;
-    graphics.enable = true;
-    qmk_keyboard.enable = true;
-    xbox_controller.enable = true;
-  };
+  core = {
+    hardware = {
+      bluetooth.enable = true;
+      logitech.enable = true;
+      graphics.enable = true;
+      qmk_keyboard.enable = true;
+      xbox_controller.enable = true;
+    };
 
-  core.openssh.enable = true;
+    openssh.enable = true;
+  };
 
   desktop = {
     boot.systemd-boot.enable = true;

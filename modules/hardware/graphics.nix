@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.hardware.graphics;
+let cfg = config.core.hardware.graphics;
 in {
   options = {
-    hardware.graphics = {
+    core.hardware.graphics = {
       enable = lib.mkEnableOption "Enable opengl support";
     };
   };
