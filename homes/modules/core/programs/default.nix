@@ -49,7 +49,6 @@
     direnv = {
       enable = true;
 
-      enableFishIntegration = config.core.shells.fish.enable;
       nix-direnv.enable = true;
     };
   };
