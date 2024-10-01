@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   imports = [ ./dconf.nix ./git.nix ];
 
   home = with pkgs; {
@@ -44,6 +44,13 @@
     yazi = {
       enable = true;
       enableFishIntegration = true;
+    };
+
+    direnv = {
+      enable = true;
+
+      enableFishIntegration = config.core.shells.fish.enable;
+      nix-direnv.enable = true;
     };
   };
 }
