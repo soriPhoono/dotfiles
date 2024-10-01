@@ -1,5 +1,6 @@
 {
-  imports = [ ./bash.nix ./nil.nix ./lua.nix ./python.nix ./javascript.nix ];
+  imports =
+    [ ./bash.nix ./nil.nix ./lua.nix ./rust.nix ./python.nix ./javascript.nix ];
 
   programs.nixvim.plugins = {
     lsp.enable = true;
