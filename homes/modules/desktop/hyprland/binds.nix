@@ -17,10 +17,10 @@ let
           exit 0
         fi
 
-        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%+
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "$value%+"
 
       elif [[ "$operation" = "lower" ]]; then
-        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%-
+        wpctl set-volume @DEFAULT_AUDIO_SINK@ "$value%-"
       fi
 
       current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
