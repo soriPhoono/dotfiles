@@ -26,7 +26,7 @@ builtins.map (v: v // { options.silent = true; }) [
   }
 
   {
-    key = "<leader>wq";
+    key = "<C-w>q";
     action = "<cmd>close<CR>";
     mode = [ "n" ];
     options.desc = "Close current window";
