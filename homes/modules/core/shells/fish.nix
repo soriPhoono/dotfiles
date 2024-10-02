@@ -13,6 +13,8 @@ in {
 
       interactiveShellInit = ''
         set fish_greeting
+
+        direnv hook fish | source
       '';
     };
   };
