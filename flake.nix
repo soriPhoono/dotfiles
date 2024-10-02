@@ -16,13 +16,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # System-global imports
-
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # System-specific imports
 
     nixos-wsl.url = "github:nix-community/nixos-wsl";
@@ -38,11 +31,6 @@
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     stylix.url = "github:danth/stylix";
-    ags = {
-      url = "github:Aylur/ags";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # Development environment imports
 
