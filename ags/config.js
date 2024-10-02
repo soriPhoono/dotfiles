@@ -1,5 +1,5 @@
 const entry = App.configDir + "/ts/main.ts";
-const outdir = "/tmp/ags/js";
+const outdir = "/tmp/ags/";
 
 try {
   await Utils.execAsync([

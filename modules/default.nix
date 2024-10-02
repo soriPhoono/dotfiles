@@ -1,5 +1,5 @@
 {
   flake.nixosModules = {
-    default = { imports = [ ./hardware ./core ./virtualization ./desktop ]; };
+    default = { imports = [ ./core ./virtualization ./desktop ]; };
   };
 }

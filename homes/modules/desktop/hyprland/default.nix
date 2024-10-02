@@ -18,11 +18,11 @@ in {
       enable = true;
       programs = {
         enable = true;
+        ags.enable = true;
         alacritty.enable = true;
         firefox.enable = true;
         fuzzel.enable = true;
         hyprlock.enable = true;
-        waybar.enable = true;
         wlogout.enable = true;
       };
       services = {
