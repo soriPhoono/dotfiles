@@ -1,11 +1,20 @@
-{ inputs, pkgs, ... }: {
+{ inputs, lib, pkgs, config, ... }:
+let cfg = config.desktop.ags;
+in {
   imports = [ inputs.ags.homeManagerModules.default ];
 
-  programs.ags = {
-    enable = true;
+  options = {
+    desktop.ags.enable = lib.mkEnableOption "Enable ags wayland shell";
+  };
 
-    configDir = ../../../../ags;
+  config = lib.mkIf cfg.enable {
+    programs.ags = {
+      enable = true;
 
-    extraPackages = with pkgs; [ bun ];
+      configDir = ../../../../ags;
+
+      extraPackages = with pkgs; [ bun ];
+    };
+
   };
 }
