@@ -2,6 +2,7 @@
 let cfg = config.desktop.programs;
 in {
   imports = [
+    ./ags.nix
     ./alacritty.nix
     ./firefox.nix
     ./fuzzel.nix

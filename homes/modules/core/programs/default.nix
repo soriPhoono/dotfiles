@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
   imports = [ ./dconf.nix ./git.nix ];
 
   home = with pkgs; {
