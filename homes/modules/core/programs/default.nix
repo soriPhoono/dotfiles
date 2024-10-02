@@ -10,7 +10,7 @@
       top = "${btop}/bin/btop";
     };
 
-    packages = [ nh ];
+    packages = with pkgs; [ nh nix-fast-build nix-tree ];
   };
 
   programs = {
