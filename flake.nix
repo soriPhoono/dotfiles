@@ -16,17 +16,17 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # System-specific imports
-
-    nixos-wsl.url = "github:nix-community/nixos-wsl";
-    nixos-hardware.url = "github:nixos/nixos-hardware/master";
-
     # System-global imports
 
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # System-specific imports
+
+    nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     # User environment imports
 
