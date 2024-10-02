@@ -24,7 +24,7 @@ let
       fi
 
       current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
-      notify-send Changed volume to $current  
+      notify-send Changed volume to "$current"  
     '';
   };
 
@@ -53,7 +53,7 @@ let
       fi
 
       current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
-      notify-send Changed volume to $current 
+      notify-send Changed volume to "$current"
     '';
   };
 in {
