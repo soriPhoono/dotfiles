@@ -1,4 +1,4 @@
-{ inputs, username, ... }: {
+{ inputs, pkgs, username, ... }: {
   imports = with inputs; [ nixos-wsl.nixosModules.default ];
 
   wsl = {
@@ -7,4 +7,12 @@
   };
 
   core.openssh.enable = true;
+
+  environment.systemPackages = with pkgs; [ wget ];
+
+  programs.nix-ld = {
+    enable = true;
+
+    package = pkgs.nix-ld-rs;
+  };
 }
