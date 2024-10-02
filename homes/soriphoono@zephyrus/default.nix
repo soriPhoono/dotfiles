@@ -1,7 +1,7 @@
-{ lib, pkgs, nixosConfig, ... }: {
+{ pkgs, ... }: {
   core.shells.fish.enable = true;
 
-  desktop.hyprland = lib.mkIf nixosConfig.desktop.enable {
+  desktop.hyprland = {
     enable = true;
     extraSettings = {
       monitor = [ "eDP-1,1920x1080@144,0x0,1" ];
