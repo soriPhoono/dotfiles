@@ -8,6 +8,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    core.shells.starship.enable = lib.mkDefault true;
     core.shells.fastfetch.enable = lib.mkDefault true;
 
     programs = {

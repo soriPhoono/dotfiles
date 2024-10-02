@@ -18,8 +18,7 @@
   };
 
   desktop = {
-    boot.systemd-boot.enable = true;
-    laptop.enable = true;
+    boot.enable = true;
     hyprland.enable = true;
   };
 
