@@ -2,7 +2,13 @@
 let cfg = config.core.shells.fish;
 in {
   options = {
-    core.shells.fish.enable = lib.mkEnableOption "Enable fish shell";
+    core.shells.fish = {
+      enable = lib.mkEnableOption "Enable fish shell";
+      extraShellInit = lib.mkOption {
+        type = with lib.types; str;
+        description = "Extra arguments to add to shellInit script";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -13,9 +19,7 @@ in {
 
       interactiveShellInit = ''
         set fish_greeting
-
-        direnv hook fish | source
-      '';
+      '' + cfg.extraShellInit;
     };
   };
 }

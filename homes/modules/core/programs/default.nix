@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./dconf.nix ./git.nix ];
+  imports = [ ./dconf.nix ./git.nix ./direnv.nix ];
 
   home = with pkgs; {
     shellAliases = {
@@ -14,6 +14,8 @@
   };
 
   programs = {
+    core.programs.direnv.enable = true;
+
     eza = {
       enable = true;
       enableFishIntegration = true;
@@ -44,12 +46,6 @@
     yazi = {
       enable = true;
       enableFishIntegration = true;
-    };
-
-    direnv = {
-      enable = true;
-
-      nix-direnv.enable = true;
     };
   };
 }
