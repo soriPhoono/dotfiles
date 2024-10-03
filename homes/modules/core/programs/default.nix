@@ -8,20 +8,12 @@
       du = "${dua}/bin/dua";
       top = "${btop}/bin/btop";
     };
-
-    packages = with pkgs; [ nh nix-fast-build nix-tree ];
   };
 
   core.programs = {
     eza.enable = true;
     find.enable = true;
+    yazi.enable = true;
     direnv.enable = true;
-  };
-
-  programs = {
-    yazi = {
-      enable = true;
-      enableFishIntegration = true;
-    };
   };
 }
