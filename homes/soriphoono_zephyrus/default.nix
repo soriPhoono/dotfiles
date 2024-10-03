@@ -2,12 +2,16 @@
   core = {
     shells.fish.enable = true;
 
-    programs.git = {
-      userName = "soriphoono";
-      userEmail = "soriphoono@gmail.com";
+    programs = {
+      neovim.enable = true;
+
+      git = {
+        userName = "soriphoono";
+        userEmail = "soriphoono@gmail.com";
+      };
     };
   };
-  
+
   desktop.hyprland = {
     enable = true;
     extraSettings = {

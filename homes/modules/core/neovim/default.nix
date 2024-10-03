@@ -1,4 +1,6 @@
-{ inputs, ... }: {
+{ inputs, lib, config, ... }:
+let cfg = config.core.programs.neovim;
+in {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
 
@@ -7,15 +9,21 @@
     ./plugins
   ];
 
-  home.shellAliases.v = "nvim";
+  options = {
+    core.programs.neovim.enable = lib.mkEnableOption "Enable neovim support";
+  };
 
-  programs.nixvim = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    home.shellAliases.v = "nvim";
 
-    defaultEditor = true;
+    programs.nixvim = {
+      enable = true;
 
-    colorschemes.catppuccin.enable = true;
+      defaultEditor = true;
 
-    globals.mapleader = " ";
+      colorschemes.catppuccin.enable = true;
+
+      globals.mapleader = " ";
+    };
   };
 }
