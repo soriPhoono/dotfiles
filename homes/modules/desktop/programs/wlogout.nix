@@ -1,3 +1,4 @@
+# TODO: customize this
 { lib, config, ... }:
 let cfg = config.desktop.programs.wlogout;
 in {

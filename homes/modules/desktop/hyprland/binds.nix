@@ -39,7 +39,7 @@ let
 
       operation=$1
       value=$2
-      current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
+      current=$(brightnessctl get)
 
       if [[ "$operation" = "raise" ]]; then
         if [[ $(awk "BEGIN { print $current * 100 + $value }") -gt 100 ]]; then

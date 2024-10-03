@@ -120,8 +120,8 @@ in
           network = {
             format-icons = [
               "<span color='#eba0ac'>󰤟</span>"
-              "<span color='#fab387'>󰤢</span>"
-              "<span color='#f9e2af'>󰤥</span>"
+              "<span color='#f9e2af'>󰤢</span>"
+              "<span color='#a6e3a1'>󰤥</span>"
               "<span color='#a6e3a1'>󰤨</span>"
             ];
 
