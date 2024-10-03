@@ -5,7 +5,7 @@ in {
     core.shells.fish = {
       enable = lib.mkEnableOption "Enable fish shell";
       extraShellInit = lib.mkOption {
-        type = with lib.types; str;
+        type = with lib.types; lines;
         description = "Extra arguments to add to shellInit script";
       };
     };
