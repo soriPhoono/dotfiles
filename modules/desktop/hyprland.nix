@@ -1,6 +1,8 @@
 { inputs, lib, pkgs, config, ... }:
 let cfg = config.desktop.hyprland;
 in {
+  imports = [ ./regreet.nix ];
+
   options = {
     desktop.hyprland.enable = lib.mkEnableOption "Enable desktop support";
   };
@@ -17,6 +19,7 @@ in {
     desktop = {
       enable = true;
       boot.enable = true;
+      regreet.enable = true;
     };
 
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];

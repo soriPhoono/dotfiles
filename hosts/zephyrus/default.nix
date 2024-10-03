@@ -18,5 +18,6 @@
   };
 
   desktop.hyprland.enable = true;
+
   laptop.enable = true;
 }
