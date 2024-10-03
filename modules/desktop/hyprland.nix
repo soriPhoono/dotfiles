@@ -21,6 +21,8 @@ in {
 
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 
+    security.polkit.enable = true;
+
     programs = {
       hyprland = {
         enable = true;
@@ -32,7 +34,5 @@ in {
     };
 
     services.hypridle.enable = true;
-
-    security.polkit.enable = true;
   };
 }

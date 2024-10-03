@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, nixosConfig, ... }:
 let cfg = config.core.shells.fish;
 in {
   options = {
@@ -16,7 +16,7 @@ in {
     core.shells.enable = lib.mkDefault true;
 
     programs.fish = {
-      enable = true;
+      enable = nixosConfig.programs.fish.enable;
 
       interactiveShellInit = ''
         set fish_greeting

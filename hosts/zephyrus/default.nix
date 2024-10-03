@@ -17,16 +17,7 @@
     openssh.enable = true;
   };
 
-  desktop = {
-    boot.enable = true;
-    hyprland.enable = true;
-  };
+  desktop.hyprland.enable = true;
 
   programs.droidcam.enable = true;
-
-  services.logind.extraConfig = ''
-    HandlePowerKey=ignore
-    HandleLidSwitch=suspend
-    HandleLidSwitchExternalPower=ignore
-  '';
 }
