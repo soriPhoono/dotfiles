@@ -1,5 +1,6 @@
 { pkgs, ... }: {
-  imports = [ ./dconf.nix ./git.nix ./eza.nix ./find.nix ./direnv.nix ];
+  imports =
+    [ ./dconf.nix ./git.nix ./eza.nix ./find.nix ./yazi.nix ./direnv.nix ];
 
   home.shellAliases = with pkgs; {
     cat = "${bat}/bin/bat";
