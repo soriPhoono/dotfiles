@@ -9,13 +9,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    direnv = {
+    programs.direnv = {
       enable = true;
 
       nix-direnv.enable = true;
     };
 
-    config.core.shells.fish.extraShellInit =
+    core.shells.fish.extraShellInit =
       lib.mkIf config.core.shells.fish.enable "direnv hook fish | source";
   };
 }

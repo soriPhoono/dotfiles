@@ -13,9 +13,9 @@
     packages = with pkgs; [ nh nix-fast-build nix-tree ];
   };
 
-  programs = {
-    core.programs.direnv.enable = true;
+  core.programs.direnv.enable = true;
 
+  programs = {
     eza = {
       enable = true;
       enableFishIntegration = true;
