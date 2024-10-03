@@ -4,6 +4,7 @@ in {
   options = {
     core.shells.fish = {
       enable = lib.mkEnableOption "Enable fish shell";
+
       extraShellInit = lib.mkOption {
         type = with lib.types; lines;
         description = "Extra arguments to add to shellInit script";
@@ -12,7 +13,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    core.shells.enable = true;
+    core.shells.enable = lib.mkDefault true;
 
     programs.fish = {
       enable = true;

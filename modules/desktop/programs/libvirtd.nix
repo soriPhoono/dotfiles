@@ -1,8 +1,8 @@
 { lib, pkgs, config, username, ... }:
-let cfg = config.desktop.desktop.libvirtd;
+let cfg = config.desktop.programs.libvirtd;
 in {
   options = {
-    desktop.desktop.libvirtd.enable =
+    desktop.programs.libvirtd.enable =
       lib.mkEnableOption "Enable libvirtd virtualization machines";
   };
 

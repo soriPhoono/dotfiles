@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.core.shells;
+let cfg = config.core.programs;
 in {
   options = {
-    core.shells.fastfetch.enable = lib.mkEnableOption "Enable fastfetch";
+    core.programs.fastfetch.enable = lib.mkEnableOption "Enable fastfetch";
   };
 
   config = lib.mkIf cfg.enable {
@@ -58,7 +58,6 @@ in {
       };
     };
 
-    core.shells.fish.extraShellInit =
-      lib.mkIf config.core.shells.fish.enable "fastfetch";
+    core.shells.fish.extraShellInit = "fastfetch";
   };
 }

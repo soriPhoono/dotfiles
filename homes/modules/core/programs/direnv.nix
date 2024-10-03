@@ -15,7 +15,6 @@ in {
       nix-direnv.enable = true;
     };
 
-    core.shells.fish.extraShellInit =
-      lib.mkIf config.core.shells.fish.enable "direnv hook fish | source";
+    core.shells.fish.extraShellInit = "direnv hook fish | source";
   };
 }

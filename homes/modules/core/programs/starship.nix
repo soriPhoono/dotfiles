@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.core.shells.starship;
+let cfg = config.core.programs.starship;
 in {
   options = {
-    core.shells.starship = {
+    core.programs.starship = {
       enable = lib.mkEnableOption "Enable starship prompt";
     };
   };
