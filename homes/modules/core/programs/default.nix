@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  imports = [ ./dconf.nix ./git.nix ./direnv.nix ];
+  imports = [ ./dconf.nix ./git.nix ./eza.nix ./direnv.nix ];
 
   home = with pkgs; {
     shellAliases = {
@@ -13,19 +13,12 @@
     packages = with pkgs; [ nh nix-fast-build nix-tree ];
   };
 
-  core.programs.direnv.enable = true;
+  core.programs = {
+    eza.enable = true;
+    direnv.enable = true;
+  };
 
   programs = {
-    eza = {
-      enable = true;
-      enableFishIntegration = true;
-
-      extraOptions = [ "--group-directories-first" ];
-
-      git = true;
-      icons = true;
-    };
-
     fd = {
       enable = true;
       hidden = true;
