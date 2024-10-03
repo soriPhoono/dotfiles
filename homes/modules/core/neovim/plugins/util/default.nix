@@ -1,6 +1,11 @@
 {
-  imports =
-    [ ./commentary.nix ./autopairs.nix ./gitsigns.nix ./toggleterm.nix ];
+  imports = [
+    ./commentary.nix
+    ./autopairs.nix
+    ./gitsigns.nix
+    ./toggleterm.nix
+    ./codeium.nix
+  ];
 
   programs.nixvim = {
     keymaps = builtins.map (v: v // { options.silent = true; }) [{
