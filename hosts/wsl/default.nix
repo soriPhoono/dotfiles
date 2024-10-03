@@ -8,7 +8,7 @@
 
   core.openssh.enable = true;
 
-  environment.systemPackages = with pkgs; [ wget ];
+  environment.systemPackages = with pkgs; [ nil nixpkgs-fmt wget ];
 
   programs.nix-ld = {
     enable = true;
