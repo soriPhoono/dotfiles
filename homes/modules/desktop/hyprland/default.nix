@@ -6,6 +6,7 @@ in {
   options = {
     desktop.hyprland = {
       enable = lib.mkEnableOption "Enable hyprland desktop";
+
       extraSettings = lib.mkOption {
         type = with lib.types; attrs;
         description = "Extra hyprland settings";
@@ -29,8 +30,8 @@ in {
         hypridle.enable = true;
         mako = {
           enable = true;
-          rounding = 10;
-          border_size = 3;
+          rounding = config.wayland.windowManager.hyprland.settings.decoration.rounding;
+          border_size = config.wayland.windowManager.hyprland.settings.general.border_size;
         };
       };
     };
