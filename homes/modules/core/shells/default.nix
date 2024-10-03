@@ -15,7 +15,7 @@ in {
       nix-index = {
         enable = true;
 
-        enableFishIntegration = true;
+        enableFishIntegration = config.core.shells.fish.enable;
       };
     };
   };

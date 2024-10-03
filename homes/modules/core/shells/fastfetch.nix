@@ -57,5 +57,8 @@ in {
         ];
       };
     };
+
+    core.shells.fish.extraShellInit =
+      lib.mkIf config.core.shells.fish.enable "fastfetch";
   };
 }

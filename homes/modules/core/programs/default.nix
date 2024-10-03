@@ -1,9 +1,8 @@
 { pkgs, ... }: {
-  imports = [ ./dconf.nix ./git.nix ./eza.nix ./direnv.nix ];
+  imports = [ ./dconf.nix ./git.nix ./eza.nix ./find.nix ./direnv.nix ];
 
   home = with pkgs; {
     shellAliases = {
-      find = "${fd}/bin/fd";
       cat = "${bat}/bin/bat";
       df = "${duf}/bin/duf";
       du = "${dua}/bin/dua";
@@ -15,27 +14,11 @@
 
   core.programs = {
     eza.enable = true;
+    find.enable = true;
     direnv.enable = true;
   };
 
   programs = {
-    fd = {
-      enable = true;
-      hidden = true;
-
-      extraOptions = [ "--follow" "--color=always" ];
-
-      ignores = [ ".git" "*.bak" ];
-    };
-
-    fzf = {
-      enable = true;
-      enableFishIntegration = true;
-
-      defaultCommand = "fd --type file";
-      defaultOptions = [ "--ansi" ];
-    };
-
     yazi = {
       enable = true;
       enableFishIntegration = true;

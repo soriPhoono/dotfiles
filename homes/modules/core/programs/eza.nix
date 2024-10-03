@@ -4,7 +4,6 @@ in {
   options = {
     core.programs.eza = {
       enable = lib.mkEnableOption "Enable eza ls replacement";
-
     };
   };
 
