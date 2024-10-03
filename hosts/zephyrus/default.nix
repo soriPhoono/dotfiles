@@ -18,6 +18,5 @@
   };
 
   desktop.hyprland.enable = true;
-
-  programs.droidcam.enable = true;
+  laptop.enable = true;
 }
