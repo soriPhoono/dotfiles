@@ -2,6 +2,8 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
 
+    ./config/keymap.nix
+    ./config/opts.nix
     ./plugins
   ];
 
@@ -15,7 +17,5 @@
     colorschemes.catppuccin.enable = true;
 
     globals.mapleader = " ";
-    opts = import ./config/opts.nix;
-    keymaps = import ./config/keymap.nix;
   };
 }
