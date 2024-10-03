@@ -8,7 +8,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    nix-index = {
+    programs.nix-index = {
       enable = true;
 
       enableFishIntegration = config.core.shells.fish.enable;

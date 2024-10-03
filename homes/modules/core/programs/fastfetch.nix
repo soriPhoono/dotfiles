@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.core.programs;
+let cfg = config.core.programs.fastfetch;
 in {
   options = {
     core.programs.fastfetch.enable = lib.mkEnableOption "Enable fastfetch";

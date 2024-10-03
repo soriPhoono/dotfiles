@@ -14,6 +14,12 @@ in {
       ./direnv.nix
     ];
 
+  options = {
+    core.shells = {
+      enable = lib.mkEnableOption "Enable shell integration";
+    };
+  };
+
   config = lib.mkIf cfg.enable {
     home.shellAliases = with pkgs; {
       cat = "${bat}/bin/bat";
