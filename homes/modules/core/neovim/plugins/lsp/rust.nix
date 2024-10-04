@@ -1,6 +1,11 @@
 {
   programs.nixvim.plugins.lsp.servers = {
     taplo.enable = true;
-    rust-analyzer = { enable = true; };
+    rust-analyzer = {
+      enable = true;
+
+      installCargo = false;
+      installRustc = false;
+    };
   };
 }
