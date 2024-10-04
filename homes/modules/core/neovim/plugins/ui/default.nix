@@ -3,7 +3,7 @@
     ./alpha.nix
     ./cmp.nix
     ./treesitter.nix
-    ./neo-tree.nix
+    ./nvim-tree.nix
     ./lualine.nix
     ./telescope.nix
     ./noice.nix

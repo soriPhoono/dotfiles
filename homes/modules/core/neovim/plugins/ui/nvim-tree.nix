@@ -2,7 +2,7 @@
   programs.nixvim = {
     keymaps = [{
       key = "<leader>e";
-      action = "<cmd>Neotree toggle<CR>";
+      action = "<cmd>NvimTreeToggle<CR>";
       mode = [ "n" ];
       options = {
         desc = "Open/Close the file browser";
@@ -11,11 +11,12 @@
     }];
 
     plugins = {
-      neo-tree = {
+      nvim-tree = {
         enable = true;
 
-        autoCleanAfterSessionRestore = true;
-        closeIfLastWindow = true;
+        autoClose = true;
+        disableNetrw = true;
+        hijackCursor = true;
       };
     };
   };
