@@ -34,9 +34,6 @@
 
     # Development environment imports
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    neovim.url = "github:soriPhoono/nvim";
   };
 }

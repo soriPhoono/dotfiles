@@ -1,31 +1,32 @@
 { lib, pkgs, config, ... }:
 let cfg = config.core.shells;
 in {
-  imports =
-    [
-      ./dconf.nix
-      ./starship.nix
-      ./fastfetch.nix
-      ./nix-index.nix
-      ./git.nix
-      ./eza.nix
-      ./find.nix
-      ./yazi.nix
-      ./direnv.nix
-    ];
+  imports = [
+    ./dconf.nix
+    ./starship.nix
+    ./fastfetch.nix
+    ./nix-index.nix
+    ./git.nix
+    ./eza.nix
+    ./find.nix
+    ./yazi.nix
+    ./direnv.nix
+  ];
 
   options = {
-    core.shells = {
-      enable = lib.mkEnableOption "Enable shell integration";
-    };
+    core.shells = { enable = lib.mkEnableOption "Enable shell integration"; };
   };
 
   config = lib.mkIf cfg.enable {
-    home.shellAliases = with pkgs; {
-      cat = "${bat}/bin/bat";
-      df = "${duf}/bin/duf";
-      du = "${dua}/bin/dua";
-      top = "${btop}/bin/btop";
+    home = {
+      shellAliases = with pkgs; {
+        cat = "${bat}/bin/bat";
+        df = "${duf}/bin/duf";
+        du = "${dua}/bin/dua";
+        top = "${btop}/bin/btop";
+      };
+
+      packages = with pkgs; [ nvim-pkg ];
     };
 
     core.programs = {
