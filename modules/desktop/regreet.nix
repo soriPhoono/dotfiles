@@ -9,6 +9,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    desktop.greetd = {
+      enable = true;
+      command = with pkgs;
+        "${cage}/bin/cage -s -- ${greetd.regreet}/bin/regreet";
+    };
+
     programs.regreet = {
       enable = true;
 
