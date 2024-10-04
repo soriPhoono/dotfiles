@@ -7,6 +7,7 @@
     ./lualine.nix
     ./telescope.nix
     ./noice.nix
+    ./trouble.nix
   ];
 
   programs.nixvim.plugins = {

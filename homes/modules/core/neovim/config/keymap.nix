@@ -32,30 +32,5 @@
       mode = [ "n" ];
       options.desc = "Close current window";
     }
-
-    {
-      key = "<leader>dn";
-      action =
-        # lua
-        "function() vim.diagnostic.goto_next() end";
-      mode = [ "n" ];
-      options.desc = "Goto next diagnostic entry";
-    }
-    {
-      key = "<leader>dp";
-      action =
-        # lua
-        "function() vim.diagnostic.goto_prev() end";
-      mode = [ "n" ];
-      options.desc = "Goto previous diagnostic entry";
-    }
-    {
-      key = "<leader>de";
-      action =
-        # lua
-        "function() vim.diagnostic.open_float() end";
-      mode = [ "n" ];
-      options.desc = "Open current diagnostic message";
-    }
   ];
 }
