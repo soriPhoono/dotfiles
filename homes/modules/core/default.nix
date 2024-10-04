@@ -1,5 +1,5 @@
 { nixosConfig, ... }: {
-  imports = [ ./programs ./shells ./neovim ];
+  imports = [ ./programs ./shells ];
 
   xdg = {
     enable = true;
