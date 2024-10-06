@@ -23,7 +23,6 @@
   nixpkgs = {
     config = { allowUnfree = true; };
 
-    overlays =
-      [ (import ../../overlays/nerdfonts.nix) inputs.neovim.overlays.default ];
+    overlays = import ../../overlays { inherit inputs; };
   };
 }
