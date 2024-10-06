@@ -512,11 +512,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1728241076,
-        "narHash": "sha256-DO4WIuWz/prVXJ4Yy2p2tiB3BQMPMmOBKdjMmAhp+0c=",
+        "lastModified": 1728247860,
+        "narHash": "sha256-yDQfGsNZBHhq8L4vnYZgCGZLQy0NIQ1XTNi7/swOH0s=",
         "owner": "soriPhoono",
         "repo": "nvim",
-        "rev": "1ec5492e167ac4944b00e3ca3f9a0d1d24f78add",
+        "rev": "90db4464493fad1970afddfa940feac8f44fa551",
         "type": "github"
       },
       "original": {
@@ -710,11 +710,11 @@
         "tinted-tmux": "tinted-tmux"
       },
       "locked": {
-        "lastModified": 1727723275,
-        "narHash": "sha256-k4HrG8TJQ0RqDS1tlDz71kvWFBNQ7qZI9T5Z0qLR85Y=",
+        "lastModified": 1728242323,
+        "narHash": "sha256-GYGx9aK+PCseQO72u6eJc8LJxWhAm2p2+3WXJ42seE8=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "e7e97059776da7e34b739415a7bc8f80f606b803",
+        "rev": "39e5435c1da9ce50fe36deaf58bd2b94dd4d8249",
         "type": "github"
       },
       "original": {
