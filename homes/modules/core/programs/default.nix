@@ -14,7 +14,7 @@ in {
   ];
 
   options = {
-    core.shells = { enable = lib.mkEnableOption "Enable shell integration"; };
+    core.shells.enable = lib.mkEnableOption "Enable shell integration";
   };
 
   config = lib.mkIf cfg.enable {
