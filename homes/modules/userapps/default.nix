@@ -10,7 +10,7 @@ in {
       # General applications
       discord
       signal-desktop
-      
+
       # Office work
       onlyoffice-desktopeditors
       slack
