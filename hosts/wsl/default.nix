@@ -6,7 +6,7 @@
     defaultUser = "${username}";
   };
 
-  environment.systemPackages = with pkgs; [ nil nixpkgs-fmt wget ];
+  environment.systemPackages = with pkgs; [ nil wget ];
 
   programs.nix-ld = {
     enable = true;
