@@ -14,7 +14,5 @@ in {
 
       nix-direnv.enable = true;
     };
-
-    core.shells.fish.extraShellInit = "direnv hook fish | source";
   };
 }

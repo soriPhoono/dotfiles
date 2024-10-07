@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, pkgs, config, ... }:
 let cfg = config.core.programs.fastfetch;
 in {
   options = {
@@ -58,6 +58,6 @@ in {
       };
     };
 
-    core.shells.fish.extraShellInit = "fastfetch";
+    core.shells.fish.extraShellInit = "${pkgs.fastfetch}/bin/fastfetch";
   };
 }

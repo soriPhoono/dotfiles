@@ -18,7 +18,7 @@ in {
     programs.fish = {
       enable = nixosConfig.programs.fish.enable;
 
-      interactiveShellInit = ''
+      shellInitLast = ''
         set fish_greeting
       '' + cfg.extraShellInit;
     };

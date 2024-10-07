@@ -1,8 +1,6 @@
 { lib, pkgs, config, ... }:
 let cfg = config.desktop.regreet;
 in {
-  imports = [ ./greetd.nix ];
-
   options = {
     desktop.regreet.enable =
       lib.mkEnableOption "Enable regreet display manager";
