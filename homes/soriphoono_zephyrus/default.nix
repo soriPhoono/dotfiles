@@ -32,5 +32,7 @@
     };
   };
 
+  userapps.enable = true;
+
   themes.catppuccin.enable = true;
 }
