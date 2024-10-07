@@ -15,7 +15,13 @@
     openssh.enable = true;
   };
 
-  desktop.hyprland.enable = true;
+  desktop = {
+    boot.enable = true;
+    regreet.enable = true;
+    hyprland.enable = true;
+
+    programs.libvirtd.enable = true;
+  };
 
   laptop.enable = true;
 }

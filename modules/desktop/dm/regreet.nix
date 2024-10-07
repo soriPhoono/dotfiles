@@ -9,10 +9,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    desktop.greetd = {
+    services.greetd = {
       enable = true;
-      command = with pkgs;
-        "${cage}/bin/cage -s -- ${greetd.regreet}/bin/regreet";
+
+      settings.default_session = { 
+        command = with pkgs; "${cage}/bin/cage -s -- ${greetd.regreet}/bin/regreet";
+      };
     };
 
     programs.regreet = {
@@ -38,7 +40,7 @@ in {
           accents = "teal";
           variant = "mocha";
         };
-        name = "catppuccin-mocha-teal-standard+default";
+        name = "catppuccin-mocha-teal-standard";
       };
 
       settings = {

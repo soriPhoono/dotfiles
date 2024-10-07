@@ -1,8 +1,6 @@
 { inputs, lib, pkgs, config, ... }:
 let cfg = config.desktop.hyprland;
 in {
-  imports = [ ./regreet.nix ];
-
   options = {
     desktop.hyprland.enable = lib.mkEnableOption "Enable desktop support";
   };
@@ -14,12 +12,6 @@ in {
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       ];
-    };
-
-    desktop = {
-      enable = true;
-      boot.enable = true;
-      regreet.enable = true;
     };
 
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
@@ -37,5 +29,7 @@ in {
     };
 
     services.hypridle.enable = true;
+
+    desktop.enable = true;
   };
 }
