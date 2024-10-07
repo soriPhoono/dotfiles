@@ -1,4 +1,4 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 let cfg = config.laptop.droidcam;
 in {
   options = {

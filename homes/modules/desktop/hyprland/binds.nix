@@ -56,7 +56,8 @@ let
       notify-send Changed volume to "$current"
     '';
   };
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     "$mod" = "SUPER";
 
@@ -96,12 +97,13 @@ in {
         "$mod, A, exec, ${fuzzel}/bin/fuzzel"
         "$mod, E, exec, ${xfce.thunar}/bin/thunar"
         "$mod, B, exec, ${firefox}/bin/firefox"
-      ] ++ (builtins.concatLists (builtins.genList (x:
-        let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
-        in [
-          "$mod, ${ws}, workspace, ${toString (x + 1)}"
-          "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-        ]) 10));
+      ] ++ (builtins.concatLists (builtins.genList
+        (x:
+          let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
+          in [
+            "$mod, ${ws}, workspace, ${toString (x + 1)}"
+            "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+          ]) 10));
 
     binde = with pkgs; [
       ", XF86AudioLowerVolume, exec, ${volumeScript}/bin/volume.sh lower 5"
