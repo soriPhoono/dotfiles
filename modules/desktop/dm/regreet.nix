@@ -10,7 +10,7 @@ in {
     services.greetd = {
       enable = true;
 
-      settings.default_session = { 
+      settings.default_session = {
         command = with pkgs; "${cage}/bin/cage -s -- ${greetd.regreet}/bin/regreet";
       };
     };
