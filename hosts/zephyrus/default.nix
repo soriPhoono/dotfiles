@@ -9,7 +9,6 @@
     hardware = {
       bluetooth.enable = true;
       logitech.enable = true;
-      graphics.enable = true;
       xbox_controller.enable = true;
     };
 

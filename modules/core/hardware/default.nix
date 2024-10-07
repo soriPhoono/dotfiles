@@ -1,4 +1,4 @@
 {
   imports =
-    [ ./bluetooth.nix ./logitech.nix ./graphics.nix  ./xbox.nix ];
+    [ ./bluetooth.nix ./logitech.nix ./xbox.nix ];
 }

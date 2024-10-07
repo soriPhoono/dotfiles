@@ -6,5 +6,5 @@ in {
       lib.mkEnableOption "Enable Xbox controller support";
   };
 
-  config = lib.mkIf cfg.enable { hardware = { xone.enable = true; }; };
+  config = lib.mkIf cfg.enable { hardware.xone.enable = true; };
 }
