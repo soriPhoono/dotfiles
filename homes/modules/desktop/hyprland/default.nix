@@ -23,7 +23,6 @@ in {
         firefox.enable = true;
         fuzzel.enable = true;
         hyprlock.enable = true;
-        waybar.enable = true;
         wlogout.enable = true;
       };
       services = {
