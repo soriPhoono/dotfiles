@@ -6,7 +6,8 @@ let
     "class:(ONLYOFFICE Desktop Editors)"
     "class:(steam)"
   ];
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     bezier = [
       "easeInOut, 0.65, 0, 0.35, 1"
@@ -26,6 +27,6 @@ in {
 
     windowrulev2 = [
       "opacity 1, class:(gamescope)"
-    ] ++ builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ ["size 80%, ${v}"]) floatingWindows;
+    ] ++ builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ]) floatingWindows;
   };
 }

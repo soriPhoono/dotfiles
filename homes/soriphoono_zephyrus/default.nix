@@ -33,6 +33,7 @@
   };
 
   userapps.enable = true;
+  userapps.steam.enable = true;
 
   themes.catppuccin.enable = true;
 }
