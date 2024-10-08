@@ -5,7 +5,7 @@ in {
     userapps.enable = lib.mkEnableOption "Enable office programs";
   };
 
-  office = pkgs.lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # General applications
       discord
