@@ -2,15 +2,12 @@ let
   floatingWindows = [
     "class:(thunar)"
     "class:(gnome-disks)"
+    "class:(virt-manager), title:(Virtual Machine Manager)"
     "class:(ONLYOFFICE Desktop Editors)"
     "class:(steam)"
   ];
-
-  windowrulev2 = builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ ["size 80%, ${v}"]) floatingWindows;
 in {
   wayland.windowManager.hyprland.settings = {
-    inherit windowrulev2;
-
     bezier = [
       "easeInOut, 0.65, 0, 0.35, 1"
       "easeIn, 0.32, 0, 0.67, 0"
@@ -26,5 +23,9 @@ in {
 
       "workspaces, 1, 4, easeInOut, "
     ];
+
+    windowrulev2 = [
+      "opacity 1, class:(gamescope)"
+    ] ++ builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ ["size 80%, ${v}"]) floatingWindows;
   };
 }
