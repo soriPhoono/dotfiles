@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 let cfg = config.desktop.hyprland;
 in {
   options = {
@@ -19,12 +19,7 @@ in {
     security.polkit.enable = true;
 
     programs = {
-      hyprland = {
-        enable = true;
-        package =
-          inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      };
-
+      hyprland.enable = true;
       hyprlock.enable = true;
     };
 
