@@ -41,15 +41,6 @@
         systemModules = [ ./wsl ];
       };
 
-      vbox = mkHost {
-        hostname = "vbox";
-        username = "soriphoono";
-
-        systemModules = [
-          ./vbox
-        ];
-      };
-
       zephyrus = mkHost {
         hostname = "zephyrus";
         username = "soriphoono";
