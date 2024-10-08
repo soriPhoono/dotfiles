@@ -373,11 +373,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1728422160,
-        "narHash": "sha256-y8eXiEaKxIM18YI17u3xzJDAYmvdE23Zo3ekFrs203E=",
+        "lastModified": 1728423385,
+        "narHash": "sha256-9F5oR2DkYjOdCsqzWp1SPdi8kkzg7WQmYfiz+ap+cC0=",
         "owner": "soriPhoono",
         "repo": "nvim",
-        "rev": "194a19e6ab09788d0dceeb04debaa7342379b0c0",
+        "rev": "14c59d950e311d38d8009a200edd87c2f9fc6131",
         "type": "github"
       },
       "original": {
