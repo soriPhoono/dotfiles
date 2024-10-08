@@ -1,4 +1,10 @@
-{
+let
+  floatingClasses = [
+    "thunar"
+  ];
+
+  windowRules = builtins.map (v: "float, class:(${v})") floatingClasses;
+in {
   wayland.windowManager.hyprland.settings = {
     bezier = [
       "easeInOut, 0.65, 0, 0.35, 1"
@@ -15,5 +21,7 @@
 
       "workspaces, 1, 4, easeInOut, "
     ];
+
+    windowrulev2 = windowRules;
   };
 }
