@@ -3,8 +3,7 @@ let
     "class:(thunar)"
     "class:(gnome-disks)"
     "class:(ONLYOFFICE Desktop Editors)"
-    "class:(steam), title:(Friends List)"
-    "class:(steam), title:(Steam Settings)"
+    "class:(steam)"
   ];
 
   windowrulev2 = builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ ["size 80%, ${v}"]) floatingWindows;
