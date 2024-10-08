@@ -1,5 +1,17 @@
-{
+let
+  floatingWindows = [
+    "class:(thunar)"
+    "class:(gnome-disks)"
+    "class:(ONLYOFFICE Desktop Editors)"
+    "class:(steam), title:(Friends List)"
+    "class:(steam), title:(Steam Settings)"
+  ];
+
+  windowrulev2 = builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ ["size 80%, ${v}"]) floatingWindows;
+in {
   wayland.windowManager.hyprland.settings = {
+    inherit windowrulev2;
+
     bezier = [
       "easeInOut, 0.65, 0, 0.35, 1"
       "easeIn, 0.32, 0, 0.67, 0"
@@ -14,20 +26,6 @@
       "fade, 1, 4, easeInOut, "
 
       "workspaces, 1, 4, easeInOut, "
-    ];
-
-    windowrulev2 = [
-      "float, class:(thunar)"
-      "center, class:(thunar)"
-      "size 80%, class:(thunar)"
-
-      "float, class:(gnome-disks)"
-      "center, class:(gnome-disks)"
-      "size 80%, class:(gnome-disks)"
-    
-      "float, class:(steam), title:(Friends List)"
-      "center, class:(steam), title:(Friends List)"
-      "size 80%, class:(steam), title:(Friends List)"
     ];
   };
 }
