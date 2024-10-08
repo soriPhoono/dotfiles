@@ -3,8 +3,6 @@
     ./hardware-configuration.nix
   ];
 
-  virtualization.virtualbox.guest.enable = true;
-
   core = {
     hardware = {
       bluetooth.enable = true;
@@ -23,5 +21,5 @@
     programs.libvirtd.enable = true;
   };
 
-  laptop.enable = true;
+  laptop.droidcam.enable = true;
 }
