@@ -17,10 +17,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      packages = with pkgs; [
-        # CLI apps
-        nvtopPackages.full
+      shellAliases = with pkgs; {
+        nvtop = "${nvtopPackages.full}/bin/nvtop";
+      };
 
+      packages = with pkgs; [
         # Desktop system level apps
         gnome-disk-utility
 

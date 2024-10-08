@@ -23,5 +23,5 @@
     programs.libvirtd.enable = true;
   };
 
-  laptop.enable = true;
+  laptop.droidcam.enable = true;
 }
