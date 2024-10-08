@@ -33,7 +33,7 @@
   };
 
   userapps.enable = true;
-  userapps.steam.enable = true;
+  userapps.gaming.enable = true;
 
   themes.catppuccin.enable = true;
 }
