@@ -7,7 +7,18 @@
 
       imports = [ ./hosts ./modules ./homes/modules ];
 
-      perSystem = { pkgs, ... }: { formatter = pkgs.nixpkgs-fmt; };
+      perSystem = { pkgs, ... }: { 
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [
+            nil
+            nixpkgs-fmt
+          ];
+
+          shellHook = ''
+            echo "Project - dotfiles"
+          '';
+        };
+      };
     };
 
   inputs = {
