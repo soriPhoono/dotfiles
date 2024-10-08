@@ -1,10 +1,4 @@
-let
-  floatingClasses = [
-    "thunar"
-  ];
-
-  windowRules = builtins.map (v: "float, class:(${v})") floatingClasses;
-in {
+{
   wayland.windowManager.hyprland.settings = {
     bezier = [
       "easeInOut, 0.65, 0, 0.35, 1"
@@ -22,6 +16,18 @@ in {
       "workspaces, 1, 4, easeInOut, "
     ];
 
-    windowrulev2 = windowRules;
+    windowrulev2 = [
+      "float, class:(thunar)"
+      "center, class:(thunar)"
+      "size 80%, class:(thunar)"
+
+      "float, class:(gnome-disks)"
+      "center, class:(gnome-disks)"
+      "size 80%, class:(gnome-disks)"
+    
+      "float, class:(steam), title:(Friends List)"
+      "center, class:(steam), title:(Friends List)"
+      "size 80%, class:(steam), title:(Friends List)"
+    ];
   };
 }

@@ -1,7 +1,7 @@
 { inputs, lib, pkgs, config, ... }:
 let cfg = config.desktop.hyprland;
 in {
-  imports = [ ./animations.nix ./autostart.nix ./binds.nix ./general.nix ];
+  imports = [ ./rules.nix ./autostart.nix ./binds.nix ./general.nix ];
 
   options = {
     desktop.hyprland = {
