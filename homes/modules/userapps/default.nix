@@ -1,6 +1,10 @@
 { lib, pkgs, config, ... }:
 let cfg = config.userapps;
 in {
+  imports = [
+    ./gaming.nix
+  ];
+
   options = {
     userapps.enable = lib.mkEnableOption "Enable office programs";
   };
@@ -14,12 +18,6 @@ in {
       # Office work
       onlyoffice-desktopeditors
       slack
-
-      # Gaming applications
-      steam
-      protontricks
-      gamemode
-      gamescope
     ];
   };
 }
