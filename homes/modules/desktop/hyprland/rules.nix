@@ -5,6 +5,7 @@ let
     "class:(virt-manager), title:(Virtual Machine Manager)"
     "class:(ONLYOFFICE Desktop Editors)"
     "class:(steam)"
+    "class:(discord)"
   ];
 in
 {

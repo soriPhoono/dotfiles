@@ -95,7 +95,7 @@ in
           };
 
           "custom/separator" = {
-            format = " | ";
+            format = "|";
 
             tooltip = false;
           };
@@ -184,6 +184,11 @@ in
             format = "<span color='#fab387'>󰥔</span> {:%H:%M %p}";
 
             tooltip = false;
+          };
+
+          tray = {
+            icon-size = 21;
+            spacing = 10;
           };
         };
       };
