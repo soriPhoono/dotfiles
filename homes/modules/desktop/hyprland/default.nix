@@ -1,4 +1,4 @@
-{ inputs, lib, pkgs, config, ... }:
+{ lib, config, ... }:
 let cfg = config.desktop.hyprland;
 in {
   imports = [ ./rules.nix ./autostart.nix ./binds.nix ./general.nix ];
@@ -37,8 +37,6 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
-      package =
-        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 
       systemd.variables = [ "--all" ];
 

@@ -1,7 +1,7 @@
 {
   description = "Personal dotfiles for NixOS";
 
-  outputs = { nixpkgs, flake-parts, ... }@inputs:
+  outputs = { flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
@@ -10,7 +10,7 @@
       perSystem = { pkgs, ... }: { 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
-            nil
+            nixd
             nixpkgs-fmt
           ];
 
@@ -40,7 +40,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     ags.url = "github:Aylur/ags";
     stylix.url = "github:danth/stylix";
 
