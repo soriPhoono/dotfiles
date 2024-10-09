@@ -2,7 +2,7 @@ const entry = `${App.configDir}/ts/main.ts`
 const output = `/tmp/ags/js`
 
 try {
-    await Utils.execAsync([
+    await Utils.exec([
         'esbuild', '--bundle', entry,
         '--format=esm',
         `--outfile=${output}/main.js`,
