@@ -47,6 +47,7 @@ in {
           "HYPRCURSOR_SIZE,24"
           "XCURSOR_SIZE,24"
 
+          "NIXOS_OZONE_WL,1"
           "GDK_BACKEND,wayland,x11,*"
           "QT_QPA_PLATFORM,wayland;xcb"
           "SDL_VIDEODRIVER,wayland"
