@@ -51,5 +51,9 @@
 
     ags.url = "github:Aylur/ags";
     stylix.url = "github:danth/stylix";
+
+    # Developer environment imports
+
+    neovim.url = "github:soriPhoono/nvim";
   };
 }

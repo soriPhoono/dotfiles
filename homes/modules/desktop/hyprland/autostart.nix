@@ -5,6 +5,6 @@
 
     exec = with pkgs; [
       "${ags}/bin/ags"
-    ]
+    ];
   };
 }
