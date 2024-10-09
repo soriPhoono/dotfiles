@@ -24,7 +24,6 @@ in {
         df = "${duf}/bin/duf";
         du = "${dua}/bin/dua";
         top = "${btop}/bin/btop";
-        v = "${nvim-pkg}/bin/nvim";
       };
     };
 

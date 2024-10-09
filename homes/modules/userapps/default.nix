@@ -12,7 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # General applications
-      logseq
+      obsidian
       discord
       signal-desktop
 
