@@ -7,7 +7,9 @@
 
       imports = [ ./hosts ./modules ./homes/modules ];
 
-      perSystem = { pkgs, ... }: { 
+      perSystem = { pkgs, ... }: {
+        formatter = pkgs.nixpkgs-fmt;
+
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nixd

@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }: 
+{ lib, pkgs, config, ... }:
 let cfg = config.desktop.programs.vscode;
 in {
   options = {
@@ -16,7 +16,7 @@ in {
         catppuccin.catppuccin-vsc-icons
 
         github.copilot
-        
+
         ms-vscode-remote.remote-ssh
         ms-vscode-remote.remote-ssh-edit
 
@@ -64,6 +64,31 @@ in {
         redhat.vscode-yaml
         tamasfe.even-better-toml
       ];
+
+      userSettings = {
+        "window.titleBarStyle" = "custom";
+        "window.dialogStyle" = "custom";
+        "window.menuBarVisibility" = "compact";
+        "workbench.colorTheme" = "Stylix";
+        "workbench.iconTheme" = "catppuccin-mocha";
+        "files.autoSave" = "onFocusChange";
+        "editor.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
+        "editor.formatOnPaste" = true;
+        "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
+        "git.autofetch" = true;
+        "git.confirmSync" = false;
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = "nixd";
+        "nix.serverSettings" = {
+          "nil" = {
+            "formatting" = {
+              "command" = [
+                "nixpkgs-fmt"
+              ];
+            };
+          };
+        };
+      };
     };
   };
 }
