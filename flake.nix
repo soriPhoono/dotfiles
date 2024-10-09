@@ -11,6 +11,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nixd
+
             nixpkgs-fmt
           ];
 
@@ -41,9 +42,5 @@
     };
 
     stylix.url = "github:danth/stylix";
-
-    # Development environment imports
-
-    neovim.url = "github:soriPhoono/nvim";
   };
 }

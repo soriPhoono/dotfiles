@@ -1,18 +1,17 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.regreet;
+let cfg = config.desktop.dm.regreet;
 in {
   options = {
-    desktop.regreet.enable =
+    desktop.dm.regreet.enable =
       lib.mkEnableOption "Enable regreet display manager";
   };
 
   config = lib.mkIf cfg.enable {
     services.greetd = {
       enable = true;
-
-      settings.default_session = {
-        command = with pkgs; "${cage}/bin/cage -s -- ${greetd.regreet}/bin/regreet";
-      };
+      # settings.default_session = {
+      #   command = with pkgs; "${cage}/bin/cage -s -- ${greetd.regreet}/bin/regreet";
+      # };
     };
 
     programs.regreet = {

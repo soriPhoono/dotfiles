@@ -6,19 +6,14 @@
   ];
 
   core = {
-    hardware = {
-      bluetooth.enable = true;
-      logitech.enable = true;
-      xbox_controller.enable = true;
-    };
-
+    hardware.enable = true;
     openssh.enable = true;
   };
 
   desktop = {
     boot.enable = true;
-    regreet.enable = true;
-    hyprland.enable = true;
+    dm.regreet.enable = true;
+    wm.hyprland.enable = true;
 
     programs.libvirtd.enable = true;
   };
