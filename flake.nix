@@ -15,6 +15,10 @@
             nixd
             nixfmt
 
+            nodejs_20
+            typescript
+            typescript-language-server
+
             ags
             esbuild
           ];
