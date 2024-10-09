@@ -6,7 +6,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    homes.packages = with pkgs; [
+    home.packages = with pkgs; [
       # Office work
       onlyoffice-desktopeditors
       slack

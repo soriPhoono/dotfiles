@@ -32,11 +32,6 @@
         ];
       };
     };
-
-    programs = {
-      firefox.enable = true;
-      vscode.enable = true;
-    };
   };
 
   userapps.enable = true;
