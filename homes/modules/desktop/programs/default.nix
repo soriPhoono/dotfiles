@@ -6,6 +6,7 @@ in {
     ./firefox.nix
     ./fuzzel.nix
     ./hyprlock.nix
+    ./vscode.nix
     ./waybar.nix
     ./wlogout.nix
   ];
