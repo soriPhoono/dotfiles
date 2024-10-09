@@ -20,7 +20,6 @@ in {
       programs = {
         enable = true;
         alacritty.enable = true;
-        firefox.enable = true;
         fuzzel.enable = true;
         hyprlock.enable = true;
         waybar.enable = true;
