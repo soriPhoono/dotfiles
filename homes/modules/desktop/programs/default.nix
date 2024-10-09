@@ -4,7 +4,6 @@ in {
   imports = [
     ./ags.nix
     ./alacritty.nix
-    ./firefox.nix
     ./fuzzel.nix
     ./hyprlock.nix
     ./wlogout.nix

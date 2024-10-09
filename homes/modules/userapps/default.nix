@@ -2,6 +2,8 @@
 let cfg = config.userapps;
 in {
   imports = [
+    ./office.nix
+    ./development.nix
     ./gaming.nix
   ];
 
@@ -12,13 +14,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # General applications
-      logseq
       discord
       signal-desktop
-
-      # Office work
-      onlyoffice-desktopeditors
-      slack
     ];
   };
 }

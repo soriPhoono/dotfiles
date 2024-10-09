@@ -7,11 +7,14 @@
 
       imports = [ ./hosts ./modules ./homes/modules ];
 
-      perSystem = { pkgs, ... }: { 
+      perSystem = { pkgs, ... }: {
+        formatter = pkgs.nixfmt;
+
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nixd
-            nixpkgs-fmt
+
+            nixfmt
           ];
 
           shellHook = ''
@@ -42,9 +45,5 @@
 
     ags.url = "github:Aylur/ags";
     stylix.url = "github:danth/stylix";
-
-    # Development environment imports
-
-    neovim.url = "github:soriPhoono/nvim";
   };
 }

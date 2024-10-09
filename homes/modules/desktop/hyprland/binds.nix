@@ -97,6 +97,8 @@ in
         "$mod, A, exec, ${fuzzel}/bin/fuzzel"
         "$mod, E, exec, ${xfce.thunar}/bin/thunar"
         "$mod, B, exec, ${firefox}/bin/firefox"
+        "$mod, C, exec, ${vscode}/bin/code"
+        "$mod, N, exec, ${obsidian}/bin/obsidian"
       ] ++ (builtins.concatLists (builtins.genList
         (x:
           let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));

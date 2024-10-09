@@ -6,6 +6,7 @@ let
     "class:(ONLYOFFICE Desktop Editors)"
     "class:(steam)"
     "class:(discord)"
+    "class:(code), title:(Open Folder)"
   ];
 in
 {
@@ -26,8 +27,6 @@ in
       "workspaces, 1, 4, easeInOut, "
     ];
 
-    windowrulev2 = [
-      "opacity 1, class:(gamescope)"
-    ] ++ builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ]) floatingWindows;
+    windowrulev2 = builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ]) floatingWindows;
   };
 }

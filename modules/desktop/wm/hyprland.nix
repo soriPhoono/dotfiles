@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.hyprland;
+let cfg = config.desktop.wm.hyprland;
 in {
   options = {
-    desktop.hyprland.enable = lib.mkEnableOption "Enable desktop support";
+    desktop.wm.hyprland.enable = lib.mkEnableOption "Enable desktop support";
   };
 
   config = lib.mkIf cfg.enable {

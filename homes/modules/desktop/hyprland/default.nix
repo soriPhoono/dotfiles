@@ -20,7 +20,6 @@ in {
       programs = {
         enable = true;
         alacritty.enable = true;
-        firefox.enable = true;
         fuzzel.enable = true;
         hyprlock.enable = true;
         wlogout.enable = true;
@@ -47,6 +46,7 @@ in {
           "HYPRCURSOR_SIZE,24"
           "XCURSOR_SIZE,24"
 
+          "NIXOS_OZONE_WL,1"
           "GDK_BACKEND,wayland,x11,*"
           "QT_QPA_PLATFORM,wayland;xcb"
           "SDL_VIDEODRIVER,wayland"
