@@ -8,13 +8,13 @@
       imports = [ ./hosts ./modules ./homes/modules ];
 
       perSystem = { pkgs, ... }: {
-        formatter = pkgs.nixpkgs-fmt;
+        formatter = pkgs.nixfmt;
 
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nixd
 
-            nixpkgs-fmt
+            nixfmt
           ];
 
           shellHook = ''

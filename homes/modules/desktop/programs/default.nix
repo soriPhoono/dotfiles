@@ -3,10 +3,8 @@ let cfg = config.desktop.programs;
 in {
   imports = [
     ./alacritty.nix
-    ./firefox.nix
     ./fuzzel.nix
     ./hyprlock.nix
-    ./vscode.nix
     ./waybar.nix
     ./wlogout.nix
   ];

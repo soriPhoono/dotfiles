@@ -1,11 +1,15 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.programs.vscode;
+let cfg = config.userapps.development;
 in {
   options = {
-    desktop.programs.vscode.enable = lib.mkEnableOption "Enable vscode editor support";
+    userapps.development.enable = lib.mkEnableOption "Enable development environment support";
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      obsidian
+    ];
+
     programs.vscode = {
       enable = true;
 

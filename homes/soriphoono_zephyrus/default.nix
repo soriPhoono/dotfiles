@@ -41,6 +41,8 @@
 
   userapps.enable = true;
   userapps.gaming.enable = true;
+  userapps.office.enable = true;
+  userapps.development.enable = true;
 
   themes.catppuccin.enable = true;
 }
