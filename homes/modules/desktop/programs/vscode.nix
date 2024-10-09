@@ -44,7 +44,6 @@ in {
         ms-python.python
         ms-python.debugpy
         ms-python.vscode-pylance
-        matangover.mypy
         ms-python.isort
         wholroyd.jinja
         batisteo.vscode-django
@@ -58,7 +57,6 @@ in {
         dart-code.flutter
 
         # Misc
-        dotjoshjohnson.xml
         redhat.vscode-yaml
         tamasfe.even-better-toml
       ];
