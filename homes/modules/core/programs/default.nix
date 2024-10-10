@@ -2,7 +2,6 @@
 let cfg = config.core.shells;
 in {
   imports = [
-    ./dconf.nix
     ./starship.nix
     ./fastfetch.nix
     ./nix-index.nix

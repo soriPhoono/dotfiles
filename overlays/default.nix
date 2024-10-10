@@ -1,1 +1,4 @@
-[ (import ./nerdfonts.nix) (import ./discord.nix) ]
+{ inputs, ... }: [
+  (import ./nerdfonts.nix)
+  (import ./discord.nix)
+]
