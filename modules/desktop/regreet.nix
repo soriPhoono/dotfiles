@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.dm.regreet;
+let cfg = config.desktop.regreet;
 in {
   options = {
-    desktop.dm.regreet.enable =
+    desktop.regreet.enable =
       lib.mkEnableOption "Enable regreet display manager";
   };
 
