@@ -15,8 +15,8 @@
     };
 
     input = {
-      repeat_rate = 20;
-      repeat_delay = 300;
+      repeat_rate = 30;
+      repeat_delay = 200;
 
       accel_profile = "flat";
 
