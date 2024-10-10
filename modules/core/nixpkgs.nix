@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
   nix = {
     package = pkgs.nixVersions.latest;
 
@@ -23,6 +23,6 @@
   nixpkgs = {
     config = { allowUnfree = true; };
 
-    overlays = import ../../overlays;
+    overlays = import ../../overlays { inherit inputs; };
   };
 }
