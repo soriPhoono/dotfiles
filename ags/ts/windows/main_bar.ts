@@ -34,7 +34,7 @@ const right_widgets = () => Widget.Box({
 
 export default (monitor: number = 0) => Widget.Window({
   name: `bar-${monitor}`,
-  class_name: 'main_bar',
+  // class_name: 'main_bar',
   monitor,
   anchor: ['top', 'left', 'right'],
   exclusivity: 'exclusive',

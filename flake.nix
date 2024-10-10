@@ -16,6 +16,7 @@
             nixfmt
 
             ags
+            sass
             esbuild
           ];
 
