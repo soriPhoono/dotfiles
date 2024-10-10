@@ -12,10 +12,8 @@
 
   desktop = {
     boot.enable = true;
-    dm.regreet.enable = true;
-    wm.hyprland.enable = true;
-
-    programs.libvirtd.enable = true;
+    regreet.enable = true;
+    hyprland.enable = true;
   };
 
   laptop.droidcam.enable = true;
