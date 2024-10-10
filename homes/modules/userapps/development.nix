@@ -2,13 +2,12 @@
 let cfg = config.userapps.development;
 in {
   options = {
-    userapps.development.enable = lib.mkEnableOption "Enable development environment support";
+    userapps.development.enable =
+      lib.mkEnableOption "Enable development environment support";
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      obsidian
-    ];
+    home.packages = with pkgs; [ obsidian ];
 
     programs.vscode = {
       enable = true;
@@ -80,13 +79,7 @@ in {
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
         "nix.serverSettings" = {
-          "nil" = {
-            "formatting" = {
-              "command" = [
-                "nixpkgs-fmt"
-              ];
-            };
-          };
+          "nil" = { "formatting" = { "command" = [ "nixpkgs-fmt" ]; }; };
         };
       };
     };

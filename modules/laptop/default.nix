@@ -1,3 +1,1 @@
-{
-  imports = [ ./droidcam.nix ];
-}
+{ imports = [ ./droidcam.nix ]; }

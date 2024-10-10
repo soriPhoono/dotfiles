@@ -1,13 +1,8 @@
 { lib, pkgs, config, ... }:
 let cfg = config.desktop.programs;
 in {
-  imports = [
-    ./alacritty.nix
-    ./fuzzel.nix
-    ./hyprlock.nix
-    ./waybar.nix
-    ./wlogout.nix
-  ];
+  imports =
+    [ ./alacritty.nix ./fuzzel.nix ./hyprlock.nix ./waybar.nix ./wlogout.nix ];
 
   options = {
     desktop.programs.enable =
@@ -16,14 +11,13 @@ in {
 
   config = lib.mkIf cfg.enable {
     home = {
-      shellAliases = with pkgs; {
-        nvtop = "${nvtopPackages.full}/bin/nvtop";
-      };
+      shellAliases = with pkgs; { nvtop = "${nvtopPackages.full}/bin/nvtop"; };
 
-      packages = with pkgs; [
-        # Desktop system level apps
-        gnome-disk-utility
-      ];
+      packages = with pkgs;
+        [
+          # Desktop system level apps
+          gnome-disk-utility
+        ];
     };
   };
 }

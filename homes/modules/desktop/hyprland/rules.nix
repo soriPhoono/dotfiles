@@ -8,8 +8,7 @@ let
     "class:(discord)"
     "class:(code), title:(Open Folder)"
   ];
-in
-{
+in {
   wayland.windowManager.hyprland.settings = {
     bezier = [
       "easeInOut, 0.65, 0, 0.35, 1"
@@ -27,6 +26,8 @@ in
       "workspaces, 1, 4, easeInOut, "
     ];
 
-    windowrulev2 = builtins.concatMap (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ]) floatingWindows;
+    windowrulev2 = builtins.concatMap
+      (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ])
+      floatingWindows;
   };
 }

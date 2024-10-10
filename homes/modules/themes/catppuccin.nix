@@ -44,17 +44,15 @@ in {
           name = "Noto Color Emoji";
         };
 
-        sizes =
-          let
-            default_font = 14;
-            focus_font = 16;
-          in
-          {
-            applications = focus_font;
-            desktop = focus_font;
-            popups = default_font;
-            terminal = focus_font;
-          };
+        sizes = let
+          default_font = 14;
+          focus_font = 16;
+        in {
+          applications = focus_font;
+          desktop = focus_font;
+          popups = default_font;
+          terminal = focus_font;
+        };
       };
     };
   };
