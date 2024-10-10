@@ -1,8 +1,6 @@
-{ inputs, ... }: {
-  imports = with inputs; [
+{
+  imports = [
     ./hardware-configuration.nix
-
-    nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
 
   core = {
@@ -15,6 +13,4 @@
     regreet.enable = true;
     hyprland.enable = true;
   };
-
-  laptop.droidcam.enable = true;
 }

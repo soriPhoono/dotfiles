@@ -1,8 +1,7 @@
 { lib, config, ... }:
 let cfg = config.core.hardware;
 in {
-  imports =
-    [ ./bluetooth.nix ./logitech.nix ./xbox.nix ];
+  imports = [ ./bluetooth.nix ./logitech.nix ./xbox.nix ];
 
   options = {
     core.hardware.enable = lib.mkEnableOption "Enable all hardware modules";

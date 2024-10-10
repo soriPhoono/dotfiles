@@ -1,8 +1,4 @@
 final: prev: {
-  nerdfonts = prev.nerdfonts.override {
-    fonts = [
-      "AurulentSansMono"
-      "JetBrainsMono"
-    ];
-  };
+  nerdfonts =
+    prev.nerdfonts.override { fonts = [ "AurulentSansMono" "JetBrainsMono" ]; };
 }

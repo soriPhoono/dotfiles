@@ -28,8 +28,10 @@ in {
         hypridle.enable = true;
         mako = {
           enable = true;
-          rounding = config.wayland.windowManager.hyprland.settings.decoration.rounding;
-          border_size = config.wayland.windowManager.hyprland.settings.general.border_size;
+          rounding =
+            config.wayland.windowManager.hyprland.settings.decoration.rounding;
+          border_size =
+            config.wayland.windowManager.hyprland.settings.general.border_size;
         };
       };
     };
