@@ -44,5 +44,8 @@
     };
 
     stylix.url = "github:danth/stylix";
+
+    # Developer environment imports
+    neovim.url = "github:soriPhoono/nvim";
   };
 }
