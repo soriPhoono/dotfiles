@@ -7,8 +7,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      # Office work
+      # Office
       onlyoffice-desktopeditors
+      
+      # Work
       slack
     ];
 

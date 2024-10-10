@@ -47,5 +47,14 @@
 
         systemModules = [ ./zephyrus ];
       };
+
+      desktop = mkHost {
+        hostname = "desktop";
+        username = "soriphoono";
+
+        systemModules = [
+          ./desktop
+        ];
+      };
     };
 }
