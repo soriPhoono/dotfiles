@@ -2,16 +2,21 @@ const entry = `${App.configDir}/ts/main.ts`
 const output = `/tmp/ags/js`
 
 try {
-    await Utils.exec([
-        'esbuild', '--bundle', entry,
-        '--format=esm',
-        `--outfile=${output}/main.js`,
-        '--external:resource://*',
-        '--external:gi://*',
-        '--external:file://*',
-    ])
+  Utils.exec([
+    'sass', `${App.configDir}/style/main.scss`,
+    `${output}/style.css`
+  ])
 
-    await import(`file://${output}/main.js`)
+  Utils.exec([
+    'esbuild', '--bundle', entry,
+    '--format=esm',
+    `--outfile=${output}/main.js`,
+    '--external:resource://*',
+    '--external:gi://*',
+    '--external:file://*',
+  ])
+
+  await import(`file://${output}/main.js`)
 } catch (error) {
-    console.error(error)
+  console.error(error)
 }

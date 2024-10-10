@@ -1,10 +1,9 @@
-const Bar = () => Widget.Window({
-    name: 'Bar',
-    child: Widget.Label("Bar")
-})
+import main_bar from "ts/windows/main_bar"
 
 App.config({
-    windows: [
-        Bar()
-    ]
+  style: '/tmp/ags/js/style.css',
+
+  windows: [
+    main_bar()
+  ]
 })
