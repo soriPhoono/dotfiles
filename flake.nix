@@ -5,7 +5,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = [ ./hosts ./modules ./homes/modules ];
+      imports = [ ./hosts ./modules/nixos ./modules/homes ];
 
       perSystem = { pkgs, ... }: {
         formatter = pkgs.nixfmt;
@@ -14,7 +14,7 @@
           packages = with pkgs; [
             nixd
 
-            nixfmt
+            nixpkgs-fmt
           ];
 
           shellHook = ''

@@ -1,7 +1,7 @@
 { lib, config, username, ... }:
 let cfg = config.desktop;
 in {
-  imports = [ ./boot.nix ./regreet.nix ./hyprland.nix ./steam.nix ];
+  imports = [ ./boot.nix ./regreet.nix ./hyprland.nix ./thunar.nix ./steam.nix ];
 
   options = { desktop.enable = lib.mkEnableOption "Enable desktop support"; };
 

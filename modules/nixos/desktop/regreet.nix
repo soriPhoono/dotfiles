@@ -9,9 +9,6 @@ in {
   config = lib.mkIf cfg.enable {
     services.greetd = {
       enable = true;
-      # settings.default_session = {
-      #   command = with pkgs; "${cage}/bin/cage -s -- ${greetd.regreet}/bin/regreet";
-      # };
     };
 
     programs.regreet = {
@@ -42,7 +39,7 @@ in {
 
       settings = {
         background = {
-          path = ../../assets/catppuccin-mountain.jpg;
+          path = ../../../assets/catppuccin-mountain.jpg;
           fit = "Contain";
         };
       };

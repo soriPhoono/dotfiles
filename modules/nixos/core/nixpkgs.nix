@@ -23,6 +23,6 @@
   nixpkgs = {
     config = { allowUnfree = true; };
 
-    overlays = import ../../overlays { inherit inputs; };
+    overlays = import ../../../overlays { inherit inputs; };
   };
 }
