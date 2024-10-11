@@ -15,4 +15,9 @@
   };
 
   boot.kernelParams = [ "i915.force_probe=a780" ];
+
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-media-driver
+    libvdpau-va-gl
+  ];
 }
