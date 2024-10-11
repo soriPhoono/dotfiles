@@ -11,10 +11,7 @@ in {
         enable = true;
         extest.enable = true;
         package = pkgs.steam.override {
-          extraPkgs = pkgs: with pkgs; [
-            libkrb5
-            keyutils
-          ];
+          extraPkgs = pkgs: with pkgs; [ libkrb5 keyutils ];
         };
 
         protontricks.enable = true;

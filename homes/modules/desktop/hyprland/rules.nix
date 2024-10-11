@@ -28,8 +28,7 @@ in {
 
     windowrulev2 = builtins.concatMap
       (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ])
-      floatingWindows ++ [
-      "workspace 1, class:(gamescope)"
-    ];
+      floatingWindows
+      ++ [ "workspace 1, class:(gamescope)" "float, class:(gamescope)" ];
   };
 }

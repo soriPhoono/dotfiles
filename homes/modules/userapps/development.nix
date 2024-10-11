@@ -6,10 +6,6 @@ in {
       lib.mkEnableOption "Enable development environment support";
   };
 
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      obsidian
-      vscode-fhs
-    ];
-  };
+  config =
+    lib.mkIf cfg.enable { home.packages = with pkgs; [ obsidian vscode-fhs ]; };
 }
