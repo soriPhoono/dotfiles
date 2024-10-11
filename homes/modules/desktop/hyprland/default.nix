@@ -52,7 +52,7 @@ in {
           "NIXOS_OZONE_WL,1"
           "GDK_BACKEND,wayland,x11,*"
           "QT_QPA_PLATFORM,wayland;xcb"
-          "SDL_VIDEODRIVER,wayland"
+          # "SDL_VIDEODRIVER,wayland"
           "CLUTTER_BACKEND,wayland"
 
           "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"

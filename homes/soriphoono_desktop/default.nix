@@ -24,15 +24,16 @@
 
         # Bind each workspace to each monitor
         workspace =
-          builtins.map (x: "${builtins.toString x}, " + "monitor:HDMI-A-1") [
+          builtins.map (x: "${builtins.toString x}, " + "monitor:DP-4") [
             1
             4
             7
-          ] ++ builtins.map (x: "${builtins.toString x}, " + "monitor:DP-4") [
+          ] ++ builtins.map (x: "${builtins.toString x}, " + "monitor:DP-1") [
             2
             5
             8
-          ] ++ builtins.map (x: "${builtins.toString x}, " + "monitor:DP-1") [
+          ]
+          ++ builtins.map (x: "${builtins.toString x}, " + "monitor:HDMI-A-1") [
             3
             6
             9
