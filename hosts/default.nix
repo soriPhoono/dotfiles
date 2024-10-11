@@ -24,7 +24,7 @@
                 sharedModules = [ self.homeManagerModules.default ];
                 extraSpecialArgs = { inherit inputs username; };
 
-                users.${username} = ../homes/${hostname}.nix;
+                users.${username} = ./homes/${hostname}.nix;
               };
             }
 
@@ -36,14 +36,14 @@
       hostname = "zephyrus";
       username = "soriphoono";
 
-      systemModules = [ ./zephyrus ];
+      systemModules = [ ./nixos/zephyrus ];
     };
 
     desktop = mkHost {
       hostname = "desktop";
       username = "soriphoono";
 
-      systemModules = [ ./desktop ];
+      systemModules = [ ./nixos/desktop ];
     };
   };
 }

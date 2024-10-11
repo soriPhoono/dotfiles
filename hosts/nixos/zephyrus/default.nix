@@ -7,5 +7,12 @@
     nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
 
+  desktop = {
+    boot.enable = true;
+    regreet.enable = true;
+    hyprland.enable = true;
+    steam.enable = true;
+  };
+
   laptop.droidcam.enable = true;
 }

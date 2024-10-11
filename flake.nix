@@ -44,5 +44,9 @@
     };
 
     stylix.url = "github:danth/stylix";
+
+    # Personal inputs
+
+    nvim.url = "github:soriPhoono/nvim";
   };
 }
