@@ -1,14 +1,7 @@
 {
-  core = {
-    shells.fish.enable = true;
-
-    programs = {
-      git = {
-        userName = "soriphoono";
-        userEmail = "soriphoono@gmail.com";
-      };
-    };
-  };
+  imports = [
+    ./common.nix
+  ];
 
   desktop = {
     hyprland = {
@@ -41,10 +34,4 @@
       };
     };
   };
-
-  userapps.enable = true;
-  userapps.office.enable = true;
-  userapps.development.enable = true;
-
-  themes.catppuccin.enable = true;
 }
