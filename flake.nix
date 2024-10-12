@@ -15,7 +15,9 @@
             nixd
             nixfmt
 
-            ags
+            (ags.overrideAttrs (
+              old: { buildInputs = old.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ]; }
+            ))
             sass
             esbuild
           ];
