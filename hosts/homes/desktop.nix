@@ -1,7 +1,29 @@
-{
+{ pkgs, ... }: {
   imports = [
     ./common.nix
   ];
+
+  home.packages = with pkgs; [
+    file-roller
+
+    krita
+    osu-lazer-bin
+  ];
+
+  programs.hyprlock.settings = {
+    input-field = [
+      {
+        size = "200, 50";
+        position = "0, -80";
+        monitor = "DP-4";
+        dots_center = true;
+        fade_on_empty = false;
+        outline_thickness = 5;
+        placeholder_text = "Password...";
+        shadow_passes = 2;
+      }
+    ];
+  };
 
   desktop = {
     hyprland = {
@@ -13,6 +35,7 @@
           "HDMI-A-1,1920x1080@75,0x0,1"
           "DP-4,1920x1080@144,1920x0,1"
           "DP-1,1920x1080@165,3840x0,1"
+          "HDMI-A-5,1920x1080,3840x0,1,mirror,DP-1"
         ];
 
         # Bind each workspace to each monitor
