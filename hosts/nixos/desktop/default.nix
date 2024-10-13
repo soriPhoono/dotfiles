@@ -17,5 +17,14 @@
   hardware.graphics.extraPackages = with pkgs; [
     intel-media-driver
     libvdpau-va-gl
+
+    intel-compute-runtime
+
+    rocmPackages.clr.icd
+    clinfo # TODO: remove this once setup is configured
+  ];
+
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 }
