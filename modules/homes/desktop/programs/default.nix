@@ -17,6 +17,8 @@ in {
         [
           # Desktop system level apps
           gnome-disk-utility
+
+          file-roller
         ];
     };
 

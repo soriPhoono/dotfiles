@@ -9,14 +9,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      # System tools
-      file-roller
-
       # General applications
       discord
       signal-desktop
 
-      clementine
+      youtube-music
 
       krita
       gimp
