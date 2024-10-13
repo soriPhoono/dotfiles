@@ -1,6 +1,10 @@
 { lib, pkgs, config, ... }:
 let cfg = config.userapps;
 in {
+  imports = [
+    ./programs
+  ];
+
   options = { userapps.enable = lib.mkEnableOption "Enable office programs"; };
 
   config = lib.mkIf cfg.enable {
@@ -12,14 +16,11 @@ in {
       discord
       signal-desktop
 
-      imv
       clementine
-      mpv
 
       krita
       gimp
       audacity
-      obs-studio
       blender-hip
       davinci-resolve
 

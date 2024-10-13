@@ -14,14 +14,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    xdg = {
-      mimeApps = {
-        "image/png" = [ "imv.desktop" ];
-        "image/jpeg" = [ "imv.desktop" ];
-        "image/gif" = [ "imv.desktop" ];
-      };
-    };
-
     gtk = {
       enable = true;
 

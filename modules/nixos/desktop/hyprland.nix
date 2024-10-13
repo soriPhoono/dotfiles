@@ -26,5 +26,7 @@ in {
     services.hypridle.enable = true;
 
     desktop.enable = true;
+    desktop.boot.enable = true;
+    desktop.regreet.enable = true;
   };
 }

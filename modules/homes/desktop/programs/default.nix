@@ -19,5 +19,10 @@ in {
           gnome-disk-utility
         ];
     };
+
+    programs = {
+      feh.enable = true;
+      mpv.enable = true;
+    };
   };
 }

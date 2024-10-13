@@ -8,6 +8,8 @@ in {
   config = lib.mkIf cfg.enable {
     security.rtkit.enable = true;
 
+    programs.file-roller.enable = true;
+
     services = {
       pipewire = {
         enable = true;
@@ -19,7 +21,6 @@ in {
       };
 
       gvfs.enable = true;
-
       udisks2.enable = true;
     };
 
