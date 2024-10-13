@@ -3,13 +3,6 @@
     ./common.nix
   ];
 
-  home.packages = with pkgs; [
-    file-roller
-
-    krita
-    osu-lazer-bin
-  ];
-
   programs.hyprlock.settings = {
     input-field = [
       {
