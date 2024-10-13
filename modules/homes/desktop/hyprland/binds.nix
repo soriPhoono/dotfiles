@@ -94,7 +94,7 @@ in {
 
         "$mod, RETURN, exec, ${alacritty}/bin/alacritty"
         "$mod, A, exec, ${fuzzel}/bin/fuzzel"
-        "$mod, E, exec, ${xfce.thunar}/bin/thunar"
+        "$mod, E, exec, ${nautilus}/bin/nautilus"
         "$mod, B, exec, ${firefox}/bin/firefox"
         "$mod, C, exec, ${vscode-fhs}/bin/code"
         "$mod, N, exec, ${obsidian}/bin/obsidian"

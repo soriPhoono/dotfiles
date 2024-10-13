@@ -1,12 +1,13 @@
 let
   floatingWindows = [
-    "class:(thunar)"
+    "class:(org.gnome.Nautilus)"
     "class:(gnome-disks)"
     "class:(virt-manager), title:(Virtual Machine Manager)"
     "class:(ONLYOFFICE Desktop Editors)"
     "class:(steam)"
     "class:(discord)"
     "class:(code), title:(Open Folder)"
+    "class:(org.gnome.FileRoller)"
   ];
 in {
   wayland.windowManager.hyprland.settings = {

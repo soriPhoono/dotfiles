@@ -13,7 +13,7 @@ in {
       signal-desktop
 
       imv
-      amarok
+      clementine
       mpv
 
       krita
