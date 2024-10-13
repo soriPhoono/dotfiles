@@ -12,13 +12,16 @@ in {
       discord
       signal-desktop
 
-      krita
-      obs-studio
-      vlc
-
-      audacity
-      audio-recorder
+      imv
       amarok
+      mpv
+
+      krita
+      gimp
+      audacity
+      obs-studio
+      blender-hip
+      davinci-resolve
 
       bleachbit
       onlyoffice-desktopeditors
@@ -26,9 +29,6 @@ in {
       obsidian
       vscode-fhs
       slack
-
-      inkscape
-      blender-hip
     ];
   };
 }
