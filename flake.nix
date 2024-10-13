@@ -5,7 +5,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
 
-      imports = [ ./hosts ./modules ./homes/modules ];
+      imports = [ ./hosts ./modules/nixos ./modules/homes ];
 
       perSystem = { pkgs, ... }: {
         formatter = pkgs.nixfmt;
@@ -13,7 +13,7 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nixd
-            nixfmt
+            nixpkgs-fmt
 
             (ags.overrideAttrs (
               old: { buildInputs = old.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ]; }
@@ -50,7 +50,7 @@
 
     ags.url = "github:Aylur/ags";
     stylix.url = "github:danth/stylix";
-
+    
     # Developer environment imports
 
     neovim.url = "github:soriPhoono/nvim";
