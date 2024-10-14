@@ -17,6 +17,17 @@ in {
       blender
     ];
 
+    xdg.configFile = {
+      "electron-flags.conf" = {
+        enable = true;
+
+        source = ''
+        --enable-features=WebRTCPipeWireCapturer
+        --ozone-platform-hint=auto
+        '';
+      };
+    };
+
     userapps.programs.vscode.enable = true;
   };
 }
