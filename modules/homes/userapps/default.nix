@@ -2,6 +2,9 @@
 let cfg = config.userapps;
 in {
   imports = [
+    ./development.nix
+    ./streaming.nix
+
     ./programs/discord.nix
   ];
 
