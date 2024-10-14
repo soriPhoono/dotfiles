@@ -1,13 +1,23 @@
 let
   floatingWindows = [
     "class:(gnome-disks)"
+
     "class:(feh)"
+
     "class:(mpv)"
+
     "class:(org.gnome.Nautilus)"
+
     "class:(org.gnome.FileRoller)"
+
+    "class:(firefox), title:(.*YouTube.*)"
+
     "class:(discord)"
+
     "class:(steam)"
+
     "class:(ONLYOFFICE Desktop Editors)"
+
     "class:(code), title:(Open Folder)"
   ];
 in {
