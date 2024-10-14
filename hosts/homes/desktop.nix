@@ -50,4 +50,6 @@
       };
     };
   };
+
+  userapps.streaming.enable = true;
 }

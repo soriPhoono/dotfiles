@@ -2,7 +2,7 @@
 let cfg = config.userapps;
 in {
   imports = [
-    ./programs
+    ./programs/discord.nix
   ];
 
   options = { userapps.enable = lib.mkEnableOption "Enable office programs"; };
