@@ -10,23 +10,17 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # General applications
-      discord
+      bleachbit
       signal-desktop
-
       youtube-music
 
       krita
       gimp
-      audacity
-      blender-hip
-      davinci-resolve
 
-      bleachbit
       onlyoffice-desktopeditors
-
-      obsidian
-      vscode-fhs
       slack
     ];
+
+    userapps.programs.discord.enable = true;
   };
 }
