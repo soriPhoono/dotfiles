@@ -1,24 +1,24 @@
 let
   floatingWindows = [
+    # Disk manager
     "class:(gnome-disks)"
-
+    # Feh image viewer
     "class:(feh)"
-
+    # Mpv video player
     "class:(mpv)"
-
+    # Nautilus
     "class:(org.gnome.Nautilus)"
-
     "class:(org.gnome.FileRoller)"
-
-    "class:(firefox), title:(.*YouTube.*)"
-
+    # Discord
     "class:(discord)"
-
+    # Steam
     "class:(steam)"
-
+    # Onlyoffice
     "class:(ONLYOFFICE Desktop Editors)"
-
+    # VsCode
     "class:(code), title:(Open Folder)"
+    # Obsidian
+    "class:(electron), title:(Open folder as vault)"
   ];
 in {
   wayland.windowManager.hyprland.settings = {
