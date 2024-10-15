@@ -1,6 +1,6 @@
 import Workspaces from "../widgets/workspaces"
 import NowPlaying from "../widgets/now_playing"
-import Volume from "../widgets/volume_slider"
+import Volume from "../widgets/volume"
 
 const LeftWidgets = () => Widget.Box({
   class_name: 'main_bar_left',
