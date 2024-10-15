@@ -1,9 +1,9 @@
 const entry = `${App.configDir}/ts/main.ts`
-const output = `/tmp/ags/js`
+const output = `/tmp/ags`
 
 try {
   console.log(`Building ${entry} -> ${output}/style.css`)
-  
+
   Utils.exec([
     'sass', `${App.configDir}/style/main.scss`,
     `${output}/style.css`

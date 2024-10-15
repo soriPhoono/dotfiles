@@ -1,11 +1,20 @@
 const hyprland = await Service.import('hyprland')
 
-export default () => Widget.Box({
-  // class_name: "workspaces",
-  children: hyprland.bind("workspaces")
-    .as(ws => ws.map(({ id }) => Widget.Button({
-      on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
-      child: Widget.Label(`${id}`),
-      // class_name: hyprland.active.workspace.bind("id").as(i => `${i === id ? "focused" : ""}`),
-    })))
+const dispatch = ws => hyprland.messageAsync(`dispatch workspace ${ws}`)
+
+export default () => Widget.EventBox({
+  onScrollUp: () => dispatch("+1"),
+  onScrollDown: () => dispatch("-1"),
+
+  child: Widget.Box({
+    children: Array.from({ length: 10 }, (_, i) => i + 1).map(i => Widget.Button({
+      attribute: i,
+      label: `${i}`,
+      on_clicked: () => dispatch(`${i}`)
+    })),
+
+    setup: self => self.hook(hyprland, () => self.children.forEach(btn => {
+      btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute)
+    }))
+  })
 })
