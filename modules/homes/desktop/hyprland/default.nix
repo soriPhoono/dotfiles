@@ -19,6 +19,7 @@ in {
       enable = true;
       programs = {
         enable = true;
+        ags.enable = true;
         alacritty.enable = true;
         fuzzel.enable = true;
         hyprlock.enable = true;
