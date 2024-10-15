@@ -1,14 +1,14 @@
 @import 'palette.scss';
 
-.left_bar {
+.right_bar {
   background-color: transparent;
 }
 
-.left_bar_body {
+.right_bar_body {
   background-color: $base;
 
   margin-top: 20px;
-  margin-left: 20px;
+  margin-right: 20px;
 
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -16,10 +16,3 @@
   border-radius: 1rem;
 }
 
-.workspace {
-  border-radius: 50%;
-}
-
-.workspace_active {
-  background-color: $teal;
-}

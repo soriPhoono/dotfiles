@@ -1,6 +1,5 @@
 import Workspaces from "../widgets/workspaces"
 import NowPlaying from "../widgets/now_playing"
-import Volume from "../widgets/volume"
 
 const MiddleWidgets = () => Widget.Box({
   class_name: 'main_bar_middle',
@@ -9,17 +8,6 @@ const MiddleWidgets = () => Widget.Box({
   children: [
     // currently playing
     NowPlaying(),
-  ]
-})
-
-const RightWidgets = () => Widget.Box({
-  class_name: 'main_bar_right',
-  hpack: "end",
-
-  spacing: 8,
-
-  children: [
-    Volume(),
   ]
 })
 
