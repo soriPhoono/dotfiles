@@ -4,7 +4,7 @@
       [ "${lxqt.lxqt-policykit}/bin/lxqt-policykit-agent" ];
 
     exec = with pkgs; [
-      "pidof ags || ${ags}/bin/ags"
+      "(pidof ags && ${ags}/bin/ags -q && ${ags}/bin/ags) || ${ags}/bin/ags"
     ];
   };
 }
