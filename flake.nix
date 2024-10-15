@@ -31,28 +31,37 @@
 
   inputs = {
     # Core imports
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # System-specific imports
-
-    nixos-wsl.url = "github:nix-community/nixos-wsl";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     # User environment imports
-
     home-manager = {
       url = "github:nix-community/home-manager";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ags.url = "github:Aylur/ags";
-    stylix.url = "github:danth/stylix";
-    
-    # Developer environment imports
+    ags = {
+      url = "github:Aylur/ags";
 
-    neovim.url = "github:soriPhoono/nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    stylix = {
+      url = "github:danth/stylix";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+
+    # Developer environment imports
+    neovim = {
+      url = "github:soriPhoono/nvim";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
