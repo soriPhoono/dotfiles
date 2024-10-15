@@ -11,6 +11,7 @@
   };
 
   userapps.enable = true;
+  userapps.development.enable = true;
 
   themes.catppuccin.enable = true;
 }

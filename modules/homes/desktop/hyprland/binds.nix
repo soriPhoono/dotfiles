@@ -96,8 +96,8 @@ in {
         "$mod, A, exec, ${fuzzel}/bin/fuzzel"
         "$mod, E, exec, ${nautilus}/bin/nautilus"
         "$mod, B, exec, ${firefox}/bin/firefox"
-        "$mod, C, exec, ${vscode-fhs}/bin/code"
-        "$mod, N, exec, ${obsidian}/bin/obsidian"
+        "$mod, C, exec, ${vscode-fhs}/bin/code --ozone-platform-hint=auto"
+        "$mod, N, exec, ${obsidian}/bin/obsidian --ozone-platform-hint=auto"
       ] ++ (builtins.concatLists (builtins.genList (x:
         let ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
         in [
