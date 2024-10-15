@@ -1,23 +1,8 @@
-@import 'palette.scss';
+@import 'src/palette.scss';
+
+@import 'src/background.scss';
+@import 'src/main_bar.scss';
 
 * {
   color: $text;
-}
-
-.main_bar {
-  background-color: $base;
-}
-
-.background {
-  background-color: transparent;
-}
-
-.time {
-  border: 3px solid $text;
-
-  font-size: 4rem;
-}
-
-.date {
-  font-size: 2rem;
 }

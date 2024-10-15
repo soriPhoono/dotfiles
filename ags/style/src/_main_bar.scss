@@ -1,0 +1,22 @@
+@import 'palette.scss';
+
+.main_bar {
+  background-color: transparent;
+}
+
+button {
+  border-radius: 50%;
+}
+
+button#hover {
+  color: $teal;
+}
+
+button.focused {
+  background-color: $teal;
+}
+
+button.empty {
+
+  background-color: $base;
+}

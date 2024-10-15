@@ -15,11 +15,7 @@
             nixd
             nixpkgs-fmt
 
-            (ags.overrideAttrs (
-              old: { buildInputs = old.buildInputs ++ [ pkgs.libdbusmenu-gtk3 ]; }
-            ))
-            sass
-            esbuild
+            typescript-language-server
           ];
 
           shellHook = ''

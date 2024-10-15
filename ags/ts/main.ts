@@ -5,8 +5,8 @@ App.config({
   style: '/tmp/ags/style.css',
 
   windows: [
-    Background(2),
-    MainBar(2)
+    Background(),
+    MainBar()
   ]
 })
 
