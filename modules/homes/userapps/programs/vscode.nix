@@ -23,6 +23,10 @@ in {
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
         "git.autofetch" = true;
         "git.confirmSync" = true;
+        "codeium.enableConfig" = {
+          "*" = true;
+          "nix" = true;
+        };
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
         "nix.serverSettings" = {
