@@ -20,10 +20,16 @@ in {
 
     programs = {
       hyprland.enable = true;
-      hyprlock.enable = true;
+
+      nm-applet.enable = true;
     };
 
-    services.hypridle.enable = true;
+    services = {
+      upower.enable = true;
+
+      gvfs.enable = true;
+      udisks2.enable = true;
+    };
 
     desktop.enable = true;
     desktop.boot.enable = true;

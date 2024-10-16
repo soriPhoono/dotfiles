@@ -5,21 +5,30 @@ export default () => Widget.EventBox({
 
   visible: battery.bind('available'),
 
-  child: Widget.Box({
-    children: [
-      // Battery icon
-      Widget.Icon({
-        icon: battery.bind('percent').as(p =>
-          `battery-level${Math.floor(p / 10) * 10}-symbolic`)
-      }),
-      Widget.Revealer({
-        reveal_child: true,
+  setup: self => {
+    console.log(`Battery available: ${battery.available}`)
 
-        child: Widget.Icon({
-          icon: battery.bind('charging').as(p => p ? 'battery-charging-symbolic' : 'battery-symbolic')
-        })
+    const percent = Widget.Revealer({
+      reveal_child: false,
+      transition_duration: 1000,
+      transition: 'slide_left',
+
+      child: Widget.Label({
+        label: battery.bind('percent').as(p => `${p}%`)
       })
-      // Time till full
-    ]
-  })
+    })
+
+    self.on_hover = () => percent.reveal_child = true;
+    self.on_hover_lost = () => percent.reveal_child = false;
+
+    self.child = Widget.Box({
+      children: [
+        // Battery icon
+        Widget.Icon({
+          icon: battery.bind('icon_name')
+        }),
+        percent
+      ]
+    })
+  }
 })
