@@ -6,8 +6,6 @@ export default () => Widget.Revealer({
   transition_duration: 1000,
 
   child: Widget.Box({
-    class_name: 'system_tray',
-
     children: system_tray.bind('items')
       .as(items =>
         [

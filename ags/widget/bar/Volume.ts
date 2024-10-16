@@ -23,8 +23,6 @@ const getIcon = () => {
 }
 
 export default () => Widget.EventBox({
-  class_name: "volume",
-
   on_primary_click: () => Utils.exec('pavucontrol'),
   on_secondary_click: () => audio.speaker.is_muted = !audio.speaker.is_muted,
 
@@ -35,7 +33,7 @@ export default () => Widget.EventBox({
     const slider = Widget.Revealer({
       reveal_child: false,
       transition_duration: 1000,
-      transition: 'slide_left',
+      transition: 'slide_right',
       child: Widget.Slider({
         hexpand: true,
         draw_value: false,

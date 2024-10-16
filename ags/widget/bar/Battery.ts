@@ -1,15 +1,13 @@
 const battery = await Service.import('battery')
 
 export default () => Widget.EventBox({
-  class_name: 'battery',
-
   visible: battery.bind('available'),
 
   setup: self => {
     const percent = Widget.Revealer({
       reveal_child: false,
       transition_duration: 1000,
-      transition: 'slide_left',
+      transition: 'slide_right',
 
       child: Widget.Label({
         label: battery.bind('percent').as(p => `${p}%`)

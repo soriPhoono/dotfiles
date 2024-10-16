@@ -8,8 +8,6 @@ in {
   config = lib.mkIf cfg.enable {
     security.rtkit.enable = true;
 
-    programs.file-roller.enable = true;
-
     services = {
       pipewire = {
         enable = true;

@@ -16,14 +16,6 @@ in {
   config = lib.mkIf cfg.enable {
     home = {
       shellAliases = with pkgs; { nvtop = "${nvtopPackages.full}/bin/nvtop"; };
-
-      packages = with pkgs;
-        [
-          # Desktop system level apps
-          gnome-disk-utility
-
-          file-roller
-        ];
     };
 
     programs = {

@@ -21,7 +21,8 @@ in {
     programs = {
       hyprland.enable = true;
 
-      nm-applet.enable = true;
+      gnome-disks.enable = true;
+      file-roller.enable = true;
     };
 
     services = {
