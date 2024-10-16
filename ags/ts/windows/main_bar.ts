@@ -1,3 +1,4 @@
+import Separator from "ts/widgets/separator";
 import Workspaces from "ts/widgets/workspaces";
 import SystemTray from "ts/widgets/system_tray";
 import Volume from "ts/widgets/volume";
@@ -35,6 +36,7 @@ const RightWidgets = () => Widget.Box({
 
       children: [
         SystemTray(),
+        Separator(),
         Volume(),
       ]
     })
