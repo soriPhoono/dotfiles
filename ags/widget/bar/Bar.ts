@@ -36,10 +36,10 @@ const RightWidgets = () => Widget.Box({
       class_name: 'right_main_bar',
 
       children: [
-        SystemTray(),
         Network(),
         Volume(),
         Battery(),
+        SystemTray(),
       ]
     })
   ]

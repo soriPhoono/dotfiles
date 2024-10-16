@@ -10,16 +10,21 @@ export default () => Widget.Revealer({
 
     children: system_tray.bind('items')
       .as(items =>
-        items.map(item =>
-          Widget.EventBox({
-            on_primary_click: (_, event) => item.activate(event),
-            on_secondary_click: (_, event) => item.openMenu(event),
+        [
+          Widget.Label({
+            label: ' | ',
+          }),
+          ...items.map(item =>
+            Widget.EventBox({
+              on_primary_click: (_, event) => item.activate(event),
+              on_secondary_click: (_, event) => item.openMenu(event),
 
-            child: Widget.Icon({ icon: item.bind('icon') }),
+              child: Widget.Icon({ icon: item.bind('icon') }),
 
-            tooltip_markup: item.bind('tooltip_markup'),
-          })
-        )
+              tooltip_markup: item.bind('tooltip_markup'),
+            })
+          )
+        ]
       )
   })
 })
