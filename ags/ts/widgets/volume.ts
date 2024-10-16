@@ -25,7 +25,7 @@ const getIcon = () => {
 const slider_revealer = () => Widget.Revealer({
   reveal_child: false,
   transition_duration: 1000,
-  transition: 'slide_right',
+  transition: 'slide_left',
   child: Widget.Slider({
     hexpand: true,
     draw_value: false,
@@ -41,6 +41,8 @@ export default () => {
   const slider = slider_revealer()
 
   return Widget.EventBox({
+    class_name: "volume",
+
     on_hover: () => slider.reveal_child = true,
     on_hover_lost: () => slider.reveal_child = false,
 

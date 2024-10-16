@@ -9,8 +9,9 @@ export default () => Widget.EventBox({
   onScrollDown: () => dispatch("-1"),
 
   child: Widget.Box({
-    children: Array.from({ length: 6 }, (_, i) => i + 1).map(i => Widget.Button({
-      on_clicked: () => dispatch(`${i}`),
+    children: Array.from({ length: 6 }, (_, i) => i + 1).map(i => Widget.EventBox({
+      on_hover: 
+      on_primary_click: () => dispatch(`${i}`),
 
       class_names: hyprland.active.workspace.bind('id').as(
         id => id === i ? ['workspace', 'workspace_active'] : ['workspace']

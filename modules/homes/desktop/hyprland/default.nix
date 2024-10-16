@@ -22,11 +22,9 @@ in {
         ags.enable = true;
         alacritty.enable = true;
         fuzzel.enable = true;
-        hyprlock.enable = true;
         wlogout.enable = true;
       };
       services = {
-        hypridle.enable = true;
         mako = {
           enable = true;
           rounding =

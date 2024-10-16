@@ -1,5 +1,4 @@
 import Workspaces from "ts/widgets/workspaces";
-import NowPlaying from "ts/widgets/now_playing";
 import SystemTray from "ts/widgets/system_tray";
 import Volume from "ts/widgets/volume";
 
@@ -21,7 +20,7 @@ const CenterWidgets = () => Widget.Box({
       class_name: 'center_main_bar',
 
       children: [
-        NowPlaying(),
+        //NowPlaying(),
       ]
     })
   ]
@@ -47,7 +46,7 @@ export default (monitor: number = 0) => Widget.Window({
   class_name: 'main_bar',
   anchor: ['top', 'left', 'right'],
   exclusivity: 'exclusive',
-  margins: [20, 20, 20, 0],
+  margins: [20, 20, 0, 20],
   monitor,
 
   child: Widget.CenterBox({

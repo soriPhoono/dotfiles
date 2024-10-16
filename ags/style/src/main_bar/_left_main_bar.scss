@@ -3,9 +3,6 @@
 .left_main_bar {
   background-color: $base;
 
-  margin-top: 20px;
-  margin-left: 20px;
-
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 
@@ -13,6 +10,9 @@
 }
 
 .workspace {
+  margin-left: 0px;
+  margin-right: 0px;
+
   border-radius: 50%;
 }
 
