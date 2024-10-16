@@ -1,10 +1,6 @@
-@import 'palette.scss';
+@import '../palette.scss';
 
-.right_bar {
-  background-color: transparent;
-}
-
-.right_bar_body {
+.right_main_bar {
   background-color: $base;
 
   margin-top: 20px;
