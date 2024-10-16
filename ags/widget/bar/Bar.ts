@@ -3,6 +3,7 @@ import SystemTray from "./SystemTray";
 import Network from './Network';
 import Volume from "./Volume";
 import Battery from "./Battery";
+import Clock from "./Clock";
 
 const LeftWidgets = () => Widget.Box({
   children: [
@@ -10,21 +11,19 @@ const LeftWidgets = () => Widget.Box({
       class_name: 'left_main_bar',
 
       children: [
-        Workspaces(),
       ]
     })
   ]
 })
 
 const CenterWidgets = () => Widget.Box({
-  children: [
-    Widget.Box({
-      class_name: 'center_main_bar',
+  class_name: 'center_main_bar',
 
-      children: [
-        //NowPlaying(),
-      ]
-    })
+  homogeneous: true,
+
+  children: [
+    Workspaces(),
+    Clock(),
   ]
 })
 

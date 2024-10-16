@@ -1,0 +1,15 @@
+@import '../palette.scss';
+
+.workspace {
+  margin-left: 0px;
+  margin-right: 0px;
+
+  padding-left: .25rem;
+  padding-right: .25rem;
+
+  border-radius: 50%;
+}
+
+.workspace_active {
+  color: $teal;
+}

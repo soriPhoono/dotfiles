@@ -1,6 +1,11 @@
+@import '../palette.scss';
+
 @import 'left_main_bar.scss';
+@import 'center_main_bar.scss';
 @import 'right_main_bar.scss';
 
 .main_bar {
-  background-color: transparent;
+  background-color: $base;
+
+  border-radius: 1rem;
 }

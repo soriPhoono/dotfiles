@@ -18,6 +18,10 @@ in {
 
     security.polkit.enable = true;
 
+    environment.systemPackages = with pkgs; [
+      playerctl
+    ];
+
     programs = {
       hyprland.enable = true;
 
