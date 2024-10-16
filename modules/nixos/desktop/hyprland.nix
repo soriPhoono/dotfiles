@@ -30,11 +30,6 @@ in {
 
       gvfs.enable = true;
       udisks2.enable = true;
-
-      xserver.desktopManager.pantheon.extraSwitchboardPlugs = with pkgs.pantheon; [
-        switchboard-plug-about
-        switchboard-plug-network
-      ];
     };
 
     desktop.enable = true;

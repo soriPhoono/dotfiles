@@ -15,7 +15,6 @@ in {
         sass
         esbuild
 
-        pantheon.switchboard
         networkmanagerapplet
       ];
     };
