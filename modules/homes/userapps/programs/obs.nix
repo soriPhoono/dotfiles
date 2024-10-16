@@ -1,4 +1,4 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 let cfg = config.userapps.programs.obs-studio;
 in {
   options = {

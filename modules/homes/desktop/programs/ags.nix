@@ -10,10 +10,15 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      sass
-      esbuild
-    ];
+    home = {
+      packages = with pkgs; [
+        sass
+        esbuild
+
+        pantheon.switchboard
+        networkmanagerapplet
+      ];
+    };
 
     programs.ags = {
       enable = true;

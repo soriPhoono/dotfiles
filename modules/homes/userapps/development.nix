@@ -1,7 +1,8 @@
 { lib, pkgs, config, ... }:
 let
   cfg = config.userapps.development;
-in {
+in
+{
   imports = [
     ./programs/vscode.nix
   ];

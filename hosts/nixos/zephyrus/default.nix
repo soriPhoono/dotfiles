@@ -7,9 +7,7 @@
     nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
 
-  desktop = {
-    hyprland.enable = true;
-  };
+  desktop = { hyprland.enable = true; };
 
   laptop.droidcam.enable = true;
 }

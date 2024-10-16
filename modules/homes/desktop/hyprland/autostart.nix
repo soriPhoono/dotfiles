@@ -4,7 +4,7 @@
       [ "${lxqt.lxqt-policykit}/bin/lxqt-policykit-agent" ];
 
     exec = with pkgs; [
-      "${ags}/bin/ags -q && ${ags}/bin/ags"
+      "sleep 1 && ${ags}/bin/ags -q && ${ags}/bin/ags"
     ];
   };
 }

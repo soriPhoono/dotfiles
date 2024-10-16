@@ -20,7 +20,8 @@ let
     # Obsidian
     "class:(electron), title:(Open folder as vault)"
   ];
-in {
+in
+{
   wayland.windowManager.hyprland.settings = {
     bezier = [
       "easeInOut, 0.65, 0, 0.35, 1"
@@ -41,6 +42,6 @@ in {
     windowrulev2 = builtins.concatMap
       (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ])
       floatingWindows
-      ++ [ "workspace 1, class:(gamescope)" "float, class:(gamescope)" ];
+    ++ [ "workspace 1, class:(gamescope)" "float, class:(gamescope)" ];
   };
 }
