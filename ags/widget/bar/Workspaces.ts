@@ -13,11 +13,13 @@ export default () => Widget.EventBox({
       on_primary_click: () => dispatch(`${i}`),
 
       child: Widget.Label({
-        class_names: hyprland.active.workspace.bind('id').as(
-          id => id === i ? ['workspace', 'workspace_active'] : ['workspace']
-        ),
+        class_name: 'workspace',
 
         label: hyprland.active.workspace.bind('id').as(id => id === i ? '' : ''),
+
+        setup: self => self.hook(hyprland.active.workspace, () => {
+          self.toggleClassName('workspace_active', hyprland.active.workspace.id === i)
+        })
       })
     })),
   })
