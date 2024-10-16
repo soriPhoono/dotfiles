@@ -1,4 +1,4 @@
-import Clock from '../widgets/clock'
+import Clock from './Clock'
 
 export default (monitor: number = 0) => Widget.Window({
   name: 'background',

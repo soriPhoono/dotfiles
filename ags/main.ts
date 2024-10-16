@@ -1,5 +1,5 @@
-import Background from "./windows/background"
-import MainBar from "./windows/main_bar"
+import Background from "./widget/background/Background"
+import MainBar from "widget/bar/Bar"
 
 App.config({
   style: '/tmp/ags/style.css',

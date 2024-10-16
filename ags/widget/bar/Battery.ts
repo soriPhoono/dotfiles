@@ -6,8 +6,6 @@ export default () => Widget.EventBox({
   visible: battery.bind('available'),
 
   setup: self => {
-    console.log(`Battery available: ${battery.available}`)
-
     const percent = Widget.Revealer({
       reveal_child: false,
       transition_duration: 1000,

@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, pkgs, config, ... }:
 let cfg = config.userapps.programs.discord;
 in {
   options = {
@@ -6,12 +6,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.discocss = {
-      enable = true;
-
-      css = ''
-        @import url("https://catppuccin.github.io/discord/dist/catppuccin-catppuccin-teal.theme.css");
-      '';
-    };
+    home.packages = with pkgs; [
+      discord
+    ];
   };
 }

@@ -1,4 +1,4 @@
-const entry = `${App.configDir}/ts/main.ts`
+const entry = `${App.configDir}/main.ts`
 const output = `/tmp/ags`
 
 try {

@@ -1,9 +1,8 @@
-import Separator from "ts/widgets/separator";
-import Workspaces from "ts/widgets/workspaces";
-import SystemTray from "ts/widgets/system_tray";
-import Network from 'ts/widgets/network';
-import Volume from "ts/widgets/volume";
-import Battery from "ts/widgets/battery";
+import Workspaces from "./Workspaces";
+import SystemTray from "./SystemTray";
+import Network from './Network';
+import Volume from "./Volume";
+import Battery from "./Battery";
 
 const LeftWidgets = () => Widget.Box({
   children: [
@@ -38,7 +37,6 @@ const RightWidgets = () => Widget.Box({
 
       children: [
         SystemTray(),
-        Separator(),
         Network(),
         Volume(),
         Battery(),
