@@ -5,7 +5,6 @@ in {
     ./ags.nix
     ./alacritty.nix
     ./fuzzel.nix
-    ./hyprlock.nix
     ./wlogout.nix
   ];
 

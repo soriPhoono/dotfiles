@@ -1,1 +1,1 @@
-{ imports = [ ./hypridle.nix ./mako.nix ]; }
+{ imports = [ ./mako.nix ]; }
