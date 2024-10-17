@@ -2,6 +2,12 @@ const entry = `${App.configDir}/main.ts`
 const output = `/tmp/ags`
 
 try {
+  console.log(`Building ${output}`)
+
+  await Utils.execAsync([
+    'mkdir', '/tmp/ags'
+  ])
+
   console.log(`Building ${entry} -> ${output}/style.css`)
 
   await Utils.execAsync([
