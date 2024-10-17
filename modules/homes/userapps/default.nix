@@ -21,7 +21,5 @@ in {
       onlyoffice-desktopeditors
       slack
     ];
-
-    userapps.programs.discord.enable = true;
   };
 }

@@ -27,7 +27,7 @@ in
 
     security = {
       rtkit.enable = true;
-      polkit.polkit.enable = true;
+      polkit.enable = true;
     };
 
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
