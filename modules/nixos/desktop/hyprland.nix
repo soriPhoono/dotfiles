@@ -7,7 +7,7 @@ let
       name = "regreet.conf";
 
       text = ''
-        exec-once = ${pkgs.greetd.regreet}/bin/regreet
+        exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
       '';
     };
 in
