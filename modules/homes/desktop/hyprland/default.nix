@@ -18,7 +18,6 @@ in {
     desktop = {
       enable = true;
       programs = {
-        enable = true;
         ags.enable = true;
         alacritty.enable = true;
         fuzzel.enable = true;

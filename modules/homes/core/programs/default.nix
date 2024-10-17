@@ -8,7 +8,6 @@ in {
     ./git.nix
     ./eza.nix
     ./find.nix
-    ./yazi.nix
     ./direnv.nix
   ];
 
@@ -34,7 +33,6 @@ in {
       git.enable = lib.mkDefault true;
       eza.enable = lib.mkDefault true;
       find.enable = lib.mkDefault true;
-      yazi.enable = lib.mkDefault true;
       direnv.enable = lib.mkDefault true;
     };
   };

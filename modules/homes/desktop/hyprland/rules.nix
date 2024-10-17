@@ -1,5 +1,6 @@
 let
   floatingWindows = [
+    # TODO: add more floating window rules for hyprland
     # Disk manager
     "class:(gnome-disks)"
     # Feh image viewer

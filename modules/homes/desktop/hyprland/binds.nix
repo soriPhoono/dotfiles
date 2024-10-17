@@ -1,4 +1,6 @@
 { pkgs, ... }:
+# TODO: update keybinds to use ags
+
 let
   volumeScript = pkgs.writeShellApplication {
     name = "volume.sh";
@@ -21,35 +23,6 @@ let
 
       elif [[ "$operation" = "lower" ]]; then
         wpctl set-volume @DEFAULT_AUDIO_SINK@ "$value%-"
-      fi
-
-      current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')
-      notify-send Changed volume to "$current"  
-    '';
-  };
-
-  # TODO: finish this
-  brightnessScript = pkgs.writeShellApplication {
-    name = "brightness.sh";
-
-    runtimeInputs = with pkgs; [ brightnessctl libnotify ];
-
-    text = ''
-      #!/bin/bash
-
-      operation=$1
-      value=$2
-      current=$(brightnessctl get)
-
-      if [[ "$operation" = "raise" ]]; then
-        if [[ $(awk "BEGIN { print $current * 100 + $value }") -gt 100 ]]; then
-          exit 0
-        fi
-
-        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%+
-
-      elif [[ "$operation" = "lower" ]]; then
-        wpctl set-volume @DEFAULT_AUDIO_SINK@ $value%-
       fi
 
       current=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{ print $2 }')

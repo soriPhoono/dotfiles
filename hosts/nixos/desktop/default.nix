@@ -6,6 +6,7 @@
   ];
 
   desktop = {
+    boot.enable = true;
     hyprland.enable = true;
     steam.enable = true;
   };

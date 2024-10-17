@@ -3,7 +3,7 @@
     exec-once = with pkgs;
       [
         "${lxqt.lxqt-policykit}/bin/lxqt-policykit-agent"
-        "sleep 1 && ags -q && ags"
+        "${ags}/bin/ags"
       ];
 
     exec = with pkgs; [

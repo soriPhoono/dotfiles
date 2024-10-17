@@ -4,8 +4,6 @@ in {
   imports = [
     ./development.nix
     ./streaming.nix
-
-    ./programs/discord.nix
   ];
 
   options = { userapps.enable = lib.mkEnableOption "Enable office programs"; };
@@ -14,11 +12,11 @@ in {
     home.packages = with pkgs; [
       # General applications
       bleachbit
+
+      discord
       signal-desktop
-      youtube-music
 
       krita
-      gimp
 
       onlyoffice-desktopeditors
       slack

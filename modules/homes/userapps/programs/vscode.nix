@@ -30,7 +30,7 @@ in {
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
         "nix.serverSettings" = {
-          "nil" = {
+          "nixd" = {
             "formatting" = {
               "command" = [
                 "nixpkgs-fmt"

@@ -14,8 +14,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       obsidian
-
-      blender
+      unityhub
     ];
 
     userapps.programs.vscode.enable = true;
