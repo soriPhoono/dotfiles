@@ -4,6 +4,7 @@ import Network from './Network';
 import Volume from "./Volume";
 import Battery from "./Battery";
 import Clock from "./Clock";
+import Bluetooth from "./Bluetooth";
 
 const LeftWidgets = () => Widget.Box({
   children: [
@@ -35,6 +36,7 @@ const RightWidgets = () => Widget.Box({
       children: [
         SystemTray(),
         Network(),
+        Bluetooth(),
         Volume(),
         Battery(),
         Clock(),

@@ -1,11 +1,10 @@
-@import 'src/palette.scss';
+@import './palette';
 
-@import 'src/background.scss';
-@import 'src/main_bar/main.scss';
+@import './widget/bar';
 
 * {
-  color: $text;
-
   margin-left: 4px;
   margin-right: 4px;
+
+  color: $text;
 }

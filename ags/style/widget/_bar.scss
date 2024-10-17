@@ -1,4 +1,10 @@
-@import '../palette.scss';
+@import '../palette';
+
+.main_bar {
+  background-color: $base;
+
+  border-radius: 1rem;
+}
 
 .workspace {
   margin-left: 0px;
@@ -12,4 +18,8 @@
 
 .workspace_active {
   color: $teal;
+}
+
+.right_main_bar {
+  padding-right: 1.5rem;
 }

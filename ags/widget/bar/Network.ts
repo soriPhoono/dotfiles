@@ -1,6 +1,8 @@
 const network = await Service.import('network')
 
 export default () => Widget.EventBox({
+  class_name: 'network',
+
   on_primary_click: () => Utils.exec('nm-applet'),
   on_secondary_click: () => network.toggleWifi(),
 
