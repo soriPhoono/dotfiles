@@ -67,7 +67,7 @@ in
           $mod CTRL, PRINT, exec, ${grim}/bin/grim -g "$(${slurp}/bin/slurp)" - | ${wl-clipboard-rs}/bin/wl-copy''
 
         "$mod, RETURN, exec, ${alacritty}/bin/alacritty"
-        "$mod, A, exec, ${fuzzel}/bin/fuzzel"
+        "$mod, A, exec, ${ags}/bin/ags -t applauncher"
         "$mod, E, exec, ${nautilus}/bin/nautilus"
         "$mod, B, exec, ${firefox}/bin/firefox"
         "$mod, C, exec, ${vscode-fhs}/bin/code --ozone-platform-hint=auto"
