@@ -4,14 +4,14 @@ const output = `/tmp/ags`
 try {
   console.log(`Building ${entry} -> ${output}/style.css`)
 
-  Utils.exec([
+  await Utils.execAsync([
     'sass', `${App.configDir}/style/main.scss`,
     `${output}/style.css`
   ])
 
   console.log(`Building ${entry} -> ${output}/main.js`)
 
-  Utils.exec([
+  await Utils.execAsync([
     'esbuild', '--bundle', entry,
     '--format=esm',
     `--outfile=${output}/main.js`,

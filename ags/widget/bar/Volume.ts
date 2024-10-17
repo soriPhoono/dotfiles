@@ -23,7 +23,7 @@ const getIcon = () => {
 }
 
 export default () => Widget.EventBox({
-  on_primary_click: () => Utils.exec('pavucontrol'),
+  on_primary_click: () => Utils.execAsync('pavucontrol').catch(console.error),
   on_secondary_click: () => audio.speaker.is_muted = !audio.speaker.is_muted,
 
   on_scroll_up: () => audio.speaker.volume = Math.max(0, audio.speaker.volume - 0.1),

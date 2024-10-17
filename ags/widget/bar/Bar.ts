@@ -5,6 +5,7 @@ import Volume from "./Volume";
 import Battery from "./Battery";
 import Clock from "./Clock";
 import Bluetooth from "./Bluetooth";
+import ClientTitle from "./ClientTitle";
 
 const LeftWidgets = () => Widget.Box({
   children: [
@@ -12,7 +13,8 @@ const LeftWidgets = () => Widget.Box({
       class_name: 'left_main_bar',
 
       children: [
-
+        // Session management
+        ClientTitle(),
       ]
     })
   ]
@@ -50,7 +52,6 @@ export default (monitor: number = 0) => Widget.Window({
   class_name: 'main_bar',
   anchor: ['top', 'left', 'right'],
   exclusivity: 'exclusive',
-  margins: [20, 20, 0, 20],
   monitor,
 
   child: Widget.CenterBox({

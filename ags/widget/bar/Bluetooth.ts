@@ -1,30 +1,38 @@
 const bluetooth = await Service.import('bluetooth')
 
 export default () => Widget.EventBox({
-  on_primary_click: () => Utils.exec('blueman'),
+  on_primary_click: () => Utils.execAsync('blueberry').catch(console.error),
   on_secondary_click: () => bluetooth.toggle(),
 
   setup: self => {
     const devices = Widget.Revealer({
-      visible: bluetooth.bind('connected_devices').as(connected => connected.length > 0),
-
-      reveal_child: bluetooth.bind('connected_devices').as(connected => connected.length > 0),
+      reveal_child: false,
       transition_duration: 1000,
       transition: 'slide_right',
 
       child: Widget.Box({
-        children: bluetooth.connected_devices.map(device =>
-          Widget.Box({
-            children: [
-              Widget.Icon({
-                icon: device.bind('icon_name')
-              }),
+        children: bluetooth.bind('connected_devices').as(devices => {
+          if (devices.length > 0) {
+            return devices.map(device =>
+              Widget.Box({
+                children: [
+                  Widget.Icon({
+                    icon: device.bind('icon_name').as(icon_name => `${icon_name}-symbolic`)
+                  }),
+                  Widget.Label({
+                    label: device.bind('battery_percentage').as(percentage => `${percentage}%`)
+                  })
+                ]
+              })
+            )
+          } else {
+            return [
               Widget.Label({
-                label: device.bind('battery_percentage').as(percentage => `${percentage}%`)
+                label: 'No devices connected'
               })
             ]
-          })
-        )
+          }
+        })
       })
     })
 
@@ -34,7 +42,9 @@ export default () => Widget.EventBox({
     self.child = Widget.Box({
       children: [
         Widget.Icon({
-          icon: bluetooth.bind('enabled').as(enabled => enabled ? 'bluetooth-connected-symbolic' : 'bluetooth-disabled-symbolic')
+          icon: bluetooth.bind('connected_devices').as(connected_devices => connected_devices.length > 0
+            ? 'bluetooth-symbolic'
+            : 'bluetooth-disconnected-symbolic')
         }),
         devices
       ]

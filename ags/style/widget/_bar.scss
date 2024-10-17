@@ -2,8 +2,7 @@
 
 .main_bar {
   background-color: $base;
-
-  border-radius: 1rem;
+  opacity: 0.8;
 }
 
 .workspace {
@@ -22,4 +21,12 @@
 
 .right_main_bar {
   padding-right: 1.5rem;
+}
+
+.client_class {
+  font-size: xx-small;
+}
+
+.client_title {
+  font-size: x-small;
 }

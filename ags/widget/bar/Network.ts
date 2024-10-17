@@ -3,7 +3,7 @@ const network = await Service.import('network')
 export default () => Widget.EventBox({
   class_name: 'network',
 
-  on_primary_click: () => Utils.exec('nm-applet'),
+  on_primary_click: () => Utils.execAsync('nm-connection-editor').catch(console.error),
   on_secondary_click: () => network.toggleWifi(),
 
   setup: self => {
