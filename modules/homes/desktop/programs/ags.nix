@@ -16,6 +16,8 @@ in {
         esbuild
 
         networkmanagerapplet
+        blueberry
+        pavucontrol
       ];
     };
 
