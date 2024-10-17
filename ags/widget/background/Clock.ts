@@ -7,12 +7,17 @@ const date = Variable("", {
 })
 
 export default () => Widget.Box({
+  vertical: true,
+
   children: [
     Widget.Label({
+      class_name: 'time',
+
       label: time.bind(),
     }),
-
     Widget.Label({
+      class_name: 'date',
+
       label: date.bind(),
     }),
   ]

@@ -1,13 +1,17 @@
+import Clock from "./Clock";
+
 export default (monitor: number = 0) => Widget.Window({
   name: 'background',
   class_name: 'background',
   monitor,
-  anchor: ['right', 'bottom'],
+  anchor: ['top', 'left', 'right', 'bottom'],
   exclusivity: 'ignore',
   layer: 'background',
-  child: Widget.Box({
-    children: [
-      // TODO: Add cpu and ram usage
-    ]
-  }),
+  child: Widget.CenterBox({
+    vertical: true,
+
+    center_widget: Widget.CenterBox({
+      center_widget: Clock(),
+    })
+  })
 })
