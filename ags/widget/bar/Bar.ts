@@ -3,6 +3,7 @@ import SystemTray from "./SystemTray";
 import Network from './Network';
 import Volume from "./Volume";
 import Battery from "./Battery";
+import Clock from "./Clock";
 
 const LeftWidgets = () => Widget.Box({
   children: [
@@ -32,10 +33,11 @@ const RightWidgets = () => Widget.Box({
       class_name: 'right_main_bar',
 
       children: [
+        SystemTray(),
         Network(),
         Volume(),
         Battery(),
-        SystemTray(),
+        Clock(),
       ]
     })
   ]

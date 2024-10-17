@@ -1,19 +1,6 @@
 { pkgs, ... }: {
   imports = [ ./common.nix ];
 
-  programs.hyprlock.settings = {
-    input-field = [{
-      size = "200, 50";
-      position = "0, -80";
-      monitor = "eDP-1";
-      dots_center = true;
-      fade_on_empty = false;
-      outline_thickness = 5;
-      placeholder_text = "Password...";
-      shadow_passes = 2;
-    }];
-  };
-
   desktop = {
     hyprland = {
       enable = true;

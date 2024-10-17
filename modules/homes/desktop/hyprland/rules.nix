@@ -30,11 +30,8 @@ in
     ];
 
     animation = [
-      "windowsIn, 1, 4, easeOut, "
-      "windowsOut, 1, 4, easeIn, "
+      "windows, 1, 4, easeIn, popin 50%"
       "windowsMove, 1, 4, easeOut, "
-
-      "fade, 1, 4, easeInOut, "
 
       "workspaces, 1, 4, easeInOut, "
     ];

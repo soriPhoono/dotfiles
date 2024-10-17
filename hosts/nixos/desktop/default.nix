@@ -19,7 +19,6 @@
     libvdpau-va-gl
 
     rocmPackages.clr.icd
-    clinfo # TODO: remove this once setup is configured
   ];
 
   systemd.tmpfiles.rules =

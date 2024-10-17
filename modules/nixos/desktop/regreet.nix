@@ -1,6 +1,17 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.regreet;
-in {
+let
+  cfg = config.desktop.regreet;
+
+  hyprland_config = pkgs.writeTextFile
+    {
+      name = "hyprland.conf";
+
+      text = ''
+        exec-once = ${pkgs.greetd.regreet}/bin/regreet
+      '';
+    };
+in
+{
   options = {
     desktop.regreet.enable =
       lib.mkEnableOption "Enable regreet display manager";
@@ -9,6 +20,12 @@ in {
   config = lib.mkIf cfg.enable {
     services.greetd = {
       enable = true;
+
+      settings = {
+        default_session = {
+          command = "${pkgs.hyprland}/bin/Hyprland --config ${hyprland_config}";
+        };
+      };
     };
 
     programs.regreet = {
@@ -34,13 +51,17 @@ in {
           accents = "teal";
           variant = "mocha";
         };
-        name = "catppuccin-mocha-teal-standard";
+        name = "catppuccin-mocha-teal-standard+default";
       };
 
       settings = {
         background = {
           path = ../../../assets/catppuccin-mountain.jpg;
           fit = "Contain";
+        };
+
+        GTK = {
+          application_prefer_dark_theme = true;
         };
       };
     };

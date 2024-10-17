@@ -1,5 +1,3 @@
-import Clock from "./Clock";
-
 export default (monitor: number = 0) => Widget.Window({
   name: 'background',
   class_name: 'background',
@@ -11,7 +9,9 @@ export default (monitor: number = 0) => Widget.Window({
     vertical: true,
 
     center_widget: Widget.CenterBox({
-      center_widget: Clock(),
+      center_widget: Widget.Box({
+
+      }),
     })
   })
 })
