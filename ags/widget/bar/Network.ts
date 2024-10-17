@@ -1,6 +1,38 @@
+import HoverRevealer from "lib/HoverRevealer"
+
 const network = await Service.import('network')
 
-export default () => Widget.EventBox({
+export default () => HoverRevealer({
+  class_name: 'network',
+
+  on_primary_click: () => Utils.execAsync('nm-connection-editor').catch(console.error),
+  on_secondary_click: () => network.toggleWifi(),
+},
+  Widget.Icon({
+    setup: self => self.hook(network, () => {
+      if (network.primary === 'wifi') {
+        self.icon = network.wifi.icon_name
+      } else {
+        self.icon = network.wired.icon_name
+      }
+    })
+  }),
+  Widget.Label({
+    setup: self => self.hook(network, () => {
+      if (network.primary === 'wifi') {
+        if (network.wifi.ssid) {
+          self.label = network.wifi.ssid
+        } else {
+          self.label = "Unknown"
+        }
+      } else {
+        self.label = network.wired.internet
+      }
+    })
+  })
+)
+
+/* export default () => Widget.EventBox({
   class_name: 'network',
 
   on_primary_click: () => Utils.execAsync('nm-connection-editor').catch(console.error),
@@ -49,3 +81,4 @@ export default () => Widget.EventBox({
     }
   }
 })
+ */

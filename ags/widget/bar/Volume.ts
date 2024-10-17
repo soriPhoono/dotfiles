@@ -1,3 +1,5 @@
+import HoverRevealer from "lib/HoverRevealer"
+
 const audio = await Service.import('audio')
 
 const getIcon = () => {
@@ -22,7 +24,25 @@ const getIcon = () => {
   return `audio-volume-${icons[icon]}-symbolic`
 }
 
-export default () => Widget.EventBox({
+export default () => HoverRevealer({
+  on_primary_click: () => Utils.execAsync('pavucontrol').catch(console.error),
+  on_secondary_click: () => audio.speaker.is_muted = !audio.speaker.is_muted,
+
+  on_scroll_up: () => audio.speaker.volume = Math.max(0, audio.speaker.volume - 0.1),
+  on_scroll_down: () => audio.speaker.volume = Math.min(1, audio.speaker.volume + 0.1),
+}, Widget.Icon({
+  icon: Utils.watch(getIcon(), audio.speaker, getIcon)
+}), Widget.Slider({
+  hexpand: true,
+  draw_value: false,
+  width_request: 140,
+  on_change: ({ value }) => audio.speaker.volume = value,
+  setup: self => self.hook(audio.speaker, () => {
+    self.value = audio.speaker.volume || 0
+  })
+}))
+
+/* export default () => Widget.EventBox({
   on_primary_click: () => Utils.execAsync('pavucontrol').catch(console.error),
   on_secondary_click: () => audio.speaker.is_muted = !audio.speaker.is_muted,
 
@@ -59,3 +79,4 @@ export default () => Widget.EventBox({
   }
 })
 
+ */

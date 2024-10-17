@@ -1,6 +1,19 @@
+import HoverRevealer from "lib/HoverRevealer";
+
 const battery = await Service.import('battery')
 
-export default () => Widget.EventBox({
+export default () => HoverRevealer({
+  visible: battery.bind('available'),
+},
+  Widget.Icon({
+    icon: battery.bind('icon_name')
+  }),
+  Widget.Label({
+    label: battery.bind('percent').as(p => `${p}%`)
+  })
+)
+
+/* export default () => Widget.EventBox({
   visible: battery.bind('available'),
 
   setup: self => {
@@ -28,3 +41,4 @@ export default () => Widget.EventBox({
     })
   }
 })
+ */

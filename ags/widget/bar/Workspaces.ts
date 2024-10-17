@@ -12,14 +12,23 @@ export default () => Widget.EventBox({
     children: Array.from({ length: 6 }, (_, i) => i + 1).map(i => Widget.EventBox({
       on_primary_click: () => dispatch(`${i}`),
 
-      child: Widget.Label({
-        class_name: 'workspace',
+      child: Widget.EventBox({
+        setup: self => {
+          const workspace = Widget.Label({
+            class_name: 'workspace',
 
-        label: hyprland.active.workspace.bind('id').as(id => id === i ? '' : ''),
+            label: hyprland.active.workspace.bind('id').as(id => id === i ? '' : ''),
 
-        setup: self => self.hook(hyprland.active.workspace, () => {
-          self.toggleClassName('workspace_active', hyprland.active.workspace.id === i)
-        })
+            setup: self => self.hook(hyprland.active.workspace, () => {
+              self.toggleClassName('workspace_active', hyprland.active.workspace.id === i)
+            })
+          })
+
+          self.on_hover = () => workspace.toggleClassName('workspace_hover', true)
+          self.on_hover_lost = () => workspace.toggleClassName('workspace_hover', false)
+
+          self.child = workspace
+        }
       })
     })),
   })

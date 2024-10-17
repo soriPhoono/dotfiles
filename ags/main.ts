@@ -1,6 +1,7 @@
 const hyprland = await Service.import('hyprland')
 
 import MainBar from "widget/bar/Bar"
+import LeftPanel from "widget/leftpanel/LeftPanel"
 
 const monitor_id = hyprland.monitors.filter(
   m => m.name.includes('DP-4') || m.name.includes('eDP-1')
@@ -13,6 +14,8 @@ App.config({
 
   windows: [
     MainBar(monitor_id.id),
+
+    LeftPanel()
   ]
 })
 
