@@ -5,6 +5,18 @@
   opacity: 0.8;
 }
 
+.left_main_bar{
+  padding-left: .75rem;
+}
+
+.client_class {
+  font-size: xx-small;
+}
+
+.client_title {
+  font-size: x-small;
+}
+
 .workspace {
   margin-left: 0px;
   margin-right: 0px;
@@ -24,13 +36,5 @@
 }
 
 .right_main_bar {
-  padding-right: 1.5rem;
-}
-
-.client_class {
-  font-size: xx-small;
-}
-
-.client_title {
-  font-size: x-small;
+  padding-right: .75rem;
 }
