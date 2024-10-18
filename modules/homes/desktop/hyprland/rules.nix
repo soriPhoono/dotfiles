@@ -13,7 +13,7 @@ let
     # Discord
     "class:(discord)"
     # Steam
-    "class:(steam)"
+    "class:(steam), title:(steam)"
     # Onlyoffice
     "class:(ONLYOFFICE Desktop Editors)"
     # VsCode
@@ -40,6 +40,14 @@ in
     windowrulev2 = builtins.concatMap
       (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ])
       floatingWindows
-    ++ [ "workspace 1, class:(gamescope)" "float, class:(gamescope)" ];
+    ++ [
+      "opacity 0.8, class:(.*)"
+
+      "opacity 1, class:(factorio)"
+      "opacity 1, class:(gamescope)"
+
+      "workspace 1, class:(gamescope)"
+      "float, class:(gamescope)"
+    ];
   };
 }
