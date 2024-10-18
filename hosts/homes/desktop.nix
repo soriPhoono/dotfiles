@@ -8,11 +8,11 @@
         env = [ "AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card2" ];
 
         monitor = [
+          "HDMI-A-5,1920x1080@75,0x0,1"
           "DP-4,1920x1080@144,1920x0,1"
-          "HDMI-A-1,1920x1080@75,0x0,1"
-          "DP-1,1920x1080@165,3840x0,1"
-          "HDMI-A-5,1920x1080,3840x0,1,mirror,DP-1"
-        ];
+          "DP-5,1920x1080@165,3840x0,1"
+          "HDMI-A-1,1920x1080,3840x0,1,mirror,DP-4"
+        ]; # TODO: fix cabling
 
         # Bind each workspace to each monitor
         workspace =
