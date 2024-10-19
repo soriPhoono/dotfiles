@@ -45,7 +45,7 @@ in
 
       "opacity 1, class:(factorio)"
       "opacity 1, class:(gamescope)"
-      "opacity 1, class:(firefox) title:(.*)( - YouTube)(.*)"
+      "opacity 1, class:(firefox), title:(.*)( - YouTube)(.*)"
 
       "workspace 1, class:(gamescope)"
       "float, class:(gamescope)"
