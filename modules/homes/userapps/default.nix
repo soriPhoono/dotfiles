@@ -4,6 +4,9 @@ in {
   imports = [
     ./development.nix
     ./streaming.nix
+
+    ./programs/obs.nix
+    ./programs/vscode.nix
   ];
 
   options = { userapps.enable = lib.mkEnableOption "Enable office programs"; };

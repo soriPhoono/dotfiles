@@ -20,7 +20,6 @@ in {
       programs = {
         ags.enable = true;
         alacritty.enable = true;
-        fuzzel.enable = true;
         wlogout.enable = true;
       };
       services = {
