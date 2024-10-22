@@ -14,7 +14,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    greetd = {
+    services.greetd = {
       enable = true;
 
       settings = {
