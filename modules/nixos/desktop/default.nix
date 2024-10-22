@@ -1,3 +1,3 @@
 {
-  imports = [ ./boot.nix ./hyprland.nix ./programs ./services ];
+  imports = [ ./boot.nix ./programs ./services ];
 }
