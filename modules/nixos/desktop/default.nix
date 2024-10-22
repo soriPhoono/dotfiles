@@ -1,3 +1,3 @@
 {
-  imports = [ ./boot.nix ./programs ./services ];
+  imports = [ ./boot.nix ./environments ./programs ./services ];
 }

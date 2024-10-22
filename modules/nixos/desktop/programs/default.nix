@@ -1,3 +1,3 @@
 {
-  imports = [ ./steam.nix ./droidcam.nix ];
+  imports = [ ./regreet.nix ./steam.nix ./droidcam.nix ];
 }
