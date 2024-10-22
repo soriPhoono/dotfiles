@@ -8,9 +8,10 @@
   ];
 
   desktop = {
-    boot.enable = true;
     hyprland.enable = true;
     steam.enable = true;
     droidcam.enable = true;
   };
+
+  services.upower.enable = true;
 }
