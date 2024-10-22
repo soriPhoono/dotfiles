@@ -31,7 +31,7 @@ in
 
       settings = {
         background = {
-          path = ../../../assets/catppuccin-mountain.jpg;
+          path = ../../../../assets/catppuccin-mountain.jpg;
           fit = "Contain";
         };
 
