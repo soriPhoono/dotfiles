@@ -8,6 +8,7 @@
   desktop = {
     boot.enable = true;
     hyprland.enable = true;
+    openrgb.enable = true;
     steam.enable = true;
   };
 
