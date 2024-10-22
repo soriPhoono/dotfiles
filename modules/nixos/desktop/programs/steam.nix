@@ -1,5 +1,5 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.steam;
+let cfg = config.desktop.programs.steam;
 in {
   options = {
     desktop.steam.enable = lib.mkEnableOption "Enable steam gaming support";

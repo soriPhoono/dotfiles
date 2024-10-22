@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.desktop.droidcam;
+let cfg = config.desktop.programs.droidcam;
 in {
   options = {
     desktop.droidcam = { enable = lib.mkEnableOption "Enable droidcam"; };

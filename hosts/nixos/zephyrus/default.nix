@@ -9,8 +9,12 @@
 
   desktop = {
     hyprland.enable = true;
-    steam.enable = true;
-    droidcam.enable = true;
+
+    programs = {
+      openrgb.enable = true;
+      droidcam.enable = true;
+      steam.enable = true;
+    };
   };
 
   services.upower.enable = true;

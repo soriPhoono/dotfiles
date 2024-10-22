@@ -6,9 +6,11 @@
   ];
 
   desktop = {
-    boot.enable = true;
     hyprland.enable = true;
-    steam.enable = true;
+    programs = {
+      openrgb.enable = true;
+      steam.enable = true;
+    };
   };
 
   boot.kernelParams = [ "i915.force_probe=a780" ];
