@@ -1,10 +1,10 @@
 { lib, config, ... }:
 let
-  cfg = config.desktop.programs.openrgb;
+  cfg = config.desktop.openrgb;
 in
 {
   options = {
-    desktop.programs.openrgb = {
+    desktop.openrgb = {
       enable = lib.mkEnableOption "Enable openrgb";
     };
   };
