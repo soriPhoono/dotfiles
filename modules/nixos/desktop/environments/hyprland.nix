@@ -1,15 +1,5 @@
 { lib, pkgs, config, username, ... }:
-let
-  cfg = config.desktop.hyprland;
-
-  launch_command = pkgs.writeTextFile
-    {
-      name = "regreet.conf";
-
-      text = ''
-        exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
-      '';
-    };
+let cfg = config.desktop.hyprland;
 in
 {
   options = {
@@ -20,10 +10,8 @@ in
     desktop = {
       boot.enable = true;
 
-      programs.regreet.enable = true;
-
       services = {
-        greetd.launch_command = "${pkgs.hyprland}/bin/Hyprland --config ${launch_command}";
+        sddm.enable = true;
 
         pipewire.enable = true;
       };
