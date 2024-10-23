@@ -1,19 +1,13 @@
 { lib, config, ... }:
-let
-  cfg = config.desktop.openrgb;
-in
-{
+let cfg = config.desktop.programs.openrgb;
+in {
   options = {
-    desktop.openrgb = {
-      enable = lib.mkEnableOption "Enable openrgb";
+    desktop.programs.openrgb = {
+      enable = lib.mkEnableOption "Enable openrgb support";
     };
   };
 
   config = lib.mkIf cfg.enable {
-    services.hardware.openrgb = {
-      enable = true;
-
-      motherboard = "intel";
-    };
+    services.hardware.openrgb.enable = true;
   };
 }
