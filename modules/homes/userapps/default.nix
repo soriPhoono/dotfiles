@@ -16,6 +16,8 @@ in {
       # General applications
       bleachbit
 
+      firefox
+
       discord
       signal-desktop
 

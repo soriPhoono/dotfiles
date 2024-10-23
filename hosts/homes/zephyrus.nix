@@ -1,7 +1,10 @@
-{ pkgs, ... }: {
+{
   imports = [ ./common.nix ];
 
-  desktop = {
+  userapps.development.advanced = true;
+  userapps.streaming.enable = true;
+  /*
+    desktop = {
     hyprland = {
       enable = true;
       extraSettings = {
@@ -23,5 +26,6 @@
         ];
       };
     };
-  };
+    };
+  */
 }

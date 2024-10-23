@@ -10,7 +10,11 @@ in {
       boot.enable = true;
 
       services = {
-        sddm.enable = true;
+        sddm = {
+          enable = true;
+
+          useKWin = true;
+        };
 
         pipewire.enable = true;
       };
@@ -24,10 +28,12 @@ in {
       desktopManager.plasma6 = {
         enable = true;
       };
+
+      power-profiles-daemon.enable = true;
     };
 
-    # networking.networkmanager.enable = true;
+    networking.networkmanager.enable = true;
 
-    # users.users.${username}.extraGroups = [ "networkmanager" ];
+    users.users.${username}.extraGroups = [ "networkmanager" ];
   };
 }
