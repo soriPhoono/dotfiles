@@ -6,7 +6,7 @@
   ];
 
   desktop = {
-    hyprland.enable = true;
+    environments.hyprland.enable = true;
 
     programs = {
       openrgb.enable = true;
