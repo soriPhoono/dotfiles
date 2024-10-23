@@ -10,7 +10,11 @@ in {
       boot.enable = true;
 
       services = {
-        sddm.enable = true;
+        sddm = {
+          enable = true;
+
+          useKWin = true;
+        };
 
         pipewire.enable = true;
       };
