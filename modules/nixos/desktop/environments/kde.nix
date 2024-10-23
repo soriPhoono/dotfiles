@@ -24,10 +24,12 @@ in {
       desktopManager.plasma6 = {
         enable = true;
       };
+
+      power-profiles-daemon.enable = true;
     };
 
-    # networking.networkmanager.enable = true;
+    networking.networkmanager.enable = true;
 
-    # users.users.${username}.extraGroups = [ "networkmanager" ];
+    users.users.${username}.extraGroups = [ "networkmanager" ];
   };
 }
