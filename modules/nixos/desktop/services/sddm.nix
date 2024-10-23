@@ -5,16 +5,28 @@ in {
     desktop.services.sddm = {
       enable = lib.mkEnableOption "Enable sddm display manager";
 
-      useKWin = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
+      useKWin = lib.mkEnableOption "Use kwin as sddm backend";
 
-        description = "Use kwin compositor for sddm backend";
+      theme = {
+        name = lib.mkOption {
+          type = lib.types.str;
+          default = "Elegant";
+
+          description = "Use theme name";
+        };
+
+        package = lib.mkPackageOption pkgs "theme" {
+          default = pkgs.elegant-sddm;
+        };
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [
+      cfg.theme.package
+    ];
+
     services.displayManager = {
       sddm = {
         enable = true;
@@ -24,11 +36,7 @@ in {
           compositor = if cfg.useKWin then "kwin" else "weston";
         };
 
-        extraPackages = with pkgs; [
-          elegant-sddm
-        ];
-
-        theme = "Elegant";
+        theme = cfg.theme.name;
       };
     };
   };
