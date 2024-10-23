@@ -7,6 +7,7 @@
 
   desktop = {
     hyprland.enable = true;
+
     programs = {
       openrgb.enable = true;
       steam.enable = true;
