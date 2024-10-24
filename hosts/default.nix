@@ -22,10 +22,14 @@
 
                   backupFileExtension = "~";
 
-                  sharedModules = [ self.homeManagerModules.default ];
+                  sharedModules = [
+                    inputs.plasma-manager.homeManagerModules.plasma-manager
+
+                    self.homeManagerModules.default
+                  ];
                   extraSpecialArgs = { inherit inputs username; };
 
-                  users.${username} = ./homes/${hostname};
+                  users.${username} = ./homes/${hostname}.nix;
                 };
               }
 
