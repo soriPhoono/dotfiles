@@ -25,7 +25,7 @@
                   sharedModules = [ self.homeManagerModules.default ];
                   extraSpecialArgs = { inherit inputs username; };
 
-                  users.${username} = ./homes/${hostname}.nix;
+                  users.${username} = ./homes/${hostname};
                 };
               }
 

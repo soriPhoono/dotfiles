@@ -9,7 +9,24 @@ in {
     programs = {
       steam = {
         enable = true;
-        package = pkgs.steam.override {
+
+        protontricks.enable = true;
+
+        extraCompatPackages = with pkgs; [ proton-ge-bin ];
+      };
+
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+      };
+    };
+  };
+}
+
+/*
+  For hyprland gamescope compatibility
+
+  package = pkgs.steam.override {
           extraPkgs = pkgs:
             with pkgs; [
               xorg.libXcursor
@@ -24,12 +41,4 @@ in {
               keyutils
             ];
         };
-
-        protontricks.enable = true;
-
-        extraPackages = with pkgs; [ gamescope ];
-        extraCompatPackages = with pkgs; [ proton-ge-bin ];
-      };
-    };
-  };
-}
+*/

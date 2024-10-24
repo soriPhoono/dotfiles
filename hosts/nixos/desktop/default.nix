@@ -6,7 +6,7 @@
   ];
 
   desktop = {
-    environments.hyprland.enable = true;
+    environments.kde.enable = true;
 
     programs = {
       openrgb.enable = true;
