@@ -14,8 +14,6 @@
           packages = with pkgs; [
             nixd
             nixpkgs-fmt
-
-            typescript-language-server
           ];
 
           shellHook = ''
@@ -35,12 +33,6 @@
     # User environment imports
     home-manager = {
       url = "github:nix-community/home-manager";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ags = {
-      url = "github:Aylur/ags";
 
       inputs.nixpkgs.follows = "nixpkgs";
     };
