@@ -1,3 +1,3 @@
 {
-  imports = [ ./regreet.nix ./openrgb.nix ./droidcam.nix ./steam.nix ];
+  imports = [ ./openrgb.nix ./droidcam.nix ./steam.nix ];
 }
