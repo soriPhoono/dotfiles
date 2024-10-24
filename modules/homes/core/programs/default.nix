@@ -21,9 +21,13 @@ in {
         cat = "${bat}/bin/bat";
         df = "${duf}/bin/duf";
         du = "${dua}/bin/dua";
-        top = "${btop}/bin/btop";
         v = "${nvim-pkg}/bin/nvim";
       };
+
+      packages = with pkgs; [
+        btop
+        nvtopPackages.full
+      ];
     };
 
     core.programs = {
