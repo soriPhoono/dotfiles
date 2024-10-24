@@ -1,6 +1,6 @@
 {
   imports = [
-    ../common.nix
+    ./common.nix
   ];
 
   desktop.plasma.enable = true;
