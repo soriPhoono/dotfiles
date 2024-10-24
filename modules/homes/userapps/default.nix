@@ -5,6 +5,7 @@ in {
     ./development.nix
     ./streaming.nix
 
+    ./programs/firefox.nix
     ./programs/obs.nix
     ./programs/vscode.nix
   ];
@@ -16,8 +17,6 @@ in {
       # General applications
       bleachbit
 
-      firefox
-
       discord
       signal-desktop
 
@@ -26,5 +25,7 @@ in {
       onlyoffice-desktopeditors
       slack
     ];
+
+    userapps.programs.firefox.enable = true;
   };
 }
