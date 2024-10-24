@@ -11,17 +11,18 @@ in
   };
 
   config =
-  let
-    packages = with pkgs; [
-      obsidian
-    ];
+    let
+      packages = with pkgs; [
+        obsidian
+      ];
 
-    advanced_packages = with pkgs; [
-      unityhub
-    ];
-  in lib.mkIf cfg.enable {
-    home.packages = packages ++ (if cfg.advanced then advanced_packages else []);
+      advanced_packages = with pkgs; [
+        unityhub
+      ];
+    in
+    lib.mkIf cfg.enable {
+      home.packages = packages ++ (if cfg.advanced then advanced_packages else [ ]);
 
-    userapps.programs.vscode.enable = true;
-  };
+      userapps.programs.vscode.enable = true;
+    };
 }
