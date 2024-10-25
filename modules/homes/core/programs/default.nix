@@ -35,6 +35,7 @@ in {
       starship.enable = lib.mkDefault true;
       fastfetch.enable = lib.mkDefault true;
       nix-index.enable = lib.mkDefault true;
+      ripgrep.enable = lib.mkDefault true;
       git.enable = lib.mkDefault true;
       eza.enable = lib.mkDefault true;
       find.enable = lib.mkDefault true;

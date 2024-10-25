@@ -6,6 +6,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    program.ripgrep.enable = true;
+    programs.ripgrep.enable = true;
   };
 }
