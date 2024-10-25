@@ -5,6 +5,7 @@ in {
     ./starship.nix
     ./fastfetch.nix
     ./nix-index.nix
+    ./ripgrep.nix
     ./git.nix
     ./eza.nix
     ./find.nix
