@@ -4,9 +4,12 @@
 
     panels = [
       {
+        screen = "all";
+
         location = "top";
         lengthMode = "fill";
         height = 35;
+
         floating = true;
         alignment = "left";
 
@@ -15,7 +18,7 @@
           "org.kde.plasma.systemmonitor.memory"
           "org.kde.plasma.systemmonitor.diskusage"
           "org.kde.plasma.systemmonitor.net"
-          "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.panelspacer"
           "org.kde.plasma.notifications"
           "org.kde.plasma.volume"
           "org.kde.plasma.networkmanagement"
@@ -25,9 +28,12 @@
         ];
       }
       {
+        screen = "all";
+
         location = "bottom";
         lengthMode = "fit";
         height = 35;
+
         floating = true;
         alignment = "center";
         hiding = "dodgewindows";
