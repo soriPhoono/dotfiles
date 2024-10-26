@@ -17,6 +17,7 @@
           "org.kde.plasma.systemmonitor.net"
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.notifications"
+          "org.kde.plasma.volume"
         ];
       }
     ];
