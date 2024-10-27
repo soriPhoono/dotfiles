@@ -8,8 +8,6 @@
       imports = [ ./hosts ./modules/nixos ./modules/homes ];
 
       perSystem = { pkgs, ... }: {
-        formatter = pkgs.nixpkgs-fmt;
-
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nixd
