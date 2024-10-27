@@ -36,10 +36,21 @@ in {
 
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
-        "nix.formatterPath" = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
-        "nix" = {
-          "nixpkgs" = {
-            "expr" = "import <nixpkgs> {}";
+        "nix.serverSettings" = {
+          nixd = {
+            formatting = {
+              command = [
+                "nixpkgs-fmt"
+              ];
+            };
+            options = {
+              nixos = {
+                expr = "(builtins.getFlake ${./.}).nixosConfigurations.desktop.options";
+              };
+              home_manager = {
+                expr = "(builtins.getFlake ${./.}).homeConfigurations.soriphoono.options";
+              };
+            };
           };
         };
       };
