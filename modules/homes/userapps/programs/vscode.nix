@@ -37,16 +37,9 @@ in {
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
         "nix.formatterPath" = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
-        "nixpkgs" = {
-          "expr" = "import <nixpkgs> { }";
-        };
-
-        "options" = {
-          "nixos" = {
-            "expr" = "(builtins.getFlake ${./.}).nixosConfigurations.desktop.options";
-          };
-          "home_manager" = {
-            "expr" = "(builtins.getFlake ${./.}).homeManagerConfigurations.soriphoono.options";
+        "nix" = {
+          "nixpkgs" = {
+            "expr" = "import <nixpkgs> {}";
           };
         };
       };
