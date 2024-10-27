@@ -29,15 +29,7 @@ in {
         };
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
-        "nix.serverSettings" = {
-          "nixd" = {
-            "formatting" = {
-              "command" = [
-                "nixpkgs-fmt"
-              ];
-            };
-          };
-        };
+        "nix.formatterPath" = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
       };
     };
   };
