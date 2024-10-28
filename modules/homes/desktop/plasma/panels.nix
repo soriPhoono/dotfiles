@@ -1,7 +1,0 @@
-{
-  programs.plasma = {
-    enable = true;
-
-    
-  };
-}
