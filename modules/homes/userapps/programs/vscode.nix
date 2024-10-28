@@ -15,26 +15,41 @@ in {
         "window.titleBarStyle" = "custom";
         "window.dialogStyle" = "custom";
         "window.menuBarVisibility" = "compact";
+
         "workbench.colorTheme" = "Stylix";
         "workbench.iconTheme" = "catppuccin-mocha";
+
         "files.autoSave" = "onFocusChange";
+
         "editor.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
         "editor.formatOnPaste" = true;
+
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
+
         "git.autofetch" = true;
         "git.confirmSync" = true;
+
         "codeium.enableConfig" = {
           "*" = true;
           "nix" = true;
         };
+
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
         "nix.serverSettings" = {
-          "nixd" = {
-            "formatting" = {
-              "command" = [
+          nixd = {
+            formatting = {
+              command = [
                 "nixpkgs-fmt"
               ];
+            };
+            options = {
+              nixos = {
+                expr = "(builtins.getFlake ${./.}).nixosConfigurations.desktop.options";
+              };
+              home_manager = {
+                expr = "(builtins.getFlake ${./.}).homeConfigurations.soriphoono.options";
+              };
             };
           };
         };
