@@ -23,8 +23,6 @@
                   backupFileExtension = "~";
 
                   sharedModules = [
-                    inputs.plasma-manager.homeManagerModules.plasma-manager
-
                     self.homeManagerModules.default
                   ];
                   extraSpecialArgs = { inherit inputs username; };
