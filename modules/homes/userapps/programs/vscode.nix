@@ -44,9 +44,6 @@ in {
               ];
             };
             options = {
-              nixos = {
-                expr = "(builtins.getFlake ${./.}).nixosConfigurations.desktop.options";
-              };
               home_manager = {
                 expr = "(builtins.getFlake ${./.}).homeConfigurations.soriphoono.options";
               };

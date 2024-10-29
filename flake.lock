@@ -320,11 +320,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730139179,
-        "narHash": "sha256-B9yvLLRwCbhfq2u+K9QfJUAg3NKKSwl6BHQHf02xeOs=",
+        "lastModified": 1730227616,
+        "narHash": "sha256-HCKjdCRcKCwJ2qVW1g9sDHmOfW6D3JrtMoaqMvUXMu4=",
         "owner": "soriPhoono",
         "repo": "nvim",
-        "rev": "675eca95d3112afe7e7e04c713eee2ee74da4acf",
+        "rev": "b85af5f3e445e3f525a61a99dc974ee0cdcf5ca5",
         "type": "github"
       },
       "original": {
@@ -335,11 +335,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1730068391,
-        "narHash": "sha256-jlAGtfMuI8pUUoUmNkm2P/38pOtHZdcAf3Az8XQLAf4=",
+        "lastModified": 1730161780,
+        "narHash": "sha256-z5ILcmwMtiCoHTXS1KsQWqigO7HJO8sbyK7f7wn9F/E=",
         "owner": "nixos",
         "repo": "nixos-hardware",
-        "rev": "6906ac67a1078cf950b8527341e229eeecb5bc30",
+        "rev": "07d15e8990d5d86a631641b4c429bc0a7400cfb8",
         "type": "github"
       },
       "original": {
