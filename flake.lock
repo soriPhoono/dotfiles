@@ -320,11 +320,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730227616,
-        "narHash": "sha256-HCKjdCRcKCwJ2qVW1g9sDHmOfW6D3JrtMoaqMvUXMu4=",
+        "lastModified": 1730227955,
+        "narHash": "sha256-NjOA+2tpuQgCMsruG1OmLLHSY1oNWtcml5wtgIpIlE4=",
         "owner": "soriPhoono",
         "repo": "nvim",
-        "rev": "b85af5f3e445e3f525a61a99dc974ee0cdcf5ca5",
+        "rev": "f47a0722c96e988e97208a3d29ab15371a22b4f5",
         "type": "github"
       },
       "original": {
