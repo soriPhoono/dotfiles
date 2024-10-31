@@ -9,7 +9,6 @@
     environments.kde.enable = true;
 
     programs = {
-      openrgb.enable = true;
       steam.enable = true;
     };
   };
