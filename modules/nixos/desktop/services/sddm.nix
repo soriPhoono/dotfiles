@@ -11,7 +11,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.catppuccin-sddm-corners
+      pkgs.elegant-sddm
     ];
 
     services.displayManager = {
@@ -23,7 +23,7 @@ in {
           compositor = if cfg.useKWin then "kwin" else "weston";
         };
 
-        theme = "catppuccin-sddm-corners";
+        theme = "Elegant";
       };
     };
   };
