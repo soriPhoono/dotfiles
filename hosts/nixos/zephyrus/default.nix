@@ -11,7 +11,6 @@
     environments.kde.enable = true;
 
     programs = {
-      openrgb.enable = true;
       droidcam.enable = true;
       steam.enable = true;
     };
