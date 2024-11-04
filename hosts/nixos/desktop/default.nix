@@ -34,7 +34,7 @@
     programs = {
       steam.enable = true;
 
-      supporting.disks.enable = true;
+      supporting.disks = true;
     };
   };
 
