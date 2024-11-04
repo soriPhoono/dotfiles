@@ -13,8 +13,8 @@
     environments.kde.enable = true;
 
     programs = {
-      droidcam.enable = true;
       steam.enable = true;
+      supporting.droidcam = true;
     };
   };
 }

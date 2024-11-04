@@ -10,8 +10,6 @@ in {
       services = {
         sddm = {
           enable = true;
-
-          useKWin = true;
         };
 
         pipewire.enable = true;
