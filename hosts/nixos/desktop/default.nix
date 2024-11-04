@@ -10,6 +10,8 @@
 
     programs = {
       steam.enable = true;
+
+      supporting.disks = true;
     };
   };
 
