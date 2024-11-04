@@ -2,7 +2,6 @@
 let cfg = config.userapps;
 in {
   imports = [
-    ./development.nix
     ./streaming.nix
 
     ./programs/firefox.nix
@@ -26,6 +25,10 @@ in {
       slack
     ];
 
-    userapps.programs.firefox.enable = true;
+    userapps.programs = {
+      firefox.enable = true;
+
+      vscode.enable = true;
+    };
   };
 }
