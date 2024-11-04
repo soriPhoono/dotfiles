@@ -9,7 +9,9 @@ in {
   };
 
   config = {
-    programs.gnome-disks.enable = lib.mkIf cfg.disks true;
-    programs.droidcam.enable = lib.mkIf cfg.droidcam true;
+    programs = {
+      gnome-disks.enable = lib.mkIf cfg.disks true;
+      droidcam.enable = lib.mkIf cfg.droidcam true;
+    };
   };
 }
