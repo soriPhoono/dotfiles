@@ -1,9 +1,33 @@
-{ lib, pkgs, ... }: {
-  imports = [ ./hardware ./nixpkgs.nix ./openssh.nix ./users.nix ];
+{ lib, pkgs, config, ... }:
+let
+  cfg = config.core;
+in
+{
+  imports = [ ./hardware ./nixpkgs.nix ./boot.nix ./openssh.nix ./users.nix ];
 
-  time.timeZone = lib.mkDefault "America/Chicago";
+  options = {
+    core = {
+      timeZone = lib.mkOption {
+        type = lib.types.str;
+        default = "America/Chicago";
+        description = "Time zone";
+      };
 
-  environment.systemPackages = with pkgs; [ coreutils ];
+      environmentVariables = lib.mkOption {
+        type = lib.types.attrsOf lib.types.str;
+        default = { };
+      };
+    };
+  };
 
-  system.stateVersion = lib.mkDefault "24.11";
+  config = {
+    time.timeZone = cfg.timeZone;
+
+    environment = {
+      systemPackages = with pkgs; [ coreutils ];
+      sessionVariables = cfg.environmentVariables;
+    };
+
+    system.stateVersion = lib.mkDefault "24.11";
+  };
 }

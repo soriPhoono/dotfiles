@@ -43,12 +43,5 @@
         home-manager.follows = "home-manager";
       };
     };
-
-    # Developer environment imports
-    neovim = {
-      url = "github:soriPhoono/nvim";
-
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 }

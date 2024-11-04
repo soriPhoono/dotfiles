@@ -7,8 +7,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     desktop = {
-      boot.enable = true;
-
       services = {
         sddm = {
           enable = true;

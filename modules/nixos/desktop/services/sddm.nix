@@ -4,8 +4,6 @@ in {
   options = {
     desktop.services.sddm = {
       enable = lib.mkEnableOption "Enable sddm display manager";
-
-      useKWin = lib.mkEnableOption "Use kwin as sddm backend";
     };
   };
 
@@ -20,7 +18,6 @@ in {
 
         wayland = {
           enable = true;
-          compositor = if cfg.useKWin then "kwin" else "weston";
         };
 
         theme = "Elegant";

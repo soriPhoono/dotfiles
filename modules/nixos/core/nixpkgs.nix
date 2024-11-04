@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -21,6 +21,6 @@
   nixpkgs = {
     config = { allowUnfree = true; };
 
-    overlays = import ../../../overlays { inherit inputs; };
+    overlays = import ../../../overlays;
   };
 }

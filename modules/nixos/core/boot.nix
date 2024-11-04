@@ -1,16 +1,25 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.boot;
-in {
-  options = { desktop.boot.enable = lib.mkEnableOption "Enable bootloader"; };
+let
+  cfg = config.core.boot;
+in
+{
+  options = {
+    core.boot = {
+      kernelParams = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+      };
+    };
+  };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     boot = {
       consoleLogLevel = 0;
       kernelPackages = pkgs.linuxPackages_zen;
       kernelParams =
-        [ "quiet" "systemd.show_status=auto" "rd.udev.log_level=3" ];
+        [ "quiet" "systemd.show_status=auto" "rd.udev.log_level=3" ] ++ cfg.kernelParams;
 
-      supportedFilesystems = [ "ntfs" ];
+      supportedFilesystems = [ "vfat" "ntfs" "apfs" "exfat" ];
 
       initrd = {
         verbose = false;
@@ -32,14 +41,11 @@ in {
       plymouth = {
         enable = true;
 
-        themePackages = with pkgs;
-          [
-            (adi1090x-plymouth-themes.override {
-              selected_themes = [ "pixels" ];
-            })
-          ];
+        themePackages = with pkgs; [
+          plymouth-proxzima-theme
+        ];
 
-        theme = "pixels";
+        theme = "proxzima";
       };
 
       tmp.cleanOnBoot = true;

@@ -22,7 +22,6 @@ in {
         cat = "${bat}/bin/bat";
         df = "${duf}/bin/duf";
         du = "${dua}/bin/dua";
-        v = "${nvim-pkg}/bin/nvim";
       };
 
       packages = with pkgs; [
