@@ -14,7 +14,11 @@
 
     programs = {
       steam.enable = true;
-      supporting.droidcam = true;
+
+      supporting = {
+        partition-manager = true;
+        droidcam = true;
+      };
     };
   };
 }

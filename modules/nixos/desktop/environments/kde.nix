@@ -1,4 +1,4 @@
-{ lib, config, username, ... }:
+{ lib, config, ... }:
 let cfg = config.desktop.environments.kde;
 in {
   options = {
@@ -6,30 +6,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    desktop = {
-      services = {
-        sddm = {
-          enable = true;
-        };
-
-        pipewire.enable = true;
-      };
-    };
-
-    programs = {
-      partition-manager.enable = true;
+    desktop.services = {
+      sddm.enable = true;
+      pipewire.enable = true;
+      network-manager.enable = true;
     };
 
     services = {
-      desktopManager.plasma6 = {
-        enable = true;
-      };
+      desktopManager.plasma6.enable = true;
 
       power-profiles-daemon.enable = true;
     };
-
-    networking.networkmanager.enable = true;
-
-    users.users.${username}.extraGroups = [ "networkmanager" ];
   };
 }

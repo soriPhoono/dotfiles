@@ -18,6 +18,8 @@ in {
 
         wayland = {
           enable = true;
+
+          # compositor = "kwin"; # TODO: possible bug, may need to re-enable
         };
 
         theme = "Elegant";

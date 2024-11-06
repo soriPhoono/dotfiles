@@ -4,6 +4,7 @@ in {
   options = {
     desktop.programs.supporting = {
       disks = lib.mkEnableOption "Enable gnome disks";
+      partition-manager = lib.mkEnableOption "Enable partition manager";
       droidcam = lib.mkEnableOption "Enable droidcam";
     };
   };
@@ -11,6 +12,7 @@ in {
   config = {
     programs = {
       gnome-disks.enable = lib.mkIf cfg.disks true;
+      partition-manager.enable = lib.mkIf cfg.partition_manager true;
       droidcam.enable = lib.mkIf cfg.droidcam true;
     };
   };
