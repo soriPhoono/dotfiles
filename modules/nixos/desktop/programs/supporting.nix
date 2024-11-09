@@ -12,7 +12,7 @@ in {
   config = {
     programs = {
       gnome-disks.enable = lib.mkIf cfg.disks true;
-      partition-manager.enable = lib.mkIf cfg.partition_manager true;
+      partition-manager.enable = lib.mkIf cfg.partition-manager true;
       droidcam.enable = lib.mkIf cfg.droidcam true;
     };
   };
