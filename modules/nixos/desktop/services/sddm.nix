@@ -19,10 +19,10 @@ in {
         wayland = {
           enable = true;
 
-          compositor = "kwin"; # TODO: possible bug, may need to re-enable
+          compositor = "kwin";
         };
 
-        theme = "Elegant";
+        theme = "elegant";
       };
     };
   };
