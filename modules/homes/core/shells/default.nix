@@ -1,1 +1,0 @@
-{ imports = [ ./fish.nix ]; }
