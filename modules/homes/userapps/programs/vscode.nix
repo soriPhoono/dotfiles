@@ -28,6 +28,7 @@ in {
 
         "git.autofetch" = true;
         "git.confirmSync" = false;
+        "git.enableSmartCommit" = true;
 
         "codeium.enableConfig" = {
           "*" = true;
