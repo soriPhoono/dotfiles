@@ -14,7 +14,9 @@ in {
       mutableExtensionsDir = false;
 
       extensions = with pkgs.vscode-extensions; [
-
+        # nix
+        jnoortheen.nix-ide
+        mkhl.direnv
       ];
 
       userSettings = {
@@ -22,7 +24,7 @@ in {
         "window.dialogStyle" = "custom";
         "window.menuBarVisibility" = "compact";
 
-        "workbench.colorTheme" = "Catppuccin Mocha";
+        "workbench.colorTheme" = "Stylix";
         "workbench.iconTheme" = "catppuccin-mocha";
 
         "files.autoSave" = "onFocusChange";
