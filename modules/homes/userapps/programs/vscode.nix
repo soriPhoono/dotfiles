@@ -9,8 +9,6 @@ in {
     programs.vscode = {
       enable = true;
 
-      package = pkgs.vscode-fhs;
-
       userSettings = {
         "window.titleBarStyle" = "custom";
         "window.dialogStyle" = "custom";
