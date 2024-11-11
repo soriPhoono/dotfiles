@@ -27,7 +27,7 @@ in {
         "terminal.integrated.fontFamily" = "'JetBrainsMono Nerd Font Mono'";
 
         "git.autofetch" = true;
-        "git.confirmSync" = true;
+        "git.confirmSync" = false;
 
         "codeium.enableConfig" = {
           "*" = true;
