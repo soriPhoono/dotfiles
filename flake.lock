@@ -218,12 +218,36 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/cc2f28000298e1269cea6612cd06ec9979dd5d7f.tar.gz"
       }
     },
+    "plasma-manager": {
+      "inputs": {
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1731193165,
+        "narHash": "sha256-pGF8L5g9QpkQtJP9JmNIRNZfcyhJHf7uT+d8tqI1h6Y=",
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "rev": "f33173b9d22e554a6f869626bc01808d35995257",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "plasma-manager",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "plasma-manager": "plasma-manager",
         "stylix": "stylix"
       }
     },
