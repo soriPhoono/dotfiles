@@ -9,7 +9,6 @@
 
   users.users = {
     soriphoono = {
-      name = "SoriPhoono";
       description = "Sori Phoono";
 
       isNormalUser = true;

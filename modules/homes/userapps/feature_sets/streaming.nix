@@ -1,10 +1,6 @@
 { lib, pkgs, config, ... }:
 let cfg = config.userapps.streaming;
 in {
-  imports = [
-    ./programs/obs.nix
-  ];
-
   options = {
     userapps.streaming = lib.mkEnableOption "Enable streaming userlevel applications";
   };
