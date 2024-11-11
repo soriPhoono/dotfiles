@@ -116,7 +116,6 @@ in {
                 };
               };
             }
-            "org.kde.plasma.appmenu"
             "org.kde.plasma.panelspacer"
             {
               plasmusicToolbar = {
