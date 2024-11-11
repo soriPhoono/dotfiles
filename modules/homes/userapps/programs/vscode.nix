@@ -15,7 +15,6 @@ in {
 
       extensions = with pkgs.vscode-extensions; [
         # Global themes
-        catppuccin.catppuccin-vsc
         catppuccin.catppuccin-vsc-icons
         
         # nix
