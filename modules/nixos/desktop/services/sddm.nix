@@ -9,7 +9,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.elegant-sddm
+      pkgs.sddm-chili-theme
     ];
 
     services.displayManager = {
@@ -22,7 +22,7 @@ in {
           compositor = "kwin";
         };
 
-        theme = "elegant";
+        theme = "chili";
       };
     };
   };

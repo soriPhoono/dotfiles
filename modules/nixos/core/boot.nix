@@ -42,10 +42,10 @@ in
         enable = true;
 
         themePackages = with pkgs; [
-          plymouth-proxzima-theme
+          (catppuccin-plymouth.override { variant = "mocha"; })
         ];
 
-        theme = "proxzima";
+        theme = "catppuccin-mocha";
       };
 
       tmp.cleanOnBoot = true;
