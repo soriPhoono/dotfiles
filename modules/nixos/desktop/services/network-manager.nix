@@ -1,4 +1,4 @@
-{ lib, config, username, ... }:
+{ lib, config, ... }:
 let
   cfg = config.desktop.services.network-manager;
 in
@@ -12,6 +12,6 @@ in
   config = lib.mkIf cfg.enable {
     networking.networkmanager.enable = true;
 
-    users.users.${username}.extraGroups = [ "networkmanager" ];
+    users.users.soriphoono.extraGroups = [ "networkmanager" ];
   };
 }

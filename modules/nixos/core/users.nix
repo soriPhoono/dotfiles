@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: {
+{ pkgs, ... }: {
   security.sudo.wheelNeedsPassword = false;
 
   programs = {
@@ -7,13 +7,15 @@
     dconf.enable = true;
   };
 
-  users.users.${username} = {
-    name = "${username}";
-    description = "Sori Phoono";
+  users.users = {
+    soriphoono = {
+      name = "SoriPhoono";
+      description = "Sori Phoono";
 
-    isNormalUser = true;
-    shell = pkgs.fish;
+      isNormalUser = true;
+      shell = pkgs.fish;
 
-    extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" ];
+    };
   };
 }

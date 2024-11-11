@@ -4,11 +4,11 @@
       inherit (inputs.nixpkgs) lib;
 
       mkHost =
-        { hostname, username, systemModules ? [ ], system ? "x86_64-linux" }:
+        { hostname, systemModules ? [ ], system ? "x86_64-linux" }:
         lib.nixosSystem {
           inherit system;
 
-          specialArgs = { inherit self inputs lib username; };
+          specialArgs = { inherit self inputs lib; };
 
           modules = with inputs;
             [
@@ -23,10 +23,13 @@
                   sharedModules = [
                     self.homeManagerModules.default
                   ];
-                  
-                  extraSpecialArgs = { inherit inputs username; };
 
-                  users.${username} = ./homes/${hostname};
+                  extraSpecialArgs = { inherit inputs; };
+
+                  users = {
+                    soriphoono = ./homes/${hostname}/soriphoono.nix;
+                    spookyskelly = lib.mkIf (hostname == "desktop") ./homes/desktop/danny.nix;
+                  };
                 };
               }
 
@@ -37,21 +40,18 @@
     {
       zephyrus = mkHost {
         hostname = "zephyrus";
-        username = "soriphoono";
 
         systemModules = [ ./nixos/zephyrus ];
       };
 
       desktop = mkHost {
         hostname = "desktop";
-        username = "soriphoono";
 
         systemModules = [ ./nixos/desktop ];
       };
 
       games-server = mkHost {
         hostname = "games-server";
-        username = "soriphoono";
 
         systemModules = [ ./nixos/games-server ];
       };
