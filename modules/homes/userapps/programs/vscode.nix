@@ -41,11 +41,6 @@ in {
         "git.confirmSync" = false;
         "git.enableSmartCommit" = true;
 
-        "codeium.enableConfig" = {
-          "*" = true;
-          "nix" = true;
-        };
-
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
         "nix.serverSettings" = {
