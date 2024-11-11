@@ -9,15 +9,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      (pkgs.where-is-my-sddm-theme.override {
-        themeConfig.General = {
-          backgroundFill = "#1e1e2e";
-          basicTextColor = "#cdd6f4";
-          passwordCursorColor = "#cdd6f4";
-          passwordInputBackground = "#1e1e2e";
-          passwordTextColor = "#cdd6f4";
-        };
-      })
+      pkgs.where-is-my-sddm-theme
     ];
 
     services.displayManager = {

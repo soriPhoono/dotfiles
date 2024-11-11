@@ -45,5 +45,7 @@
         home-manager.follows = "home-manager";
       };
     };
+
+    # Personal tooling imports
   };
 }
