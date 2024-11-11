@@ -9,6 +9,14 @@ in {
     programs.vscode = {
       enable = true;
 
+      enableUpdateCheck = true;
+      enableExtensionUpdateCheck = true;
+      mutableExtensionsDir = false;
+
+      extensions = with pkgs.vscode-extensions; [
+
+      ];
+
       userSettings = {
         "window.titleBarStyle" = "custom";
         "window.dialogStyle" = "custom";
