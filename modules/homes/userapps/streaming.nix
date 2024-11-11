@@ -6,10 +6,10 @@ in {
   ];
 
   options = {
-    userapps.streaming.enable = lib.mkEnableOption "Enable streaming userlevel applications";
+    userapps.streaming = lib.mkEnableOption "Enable streaming userlevel applications";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg {
     home.packages = with pkgs; [
       gimp
       audacity
