@@ -16,7 +16,7 @@ in {
         "window.dialogStyle" = "custom";
         "window.menuBarVisibility" = "compact";
 
-        "workbench.colorTheme" = "Stylix";
+        "workbench.colorTheme" = "Catppuccin Mocha";
         "workbench.iconTheme" = "catppuccin-mocha";
 
         "files.autoSave" = "onFocusChange";

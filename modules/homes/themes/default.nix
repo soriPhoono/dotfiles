@@ -20,6 +20,8 @@ in
       stylix = {
         enable = true;
 
+        targets.vscode.enable = false;
+
         cursor = {
           package = pkgs.catppuccin-cursors.mochaTeal;
           size = 24;
