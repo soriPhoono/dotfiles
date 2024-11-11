@@ -49,5 +49,12 @@
 
         systemModules = [ ./nixos/desktop ];
       };
+
+      games-server = mkHost {
+        hostname = "games-server";
+        username = "soriphoono";
+
+        systemModules = [ ./nixos/games-server ];
+      };
     };
 }

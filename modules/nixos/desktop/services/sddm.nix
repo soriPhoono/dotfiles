@@ -9,7 +9,13 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.sddm-chili-theme
+      (pkgs.where-is-my-sddm-theme.override {
+        themeConfig.General = {
+          background = "${../../../../assets/wallpapers/kung-fu.jpg}";
+          backgroundMode = "fill";
+        };
+        variants = [ "qt5" ];
+      })
     ];
 
     services.displayManager = {
@@ -22,7 +28,7 @@ in {
           compositor = "kwin";
         };
 
-        theme = "chili";
+        theme = "where_is_my_sddm_theme";
       };
     };
   };
