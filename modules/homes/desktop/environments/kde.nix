@@ -73,7 +73,10 @@ in {
               };
             }
           ];
+          alignment = "center";
           hiding = "autohide";
+          floating = true;
+          lengthMode = "fit";
         }
         # Application name, Global menu and Song information and playback controls at the top
         {
