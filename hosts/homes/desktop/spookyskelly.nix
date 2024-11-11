@@ -18,5 +18,6 @@
   userapps = {
     enable = true;
     streaming = true;
+    artwork = true;
   };
 }

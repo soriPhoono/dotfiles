@@ -28,7 +28,7 @@
 
                   users = {
                     soriphoono = ./homes/${hostname}/soriphoono.nix;
-                    spookyskelly = lib.mkIf (hostname == "desktop") ./homes/desktop/danny.nix;
+                    spookyskelly = lib.mkIf (hostname == "desktop") ./homes/desktop/spookyskelly.nix;
                   };
                 };
               }

@@ -16,5 +16,12 @@
 
       extraGroups = [ "wheel" ];
     };
+
+    spookyskelly = {
+      description = "Spooky Skelly";
+
+      isNormalUser = true;
+      shell = pkgs.fish;
+    };
   };
 }

@@ -15,8 +15,8 @@
     qt.enable = true;
   };
 
-  userapps = {
-    enable = true;
+  userapps.feature_sets = {
+    global = true;
     streaming = true;
   };
 }

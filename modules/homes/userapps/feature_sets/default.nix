@@ -1,15 +1,15 @@
 { lib, pkgs, config, ... }:
 let
-  cfg = config.userapps;
+  cfg = config.userapps.feature_sets;
 in
 {
   imports = [
     ./streaming.nix
   ];
 
-  options = { userapps.enable = lib.mkEnableOption "Enable office programs"; };
+  options = { userapps.feature_sets.global = lib.mkEnableOption "Enable office programs"; };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf cfg.global {
     home.packages = with pkgs; [
       # General applications
       bleachbit
