@@ -20,7 +20,7 @@
                   useGlobalPkgs = true;
                   useUserPackages = true;
 
-                  backupFileExtension = "~";
+                  backupFileExtension = "backup";
 
                   sharedModules = [
                     self.homeManagerModules.default
