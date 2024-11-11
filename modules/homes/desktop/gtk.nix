@@ -17,7 +17,6 @@ in
       };
 
       font = {
-        package = pkgs.nerdfonts;
         name = "AurulentSansM Nerd Font Propo";
       };
     };
