@@ -17,12 +17,8 @@ in {
       bleachbit
 
       discord
-      signal-desktop
 
-      krita
-
-      onlyoffice-desktopeditors
-      slack
+      obsidian
     ];
 
     userapps.programs = {
