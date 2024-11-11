@@ -3,7 +3,10 @@
     ../common.nix
   ];
 
-  desktop.gtk.enable = true;
+  desktop = {
+    gtk.enable = true;
+    qt.enable = true;
+  };
 
   userapps = {
     enable = true;
