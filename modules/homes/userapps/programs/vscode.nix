@@ -14,6 +14,10 @@ in {
       mutableExtensionsDir = false;
 
       extensions = with pkgs.vscode-extensions; [
+        # Global themes
+        catppuccin.catppuccin-vsc
+        catppuccin.catppuccin-vsc-icons
+        
         # nix
         jnoortheen.nix-ide
         mkhl.direnv
