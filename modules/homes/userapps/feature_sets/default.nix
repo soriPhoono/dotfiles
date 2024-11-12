@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    ./artwork.nix
     ./streaming.nix
   ];
 
