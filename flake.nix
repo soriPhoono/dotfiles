@@ -15,10 +15,6 @@
             nixd
             nixpkgs-fmt
           ];
-
-          shellHook = ''
-            echo "Project - dotfiles"
-          '';
         };
       };
     };
