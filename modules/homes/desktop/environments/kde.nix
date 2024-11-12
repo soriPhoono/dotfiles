@@ -134,7 +134,7 @@ in {
         effects = {
           blur.enable = true;
 
-          wobblyWindows = true;
+          wobblyWindows.enable = true;
         };
 
         scripts = {
