@@ -85,11 +85,6 @@ in {
             "org.kde.plasma.systemmonitor.diskusage"
             "org.kde.plasma.systemmonitor.net"
             "org.kde.plasma.panelspacer"
-            "org.kde.plasma.networkmanagement"
-            "org.kde.plasma.bluetooth"
-            "org.kde.plasma.volume"
-            "org.kde.plasma.battery"
-            "org.kde.plasma.brightness"
             {
               systemTray.items = {
                 # We explicitly show bluetooth and battery and volume
@@ -102,7 +97,19 @@ in {
                   "org.kde.plasma.volume"
                   "org.kde.plasma.networkmanagement"
                   "org.kde.plasma.brightness"
+                  "org.kde.plasma.clipboard"
                 ];
+              };
+            }
+            "org.kde.plasma.networkmanagement"
+            "org.kde.plasma.bluetooth"
+            "org.kde.plasma.volume"
+            "org.kde.plasma.battery"
+            "org.kde.plasma.brightness"
+            {
+              digitalClock = {
+                date.enable = false;
+                time.format = "12h";
               };
             }
           ];
