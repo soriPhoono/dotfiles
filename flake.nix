@@ -27,6 +27,8 @@
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     # User environment imports
+    nur.url = "github:nix-community/NUR";
+
     home-manager = {
       url = "github:nix-community/home-manager";
 
