@@ -15,6 +15,20 @@ in {
   config = lib.mkIf cfg.enable {
     programs.plasma = {
       enable = true;
+      immutableByDefault = true;
+
+      input.keyboard = {
+        repeatDelay = 300;
+        repeatRate = 20;
+      };
+
+      desktop.icons = {
+        folderPreviewPopups = true;
+        sorting = {
+          foldersFirst = true;
+          mode = "type";
+        };
+      };
 
       panels = [
         # Windows-like panel at the bottom
@@ -115,6 +129,23 @@ in {
           ];
         }
       ];
+
+      kwin = {
+        effects = {
+          blur.enable = true;
+
+          wobblyWindows = true;
+        };
+
+        scripts = {
+          polonium = {
+            enable = true;
+            settings = {
+              borderVisibility = "borderAll";
+            };
+          };
+        };
+      };
     };
   };
 }

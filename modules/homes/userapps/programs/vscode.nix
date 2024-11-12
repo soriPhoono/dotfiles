@@ -16,6 +16,10 @@ in {
       extensions = with pkgs.vscode-extensions; [
         # Global themes
         catppuccin.catppuccin-vsc-icons
+
+        # Global tooling
+        github.copilot
+        github.copilot-chat
         
         # nix
         jnoortheen.nix-ide

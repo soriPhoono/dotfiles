@@ -19,6 +19,7 @@
 
   userapps.feature_sets = {
     global = true;
+    development = true;
     streaming = true;
   };
 }

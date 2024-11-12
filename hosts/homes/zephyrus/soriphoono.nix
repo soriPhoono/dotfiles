@@ -17,5 +17,8 @@
     kde.enable = true;
   };
 
-  userapps.feature_sets.global = true;
+  userapps.feature_sets = {
+    global = true;
+    development = true;
+  };
 }
