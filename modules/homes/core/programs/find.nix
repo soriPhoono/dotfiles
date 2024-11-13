@@ -8,7 +8,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.shellAliases = with pkgs; { find = "${fzf}/bin/fzf"; };
+    home.shellAliases = with pkgs; {
+      find = "${fd}/bin/fd";
+      search = "${fzf}/bin/fzf";
+    };
 
     programs = {
       fd = {
