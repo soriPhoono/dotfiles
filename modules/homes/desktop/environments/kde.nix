@@ -32,6 +32,8 @@ in {
         profiles = {
           catppuccin = {
             colorScheme = "catppuccin-mocha";
+
+            font.size = 16;
           };
         };
       };
