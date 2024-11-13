@@ -14,8 +14,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.bash = {
       enable = true;
-      enableCompletion = true;
-      enableVteIntegration = true;
       historyControl = [ "ignoreboth" ];
     };
   };
