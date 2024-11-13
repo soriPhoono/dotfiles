@@ -25,7 +25,7 @@ in {
             {
               name = "minecraft uuid finder";
               keyword = "minecraft";
-              url = "https://mcuuid.net/?q=shadowlynch101";
+              url = "https://mcuuid.net/";
             }
           ];
         };

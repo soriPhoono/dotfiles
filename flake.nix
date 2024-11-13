@@ -26,6 +26,9 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    # Server imports
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+
     # User environment imports
     nur.url = "github:nix-community/NUR";
 
