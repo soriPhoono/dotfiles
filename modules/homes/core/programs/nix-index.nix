@@ -1,6 +1,8 @@
-{ lib, config, ... }:
-let cfg = config.core.programs.nix-index;
-in {
+{ lib, pkgs, config, ... }:
+let
+  cfg = config.core.programs.nix-index;
+in
+{
   options = {
     core.programs.nix-index = {
       enable = lib.mkEnableOption "Enable nix-index";

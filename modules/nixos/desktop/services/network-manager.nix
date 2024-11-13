@@ -1,6 +1,8 @@
 { lib, config, ... }:
 let
   cfg = config.desktop.services.network-manager;
+
+  enableWifiPermissions = users: lib.mapAttrs (name: user: user // { extraGroups = [ "networkmanager" ]; }) users;
 in
 {
   options = {
@@ -12,6 +14,6 @@ in
   config = lib.mkIf cfg.enable {
     networking.networkmanager.enable = true;
 
-    users.users.soriphoono.extraGroups = [ "networkmanager" ];
+    users.users = enableWifiPermissions config.users.users;
   };
 }
