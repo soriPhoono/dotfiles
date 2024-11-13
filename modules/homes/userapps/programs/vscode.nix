@@ -24,6 +24,14 @@ in {
         # nix
         jnoortheen.nix-ide
         mkhl.direnv
+
+        # zig
+        ziglang.vscode-zig
+
+        # rust
+        tamasfe.even-better-toml
+        vadimcn.vscode-lldb
+        rust-lang.rust-analyzer
       ];
 
       userSettings = {
