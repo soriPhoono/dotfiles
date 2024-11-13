@@ -3,7 +3,7 @@ let
   cfg = config.core;
 in
 {
-  imports = [ ./hardware ./nixpkgs.nix ./boot.nix ./openssh.nix ];
+  imports = [ ./hardware ./nixpkgs.nix ./boot.nix ./openssh.nix ./user.nix ];
 
   options = {
     core = {
@@ -28,12 +28,6 @@ in
     environment = {
       systemPackages = with pkgs; [ coreutils ];
       sessionVariables = cfg.environmentVariables;
-    };
-
-    programs = {
-      fish.enable = true;
-
-      dconf.enable = true;
     };
 
     system.stateVersion = lib.mkDefault "24.11";

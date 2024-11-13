@@ -25,6 +25,7 @@ in {
 
       fzf = {
         enable = true;
+        enableBashIntegration = config.core.shells.bash.enable;
         enableFishIntegration = config.core.shells.fish.enable;
 
         defaultCommand = "fd --type file";

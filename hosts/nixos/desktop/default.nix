@@ -1,15 +1,4 @@
-{ lib, pkgs, ... }:
-let
-  mkUser = username: isWheel: {
-    description = "${username}";
-
-    isNormalUser = true;
-    shell = pkgs.fish;
-
-    extraGroups = lib.mkIf isWheel [ "wheel" ];
-  };
-in
-{
+{ pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
 
@@ -17,8 +6,12 @@ in
   ];
 
   users.users = {
-    soriphoono = mkUser "soriphoono" true;
-    spookyskelly = mkUser "spookyskelly" false;
+    spookyskelly = {
+      description = "Spooky Skelly";
+
+      isNormalUser = true;
+      shell = pkgs.fish;
+    };
   };
 
   core = {

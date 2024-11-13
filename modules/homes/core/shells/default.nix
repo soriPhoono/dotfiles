@@ -1,1 +1,3 @@
-{ imports = [ ./fish.nix ]; }
+{
+  imports = [ ./bash.nix ./fish.nix ];
+}
