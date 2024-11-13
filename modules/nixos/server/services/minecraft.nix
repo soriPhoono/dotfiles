@@ -1,5 +1,5 @@
 { lib, config, ... }:
-let cfg = config.services.minecraft;
+let cfg = config.server.services.minecraft;
 in {
   options = {
     server.services.minecraft = {
@@ -12,6 +12,8 @@ in {
       enable = true;
       declarative = true;
       openFirewall = true;
+
+      jvmOpts = "-Xms4092M -Xmx4092M -XX:+UseG1GC -XX:+CMSIncrementalPacing -XX:+CMSClassUnloadingEnabled -XX:ParallelGCThreads=2 -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10";
 
       whitelist = {
         shadowlynch101 = "09c574f3-e8fc-4652-88ee-14cfa0b39557";

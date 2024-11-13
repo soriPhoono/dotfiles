@@ -20,6 +20,14 @@ in {
           extensions = with config.nur.repos.rycee.firefox-addons; [
             ublock-origin
           ];
+
+          bookmarks = [
+            {
+              name = "minecraft uuid finder";
+              keyword = "minecraft";
+              url = "https://mcuuid.net/?q=shadowlynch101";
+            }
+          ];
         };
       };
     };

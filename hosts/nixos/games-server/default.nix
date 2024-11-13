@@ -1,5 +1,3 @@
-{ pkgs, ... }: {
-  core.openssh.enable = true;
-
-
+{
+  server.services.minecraft.enable = true;
 }
