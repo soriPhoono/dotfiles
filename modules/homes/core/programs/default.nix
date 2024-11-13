@@ -21,7 +21,7 @@ in {
       shellAliases = with pkgs; {
         cat = "${bat}/bin/bat";
         df = "${duf}/bin/duf";
-        du = "${dua}/bin/dua";
+        du = "${dua}/bin/dua i";
         top = "${btop}/bin/btop";
         nvtop = "${nvtopPackages.full}/bin/nvtop";
       };
