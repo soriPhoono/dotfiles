@@ -6,6 +6,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home.shellAliases.grep = "rg";
+
     programs.ripgrep.enable = true;
   };
 }
