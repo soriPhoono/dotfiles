@@ -1,9 +1,25 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }:
+let
+  mkUser = username: isWheel: {
+    description = "${username}";
+
+    isNormalUser = true;
+    shell = pkgs.fish;
+
+    extraGroups = lib.mkIf isWheel [ "wheel" ];
+  };
+in
+{
   imports = [
     ./hardware-configuration.nix
 
     ../configuration.nix
   ];
+
+  users.users = {
+    soriphoono = mkUser "soriphoono" true;
+    spookyskelly = mkUser "spookyskelly" false;
+  };
 
   core = {
     boot.kernelParams = [

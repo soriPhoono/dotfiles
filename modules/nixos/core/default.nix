@@ -3,7 +3,7 @@ let
   cfg = config.core;
 in
 {
-  imports = [ ./hardware ./nixpkgs.nix ./boot.nix ./openssh.nix ./users.nix ];
+  imports = [ ./hardware ./nixpkgs.nix ./boot.nix ./openssh.nix ];
 
   options = {
     core = {
@@ -22,10 +22,18 @@ in
 
   config = {
     time.timeZone = cfg.timeZone;
+    
+    security.sudo.wheelNeedsPassword = false;
 
     environment = {
       systemPackages = with pkgs; [ coreutils ];
       sessionVariables = cfg.environmentVariables;
+    };
+
+    programs = {
+      fish.enable = true;
+
+      dconf.enable = true;
     };
 
     system.stateVersion = lib.mkDefault "24.11";
