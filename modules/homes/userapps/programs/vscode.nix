@@ -20,7 +20,7 @@ in {
         # Global tooling
         github.copilot
         github.copilot-chat
-        
+
         # nix
         jnoortheen.nix-ide
         mkhl.direnv

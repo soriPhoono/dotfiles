@@ -12,8 +12,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    core.shells.enable = lib.mkDefault true;
-
     programs.bash = {
       enable = true;
       enableCompletion = true;

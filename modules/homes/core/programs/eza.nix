@@ -10,7 +10,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.eza = {
       enable = true;
-      enableBashIntegration = config.core.shells.bash.enable;
       enableFishIntegration = config.core.shells.fish.enable;
 
       extraOptions = [ "--group-directories-first" ];

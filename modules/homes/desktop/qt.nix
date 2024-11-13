@@ -1,7 +1,8 @@
 { lib, config, ... }:
 let
   cfg = config.desktop.qt;
-in {
+in
+{
   options = {
     desktop.qt.enable = lib.mkEnableOption "Enable qt configuration";
   };

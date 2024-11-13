@@ -13,7 +13,7 @@ in
     programs.nix-index = {
       enable = true;
 
-      enableBashIntegration = config.core.shells.bash.enable;
+      enableBashIntegration = config.core.shells.enable;
       enableFishIntegration = config.core.shells.fish.enable;
     };
   };

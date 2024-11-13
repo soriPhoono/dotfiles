@@ -22,7 +22,7 @@ in
 
   config = {
     time.timeZone = cfg.timeZone;
-    
+
     security.sudo.wheelNeedsPassword = false;
 
     environment = {

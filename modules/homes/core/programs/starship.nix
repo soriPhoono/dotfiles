@@ -10,7 +10,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.starship = {
       enable = true;
-      enableBashIntegration = config.core.shells.bash.enable;
+      enableBashIntegration = config.core.shells.enable;
       enableFishIntegration = config.core.shells.fish.enable;
       enableTransience = config.core.shells.fish.enable;
 

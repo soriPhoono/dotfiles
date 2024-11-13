@@ -1,6 +1,8 @@
-{ lib, config, ... }: let
+{ lib, config, ... }:
+let
   cfg = config.desktop.programs.supporting;
-in {
+in
+{
   options = {
     desktop.programs.supporting = {
       droidcam = lib.mkEnableOption "Enable droidcam";
