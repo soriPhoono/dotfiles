@@ -15,11 +15,7 @@
 
     programs = {
       steam.enable = true;
-
-      supporting = {
-
-        droidcam = true;
-      };
+      supporting.droidcam = true;
     };
   };
 }

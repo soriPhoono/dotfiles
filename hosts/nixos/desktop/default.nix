@@ -40,14 +40,7 @@
   desktop = {
     environments.kde.enable = true;
 
-    programs = {
-      steam.enable = true;
-
-      supporting = {
-        disks = true;
-
-      };
-    };
+    programs.steam.enable = true;
   };
 
   systemd.tmpfiles.rules =

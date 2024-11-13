@@ -4,14 +4,9 @@ in {
   options = {
     core.shells.bash = {
       enable = lib.mkOption {
-        type = with lib.types; boo;
+        type = with lib.types; bool;
         default = true;
-        description =  "Enable bash shell";
-      };
-
-      extraShellInit = lib.mkOption {
-        type = with lib.types; lines;
-        description = "Extra arguments to add to shellInit script";
+        description = "Enable bash shell";
       };
     };
   };
@@ -23,9 +18,7 @@ in {
       enable = true;
       enableCompletion = true;
       enableVteIntegration = true;
-      historyControl = "ignoreboth";
-
-      initExtra = cfg.extraShellInit;
+      historyControl = [ "ignoreboth" ];
     };
   };
 }
