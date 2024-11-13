@@ -52,7 +52,7 @@ in
 
       supporting = {
         disks = true;
-        partition-manager = true;
+
       };
     };
   };

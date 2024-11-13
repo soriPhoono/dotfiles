@@ -1,14 +1,4 @@
-{ inputs, lib, pkgs, ... }:
-let
-  mkUser = username: isWheel: {
-    description = "${username}";
-
-    isNormalUser = true;
-    shell = pkgs.fish;
-
-    extraGroups = lib.mkIf isWheel [ "wheel" ];
-  };
-in
+{ inputs, pkgs, ... }:
 {
   imports = with inputs; [
     ./hardware-configuration.nix
@@ -18,7 +8,14 @@ in
     nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
 
-  users.users.soriphoono = mkUser "Sori Phoono" true;
+  users.users.soriphoono = {
+    description = "Sori Phoono";
+
+    isNormalUser = true;
+    shell = pkgs.fish;
+
+    extraGroups = [ "wheel" ];
+  };
 
   core.hardware.graphics.enable = true;
 
@@ -29,7 +26,7 @@ in
       steam.enable = true;
 
       supporting = {
-        partition-manager = true;
+
         droidcam = true;
       };
     };
