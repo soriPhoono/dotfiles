@@ -16,11 +16,6 @@ in
         name = "catppuccin-mocha-teal-cursors";
       };
 
-      iconTheme = {
-        package = pkgs.papirus-icon-theme;
-        name = "ePapirus-Dark";
-      };
-
       font = {
         name = "AurulentSansM Nerd Font Propo";
       };
