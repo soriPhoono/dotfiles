@@ -1,3 +1,7 @@
-{
-  server.services.minecraft.enable = true;
+{ inputs, ... }: {
+  imports = [
+    inputs.nix-minecraft.nixosModules.minecraft-servers
+  ];
+
+  
 }
