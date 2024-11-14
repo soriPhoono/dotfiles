@@ -56,7 +56,6 @@ in {
         };
 
         panels = [
-          # Windows-like panel at the bottom
           {
             location = "bottom";
             screen = "all";
