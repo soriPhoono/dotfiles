@@ -2,9 +2,7 @@
 let cfg = config.userapps.feature_sets.gaming;
 in {
   options = {
-    userapps.feature_sets.gaming = {
-      enable = lib.mkEnableOption "Enable gaming programs";
-    };
+    userapps.feature_sets.gaming = lib.mkEnableOption "Enable gaming programs";
   };
 
   config = lib.mkIf cfg.enable {

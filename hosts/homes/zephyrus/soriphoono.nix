@@ -13,5 +13,6 @@
   userapps.feature_sets = {
     global = true;
     development = true;
+    gaming = true;
   };
 }

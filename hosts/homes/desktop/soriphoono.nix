@@ -12,6 +12,7 @@
 
   userapps.feature_sets = {
     global = true;
+    gaming = true;
     development = true;
     streaming = true;
   };
