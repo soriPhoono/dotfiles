@@ -4,7 +4,7 @@
       inherit (inputs.nixpkgs) lib;
 
       mkHost =
-        { hostname, systemModules ? [ ], system ? "x86_64-linux" }:
+        { hostname, useHomeManager ? true, systemModules ? [ ], system ? "x86_64-linux" }:
         lib.nixosSystem {
           inherit system;
 
@@ -14,6 +14,8 @@
             [
               { networking.hostName = "${hostname}"; }
 
+              self.nixosModules.default
+            ] ++ lib.mkIf useHomeManager [
               home-manager.nixosModules.home-manager
               {
                 home-manager = {
@@ -32,8 +34,6 @@
                   };
                 };
               }
-
-              self.nixosModules.default
             ] ++ systemModules;
         };
     in
