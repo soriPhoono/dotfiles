@@ -9,24 +9,7 @@ in {
     programs = {
       steam = {
         enable = true;
-
-        protontricks.enable = true;
-
-        extraCompatPackages = with pkgs; [ proton-ge-bin ];
-      };
-
-      gamemode = {
-        enable = true;
-        enableRenice = true;
-      };
-    };
-  };
-}
-
-/*
-  For hyprland gamescope compatibility
-
-  package = pkgs.steam.override {
+        package = pkgs.steam.override {
           extraPkgs = pkgs:
             with pkgs; [
               xorg.libXcursor
@@ -41,4 +24,40 @@ in {
               keyutils
             ];
         };
+
+        protontricks.enable = true;
+
+        extraCompatPackages = with pkgs; [ proton-ge-bin ];
+      };
+
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+      };
+
+      gamescope = {
+        enable = true;
+
+        capSysNice = true;
+
+        args = [
+          "-W 1920"
+          "-H 1080"
+          "-r 144"
+          "-fe"
+        ];
+
+        env = {
+          OBS_VKCAPTURE = "1";
+          DXVK_ASYNC = "1";
+        };
+      };
+    };
+  };
+}
+
+/*
+  For hyprland gamescope compatibility
+
+  
 */
