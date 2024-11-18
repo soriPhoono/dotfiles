@@ -1,35 +1,14 @@
-{ lib, pkgs, config, ... }:
-let
-  cfg = config.core;
-in
+{ lib, pkgs, ... }:
 {
-  imports = [ ./hardware ./nixpkgs.nix ./boot.nix ./openssh.nix ./user.nix ];
+  imports = [ ./nixpkgs.nix ./boot.nix ./hardware.nix ./openssh.nix ./user.nix ];
 
-  options = {
-    core = {
-      timeZone = lib.mkOption {
-        type = lib.types.str;
-        default = "America/Chicago";
-        description = "Time zone";
-      };
+  time.timeZone = lib.mkDefault "America/Chicago";
 
-      environmentVariables = lib.mkOption {
-        type = lib.types.attrsOf lib.types.str;
-        default = { };
-      };
-    };
+  security.sudo.wheelNeedsPassword = false;
+
+  environment = {
+    systemPackages = with pkgs; [ coreutils ];
   };
 
-  config = {
-    time.timeZone = cfg.timeZone;
-
-    security.sudo.wheelNeedsPassword = false;
-
-    environment = {
-      systemPackages = with pkgs; [ coreutils ];
-      sessionVariables = cfg.environmentVariables;
-    };
-
-    system.stateVersion = lib.mkDefault "24.11";
-  };
+  system.stateVersion = lib.mkDefault "24.11";
 }

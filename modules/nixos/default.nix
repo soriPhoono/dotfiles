@@ -1,1 +1,6 @@
-{ flake.nixosModules.default.imports = [ ./core ./desktop ./server ]; }
+{
+  flake.nixosModules.default.imports = [
+    ./core
+    ./desktop
+  ];
+}

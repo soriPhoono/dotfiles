@@ -1,5 +1,10 @@
 {
   flake.homeManagerModules.default = {
-    imports = [ ./core ./desktop ./themes ./userapps ];
+    imports = [
+      ./core
+      # ./desktop
+      ./themes
+      # ./userapps
+    ];
   };
 }

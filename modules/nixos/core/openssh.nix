@@ -5,10 +5,10 @@ in {
     core.openssh.enable = lib.mkEnableOption "Enable openssh support";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     services.openssh = {
       enable = true;
-
+    } // lib.mkIf cfg.enable {
       # hostKeys = [{
       #   comment = "soriphoono ${config.networking.hostName}";
 

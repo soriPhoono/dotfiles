@@ -4,28 +4,19 @@ let
 in
 {
   options = {
-    core.boot = {
-      kernelParams = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [ ];
-      };
-    };
+    core.boot.enable = lib.mkEnableOption "Enable systemd-boot bootloader";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     boot = {
-      consoleLogLevel = 0;
       kernelPackages = pkgs.linuxPackages_zen;
+
+      consoleLogLevel = 0;
+
       kernelParams =
-        [ "quiet" "systemd.show_status=auto" "rd.udev.log_level=3" ] ++ cfg.kernelParams;
+        [ "quiet" "systemd.show_status=auto" "udev.log_level=3" ];
 
-      supportedFilesystems = [ "vfat" "ntfs" "apfs" "exfat" ];
-
-      initrd = {
-        verbose = false;
-
-        supportedFilesystems = [ "vfat" "ntfs" "apfs" "exfat" ];
-      };
+      initrd.verbose = false;
 
       loader = {
         efi.canTouchEfiVariables = true;
@@ -42,7 +33,9 @@ in
         enable = true;
 
         themePackages = with pkgs; [
-          (catppuccin-plymouth.override { variant = "mocha"; })
+          (catppuccin-plymouth.override {
+            variant = "mocha";
+          })
         ];
 
         theme = "catppuccin-mocha";

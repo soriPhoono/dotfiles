@@ -1,10 +1,6 @@
-{ inputs, ... }: {
+{
   nix = {
-    settings = {
-      auto-optimise-store = true;
-
-      experimental-features = [ "nix-command" "flakes" ];
-    };
+    settings.experimental-features = [ "nix-command" "flakes" ];
 
     optimise = {
       dates = [ "daily" ];
@@ -19,8 +15,8 @@
   };
 
   nixpkgs = {
-    config = { allowUnfree = true; };
+    config.allowUnfree = true;
 
-    overlays = import ../../../overlays { inherit inputs; };
+    overlays = import ../../../overlays;
   };
 }

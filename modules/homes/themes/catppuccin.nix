@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ... }:
+{ lib, pkgs, config, nixosConfig, ... }:
 let cfg = config.themes.catppuccin;
 in {
   options = {
@@ -10,7 +10,7 @@ in {
     themes.enable = true;
 
     stylix = {
-      image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
+      image = nixosConfig.desktop.wallpaper;
 
       base16Scheme =
         "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
