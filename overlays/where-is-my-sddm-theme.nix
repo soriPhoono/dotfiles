@@ -14,6 +14,7 @@ final: prev: {
       passwordInputBackground = "#313244";
       passwordTextColor = "#cdd6f4";
       showUsersByDefault = true;
+      showSessionsByDefault = true;
       usersFontSize = 24;
     };
   };

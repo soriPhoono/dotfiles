@@ -28,6 +28,19 @@ in {
         protontricks.enable = true;
 
         extraCompatPackages = with pkgs; [ proton-ge-bin ];
+
+        gamescopeSession = {
+          enable = true;
+
+          args = [
+            "-w 1920"
+            "-h 1080"
+            "-r 144"
+            "--force-grab-cursor"
+            "-fbe"
+            "--prefer-output DP-4"
+          ];
+        };
       };
 
       gamemode = {
@@ -37,27 +50,8 @@ in {
 
       gamescope = {
         enable = true;
-
         capSysNice = true;
-
-        args = [
-          "-W 1920"
-          "-H 1080"
-          "-r 144"
-          "-fe"
-        ];
-
-        env = {
-          OBS_VKCAPTURE = "1";
-          DXVK_ASYNC = "1";
-        };
       };
     };
   };
 }
-
-/*
-  For hyprland gamescope compatibility
-
-  
-*/

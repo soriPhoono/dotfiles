@@ -19,7 +19,7 @@ in {
         wayland = {
           enable = true;
 
-          compositor = "kwin";
+          # compositor = "kwin";
         };
 
         theme = "where_is_my_sddm_theme";
