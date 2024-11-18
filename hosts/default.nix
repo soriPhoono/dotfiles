@@ -49,11 +49,5 @@
 
         systemModules = [ ./nixos/desktop ];
       };
-
-      games-server = mkHost {
-        hostname = "games-server";
-
-        systemModules = [ ./nixos/games-server ];
-      };
     };
 }

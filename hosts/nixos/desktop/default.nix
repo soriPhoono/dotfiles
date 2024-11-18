@@ -5,15 +5,6 @@
     ../configuration.nix
   ];
 
-  users.users = {
-    spookyskelly = {
-      description = "Spooky Skelly";
-
-      isNormalUser = true;
-      shell = pkgs.fish;
-    };
-  };
-
   core = {
     boot.kernelParams = [
       "i915.force_probe=a780"
