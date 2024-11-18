@@ -1,8 +1,8 @@
 { lib, config, ... }:
-let cfg = config.desktop.environments.kde;
+let cfg = config.desktop.kde;
 in {
   options = {
-    desktop.environments.kde.enable = lib.mkEnableOption "Enable kde desktop environment";
+    desktop.kde.enable = lib.mkEnableOption "Enable kde desktop environment";
   };
 
   config = lib.mkIf cfg.enable {
