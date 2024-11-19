@@ -4,19 +4,47 @@ let
 in
 {
   options = {
-    core.boot.enable = lib.mkEnableOption "Enable systemd-boot bootloader";
+    core.boot = {
+      enable = lib.mkEnableOption "Enable systemd-boot bootloader";
+
+      debug = lib.mkEnableOption "Enable debug output for the kernel";
+
+      kernelParams = lib.mkOption {
+        type = lib.types.listOf lib.types.string;
+        default = [ ];
+        description = ''
+          Additional kernel parameters to pass to the kernel.
+        '';
+      };
+
+      plymouth = {
+        enable = lib.mkEnableOption "Enable plymouth boot splash";
+
+        theme = lib.mkOption {
+          type = lib.types.str;
+          default = "mocha";
+          description = ''
+            The variant of the plymouth theme to use.
+          '';
+        };
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
     boot = {
-      kernelPackages = pkgs.linuxPackages_zen;
+      kernelPackages = lib.mkDefault pkgs.linuxPackages_zen;
 
-      consoleLogLevel = 0;
+      consoleLogLevel = if cfg.debug then 4 else 0;
 
-      kernelParams =
-        [ "quiet" "systemd.show_status=auto" "udev.log_level=3" ];
+      kernelParams = (
+        if cfg.debug then
+          [ ]
+        else
+          [ "quiet" "systemd.show_status=auto" "udev.log_level=3" ]
+      ) ++ cfg.kernelParams;
 
-      initrd.verbose = false;
+      initrd.verbose = cfg.debug;
 
       loader = {
         efi.canTouchEfiVariables = true;
@@ -29,19 +57,17 @@ in
         };
       };
 
-      plymouth = {
+      plymouth = lib.mkIf cfg.plymouth.enable {
         enable = true;
 
         themePackages = with pkgs; [
           (catppuccin-plymouth.override {
-            variant = "mocha";
+            inherit (cfg.plymouth.theme) variant;
           })
         ];
 
-        theme = "catppuccin-mocha";
+        theme = cfg.plymouth.theme.name;
       };
-
-      tmp.cleanOnBoot = true;
     };
 
     zramSwap.enable = true;

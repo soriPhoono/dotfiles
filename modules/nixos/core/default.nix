@@ -6,9 +6,7 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  environment = {
-    systemPackages = with pkgs; [ coreutils ];
-  };
+  environment.systemPackages = with pkgs; [ coreutils ];
 
   system.stateVersion = lib.mkDefault "24.11";
 }

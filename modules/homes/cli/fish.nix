@@ -29,7 +29,9 @@ in {
 
       shellInitLast = ''
         set fish_greeting
-      '' + cfg.extraShellInit;
+
+        fastfetch
+      '';
     };
   };
 }

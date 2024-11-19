@@ -4,19 +4,10 @@ in {
   imports = [ ./kde.nix ./hyprland.nix ./steam.nix ];
 
   options = {
-    desktop = {
-      enable = lib.mkEnableOption "Enable the desktop module";
-
-      wallpaper = lib.mkOption {
-        type = lib.types.path;
-        description = "The path to the wallpaper image";
-      };
-    };
+    desktop.enable = lib.mkEnableOption "Enable the desktop module";
   };
 
   config = lib.mkIf cfg.enable {
-    desktop.wallpaper = ../../assets/wallpapers/catppuccin-mountain.jpg;
-
     security.rtkit.enable = true;
 
     networking.networkmanager.enable = true;

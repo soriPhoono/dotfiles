@@ -3,12 +3,7 @@
     ../common.nix
   ];
 
-  desktop = {
-    gtk.enable = true;
-    qt.enable = true;
-
-    kde.enable = true;
-  };
+  desktop.hyprland.enable = true;
 
   userapps.feature_sets = {
     global = true;
