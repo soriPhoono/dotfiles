@@ -26,6 +26,10 @@ in
   config = lib.mkIf cfg.enable {
     desktop.enable = true;
 
+    environment.systemPackages = with pkgs; [
+      kitty
+    ];
+
     programs = {
       hyprland.enable = true;
 
