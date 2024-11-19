@@ -26,9 +26,6 @@
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    # Server imports
-    # nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-
     # User environment imports
     nur.url = "github:nix-community/NUR";
 
@@ -36,12 +33,6 @@
       url = "github:nix-community/home-manager";
 
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
 
     stylix = {
@@ -53,7 +44,13 @@
       };
     };
 
-    
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
+    hyprland.url = "github:hyprwm/Hyprland";
 
     # Personal tooling imports
   };
