@@ -6,7 +6,7 @@ in {
       enable = lib.mkEnableOption "Enable fish shell";
 
       extraShellInit = lib.mkOption {
-        type = with lib.types; lines;
+        type = lib.types.lines;
         description = "Extra arguments to add to shellInit script";
       };
     };
@@ -29,8 +29,8 @@ in {
 
       shellInitLast = ''
         set fish_greeting
-
-        fastfetch
+        
+        ${cfg.extraShellInit}
       '';
     };
   };

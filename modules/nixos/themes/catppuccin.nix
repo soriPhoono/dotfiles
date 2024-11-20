@@ -10,7 +10,7 @@ in {
     themes.enable = true;
 
     stylix = {
-      image = nixosConfig.desktop.wallpaper;
+      image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
 
       base16Scheme =
         "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";

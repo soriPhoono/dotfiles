@@ -45,7 +45,7 @@ in
         enable = true;
 
         package = pkgs.steam.override {
-          extraPkgs = with pkgs; [
+          extraPkgs = pkgs: with pkgs; [
             xorg.libXcursor
             xorg.libXi
             xorg.libXinerama
@@ -80,9 +80,9 @@ in
         capSysNice = true;
 
         args = [
-          "-w ${cfg.session.resolution.width}"
-          "-h ${cfg.session.resolution.height}"
-          "-r ${cfg.session.resolution.refreshRate}"
+          "-w ${builtins.toString cfg.session.resolution.width}"
+          "-h ${builtins.toString cfg.session.resolution.height}"
+          "-r ${builtins.toString cfg.session.resolution.refreshRate}"
           "--force-grab-cursor"
           "-fb"
         ];

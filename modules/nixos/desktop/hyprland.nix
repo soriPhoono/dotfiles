@@ -7,7 +7,7 @@ in
       enable = lib.mkEnableOption "Enable hyprland window manager";
 
       monitors = lib.mkOption {
-        type = lib.types.listOf lib.lines.str;
+        type = lib.types.listOf lib.types.str;
         default = [
 
         ];
@@ -76,27 +76,29 @@ in
 
         settings = {
           default_session = {
-            command = let 
-              hypr_config = ''
-                ${builtins.map (monitor: "monitor = ${monitor}") cfg.monitors}
+            command =
+              let
+                hypr_config = ''
+                  ${lib.strings.concatMapStringsSep "\n" (monitor: "monitor = ${monitor}") cfg.monitors}
 
-                input = {
-                  repeat_rate = 30;
-                  repeat_delay = 200;
-                  accel_profile = "flat";
-                }
+                  input = {
+                    repeat_rate = 30;
+                    repeat_delay = 200;
+                    accel_profile = "flat";
+                  }
 
-                misc = {
-                  disable_hyprland_logo = true;
-                  disable_splash_rendering = true;
+                  misc = {
+                    disable_hyprland_logo = true;
+                    disable_splash_rendering = true;
 
-                  mouse_move_enables_dpms = true;
-                  key_press_enables_dpms = true;
-                }
+                    mouse_move_enables_dpms = true;
+                    key_press_enables_dpms = true;
+                  }
 
-                exec = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
-              '';
-            in "${pkgs.hyprland}/bin/Hyprland --config ${hypr_config}";
+                  exec = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
+                '';
+              in
+              "${pkgs.hyprland}/bin/Hyprland --config ${hypr_config}";
             user = "greeter";
           };
 

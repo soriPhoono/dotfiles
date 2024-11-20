@@ -43,11 +43,5 @@
 
         systemModules = [ ./nixos/zephyrus ];
       };
-
-      desktop = mkHost {
-        hostname = "desktop";
-
-        systemModules = [ ./nixos/desktop ];
-      };
     };
 }

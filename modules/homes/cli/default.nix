@@ -20,8 +20,8 @@
 
     starship = {
       enable = true;
-      enableFishIntegration = config.core.shells.fish.enable;
-      enableTransience = config.core.shells.fish.enable;
+      enableFishIntegration = config.cli.fish.enable;
+      enableTransience = config.cli.fish.enable;
 
       settings = {
         add_newline = true;
@@ -41,7 +41,7 @@
 
       settings = {
         logo = {
-          source = assets/fastfetch.txt;
+          source = ../../../assets/supporting/fastfetch.txt;
           color = { "1" = "cyan"; };
 
           padding.right = 1;
@@ -88,7 +88,7 @@
 
     eza = {
       enable = true;
-      enableFishIntegration = config.core.shells.fish.enable;
+      enableFishIntegration = config.cli.fish.enable;
 
       extraOptions = [ "--group-directories-first" ];
 
@@ -107,7 +107,7 @@
 
     fzf = {
       enable = true;
-      enableFishIntegration = config.core.shells.fish.enable;
+      enableFishIntegration = config.cli.fish.enable;
 
       defaultCommand = "fd --type file";
       defaultOptions = [ "--ansi" ];
@@ -145,13 +145,13 @@
       enable = true;
 
       enableBashIntegration = true;
-      enableFishIntegration = config.core.shells.fish.enable;
+      enableFishIntegration = config.cli.fish.enable;
     };
 
     home-manager.enable = true;
   };
 
-  core.shells.fish.extraShellInit = "${pkgs.fastfetch}/bin/fastfetch";
+  cli.fish.extraShellInit = "${pkgs.fastfetch}/bin/fastfetch";
 
   home.stateVersion = nixosConfig.system.stateVersion;
 }

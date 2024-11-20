@@ -51,7 +51,7 @@ in {
         enableGraphical = true;
       };
 
-      qmk.enable = lib.mkIf (cfg.enable || cfg.inputs.qmk.enable) true;
+      keyboard.qmk.enable = lib.mkIf (cfg.enable || cfg.inputs.qmk.enable) true;
 
       xone.enable = lib.mkIf (cfg.enable || cfg.inputs.controllers.enable) true;
     };

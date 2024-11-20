@@ -4,8 +4,6 @@ let
 in
 {
   imports = with inputs; [
-    stylix.homeManagerModules.stylix
-
     ./catppuccin.nix
   ];
 

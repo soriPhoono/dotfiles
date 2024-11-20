@@ -10,7 +10,7 @@ in
       debug = lib.mkEnableOption "Enable debug output for the kernel";
 
       kernelParams = lib.mkOption {
-        type = lib.types.listOf lib.types.string;
+        type = lib.types.listOf lib.types.str;
         default = [ ];
         description = ''
           Additional kernel parameters to pass to the kernel.
@@ -62,11 +62,11 @@ in
 
         themePackages = with pkgs; [
           (catppuccin-plymouth.override {
-            inherit (cfg.plymouth.theme) variant;
+            variant = cfg.plymouth.theme;
           })
         ];
 
-        theme = cfg.plymouth.theme.name;
+        theme = "catppuccin-${cfg.plymouth.theme}";
       };
     };
 
