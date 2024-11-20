@@ -26,15 +26,21 @@ in
   config = lib.mkIf cfg.enable {
     desktop.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      kitty
-    ];
+    environment = {
+      systemPackages = with pkgs; [
+        kitty
+      ];
+
+      variables = {
+        NIXOS_OZONE_WL = "1";
+      };
+    };
 
     programs = {
       hyprland.enable = true;
 
       regreet = {
-        enable = true;
+        enable = false;
 
         font = {
           name = "AurulentSansM Nerd Font Propo";
@@ -52,7 +58,7 @@ in
 
     services = {
       greetd = {
-        enable = true;
+        enable = false;
 
         vt = 1;
 
