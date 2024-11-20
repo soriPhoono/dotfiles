@@ -60,7 +60,7 @@ in
           default_session = {
             command =
               let
-                hypr_config = ''
+                hypr_config = pkgs.writeText "greetd.conf" ''
                   ${lib.strings.concatMapStringsSep "\n" (monitor: "monitor = ${monitor}") cfg.monitors}
 
                   input = {
