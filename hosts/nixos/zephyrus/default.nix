@@ -10,6 +10,20 @@
 
   desktop = {
     hyprland.enable = true;
-    steam.enable = true;
+    steam = {
+      enable = true;
+
+      session = {
+        enable = true;
+
+        output = "eDP-1";
+
+        resolution = {
+          width = 1920;
+          height = 1080;
+          refreshRate = 144;
+        }
+      };
+    };
   };
 }

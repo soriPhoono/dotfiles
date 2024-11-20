@@ -36,19 +36,6 @@ in
       regreet = {
         enable = true;
 
-        theme = {
-          package = (pkgs.magnetic-catppuccin-gtk.override {
-            # accent = [ "teal" ];
-            # tweaks = [
-            #   "black"
-            #   "float"
-            #   "outline"
-            # ];
-          });
-
-          name = "magnetic-catppuccin-gtk";
-        };
-
         font = {
           name = "AurulentSansM Nerd Font Propo";
           size = 14;
@@ -57,11 +44,6 @@ in
         iconTheme = {
           package = pkgs.papirus-icon-theme;
           name = "Papirus-Dark";
-        };
-
-        cursorTheme = {
-          package = pkgs.bibata-cursors-translucent;
-          name = "Bibata_Ghost";
         };
 
         settings.background.path = ../../../assets/wallpapers/catppuccin-mountain.jpg;

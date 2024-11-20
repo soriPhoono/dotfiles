@@ -14,6 +14,8 @@
             [
               { networking.hostName = "${hostname}"; }
 
+              inputs.stylix.nixosModules.stylix
+
               self.nixosModules.default
             
               home-manager.nixosModules.home-manager
@@ -30,7 +32,6 @@
 
                   users = {
                     soriphoono = ./homes/${hostname}/soriphoono.nix;
-                    # spookyskelly = lib.mkIf (hostname == "desktop") ./homes/desktop/spookyskelly.nix;
                   };
                 };
               }

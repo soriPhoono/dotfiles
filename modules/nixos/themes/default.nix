@@ -1,9 +1,9 @@
-{ inputs, lib, pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 let
   cfg = config.themes;
 in
 {
-  imports = with inputs; [
+  imports = [
     ./catppuccin.nix
   ];
 

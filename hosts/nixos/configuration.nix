@@ -1,10 +1,8 @@
 {
   core = {
-    boot = {
-      enable = true;
-      plymouth.enable = true;
-    };
-    
+    boot.enable = true;
     hardware.enable = true;
   };
+
+  themes.catppuccin.enable = true;
 }

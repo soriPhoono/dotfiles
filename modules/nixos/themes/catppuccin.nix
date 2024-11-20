@@ -1,4 +1,4 @@
-{ lib, pkgs, config, nixosConfig, ... }:
+{ lib, pkgs, config, ... }:
 let cfg = config.themes.catppuccin;
 in {
   options = {

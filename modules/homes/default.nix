@@ -3,7 +3,6 @@
     imports = [
       ./cli
       ./desktop
-      ./themes
       ./userapps
     ];
   };

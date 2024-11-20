@@ -16,18 +16,6 @@ in
           Additional kernel parameters to pass to the kernel.
         '';
       };
-
-      plymouth = {
-        enable = lib.mkEnableOption "Enable plymouth boot splash";
-
-        theme = lib.mkOption {
-          type = lib.types.str;
-          default = "mocha";
-          description = ''
-            The variant of the plymouth theme to use.
-          '';
-        };
-      };
     };
   };
 
@@ -57,17 +45,7 @@ in
         };
       };
 
-      plymouth = lib.mkIf cfg.plymouth.enable {
-        enable = true;
-
-        themePackages = with pkgs; [
-          (catppuccin-plymouth.override {
-            variant = cfg.plymouth.theme;
-          })
-        ];
-
-        theme = "catppuccin-${cfg.plymouth.theme}";
-      };
+      plymouth.enable = ! cfg.debug;
     };
 
     zramSwap.enable = true;
