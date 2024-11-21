@@ -26,21 +26,69 @@ in
   config = lib.mkIf cfg.enable {
     desktop.enable = true;
 
+    security.polkit.enable = true;
+
+    systemd = {
+      user.services.polkit-gnome-authentication-agent-1 = {
+        description = "polkit-gnome-authentication-agent-1";
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+      };
+    };
+
     environment = {
       systemPackages = with pkgs; [
-        kitty
+        playerctl
+        brightnessctl
+
+        grim
+        slurp
+
+        wl-clipboard-rs
+
+        alacritty
       ];
 
       variables = {
         NIXOS_OZONE_WL = "1";
+
+        GDK_BACKEND = "wayland,x11";
+        QT_QPA_PLATFORM = "wayland;xcb";
+        CLUTTER_BACKEND = "wayland";
+
+        QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
+        QT_AUTO_SCREEN_SCALE_FACTOR = 1;
+
+        XDG_SESSION_DESKTOP = "Hyprland";
+
+        HYPRCURSOR_SIZE = 24;
       };
     };
 
     programs = {
       hyprland.enable = true;
 
+      thunar = {
+        enable = true;
+        plugins = with pkgs.xfce; [
+          thunar-volman
+          thunar-archive-plugin
+          thunar-media-tags-plugin
+        ];
+      };
+
+      file-roller.enable = true;
+
       regreet = {
-        enable = false;
+        enable = true;
 
         font = {
           name = "AurulentSansM Nerd Font Propo";
@@ -57,8 +105,12 @@ in
     };
 
     services = {
+      gvfs.enable = true;
+
+      gnome.gnome-keyring.enable = true;
+
       greetd = {
-        enable = false;
+        enable = true;
 
         vt = 1;
 
@@ -83,7 +135,7 @@ in
                     key_press_enables_dpms = true;
                   }
 
-                  exec = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
+                  exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
                 '';
               in
               "${pkgs.hyprland}/bin/Hyprland --config ${hypr_config}";

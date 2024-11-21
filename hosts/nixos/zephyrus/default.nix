@@ -9,7 +9,14 @@
   ];
 
   desktop = {
-    hyprland.enable = true;
+    hyprland = {
+      enable = true;
+
+      monitors = [
+        "eDP-1, 1920x1080@144, 0x0, 1"
+      ];
+    };
+
     steam = {
       enable = true;
 

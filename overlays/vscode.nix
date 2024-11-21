@@ -1,8 +1,8 @@
 final: prev: {
-  vscode-fhs = prev.vscode-fhs.overrideAttrs (_: {
+  vscode = prev.vscode.overrideAttrs (_: {
     src = builtins.fetchTarball {
       url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64";
-      sha256 = "106gy3w46js6kji4lf0klgi1rjdwbpdi5i2gm4jjxsiki45bz6qk";
+      sha256 = "1j9wg42g3m46bm6l6p83h2abqkrb9afvc0b87d54cmdgwj717gnh";
     };
   });
 }
