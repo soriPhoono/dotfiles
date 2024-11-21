@@ -1,5 +1,6 @@
 { lib, pkgs, config, ... }:
-let cfg = config.desktop.hyprland;
+let
+  cfg = config.desktop.hyprland;
 in
 {
   options = {
@@ -24,9 +25,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    desktop.enable = true;
-
-    security.polkit.enable = true;
+    security = {
+      polkit.enable = true;
+      rtkit.enable = true;
+    };
 
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
@@ -44,6 +46,12 @@ in
       };
     };
 
+    xdg = {
+      portal.extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+    };
+
     environment = {
       systemPackages = with pkgs; [
         playerctl
@@ -55,14 +63,15 @@ in
         wl-clipboard-rs
 
         alacritty
+        nautilus
       ];
 
       variables = {
         NIXOS_OZONE_WL = "1";
 
-        GDK_BACKEND = "wayland,x11";
-        QT_QPA_PLATFORM = "wayland;xcb";
-        CLUTTER_BACKEND = "wayland";
+        # GDK_BACKEND = "wayland,x11";
+        # QT_QPA_PLATFORM = "wayland;xcb";
+        # CLUTTER_BACKEND = "wayland";
 
         QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
         QT_AUTO_SCREEN_SCALE_FACTOR = 1;
@@ -76,15 +85,9 @@ in
     programs = {
       hyprland.enable = true;
 
-      thunar = {
-        enable = true;
-        plugins = with pkgs.xfce; [
-          thunar-volman
-          thunar-archive-plugin
-          thunar-media-tags-plugin
-        ];
-      };
-
+      droidcam.enable = true;
+      partition-manager.enable = true;
+      seahorse.enable = true;
       file-roller.enable = true;
 
       regreet = {
@@ -105,9 +108,21 @@ in
     };
 
     services = {
+      gnome.gnome-keyring.enable = true;
+
       gvfs.enable = true;
 
-      gnome.gnome-keyring.enable = true;
+      upower.enable = true;
+      power-profiles-daemon.enable = true;
+
+      pipewire = {
+        enable = true;
+
+        jack.enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
 
       greetd = {
         enable = true;
@@ -149,5 +164,9 @@ in
         };
       };
     };
+
+    networking.networkmanager.enable = true;
+
+    users.users.soriphoono.extraGroups = [ "networkmanager" ];
   };
 }

@@ -13,26 +13,6 @@ in
           type = lib.types.str;
           description = "Output to use for gamescope";
         };
-
-        resolution = {
-          width = lib.mkOption {
-            type = lib.types.int;
-            default = 1920;
-            description = "Width of the gamescope window";
-          };
-
-          height = lib.mkOption {
-            type = lib.types.int;
-            default = 1080;
-            description = "Height of the gamescope window";
-          };
-
-          refreshRate = lib.mkOption {
-            type = lib.types.int;
-            default = 144;
-            description = "Refresh rate of the gamescope window";
-          };
-        };
       };
     };
   };
@@ -80,9 +60,9 @@ in
         capSysNice = true;
 
         args = [
-          "-w ${builtins.toString cfg.session.resolution.width}"
-          "-h ${builtins.toString cfg.session.resolution.height}"
-          "-r ${builtins.toString cfg.session.resolution.refreshRate}"
+          "-w 1920"
+          "-h 1080"
+          "-r 144"
           "--force-grab-cursor"
           "-fb"
         ];
