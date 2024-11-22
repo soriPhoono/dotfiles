@@ -45,6 +45,21 @@ in {
       systemd.variables = [ "--all" ];
 
       settings = {
+        env = [
+          "NIXOS_OZONE_WL,1"
+
+          "GDK_BACKEND,wayland,x11"
+          "GSK_RENDERER,gl"
+
+          "QT_QPA_PLATFORM,wayland;xcb"
+          "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+          "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+
+          "XDG_SESSION_DESKTOP,Hyprland"
+
+          "HYPRCURSOR_SIZE,24"
+        ];
+
         "$mod" = "SUPER";
 
         general = {
@@ -102,31 +117,16 @@ in {
 
         windowrulev2 =
           let
-            floatingWindows = [
-              # TODO: add more floating window rules for hyprland
-              # Disk manager
-              "class:(gnome-disks)"
-              # Feh image viewer
-              "class:(feh)"
-              # Mpv video player
-              "class:(mpv)"
-              # Nautilus
-              "class:(org.gnome.Nautilus)"
-              "class:(org.gnome.FileRoller)"
-              # Discord
-              "class:(discord)"
-              # Steam
-              "class:(steam), title:(steam)"
-              # VsCode
-              "class:(code), title:(Open Folder)"
-              # Obsidian
-              "class:(electron), title:(Open folder as vault)"
-            ];
+            floatWindows = windows: builtins.concatMap (w: [ "float, ${w}" ] ++ [ "center, ${w}" ] ++ [ "size 50, ${w}" ]) windows;
           in
-          builtins.concatMap
-            (v: [ "float, ${v}" ] ++ [ "center, ${v}" ] ++ [ "size 80%, ${v}" ])
-            floatingWindows
-          ++ [
+          floatWindows [
+            "class:(feh)"
+            "class:(mpv)"
+            "class:(discord)"
+            "class:(electron), title:(Open folder as vault)"
+            "class:(code), title:(Open Folder)"
+            "class:(steam)"
+          ] ++ [
             "opacity 0.8, class:(.*)"
 
             "opacity 1, class:(firefox), title:(.*)( - YouTube)(.*)"
@@ -167,7 +167,7 @@ in {
             $mod CTRL, PRINT, exec, grim -g "$(slurp)" - | wl-copy''
 
           "$mod, Return, exec, alacritty"
-          "$mod, E, exec, thunar"
+          "$mod, E, exec, nautilus"
           "$mod, B, exec, firefox"
           "$mod, C, exec, code"
           "$mod, N, exec, obsidian"

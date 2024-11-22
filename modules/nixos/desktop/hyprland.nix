@@ -25,10 +25,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    security = {
-      polkit.enable = true;
-      rtkit.enable = true;
-    };
+    desktop.enable = true;
+
+    security.polkit.enable = true;
 
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
@@ -59,36 +58,11 @@ in
 
         grim
         slurp
-
-        wl-clipboard-rs
-
-        alacritty
-        nautilus
       ];
-
-      variables = {
-        NIXOS_OZONE_WL = "1";
-
-        # GDK_BACKEND = "wayland,x11";
-        # QT_QPA_PLATFORM = "wayland;xcb";
-        # CLUTTER_BACKEND = "wayland";
-
-        QT_WAYLAND_DISABLE_WINDOWDECORATION = 1;
-        QT_AUTO_SCREEN_SCALE_FACTOR = 1;
-
-        XDG_SESSION_DESKTOP = "Hyprland";
-
-        HYPRCURSOR_SIZE = 24;
-      };
     };
 
     programs = {
       hyprland.enable = true;
-
-      droidcam.enable = true;
-      partition-manager.enable = true;
-      seahorse.enable = true;
-      file-roller.enable = true;
 
       regreet = {
         enable = true;
@@ -108,65 +82,11 @@ in
     };
 
     services = {
-      gnome.gnome-keyring.enable = true;
-
-      gvfs.enable = true;
-
-      upower.enable = true;
-      power-profiles-daemon.enable = true;
-
-      pipewire = {
-        enable = true;
-
-        jack.enable = true;
-        alsa.enable = true;
-        alsa.support32Bit = true;
-        pulse.enable = true;
-      };
-
       greetd = {
         enable = true;
 
         vt = 1;
-
-        settings = {
-          default_session = {
-            command =
-              let
-                hypr_config = pkgs.writeText "greetd.conf" ''
-                  ${lib.strings.concatMapStringsSep "\n" (monitor: "monitor = ${monitor}") cfg.monitors}
-
-                  input = {
-                    repeat_rate = 30;
-                    repeat_delay = 200;
-                    accel_profile = "flat";
-                  }
-
-                  misc = {
-                    disable_hyprland_logo = true;
-                    disable_splash_rendering = true;
-
-                    mouse_move_enables_dpms = true;
-                    key_press_enables_dpms = true;
-                  }
-
-                  exec-once = ${pkgs.greetd.regreet}/bin/regreet; hyprctl dispatch exit
-                '';
-              in
-              "${pkgs.hyprland}/bin/Hyprland --config ${hypr_config}";
-            user = "greeter";
-          };
-
-          initial_session = {
-            command = "Hyprland";
-            user = "soriphoono";
-          };
-        };
       };
     };
-
-    networking.networkmanager.enable = true;
-
-    users.users.soriphoono.extraGroups = [ "networkmanager" ];
   };
 }
