@@ -56,6 +56,10 @@
         };
       };
 
+      aliases = {
+        shells.default = "main-shell";
+      };
+
       systems = with inputs; {
         modules.nixos = [
           stylix.nixosModules.stylix
