@@ -56,9 +56,7 @@
         };
       };
 
-      alias = {
-        shells.default = "main-shell";
-      };
+      alias.shells.default = "main-shell";
 
       systems = with inputs; {
         modules.nixos = [

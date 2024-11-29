@@ -1,4 +1,4 @@
-{ pkgs, config, nixosConfig, ... }: {
+{ pkgs, config, ... }: {
   imports = [ ./bash.nix ./fish.nix ];
 
   xdg = {

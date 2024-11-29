@@ -9,7 +9,7 @@ in {
     kernelParams = lib.mkOption {
       type = lib.types.listOf lib.types.str;
 
-      default = [];
+      default = [ ];
 
       description = ''
         Additional kernel parameters to pass to the boot
@@ -38,7 +38,7 @@ in {
 
         systemd-boot = {
           enable = true;
-          
+
           editor = false;
           configurationLimit = 10;
         };

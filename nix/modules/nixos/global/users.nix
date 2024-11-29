@@ -1,8 +1,7 @@
 { lib, pkgs, config, ... }:
 let cfg = config.global.users;
 in {
-  options.global.users =
-  {
+  options.global.users = {
     users = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "List of users to create";
@@ -12,7 +11,7 @@ in {
       ];
     };
 
-    shell = lib.mkOption{
+    shell = lib.mkOption {
       type = lib.types.package;
       description = "Default shell for users";
       default = pkgs.fish;
