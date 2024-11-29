@@ -56,7 +56,7 @@
         };
       };
 
-      aliases = {
+      alias = {
         shells.default = "main-shell";
       };
 
