@@ -58,6 +58,10 @@
 
       alias.shells.default = "main-shell";
 
+      channels-config = {
+        allowUnfree = true;
+      };
+
       systems = with inputs; {
         modules.nixos = [
           stylix.nixosModules.stylix
