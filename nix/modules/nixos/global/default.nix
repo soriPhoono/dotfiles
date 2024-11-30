@@ -1,7 +1,7 @@
 { lib, pkgs, ... }: {
   imports = [
     ./users.nix
-    ./nixpkgs.nix
+    ./nixconf.nix
   ];
 
   security.sudo.wheelNeedsPassword = false;

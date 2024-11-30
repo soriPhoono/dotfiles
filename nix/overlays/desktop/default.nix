@@ -1,3 +1,4 @@
+{ ... }:
 final: prev: {
   discord = prev.discord.overrideAttrs (_: {
     src = builtins.fetchTarball {
