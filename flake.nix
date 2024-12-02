@@ -36,6 +36,12 @@
         home-manager.follows = "home-manager";
       };
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -65,6 +71,7 @@
       systems = with inputs; {
         modules.nixos = [
           stylix.nixosModules.stylix
+          nixvim.nixosModules.nixvim
         ];
 
         hosts = {
