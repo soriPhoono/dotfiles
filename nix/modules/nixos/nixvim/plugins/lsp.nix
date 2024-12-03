@@ -17,7 +17,12 @@
         clangd.enable = true;
 
         zls.enable = true;
-        rust_analyzer.enable = true;
+        rust_analyzer = {
+          enable = true;
+
+          installCargo = true;
+          installRustc = true;
+        };
 
         java_language_server.enable = true;
 
