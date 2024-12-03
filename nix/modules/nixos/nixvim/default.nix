@@ -1,4 +1,8 @@
 { ... }: {
+  imports = [
+    ./plugins
+  ];
+
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
@@ -48,23 +52,6 @@
 
     keymaps = [
       {
-        action = "<cmd>ToggleTerm<CR>";
-        key = "<leader>t";
-        options = {
-          silent = true;
-          desc = "Open Terminal";
-        };
-      }
-      {
-        action = "<cmd>LazyGit<CR>";
-        key = "<leader>g";
-        options = {
-          silent = true;
-          desc = "Open LazyGit";
-        };
-      }
-
-      {
         action = "<cmd>wq<CR>";
         key = "<leader>w";
         options = {
@@ -89,100 +76,5 @@
         };
       }
     ];
-
-    plugins = {
-      toggleterm.enable = true;
-
-      lsp = {
-        enable = true;
-
-        servers.nixd = {
-          enable = true;
-          settings.formatting.command = [
-            "nixpkgs-fmt"
-          ];
-        };
-      };
-
-      lspkind = {
-        enable = true;
-        mode = "symbol";
-      };
-
-      cmp = {
-        enable = true;
-        autoEnableSources = true;
-
-        cmdline = {
-          "/" = {
-            mapping = {
-              __raw = "cmp.mapping.preset.cmdline()";
-            };
-            sources = [
-              {
-                name = "buffer";
-              }
-            ];
-          };
-          ":" = {
-            mapping = {
-              __raw = "cmp.mapping.preset.cmdline()";
-            };
-            sources = [
-              {
-                name = "path";
-              }
-              {
-                name = "cmdline";
-                option = {
-                  ignore_cmds = [
-                    "Man"
-                    "!"
-                  ];
-                };
-              }
-            ];
-          };
-        };
-
-        filetype = {
-          lua = {
-            sources = [
-              {
-                name = "nvim_lua";
-              }
-              {
-                name = "nvim_lsp";
-                keyword_length = 3;
-              }
-              {
-                name = "path";
-              }
-              {
-                name = "buffer";
-              }
-            ];
-          };
-        };
-
-        settings = {
-          sources = [
-            {
-              name = "nvim_lsp";
-              keyword_length = 3;
-            }
-            {
-              name = "luasnip";
-            }
-            {
-              name = "path";
-            }
-            {
-              name = "buffer";
-            }
-          ];
-        };
-      };
-    };
   };
 }
