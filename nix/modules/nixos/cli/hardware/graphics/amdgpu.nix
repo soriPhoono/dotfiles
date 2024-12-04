@@ -6,7 +6,7 @@ in {
     dedicated = lib.mkEnableOption "Enable dedicated AMD GPU support";
   };
 
-  config.hardware.amdgpu = {
+  config.hardware.amdgpu = lib.mkIf cfg.enable {
     initrd.enable = true;
 
     opencl.enable = lib.mkIf cfg.dedicated true;

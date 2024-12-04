@@ -11,7 +11,9 @@
       language = [
         {
           name = "nix";
-          language-servers = "nixd";
+          language-servers = [
+            "nixd"
+          ];
           formatter = {
             command = "${nixpkgs-fmt}/bin/nixpkgs-fmt";
           };
