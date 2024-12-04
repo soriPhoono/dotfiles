@@ -1,4 +1,4 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 let cfg = config.cli.networking;
 in {
   options.cli.networking = {

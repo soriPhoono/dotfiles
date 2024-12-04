@@ -39,7 +39,6 @@
 
     nixvim = {
       url = "github:nix-community/nixvim";
-      # If using a stable channel you can use `url = "github:nix-community/nixvim/nixos-<version>"`
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -62,16 +61,9 @@
         };
       };
 
-      alias.shells.default = "main-shell";
-
-      channels-config = {
-        allowUnfree = true;
-      };
-
       systems = with inputs; {
         modules.nixos = [
           stylix.nixosModules.stylix
-          nixvim.nixosModules.nixvim
         ];
 
         hosts = {
@@ -86,6 +78,16 @@
             }
           ];
         };
+      };
+
+      homes = with inputs; {
+        modules = [
+          nixvim.homeManagerModules.nixvim
+        ];
+      };
+
+      outputs-builder = channels: {
+        formatter = channels.nixpkgs.nixpkgs-fmt;
       };
     };
 }

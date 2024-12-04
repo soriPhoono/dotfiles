@@ -1,4 +1,4 @@
-{ lib, pkgs, config, ...}:
+{ lib, pkgs, config, ... }:
 let cfg = config.userapps.streaming;
 in {
   options.userapps.streaming = lib.mkEnableOption "Enable streaming services";

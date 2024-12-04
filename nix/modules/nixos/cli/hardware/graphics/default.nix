@@ -1,4 +1,4 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 let cfg = config.cli.hardware.graphics;
 in {
   imports = [
@@ -10,7 +10,7 @@ in {
 
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = [];
+      default = [ ];
       description = "Extra packages to install for graphics support";
     };
   };

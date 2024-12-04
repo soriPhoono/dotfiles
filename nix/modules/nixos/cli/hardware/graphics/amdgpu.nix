@@ -1,4 +1,4 @@
-{ lib, config, ... }: 
+{ lib, config, ... }:
 let cfg = config.cli.hardware.graphics.amdgpu;
 in {
   options.cli.hardware.graphics.amdgpu = {

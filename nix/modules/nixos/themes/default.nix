@@ -1,6 +1,6 @@
 { lib, pkgs, config, ... }:
 let cfg = config.themes;
-in{
+in {
   imports = [
     ./catppuccin.nix
   ];
@@ -9,7 +9,7 @@ in{
     lib.mkEnableOption "Enable themes system";
 
   config.stylix = lib.mkIf cfg.enable
-   {
+    {
       enable = true;
 
       cursor = {

@@ -16,4 +16,6 @@
       options = "--delete-older-than 1d";
     };
   };
+
+  nixpkgs.config.allowUnfree = true;
 }
