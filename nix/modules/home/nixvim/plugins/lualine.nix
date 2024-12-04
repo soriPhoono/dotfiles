@@ -6,7 +6,7 @@ let
     black = "#11111b";
     white = "#cdd6f4";
     red = "#f38ba8";
-    violet = "#f38ba8";
+    violet = "#cba6f7";
     grey = "#313244";
   };
 in
@@ -67,32 +67,6 @@ in
               };
             };
           };
-        };
-
-        sections = {
-          lualine_a = [
-            "mode"
-          ];
-          lualine_b = [
-            "filename" "branch"
-          ];
-          lualine_c = [];
-          lualine_x = [];
-          lualine_y = [
-            "filetype" "progress"
-          ];
-          lualine_z = [
-            "location"
-          ];
-        };
-
-        inactive_sections = {
-          lualine_a = [
-            "filename"
-          ];
-          lualine_z = [
-            "location"
-          ];
         };
       };
     };
