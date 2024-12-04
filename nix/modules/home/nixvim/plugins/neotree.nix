@@ -1,11 +1,24 @@
 { ... }: {
-  programs.nixvim.plugins = {
-    web-devicons.enable = true;
-    neo-tree = {
-      enable = true;
-      closeIfLastWindow = true;
+  programs.nixvim = {
+    keymaps = [
+      {
+        action = "<cmd>Neotree toggle<CR>";
+        key = "<leader>e";
+        options = {
+          silent = true;
+          desc = "Open file explorer";
+        };
+      }
+    ];
 
-      window.position = "left";
+    plugins = {
+      web-devicons.enable = true;
+      neo-tree = {
+        enable = true;
+        closeIfLastWindow = true;
+
+        window.position = "float";
+      };
     };
   };
 }

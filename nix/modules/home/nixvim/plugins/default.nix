@@ -3,26 +3,44 @@
     ./noice.nix
     ./lualine.nix
     ./neotree.nix
+    ./telescope.nix
 
     ./cmp.nix
     ./lsp.nix
   ];
 
-  programs.nixvim.plugins = {
-    gitsigns.enable = true;
-    autoclose.enable = true;
+  programs.nixvim = {
+    keymaps = [
+      {
+        action = "<cmd>ToggleTerm<CR>";
+        key = "<leader>t";
+        options = {
+          silent = true;
+          desc = "Open internal terminal";
+        };
+      }
+    ];
 
-    toggleterm = {
-      enable = true;
-      settings.direction = "float";
+    plugins = {
+      gitsigns.enable = true;
+      autoclose.enable = true;
+
+      toggleterm = {
+        enable = true;
+        settings.direction = "float";
+      };
+
+      which-key = {
+        enable = true;
+
+        settings.preset = "helix";
+      };
+
+      dashboard = {
+        enable = true;
+
+        settings.theme = "hyper";
+      };
     };
-
-    which-key = {
-      enable = true;
-
-      settings.preset = "helix";
-    };
-
-    startify.enable = true;
   };
 }
