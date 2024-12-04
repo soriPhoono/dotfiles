@@ -3,8 +3,6 @@
     wget
   ];
 
-  themes.catppuccin.enable = true;
-
   programs = {
     nix-ld = {
       enable = true;
