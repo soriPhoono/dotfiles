@@ -12,6 +12,7 @@
     ./ripgrep.nix
     ./nix-index.nix
     ./helix.nix
+    ./zellij.nix
   ];
 
   xdg = {
@@ -27,8 +28,6 @@
   programs = {
     home-manager.enable = true;
   };
-
-  cli.fish.extraShellInit = "${pkgs.fastfetch}/bin/fastfetch";
 
   home.stateVersion = "24.11";
 }

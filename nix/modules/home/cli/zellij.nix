@@ -1,3 +1,11 @@
-{ ... }: {
-  programs.zellij.enable = true;
+{ config, ... }: {
+  programs.zellij = {
+    enable = true;
+    
+    enableFishIntegration = true;
+
+    settings = {
+      
+    };
+  };
 }
