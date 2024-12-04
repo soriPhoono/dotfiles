@@ -36,11 +36,6 @@
         home-manager.follows = "home-manager";
       };
     };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs:
@@ -82,7 +77,7 @@
 
       homes = with inputs; {
         modules = [
-          nixvim.homeManagerModules.nixvim
+          stylix.homeManagerModules.stylix
         ];
       };
 

@@ -1,11 +1,11 @@
 { config, ... }: {
   programs.eza = {
-      enable = true;
-      enableFishIntegration = config.cli.fish.enable;
+    enable = true;
+    enableFishIntegration = config.cli.fish.enable;
 
-      extraOptions = [ "--group-directories-first" ];
+    extraOptions = [ "--group-directories-first" ];
 
-      git = true;
-      icons = "auto";
-    };
+    git = true;
+    icons = "auto";
+  };
 }

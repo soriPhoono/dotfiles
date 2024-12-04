@@ -3,9 +3,7 @@
     enable = true;
     defaultEditor = true;
 
-    languages = {
-
-    };
+    languages = { };
 
     settings = {
       editor = {
