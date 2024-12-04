@@ -11,6 +11,7 @@
     ./git.nix
     ./ripgrep.nix
     ./nix-index.nix
+    ./helix.nix
   ];
 
   xdg = {
