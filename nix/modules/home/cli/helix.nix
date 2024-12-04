@@ -3,7 +3,21 @@
     enable = true;
     defaultEditor = true;
 
-    languages = { };
+    languages = with pkgs; {
+      language-server.nixd = {
+        command = "${nixd}/bin/nixd";
+      };
+
+      language = [
+        {
+          name = "nix";
+          language-servers = "nixd";
+          formatter = {
+            command = "${nixpkgs-fmt}/bin/nixpkgs-fmt";
+          };
+        }
+      ];
+    };
 
     settings = {
       editor = {
