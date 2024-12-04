@@ -1,10 +1,15 @@
 { ... }: {
-  programs.nixvim.plugins.treesitter = {
-    enable = true;
+  programs.nixvim.plugins = {
+    treesitter-context.enable = true;
+    ts-context-commentstring.enable = true;
 
-    settings = {
-      highlight.enable = true;
-      indent.enable = true;
+    treesitter = {
+      enable = true;
+
+      settings = {
+        highlight.enable = true;
+        indent.enable = true;
+      };
     };
   };
 }
