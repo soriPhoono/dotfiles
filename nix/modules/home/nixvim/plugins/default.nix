@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./noice.nix
+    ./treesitter.nix
     ./lualine.nix
     ./neotree.nix
     ./telescope.nix
