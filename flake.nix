@@ -75,12 +75,6 @@
         };
       };
 
-      homes = with inputs; {
-        modules = [
-          stylix.homeManagerModules.stylix
-        ];
-      };
-
       outputs-builder = channels: {
         formatter = channels.nixpkgs.nixpkgs-fmt;
       };
