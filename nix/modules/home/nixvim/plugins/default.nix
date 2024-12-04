@@ -22,5 +22,7 @@
 
       settings.preset = "helix";
     };
+
+    startify.enable = true;
   };
 }
