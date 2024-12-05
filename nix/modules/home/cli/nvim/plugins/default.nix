@@ -5,6 +5,7 @@
     ./lualine.nix
     ./neotree.nix
     ./telescope.nix
+    ./trouble.nix
 
     ./cmp.nix
     ./lsp.nix
