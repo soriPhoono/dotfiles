@@ -36,6 +36,11 @@
         home-manager.follows = "home-manager";
       };
     };
+
+    nvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
@@ -74,6 +79,10 @@
           ];
         };
       };
+
+      homes.modules = with inputs; [
+        nvim.homeManagerModules.nixvim
+      ];
 
       outputs-builder = channels: {
         formatter = channels.nixpkgs.nixpkgs-fmt;
