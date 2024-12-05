@@ -6,7 +6,7 @@
     ./programs/direnv.nix
     ./programs/starship.nix
     ./programs/fastfetch.nix
-    ./programs/fd.nix
+    ./programs/search.nix
     ./programs/eza.nix
     ./programs/git.nix
     ./programs/ripgrep.nix
