@@ -1,17 +1,17 @@
 { pkgs, ... }: {
   imports = [
-    ./bash.nix
-    ./fish.nix
+    ./shells/bash.nix
+    ./shells/fish.nix
 
-    ./direnv.nix
-    ./starship.nix
-    ./fastfetch.nix
-    ./fd.nix
-    ./eza.nix
-    ./git.nix
-    ./ripgrep.nix
-    ./nix-index.nix
-    ./zellij.nix
+    ./programs/direnv.nix
+    ./programs/starship.nix
+    ./programs/fastfetch.nix
+    ./programs/fd.nix
+    ./programs/eza.nix
+    ./programs/git.nix
+    ./programs/ripgrep.nix
+    ./programs/nix-index.nix
+    ./programs/zellij.nix
   ];
 
   xdg = {

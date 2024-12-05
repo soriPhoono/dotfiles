@@ -18,6 +18,8 @@ in {
         find = "${fd}/bin/fd";
         search = "${fzf}/bin/fzf";
         grep = "${ripgrep}/bin/rg";
+
+        v = "nvim";
       };
 
       shellInitLast = ''
