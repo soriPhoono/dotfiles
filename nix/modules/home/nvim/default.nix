@@ -53,7 +53,7 @@
     keymaps = [
       {
         action = "<cmd>w<CR>";
-        key = "<leader>wq";
+        key = "<leader>w";
         options = {
           silent = true;
           desc = "Save current file";
