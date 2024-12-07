@@ -20,17 +20,17 @@ in {
 
       fonts = {
         serif = {
-          package = pkgs.nerdfonts;
+          package = pkgs.nerd-fonts.aurulent-sans-mono;
           name = "AurulentSansM Nerd Font Propo";
         };
 
         sansSerif = {
-          package = pkgs.nerdfonts;
+          package = pkgs.nerd-fonts.aurulent-sans-mono;
           name = "AurulentSansM Nerd Font Propo";
         };
 
         monospace = {
-          package = pkgs.nerdfonts;
+          package = pkgs.nerd-fonts.aurulent-sans-mono;
           name = "JetBrainsMono Nerd Font Mono";
         };
 

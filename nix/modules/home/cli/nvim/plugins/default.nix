@@ -3,34 +3,18 @@
     ./noice.nix
     ./treesitter.nix
     ./lualine.nix
-    ./neotree.nix
     ./telescope.nix
-    ./trouble.nix
 
     ./cmp.nix
     ./lsp.nix
   ];
 
   programs.nixvim = {
-    keymaps = [
-      {
-        action = "<cmd>ToggleTerm<CR>";
-        key = "<leader>t";
-        options = {
-          silent = true;
-          desc = "Open internal terminal";
-        };
-      }
-    ];
-
     plugins = {
-      gitsigns.enable = true;
       autoclose.enable = true;
-
-      toggleterm = {
-        enable = true;
-        settings.direction = "float";
-      };
+      commentary.enable = true;
+      gitsigns.enable = true;
+      lazygit.enable = true;
 
       which-key = {
         enable = true;
