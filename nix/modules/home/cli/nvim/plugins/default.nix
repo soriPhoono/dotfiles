@@ -4,6 +4,7 @@
     ./treesitter.nix
     ./lualine.nix
     ./telescope.nix
+    ./neo-tree.nix
 
     ./cmp.nix
     ./lsp.nix
