@@ -11,6 +11,17 @@
   ];
 
   programs.nixvim = {
+    keymap = [
+      {
+        action = "<cmd>IncRename<CR>";
+        key = "<F2>";
+        options = {
+          silent = true;
+          desc = "Rename element under cursor";
+        };
+      }
+    ];
+
     plugins = {
       autoclose.enable = true;
       commentary.enable = true;
@@ -18,7 +29,6 @@
       lazygit.enable = true;
       codeium-nvim.enable = true;
       inc-rename.enable = true;
-      trouble.enable = true;
 
       which-key = {
         enable = true;
