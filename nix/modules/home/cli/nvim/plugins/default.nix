@@ -16,6 +16,9 @@
       commentary.enable = true;
       gitsigns.enable = true;
       lazygit.enable = true;
+      codeium-nvim.enable = true;
+      inc-rename.enable = true;
+      trouble.enable = true;
 
       which-key = {
         enable = true;
