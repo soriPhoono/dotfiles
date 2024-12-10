@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.nixvim.plugins = {
     lsp = {
       enable = true;
@@ -8,7 +8,7 @@
           enable = true;
 
           settings.formatting.command = [
-            "nixpkgs-fmt"
+            "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
           ];
         };
 
