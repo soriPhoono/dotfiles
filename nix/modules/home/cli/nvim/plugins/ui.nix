@@ -12,8 +12,6 @@
       settings.preset = "helix";
     };
 
-    lspsaga.enable = true;
-
     noice = {
       enable = true;
 

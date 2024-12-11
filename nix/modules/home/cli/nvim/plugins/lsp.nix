@@ -10,7 +10,7 @@
         };
       }
       {
-        action = "<cmd>lua vim.lsp.buf.format()<CR>";
+        action = "<cmd>lua vim.lsp.buf.format()<CR><cmd>%foldopen!<CR>";
         key = "<leader>lf";
         options = {
           silent = true;
@@ -100,6 +100,8 @@
     ];
 
     plugins = {
+      lspsaga.enable = true;
+
       lsp = {
         enable = true;
 
