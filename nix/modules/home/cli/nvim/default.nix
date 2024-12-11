@@ -28,7 +28,7 @@
       softtabstop = 2;
       shiftwidth = 2;
 
-      foldenable = true;
+      foldenable = false;
       foldmethod = "expr";
       foldexpr = "v:lua.vim.treesitter.foldexpr()";
 
@@ -41,27 +41,6 @@
       cmdheight = 0;
       laststatus = 3;
     };
-
-    autoCmd = [
-      {
-        command = "silent! %foldopen!";
-        event = [
-          "BufWinEnter"
-        ];
-        pattern = [
-          "*"
-        ];
-      }
-      {
-        command = "silent! lua vim.lsp.buf.hover()";
-        event = [
-          "CursorHold"
-        ];
-        pattern = [
-          "*"
-        ];
-      }
-    ];
 
     keymaps = [
       {

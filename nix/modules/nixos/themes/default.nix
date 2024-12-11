@@ -12,6 +12,13 @@ in {
     {
       enable = true;
 
+      targets.nixvim = {
+        transparentBackground = {
+          main = true;
+          signColumn = true;
+        };
+      };
+
       cursor = {
         package = pkgs.bibata-cursors-translucent;
         size = 24;

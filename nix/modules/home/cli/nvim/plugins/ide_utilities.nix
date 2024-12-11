@@ -2,11 +2,11 @@
   programs.nixvim = {
     keymaps = [
       {
-        action = "<cmd>Neotree toggle<CR>";
-        key = "<leader>e";
+        action = "<cmd>Commentary<CR>";
+        key = "<leader>c";
         options = {
           silent = true;
-          desc = "Open file browser";
+          desc = "Comment current line";
         };
       }
     ];
@@ -14,18 +14,10 @@
     plugins = {
       autoclose.enable = true;
       commentary.enable = true;
-      gitsigns.enable = true;
 
       lspkind = {
         enable = true;
         mode = "symbol";
-      };
-
-      neo-tree = {
-        enable = true;
-        closeIfLastWindow = true;
-
-        window.position = "float";
       };
 
       cmp = {
@@ -74,6 +66,10 @@
                 name = "nvim_lsp";
                 keyword_length = 3;
               }
+              {
+                name = "luasnip";
+              }
+
               {
                 name = "path";
               }
