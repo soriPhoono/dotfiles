@@ -29,8 +29,8 @@
       shiftwidth = 2;
 
       foldenable = true;
+      foldmethod = "expr";
       foldexpr = "v:lua.vim.treesitter.foldexpr()";
-      foldtext = "v:lua.vim.treesitter.foldtext()";
 
       history = 2000;
       undofile = true;
@@ -41,6 +41,18 @@
       cmdheight = 0;
       laststatus = 3;
     };
+
+    autoCmd = [
+      {
+        command = "silent! %foldopen!";
+        event = [
+          "BufWinEnter"
+        ];
+        pattern = [
+          "*"
+        ];
+      }
+    ];
 
     keymaps = [
       {
