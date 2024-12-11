@@ -52,6 +52,15 @@
           "*"
         ];
       }
+      {
+        command = "silent! lua vim.lsp.buf.hover()";
+        event = [
+          "CursorHold"
+        ];
+        pattern = [
+          "*"
+        ];
+      }
     ];
 
     keymaps = [

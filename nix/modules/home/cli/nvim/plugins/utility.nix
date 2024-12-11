@@ -1,36 +1,12 @@
 { ... }: {
   programs.nixvim = {
-    keymaps = [
-      {
-        action = "<cmd>lua vim.lsp.buf.format()<CR>";
-        key = "<leader>lf";
-        options = {
-          silent = true;
-          desc = "Format the current buffer";
-        };
-      }
-      {
-        action = "<cmd>Lspsaga finder<CR>";
-        key = "<leader>ls";
-        options = {
-          silent = true;
-          desc = "Find all references";
-        };
-      }
-      {
-        action = "<cmd>Lspsaga outline<CR>";
-        key = "<leader>lo";
-        options = {
-          silent = true;
-          desc = "Show document outline";
-        };
-      }
+    keymap = [
       {
         action = "<cmd>Neotree toggle<CR>";
         key = "<leader>e";
         options = {
           silent = true;
-          desc = "Open file explorer";
+          desc = "Open file browser";
         };
       }
     ];
