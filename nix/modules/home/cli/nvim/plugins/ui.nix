@@ -1,5 +1,7 @@
 { ... }: {
   programs.nixvim.plugins = {
+    transparent.enable = true;
+
     notify = {
       enable = true;
       render = "compact";
@@ -99,11 +101,6 @@
                 };
               };
             };
-          };
-          sections = {
-            lualine_a = [
-
-            ];
           };
         };
       };

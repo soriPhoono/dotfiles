@@ -3,12 +3,6 @@
     enable = true;
     defaultEditor = true;
 
-    colorschemes.catppuccin = {
-      enable = true;
-
-      settings.flavor = "frappe";
-    };
-
     clipboard.providers.wl-copy.enable = true;
 
     globals = {
@@ -35,6 +29,8 @@
       shiftwidth = 2;
 
       foldenable = true;
+      foldexpr = "v:lua.vim.treesitter.foldexpr()";
+      foldtext = "v:lua.vim.treesitter.foldtext()";
 
       history = 2000;
       undofile = true;

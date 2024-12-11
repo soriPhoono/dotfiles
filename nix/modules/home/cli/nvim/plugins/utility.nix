@@ -2,11 +2,27 @@
   programs.nixvim = {
     keymaps = [
       {
-        action = "<cmd>lua vim.lsp.buf.format()";
+        action = "<cmd>lua vim.lsp.buf.format()<CR>";
         key = "<leader>lf";
         options = {
           silent = true;
           desc = "Format the current buffer";
+        };
+      }
+      {
+        action = "<cmd>Lspsaga finder<CR>";
+        key = "<leader>ls";
+        options = {
+          silent = true;
+          desc = "Find all references";
+        };
+      }
+      {
+        action = "<cmd>Lspsaga outline<CR>";
+        key = "<leader>lo";
+        options = {
+          silent = true;
+          desc = "Show document outline";
         };
       }
       {
@@ -20,6 +36,10 @@
     ];
 
     plugins = {
+      autoclose.enable = true;
+      commentary.enable = true;
+      gitsigns.enable = true;
+
       lspkind = {
         enable = true;
         mode = "symbol";
