@@ -17,7 +17,6 @@
 
     opts = {
       termguicolors = true;
-      colorcolumn = "80";
       updatetime = 500;
 
       number = true;
