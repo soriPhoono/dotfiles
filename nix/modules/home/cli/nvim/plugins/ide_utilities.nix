@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.nixvim = {
     keymaps = [
       {
@@ -147,6 +147,10 @@
 
       treesitter = {
         enable = true;
+
+        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+          norg
+        ];
 
         settings = {
           highlight = {

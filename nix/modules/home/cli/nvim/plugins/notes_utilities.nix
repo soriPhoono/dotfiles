@@ -29,8 +29,7 @@
         "core.dirman" = {
           config = {
             workspaces = {
-              home = "~/Documents/notes";
-              school = "~/Documents/school/notes";
+              Notes = "~/Documents/notes/";
             };
           };
         };
