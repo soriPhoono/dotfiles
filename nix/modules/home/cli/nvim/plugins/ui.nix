@@ -13,10 +13,7 @@
 
     plugins = {
       gitsigns.enable = true;
-
-      nui = {
-        enable = true;
-      };
+      nui.enable = true;
 
       notify = {
         enable = true;
@@ -48,6 +45,15 @@
         };
       };
 
+      bufferline = {
+        enable = true;
+
+        settings.options = {
+          diagnostics = "nvim_lsp";
+          separator_style = "padded_slope";
+        };
+      };
+
       lualine =
         let
           colors = {
@@ -64,6 +70,47 @@
           enable = true;
 
           settings = {
+            sections = {
+              lualine_a = [
+                "mode"
+              ];
+              lualine_b = [
+                "branch"
+              ];
+              lualine_c = [
+              ];
+              lualine_x = [
+                "fileformat"
+                "filetype"
+              ];
+              lualine_y = [
+                "diagnostics"
+              ];
+              lualine_z = [
+                "encoding"
+              ];
+            };
+            inactive_sections =
+              {
+                lualine_a = [
+
+                ];
+                lualine_b = [
+
+                ];
+                lualine_c = [
+                  "filename"
+                ];
+                lualine_x = [
+                  "location"
+                ];
+                lualine_y = [
+
+                ];
+                lualine_z = [
+
+                ];
+              };
             options = {
               theme = {
                 normal = {
@@ -122,8 +169,6 @@
       neo-tree = {
         enable = true;
         closeIfLastWindow = true;
-
-        window.position = "float";
       };
     };
   };

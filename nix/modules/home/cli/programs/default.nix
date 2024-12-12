@@ -4,7 +4,6 @@
     ./git.nix
     ./direnv.nix
     ./search.nix
-    ./zellij.nix
     ./ripgrep.nix
     ./starship.nix
     ./fastfetch.nix

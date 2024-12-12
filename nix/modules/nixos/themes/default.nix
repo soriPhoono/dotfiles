@@ -12,11 +12,8 @@ in {
     {
       enable = true;
 
-      targets.nixvim = {
-        transparentBackground = {
-          main = true;
-          signColumn = true;
-        };
+      targets = {
+        nixvim.enable = false;
       };
 
       cursor = {

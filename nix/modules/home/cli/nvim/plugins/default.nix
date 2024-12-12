@@ -8,6 +8,5 @@
 
   programs.nixvim.plugins = {
     web-devicons.enable = true;
-    transparent.enable = true;
   };
 }

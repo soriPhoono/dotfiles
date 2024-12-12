@@ -20,6 +20,8 @@
     ];
 
     plugins = {
+      lint.enable = true;
+
       lsp = {
         enable = true;
 

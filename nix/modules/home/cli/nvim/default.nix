@@ -3,6 +3,11 @@
     enable = true;
     defaultEditor = true;
 
+    colorschemes.catppuccin = {
+      enable = true;
+      settings.transparent_background = true;
+    };
+
     clipboard.providers.wl-copy.enable = true;
 
     globals = {
@@ -44,27 +49,19 @@
 
     keymaps = [
       {
-        action = "<cmd>w<CR>";
-        key = "<leader>w";
-        options = {
-          silent = true;
-          desc = "Save current file";
-        };
-      }
-      {
-        action = "<cmd>q<CR>";
-        key = "<leader>q";
+        action = "<cmd>w<CR><cmd>bd<CR>";
+        key = "<C-c>";
         options = {
           silent = true;
           desc = "Close current file or editor";
         };
       }
       {
-        action = "<cmd>Q<CR>";
-        key = "<leader>qa";
+        action = "<cmd>qall<CR>";
+        key = "<leader>q";
         options = {
           silent = true;
-          desc = "Close current editor";
+          desc = "Close the editor";
         };
       }
     ];

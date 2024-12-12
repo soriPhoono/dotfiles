@@ -125,10 +125,9 @@
               treesitter = true;
             };
             color_devicons = true;
-            prompt_prefix = "";
+            prompt_prefix = " ";
             selection_caret = " ";
             entry_prefix = " ";
-            initial_mode = "insert";
             vimgrep_arguments = [
               "rg"
               "-L"
