@@ -51,6 +51,7 @@
         settings.options = {
           diagnostics = "nvim_lsp";
           separator_style = "padded_slope";
+          hover.enable = true;
         };
       };
 
