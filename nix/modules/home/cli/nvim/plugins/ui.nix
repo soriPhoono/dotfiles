@@ -3,7 +3,7 @@
     keymaps = [
       {
         action = "<cmd>Neotree toggle<CR>";
-        key = "<leader>e";
+        key = "<C-E>";
         options = {
           silent = true;
           desc = "Open file browser";
@@ -50,7 +50,6 @@
 
         settings.options = {
           diagnostics = "nvim_lsp";
-          separator_style = "padded_slope";
           hover.enable = true;
         };
       };

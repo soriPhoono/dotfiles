@@ -49,8 +49,8 @@
 
     keymaps = [
       {
-        action = "<cmd>w<CR><cmd>bd<CR>";
-        key = "<C-c>";
+        action = "<cmd>w<CR>";
+        key = "<C-s>";
         options = {
           silent = true;
           desc = "Close current file or editor";
@@ -58,7 +58,7 @@
       }
       {
         action = "<cmd>qall<CR>";
-        key = "<leader>q";
+        key = "<C-q>";
         options = {
           silent = true;
           desc = "Close the editor";
