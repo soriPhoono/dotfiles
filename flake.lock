@@ -635,11 +635,11 @@
         "snowfall": "snowfall"
       },
       "locked": {
-        "lastModified": 1734195746,
-        "narHash": "sha256-BcPQNzP6HXdPXx5yQGEv5uf725cwe+fLmBC+n+k6ERk=",
+        "lastModified": 1734195959,
+        "narHash": "sha256-I82PGW16+OHu58LGUi8erENfQY2lG3TJLEkJRnKznVI=",
         "owner": "soriphoono",
         "repo": "nvim",
-        "rev": "8bed92ca0060bb3e5dfe38472f3d3853aaf7e470",
+        "rev": "0879140fb1b42c790e0af291df6b479f0bb5d5e8",
         "type": "github"
       },
       "original": {
