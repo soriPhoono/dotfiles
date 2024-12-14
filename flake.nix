@@ -26,8 +26,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur.url = "github:nix-community/NUR";
-
     stylix = {
       url = "github:danth/stylix";
 
@@ -37,13 +35,7 @@
       };
     };
 
-    nvim = {
-      url = "github:nix-community/nixvim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
+    nvim.url = "github:soriphoono/nvim";
   };
 
   outputs = inputs:
@@ -84,7 +76,7 @@
       };
 
       homes.modules = with inputs; [
-        nvim.homeManagerModules.nixvim
+        nvim.homeModules.nvim
       ];
 
       outputs-builder = channels: {
