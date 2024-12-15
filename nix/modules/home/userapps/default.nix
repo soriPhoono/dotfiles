@@ -9,7 +9,12 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      discord
+      (
+        pkgs.discord.overrideAttrs (_: {
+          url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+          sha256 = "0njwcnrn2br47dzqvmlazcmf63bblx68775f0kv8djwxfvg977im";
+        })
+      )
 
       obsidian
     ];
