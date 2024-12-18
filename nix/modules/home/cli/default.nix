@@ -11,6 +11,7 @@
     ./programs/ripgrep.nix
     ./programs/search.nix
     ./programs/starship.nix
+    ./programs/zellij.nix
   ];
 
   xdg = {
