@@ -5,7 +5,7 @@
 
     ./hardware/bluetooth.nix
     ./hardware/graphics.nix
-    ./hardware/graphics/amdgpu.nix
+    ./hardware/amdgpu.nix
     ./hardware/inputs.nix
   ];
 }
