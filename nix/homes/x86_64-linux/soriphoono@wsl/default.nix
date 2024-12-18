@@ -1,5 +1,12 @@
 {
   cli.fish.enable = true;
 
-  home.stateVersion = "24.11";
+  stylix = {
+    enable = true;
+
+    targets = {
+      nixvim.enable = false;
+      neovim.enable = false;
+    };
+  };
 }

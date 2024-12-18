@@ -1,4 +1,4 @@
-{
+{ nixosConfig, ... }: {
   imports = [
     ./shells/bash.nix
     ./shells/fish.nix
@@ -27,5 +27,5 @@
     home-manager.enable = true;
   };
 
-  home.stateVersion = "24.11";
+  home.stateVersion = nixosConfig.system.stateVersion;
 }

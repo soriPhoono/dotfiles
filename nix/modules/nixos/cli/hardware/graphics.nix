@@ -1,10 +1,6 @@
 { lib, config, ... }:
 let cfg = config.cli.hardware.graphics;
 in {
-  imports = [
-    ./amdgpu.nix
-  ];
-
   options.cli.hardware.graphics = {
     enable = lib.mkEnableOption "Enable graphics support";
 
