@@ -17,7 +17,7 @@
 
     fzf = {
       enable = true;
-      enableFishIntegration = config.cli.fish.enable;
+      enableFishIntegration = config.global.fish.enable;
 
       defaultCommand = "fd --type file";
       defaultOptions = [
