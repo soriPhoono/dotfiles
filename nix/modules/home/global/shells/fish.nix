@@ -1,8 +1,8 @@
 { lib, pkgs, config, ... }:
-let cfg = config.cli.fish;
+let cfg = config.global.fish;
 in {
   options = {
-    cli.fish = {
+    global.fish = {
       enable = lib.mkEnableOption "Enable fish shell";
     };
   };

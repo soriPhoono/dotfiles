@@ -1,13 +1,6 @@
-{ config, ... }:
-let
-in {
-  home.file = { };
-
+{
   programs.zellij = {
     enable = true;
-
-    enableBashIntegration = true;
-    enableFishIntegration = config.cli.fish.enable;
 
     settings = {
       simplified_ui = true;

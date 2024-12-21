@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  networking.hostName = "wsl";
+
   environment.systemPackages = with pkgs; [
     wget
   ];
