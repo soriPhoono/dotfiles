@@ -1,8 +1,5 @@
 { nixosConfig, ... }: {
   imports = [
-    ./shells/bash.nix
-    ./shells/fish.nix
-
     ./programs/direnv.nix
     ./programs/eza.nix
     ./programs/fastfetch.nix

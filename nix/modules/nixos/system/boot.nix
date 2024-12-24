@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }:
-let cfg = config.cli.boot;
+let cfg = config.system.boot;
 in {
-  options.cli.boot = {
+  options.system.boot = {
     enable = lib.mkEnableOption "Enable the boot loader for systems";
 
     verbose = lib.mkEnableOption "Enable verbose output for the boot loader";

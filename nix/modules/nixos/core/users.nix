@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }:
-let cfg = config.global.users;
+let cfg = config.core.users;
 in {
-  options.global.users = {
+  options.core.users = {
     users = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "List of users to create";

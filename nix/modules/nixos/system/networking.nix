@@ -1,7 +1,7 @@
 { lib, config, ... }:
-let cfg = config.cli.networking;
+let cfg = config.system.networking;
 in {
-  options.cli.networking = {
+  options.system.networking = {
     network-manager = lib.mkEnableOption "Enable NetworkManager";
   };
 
