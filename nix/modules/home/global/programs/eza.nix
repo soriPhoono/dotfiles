@@ -1,7 +1,7 @@
 { config, ... }: {
   programs.eza = {
     enable = true;
-    enableFishIntegration = config.global.fish.enable;
+    enableFishIntegration = config.cli.fish.enable;
 
     extraOptions = [ "--group-directories-first" ];
 

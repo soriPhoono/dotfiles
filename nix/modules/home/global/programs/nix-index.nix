@@ -3,6 +3,6 @@
     enable = true;
 
     enableBashIntegration = true;
-    enableFishIntegration = config.global.fish.enable;
+    enableFishIntegration = config.cli.fish.enable;
   };
 }

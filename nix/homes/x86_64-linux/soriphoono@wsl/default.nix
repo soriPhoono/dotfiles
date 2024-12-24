@@ -1,9 +1,7 @@
 {
-  global = {
-    git = {
-      userName = "soriphoono";
-      userEmail = "soriphoono@gmail.com";
-    };
+  global.git = {
+    userName = "soriphoono";
+    userEmail = "soriphoono@gmail.com";
   };
 
   cli.fish.enable = true;
