@@ -1,10 +1,12 @@
 {
-  global.git = {
-    userName = "soriphoono";
-    userEmail = "soriphoono@gmail.com";
-  };
+  global = {
+    fish.enable = true;
 
-  cli.fish.enable = true;
+    git = {
+      userName = "soriphoono";
+      userEmail = "soriphoono@gmail.com";
+    };
+  };
 
   stylix = {
     enable = true;

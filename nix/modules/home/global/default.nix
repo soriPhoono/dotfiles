@@ -1,14 +1,12 @@
 { nixosConfig, ... }: {
   imports = [
-    ./programs/direnv.nix
-    ./programs/eza.nix
-    ./programs/fastfetch.nix
-    ./programs/git.nix
-    ./programs/nix-index.nix
-    ./programs/ripgrep.nix
-    ./programs/search.nix
-    ./programs/starship.nix
-    ./programs/zellij.nix
+    ./bash.nix
+    ./fish.nix
+
+    ./eza.nix
+    ./fastfetch.nix
+    ./git.nix
+    ./starship.nix
   ];
 
   xdg = {
@@ -22,6 +20,59 @@
   };
 
   programs = {
+    direnv = {
+      enable = true;
+
+      nix-direnv.enable = true;
+    };
+
+    nix-index = {
+      enable = true;
+
+      enableBashIntegration = true;
+      enableFishIntegration = true;
+    };
+
+    fd = {
+      enable = true;
+      hidden = true;
+
+      extraOptions = [
+        "--follow"
+        "--color=always"
+      ];
+
+      ignores = [
+        ".git"
+        "*.bak"
+      ];
+    };
+
+    fzf = {
+      enable = true;
+      enableFishIntegration = true;
+
+      defaultCommand = "fd --type file";
+      defaultOptions = [
+        "--ansi"
+      ];
+    };
+
+    zellij = {
+      enable = true;
+
+      settings = {
+        ui = {
+          pane_frames = {
+            rounded_corners = true;
+            hide_session_name = true;
+          };
+        };
+      };
+    };
+
+    ripgrep.enable = true;
+
     home-manager.enable = true;
   };
 

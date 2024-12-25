@@ -1,8 +1,8 @@
 { config, ... }: {
   programs.starship = {
     enable = true;
-    enableFishIntegration = config.cli.fish.enable;
-    enableTransience = config.cli.fish.enable;
+    enableFishIntegration = true;
+    enableTransience = true;
 
     settings = {
       add_newline = true;

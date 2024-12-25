@@ -1,0 +1,23 @@
+{ pkgs, ... }:
+{
+  programs.fish = {
+    enable = true;
+
+    shellAliases = with pkgs; {
+      cat = "${bat}/bin/bat";
+      df = "${duf}/bin/duf";
+      du = "${dua}/bin/dua i";
+      find = "${fd}/bin/fd";
+      search = "${fzf}/bin/fzf";
+      grep = "${ripgrep}/bin/rg";
+
+      v = "nvim";
+    };
+
+    shellInitLast = ''
+      set fish_greeting
+
+      fastfetch
+    '';
+  };
+}
