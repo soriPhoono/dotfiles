@@ -1,9 +1,7 @@
 {
-  global = {
-    git = {
-      userName = "soriphoono";
-      userEmail = "soriphoono@gmail.com";
-    };
+  core.git = {
+    userName = "soriphoono";
+    userEmail = "soriphoono@gmail.com";
   };
 
   stylix = {

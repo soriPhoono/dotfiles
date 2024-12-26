@@ -1,6 +1,6 @@
 { lib, config, ... }:
-let cfg = config.global.git; in {
-  options.global.git = {
+let cfg = config.core.git; in {
+  options.core.git = {
     userName = lib.mkOption {
       type = lib.types.str;
     };
