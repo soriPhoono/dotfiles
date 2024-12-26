@@ -45,8 +45,6 @@
       src = ./.;
 
       snowfall = {
-        root = ./nix;
-
         namespace = "soriphoono";
 
         meta = {
