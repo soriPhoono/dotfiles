@@ -30,7 +30,7 @@ in {
       cfg.users
       (name: {
         create = true;
-        admin = true;
+        admin = (name == "soriphoono");
 
         home.enable = true;
       });

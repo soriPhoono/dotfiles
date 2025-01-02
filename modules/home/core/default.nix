@@ -63,20 +63,7 @@
       ];
     };
 
-    zellij = {
-      enable = true;
-
-      settings = {
-        ui = {
-          pane_frames = {
-            rounded_corners = true;
-            hide_session_name = true;
-          };
-        };
-      };
-    };
-
-    ripgrep.enable = true;
+    rigrep.enable = true;
 
     home-manager.enable = true;
   };
