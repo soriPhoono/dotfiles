@@ -53,32 +53,5 @@
           title = "Personal dotfiles";
         };
       };
-
-      systems = with inputs; {
-        modules.nixos = [
-          stylix.nixosModules.stylix
-        ];
-
-        hosts = {
-          wsl.modules = [
-            nixos-wsl.nixosModules.default
-            {
-              wsl = {
-                enable = true;
-
-                defaultUser = "soriphoono";
-              };
-            }
-          ];
-        };
-      };
-
-      homes.modules = with inputs; [
-        nvim.homeModules.nvim
-      ];
-
-      outputs-builder = channels: {
-        formatter = channels.nixpkgs.nixpkgs-fmt;
-      };
     };
 }

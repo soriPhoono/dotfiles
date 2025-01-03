@@ -1,8 +1,10 @@
-{ lib, pkgs, config, ... }:
+{ inputs, lib, pkgs, config, ... }:
 let cfg = config.themes;
 in {
   imports = [
     ./catppuccin.nix
+
+    inputs.stylix.nixosModules.stylix
   ];
 
   options.themes.enable =

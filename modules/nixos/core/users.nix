@@ -1,44 +1,40 @@
 { lib, pkgs, config, ... }:
-let cfg = config.core.users;
-in {
-  options.core.users = {
-    users = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "List of users to create";
+let
+  cfg = config.core.users;
 
-      default = [
-        "soriphoono"
-      ];
-    };
+  userType = lib.types.submodule {
+    options = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        description = "Name of the user to create";
+      };
 
-    shell = lib.mkOption {
-      type = lib.types.package;
-      description = "Default shell for users";
-      default = pkgs.fish;
+      admin = lib.mkOption {
+        type = lib.types.bool;
+        description = "Create user as admin";
+        default = false;
+      };
     };
+  };
+in
+{
+  options.core.users = lib.mkOption {
+    type = with lib.types; listOf either str userType;
+    description = "List of users to create";
   };
 
   config = {
     programs = {
       dconf.enable = true;
-
-      fish.enable = lib.mkIf (cfg.shell == pkgs.fish) true;
-      zsh.enable = lib.mkIf (cfg.shell == pkgs.zsh) true;
+      fish.enable = true;
     };
 
-    snowfallorg.users = lib.genAttrs
-      cfg.users
-      (name: {
-        create = true;
-        admin = (name == "soriphoono");
+    users.defaultUserShell = pkgs.fish;
 
-        home.enable = true;
-      });
-
-    users.users = lib.genAttrs
-      cfg.users
-      (name: {
-        shell = cfg.shell;
-      });
+    snowfallorg.users =
+      let
+        genUsers = field: list: builtins.listToAttrs (map (v: { name = v.${field}; value = v; }) list);
+      in
+      genUsers "name" cfg;
   };
 }
