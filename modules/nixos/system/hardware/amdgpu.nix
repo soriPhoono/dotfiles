@@ -17,10 +17,7 @@ in
       VDPAU_DRIVER = "radeonsi";
     };
 
-    hardware.graphics.extraPackages = with pkgs; [
-      libva
-      libvdpau-va-gl
-    ] ++ lib.mkIf cfg.dedicated [
+    hardware.graphics.extraPackages = with pkgs; lib.mkIf cfg.dedicated [
       rocmPackages.clr.icd
     ];
 

@@ -5,16 +5,6 @@ in {
     enable = lib.mkEnableOption "Enable the boot loader for systems";
 
     verbose = lib.mkEnableOption "Enable verbose output for the boot loader";
-
-    kernelParams = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-
-      default = [ ];
-
-      description = ''
-        Additional kernel parameters to pass to the boot
-      '';
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -29,7 +19,7 @@ in {
         "quiet"
         "systemd.show_status=false"
         "udev.log_level=3"
-      ]) ++ cfg.kernelParams;
+      ]);
 
       initrd.verbose = cfg.verbose;
 

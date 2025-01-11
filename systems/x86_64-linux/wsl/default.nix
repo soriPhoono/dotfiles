@@ -10,13 +10,6 @@
     }
   ];
 
-  core.users = [
-    {
-      name = "soriphoono";
-      admin = true;
-    }
-  ];
-
   themes.catppuccin.enable = true;
 
   environment.systemPackages = with pkgs; [

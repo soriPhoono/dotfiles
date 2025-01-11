@@ -8,11 +8,11 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    hardware.gpu.enable = true;
+
     boot.kernelParams = [
       # "i915.force_probe=" # TODO: get igpu device id with nix-shell -p pciutils --run "lspci -nn | grep VGA"
     ];
-
-    hardware.gpu.enable = true;
 
     environment.variables = {
       LIBVA_DRIVER_NAME = "iHD";

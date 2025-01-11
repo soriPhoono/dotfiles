@@ -1,40 +1,14 @@
-{ lib, pkgs, config, ... }:
-let
-  cfg = config.core.users;
-
-  userType = lib.types.submodule {
-    options = {
-      name = lib.mkOption {
-        type = lib.types.str;
-        description = "Name of the user to create";
-      };
-
-      admin = lib.mkOption {
-        type = lib.types.bool;
-        description = "Create user as admin";
-        default = false;
-      };
-    };
-  };
-in
-{
-  options.core.users = lib.mkOption {
-    type = with lib.types; listOf either str userType;
-    description = "List of users to create";
+{ pkgs, ... }: {
+  programs = {
+    dconf.enable = true;
+    fish.enable = true;
   };
 
-  config = {
-    programs = {
-      dconf.enable = true;
-      fish.enable = true;
-    };
+  snowfallorg.users.soriphoono = { }; # Admin account creation
 
-    users.defaultUserShell = pkgs.fish;
+  users = {
+    defaultUserShell = pkgs.fish;
 
-    snowfallorg.users =
-      let
-        genUsers = field: list: builtins.listToAttrs (map (v: { name = v.${field}; value = v; }) list);
-      in
-      genUsers "name" cfg;
+    users.soriphoono.initialPassword = "hello";
   };
 }
