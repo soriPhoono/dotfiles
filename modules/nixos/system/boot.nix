@@ -1,19 +1,22 @@
 { lib, pkgs, config, ... }:
-let cfg = config.system.boot;
+let
+  this = "system.boot";
+
+  cfg = config."${this}";
 in {
-  options.system.boot = {
+  options."${this}" = {
     enable = lib.mkEnableOption "Enable the boot loader for systems";
 
-    verbose = lib.mkEnableOption "Enable verbose output for the boot loader";
+    plymouth.enable = lib.mkEnableOption "Enable plymouth bootloader animation";
   };
 
   config = lib.mkIf cfg.enable {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen;
 
-      consoleLogLevel = if cfg.verbose then 4 else 0;
+      consoleLogLevel = if (!cfg.plymouth.enable) then 4 else 0;
 
-      kernelParams = (if cfg.verbose then [
+      kernelParams = (if (!cfg.plymouth.enable) then [
 
       ] else [
         "quiet"
@@ -21,7 +24,7 @@ in {
         "udev.log_level=3"
       ]);
 
-      initrd.verbose = cfg.verbose;
+      initrd.verbose = !cfg.plymouth.enable;
 
       loader = {
         efi.canTouchEfiVariables = true;
@@ -34,7 +37,7 @@ in {
         };
       };
 
-      plymouth.enable = ! cfg.verbose;
+      plymouth.enable = cfg.plymouth.enable;
     };
 
     zramSwap.enable = true;

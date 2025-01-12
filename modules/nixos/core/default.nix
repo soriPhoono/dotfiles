@@ -1,16 +1,36 @@
-{ lib, pkgs, ... }: {
+{ lib, config, ... }:
+let
+  this = "core";
+
+  cfg = config."${this}";
+in
+{
   imports = [
-    ./users.nix
+    ./admin.nix
     ./nixconf.nix
   ];
 
-  security.sudo.wheelNeedsPassword = false;
+  options."${this}" = {
+    enable = lib.mkEnableOption "Enable this module";
 
-  time.timeZone = lib.mkDefault "America/Chicago";
+    timeZone = lib.mkOption {
+      type = lib.types.str;
+      description = "The timezone of the system";
 
-  environment.systemPackages = with pkgs; [
-    coreutils
-  ];
+      default = "America/Chicago";
+    };
 
-  system.stateVersion = lib.mkDefault "25.05";
+    systemVersion = lib.mkOption {
+      type = lib.types.str;
+      description = "The system version to build against";
+
+      default = "25.05";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    time.timeZone = cfg.timeZone;
+
+    system.stateVersion = cfg.systemVersion;
+  };
 }

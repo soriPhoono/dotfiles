@@ -58,5 +58,11 @@
           title = "Personal dotfiles";
         };
       };
+
+      templates = {
+        module.description = "Create a new basic module header";
+        overlay.description = "Create a new basic overlay";
+        system.description = "Create a new basic system implementation";
+      };
     };
 }

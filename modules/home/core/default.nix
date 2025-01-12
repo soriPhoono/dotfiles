@@ -62,6 +62,7 @@
       ];
     };
 
+    bat.enable = true;
     ripgrep.enable = true;
 
     home-manager.enable = true;

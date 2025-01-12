@@ -1,13 +1,22 @@
 { lib, config, ... }:
-let cfg = config.system.networking;
-in {
-  options.system.networking = {
-    network-manager = lib.mkEnableOption "Enable NetworkManager";
+let
+  this = "system.networking";
+
+  cfg = config."${this}";
+in
+{
+  options."${this}" = {
+    enable = lib.mkEnableOption "Enable networking";
   };
 
-  config = {
-    networking.networkmanager.enable = lib.mkIf cfg.network-manager true;
+  config = lib.mkIf cfg.enable {
+    networking.firewall.enable = true;
+    networking.nftables.enable = true;
 
-    # TODO: add ssh configuration
+    networking.networkmanager.enable = true;
+
+    users.users.${config.core.admin.unixName}.extraGroups = [ "networkmanager" ];
+
+    services.timesyncd.enable = true;
   };
 }
