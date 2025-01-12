@@ -12,8 +12,16 @@
       inherit (nixpkgs) lib;
     in
     {
+      templates = import ./templates;
+
       nixosModules.default.imports = [
         ./modules/nixos
       ];
+
+      nixosSystems = {
+        wsl = lib.nixosSystem {
+
+        };
+      };
     };
 }
