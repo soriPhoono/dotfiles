@@ -15,13 +15,6 @@ in
 
     name = lib.mkOption {
       type = lib.types.str;
-      description = "The admin account's username";
-
-      default = "Sori Phoono";
-    };
-
-    unixName = lib.mkOption {
-      type = lib.types.str;
       description = "The admin account's unix username";
 
       default = "soriphoono";
@@ -42,15 +35,15 @@ in
       users = {
         root.shell = pkgs.bashInteractive;
 
-        ${cfg.unixName} = {
+        ${cfg.name} = {
           isNormalUser = true;
 
-          name = cfg.unixName;
-          description = cfg.name;
+          name = cfg.name;
+          description = lib.soriphoono.real_to_unix_name cfg.name;
 
           initialPassword = "hello";
 
-          home = "/home/${cfg.unixName}";
+          home = "/home/${cfg.name}";
           group = "users";
 
           extraGroups = [ "wheel" ];

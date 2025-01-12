@@ -29,17 +29,15 @@ in
     };
   };
 
-  config = lib.mkIf (!config.system.hardware.vm.enable) {
-    system.hardware.gpu.enable = true;
+  config = {
+    hardware.amdgpu = {
+      initrd.enable = cfg.integrated.enable;
+      opencl.enable = cfg.dedicated.enable;
+    };
 
     environment.variables = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) {
       LIBVA_DRIVER_NAME = "radeonsi";
       VDPAU_DRIVER = "radeonsi";
-    };
-
-    hardware.amdgpu = {
-      initrd.enable = cfg.integrated.enable;
-      opencl.enable = cfg.dedicated.enable;
     };
 
     systemd.tmpfiles.rules = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.rocm) [

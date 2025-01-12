@@ -10,18 +10,16 @@ in
     ./amd.nix
   ];
 
-  options."${this}" = {
-    enable = lib.mkEnableOption "Enable gpu based features";
-  };
+  options."${this}".enable = lib.mkEnableOption "Enable critical gpu features";
 
-  config = lib.mkIf (cfg.enable && !config.system.hardware.vm.enable) {
+  config = lib.mkIf cfg.enable {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
     };
 
     environment.systemPackages = with pkgs; [
-      nvtopPackages.full
+      nvtop
     ];
   };
 }

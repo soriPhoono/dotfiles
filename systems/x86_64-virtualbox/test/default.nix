@@ -1,9 +1,15 @@
 {
   system = {
     hardware.vm.virtualbox.enable = true;
-  };
 
-  imports = [
-    ../../x86_64-linux/test/default.nix
-  ];
+    boot = {
+      enable = true;
+      plymouth.enable = true;
+    };
+
+    power.enable = true;
+    pipewire.enable = true;
+    networking.enable = true;
+    bluetooth.enable = true;
+  };
 }

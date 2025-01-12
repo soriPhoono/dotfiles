@@ -6,7 +6,7 @@ let
 in
 {
   options."${this}" = {
-    internal = {
+    integrated = {
       enable = lib.mkEnableOption "Enable igpu features for intel igpus";
 
       device_id = lib.mkOption {
@@ -27,11 +27,9 @@ in
     };
   };
 
-  config = lib.mkIf (!config.system.hardware.vm.enable) {
-    system.hardware.gpu.intel.enable = true;
-
-    boot.kernelParams = lib.mkIf cfg.internal.enable [
-      "i915.force_probe=${cfg.internal.device_id}"
+  config = {
+    boot.kernelParams = lib.mkIf cfg.integrated.enable [
+      "i915.force_probe=${cfg.integrated.device_id}"
     ];
 
     environment.variables = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) {
@@ -44,6 +42,6 @@ in
       libvdpau-va-gl
     ];
 
-    services.thermald.enable = cfg.internal.enable;
+    services.thermald.enable = cfg.integrated.enable;
   };
 }

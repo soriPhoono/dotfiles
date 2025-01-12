@@ -10,10 +10,6 @@
     }
   ];
 
-  core.enable = true;
-
-  themes.catppuccin.enable = true;
-
   environment.systemPackages = with pkgs; [
     wget
   ];

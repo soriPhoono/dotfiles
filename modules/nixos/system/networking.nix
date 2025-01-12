@@ -15,7 +15,7 @@ in
 
     networking.networkmanager.enable = true;
 
-    users.users.${config.core.admin.unixName}.extraGroups = [ "networkmanager" ];
+    users.users.${config.core.admin.name}.extraGroups = [ "networkmanager" ];
 
     services.timesyncd.enable = true;
   };

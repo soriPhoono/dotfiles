@@ -11,16 +11,21 @@ in
   ];
 
   options."${this}" = {
-    enable = lib.mkEnableOption "Enable this module";
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      description = "Enable the core module";
 
-    timeZone = lib.mkOption {
+      default = true;
+    };
+
+    region = lib.mkOption {
       type = lib.types.str;
       description = "The timezone of the system";
 
       default = "America/Chicago";
     };
 
-    systemVersion = lib.mkOption {
+    version = lib.mkOption {
       type = lib.types.str;
       description = "The system version to build against";
 
@@ -29,8 +34,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    time.timeZone = cfg.timeZone;
+    time.timeZone = cfg.region;
 
-    system.stateVersion = cfg.systemVersion;
+    system.stateVersion = cfg.version;
   };
 }
