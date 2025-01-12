@@ -1,6 +1,6 @@
 { lib, pkgs, config, ... }:
 let
-  this = "system.hardware.bluetooth";
+  this = "system.bluetooth";
 
   cfg = config."${this}";
 in

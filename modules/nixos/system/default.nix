@@ -1,9 +1,10 @@
 {
   imports = [
+    ./bluetooth.nix
+    ./brightness.nix
     ./power.nix
     ./boot.nix
     ./networking.nix
-    ./gpg.nix
     ./pipewire.nix
   ];
 }

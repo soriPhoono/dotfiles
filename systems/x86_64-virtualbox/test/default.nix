@@ -1,14 +1,9 @@
 {
   system = {
-    boot = {
-      enable = true;
-      verbose = true;
-    };
-
-    vm.virtualbox.enable = true;
-
-    networking.network-manager = true;
+    hardware.vm.virtualbox.enable = true;
   };
 
-  themes.catppuccin.enable = true;
+  imports = [
+    ../../x86_64-linux/test/default.nix
+  ];
 }

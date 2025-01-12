@@ -1,12 +1,13 @@
 { lib, pkgs, config, ... }:
-let cfg = config.themes.catppuccin;
+let
+  this = "themes.catppuccin";
+
+  cfg = config."${this}";
 in {
-  options.themes.catppuccin.enable =
+  options."${this}".enable =
     lib.mkEnableOption "Enable catppuccin desktop theming";
 
   config = lib.mkIf cfg.enable {
-    themes.enable = true;
-
     stylix = {
       image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
 

@@ -29,7 +29,9 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf (!config.system.hardware.vm.enable) {
+    system.hardware.gpu.enable = true;
+
     environment.variables = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) {
       LIBVA_DRIVER_NAME = "radeonsi";
       VDPAU_DRIVER = "radeonsi";

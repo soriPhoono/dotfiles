@@ -14,13 +14,7 @@ in
     enable = lib.mkEnableOption "Enable gpu based features";
   };
 
-  config = lib.mkIf cfg.enable {
-    warnings =
-      if config.system.vm.enable
-      then [
-        ''You have enabled virtualisation features on a platform you have requested be built for real hardware, please disable one as they conflict.''
-      ] else [ ];
-
+  config = lib.mkIf (cfg.enable && !config.system.hardware.vm.enable) {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;

@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  this = "system.hardware.monitor";
+  this = "system.brightness";
 
   cfg = config."${this}";
 in

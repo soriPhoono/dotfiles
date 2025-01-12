@@ -6,8 +6,6 @@ let
 in
 {
   options."${this}" = {
-    enable = lib.mkEnableOption "Enable intel igpu drivers";
-
     internal = {
       enable = lib.mkEnableOption "Enable igpu features for intel igpus";
 
@@ -29,7 +27,9 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (!config.system.hardware.vm.enable) {
+    system.hardware.gpu.intel.enable = true;
+
     boot.kernelParams = lib.mkIf cfg.internal.enable [
       "i915.force_probe=${cfg.internal.device_id}"
     ];
