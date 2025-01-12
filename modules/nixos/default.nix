@@ -1,5 +1,5 @@
 {
   imports = [
-    ./virtualbox.nix
+    ./core
   ];
 }
