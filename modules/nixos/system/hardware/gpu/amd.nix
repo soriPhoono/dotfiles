@@ -36,8 +36,8 @@ in
     };
 
     hardware.amdgpu = {
-      initrd.enable = lib.mkIf cfg.integrated.enable;
-      opencl.enable = lib.mkIf cfg.dedicated.enable;
+      initrd.enable = cfg.integrated.enable;
+      opencl.enable = cfg.dedicated.enable;
     };
 
     systemd.tmpfiles.rules = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.rocm) [
