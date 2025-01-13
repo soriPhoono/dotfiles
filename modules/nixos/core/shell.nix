@@ -1,0 +1,24 @@
+{ lib, pkgs, config, ... }:
+let
+  this = "core.shell";
+
+  cfg = config."${this}";
+in
+{
+  options."${this}" = {
+    shell = lib.mkOption {
+      type = with pkgs; lib.types.enum [ fish bash ];
+      description = "The package to use as the default user shell";
+
+      default = pkgs.fish;
+    };
+  };
+
+  config = {
+    users.defaultUserShell = cfg.shell;
+
+    programs = {
+      fish.enable = cfg.shell == pkgs.fish;
+    };
+  };
+}

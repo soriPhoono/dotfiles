@@ -1,0 +1,5 @@
+{
+  core = {
+    enable = true;
+  };
+}

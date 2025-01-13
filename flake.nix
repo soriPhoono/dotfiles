@@ -2,26 +2,29 @@
   description = "Personal system configurations for home computers";
 
   inputs = {
+    # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # System inputs
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    # Global imports
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
-    let
-      inherit (nixpkgs) lib;
-    in
-    {
-      templates = import ./templates;
+  outputs = inputs@{ self, ... }: {
+    templates = import ./templates;
 
-      nixosModules.default.imports = [
-        ./modules/nixos
-      ];
+    nixosModules = import ./modules/nixos;
 
-      nixosSystems = {
-        wsl = lib.nixosSystem {
+    homeModules = import ./modules/home;
 
-        };
-      };
-    };
+    nixosConfigurations = import ./systems { inherit self inputs; };
+  };
 }
