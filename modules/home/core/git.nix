@@ -26,7 +26,8 @@ in
 
       aliases = {
         a = "add";
-
+        e = "commit --ammend --only";
+        
         co = "checkout";
       };
 
@@ -52,11 +53,6 @@ in
         rerere.enabled = true;
 
         merge.conflictStyle = "zdiff3";
-
-        alias = {
-          edit = "commit --ammend --only";
-          ff = "merge --ff-only";
-        };
 
         url = {
           "git@github.com:" = {

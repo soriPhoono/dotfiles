@@ -28,8 +28,8 @@ in
 
               text = ''
                 echo "[INFO] Re-creating system configuration, would you like to power down between generations, or roll over to the next in this power cycle? [s/r]"
-                read -p ">>> " -n 1
-                token = $(echo "$REPLY" | tr '[:upper:]' '[:lower:]')
+                read -p ">>> " -n 1 -r
+                token=$(echo "$REPLY" | tr '[:upper:]' '[:lower:]')
                 case "$token" in
                   s) sudo nixos-rebuild switch --flake github:soriphoono/dotfiles#${hostname};;
                   r) sudo nixos-rebuild boot --flake github:soriphoono/dotfiles#${hostname};;
@@ -40,7 +40,7 @@ in
               '';
             };
           in
-          "${rebuild_script}";
+          "${rebuild_script}/bin/rebuild.sh";
       };
     };
   };
