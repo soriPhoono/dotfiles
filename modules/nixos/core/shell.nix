@@ -31,8 +31,8 @@ in
                 read -p ">>> " -n 1 -r
                 token=$(echo "$REPLY" | tr '[:upper:]' '[:lower:]')
                 case "$token" in
-                  s) sudo nixos-rebuild switch --flake github:soriphoono/dotfiles#${hostname};;
-                  r) sudo nixos-rebuild boot --flake github:soriphoono/dotfiles#${hostname};;
+                  s) sudo nixos-rebuild switch --flake .#${hostname};;
+                  r) sudo nixos-rebuild boot --flake .#${hostname};;
                   *) echo "Bad entry, please try again..." && exit 1;;
                 esac
 
