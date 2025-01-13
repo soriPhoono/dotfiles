@@ -1,19 +1,13 @@
-{ lib, config, nixosConfig, ... }:
-let
-  this = "core";
-
-  cfg = config."${this}";
-in
-{
+{ nixosConfig, ... }: {
   imports = [
     ./fish.nix
+
+    ./git.nix
   ];
 
-  options."${this}" = {
-    enable = lib.mkEnableOption "Enable the core home manager feature set";
-  };
+  options.core = {};
 
-  config = lib.mkIf cfg.enable {
+  config = {
     home.stateVersion = nixosConfig.system.stateVersion;
 
     programs.home-manager.enable = true;

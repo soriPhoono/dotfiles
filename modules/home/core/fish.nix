@@ -1,11 +1,9 @@
 { lib, pkgs, nixosConfig, config, hostname, ... }:
 let
-  this = "core.fish";
-
-  cfg = config."${this}";
+  cfg = config.core.fish;
 in
 {
-  options."${this}" = {
+  options.core.fish = {
     enable = lib.mkOption {
       type = lib.types.bool;
       description = "Enable the fish shell";
@@ -19,7 +17,7 @@ in
       if !nixosConfig.programs.fish.enable
       then [
         "Fish is not installed at the system level, writing configs is not sufficient for a working install"
-      ] else [];
+      ] else [ ];
 
     programs.fish = {
       enable = true;

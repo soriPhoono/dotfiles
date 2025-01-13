@@ -1,11 +1,9 @@
 { lib, config, ... }:
 let
-  this = "core.admin";
-
-  cfg = config."${this}";
+  cfg = config.core.admin;
 in
 {
-  options."${this}" = {
+  options.core.admin = {
     name = lib.mkOption {
       type = lib.types.str;
       description = "Real name of the user";
@@ -15,22 +13,15 @@ in
   };
 
   config = {
-    users =
-      let
-        to_unix_name =
-          with lib;
-          with lib.strings;
-          name: (concatStrings (splitString " " (toLower name)));
-      in
-      {
-        users.${to_unix_name cfg.name} = {
-          description = cfg.name;
-          initialPassword = "password";
+    users = {
+      users.${lib.soriphoono.to_unix_name cfg.name} = {
+        description = cfg.name;
+        initialPassword = "password";
 
-          extraGroups = [ "wheel" ];
+        extraGroups = [ "wheel" ];
 
-          isNormalUser = true;
-        };
+        isNormalUser = true;
       };
+    };
   };
 }

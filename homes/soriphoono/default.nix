@@ -1,5 +1,3 @@
 {
-  core = {
-    enable = true;
-  };
+  core.git.enable = true;
 }

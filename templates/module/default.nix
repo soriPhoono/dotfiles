@@ -10,7 +10,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    warnings = [];
+    warnings = [ ];
 
     # Your code goes here
   };

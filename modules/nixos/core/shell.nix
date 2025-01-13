@@ -1,11 +1,9 @@
 { lib, pkgs, config, ... }:
 let
-  this = "core.shell";
-
-  cfg = config."${this}";
+  cfg = config.core.shell;
 in
 {
-  options."${this}" = {
+  options.core.shell = {
     shell = lib.mkOption {
       type = with pkgs; lib.types.enum [ fish bash ];
       description = "The package to use as the default user shell";

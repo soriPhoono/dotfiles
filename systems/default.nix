@@ -1,18 +1,21 @@
-{ self, inputs, ... }:
+{ self, inputs, lib, ... }:
 let
-  inherit (inputs.nixpkgs) lib;
-
   mkSystem =
-    details:
+    { hostname
+    , extraModules
+    , system ? "x86_64-linux"
+    , users ? [ "soriphoono" ]
+    ,
+    }:
     let
       specialArgs = {
-        inherit self inputs;
-        inherit (details) hostname;
+        inherit self inputs hostname;
       };
     in
     lib.nixosSystem {
-      inherit specialArgs;
-      inherit (details) system;
+      inherit system;
+
+      specialArgs = specialArgs;
 
       modules = [
         self.nixosModules.default
@@ -23,24 +26,21 @@ let
             useGlobalPkgs = true;
             useUserPackages = true;
 
+            extraSpecialArgs = specialArgs;
+
             sharedModules = [
               self.homeModules.default
             ];
 
-            extraSpecialArgs = specialArgs;
-
-            users = lib.genAttrs ([ "soriphoono" ] ++ (details.users or [ ])) (name: ../homes/${name});
+            users = lib.genAttrs users (name: ../homes/${name});
           };
         }
-      ] ++ details.extraModules;
+      ] ++ extraModules;
     };
 in
 {
   wsl = mkSystem {
-    system = "x86_64-linux";
-
     hostname = "wsl";
-
     extraModules = [
       ./wsl
     ];

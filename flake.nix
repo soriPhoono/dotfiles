@@ -3,6 +3,8 @@
 
   inputs = {
     # Repo inputs
+    systems.url = "github:nix-systems/default";
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # System inputs
@@ -18,13 +20,28 @@
     };
   };
 
-  outputs = inputs@{ self, ... }: {
-    templates = import ./templates;
+  outputs = inputs@{ self, nixpkgs, systems, ... }:
+    let
+      mkLib =
+        nixpkgs:
+        nixpkgs.lib.extend (
+          final: prev: (import ./lib {
+            inherit inputs;
+            inherit (nixpkgs) lib;
+          })
+        );
 
-    nixosModules = import ./modules/nixos;
+      lib = mkLib inputs.nixpkgs;
+    in
+    {
+      formatter = lib.soriphoono.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
 
-    homeModules = import ./modules/home;
+      templates = import ./templates;
 
-    nixosConfigurations = import ./systems { inherit self inputs; };
-  };
+      nixosModules = import ./modules/nixos;
+
+      homeModules = import ./modules/home;
+
+      nixosConfigurations = import ./systems { inherit self inputs lib; };
+    };
 }
