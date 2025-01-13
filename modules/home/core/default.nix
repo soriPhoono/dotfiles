@@ -1,15 +1,15 @@
-{ nixosConfig, ... }: {
+{ ... }: {
   imports = [
     ./fish.nix
 
     ./git.nix
   ];
 
-  options.core = {};
+  options.core = { };
 
   config = {
-    home.stateVersion = nixosConfig.system.stateVersion;
-
     programs.home-manager.enable = true;
+
+    home.stateVersion = "25.05";
   };
 }

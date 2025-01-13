@@ -1,3 +1,12 @@
 {
-  core.git.enable = true;
+  core = {
+    fish.enable = true;
+
+    git = {
+      enable = true;
+
+      username = "soriphoono";
+      email = "soriphoono@gmail.com";
+    };
+  };
 }
