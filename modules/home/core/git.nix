@@ -3,19 +3,20 @@ let
   cfg = config.core.git;
 in
 {
-  options.core.git = {
-    enable = lib.mkEnableOption "Enable git config";
+  options.core.git = 
+    {
+      enable = lib.mkEnableOption "Enable git config";
 
-    username = lib.mkOption {
-      type = lib.types.str;
-      description = "Your username for git related services";
-    };
+      username = lib.mkOption {
+        type = lib.types.str;
+        description = "Your username for git related services";
+      };
 
-    email = lib.mkOption {
-      type = lib.types.str;
-      description = "Your email for git related inquiry";
+      email = lib.mkOption {
+        type = lib.types.str;
+        description = "Your email for git related inquiry";
+      };
     };
-  };
 
   config = lib.mkIf cfg.enable {
     programs.git = {
@@ -26,8 +27,8 @@ in
 
       aliases = {
         a = "add";
-        e = "commit --ammend --only";
-        
+        e = "commit --amend --only";
+
         co = "checkout";
       };
 

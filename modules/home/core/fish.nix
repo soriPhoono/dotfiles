@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, pkgs, config, ... }:
 let
   cfg = config.core.fish;
 in
@@ -10,15 +10,29 @@ in
       enable = true;
 
       shellAliases = {
-        g = "git";
-        v = "nvim";
+        g = "${pkgs.git}/bin/git";
+        v = "${pkgs.neovim}/bin/nvim";
       };
 
-      shellInitLast = ''
-        set fish_greeting
+      shellInitLast =
+        let
+          shell_init = pkgs.writeShellApplication {
+            name = "shell_init.sh";
 
-        fastfetch
-      '';
+            runtimeInputs = with pkgs; [
+              fastfetch
+            ];
+
+            text = ''
+              fastfetch
+            '';
+          };
+        in
+        ''
+          set fish_greeting
+
+          ${shell_init}/bin/shell_init.sh
+        '';
     };
   };
 }

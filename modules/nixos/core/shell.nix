@@ -26,17 +26,23 @@ in
             rebuild_script = pkgs.writeShellApplication {
               name = "rebuild.sh";
 
+              runtimeInputs = with pkgs; [
+                nix-index
+              ];
+
               text = ''
                 echo "[INFO] Re-creating system configuration, would you like to power down between generations, or roll over to the next in this power cycle? [s/r]"
+                
                 read -p ">>> " -n 1 -r
                 token=$(echo "$REPLY" | tr '[:upper:]' '[:lower:]')
+
                 case "$token" in
                   s) sudo nixos-rebuild switch --flake .#${hostname};;
                   r) sudo nixos-rebuild boot --flake .#${hostname};;
                   *) echo "Bad entry, please try again..." && exit 1;;
                 esac
 
-                ${pkgs.nix-index}/bin/nix-index
+                nix-index
               '';
             };
           in
