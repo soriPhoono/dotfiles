@@ -3,7 +3,7 @@ let
   cfg = config.core.git;
 in
 {
-  options.core.git = 
+  options.core.git =
     {
       enable = lib.mkEnableOption "Enable git config";
 
@@ -56,7 +56,7 @@ in
         merge.conflictStyle = "zdiff3";
 
         url = {
-          "git@github.com:" = {
+          "ssh://git@github.com:" = {
             insteadOf = "github:";
           };
         };
