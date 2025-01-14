@@ -38,17 +38,24 @@
         inherit (nixpkgs) lib;
       })
     );
-  in
-    {
-      templates = import ./templates;
 
-      packages = import ./packages;
+    systems = import ./systems {
+      inherit self inputs lib;
+    };
+  in {
+    templates = import ./templates;
 
-      formatter = lib.soriphoono.pkgsForAllSystems (pkgs: pkgs.alejandra);
+    nixosModules = import ./modules/nixos;
+    homeModules = import ./modules/home;
 
-      nixosConfigurations = import ./systems/nixos {
-        inherit self inputs lib;
-      };
-    }
-    // (import ./modules);
+    packages =
+      lib.soriphoono.forAllSystems
+      (system: import ./packages);
+
+    formatter =
+      lib.soriphoono.forAllSystems
+      (system: nixpkgs.legacyPackages.${system}.alejandra);
+
+    nixosConfigurations = systems.bareMetal;
+  };
 }
