@@ -7,6 +7,7 @@ in
     ./bash.nix
     ./fish.nix
 
+    ./starship.nix
     ./nix-index.nix
     ./eza.nix
     ./fastfetch.nix
