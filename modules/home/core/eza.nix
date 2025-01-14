@@ -11,7 +11,7 @@ in
     programs.eza = {
       enable = true;
 
-      enableFishIntegration = true;
+      enableFishIntegration = config.core.fish.enable;
 
       git = true;
       icons = "auto";
