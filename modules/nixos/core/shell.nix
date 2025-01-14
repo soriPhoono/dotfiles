@@ -43,6 +43,8 @@ in
         };
       in
       {
+        dconf.enable = true;
+
         fish = {
           enable = cfg.shell == "fish";
 

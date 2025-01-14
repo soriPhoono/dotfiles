@@ -2,10 +2,8 @@
 let
   mkSystem =
     { hostname
-    , extraModules
     , system ? "x86_64-linux"
     , users ? [ "soriphoono" ]
-    ,
     }:
     lib.nixosSystem {
       inherit system;
@@ -20,6 +18,8 @@ let
         }
 
         self.nixosModules.default
+
+        ./${hostname}
 
         inputs.home-manager.nixosModules.home-manager
         {
@@ -44,8 +44,5 @@ in
 {
   wsl = mkSystem {
     hostname = "wsl";
-    extraModules = [
-      ./wsl
-    ];
   };
 }
