@@ -2,6 +2,7 @@
   default = {
     imports = [
       ./core
+      ./system
     ];
   };
 }

@@ -2,10 +2,17 @@
   description = "Personal system configurations for home computers";
 
   inputs = {
-    # Repo inputs
+    # Technical inputs
     systems.url = "github:nix-systems/default";
 
+    # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Compiler inputs
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # System inputs
     nixos-wsl = {
