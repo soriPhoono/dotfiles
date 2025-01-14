@@ -14,7 +14,7 @@ in
       settings = {
         logo = {
           source = ../../../assets/fastfetch.txt;
-          color = { "1" = "cyan" };
+          color = { "1" = "cyan"; };
 
           padding.right = 1;
         };

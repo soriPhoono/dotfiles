@@ -14,24 +14,10 @@ in
         v = "${pkgs.neovim}/bin/nvim";
       };
 
-      shellInitLast =
-        let
-          shell_init = pkgs.writeShellApplication {
-            name = "shell_init.sh";
-
-            runtimeInputs = with pkgs; [
-              fastfetch
-            ];
-
-            text = ''
-              fastfetch
-            '';
-          };
-        in
-        ''
+      shellInitLast = ''
           set fish_greeting
 
-          ${shell_init}/bin/shell_init.sh
+          ${pkgs.fastfetch}/bin/fastfetch
         '';
     };
   };
