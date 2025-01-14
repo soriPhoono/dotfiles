@@ -9,11 +9,6 @@ in
     programs.fish = {
       enable = true;
 
-      shellAliases = {
-        g = "${pkgs.git}/bin/git";
-        v = "${pkgs.neovim}/bin/nvim";
-      };
-
       shellInitLast = ''
           set fish_greeting
 

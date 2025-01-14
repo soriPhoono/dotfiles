@@ -25,12 +25,7 @@ in
       userEmail = cfg.email;
 
       aliases = {
-        s = "status";
-        a = "add";
-        c = "commit";
-        e = "commit --amend --only";
-
-        co = "checkout";
+        edit = "commit --amend --only";
       };
 
       ignores = [

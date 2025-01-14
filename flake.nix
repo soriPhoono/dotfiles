@@ -6,7 +6,8 @@
     systems.url = "github:nix-systems/default";
 
     # Repo inputs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Compiler inputs
     nixos-generators = {
@@ -27,16 +28,36 @@
     };
   };
 
-  outputs = inputs@{ self, systems, nixpkgs, nixos-generators, ... }:    {
+  outputs = inputs@{ self, nixpkgs, unstable, ... }:
+  let
+    lib = nixpkgs.lib.extend (
+      final: prev: (import ./lib {
+        inherit self inputs;
+        inherit (nixpkgs) lib;
+      })
+    );
+
+    forAllSystems = action: lib.genAttrs (import inputs.systems) (system: action system);
+
+    pkgs = forAllSystems (system: import nixpkgs {
+      inherit system;
+
+      overlays = import ./overlays;
+
+      config.allowUnfree = true;
+    });
+
+    pkgsForAllSystems = action: forAllSystems (system: action pkgs.${system});
+  in {
     templates = import ./templates;
 
-    nixosModules = import ./modules/nixos;
+    packages = import ./packages;
 
-    homeModules = import ./modules/home;
+    formatter = pkgsForAllSystems (pkgs: pkgs.alejandra);
 
     nixosConfigurations = import ./systems {
       inherit self inputs;
       inherit (nixpkgs) lib;
     };
-  };
+  } // (import ./modules);
 }
