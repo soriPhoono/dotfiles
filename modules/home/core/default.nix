@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.core;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core;
+in {
   imports = [
     ./bash.nix
     ./fish.nix

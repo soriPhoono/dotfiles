@@ -1,8 +1,11 @@
-{ lib, pkgs, config, ... }:
-let
-  cfg = config.core.fish;
-in
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  cfg = config.core.fish;
+in {
   options.core.fish.enable = lib.mkEnableOption "Enable the fish shell";
 
   config = lib.mkIf cfg.enable {
@@ -10,10 +13,10 @@ in
       enable = true;
 
       shellInitLast = ''
-          set fish_greeting
+        set fish_greeting
 
-          ${pkgs.fastfetch}/bin/fastfetch
-        '';
+        ${pkgs.fastfetch}/bin/fastfetch
+      '';
     };
   };
 }

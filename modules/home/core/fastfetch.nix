@@ -1,8 +1,11 @@
-{ lib, pkgs, config, ... }:
-let
-  cfg = config.core.fastfetch;
-in
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  cfg = config.core.fastfetch;
+in {
   options.core.fastfetch = {
     enable = lib.mkEnableOption "Enable fastfetch";
   };
@@ -14,7 +17,7 @@ in
       settings = {
         logo = {
           source = ../../../assets/fastfetch.txt;
-          color = { "1" = "cyan"; };
+          color = {"1" = "cyan";};
 
           padding.right = 1;
         };

@@ -6,8 +6,7 @@
     systems.url = "github:nix-systems/default";
 
     # Repo inputs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Compiler inputs
     nixos-generators = {
@@ -28,36 +27,28 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, unstable, ... }:
-  let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
     lib = nixpkgs.lib.extend (
       final: prev: (import ./lib {
         inherit self inputs;
         inherit (nixpkgs) lib;
       })
     );
+  in
+    {
+      templates = import ./templates;
 
-    forAllSystems = action: lib.genAttrs (import inputs.systems) (system: action system);
+      packages = import ./packages;
 
-    pkgs = forAllSystems (system: import nixpkgs {
-      inherit system;
+      formatter = lib.soriphoono.pkgsForAllSystems (pkgs: pkgs.alejandra);
 
-      overlays = import ./overlays;
-
-      config.allowUnfree = true;
-    });
-
-    pkgsForAllSystems = action: forAllSystems (system: action pkgs.${system});
-  in {
-    templates = import ./templates;
-
-    packages = import ./packages;
-
-    formatter = pkgsForAllSystems (pkgs: pkgs.alejandra);
-
-    nixosConfigurations = import ./systems {
-      inherit self inputs;
-      inherit (nixpkgs) lib;
-    };
-  } // (import ./modules);
+      nixosConfigurations = import ./systems/nixos {
+        inherit self inputs lib;
+      };
+    }
+    // (import ./modules);
 }

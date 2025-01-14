@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.core.fd;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.fd;
+in {
   options.core.fd = {
     enable = lib.mkEnableOption "Enable fd";
   };

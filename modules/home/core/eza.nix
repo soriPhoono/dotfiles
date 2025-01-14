@@ -1,8 +1,11 @@
-{ lib, pkgs, config, ... }:
-let
-  cfg = config.core.eza;
-in
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  cfg = config.core.eza;
+in {
   options.core.eza = {
     enable = lib.mkEnableOption "Enable eza config";
   };

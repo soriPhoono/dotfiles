@@ -1,5 +1,9 @@
-{ lib, config, ... }:
-let cfg = config.core.bat;
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.bat;
 in {
   options.core.bat = {
     enable = lib.mkEnableOption "Install bat";

@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.core.admin;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.admin;
+in {
   options.core.admin = {
     name = lib.mkOption {
       type = lib.types.str;
@@ -13,22 +15,19 @@ in
   };
 
   config = {
-    users =
-      let
-        to_unix_name =
-          with lib;
-          with lib.strings;
-          name: concatStrings (splitString " " (toLower name));
-      in
-      {
-        users.${to_unix_name cfg.name} = {
-          description = cfg.name;
-          initialPassword = "password";
+    users = let
+      to_unix_name = with lib;
+      with lib.strings;
+        name: concatStrings (splitString " " (toLower name));
+    in {
+      users.${to_unix_name cfg.name} = {
+        description = cfg.name;
+        initialPassword = "password";
 
-          extraGroups = [ "wheel" ];
+        extraGroups = ["wheel"];
 
-          isNormalUser = true;
-        };
+        isNormalUser = true;
       };
+    };
   };
 }

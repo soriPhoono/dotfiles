@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.core.nix-index;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.nix-index;
+in {
   options.core.nix-index = {
     enable = lib.mkEnableOption "Enable nix-index";
   };

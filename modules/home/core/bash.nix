@@ -4,6 +4,6 @@
 
     enableCompletion = true;
     enableVteIntegration = true;
-    historyControl = [ "erasedups" "ignoreboth" ];
+    historyControl = ["erasedups" "ignoreboth"];
   };
 }

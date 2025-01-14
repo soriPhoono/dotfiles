@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.core.fzf;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.fzf;
+in {
   options.core.fzf = {
     enable = lib.mkEnableOption "Enable fzf";
   };
