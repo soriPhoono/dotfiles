@@ -20,28 +20,14 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, systems, ... }:
-    let
-      mkLib =
-        nixpkgs:
-        nixpkgs.lib.extend (
-          final: prev: (import ./lib {
-            inherit inputs;
-            inherit (nixpkgs) lib;
-          })
-        );
+  outputs = inputs@{ self, systems, nixpkgs, ... }:    {
+    templates = import ./templates;
 
-      lib = mkLib inputs.nixpkgs;
-    in
-    {
-      formatter = lib.soriphoono.forAllSystems (system: nixpkgs.legacyPackages.${system}.nixpkgs-fmt);
+    nixosModules = import ./modules/nixos;
 
-      templates = import ./templates;
+    homeModules = import ./modules/home;
 
-      nixosModules = import ./modules/nixos;
-
-      homeModules = import ./modules/home;
-
-      nixosConfigurations = import ./systems { inherit self inputs lib; };
-    };
+    nixosConfigurations = import ./systems { inherit self inputs;
+    inherit (nixpkgs) lib; };
+  };
 }

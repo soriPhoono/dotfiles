@@ -2,6 +2,8 @@
   imports = [
     ./fish.nix
 
+    ./eza.nix
+
     ./git.nix
   ];
 
