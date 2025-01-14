@@ -7,17 +7,18 @@ let
     , users ? [ "soriphoono" ]
     ,
     }:
-    let
-      specialArgs = {
-        inherit self inputs hostname;
-      };
-    in
     lib.nixosSystem {
       inherit system;
 
-      specialArgs = specialArgs;
+      specialArgs = {
+        inherit self inputs hostname;
+      };
 
       modules = [
+        {
+          networking.hostName = hostname;
+        }
+
         self.nixosModules.default
 
         inputs.home-manager.nixosModules.home-manager
@@ -26,7 +27,9 @@ let
             useGlobalPkgs = true;
             useUserPackages = true;
 
-            extraSpecialArgs = specialArgs;
+            extraSpecialArgs = {
+              inherit self inputs hostname;
+            };
 
             sharedModules = [
               self.homeModules.default

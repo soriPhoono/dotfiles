@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./bash.nix
     ./fish.nix
 
     ./eza.nix

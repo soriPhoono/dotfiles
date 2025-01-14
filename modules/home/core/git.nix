@@ -26,6 +26,7 @@ in
       userEmail = cfg.email;
 
       aliases = {
+        s = "status";
         a = "add";
         e = "commit --amend --only";
 

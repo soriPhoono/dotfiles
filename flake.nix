@@ -27,7 +27,9 @@
 
     homeModules = import ./modules/home;
 
-    nixosConfigurations = import ./systems { inherit self inputs;
-    inherit (nixpkgs) lib; };
+    nixosConfigurations = import ./systems {
+      inherit self inputs;
+      inherit (nixpkgs) lib;
+    };
   };
 }
