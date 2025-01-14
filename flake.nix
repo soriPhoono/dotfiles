@@ -27,7 +27,7 @@
     };
   };
 
-  outputs = inputs@{ self, systems, nixpkgs, ... }:    {
+  outputs = inputs@{ self, systems, nixpkgs, nixos-generators, ... }:    {
     templates = import ./templates;
 
     nixosModules = import ./modules/nixos;
