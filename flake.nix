@@ -32,30 +32,96 @@
     nixpkgs,
     ...
   }: let
-    lib = nixpkgs.lib.extend (
-      final: prev: (import ./lib {
-        inherit self inputs;
-        inherit (nixpkgs) lib;
-      })
-    );
+    inherit (nixpkgs) lib;
 
-    systems = import ./systems {
-      inherit self inputs lib;
-    };
+    forEach = f: elem:
+      lib.genAttrs
+      elem
+      (item: f item);
+
+    mkPkgs = system:
+      nixpkgs.legacyPackages.${system};
+
+    forAllSystems = f:
+      forEach f (import inputs.systems);
+
+    pkgsForAllSystems = f:
+      forAllSystems (system: f (mkPkgs system));
+
+    readDirIfExists = path:
+      if builtins.pathExists path
+      then builtins.readDir path
+      else {};
+
+    getNixFilesAt = path:
+      lib.attrsets.mapAttrsToList (name: type: name)
+      (lib.filterAttrs
+      (name: type: type == "file" && lib.strings.hasSuffix ".nix" name)
+      (readDir path));
+
+    # createDefaultEntry =
+    #   path:
+    #   args:
+    #   if builtins.pathExists path
+    #   then {
+    #     (builtins.substring 0 ((builtins.stringLength path) - 4)) = import path args;
+    #   }
+    #   else {};
+
+    getImportableEntries = path: map (package: builtins.substring 0 ((builtins.stringLength package) - 4) package) (read_nix_files path);
   in {
     templates = import ./templates;
 
     nixosModules = import ./modules/nixos;
     homeModules = import ./modules/home;
 
+    formatter = pkgsForAllSystems (pkgs: pkgs.alejandra);
+
     packages =
-      lib.soriphoono.forAllSystems
-      (system: import ./packages);
+      (
+        if builtins.pathExists ./default.nix
+        then forAllSystems (system: let pkgs = mkPkgs system; in {
+          default = import ./default.nix {
+            inherit lib pkgs;
+          };
+        })
+        else {}
+      ) // (
+        forAllSystems
+        (system: let
+          pkgs = mkPkgs system;
+        in forEach (package: import ./packages/${package}.nix {inherit lib pkgs;}) (getImportableEntries ./packages))
+      ) // (
+        forAllSystems
+        (system: let
+          pkgs = mkPkgs system;
+        in forEach (package: import ./packages/${system}/${package}.nix {inherit lib pkgs;}) (getImportableEntries ./packages/${system}))
+      );
 
-    formatter =
-      lib.soriphoono.forAllSystems
-      (system: nixpkgs.legacyPackages.${system}.alejandra);
+    devShells =
+      (
+        if builtins.pathExists ./shell.nix
+        then forAllSystems
+        (system: let pkgs = mkPkgs system; in {
+          default = import ./shell.nix {
+            inherit pkgs;
+          };
+        })
+        else {};
+      ) // (
+        forAllSystems
+        (system: let
+          pkgs = mkPkgs pkgs;
+        in forEach (shell: import ./shells/${shell}.nix { inherit pkgs; }) (getImportableEntries ./shells))
+      ) // (
+        forAllSystems
+        (system: let
+          pkgs = mkPkgs pkgs;
+        in forEach (shell: import ./shells/${system}/${shell}.nix {inherit pkgs; }) (getImportableEntries ./shells/${system}))
+      )
 
-    nixosConfigurations = systems.bareMetal;
+    nixosConfigurations = import ./systems {
+      inherit self inputs lib;
+    };
   };
 }

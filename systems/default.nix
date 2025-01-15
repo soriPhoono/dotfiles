@@ -4,37 +4,6 @@
   lib,
   ...
 }: let
-  mkModules = {
-    hostname,
-    users ? ["soriphoono"],
-  }: [
-    {
-      networking.hostName = hostname;
-    }
-
-    self.nixosModules.default
-
-    ./${hostname}
-
-    inputs.home-manager.nixosModules.home-manager
-    {
-      home-manager = {
-        useGlobalPkgs = true;
-        useUserPackages = true;
-
-        extraSpecialArgs = {
-          inherit self inputs hostname;
-        };
-
-        sharedModules = [
-          self.homeModules.default
-        ];
-
-        users = lib.genAttrs users (name: ../homes/${name});
-      };
-    }
-  ];
-
   mkSystem = {
     hostname,
     system ? "x86_64-linux",
@@ -44,36 +13,37 @@
       inherit system;
 
       specialArgs = {
-        inherit self inputs hostname;
+        inherit inputs lib hostname;
       };
 
-      modules = mkModules {
-        inherit hostname users;
-      };
-    };
+      modules = [
+        {
+          networking.hostName = hostname;
+        }
 
-  mkGenerator = {
-    hostname,
-    format,
-    system ? "x86_64-linux",
-    users ? ["soriphoono"],
-  }:
-    inputs.nixos-generators.nixosGenerate {
-      inherit system format;
+        self.nixosModules.default
 
-      specialArgs = {
-        inherit self inputs hostname;
-      };
+        ./${hostname}
 
-      modules =
-        (mkModules {
-          inherit hostname users;
-        })
-        ++ [
-          {
-            virtualisation.virtualbox.guest.enable = hostname == "virtualbox";
-          }
-        ];
+        inputs.home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+
+            extraSpecialArgs = {
+              inherit inputs;
+            };
+
+            sharedModules = [
+              self.homeModules.default
+            ];
+
+            # TODO: see if we can set home config from homeConfigurations in the flake to preserve load configuration
+            users = lib.genAttrs users (name: ../homes/${name});
+          };
+        }
+      ];
     };
 in {
   wsl = mkSystem {
