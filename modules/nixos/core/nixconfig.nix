@@ -38,7 +38,9 @@
   };
 
   nixpkgs = {
-    overlays = import ../../../overlays;
+    overlays = import ../../../overlays {
+      # Inputs for overlays here
+    };
 
     config.allowUnfree = true;
   };

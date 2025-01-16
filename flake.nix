@@ -34,44 +34,64 @@
   }: let
     systems = import inputs.systems;
 
-    lib = nixpkgs.lib.extend(final: prev: import ./lib {
-      # Write lib parameters here
-    });
+    lib = nixpkgs.lib.extend (final: prev:
+      import ./lib {
+        # Write lib parameters here
+      });
 
-    pkgs = {};
+    pkgsBySystem = {};
 
     getPkgs = system:
-      if lib.attrsets.hasAttr system pkgs
-      then pkgs.${system}
-      else let pkgs = import nixpkgs {
-        inherit system;
+      if lib.attrsets.hasAttr system pkgsBySystem
+      then pkgsBySystem.${system}
+      else let
+        pkgs = import nixpkgs {
+          inherit system;
 
-        overlays = import ./overlays {
-          # Write overlay parameters here
+          overlays = import ./overlays {
+            # Write overlay parameters here
+          };
+
+          config.allowUnfree = true;
         };
-
-        config.allowUnfree = true;
-      };
-      in pkgs;
+      in
+        pkgs;
 
     forEach = elements: f:
       lib.genAttrs
       elements
       (item: f item);
 
-    pkgsForAllSystems = f:
-      forEach systems (system: f (getPkgs system));
+    forEachSystem = forEach systems;
 
-    getImportableEntries = path: map (entry: builtins.substring 0 ((builtins.stringLength entry) - 4) entry) (
-      lib.attrsets.mapAttrsToList
-      (name: type: name)
-      (lib.attrsets.filterAttrs
-        (name: type: type == "file" && lib.strings.hasSuffix ".nix" name)
-        (if builtins.pathExists path
-          then builtins.readDir path
-          else {})
-      )
-    );
+    pkgsForAllSystems = f:
+      forEachSystem (system: f (getPkgs system));
+
+    readIfExists = path:
+      if builtins.pathExists path
+      then builtins.readDir path
+      else {};
+
+    afterLastOf = sub: str: let
+      elements = builtins.split sub str;
+    in
+      builtins.elemAt elements ((builtins.length elements) - 1);
+
+    importSystem = path: system: let
+      importFrom = path:
+        forEach (map (entry: lib.strings.removeSuffix ".nix" entry) (
+          lib.attrsets.mapAttrsToList
+          (name: type: afterLastOf "/" name)
+          (lib.attrsets.filterAttrs
+            (name: type: (type == "regular") && lib.strings.hasSuffix ".nix" name)
+            (readIfExists ./${path}))
+        )) (entry: import ./${path}/${entry}.nix {
+          inherit lib;
+
+          pkgs = getPkgs system;
+        });
+    in
+      (importFrom ./${path}) // (importFrom ./${path}/${system});
   in {
     templates = import ./templates;
 
@@ -80,27 +100,9 @@
 
     formatter = pkgsForAllSystems (pkgs: pkgs.alejandra);
 
-    packages =
-      (
-        forEach
-        systems
-        (system: forEach (getImportableEntries ./packages) (package: import ./packages/${package}.nix {inherit lib; pkgs = getPkgs system;}))
-      ) // (
-        forEach
-        systems
-        (system: forEach (getImportableEntries ./packages/${system}) (package: import ./packages/${system}/${package}.nix {inherit lib; pkgs = getPkgs system;}))
-      );
+    packages = forEachSystem (system: importSystem ./packages system);
 
-    devShells =
-      (
-        forEach
-        systems
-        (system: forEach (getImportableEntries ./shells) (shell: import ./shells/${shell}.nix { pkgs = getPkgs system; }))
-      ) // (
-        forEach
-        systems
-        (system: forEach (getImportableEntries ./shells/${system}) (shell: import ./shells/${system}/${shell}.nix { pkgs = getPkgs system; }))
-      );
+    devShells = forEachSystem (system: importSystem ./shells system);
 
     nixosConfigurations = import ./systems {
       inherit self inputs lib;
