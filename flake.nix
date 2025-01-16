@@ -57,12 +57,12 @@
       in
         pkgs;
 
-    forEach = elements: f:
+    forEach = f: elements:
       lib.genAttrs
       elements
       (item: f item);
 
-    forEachSystem = forEach systems;
+    forEachSystem = f: forEach f systems;
 
     pkgsForAllSystems = f:
       forEachSystem (system: f (getPkgs system));
@@ -72,24 +72,28 @@
       then builtins.readDir path
       else {};
 
-    afterLastOf = sub: str: let
-      elements = builtins.split sub str;
-    in
-      builtins.elemAt elements ((builtins.length elements) - 1);
+    getFilesOfType = path: extension:
+      lib.attrsets.filterAttrs
+      (name: type: (type == "regular") && lib.strings.hasSuffix extension name)
+      (readIfExists path);
+
+    afterLastOf = sub: str:
+      let
+        elements = builtins.split sub str;
+      in builtins.elemAt elements ((builtins.length elements) - 1);
+
+    getFileNames = files:
+      lib.attrsets.mapAttrsToList
+        (name: type: afterLastOf "/" name)
+        files;
 
     importSystem = path: system: let
       importFrom = path:
-        forEach (map (entry: lib.strings.removeSuffix ".nix" entry) (
-          lib.attrsets.mapAttrsToList
-          (name: type: afterLastOf "/" name)
-          (lib.attrsets.filterAttrs
-            (name: type: (type == "regular") && lib.strings.hasSuffix ".nix" name)
-            (readIfExists ./${path}))
-        )) (entry: import ./${path}/${entry}.nix {
+        forEach (entry: import ./${path}/${entry}.nix {
           inherit lib;
 
           pkgs = getPkgs system;
-        });
+        }) (map (file: lib.strings.removeSuffix ".nix" file) (getFileNames (getFilesOfType path ".nix")));
     in
       (importFrom ./${path}) // (importFrom ./${path}/${system});
   in {
