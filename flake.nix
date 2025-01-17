@@ -68,6 +68,12 @@
             })
           else {};
 
+        overlays =
+          if builtins.pathExists ./overlays
+          then
+            load (filesOf ./overlays) (name: import ./overlays/${name}.nix)
+            else {};
+
         nixosConfigurations = import ./systems {
           inherit self inputs lib;
         };
