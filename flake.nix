@@ -5,6 +5,8 @@
     # Technical inputs
     systems.url = "github:nix-systems/default";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -29,87 +31,65 @@
 
   outputs = inputs @ {
     self,
+    flake-utils,
     nixpkgs,
+    nixos-generators,
     ...
   }: let
-    systems = import inputs.systems;
-
     lib = nixpkgs.lib.extend (final: prev:
       import ./lib {
-        # Write lib parameters here
+        lib = prev;
       });
+  in
+    with lib.soriphoono;
+      flake-utils.lib.eachDefaultSystem (system: let
+        pkgs = nixpkgs.legacyPackages.${system};
 
-    pkgsBySystem = {};
+        load = path:
+          loadCompilable {
+            inherit system path;
 
-    getPkgs = system:
-      if lib.attrsets.hasAttr system pkgsBySystem
-      then pkgsBySystem.${system}
-      else let
-        pkgs = import nixpkgs {
-          inherit system;
-
-          overlays = import ./overlays {
-            # Write overlay parameters here
+            args = {
+              inherit lib pkgs;
+            };
           };
+      in {
+        formatter = pkgs.alejandra;
+        packages = load ./packages;
+        devShells = load ./shells;
+      })
+      // {
+        templates =
+          if builtins.pathExists ./templates
+          then
+            load (dirsOf ./templates) (name: {
+              path = ./templates/${name};
+              description = "Create boilerplate for a ${name} based project";
+            })
+          else {};
 
-          config.allowUnfree = true;
+        nixosConfigurations = import ./systems {
+          inherit self inputs lib;
         };
-      in
-        pkgs;
-
-    forEach = f: elements:
-      lib.genAttrs
-      elements
-      (item: f item);
-
-    forEachSystem = f: forEach f systems;
-
-    pkgsForAllSystems = f:
-      forEachSystem (system: f (getPkgs system));
-
-    readIfExists = path:
-      if builtins.pathExists path
-      then builtins.readDir path
-      else {};
-
-    getFilesOfType = path: extension:
-      lib.attrsets.filterAttrs
-      (name: type: (type == "regular") && lib.strings.hasSuffix extension name)
-      (readIfExists path);
-
-    afterLastOf = sub: str:
-      let
-        elements = builtins.split sub str;
-      in builtins.elemAt elements ((builtins.length elements) - 1);
-
-    getFileNames = files:
-      lib.attrsets.mapAttrsToList
-        (name: type: afterLastOf "/" name)
-        files;
-
-    importSystem = path: system: let
-      importFrom = path:
-        forEach (entry: import ./${path}/${entry}.nix {
-          inherit lib;
-
-          pkgs = getPkgs system;
-        }) (map (file: lib.strings.removeSuffix ".nix" file) (getFileNames (getFilesOfType path ".nix")));
-    in
-      (importFrom ./${path}) // (importFrom ./${path}/${system});
-  in {
-    templates = import ./templates;
-
-    nixosModules = import ./modules/nixos;
-    homeModules = import ./modules/home;
-
-    formatter = pkgsForAllSystems (pkgs: pkgs.alejandra);
-
-    packages = forEachSystem (system: importSystem ./packages system);
-
-    devShells = forEachSystem (system: importSystem ./shells system);
-
-    nixosConfigurations = import ./systems {
-      inherit self inputs lib;
-    };
-  };
+      }
+      // lib.genAttrs
+      [
+        "nixosModules"
+        "homeModules"
+      ]
+      (
+        name: let
+          modules = loadModules ./modules/${lib.removeSuffix "Modules" name};
+        in
+          modules
+          // (
+            if !(builtins.hasAttr "default" modules)
+            then {
+              default = {
+                imports = builtins.attrValues self.${name};
+              };
+            }
+            else {}
+          )
+      );
 }
