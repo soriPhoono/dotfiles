@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "Enable hyprland desktop configuration";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.kitty.enable = true;
     wayland.windowManager.hyprland = {
       enable = true;
