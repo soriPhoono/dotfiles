@@ -13,7 +13,7 @@ in
 
     networking.networkmanager.enable = true;
 
-    users.users.${lib.to_unix_name config.core.admin.name}.extraGroups = [ "networkmanager" ];
+    users.users.${lib.dotfiles.to_unix_name config.core.admin.name}.extraGroups = [ "networkmanager" ];
 
     services.timesyncd.enable = true;
   };

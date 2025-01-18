@@ -15,7 +15,7 @@ in {
   };
 
   config = let
-    unix_name = lib.to_unix_name cfg.name;
+    unix_name = lib.dotfiles.to_unix_name cfg.name;
   in {
     snowfallorg.users.${unix_name} = {};
 

@@ -1,11 +1,8 @@
 # Sane default allowing for user level overriding
 {
-  inputs,
-  lib,
   pkgs,
   ...
-}:
-with lib.soriphoono; {
+}: {
   nix = {
     package = pkgs.nixVersions.latest;
 
