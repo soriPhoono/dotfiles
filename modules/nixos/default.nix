@@ -1,8 +1,0 @@
-{
-  default = {
-    imports = [
-      ./core
-      ./system
-    ];
-  };
-}

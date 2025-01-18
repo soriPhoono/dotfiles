@@ -1,8 +1,11 @@
+# Sane default allowing for user level overriding
 {
   inputs,
+  lib,
   pkgs,
   ...
-}: {
+}:
+with lib.soriphoono; {
   nix = {
     package = pkgs.nixVersions.latest;
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
@@ -35,13 +38,5 @@
         "daily"
       ];
     };
-  };
-
-  nixpkgs = {
-    overlays = import ../../../overlays {
-      # Inputs for overlays here
-    };
-
-    config.allowUnfree = true;
   };
 }
