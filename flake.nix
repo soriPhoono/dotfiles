@@ -48,7 +48,7 @@
       };
 
       alias = {
-        shells.default = "nix";
+        shells.default = "development";
       };
 
       channels-config.allowUnfree = true;
