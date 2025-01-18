@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  hostname,
   ...
 }: let
   cfg = config.core.shell;
@@ -32,7 +31,25 @@ in {
 
         # TODO: check this
         text = ''
-          echo "[INFO] Re-creating system configuration, would you like to power down between generations, or roll over to the next in this power cycle? [s/r]"
+          select choice in switch boot cancel
+          do
+            case $choice in
+              switch)
+                sudo nixos-rebuild switch --flake .#${config.networking.hostName}
+                break
+                ;;
+              boot)
+                sudo nixos-rebuild boot --flake .#${config.networking.hostName}
+                break
+                ;;
+              cancel)
+                exit 0
+                ;;
+              *)
+                echo "Invalid selection"
+                ;;
+            esac
+          done
 
           nix-index
         '';

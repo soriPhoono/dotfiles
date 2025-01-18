@@ -8,7 +8,6 @@
 with lib.soriphoono; {
   nix = {
     package = pkgs.nixVersions.latest;
-    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
     settings = {
       experimental-features = [

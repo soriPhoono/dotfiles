@@ -14,19 +14,17 @@ in {
     };
   };
 
-  config = {
-    users = let
-      to_unix_name = with lib;
-      with lib.strings;
-        name: concatStrings (splitString " " (toLower name));
-    in {
+  config = let
+    to_unix_name = with lib;
+    with lib.strings;
+      name: concatStrings (splitString " " (toLower name));
+  in {
+    snowfallorg.users.${to_unix_name cfg.name} = {};
+
+    users = {
       users.${to_unix_name cfg.name} = {
         description = cfg.name;
         initialPassword = "password";
-
-        extraGroups = ["wheel"];
-
-        isNormalUser = true;
       };
     };
   };
