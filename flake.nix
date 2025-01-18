@@ -12,7 +12,7 @@
 
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
 
-    # Compiler inputs
+    # Assembler inputs
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";

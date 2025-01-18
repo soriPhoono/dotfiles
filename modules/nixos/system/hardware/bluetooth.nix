@@ -1,5 +1,9 @@
-{ lib, config, virtual, ... }:
-let
+{
+  lib,
+  config,
+  virtual,
+  ...
+}: let
   cfg = config.system.hardware.bluetooth;
 in {
   options.system.hardware.bluetooth = {

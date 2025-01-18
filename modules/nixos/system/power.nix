@@ -1,14 +1,16 @@
-{ lib, config, ... }:
-let
-  cfg = config.system.power;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.system.power;
+in {
   options.system.power = {
     enable = lib.mkEnableOption "Enable power optimisations";
   };
 
   config = lib.mkIf cfg.enable {
-    warnings = [ ];
+    warnings = [];
 
     services.tlp = {
       enable = true;

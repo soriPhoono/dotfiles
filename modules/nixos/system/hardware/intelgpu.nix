@@ -1,8 +1,12 @@
-{ lib, pkgs, config, virtual, ... }:
-let
-  cfg = config.system.hardware.intelgpu;
-in
 {
+  lib,
+  pkgs,
+  config,
+  virtual,
+  ...
+}: let
+  cfg = config.system.hardware.intelgpu;
+in {
   options.system.hardware.intelgpu = {
     integrated = {
       enable = lib.mkEnableOption "Enable igpu features for intel igpus";
@@ -34,10 +38,11 @@ in
       enable = true;
       enable32Bit = true;
 
-      extraPackages = with pkgs; lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) [
-        intel-media-driver
-        libvdpau-va-gl
-      ];
+      extraPackages = with pkgs;
+        lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) [
+          intel-media-driver
+          libvdpau-va-gl
+        ];
     };
 
     environment = {

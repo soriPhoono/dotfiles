@@ -1,8 +1,5 @@
 # Sane default allowing for user level overriding
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   nix = {
     package = pkgs.nixVersions.latest;
 

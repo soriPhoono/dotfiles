@@ -1,8 +1,10 @@
-{ lib, config, ... }:
-let
-  cfg = config.system.pipewire;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.system.pipewire;
+in {
   options.system.pipewire.enable = lib.mkEnableOption "Enable audio driver";
 
   config = lib.mkIf cfg.enable {

@@ -1,8 +1,12 @@
-{ lib, pkgs, config, virtual, ... }:
-let
-  cfg = config.system.hardware.amdgpu;
-in
 {
+  lib,
+  pkgs,
+  config,
+  virtual,
+  ...
+}: let
+  cfg = config.system.hardware.amdgpu;
+in {
   options.system.hardware.amdgpu = {
     integrated = {
       enable = lib.mkEnableOption "Enable integrated GPU features";
