@@ -8,5 +8,7 @@ inputs.pre-commit-hooks.lib.${system}.run {
 
   hooks = {
     alejandra.enable = true;
+    flake-checker.enable = true;
+    statix.enable = true;
   };
 }
