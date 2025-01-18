@@ -9,5 +9,7 @@
       username = "soriphoono";
       email = "soriphoono@gmail.com";
     };
+
+    editors.helix.enable = true;
   };
 }
