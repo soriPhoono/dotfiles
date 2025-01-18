@@ -41,13 +41,7 @@
       inherit inputs;
 
       src = ./.;
-
-      snowfall = {
-        namespace = "dotfiles";
-      };
-
-      templates = {
-      };
+      snowfall.namespace = "dotfiles";
 
       outputs-builder = channels: {
         formatter = channels.nixpkgs.alejandra;

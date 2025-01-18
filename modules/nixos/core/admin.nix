@@ -15,14 +15,12 @@ in {
   };
 
   config = let
-    to_unix_name = with lib;
-    with lib.strings;
-      name: concatStrings (splitString " " (toLower name));
+    unix_name = lib.to_unix_name cfg.name;
   in {
-    snowfallorg.users.${to_unix_name cfg.name} = {};
+    snowfallorg.users.${unix_name} = {};
 
     users = {
-      users.${to_unix_name cfg.name} = {
+      users.${unix_name} = {
         description = cfg.name;
         initialPassword = "password";
       };
