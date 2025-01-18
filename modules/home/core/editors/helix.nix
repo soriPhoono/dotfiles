@@ -13,7 +13,7 @@ in {
     programs.helix = {
       enable = true;
 
-      defaultEditor = config.core.editors.neovim.enable;
+      defaultEditor = true;
     };
   };
 }
