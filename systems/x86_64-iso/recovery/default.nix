@@ -1,4 +1,4 @@
-{...}: {
+_: {
   system = {
     boot = {
       enable = true;

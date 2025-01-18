@@ -10,10 +10,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.firewall.enable = true;
-    networking.nftables.enable = true;
+    networking = {
+      firewall.enable = true;
+      nftables.enable = true;
 
-    networking.networkmanager.enable = true;
+      networkmanager.enable = true;
+    };
 
     users.users.${lib.dotfiles.to_unix_name config.core.admin.name}.extraGroups = ["networkmanager"];
 
