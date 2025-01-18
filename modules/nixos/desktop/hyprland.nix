@@ -16,6 +16,17 @@ in {
       hyprlock.enable = true;
     };
 
-    services.hypridle.enable = true;
+    services = {
+      xserver = {
+        enable = true;
+
+        xkb.layout = "us";
+        xkb.variant = "";
+
+        displayManager.sddm.enable = true;
+      };
+
+      hypridle.enable = true;
+    };
   };
 }
