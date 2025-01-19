@@ -1,16 +1,14 @@
 keys:
-  - &admin_soriphoono C2B9FC8254BAFAE7DB22909CE805BC8E17D7B0A8
+  - &admin_soriphoono age1rpk9d2sfaghtev2uypsdeza0yt76z8yt2t574m3f4u9l57grefsq5fnyer
   - &system_wsl age1q0we70gk6uj4y92hdnwj06vcfm74h0h8dd7cyl07sdv5d93h5qsqlkm0wh
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
-      - pgp:
+      - age:
           - *admin_soriphoono
-        age:
           - *system_wsl
   - path_regex: secrets/soriphoono/[^/]+\.(yaml|json|env|ini)$
     key_groups:
-      - pgp:
+      - age:
           - *admin_soriphoono
-        age:
           - *system_wsl

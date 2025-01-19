@@ -45,10 +45,6 @@
       src = ./.;
       snowfall.namespace = "dotfiles";
 
-      homes.modules = with inputs; [
-        sops-nix.homeManagerModules.sops
-      ];
-
       outputs-builder = channels: {
         formatter = channels.nixpkgs.alejandra;
       };

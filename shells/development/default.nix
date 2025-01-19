@@ -13,13 +13,10 @@ in
 
     packages = with pkgs; [
       nixd
+
+      age
+      sops
     ];
 
-    sopsCreateGPGHome = true;
-
-    buildInputs =
-      pre-commit-check.enabledPackages
-      ++ [
-        (pkgs.callPackage inputs.sops-nix {}).sops-import-keys-hook
-      ];
+    buildInputs = pre-commit-check.enabledPackages;
   }

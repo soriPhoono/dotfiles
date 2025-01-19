@@ -6,6 +6,8 @@
   cfg = config.core;
 in {
   imports = [
+    ./secrets.nix
+
     ./bash.nix
     ./fish.nix
 
@@ -22,6 +24,11 @@ in {
   ];
 
   options.core = {
+    username = lib.mkOption {
+      type = lib.types.str;
+      description = "Set the username";
+    };
+
     plainShell = lib.mkOption {
       type = lib.types.bool;
       description = "Disable cli tools";
@@ -53,6 +60,10 @@ in {
 
     programs.home-manager.enable = true;
 
-    home.stateVersion = "25.05";
+    home = {
+      homeDirectory = "/home/${cfg.username}";
+
+      stateVersion = "25.05";
+    };
   };
 }
