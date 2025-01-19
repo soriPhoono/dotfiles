@@ -15,6 +15,11 @@
 
   core.hostname = "wsl";
 
+  system.themes = {
+    enable = true;
+    catppuccin.enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     wget
   ];
