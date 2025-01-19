@@ -5,6 +5,8 @@
 }: {
   home.username = "soriphoono";
 
+  nvim.enable = true;
+
   core = {
     secrets.enable = true;
 
