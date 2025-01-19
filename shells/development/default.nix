@@ -15,5 +15,11 @@ in
       nixd
     ];
 
-    buildInputs = pre-commit-check.enabledPackages;
+    sopsCreateGPGHome = true;
+
+    buildInputs =
+      pre-commit-check.enabledPackages
+      ++ [
+        (pkgs.callPackage inputs.sops-nix {}).sops-import-keys-hook
+      ];
   }

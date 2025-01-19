@@ -17,13 +17,13 @@ in {
   config = let
     unix_name = lib.dotfiles.to_unix_name cfg.name;
   in {
+    sops.secrets.admin_password.neededForUsers = true;
+
     snowfallorg.users.${unix_name} = {};
 
-    users = {
-      users.${unix_name} = {
-        description = cfg.name;
-        initialPassword = "password";
-      };
+    users.users.${unix_name} = {
+      description = cfg.name;
+      hashedPasswordFile = config.sops.secrets.admin_password.path;
     };
   };
 }
