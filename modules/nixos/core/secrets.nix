@@ -9,8 +9,6 @@ in {
     inputs.sops-nix.nixosModules.sops
   ];
 
-  programs.gnupg.agent.enable = true;
-
   services.openssh = {
     enable = true;
 

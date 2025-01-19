@@ -36,7 +36,6 @@ in {
       ];
 
       extraConfig = {
-        core.editor = "${pkgs.neovim}/bin/nvim";
         init.defaultBranch = "main";
 
         diff.algorithm = "histogram";

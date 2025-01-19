@@ -6,25 +6,26 @@
 }: let
   cfg = config.nvim;
 in {
+  options.nvim.enable = lib.mkEnableOption "Enable neovim configuration";
+
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
 
     ./core/opts.nix
     ./core/keymaps.nix
 
-    ./plugins/cmp.nix
     ./plugins/lsp.nix
-    ./plugins/lualine.nix
-    ./plugins/mini.nix
-    ./plugins/neorg.nix
-    ./plugins/neotree.nix
-    ./plugins/noice.nix
-    ./plugins/telescope.nix
     ./plugins/treesitter.nix
+    ./plugins/cmp.nix
+
+    ./plugins/noice.nix
+    ./plugins/dashboard.nix
+    ./plugins/lualine.nix
+    ./plugins/neotree.nix
+    ./plugins/telescope.nix
+
     ./plugins/util.nix
   ];
-
-  options.nvim.enable = lib.mkEnableOption "Enable custom neovim ide";
 
   config = lib.mkIf cfg.enable {
     programs.nixvim = {

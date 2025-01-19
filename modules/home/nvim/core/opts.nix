@@ -1,46 +1,50 @@
 {
-  programs.nixvim = {
-    clipboard.providers.wl-copy.enable = true;
+  lib,
+  config,
+  ...
+}: {
+  config = lib.mkIf config.nvim.enable {
+    programs.nixvim = {
+      globals = {
+        mapleader = " ";
+        maplocalleader = " ";
+      };
 
-    globals = {
-      mapleader = " ";
-      maplocalleader = " ";
-    };
+      opts = {
+        termguicolors = true;
+        updatetime = 500;
 
-    opts = {
-      termguicolors = true;
-      updatetime = 500;
+        number = true;
+        cursorline = true;
+        incsearch = true;
+        hlsearch = true;
 
-      number = true;
-      cursorline = true;
-      incsearch = true;
-      hlsearch = true;
+        spell = true;
+        spelllang = "en";
 
-      spell = true;
-      spelllang = "en";
+        expandtab = true;
+        tabstop = 2;
+        softtabstop = 2;
+        shiftwidth = 2;
 
-      expandtab = true;
-      tabstop = 2;
-      softtabstop = 2;
-      shiftwidth = 2;
+        #foldenable = false;
+        #foldmethod = "expr";
+        #foldexpr = "v:lua.vim.treesitter.foldexpr()";
 
-      foldenable = false;
-      foldmethod = "expr";
-      foldexpr = "v:lua.vim.treesitter.foldexpr()";
+        history = 2000;
+        undofile = true;
 
-      history = 2000;
-      undofile = true;
+        splitright = true;
+        splitbelow = true;
 
-      splitright = true;
-      splitbelow = true;
+        cmdheight = 0;
+        laststatus = 3;
+      };
 
-      cmdheight = 0;
-      laststatus = 3;
-    };
-
-    colorschemes.catppuccin = {
-      enable = true;
-      settings.transparent_background = true;
+      colorschemes.catppuccin = {
+        enable = true;
+        settings.transparent_background = true;
+      };
     };
   };
 }

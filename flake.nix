@@ -33,13 +33,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
+    nixvim.url = "github:nix-community/nixvim";
   };
 
   outputs = inputs @ {

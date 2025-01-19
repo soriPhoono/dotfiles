@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  inputs,
+  config,
+  ...
+}: {
   home.username = "soriphoono";
 
   core = {

@@ -1,17 +1,25 @@
 {
-  programs.nixvim.keymaps =
-    builtins.map
-    (v: v // {options.silent = true;})
-    [
-      {
-        action = "<cmd>w<CR>";
-        key = "<C-s>";
-        options.desc = "Close current file or editor";
-      }
-      {
-        action = "<cmd>qall<CR>";
-        key = "<C-q>";
-        options.desc = "Close the editor";
-      }
-    ];
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.nvim;
+in {
+  config = lib.mkIf cfg.enable {
+    programs.nixvim.keymaps =
+      builtins.map
+      (v: v // {options.silent = true;})
+      [
+        {
+          action = "<cmd>w<CR>";
+          key = "<C-s>";
+          options.desc = "Save current file";
+        }
+        {
+          action = "<cmd>qall<CR>";
+          key = "<C-q>";
+          options.desc = "Close the editor";
+        }
+      ];
+  };
 }
