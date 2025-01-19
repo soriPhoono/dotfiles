@@ -7,6 +7,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
@@ -23,31 +24,39 @@
     flake-parts.mkFlake {inherit inputs;} {
       inherit systems;
 
+      imports = with inputs; [
+        pre-commit-hooks.flakeModule
+        treefmt-nix.flakeModule
+      ];
+
       flake = {
       };
 
       perSystem = {
-        system,
+        config,
         pkgs,
         ...
-      }: rec {
-        checks.pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            gptcommit.enable = true;
-
-            alejandra.enable = true;
-            flake-checker.enable = true;
-            statix.enable = true;
-          };
-        };
-
+      }: {
         formatter = pkgs.alejandra;
 
-        devShells.default = pkgs.mkShell {
-          inherit (checks.pre-commit-check) shellHook;
+        treefmt = {
+          programs.alejandra.enable = true;
+        };
 
-          buildInputs = checks.pre-commit-check.enabledPackages;
+        pre-commit.settings.hooks = {
+          gptcommit.enable = true;
+
+          alejandra.enable = true;
+          flake-checker.enable = true;
+          statix.enable = true;
+        };
+
+        devShells.default = pkgs.mkShell {
+          shellHook = ''
+            ${config.pre-commit.installationScript}
+
+            echo 1>&2 "Welcome to the base development shell!"
+          '';
         };
       };
     };
