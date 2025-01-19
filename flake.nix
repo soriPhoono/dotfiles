@@ -55,6 +55,10 @@
         shells.default = "development";
       };
 
+      templates = {
+        base_flake.description = "This is a basic template for a flake";
+      };
+
       channels-config.allowUnfree = true;
     };
 }
