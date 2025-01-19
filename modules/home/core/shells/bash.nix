@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: {
   programs.bash = {
     enable = true;
 
@@ -6,7 +10,12 @@
     enableVteIntegration = true;
     historyControl = ["erasedups" "ignoreboth"];
 
-    initExtra = ''
+    initExtra = let
+      importEnvironment =
+        if lib.hasAttr "environment" config.sops.secrets
+        then "export $(cat ${config.sops.secrets.environment.path})"
+        else "";
+    in ''
       export $(cat ${config.sops.secrets.environment.path} | xargs)
     '';
   };

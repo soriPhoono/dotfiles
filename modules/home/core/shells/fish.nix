@@ -12,10 +12,15 @@ in {
     programs.fish = {
       enable = true;
 
-      shellInitLast = ''
+      shellInitLast = let
+        importEnvironment =
+          if lib.hasAttr "environment" config.sops.secrets
+          then "export (cat ${config.sops.secrets.environment.path})"
+          else "";
+      in ''
         set fish_greeting
 
-        export (cat ${config.sops.secrets.environment.path})
+        ${importEnvironment}
 
         ${pkgs.fastfetch}/bin/fastfetch
       '';
