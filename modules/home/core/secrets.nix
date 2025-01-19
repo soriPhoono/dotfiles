@@ -10,7 +10,9 @@ in {
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  options.core.secrets.enable = lib.mkEnableOption "Enable secrets management";
+  options.core.secrets = {
+    enable = lib.mkEnableOption "Enable secrets management";
+  };
 
   config = let
     secretsPath = ../../../secrets;

@@ -25,8 +25,10 @@ in {
     ];
   };
 
-  sops = {
-    defaultSopsFile = ../../../secrets/global.yaml;
+  sops = let
+    secretsPath = ../../../secrets;
+  in {
+    defaultSopsFile = "${secretsPath}/global.yaml";
 
     age = {
       sshKeyPaths = [

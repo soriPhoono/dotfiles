@@ -19,7 +19,15 @@ in {
   in {
     security.sudo.wheelNeedsPassword = false;
 
-    sops.secrets.admin_password.neededForUsers = true;
+    sops.secrets = {
+      admin_password.neededForUsers = true;
+      admin_age_key = {
+        path = "/home/${unix_name}/.config/sops/age/keys.txt";
+        mode = "0440";
+        owner = unix_name;
+        group = "users";
+      };
+    };
 
     snowfallorg.users.${unix_name} = {};
 
