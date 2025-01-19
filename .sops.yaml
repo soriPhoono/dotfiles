@@ -8,3 +8,9 @@ creation_rules:
           - *admin_soriphoono
         age:
           - *system_wsl
+  - path_regex: secrets/soriphoono/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - pgp:
+          - *admin_soriphoono
+        age:
+          - *system_wsl
