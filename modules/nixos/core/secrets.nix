@@ -1,11 +1,8 @@
 {
   inputs,
-  lib,
   config,
   ...
 }: let
-  cfg = config.core.secrets;
-
   system_key_path = "/etc/ssh/ssh_host_ed25519_key";
 in {
   imports = [

@@ -1,27 +1,21 @@
-{config, ...}: let
-  username = "soriphoono";
-in {
-  core = {
-    inherit username;
+{config, ...}: {
+  home.username = "soriphoono";
 
+  core = {
     secrets.enable = true;
 
-    fish.enable = true;
-    starship.enable = true;
+    shells = {
+      fish.enable = true;
+      starship.enable = true;
+    };
 
     editors.helix.enable = true;
 
-    git = {
-      inherit username;
-
-      enable = true;
+    programs.git = {
+      username = "soriphoono";
       email = "soriphoono@gmail.com";
     };
   };
 
-  sops = {
-    secrets.ssh_private = {
-      path = "%r/test.txt";
-    };
-  };
+  sops.secrets.ssh_private.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
 }

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.core.nix-index;
+  cfg = config.core.programs.nix-index;
 in {
-  options.core.nix-index = {
+  options.core.programs.nix-index = {
     enable = lib.mkEnableOption "Enable nix-index";
   };
 
@@ -14,7 +14,7 @@ in {
       enable = true;
 
       enableBashIntegration = true;
-      enableFishIntegration = config.core.fish.enable;
+      enableFishIntegration = config.core.shells.fish.enable;
     };
   };
 }

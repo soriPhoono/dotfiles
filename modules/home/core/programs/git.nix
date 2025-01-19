@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.core.git;
+  cfg = config.core.programs.git;
 in {
-  options.core.git = {
+  options.core.programs.git = {
     enable = lib.mkEnableOption "Enable git config";
 
     username = lib.mkOption {

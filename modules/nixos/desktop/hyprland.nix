@@ -17,15 +17,6 @@ in {
     };
 
     services = {
-      xserver = {
-        enable = true;
-
-        xkb.layout = "us";
-        xkb.variant = "";
-
-        displayManager.sddm.enable = true;
-      };
-
       hypridle.enable = true;
     };
   };

@@ -3,16 +3,16 @@
   config,
   ...
 }: let
-  cfg = config.core.fzf;
+  cfg = config.core.programs.fzf;
 in {
-  options.core.fzf = {
+  options.core.programs.fzf = {
     enable = lib.mkEnableOption "Enable fzf";
   };
 
   config = lib.mkIf cfg.enable {
     programs.fzf = {
       enable = true;
-      enableFishIntegration = config.core.fish.enable;
+      enableFishIntegration = config.core.shells.fish.enable;
 
       defaultCommand = "fd --type file";
       defaultOptions = [

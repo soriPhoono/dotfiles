@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.core.fd;
+  cfg = config.core.programs.fd;
 in {
-  options.core.fd = {
+  options.core.programs.fd = {
     enable = lib.mkEnableOption "Enable fd";
   };
 

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.core.starship;
+  cfg = config.core.shells.starship;
 in {
-  options.core.starship = {
+  options.core.shells.starship = {
     enable = lib.mkEnableOption "Enable starship prompt";
   };
 
@@ -13,8 +13,8 @@ in {
     programs.starship = {
       enable = true;
 
-      enableFishIntegration = config.core.fish.enable;
-      enableTransience = config.core.fish.enable;
+      enableFishIntegration = config.core.shells.fish.enable;
+      enableTransience = config.core.shells.fish.enable;
 
       settings = {
         add_newline = true;

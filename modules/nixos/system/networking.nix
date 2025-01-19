@@ -25,7 +25,13 @@ in {
     services = {
       openssh = lib.mkIf cfg.ssh.enable {
         startWhenNeeded = true;
-        passwordAuthentication = true;
+        passwordAuthentication = false;
+
+        settings = {
+          PermitRootLogin = "no";
+          PasswordAuthentication = false;
+          KbdInteractiveAuthentication = false;
+        };
       };
 
       timesyncd.enable = true;

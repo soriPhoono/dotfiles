@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.core.direnv;
+  cfg = config.core.programs.direnv;
 in {
-  options.core.direnv = {
+  options.core.programs.direnv = {
     enable = lib.mkEnableOption "Enable direnv";
   };
 

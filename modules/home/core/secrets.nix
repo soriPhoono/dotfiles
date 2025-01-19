@@ -10,20 +10,28 @@ in {
     inputs.sops-nix.homeManagerModules.sops
   ];
 
-  options.core.secrets = {
-    enable = lib.mkEnableOption "Enable secrets management";
-  };
+  options.core.secrets.enable = lib.mkEnableOption "Enable secrets management";
 
-  config = lib.mkIf cfg.enable {
-    sops = {
-      age.sshKeyPaths = [];
+  config = let
+    secretsPath = ../../../secrets;
+  in
+    lib.mkIf cfg.enable {
+      sops = {
+        age = {
+          keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+          sshKeyPaths = [];
+          generateKey = true;
+        };
 
-      gnupg = {
-        home = "~/.gnupg";
-        sshKeyPaths = [];
+        defaultSopsFile = "${secretsPath}/${config.home.username}.yaml";
+
+        secrets.environment = {
+          format = "dotenv";
+          sopsFile = let
+            environmentPath = "${secretsPath}/${config.home.username}.env";
+          in
+            lib.mkIf (builtins.pathExists environmentPath) environmentPath;
+        };
       };
-
-      defaultSopsFile = ../../../secrets/${config.core.username}/user.yaml;
     };
-  };
 }

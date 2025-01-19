@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.core.eza;
+  cfg = config.core.programs.eza;
 in {
-  options.core.eza = {
+  options.core.programs.eza = {
     enable = lib.mkEnableOption "Enable eza config";
   };
 
@@ -14,7 +14,7 @@ in {
     programs.eza = {
       enable = true;
 
-      enableFishIntegration = config.core.fish.enable;
+      enableFishIntegration = config.core.shells.fish.enable;
 
       git = true;
       icons = "auto";

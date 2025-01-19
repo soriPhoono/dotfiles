@@ -8,27 +8,22 @@ in {
   imports = [
     ./secrets.nix
 
-    ./bash.nix
-    ./fish.nix
+    ./shells/bash.nix
+    ./shells/fish.nix
+    ./shells/starship.nix
 
-    ./starship.nix
-    ./nix-index.nix
-    ./eza.nix
-    ./fastfetch.nix
-    ./bat.nix
-    ./fd.nix
-    ./fzf.nix
-    ./direnv.nix
+    ./programs/nix-index.nix
+    ./programs/eza.nix
+    ./programs/fastfetch.nix
+    ./programs/bat.nix
+    ./programs/fd.nix
+    ./programs/fzf.nix
+    ./programs/direnv.nix
 
-    ./git.nix
+    ./programs/git.nix
   ];
 
   options.core = {
-    username = lib.mkOption {
-      type = lib.types.str;
-      description = "Set the username";
-    };
-
     plainShell = lib.mkOption {
       type = lib.types.bool;
       description = "Disable cli tools";
@@ -48,7 +43,7 @@ in {
       };
     };
 
-    core = lib.mkIf (!cfg.plainShell) {
+    core.programs = lib.mkIf (!cfg.plainShell) {
       nix-index.enable = true;
       eza.enable = true;
       fastfetch.enable = true;
@@ -56,12 +51,13 @@ in {
       fd.enable = true;
       fzf.enable = true;
       direnv.enable = true;
+      git.enable = true;
     };
 
     programs.home-manager.enable = true;
 
     home = {
-      homeDirectory = "/home/${cfg.username}";
+      homeDirectory = "/home/${config.home.username}";
 
       stateVersion = "25.05";
     };

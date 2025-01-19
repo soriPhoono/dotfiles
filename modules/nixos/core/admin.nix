@@ -17,6 +17,8 @@ in {
   config = let
     unix_name = lib.dotfiles.to_unix_name cfg.name;
   in {
+    security.sudo.wheelNeedsPassword = false;
+
     sops.secrets.admin_password.neededForUsers = true;
 
     snowfallorg.users.${unix_name} = {};
