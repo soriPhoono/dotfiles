@@ -9,8 +9,6 @@
       starship.enable = true;
     };
 
-    editors.helix.enable = true;
-
     programs.git = {
       username = "soriphoono";
       email = "soriphoono@gmail.com";

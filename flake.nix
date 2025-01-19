@@ -33,13 +33,11 @@
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
 
-    # User imports
-    neovim = {
-      url = "github:soriphoono/nvim";
+    nixvim = {
+      url = "github:nix-community/nixvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        pre-commit-hooks.follows = "pre-commit-hooks";
-        snowfall-lib.follows = "snowfall-lib";
+        home-manager.follows = "home-manager";
       };
     };
   };
