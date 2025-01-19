@@ -347,6 +347,32 @@
         "type": "github"
       }
     },
+    "neovim": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pre-commit-hooks": [
+          "pre-commit-hooks"
+        ],
+        "snowfall-lib": [
+          "snowfall-lib"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737326143,
+        "narHash": "sha256-u10vQu0cKI+J0p7lAwrLPifQ7wCt+IWCwUaAeF/bLmk=",
+        "owner": "soriphoono",
+        "repo": "nvim",
+        "rev": "fcebbef1b194b7d00820a3bc64e6c1bc34905de1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "soriphoono",
+        "repo": "nvim",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1736643958,
@@ -492,6 +518,7 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
+        "neovim": "neovim",
         "nixos-generators": "nixos-generators",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
