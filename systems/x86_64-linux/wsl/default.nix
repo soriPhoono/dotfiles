@@ -13,6 +13,8 @@
     }
   ];
 
+  core.hostname = "wsl";
+
   environment.systemPackages = with pkgs; [
     wget
   ];

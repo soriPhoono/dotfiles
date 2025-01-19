@@ -7,6 +7,9 @@
 in {
   options.system.networking = {
     enable = lib.mkEnableOption "Enable networking";
+
+    networkmanager.enable = lib.mkEnableOption "Enable network manager script for wifi management";
+    ssh.enable = lib.mkEnableOption "Enable ssh connections";
   };
 
   config = lib.mkIf cfg.enable {
@@ -14,11 +17,18 @@ in {
       firewall.enable = true;
       nftables.enable = true;
 
-      networkmanager.enable = true;
+      networkmanager.enable = cfg.networkmanager.enable;
     };
 
-    users.users.${lib.dotfiles.to_unix_name config.core.admin.name}.extraGroups = ["networkmanager"];
+    users.users.${lib.dotfiles.to_unix_name config.core.admin.name}.extraGroups = lib.mkIf cfg.networkmanager.enable ["networkmanager"];
 
-    services.timesyncd.enable = true;
+    services = {
+      openssh = lib.mkIf cfg.ssh.enable {
+        startWhenNeeded = true;
+        passwordAuthentication = true;
+      };
+
+      timesyncd.enable = true;
+    };
   };
 }

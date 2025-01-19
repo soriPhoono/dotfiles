@@ -1,1 +1,3 @@
-_: {}
+_: {
+  core.hostname = "virtualbox";
+}
