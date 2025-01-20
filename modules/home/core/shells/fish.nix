@@ -13,7 +13,8 @@ in {
       enable = true;
 
       shellAliases = {
-        v = "${pkgs.neovim}/bin/nvim";
+        g = "git";
+        v = "nvim";
       };
 
       shellInitLast = let
