@@ -3,6 +3,7 @@ keys:
 
   - &server_wsl_desktop age1ayntxnj78awwr53j4a3322mpfkrvacdhu4yg6uumej8px2vuascsnzlypt
   - &server_wsl_zephyrus age15nx5unrgh5839jha6k6dy5pa6ldkdft5g83dx5n347pxdax8nqsqq8a77u
+  - &server_zephyrus age1pf95vtfx9ftqekrrn7ec5lpsrxpnqw2pqlppuz2zhqcnzts3cvtqazv648
 creation_rules:
   - path_regex: homes/.*/.*/secrets.(yaml|json|env|ini)$
     key_groups:
@@ -14,3 +15,4 @@ creation_rules:
         - *admin_soriphoono
         - *server_wsl_desktop
         - *server_wsl_zephyrus
+        - *server_zephyrus
