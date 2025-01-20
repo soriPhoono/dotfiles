@@ -14,30 +14,32 @@ in {
     };
   };
 
-  services.openssh = {
-    enable = true;
+  config = {
+    services.openssh = {
+      enable = true;
 
-    hostKeys = [
-      {
-        comment = "ed25519 system key for host: ${config.networking.hostName}";
+      hostKeys = [
+        {
+          comment = "ed25519 system key for host: ${config.networking.hostName}";
 
-        path = system_key_path;
-        rounds = 100;
-        type = "ed25519";
-      }
-    ];
-  };
-
-  sops = {
-    inherit (cfg) defaultSopsFile;
-
-    age = {
-      sshKeyPaths = [
-        system_key_path
+          path = system_key_path;
+          rounds = 100;
+          type = "ed25519";
+        }
       ];
+    };
 
-      keyFile = "/var/lib/sops-nix/key.txt";
-      generateKey = true;
+    sops = {
+      inherit (cfg) defaultSopsFile;
+
+      age = {
+        sshKeyPaths = [
+          system_key_path
+        ];
+
+        keyFile = "/var/lib/sops-nix/key.txt";
+        generateKey = true;
+      };
     };
   };
 }
