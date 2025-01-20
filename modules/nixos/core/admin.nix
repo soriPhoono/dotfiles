@@ -8,32 +8,28 @@ in {
   options.core.admin = {
     name = lib.mkOption {
       type = lib.types.str;
-      description = "Real name of the user";
+      description = "Unix name of the user";
 
-      default = "Sori Phoono";
+      default = "soriphoono";
     };
   };
 
-  config = let
-    unix_name = lib.dotfiles.to_unix_name cfg.name;
-  in {
+  config = {
     security.sudo.wheelNeedsPassword = false;
 
     sops.secrets = {
       admin_password.neededForUsers = true;
+
       admin_age_key = {
-        path = "/home/${unix_name}/.config/sops/age/keys.txt";
+        path = "/home/${cfg.name}/.config/sops/age/keys.txt";
         mode = "0440";
-        owner = unix_name;
+        owner = cfg.name;
         group = "users";
       };
     };
 
-    snowfallorg.users.${unix_name} = {};
+    snowfallorg.users.${cfg.name} = {};
 
-    users.users.${unix_name} = {
-      description = cfg.name;
-      hashedPasswordFile = config.sops.secrets.admin_password.path;
-    };
+    users.users.${cfg.name}.hashedPasswordFile = config.sops.secrets.admin_password.path;
   };
 }

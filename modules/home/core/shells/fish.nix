@@ -12,10 +12,6 @@ in {
     programs.fish = {
       enable = true;
 
-      shellAliases = {
-        v = "${pkgs.neovim}/bin/nvim";
-      };
-
       shellInitLast = let
         importEnvironment =
           if lib.hasAttr "environment" config.sops.secrets

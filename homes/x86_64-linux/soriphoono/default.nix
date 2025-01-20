@@ -3,9 +3,11 @@
   config,
   ...
 }: {
-  home.username = "soriphoono";
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+  ];
 
-  nvim.enable = true;
+  home.username = "soriphoono";
 
   core = {
     secrets.enable = true;
@@ -20,6 +22,10 @@
       email = "soriphoono@gmail.com";
     };
   };
+
+  # nvim.enable = true;
+
+  programs.nixvim.enable = true;
 
   sops.secrets.ssh_private.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
 }

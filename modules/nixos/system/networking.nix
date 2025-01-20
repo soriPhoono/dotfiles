@@ -20,7 +20,7 @@ in {
       networkmanager.enable = cfg.networkmanager.enable;
     };
 
-    users.users.${lib.dotfiles.to_unix_name config.core.admin.name}.extraGroups = lib.mkIf cfg.networkmanager.enable ["networkmanager"];
+    users.users.${config.core.admin.name}.extraGroups = lib.mkIf cfg.networkmanager.enable ["networkmanager"];
 
     services = {
       openssh = lib.mkIf cfg.ssh.enable {

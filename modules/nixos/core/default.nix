@@ -7,13 +7,6 @@
     ./shell.nix
   ];
 
-  options.core = {
-    hostname = lib.mkOption {
-      type = lib.types.str;
-      description = "The system host name to create";
-    };
-  };
-
   config = {
     time.timeZone = lib.mkDefault "America/Chicago";
 
