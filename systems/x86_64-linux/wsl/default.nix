@@ -14,7 +14,10 @@
     }
   ];
 
-  core.hostname = "wsl";
+  core = {
+    hostname = "wsl";
+    secrets.sopsFile = ./secrets.yaml;
+  };
 
   system.themes = {
     enable = true;
