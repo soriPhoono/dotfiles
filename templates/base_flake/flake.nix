@@ -12,12 +12,8 @@
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    ...
-  }:
-    inputs.snowfall-lib.mkFlake {
+  outputs = inputs @ {snowfall-lib, ...}:
+    snowfall-lib.mkFlake {
       inherit inputs;
 
       src = ./.;

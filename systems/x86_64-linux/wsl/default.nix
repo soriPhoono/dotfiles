@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  config,
   ...
 }: {
   imports = [
@@ -8,7 +9,7 @@
     {
       wsl = {
         enable = true;
-        defaultUser = "soriphoono";
+        defaultUser = config.core.admin.name;
       };
     }
   ];

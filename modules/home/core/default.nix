@@ -24,6 +24,13 @@ in {
   ];
 
   options.core = {
+    username = lib.mkOption {
+      type = lib.types.str;
+      description = "The username of the user";
+
+      default = "user";
+    };
+
     plainShell = lib.mkOption {
       type = lib.types.bool;
       description = "Disable cli tools";
@@ -57,7 +64,9 @@ in {
     programs.home-manager.enable = true;
 
     home = {
-      homeDirectory = "/home/${config.home.username}";
+      inherit (cfg) username;
+
+      homeDirectory = "/home/${cfg.username}";
 
       stateVersion = "25.05";
     };

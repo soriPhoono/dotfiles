@@ -1,14 +1,6 @@
-{
-  inputs,
-  config,
-  ...
-}: let
+{config, ...}: let
   system_key_path = "/etc/ssh/ssh_host_ed25519_key";
 in {
-  imports = [
-    inputs.sops-nix.nixosModules.sops
-  ];
-
   services.openssh = {
     enable = true;
 

@@ -1,15 +1,10 @@
 {
-  inputs,
   lib,
   config,
   ...
 }: let
   cfg = config.core.secrets;
 in {
-  imports = [
-    inputs.sops-nix.homeManagerModules.sops
-  ];
-
   options.core.secrets = {
     enable = lib.mkEnableOption "Enable secrets management";
   };

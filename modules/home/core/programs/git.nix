@@ -54,7 +54,7 @@ in {
         merge.conflictStyle = "zdiff3";
 
         url = {
-          "ssh://git@github.com:" = {
+          "git@github.com:" = {
             insteadOf = "github:";
           };
         };

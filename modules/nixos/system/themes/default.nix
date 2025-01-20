@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   pkgs,
   config,
@@ -8,8 +7,6 @@
   cfg = config.system.themes;
 in {
   imports = [
-    inputs.stylix.nixosModules.stylix
-
     ./catppuccin.nix
   ];
 

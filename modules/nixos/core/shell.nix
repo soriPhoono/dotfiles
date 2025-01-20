@@ -24,7 +24,22 @@ in {
     programs = {
       dconf.enable = true;
 
-      fish.enable = cfg.shell == "fish";
+      fish = {
+        enable = cfg.shell == "fish";
+
+        shellAliases.rebuild = let
+          rebuild = pkgs.writeShellApplication {
+            name = "rebuild.sh";
+
+            runtimeInputs = with pkgs; [
+            ];
+
+            text = ''
+              echo "WIP..."
+            '';
+          };
+        in "${rebuild}/bin/rebuild.sh";
+      };
     };
   };
 }

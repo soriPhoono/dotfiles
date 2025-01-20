@@ -10,7 +10,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    warnings = [];
+    services.power-profiles-daemon.enable = false;
 
     services.tlp = {
       enable = true;

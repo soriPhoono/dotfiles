@@ -32,8 +32,6 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
-
-    nixvim.url = "github:nix-community/nixvim";
   };
 
   outputs = inputs @ {
@@ -47,6 +45,15 @@
 
       src = ./.;
       snowfall.namespace = "dotfiles";
+
+      systems.modules.nixos = with inputs; [
+        sops-nix.nixosModules.sops
+        stylix.nixosModules.stylix
+      ];
+
+      homes.modules = with inputs; [
+        sops-nix.homeManagerModules.sops
+      ];
 
       outputs-builder = channels: {
         formatter = channels.nixpkgs.alejandra;
