@@ -8,7 +8,7 @@ creation_rules:
     key_groups:
       - age:
         - *admin_soriphoono
-  - path_regex: secrets/system.(yaml|json|env|ini)$
+  - path_regex: secrets/wsl/system.(yaml|json|env|ini)$
     key_groups:
       - age:
         - *admin_soriphoono
