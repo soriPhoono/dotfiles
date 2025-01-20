@@ -34,6 +34,8 @@
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
 
+    # Extra configuration, should also be build in a separate repo
+    # (configuration that must be packaged to run off the network)
     nvim.url = "github:soriPhoono/nvim";
   };
 
