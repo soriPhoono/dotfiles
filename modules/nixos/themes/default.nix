@@ -4,13 +4,13 @@
   config,
   ...
 }: let
-  cfg = config.system.themes;
+  cfg = config.themes;
 in {
   imports = [
     ./catppuccin.nix
   ];
 
-  options.system.themes.enable = lib.mkEnableOption "Enable themes system";
+  options.themes.enable = lib.mkEnableOption "Enable themes system";
 
   config = lib.mkIf cfg.enable {
     stylix = {

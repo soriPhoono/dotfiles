@@ -5,6 +5,7 @@
     secrets = {
       enable = true;
       defaultSopsFile = ./secrets.yaml;
+
       environment = {
         enable = true;
         sopsFile = ./secrets.env;

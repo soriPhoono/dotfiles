@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.desktop.hyprland;
+  cfg = config.desktop.noir;
 in {
-  options.desktop.hyprland = {
+  options.desktop.noir = {
     enable = lib.mkEnableOption "Enable hyprland installation";
   };
 

@@ -4,6 +4,7 @@
   inputs = {
     # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     snowfall-lib = {
       url = "github:snowfallorg/lib";
@@ -46,11 +47,17 @@
       src = ./.;
       snowfall.namespace = "dotfiles";
 
-      systems.modules.nixos = with inputs; [
-        sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
-        nixvim.nixosModules.nixvim
-      ];
+      systems = {
+        modules.nixos = with inputs; [
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
+          nixvim.nixosModules.nixvim
+        ];
+
+        hosts.zephyrus.modules = with inputs; [
+          nixos-hardware.nixosModules.asus-zephyrus-ga401
+        ];
+      };
 
       homes.modules = with inputs; [
         sops-nix.homeManagerModules.sops

@@ -27,7 +27,6 @@ in {
     services = {
       openssh = lib.mkIf cfg.ssh.enable {
         startWhenNeeded = true;
-        passwordAuthentication = false;
 
         settings = {
           PermitRootLogin = "no";

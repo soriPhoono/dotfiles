@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.system.themes.catppuccin;
+  cfg = config.themes.catppuccin;
 in {
-  options.system.themes.catppuccin.enable = lib.mkEnableOption "Enable catppuccin colorscheme";
+  options.themes.catppuccin.enable = lib.mkEnableOption "Enable catppuccin colorscheme";
 
   config = lib.mkIf cfg.enable {
     stylix = {

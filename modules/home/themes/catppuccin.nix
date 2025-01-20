@@ -8,7 +8,7 @@
 in {
   options.themes.catppuccin.enable = lib.mkEnableOption "Enable catppuccin colorscheme";
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (config.themes.enable && cfg.enable) {
     stylix = {
       image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
 
