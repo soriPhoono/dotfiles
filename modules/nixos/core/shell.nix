@@ -31,9 +31,6 @@ in {
           rebuild = pkgs.writeShellApplication {
             name = "rebuild.sh";
 
-            runtimeInputs = with pkgs; [
-            ];
-
             text = ''
               echo "WIP..."
             '';
