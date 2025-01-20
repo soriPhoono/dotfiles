@@ -8,6 +8,8 @@ in {
   imports = [
     ./core/opts.nix
     ./core/keymaps.nix
+
+    ./plugins/cmp.nix
   ];
 
   options.nvim.soriphoono.enable = lib.mkEnableOption "Enable soriphoono's neovim customisations";

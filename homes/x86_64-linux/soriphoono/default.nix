@@ -22,6 +22,8 @@
     };
   };
 
+  nvim.soriphoono.enable = true;
+
   themes = {
     enable = true;
     catppuccin.enable = true;
