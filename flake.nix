@@ -39,12 +39,7 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    snowfall-lib,
-    ...
-  }:
+  outputs = inputs @ {snowfall-lib, ...}:
     snowfall-lib.mkFlake {
       inherit inputs;
 

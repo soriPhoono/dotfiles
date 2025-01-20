@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  cfg = config.nvim;
+  cfg = config.nvim.soriphoono;
 in {
   config = lib.mkIf cfg.enable {
     programs.nixvim.plugins.telescope = {
