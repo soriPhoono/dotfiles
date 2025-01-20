@@ -10,9 +10,9 @@ in {
     enable = lib.mkEnableOption "Enable helix text editor";
   };
 
-  config = {
-    home.packages = with pkgs; [
-      helix
-    ];
+  config = lib.mkIf cfg.enable {
+    programs.helix = {
+      enable = true;
+    };
   };
 }

@@ -11,8 +11,8 @@ in {
   };
 
   config = {
-    home.packages = with pkgs; [
-      neovim
-    ];
+    programs.neovim = {
+      inherit (cfg) enable;
+    };
   };
 }

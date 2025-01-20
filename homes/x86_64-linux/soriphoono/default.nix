@@ -1,8 +1,9 @@
-{config, ...}: {
-  imports = [
-    ./nixpkgs.nix
-  ];
-
+{
+  inputs,
+  pkgs,
+  config,
+  ...
+}: {
   core = {
     username = "soriphoono";
 
@@ -17,11 +18,17 @@
     };
 
     shells = {
-      fish.enable = true;
+      fish = {
+        enable = true;
+        workspace = inputs.nvim.packages.${pkgs.system}.hollace;
+      };
+
       starship.enable = true;
     };
 
-    editors.neovim.enable = true;
+    editors.neovim = {
+      enable = true;
+    };
 
     programs.git = {
       username = "soriphoono";

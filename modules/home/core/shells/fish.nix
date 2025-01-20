@@ -6,7 +6,16 @@
 }: let
   cfg = config.core.shells.fish;
 in {
-  options.core.shells.fish.enable = lib.mkEnableOption "Enable the fish shell";
+  options.core.shells.fish = {
+    enable = lib.mkEnableOption "Enable the fish shell";
+
+    workspace = lib.mkOption {
+      type = lib.types.package;
+      description = "Personal t-ide to install from the nvim flake input";
+
+      default = pkgs.neovim;
+    };
+  };
 
   config = lib.mkIf cfg.enable {
     programs.fish = {
@@ -15,7 +24,7 @@ in {
       shellAliases = {
         g = "${pkgs.git}/bin/git";
 
-        v = "${pkgs.neovim}/bin/nvim";
+        v = "${cfg.workspace}/bin/nvim";
       };
 
       shellInitLast = let
