@@ -16,7 +16,7 @@
         then "export $(cat ${config.sops.secrets.environment.path})"
         else "";
     in ''
-      export $(cat ${config.sops.secrets.environment.path} | xargs)
+      ${importEnvironment}
     '';
   };
 }

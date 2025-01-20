@@ -53,6 +53,7 @@
 
       homes.modules = with inputs; [
         sops-nix.homeManagerModules.sops
+        stylix.homeManagerModules.stylix # TODO: when the hosts move to nixos, this should be removed and placed in the nixos modules
       ];
 
       outputs-builder = channels: {
