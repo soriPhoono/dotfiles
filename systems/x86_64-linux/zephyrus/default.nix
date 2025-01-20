@@ -1,4 +1,8 @@
 {
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
   core.hostname = "zephyrus";
 
   system = {
