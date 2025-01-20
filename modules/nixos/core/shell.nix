@@ -32,7 +32,9 @@ in {
             name = "rebuild.sh";
 
             text = ''
-              echo "WIP..."
+              sudo nixos-rebuild switch --flake '.#${config.core.hostname}'
+
+              nix-index
             '';
           };
         in "${rebuild}/bin/rebuild.sh";
