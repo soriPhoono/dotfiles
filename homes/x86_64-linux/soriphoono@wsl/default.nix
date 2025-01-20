@@ -1,3 +1,3 @@
 {lib, ...}: {
-  hyprland.enable = lib.mkForce false;
+  noir.enable = lib.mkForce false;
 }

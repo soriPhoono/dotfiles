@@ -24,7 +24,7 @@
 
   nvim.soriphoono.enable = true;
 
-  hyprland = {
+  noir = {
     enable = true;
   };
 
