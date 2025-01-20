@@ -44,11 +44,6 @@ in {
         cmdheight = 0;
         laststatus = 3;
       };
-
-      colorschemes.catppuccin = {
-        enable = true;
-        settings.transparent_background = true;
-      };
     };
   };
 }
