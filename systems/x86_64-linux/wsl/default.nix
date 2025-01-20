@@ -16,7 +16,7 @@
 
   core = {
     hostname = "wsl";
-    secrets.sopsFile = ./secrets.yaml;
+    secrets.defaultSopsFile = ./secrets.yaml;
   };
 
   system.themes = {
