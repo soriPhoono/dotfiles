@@ -1,7 +1,7 @@
 {config, ...}: {
-  home.username = "soriphoono";
-
   core = {
+    username = "soriphoono";
+
     secrets.enable = true;
 
     shells = {
