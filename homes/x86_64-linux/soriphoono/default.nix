@@ -2,7 +2,14 @@
   core = {
     username = "soriphoono";
 
-    secrets.enable = true;
+    secrets = {
+      enable = true;
+      defaultSopsFile = ./secrets.yaml;
+      environment = {
+        enable = true;
+        sopsFile = ./secrets.env;
+      };
+    };
 
     shells = {
       fish.enable = true;

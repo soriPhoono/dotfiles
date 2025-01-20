@@ -7,28 +7,36 @@
 in {
   options.core.secrets = {
     enable = lib.mkEnableOption "Enable secrets management";
-  };
 
-  config = let
-    secretsPath = ../../../secrets;
-  in
-    lib.mkIf cfg.enable {
-      sops = {
-        age = {
-          keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-          sshKeyPaths = [];
-          generateKey = true;
-        };
+    defaultSopsFile = lib.mkOption {
+      type = lib.types.path;
+      description = "Default sops database";
+    };
 
-        defaultSopsFile = "${secretsPath}/${config.home.username}.yaml";
+    environment = {
+      enable = lib.mkEnableOption "Enable environment secrets";
 
-        secrets.environment = {
-          format = "dotenv";
-          sopsFile = let
-            environmentPath = "${secretsPath}/${config.home.username}.env";
-          in
-            lib.mkIf (builtins.pathExists environmentPath) environmentPath;
-        };
+      sopsFile = lib.mkOption {
+        type = lib.types.path;
+        description = "Sops file for environment secrets";
       };
     };
+  };
+
+  config = lib.mkIf cfg.enable {
+    sops = {
+      inherit (cfg) defaultSopsFile;
+
+      age = {
+        keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+        sshKeyPaths = [];
+        generateKey = true;
+      };
+
+      secrets.environment = lib.mkIf cfg.environment.enable {
+        format = "dotenv";
+        inherit (cfg.environment) sopsFile;
+      };
+    };
+  };
 }
