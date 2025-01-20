@@ -28,7 +28,7 @@ in {
       inherit (cfg) defaultSopsFile;
 
       age = {
-        keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+        keyFile = "${config.home.homeDirectory}/keys.txt";
         sshKeyPaths = [];
         generateKey = true;
       };

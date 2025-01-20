@@ -21,7 +21,7 @@ in {
       admin_password.neededForUsers = true;
 
       admin_age_key = {
-        path = "/home/${cfg.name}/.config/sops/age/keys.txt";
+        path = "/home/${cfg.name}/keys.txt";
         mode = "0440";
         owner = cfg.name;
         group = "users";
