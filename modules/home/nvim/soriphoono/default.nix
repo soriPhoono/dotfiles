@@ -5,6 +5,11 @@
 }: let
   cfg = config.nvim.soriphoono;
 in {
+  imports = [
+    ./core/opts.nix
+    ./core/keymaps.nix
+  ];
+
   options.nvim.soriphoono.enable = lib.mkEnableOption "Enable soriphoono's neovim customisations";
 
   config = lib.mkIf cfg.enable {
