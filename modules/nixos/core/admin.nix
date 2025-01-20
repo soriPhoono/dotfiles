@@ -17,11 +17,20 @@ in {
   config = {
     security.sudo.wheelNeedsPassword = false;
 
-    sops.secrets = {
-      admin_password.neededForUsers = true;
+    sops.secrets = let
+      sopsFile = ../../../secrets/global.yaml;
+    in {
+      admin_password = {
+        inherit sopsFile;
+
+        neededForUsers = true;
+      };
 
       admin_age_key = {
+        inherit sopsFile;
+
         path = "/home/${cfg.name}/.config/sops/age/keys.txt";
+
         mode = "0440";
         owner = cfg.name;
         group = "users";

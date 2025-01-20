@@ -1,30 +1,41 @@
 {config, ...}: let
   system_key_path = "/etc/ssh/ssh_host_ed25519_key";
+
+  cfg = config.core.secrets;
 in {
-  services.openssh = {
-    enable = true;
-
-    hostKeys = [
-      {
-        comment = "ed25519 system key for host: ${config.networking.hostName}";
-
-        path = system_key_path;
-        rounds = 100;
-        type = "ed25519";
-      }
-    ];
+  options.core.secrets = {
+    enable = lib.mkEnableOption "Enable secrets management for system specific secrets";
   };
 
-  sops = {
-    defaultSopsFile = ../../../secrets/${config.core.hostname}/system.yaml;
+  config = {
+    services.openssh = {
+      enable = true;
 
-    age = {
-      sshKeyPaths = [
-        system_key_path
+      hostKeys = [
+        {
+          comment = "ed25519 system key for host: ${config.networking.hostName}";
+
+          path = system_key_path;
+          rounds = 100;
+          type = "ed25519";
+        }
       ];
+    };
 
-      keyFile = "/var/lib/sops-nix/key.txt";
-      generateKey = true;
+    sops = {
+      defaultSopsFile =
+        if cfg.enable
+        then ../../../secrets/${config.core.hostname}/system.yaml
+        else ../../../secrets/global.yaml;
+
+      age = {
+        sshKeyPaths = [
+          system_key_path
+        ];
+
+        keyFile = "/var/lib/sops-nix/key.txt";
+        generateKey = true;
+      };
     };
   };
 }
