@@ -34,10 +34,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
     stylix.url = "github:danth/stylix";
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nvim.url = "github:soriPhoono/nvim";
   };
 
   outputs = inputs @ {snowfall-lib, ...}:
@@ -51,7 +48,6 @@
         modules.nixos = with inputs; [
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
-          nixvim.nixosModules.nixvim
         ];
 
         hosts.zephyrus.modules = with inputs; [
@@ -61,7 +57,6 @@
 
       homes.modules = with inputs; [
         sops-nix.homeManagerModules.sops
-        nixvim.homeManagerModules.nixvim
       ];
 
       outputs-builder = channels: {

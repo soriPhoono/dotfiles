@@ -23,8 +23,6 @@
     };
   };
 
-  nvim.soriphoono.enable = true;
-
   noir.enable = true;
 
   themes = {
