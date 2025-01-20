@@ -14,7 +14,7 @@
     }
   ];
 
-  networking.hostName = "wsl";
+  core.hostname = "wsl";
 
   system.themes = {
     enable = true;
