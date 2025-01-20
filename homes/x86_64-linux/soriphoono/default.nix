@@ -24,9 +24,7 @@
 
   nvim.soriphoono.enable = true;
 
-  noir = {
-    enable = true;
-  };
+  noir.enable = true;
 
   themes = {
     enable = true;

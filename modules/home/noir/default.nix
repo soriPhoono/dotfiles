@@ -15,8 +15,11 @@ in {
 
     programs.kitty.enable = true;
 
-    wayland.windowManager.hyprland.settings.bind = [
-      "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
-    ];
+    wayland.windowManager.hyprland.settings = {
+      bind = [
+        "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
+        "$mod, C, exec, ${pkgs.kitty}/bin/kitty"
+      ];
+    };
   };
 }
