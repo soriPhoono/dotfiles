@@ -1,6 +1,19 @@
-{config, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.secrets;
+
   system_key_path = "/etc/ssh/ssh_host_ed25519_key";
 in {
+  options.core.secrets = {
+    defaultSopsFile = lib.mkOption {
+      type = lib.types.path;
+      description = "The default SOPS file to use for system secrets.";
+    };
+  };
+
   services.openssh = {
     enable = true;
 
@@ -15,10 +28,8 @@ in {
     ];
   };
 
-  sops = let
-    secretsPath = ../../../secrets;
-  in {
-    defaultSopsFile = "${secretsPath}/global.yaml";
+  sops = {
+    inherit (cfg) defaultSopsFile;
 
     age = {
       sshKeyPaths = [
