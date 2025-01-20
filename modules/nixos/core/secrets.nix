@@ -7,13 +7,6 @@
 
   system_key_path = "/etc/ssh/ssh_host_ed25519_key";
 in {
-  options.core.secrets = {
-    defaultSopsFile = lib.mkOption {
-      type = lib.types.path;
-      description = "The default SOPS file to use for system secrets.";
-    };
-  };
-
   config = {
     services.openssh = {
       enable = true;
@@ -30,7 +23,7 @@ in {
     };
 
     sops = {
-      inherit (cfg) defaultSopsFile;
+      defaultSopsFile = ../../../secrets/${config.core.hostname}/system.yaml;
 
       age = {
         sshKeyPaths = [

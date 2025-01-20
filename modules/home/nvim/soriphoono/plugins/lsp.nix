@@ -40,19 +40,11 @@ in {
         enable = true;
 
         servers = {
-          nixd = {
-            enable = true;
-            settings.formatting.command = [
-              "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
-            ];
-          };
-
+          nixd.enable = true;
           bashls.enable = true;
 
           clangd.enable = true;
-
           zls.enable = true;
-
           rust_analyzer = {
             enable = true;
 

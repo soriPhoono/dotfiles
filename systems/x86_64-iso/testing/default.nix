@@ -1,7 +1,6 @@
 {
   core = {
     hostname = "testing";
-    secrets.defaultSopsFile = ../../../secrets/system.yaml;
   };
 
   system = {

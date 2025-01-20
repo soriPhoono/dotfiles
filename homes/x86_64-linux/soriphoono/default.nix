@@ -24,6 +24,10 @@
 
   nvim.soriphoono.enable = true;
 
+  hyprland = {
+    enable = true;
+  };
+
   themes = {
     enable = true;
     catppuccin.enable = true;

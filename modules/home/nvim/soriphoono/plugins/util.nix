@@ -22,7 +22,6 @@ in {
         web-devicons.enable = true;
         nvim-autopairs.enable = true;
         gitsigns.enable = true;
-        lazygit.enable = true;
 
         which-key = {
           enable = true;
