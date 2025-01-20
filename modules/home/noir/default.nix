@@ -18,7 +18,6 @@ in {
     wayland.windowManager.hyprland.settings = {
       bind = [
         "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
-        "$mod, C, exec, ${pkgs.kitty}/bin/kitty"
       ];
     };
   };

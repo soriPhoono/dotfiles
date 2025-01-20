@@ -13,8 +13,9 @@ in {
       enable = true;
 
       shellAliases = {
-        g = "${pkgs.git}";
-        v = "${pkgs.neovim}";
+        g = "${pkgs.git}/bin/git";
+
+        v = "${pkgs.neovim}/bin/nvim";
       };
 
       shellInitLast = let

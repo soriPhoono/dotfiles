@@ -1,4 +1,8 @@
 {config, ...}: {
+  imports = [
+    ./nixpkgs.nix
+  ];
+
   core = {
     username = "soriphoono";
 
@@ -16,6 +20,8 @@
       fish.enable = true;
       starship.enable = true;
     };
+
+    editors.neovim.enable = true;
 
     programs.git = {
       username = "soriphoono";

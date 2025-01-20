@@ -22,6 +22,9 @@ in {
     ./programs/direnv.nix
 
     ./programs/git.nix
+
+    ./editors/helix.nix
+    ./editors/neovim.nix
   ];
 
   options.core = {

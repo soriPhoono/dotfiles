@@ -31,11 +31,32 @@ in {
           rebuild = pkgs.writeShellApplication {
             name = "rebuild.sh";
 
-            text = ''
-              sudo nixos-rebuild switch --flake '.#${config.core.hostname}'
+            text =
+              # bash
+              ''
+                select choice in switch boot cancel
+                do
+                  case $choice
+                  in
+                    switch)
+                      sudo nixos-rebuild switch --flake '.#${config.core.hostname}'
+                      break
+                      ;;
+                    boot)
+                      sudo nixos-rebuild boot --flake '.#${config.core.hostname}'
+                      break
+                      ;;
+                    cancel)
+                      break
+                      ;;
+                    *)
+                      echo "Bad selection"
+                      ;;
+                  esac
+                done
 
-              nix-index
-            '';
+                nix-index
+              '';
           };
         in "${rebuild}/bin/rebuild.sh";
       };
