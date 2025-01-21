@@ -18,7 +18,7 @@
     hostname = "wsl";
   };
 
-  system.themes = {
+  themes = {
     enable = true;
     catppuccin.enable = true;
   };
