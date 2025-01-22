@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   config,
   ...
@@ -18,6 +17,7 @@ in {
     ./programs/eza.nix
     ./programs/fastfetch.nix
     ./programs/bat.nix
+    ./programs/ripgrep.nix
     ./programs/fd.nix
     ./programs/fzf.nix
     ./programs/direnv.nix
@@ -57,6 +57,7 @@ in {
       eza.enable = true;
       fastfetch.enable = true;
       bat.enable = true;
+      ripgrep.enable = true;
       fd.enable = true;
       fzf.enable = true;
       direnv.enable = true;
