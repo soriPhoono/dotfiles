@@ -63,7 +63,11 @@ in {
       git.enable = true;
     };
 
-    programs.home-manager.enable = true;
+    programs = {
+      neovim.enable = true;
+
+      home-manager.enable = true;
+    };
 
     home = {
       inherit (cfg) username;
