@@ -26,10 +26,6 @@
       starship.enable = true;
     };
 
-    editors.neovim = {
-      enable = true;
-    };
-
     programs.git = {
       username = "soriphoono";
       email = "soriphoono@gmail.com";

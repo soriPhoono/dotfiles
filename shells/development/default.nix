@@ -15,6 +15,7 @@ in
       nixd
 
       age
+      ssh-to-age
       sops
     ];
 

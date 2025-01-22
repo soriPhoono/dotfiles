@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   config,
   ...
@@ -22,9 +23,6 @@ in {
     ./programs/direnv.nix
 
     ./programs/git.nix
-
-    ./editors/helix.nix
-    ./editors/neovim.nix
   ];
 
   options.core = {
@@ -69,8 +67,11 @@ in {
 
     home = {
       inherit (cfg) username;
-
       homeDirectory = "/home/${cfg.username}";
+
+      packages = with inputs; [
+        editors.packages.${username}
+      ];
 
       stateVersion = "25.05";
     };
