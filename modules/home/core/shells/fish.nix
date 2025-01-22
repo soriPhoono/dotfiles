@@ -19,7 +19,7 @@ in {
         g = "${pkgs.git}/bin/git";
 
         v =
-          lib.mkIf (lib.hasAttr config.home.username inputs.editors.packages)
+          lib.mkIf (lib.hasAttr "${config.home.username}_workspace" inputs.editors.packages)
           "${inputs.editors.packages."${config.home.username}_workspace"}/bin/nvim";
       };
 
