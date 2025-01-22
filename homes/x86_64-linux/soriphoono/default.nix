@@ -1,13 +1,4 @@
-{
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
-  home.packages = [
-    inputs.editors.packages.${pkgs.system}.soriphoono
-  ];
-
+{config, ...}: {
   core = {
     username = "soriphoono";
 

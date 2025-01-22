@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   config,
@@ -16,6 +17,8 @@ in {
 
       shellAliases = {
         g = "${pkgs.git}/bin/git";
+
+        v = "${inputs.editors.packages.${pkgs.system}.${config.home.username}}/bin/nvim";
       };
 
       shellInitLast = let
