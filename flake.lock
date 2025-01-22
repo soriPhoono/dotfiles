@@ -99,11 +99,11 @@
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
-        "lastModified": 1737580947,
-        "narHash": "sha256-LJNeIyoQ4hUlK77SXGQ2eAo3UAQmd4nZC+ySKoP2YLM=",
+        "lastModified": 1737583200,
+        "narHash": "sha256-td1AhLjoB50Z0RJU98N4tsjS4ldH3bpqT/utkmMUcQ0=",
         "owner": "soriPhoono",
         "repo": "nvim",
-        "rev": "08f590447594bd7c5380fe6a00a87ac9aeff6e18",
+        "rev": "ad716fbd7d3cdf279a835546dbc4700c338dd0f9",
         "type": "github"
       },
       "original": {
