@@ -18,7 +18,7 @@ in {
       shellAliases = {
         g = "${pkgs.git}/bin/git";
 
-        v = lib.mkIf (lib.hasAttr inputs.editors.nixvimConfigurations.${pkgs.system} config.home.username) "${inputs.editors.nixvimConfigurations.${pkgs.system}.${config.home.username}}/bin/nvim";
+        v = lib.mkIf (lib.hasAttr config.home.username inputs.editors.nixvimConfigurations) "${inputs.editors.nixvimConfigurations.${config.home.username}}/bin/nvim";
       };
 
       shellInitLast = let
