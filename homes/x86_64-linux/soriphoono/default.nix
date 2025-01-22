@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+{config, ...}: {
   core = {
     username = "soriphoono";
 
@@ -18,10 +13,7 @@
     };
 
     shells = {
-      fish = {
-        enable = true;
-        workspace = inputs.nvim.packages.${pkgs.system}.hollace;
-      };
+      fish.enable = true;
 
       starship.enable = true;
     };

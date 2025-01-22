@@ -69,10 +69,6 @@ in {
       inherit (cfg) username;
       homeDirectory = "/home/${cfg.username}";
 
-      packages = with inputs; [
-        editors.packages.${username}
-      ];
-
       stateVersion = "25.05";
     };
   };

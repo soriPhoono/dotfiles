@@ -11,12 +11,12 @@
         enable = true;
         defaultUser = config.core.admin.name;
       };
+
+      nixpkgs.hostPlatform = "x86_64-linux";
     }
   ];
 
-  core = {
-    hostname = "wsl";
-  };
+  core.hostname = "wsl";
 
   themes = {
     enable = true;
