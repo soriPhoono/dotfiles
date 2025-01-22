@@ -1,5 +1,7 @@
 {
+  inputs,
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -64,15 +66,15 @@ in {
       git.enable = true;
     };
 
-    programs = {
-      neovim.enable = true;
-
-      home-manager.enable = true;
-    };
+    programs.home-manager.enable = true;
 
     home = {
       inherit (cfg) username;
       homeDirectory = "/home/${cfg.username}";
+
+      packages = [
+        inputs.editors.packages.${pkgs.system}.${cfg.username}
+      ];
 
       stateVersion = "25.05";
     };

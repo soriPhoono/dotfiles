@@ -99,11 +99,11 @@
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
-        "lastModified": 1737583200,
-        "narHash": "sha256-td1AhLjoB50Z0RJU98N4tsjS4ldH3bpqT/utkmMUcQ0=",
+        "lastModified": 1737588751,
+        "narHash": "sha256-0F614WMSqzPcYNosnpv6ovaTUDRtukIMWEne9XWeMyw=",
         "owner": "soriPhoono",
         "repo": "nvim",
-        "rev": "ad716fbd7d3cdf279a835546dbc4700c338dd0f9",
+        "rev": "c7ca7c79ec77b716db3628a742f324747086a3a0",
         "type": "github"
       },
       "original": {
@@ -963,11 +963,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1737416820,
-        "narHash": "sha256-PvOXfVj62pYnl2aq8l/hQkgmo22K1qa6n1JILTm4+ng=",
+        "lastModified": 1737584885,
+        "narHash": "sha256-9QihDPf9pglzTGY51cmmcqGpQuLiJEobJX7CWJzmXsM=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "268daf22a1f93a00b7efc74c367d6711ca7f18e1",
+        "rev": "36c39ff014a8abbc682a073b2c5ba6cea77cf41e",
         "type": "github"
       },
       "original": {
