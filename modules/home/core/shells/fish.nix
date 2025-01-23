@@ -16,7 +16,15 @@ in {
       enable = true;
 
       shellAliases = {
-        v = "nvim";
+        v = "${inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
+          inherit pkgs;
+
+          module = _: {
+            imports = [
+              ../../../../modules/nvim/${config.home.username}
+            ];
+          };
+        }}/bin/nvim";
       };
 
       shellInitLast = let

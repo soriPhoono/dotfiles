@@ -1,7 +1,5 @@
 {
-  inputs,
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -25,8 +23,6 @@ in {
     ./programs/direnv.nix
 
     ./programs/git.nix
-
-    ./nvim.nix
   ];
 
   options.core = {

@@ -16,7 +16,7 @@ in {
     stylix = {
       enable = true;
 
-      targets = rec {
+      targets = {
         neovim.enable = false;
         nixvim.enable = false;
       };

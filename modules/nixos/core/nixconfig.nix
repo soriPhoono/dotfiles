@@ -32,4 +32,6 @@
       ];
     };
   };
+
+  nixpkgs.config.allowUnfree = true;
 }
