@@ -16,6 +16,6 @@ in {
         defaultEditor = true;
         nixpkgs.useGlobalPackages = true;
       }
-      // (import ../../../nvim/${config.home.username});
+      // lib.mkIf (builtins.pathExists ../../../nvim/${config.home.username}) (import ../../../nvim/${config.home.username});
   };
 }
