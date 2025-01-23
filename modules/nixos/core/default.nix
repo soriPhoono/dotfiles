@@ -5,6 +5,8 @@
     ./admin.nix
     ./secrets.nix
     ./shell.nix
+
+    ./editors.nix
   ];
 
   options.core.hostname = lib.mkOption {

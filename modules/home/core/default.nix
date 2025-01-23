@@ -28,13 +28,6 @@ in {
   ];
 
   options.core = {
-    username = lib.mkOption {
-      type = lib.types.str;
-      description = "The username of the user";
-
-      default = "user";
-    };
-
     plainShell = lib.mkOption {
       type = lib.types.bool;
       description = "Disable cli tools";
@@ -54,6 +47,8 @@ in {
       };
     };
 
+    snowfallorg.user.enable = true;
+
     core.programs = lib.mkIf (!cfg.plainShell) {
       nix-index.enable = true;
       eza.enable = true;
@@ -68,15 +63,6 @@ in {
 
     programs.home-manager.enable = true;
 
-    home = {
-      inherit (cfg) username;
-      homeDirectory = "/home/${cfg.username}";
-
-      packages = [
-        inputs.editors.packages.${pkgs.system}.${cfg.username}
-      ];
-
-      stateVersion = "25.05";
-    };
+    home.stateVersion = "25.05";
   };
 }

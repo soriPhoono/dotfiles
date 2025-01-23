@@ -5,6 +5,8 @@
     # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     snowfall-lib = {
       url = "github:snowfallorg/lib";
       inputs = {
@@ -50,17 +52,22 @@
       };
     };
 
-    # Extra configuration, should also be build in a separate repo
-    # (configuration that must be packaged to run off the network)
-    editors = {
-      url = "github:soriPhoono/nvim";
+    nixvim = {
+      url = "github:nix-community/nixvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
       };
     };
   };
 
-  outputs = inputs @ {snowfall-lib, ...}:
+  outputs = inputs @ {
+    nixpkgs,
+    flake-utils,
+    snowfall-lib,
+    nixvim,
+    ...
+  }:
     snowfall-lib.mkFlake {
       inherit inputs;
 
@@ -69,21 +76,32 @@
 
       systems.modules.nixos = with inputs; [
         sops-nix.nixosModules.sops
+        nixvim.nixosModules.nixvim
         stylix.nixosModules.stylix
       ];
 
       homes.modules = with inputs; [
         sops-nix.homeManagerModules.sops
+        nixvim.homeManagerModules.nixvim
       ];
-
-      outputs-builder = channels: {
-        formatter = channels.nixpkgs.alejandra;
-      };
 
       templates = {
         base_flake.description = "This is a basic template for a flake";
       };
-
-      channels-config.allowUnfree = true;
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      formatter = pkgs.alejandra;
+    })
+    // flake-utils.lib.eachDefaultSystemPassThrough (system: let
+      inherit (nixpkgs) lib;
+    in {
+      nixvimConfigurations =
+        lib.mapAttrs
+        (name: type: nixvim.legacyPackages.${system}.makeNixvim (import ./modules/nvim/${name}))
+        (lib.filterAttrs
+          (name: type: type == "directory" && builtins.pathExists ./modules/nvim/${name}/default.nix)
+          (builtins.readDir ./modules/nvim));
+    });
 }

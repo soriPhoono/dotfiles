@@ -16,11 +16,7 @@ in {
       enable = true;
 
       shellAliases = {
-        g = "${pkgs.git}/bin/git";
-
-        v =
-          lib.mkIf (lib.hasAttr "${config.home.username}_workspace" inputs.editors.packages)
-          "${inputs.editors.packages."${config.home.username}_workspace"}/bin/nvim";
+        v = "nvim";
       };
 
       shellInitLast = let

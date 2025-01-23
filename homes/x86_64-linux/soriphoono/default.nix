@@ -1,7 +1,5 @@
 {config, ...}: {
   core = {
-    username = "soriphoono";
-
     secrets = {
       enable = true;
       defaultSopsFile = ./secrets.yaml;
