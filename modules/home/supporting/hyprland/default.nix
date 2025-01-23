@@ -6,6 +6,9 @@
 }: let
   cfg = config.supporting.hyprland;
 in {
+  imports = [
+  ];
+
   options.supporting.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland desktop with sane defaults";
 
@@ -29,16 +32,9 @@ in {
           [
             "$mod, Q, killactive, "
 
-            "$mod, Tab, swapnext, "
-
             "$mod, F, togglefloating, "
             "$mod, P, pin, active"
             "$mod, C, centerwindow, "
-
-            "$mod CTRL_SHIFT, Up, resizeactive, 0 -10"
-            "$mod CTRL_SHIFT, Left, resizeactive, -10 0"
-            "$mod CTRL_SHIFT, Right, resizeactive, 10 0"
-            "$mod CTRL_SHIFT, Down, resizeactive, 0 10"
 
             "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
           ]
@@ -53,9 +49,19 @@ in {
 
                 key = builtins.elemAt directions i;
                 direction = lib.toLower (lib.substring 0 1 key);
+
+                resizeParams =
+                  if direction == "u"
+                  then "0 -10"
+                  else if direction == "l"
+                  then "-10 0"
+                  else if direction == "r"
+                  then "10 0"
+                  else "0 10";
               in [
                 "$mod, ${key}, movefocus, ${direction}"
                 "$mod CTRL, ${key}, movewindow, ${direction}"
+                "$mod CTRL_SHIFT, ${key}, resizeactive, ${resizeParams}"
               ]
             )
             4))
