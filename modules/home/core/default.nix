@@ -25,6 +25,8 @@ in {
     ./programs/direnv.nix
 
     ./programs/git.nix
+
+    ./nvim.nix
   ];
 
   options.core = {
@@ -60,8 +62,6 @@ in {
       direnv.enable = true;
 
       git.enable = true;
-
-      neovim.enable = true;
     };
 
     programs.home-manager.enable = true;

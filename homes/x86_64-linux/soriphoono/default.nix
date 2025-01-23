@@ -19,6 +19,8 @@
       username = "soriphoono";
       email = "soriphoono@gmail.com";
     };
+
+    neovim.enable = true;
   };
 
   noir.enable = true;

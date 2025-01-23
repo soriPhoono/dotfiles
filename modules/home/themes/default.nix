@@ -16,6 +16,11 @@ in {
     stylix = {
       enable = true;
 
+      targets = rec {
+        neovim.enable = false;
+        nixvim.enable = false;
+      };
+
       cursor = {
         package = pkgs.bibata-cursors-translucent;
         size = 24;
