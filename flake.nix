@@ -79,10 +79,16 @@
         stylix.nixosModules.stylix
       ];
 
-      homes.modules = with inputs; [
-        sops-nix.homeManagerModules.sops
-        nixvim.homeManagerModules.nixvim
-      ];
+      homes = {
+        users."soriphoono@DESKTOP-01GCTUV".modules = with inputs; [
+          stylix.homeManagerModules.stylix
+        ];
+
+        modules = with inputs; [
+          sops-nix.homeManagerModules.sops
+          nixvim.homeManagerModules.nixvim
+        ];
+      };
 
       templates = {
         base_flake.description = "This is a basic template for a flake";
