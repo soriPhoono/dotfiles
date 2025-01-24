@@ -8,7 +8,12 @@
   cfg = config.core.secrets;
 in {
   options.core.secrets = {
-    enable = lib.mkEnableOption "Enable secrets management for system specific secrets";
+    defaultSopsFile = lib.mkOption {
+      type = lib.types.path;
+      description = "Default database for import secrets";
+
+      default = ../../../secrets/global.yaml;
+    };
   };
 
   config = {
@@ -27,10 +32,7 @@ in {
     };
 
     sops = {
-      defaultSopsFile =
-        if cfg.enable
-        then ../../../secrets/${config.core.hostname}/system.yaml
-        else ../../../secrets/global.yaml;
+      inherit (cfg) defaultSopsFile;
 
       age = {
         sshKeyPaths = [

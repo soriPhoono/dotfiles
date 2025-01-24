@@ -1,4 +1,7 @@
-{lib, ...}: {
+{lib, config, ...}:
+let
+  cfg = config.core;
+in {
   imports = [
     ./nixconfig.nix
 
@@ -15,6 +18,8 @@
 
   config = {
     time.timeZone = lib.mkDefault "America/Chicago";
+
+    networking.hostName = cfg.hostname;
 
     system.stateVersion = lib.mkDefault "25.05";
   };

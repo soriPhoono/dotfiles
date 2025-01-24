@@ -14,8 +14,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     networking = {
-      hostName = config.core.hostname;
-
       firewall.enable = true;
       nftables.enable = true;
 
