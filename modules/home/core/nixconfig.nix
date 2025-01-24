@@ -1,5 +1,4 @@
-# Sane default allowing for user level overriding
-{pkgs, ...}: {
+{
   nix = {
     settings = {
       experimental-features = [

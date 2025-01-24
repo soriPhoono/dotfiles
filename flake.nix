@@ -80,7 +80,7 @@
       ];
 
       homes = {
-        users."soriphoono@DESKTOP-01GCTUV".modules = with inputs; [
+        users."soriphoono@wsl".modules = with inputs; [
           stylix.homeManagerModules.stylix
         ];
 
