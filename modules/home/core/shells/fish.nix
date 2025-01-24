@@ -9,6 +9,23 @@
 in {
   options.core.shells.fish = {
     enable = lib.mkEnableOption "Enable the fish shell";
+
+    workspace = lib.mkOption {
+      type = lib.types.package;
+      description = "Workspace configuration to enable";
+
+      default = inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
+        inherit pkgs;
+
+        module = _: {
+          imports = [
+            (lib.mkIf
+              (builtins.pathExists ../../../../modules/nvim/${config.home.username})
+              ../../../../modules/nvim/${config.home.users})
+          ];
+        };
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -16,15 +33,7 @@ in {
       enable = true;
 
       shellAliases = {
-        v = "${inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
-          inherit pkgs;
-
-          module = _: {
-            imports = [
-              ../../../../modules/nvim/${config.home.username}
-            ];
-          };
-        }}/bin/nvim";
+        v = "${cfg.workspace}/bin/nvim";
       };
 
       shellInitLast = let
