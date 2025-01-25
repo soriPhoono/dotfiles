@@ -1,8 +1,4 @@
-{
-  config,
-  nixosConfig,
-  ...
-}: {
+{config, ...}: {
   core = {
     secrets = {
       enable = true;
@@ -15,7 +11,7 @@
     };
 
     shells = {
-      fish.enable = builtins.trace "${nixosConfig}" true;
+      fish.enable = true;
       starship.enable = true;
     };
 
