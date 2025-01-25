@@ -1,30 +1,17 @@
-{config, ...}: {
-  core = {
-    secrets = {
-      enable = true;
-      defaultSopsFile = ./secrets.yaml;
+{
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ../soriphoono
+  ];
 
-      environment = {
-        enable = true;
-        sopsFile = ./secrets.env;
-      };
-    };
+  noir.enable = lib.mkForce false;
 
-    shells = {
-      fish.enable = true;
-      starship.enable = true;
-    };
+  nix.package = pkgs.nixVersions.latest;
 
-    programs.git = {
-      username = "soriphoono";
-      email = "soriphoono@gmail.com";
-    };
-  };
-
-  themes = {
-    enable = true;
-    catppuccin.enable = true;
-  };
-
-  sops.secrets.ssh_private.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+  programs.bash.initExtra = ''
+    ${pkgs.fish}/bin/fish
+  '';
 }
