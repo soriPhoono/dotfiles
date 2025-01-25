@@ -13,7 +13,6 @@ in {
     ./shells/fish.nix
     ./shells/starship.nix
 
-    ./programs/nix-index.nix
     ./programs/eza.nix
     ./programs/fastfetch.nix
     ./programs/bat.nix
@@ -48,7 +47,6 @@ in {
     snowfallorg.user.enable = true;
 
     core.programs = lib.mkIf (!cfg.plainShell) {
-      nix-index.enable = true;
       eza.enable = true;
       fastfetch.enable = true;
       bat.enable = true;
