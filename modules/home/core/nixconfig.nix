@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   nix = {
     settings = {
       experimental-features = [
