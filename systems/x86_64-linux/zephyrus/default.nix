@@ -1,6 +1,5 @@
-{inputs, ...}: {
-  imports = with inputs; [
-    # nixos-hardware.nixosModules.asus-zephyrus-ga401
+{
+  imports = [
     ./disk-config.nix
   ];
 
