@@ -4,6 +4,7 @@
   inputs = {
     # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -19,19 +20,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Assembler inputs
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # System inputs
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     # Global imports
     home-manager = {
@@ -59,9 +51,7 @@
 
     nixvim = {
       url = "github:nix-community/nixvim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -79,19 +69,21 @@
       snowfall.namespace = "dotfiles";
 
       systems.modules.nixos = with inputs; [
+        nixos-facter-modules.nixosModules.facter
         sops-nix.nixosModules.sops
         nixvim.nixosModules.nixvim
         stylix.nixosModules.stylix
+        nix-index-database.nixosModules.nix-index
       ];
 
       homes = {
         users."soriphoono@wsl".modules = with inputs; [
           stylix.homeManagerModules.stylix
+          nix-index-database.hmModules.nix-index
         ];
 
         modules = with inputs; [
           sops-nix.homeManagerModules.sops
-          nix-index-database.hmModules.nix-index
           nixvim.homeManagerModules.nixvim
         ];
       };

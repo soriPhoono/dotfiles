@@ -1,5 +1,8 @@
-{lib, config, ...}:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   cfg = config.core;
 in {
   imports = [
@@ -20,6 +23,8 @@ in {
     time.timeZone = lib.mkDefault "America/Chicago";
 
     networking.hostName = cfg.hostname;
+
+    facter.reportPath = ../../../hardware-survey/${cfg.hostname};
 
     system.stateVersion = lib.mkDefault "25.05";
   };
