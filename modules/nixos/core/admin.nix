@@ -6,11 +6,11 @@
   cfg = config.core.admin;
 in {
   options.core.admin = {
-    name = lib.mkOption {
-      type = lib.types.str;
+    users = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
       description = "Unix name of the user";
 
-      default = "soriphoono";
+      default = ["soriphoono"];
     };
   };
 
@@ -19,26 +19,28 @@ in {
 
     sops.secrets = let
       sopsFile = ../../../secrets/global.yaml;
-    in {
-      admin_password = {
-        inherit sopsFile;
+    in
+      lib.mapAttrs (name: {
+        "${name}_password" = {
+          inherit sopsFile;
 
-        neededForUsers = true;
-      };
+          neededForUsers = true;
+        };
 
-      admin_age_key = {
-        inherit sopsFile;
+        "${name}_age_key" = {
+          inherit sopsFile;
 
-        path = "/home/${cfg.name}/.config/sops/age/keys.txt";
+          path = "/home/${name}/.config/sops/age/keys.txt";
 
-        mode = "0440";
-        owner = cfg.name;
-        group = "users";
-      };
-    };
+          mode = "0440";
+          owner = name;
+          group = "users";
+        };
+      })
+      config.snowfallorg.users;
 
-    snowfallorg.users.${cfg.name} = {};
+    snowfallorg.users = lib.genAttrs (name: {}) cfg.users;
 
-    users.users.${cfg.name}.hashedPasswordFile = config.sops.secrets.admin_password.path;
+    users.users = lib.genAttrs (name: {hashedPasswordFile = config.sops.secrets."${name}_password".path;}) cfg.users;
   };
 }

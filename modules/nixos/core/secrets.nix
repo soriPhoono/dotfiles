@@ -38,9 +38,6 @@ in {
         sshKeyPaths = [
           system_key_path
         ];
-
-        keyFile = "/var/lib/sops-nix/key.txt";
-        generateKey = true;
       };
     };
   };

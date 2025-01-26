@@ -1,6 +1,8 @@
 # Sane default allowing for user level overriding
-{
+{pkgs, ...}: {
   nix = {
+    package = pkgs.nixVersions.latest;
+
     settings = {
       experimental-features = [
         "nix-command"
