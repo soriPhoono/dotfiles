@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = with inputs; [
-    nixos-hardware.nixosModules.asus-zephyrus-ga401
+    # nixos-hardware.nixosModules.asus-zephyrus-ga401
   ];
 
   core.hostname = "zephyrus";

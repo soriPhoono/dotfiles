@@ -24,7 +24,7 @@ in {
 
     networking.hostName = cfg.hostname;
 
-    facter.reportPath = ../../../hardware-survey/${cfg.hostname};
+    facter.reportPath = ../../../hardware-survey/${cfg.hostname}.json;
 
     system.stateVersion = lib.mkDefault "25.05";
   };
