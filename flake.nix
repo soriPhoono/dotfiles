@@ -4,7 +4,6 @@
   inputs = {
     # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -25,9 +24,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Global imports
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+
+    disko = {
+      url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -70,6 +75,7 @@
 
       systems.modules.nixos = with inputs; [
         nixos-facter-modules.nixosModules.facter
+        disko.nixosModules.disko
         sops-nix.nixosModules.sops
         nixvim.nixosModules.nixvim
         stylix.nixosModules.stylix
