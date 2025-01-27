@@ -20,7 +20,7 @@ in {
       networkmanager.enable = cfg.networkmanager.enable;
     };
 
-    users.users.${config.core.admin.name}.extraGroups = lib.mkIf cfg.networkmanager.enable ["networkmanager"];
+    users.users = lib.genAttrs config.core.admin.users (name: {extraGroups = lib.mkIf cfg.networkmanager.enable ["networkmanager"];});
 
     services = {
       openssh = lib.mkIf cfg.ssh.enable {

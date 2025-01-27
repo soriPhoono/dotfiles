@@ -19,28 +19,32 @@ in {
 
     sops.secrets = let
       sopsFile = ../../../secrets/global.yaml;
+
+      getName = token: lib.elemAt (lib.splitString "/" token) 0;
     in
-      lib.mapAttrs (name: {
-        "${name}_password" = {
-          inherit sopsFile;
+      lib.genAttrs
+      (map (name: "${name}/password") cfg.users)
+      (name: {
+        inherit sopsFile;
 
-          neededForUsers = true;
-        };
-
-        "${name}_age_key" = {
-          inherit sopsFile;
-
-          path = "/home/${name}/.config/sops/age/keys.txt";
-
-          mode = "0440";
-          owner = name;
-          group = "users";
-        };
+        neededForUsers = true;
       })
-      config.snowfallorg.users;
+      // lib.genAttrs
+      (map (name: "${name}/age_key") cfg.users)
+      (name: let
+        username = getName name;
+      in {
+        inherit sopsFile;
 
-    snowfallorg.users = lib.genAttrs (name: {}) cfg.users;
+        path = "/home/${username}/.config/sops/age/keys.txt";
 
-    users.users = lib.genAttrs (name: {hashedPasswordFile = config.sops.secrets."${name}_password".path;}) cfg.users;
+        mode = "0440";
+        owner = username;
+        group = "users";
+      });
+
+    snowfallorg.users = lib.genAttrs cfg.users (name: {});
+
+    users.users = lib.genAttrs cfg.users (name: {hashedPasswordFile = config.sops.secrets."${name}/password".path;});
   };
 }
