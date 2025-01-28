@@ -13,6 +13,7 @@ creation_rules:
     key_groups:
       - age:
         - *admin_recovery
+        - *admin_soriphoono
         - *server_zephyrus
   - path_regex: .*
     key_groups:
