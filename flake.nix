@@ -2,7 +2,6 @@
   description = "Personal system configurations for home computers";
 
   inputs = {
-    # Repo inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";

@@ -35,7 +35,7 @@
         rootFsOptions = {
           acltype = "posixacl";
           atime = "off";
-          compression = "zstd";
+          compression = "lz4";
           mountpoint = "none";
           xattr = "sa";
         };

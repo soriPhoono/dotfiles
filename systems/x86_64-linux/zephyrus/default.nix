@@ -3,6 +3,8 @@
     ./disk-config.nix
   ];
 
+  facter.reportPath = ./facter.json;
+
   core.hostname = "zephyrus";
 
   system = {
