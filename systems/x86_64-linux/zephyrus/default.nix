@@ -8,7 +8,13 @@
   core.hostname = "zephyrus";
 
   system = {
-    hardware.bluetooth.enable = true;
+    hardware = {
+      amdgpu.integrated.enable = true;
+
+      nvidia.enable = true;
+
+      bluetooth.enable = true;
+    };
 
     boot = {
       enable = true;
