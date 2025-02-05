@@ -6,4 +6,6 @@
 
     ./bluetooth.nix
   ];
+
+  services.fstrim.enable = true;
 }
