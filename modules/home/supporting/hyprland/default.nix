@@ -6,9 +6,6 @@
 }: let
   cfg = config.supporting.hyprland;
 in {
-  imports = [
-  ];
-
   options.supporting.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland desktop with sane defaults";
 
@@ -27,6 +24,17 @@ in {
 
       settings = {
         "$mod" = cfg.modKey;
+
+        general = {
+          border_size = 3;
+
+          snap = {
+            enabled = true;
+            border_overlap = true;
+          };
+        };
+
+        decoration.rounding = 5;
 
         bind =
           [

@@ -2,7 +2,7 @@
   description = "Personal system configurations for home computers";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs?rev=d2faa1bbca1b1e4962ce7373c5b0879e5b12cef2";
 
     flake-utils.url = "github:numtide/flake-utils";
 
