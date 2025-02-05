@@ -52,6 +52,7 @@ in {
           "$mod, C, centerwindow, "
 
           "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
+          "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
         ]
         ++ (builtins.concatLists (builtins.genList (
             i: let

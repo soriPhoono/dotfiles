@@ -11,6 +11,9 @@ in {
     ./autostart.nix
     ./binds.nix
     ./rules.nix
+
+    ./mako.nix
+    ./kitty.nix
   ];
 
   options.supporting.hyprland = {
