@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.supporting.hyprland;
+  cfg = config.hyprland.soriphoono;
 in {
-  options.supporting.hyprland = {
+  options.hyprland.soriphoono = {
     extraBinds = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "The extra binds to inject into hyprland's config";

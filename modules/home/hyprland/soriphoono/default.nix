@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  cfg = config.supporting.hyprland;
+  cfg = config.hyprland.soriphoono;
 in {
   imports = [
     ./general.nix
@@ -16,7 +16,7 @@ in {
     ./kitty.nix
   ];
 
-  options.supporting.hyprland = {
+  options.hyprland.soriphoono = {
     enable = lib.mkEnableOption "Enable hyprland desktop with sane defaults";
 
     modKey = lib.mkOption {

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.supporting.hyprland;
+  cfg = config.hyprland.soriphoono;
 in {
-  options.supporting.hyprland = {
+  options.hyprland.soriphoono = {
     workspaceRules = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Extra workspace rules for the system";

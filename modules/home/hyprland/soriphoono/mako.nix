@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  cfg = config.supporting.mako;
+  cfg = config.hyprland.soriphoono;
 in {
   config = lib.mkIf cfg.enable {
     services.mako = {
@@ -12,7 +12,7 @@ in {
       borderRadius = 5;
       borderSize = 3;
 
-      padding = 20;
+      margin = "20";
     };
   };
 }

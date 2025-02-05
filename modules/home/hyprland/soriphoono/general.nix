@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  cfg = config.supporting.hyprland;
+  cfg = config.hyprland.soriphoono;
 in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
