@@ -9,6 +9,7 @@ in {
     ./general.nix
     ./monitors.nix
     ./binds.nix
+    ./rules.nix
   ];
 
   options.supporting.hyprland = {

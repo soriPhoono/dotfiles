@@ -6,6 +6,22 @@
 }: let
   cfg = config.supporting.hyprland;
 in {
+  options.supporting.hyprland = {
+    extraBinds = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "The extra binds to inject into hyprland's config";
+
+      default = [];
+    };
+
+    switchId = lib.mkOption {
+      type = lib.types.str;
+      description = "The id for the laptop switch if applicable";
+
+      default = null;
+    };
+  };
+
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       "$mod" = cfg.modKey;
@@ -57,7 +73,23 @@ in {
               ]
             )
             9)
-        );
+        )
+        ++ cfg.extraBinds;
+
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, Control_L, movewindow"
+        "$mod, mouse:273, resizewindow"
+        "$mod, ALT_L, resizewindow"
+      ];
+
+      bindl = let
+        monitor = lib.elemAt cfg.monitors 0;
+      in
+        lib.mkIf (cfg.switchId != null) [
+          ", switch:on:${cfg.switchId}, exec, hyprctl keyword monitor \"eDP-1, disable\""
+          ", switch:off:${cfg.switchId}, exec, hyprctl keyword monitor \"${monitor.name}, ${monitor.resolution}, ${monitor.position}, ${toString monitor.scale}\""
+        ];
     };
   };
 }

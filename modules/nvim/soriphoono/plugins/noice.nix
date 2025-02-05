@@ -8,6 +8,8 @@
       settings = {
         render = "compact";
         timeout = 2500;
+
+        background_colour = "#000000";
       };
     };
 
