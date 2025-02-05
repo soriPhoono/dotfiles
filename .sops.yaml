@@ -4,7 +4,7 @@ keys:
 
   - &server_zephyrus age1pf95vtfx9ftqekrrn7ec5lpsrxpnqw2pqlppuz2zhqcnzts3cvtqazv648
 creation_rules:
-  - path_regex: homes/.*/soriphoono(@.*)?/secrets.(yaml|json|env|ini)$
+  - path_regex: homes/.*/soriphoono/secrets.(yaml|json|env|ini)$
     key_groups:
       - age:
         - *admin_recovery
@@ -13,9 +13,5 @@ creation_rules:
     key_groups:
       - age:
         - *admin_recovery
-        - *admin_soriphoono
         - *server_zephyrus
-  - path_regex: .*
-    key_groups:
-      - age:
-        - *admin_recovery
+
