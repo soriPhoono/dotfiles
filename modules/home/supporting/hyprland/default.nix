@@ -7,6 +7,7 @@
 in {
   imports = [
     ./general.nix
+    ./monitors.nix
     ./binds.nix
   ];
 
