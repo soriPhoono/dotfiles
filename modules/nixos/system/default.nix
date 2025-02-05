@@ -2,7 +2,7 @@
   imports = [
     ./boot.nix
     ./power.nix
-    ./pipewire.nix
+    ./audio.nix
     ./networking.nix
   ];
 }
