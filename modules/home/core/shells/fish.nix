@@ -18,7 +18,7 @@ in {
       shellAliases = {
         v =
           lib.mkIf (builtins.pathExists ../../../../modules/nvim/${config.home.username})
-          "${inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvim (import ../../../../modules/nvim/${config.home.username})}}/bin/nvim";
+          "${inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvim (import ../../../../modules/nvim/${config.home.username})}/bin/nvim";
       };
 
       shellInitLast = let
