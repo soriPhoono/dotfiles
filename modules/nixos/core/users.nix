@@ -4,22 +4,15 @@
   config,
   ...
 }: let
-  cfg = config.core.admin;
+  cfg = config.core;
 in {
-  options.core.admin = {
+  options.core = {
     users = let
       userType = lib.types.submodule {
         options = {
           name = lib.mkOption {
             type = lib.types.str;
             description = "The user's unix name";
-          };
-
-          shell = lib.mkOption {
-            type = lib.types.package;
-            description = "The package to use as the user's shell";
-
-            default = pkgs.fish;
           };
         };
       };
@@ -34,6 +27,13 @@ in {
           }
         ];
       };
+
+    shell = lib.mkOption {
+      type = lib.types.package;
+      description = "The package to use as the user's shell";
+
+      default = pkgs.fish;
+    };
   };
 
   config = {
@@ -65,19 +65,21 @@ in {
         group = "users";
       });
 
-    snowfallorg.users = lib.genAttrs cfg.users (name: {});
+    snowfallorg.users = lib.genAttrs (map (user: user.name) cfg.users) (name: {});
 
-    users.users = lib.genAttrs cfg.users (user: {
-      inherit (user) shell;
+    users = {
+      defaultUserShell = cfg.shell;
 
-      hashedPasswordFile = config.sops.secrets."${user.name}/password".path;
-    });
+      users = lib.genAttrs (map (user: user.name) cfg.users) (user: {
+        hashedPasswordFile = config.sops.secrets."${user}/password".path;
+      });
+    };
 
     programs = {
       dconf.enable = true;
 
       fish = {
-        enable = builtins.any (user: user.shell == pkgs.fish) cfg.users;
+        enable = cfg.shell == pkgs.fish;
 
         shellAliases.rebuild = let
           rebuild = pkgs.writeShellApplication {
