@@ -8,6 +8,7 @@ in {
   imports = [
     ./general.nix
     ./monitors.nix
+    ./autostart.nix
     ./binds.nix
     ./rules.nix
   ];

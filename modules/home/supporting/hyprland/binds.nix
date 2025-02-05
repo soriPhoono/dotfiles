@@ -26,9 +26,26 @@ in {
     wayland.windowManager.hyprland.settings = {
       "$mod" = cfg.modKey;
 
-      bind =
+      bind = let
+        killScript = pkgs.writeShellApplication {
+          name = "killscript.sh";
+
+          runtimeInputs = with pkgs; [
+            jq
+            xdotool
+          ];
+
+          text = ''
+            if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ]; then
+              xdotool getactivewindow windowunmap
+            else
+              hyprctl dispatch killactive ""
+            fi
+          '';
+        };
+      in
         [
-          "$mod, Q, killactive, "
+          "$mod, Q, exec, ${killScript}/bin/killscript.sh"
 
           "$mod, F, togglefloating, "
           "$mod, P, pin, active"

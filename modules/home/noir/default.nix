@@ -14,6 +14,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    supporting.mako.enable = true;
+
     programs.kitty.enable = true;
+
+    services.gnome-keyring.enable = true;
   };
 }

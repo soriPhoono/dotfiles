@@ -39,9 +39,19 @@ in {
           "bordersize 0, floating:0, onworkspace:f[1]"
           "rounding 0, floating:0, onworkspace:f[1]"
 
+          # Opacity
           "opacity 0.8, class:(.*)"
         ]
         ++ cfg.windowRules;
+
+      bezier = [
+        "ease-in-out, .42, 0, .58, 1"
+      ];
+
+      animation = [
+        "windows, 1, 5, ease-in-out, slide"
+        "fade, 1, 5, ease-in-out"
+      ];
     };
   };
 }

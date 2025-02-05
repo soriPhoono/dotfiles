@@ -7,10 +7,10 @@
   cfg = config.noir;
 in {
   config = lib.mkIf cfg.enable {
-    supporting.hyprland.enable = true;
+    supporting.hyprland = {
+      enable = true;
 
-    wayland.windowManager.hyprland.settings = {
-      bind = [
+      extraBinds = [
         "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
       ];
     };
