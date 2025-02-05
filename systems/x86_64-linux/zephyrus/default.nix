@@ -10,7 +10,6 @@
   system = {
     hardware = {
       amdgpu.integrated.enable = true;
-
       nvidia.enable = true;
 
       bluetooth.enable = true;

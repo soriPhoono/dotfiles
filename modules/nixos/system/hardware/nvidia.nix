@@ -23,6 +23,10 @@ in {
       graphics = {
         enable = true;
         enable32Bit = true;
+
+        extraPackages = with pkgs; [
+          nvidia-vaapi-driver
+        ];
       };
 
       nvidia = {
@@ -33,9 +37,8 @@ in {
           finegrained = true;
         };
 
-        dynamicBoost = {
-          enable = true;
-        };
+        dynamicBoost.enable = true;
+        modesetting.enable = true;
 
         prime = {
           intelBusId = lib.mkIf config.system.hardware.intelgpu.integrated.enable "PCI:0:2:0";
