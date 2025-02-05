@@ -15,10 +15,6 @@ in {
         type = lib.types.str;
         description = "The igpu device id to detect on later generation gpus";
       };
-    };
-
-    dedicated = {
-      enable = lib.mkEnableOption "Enable dedicated intel gpu support";
 
       acceleration = lib.mkOption {
         type = lib.types.bool;
@@ -29,7 +25,7 @@ in {
     };
   };
 
-  config = lib.mkIf (!virtual && (cfg.integrated.enable || cfg.dedicated.enable)) {
+  config = lib.mkIf (!virtual && cfg.integrated.enable) {
     boot.kernelParams = lib.mkIf cfg.integrated.enable [
       "i915.force_probe=${cfg.integrated.device_id}"
     ];
@@ -39,18 +35,20 @@ in {
       enable32Bit = true;
 
       extraPackages = with pkgs;
-        lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) [
+        lib.mkIf (cfg.integrated.enable && cfg.integrated.acceleration) [
           intel-media-driver
           libvdpau-va-gl
         ];
     };
 
+    services.xserver.videoDrivers = ["intel"];
+
     environment = {
       systemPackages = with pkgs; [
-        nvtop
+        nvtopPackages.full
       ];
 
-      variables = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) {
+      variables = lib.mkIf (cfg.integrated.enable && cfg.integrated.acceleration) {
         LIBVA_DRIVER_NAME = "iHD";
         VDPAU_DRIVER = "va_gl";
       };

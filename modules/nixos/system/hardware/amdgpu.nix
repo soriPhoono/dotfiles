@@ -10,10 +10,6 @@ in {
   options.system.hardware.amdgpu = {
     integrated = {
       enable = lib.mkEnableOption "Enable integrated GPU features";
-    };
-
-    dedicated = {
-      enable = lib.mkEnableOption "Enable dedicated GPU features";
 
       acceleration = lib.mkOption {
         type = lib.types.bool;
@@ -21,6 +17,10 @@ in {
 
         default = true;
       };
+    };
+
+    dedicated = {
+      enable = lib.mkEnableOption "Enable dedicated GPU features";
 
       rocm = lib.mkOption {
         type = lib.types.bool;
@@ -44,12 +44,14 @@ in {
       };
     };
 
+    services.xserver.videoDrivers = ["amdgpu"];
+
     environment = {
       systemPackages = with pkgs; [
-        nvtop
+        nvtopPackages.full
       ];
 
-      variables = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.acceleration) {
+      variables = lib.mkIf (cfg.integrated.enable && cfg.integrated.acceleration) {
         LIBVA_DRIVER_NAME = "radeonsi";
         VDPAU_DRIVER = "radeonsi";
       };
