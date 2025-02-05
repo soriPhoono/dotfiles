@@ -40,6 +40,7 @@ in {
         prime = {
           intelBusId = lib.mkIf config.system.hardware.intelgpu.integrated.enable "PCI:0:2:0";
           amdgpuBusId = lib.mkIf config.system.hardware.amdgpu.integrated.enable "PCI:4:0:0";
+          nvidiaBusId = "PCI:1:0:0";
 
           offload = {
             enable = true;
