@@ -13,6 +13,7 @@ in {
 
         runtimeInputs = with pkgs; [
           wl-clipboard-rs
+          wl-clip-persist
           cliphist
 
           swww
@@ -22,6 +23,7 @@ in {
           wallpapers=$(command ls ~/Pictures/Wallpapers/)
 
           wl-paste --watch cliphist store &
+          wl-clip-persist --clipboard regular &
 
           swww-daemon &
 

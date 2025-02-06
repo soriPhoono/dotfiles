@@ -77,7 +77,7 @@ in {
       style =
         # CSS
         ''
-          window#waybar.statusBar {
+          * {
             background: transparent
           }
         '';
