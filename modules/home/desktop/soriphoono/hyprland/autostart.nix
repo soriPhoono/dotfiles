@@ -29,7 +29,7 @@ in {
       exec-once = [
         "${wallpaperScript}/bin/wallpaper.sh"
 
-        "${pkgs.clipse}/bin/clipse -listen"
+        "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store"
       ];
     };
   };

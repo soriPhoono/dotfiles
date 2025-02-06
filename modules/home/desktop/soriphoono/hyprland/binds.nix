@@ -60,7 +60,6 @@ in {
 
           "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
           "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
-          "$mod, V, exec, ${pkgs.kitty} --class clipse -e '${pkgs.clipse}/bin/clipse'"
           "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
         ]
         ++ (builtins.concatLists (builtins.genList (

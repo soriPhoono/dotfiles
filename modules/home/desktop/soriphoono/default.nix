@@ -1,7 +1,7 @@
 {lib, ...}: {
   imports = [
     ./mako.nix
-    ./fuzzel.nix
+    ./wofi.nix
     ./kitty.nix
 
     ./hyprland
