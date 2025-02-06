@@ -21,7 +21,7 @@
     };
   };
 
-  desktop.soriphoono.enable = true;
+  desktop.noir.enable = true;
 
   themes = {
     enable = true;

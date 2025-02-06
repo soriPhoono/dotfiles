@@ -18,7 +18,7 @@ in {
     ./programs/firefox.nix
   ];
 
-  options.desktop.soriphoono = {
+  options.desktop.noir = {
     enable = lib.mkEnableOption "Enable hyprland desktop with sane defaults";
   };
 

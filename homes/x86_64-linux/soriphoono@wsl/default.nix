@@ -7,7 +7,7 @@
     ../soriphoono
   ];
 
-  desktop.soriphoono.enable = lib.mkForce false;
+  desktop.noir.enable = lib.mkForce false;
 
   nix.package = pkgs.nixVersions.latest;
 
