@@ -19,7 +19,10 @@ in {
       targets = {
         neovim.enable = false;
         nixvim.enable = false;
+
         hyprland.hyprpaper.enable = false;
+
+        waybar.enable = false;
       };
 
       cursor = {

@@ -74,9 +74,13 @@ in {
         };
       };
 
-      style = ''
-
-      '';
+      style =
+        # CSS
+        ''
+          window#waybar.statusBar {
+            background: transparent
+          }
+        '';
 
       systemd.enable = true;
     };
