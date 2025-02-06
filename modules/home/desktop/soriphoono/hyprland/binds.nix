@@ -59,7 +59,7 @@ in {
           "$mod, C, centerwindow, "
 
           "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
-          "$mod, A, exec, ${pkgs.wofi}/bin/wofi"
+          "$mod, A, exec, ${pkgs.wofi}/bin/wofi --show drun"
           "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
         ]
         ++ (builtins.concatLists (builtins.genList (

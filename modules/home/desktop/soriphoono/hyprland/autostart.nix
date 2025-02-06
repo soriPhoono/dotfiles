@@ -8,28 +8,29 @@
 in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = let
-      wallpaperScript = pkgs.writeShellApplication {
-        name = "wallpaper.sh";
+      bootstrap = pkgs.writeShellApplication {
+        name = "bootstrap.sh";
 
         runtimeInputs = with pkgs; [
+          wl-clipboard-rs
+          cliphist
+
           swww
         ];
 
         text = ''
-          sleep 1
+          wallpapers=$(command ls ~/Pictures/Wallpapers/)
+
+          wl-paste --watch cliphist store
 
           swww-daemon &
-
-          wallpapers=$(command ls ~/Pictures/Wallpapers/)
 
           for wallpaper in $wallpapers; do swww img "$wallpaper"; done
         '';
       };
     in {
       exec-once = [
-        "${wallpaperScript}/bin/wallpaper.sh"
-
-        "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store"
+        "${bootstrap}/bin/bootstrap.sh"
       ];
     };
   };
