@@ -14,6 +14,7 @@ in {
 
     ./programs/mako.nix
     ./programs/fuzzel.nix
+    ./programs/waybar.nix
     ./programs/kitty.nix
     ./programs/firefox.nix
   ];
