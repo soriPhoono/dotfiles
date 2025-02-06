@@ -13,7 +13,7 @@ in {
     ./hyprland/rules.nix
 
     ./programs/mako.nix
-    ./programs/wofi.nix
+    ./programs/fuzzel.nix
     ./programs/kitty.nix
     ./programs/firefox.nix
   ];
