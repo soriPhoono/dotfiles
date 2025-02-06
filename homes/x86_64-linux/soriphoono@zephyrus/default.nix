@@ -1,5 +1,5 @@
 {
-  desktop.soriphoono = {
+  desktop.noir = {
     monitors = [
       {
         name = "eDP-1";
