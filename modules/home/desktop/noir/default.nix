@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -15,6 +16,7 @@ in {
     ./programs/mako.nix
     ./programs/fuzzel.nix
     ./programs/waybar.nix
+    ./programs/wlogout.nix
     ./programs/kitty.nix
     ./programs/firefox.nix
   ];
@@ -24,6 +26,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    gtk.iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
 

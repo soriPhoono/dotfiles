@@ -58,7 +58,7 @@ in {
       in {
         inherit sopsFile;
 
-        path = "/home/${username}/.config/sops/age/keys.txt";
+        path = "/tmp/user_keys/${username}.age";
 
         mode = "0440";
         owner = username;

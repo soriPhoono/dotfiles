@@ -20,22 +20,56 @@ in {
           margin-right = 20;
 
           modules-left = [
+            "custom/session_controls"
+            "hyprland/workspaces"
           ];
 
           modules-center = [
           ];
 
           modules-right = [
-            "battery"
+            "upower"
             "clock"
           ];
 
-          "battery" = {
-            "format" = "{capacity}% {icon}";
-            "format-icons" = ["" "" "" "" ""];
+          "custom/session_controls" = {
+            format = "";
+            on-click = "wlogout";
+
+            tooltip-format = "Session management";
           };
-          "clock" = {
-            "format-alt" = "{:%a, %d. %b  %H:%M}";
+
+          "hyprland/workspaces" = {
+            active-only = true;
+            all-outputs = true;
+
+            format = "{icon}";
+
+            format-icons = {
+              active = "󰑊";
+              default = "󰑊";
+              empty = "";
+              urgent = "󰑊";
+
+              "1" = "";
+              "2" = "";
+              "3" = "󰈹";
+              "4" = "󰝚";
+              "5" = "";
+              "6" = "󰑋";
+            };
+
+            persistent-workspaces = {
+              "*" = 6;
+            };
+          };
+
+          upower = {
+            format = " {percentage}";
+
+            native-path = "BAT0";
+            icon-size = 15;
+            hide-if-empty = true;
           };
         };
       };

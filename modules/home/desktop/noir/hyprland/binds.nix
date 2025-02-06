@@ -90,8 +90,8 @@ in {
               i: let
                 ws = i + 1;
               in [
-                "$mod, ${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, ${toString i}, movetoworkspacesilent, ${toString ws}"
+                "$mod, ${toString ws}, workspace, ${toString ws}"
+                "$mod SHIFT, ${toString ws}, movetoworkspacesilent, ${toString ws}"
               ]
             )
             9)

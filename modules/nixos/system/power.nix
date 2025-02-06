@@ -10,16 +10,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.power-profiles-daemon.enable = false;
+    services = {
+      upower.enable = true;
 
-    services.tlp = {
-      enable = true;
+      tlp = {
+        enable = true;
 
-      settings = {
-        CPU_BOOST_ON_AC = 1;
-        CPU_BOOST_ON_BAT = 0;
-        CPU_SCALING_GOVENOR_ON_AC = "performance";
-        CPU_SCALING_GOVENOR_ON_BAT = "powersave";
+        settings = {
+          CPU_BOOST_ON_AC = 1;
+          CPU_BOOST_ON_BAT = 0;
+          CPU_SCALING_GOVENOR_ON_AC = "performance";
+          CPU_SCALING_GOVENOR_ON_BAT = "powersave";
+        };
       };
     };
 
