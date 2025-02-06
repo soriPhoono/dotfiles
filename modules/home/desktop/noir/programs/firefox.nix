@@ -7,19 +7,18 @@
   cfg = config.desktop.noir;
 in {
   config = lib.mkIf cfg.enable {
-    programs.firefox = {
+    programs.firefox = rec {
       enable = true;
 
-      profiles = {
-        soriphoono = {
-          bookmarks = [
-          ];
+      profiles = lib.genAttrs (builtins.attrNames profiles) (name: {
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+        ];
 
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            ublock-origin
-          ];
+        settings = {
+          extensions.autoDisableScopes = 0;
         };
-      };
+      });
     };
 
     desktop.noir.extraBinds = [
