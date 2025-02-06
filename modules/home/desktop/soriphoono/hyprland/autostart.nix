@@ -21,7 +21,7 @@ in {
         text = ''
           wallpapers=$(command ls ~/Pictures/Wallpapers/)
 
-          wl-paste --watch cliphist store
+          wl-paste --watch cliphist store &
 
           swww-daemon &
 
