@@ -7,10 +7,10 @@
   cfg = config.desktop.noir;
 in {
   config = lib.mkIf cfg.enable {
-    programs.firefox = rec {
+    programs.firefox = {
       enable = true;
 
-      profiles = lib.genAttrs (builtins.attrNames profiles) (name: {
+      profiles.default = {
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
         ];
@@ -18,7 +18,7 @@ in {
         settings = {
           extensions.autoDisableScopes = 0;
         };
-      });
+      };
     };
 
     desktop.noir.extraBinds = [

@@ -29,13 +29,4 @@
   };
 
   sops.secrets.ssh_private.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
-
-  programs.firefox = {
-    profiles = {
-      soriphoono = {
-        bookmarks = [
-        ];
-      };
-    };
-  };
 }
