@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.desktop.soriphoono;
+  cfg = config.desktop.noir;
 in {
-  options.desktop.soriphoono = {
+  options.desktop.noir = {
     modKey = lib.mkOption {
       type = lib.types.str;
       description = "The modifier key to enable hyprland hotkeys";
@@ -57,10 +57,6 @@ in {
           "$mod, F, togglefloating, "
           "$mod, P, pin, active"
           "$mod, C, centerwindow, "
-
-          "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
-          "$mod, A, exec, ${pkgs.wofi}/bin/wofi --show drun"
-          "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
         ]
         ++ (builtins.concatLists (builtins.genList (
             i: let

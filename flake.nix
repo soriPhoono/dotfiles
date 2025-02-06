@@ -4,6 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs?rev=d2faa1bbca1b1e4962ce7373c5b0879e5b12cef2";
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-utils.url = "github:numtide/flake-utils";
 
     snowfall-lib = {
@@ -83,6 +88,7 @@
         nixvim.nixosModules.nixvim
         stylix.nixosModules.stylix
         nix-index-database.nixosModules.nix-index
+        nur.modules.nixos.default
       ];
 
       homes = {

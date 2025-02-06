@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.desktop.soriphoono;
+  cfg = config.desktop.noir;
 in {
-  options.desktop.soriphoono.monitors = lib.mkOption {
+  options.desktop.noir.monitors = lib.mkOption {
     type = let
       monitorType = lib.types.submodule {
         options = {

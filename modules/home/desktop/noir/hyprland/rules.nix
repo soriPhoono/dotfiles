@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.desktop.soriphoono;
+  cfg = config.desktop.noir;
 in {
-  options.desktop.soriphoono = {
+  options.desktop.noir = {
     workspaceRules = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Extra workspace rules for the system";
@@ -23,22 +23,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      workspace =
-        [
-          # Smart gaps
-          "w[tv1], gapsout:0, gapsin:0"
-          "f[1], gapsout:0, gapsin:0"
-        ]
-        ++ cfg.workspaceRules;
+      workspace = cfg.workspaceRules;
 
       windowrulev2 =
         [
-          # Smart gaps
-          "bordersize 0, floating:0, onworkspace:w[tv1]"
-          "rounding 0, floating:0, onworkspace:w[tv1]"
-          "bordersize 0, floating:0, onworkspace:f[1]"
-          "rounding 0, floating:0, onworkspace:f[1]"
-
           # Opacity
           "opacity 0.8, class:(.*)"
 

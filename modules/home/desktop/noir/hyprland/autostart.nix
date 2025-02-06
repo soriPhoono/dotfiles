@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.desktop.soriphoono;
+  cfg = config.desktop.noir;
 in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = let
