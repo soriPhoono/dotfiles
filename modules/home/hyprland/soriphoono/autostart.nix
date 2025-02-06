@@ -20,10 +20,9 @@ in {
 
           swww-daemon &
 
-          ${builtins.concatStringsSep "\n" (lib.mapAttrsToList (name: val:
-            if val == "regular"
-            then "swww img ../../../../assets/wallpapers/${name}"
-            else "") (builtins.readDir ../../../../assets/wallpapers))}
+          wallpapers=$(command ls ~/Pictures/Wallpapers/)
+
+          for wallpaper in $wallpapers; do swww img "$wallpaper"; done
         '';
       };
     in {

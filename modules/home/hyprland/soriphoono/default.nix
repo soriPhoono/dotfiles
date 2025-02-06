@@ -13,6 +13,7 @@ in {
     ./rules.nix
 
     ./mako.nix
+    ./fuzzel.nix
     ./kitty.nix
   ];
 
