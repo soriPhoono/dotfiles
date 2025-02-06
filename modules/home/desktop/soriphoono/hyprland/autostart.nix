@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.hyprland.soriphoono;
+  cfg = config.desktop.soriphoono;
 in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = let
@@ -28,6 +28,8 @@ in {
     in {
       exec-once = [
         "${wallpaperScript}/bin/wallpaper.sh"
+
+        "${pkgs.clipse}/bin/clipse -listen"
       ];
     };
   };

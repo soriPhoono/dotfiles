@@ -7,7 +7,7 @@
     ../soriphoono
   ];
 
-  hyprland.soriphoono.enable = lib.mkForce false;
+  desktop.soriphoono.enable = lib.mkForce false;
 
   nix.package = pkgs.nixVersions.latest;
 

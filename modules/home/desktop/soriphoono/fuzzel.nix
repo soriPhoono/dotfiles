@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  cfg = config.hyprland.soriphoono;
+  cfg = config.desktop.soriphoono;
 in {
   config = lib.mkIf cfg.enable {
     programs.fuzzel = {

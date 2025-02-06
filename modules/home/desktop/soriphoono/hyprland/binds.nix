@@ -4,14 +4,14 @@
   config,
   ...
 }: let
-  cfg = config.hyprland.soriphoono;
+  cfg = config.desktop.soriphoono;
 in {
-  options.hyprland.soriphoono = {
-    extraBinds = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "The extra binds to inject into hyprland's config";
+  options.desktop.soriphoono = {
+    modKey = lib.mkOption {
+      type = lib.types.str;
+      description = "The modifier key to enable hyprland hotkeys";
 
-      default = [];
+      default = "SUPER";
     };
 
     switchId = lib.mkOption {
@@ -19,6 +19,13 @@ in {
       description = "The id for the laptop switch if applicable";
 
       default = null;
+    };
+
+    extraBinds = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "The extra binds to inject into hyprland's config";
+
+      default = [];
     };
   };
 
@@ -53,6 +60,7 @@ in {
 
           "$mod, Return, exec, ${pkgs.kitty}/bin/kitty"
           "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
+          "$mod, V, exec, ${pkgs.kitty} --class clipse -e '${pkgs.clipse}/bin/clipse'"
           "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
         ]
         ++ (builtins.concatLists (builtins.genList (

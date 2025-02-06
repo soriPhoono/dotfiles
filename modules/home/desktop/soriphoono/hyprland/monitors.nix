@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.hyprland.soriphoono;
+  cfg = config.desktop.soriphoono;
 in {
-  options.hyprland.soriphoono.monitors = lib.mkOption {
+  options.desktop.soriphoono.monitors = lib.mkOption {
     type = let
       monitorType = lib.types.submodule {
         options = {

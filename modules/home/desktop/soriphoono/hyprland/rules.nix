@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.hyprland.soriphoono;
+  cfg = config.desktop.soriphoono;
 in {
-  options.hyprland.soriphoono = {
+  options.desktop.soriphoono = {
     workspaceRules = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Extra workspace rules for the system";
@@ -41,6 +41,9 @@ in {
 
           # Opacity
           "opacity 0.8, class:(.*)"
+
+          "float, class:(clipse)"
+          "size 622 652, class:(clipse)"
         ]
         ++ cfg.windowRules;
 

@@ -1,5 +1,5 @@
 {
-  hyprland.soriphoono = {
+  desktop.soriphoono = {
     monitors = [
       {
         name = "eDP-1";

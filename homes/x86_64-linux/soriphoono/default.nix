@@ -21,7 +21,7 @@
     };
   };
 
-  hyprland.soriphoono.enable = true;
+  desktop.soriphoono.enable = true;
 
   themes = {
     enable = true;
