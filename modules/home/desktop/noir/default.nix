@@ -20,6 +20,8 @@ in {
     ./programs/kitty.nix
     ./programs/nautilus.nix
     ./programs/firefox.nix
+
+    ./services/gammastep.nix
   ];
 
   options.desktop.noir = {

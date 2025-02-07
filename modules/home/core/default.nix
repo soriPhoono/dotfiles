@@ -34,6 +34,12 @@ in {
   };
 
   config = {
+    home.packages = with pkgs; [
+      zip
+      unzip
+      unrar
+    ];
+
     xdg = {
       enable = true;
 
