@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./nixconfig.nix
+    ./nh.nix
   ];
 
   environment.systemPackages = with pkgs; [

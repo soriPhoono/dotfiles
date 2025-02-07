@@ -9,7 +9,7 @@
 
   desktop.noir.enable = lib.mkForce false;
 
-  nix.package = pkgs.nixVersions.latest;
+  nix.package = pkgs.lix;
 
   programs.bash.initExtra = ''
     ${pkgs.fish}/bin/fish
