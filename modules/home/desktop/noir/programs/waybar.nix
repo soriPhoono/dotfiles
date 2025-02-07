@@ -65,10 +65,10 @@ in {
             format = "{icon}";
 
             format-icons = {
-              active = "<span>󰑊</span>";
-              default = "<span><span>󰑊</span>";
-              empty = "<span></span>";
-              urgent = "<span>󰑊</span>";
+              active = "<span color='#8bd5ca'>󰑊</span>";
+              default = "<span color='#cad3f5'>󰑊</span>";
+              empty = "<span color='#6e738d'></span>";
+              urgent = "<span color='#ee99a0'>󰑊</span>";
             };
 
             persistent-workspaces = {
