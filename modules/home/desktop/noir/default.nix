@@ -18,6 +18,7 @@ in {
     ./programs/waybar.nix
     ./programs/wlogout.nix
     ./programs/kitty.nix
+    ./programs/nautilus.nix
     ./programs/firefox.nix
   ];
 

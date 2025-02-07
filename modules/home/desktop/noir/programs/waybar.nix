@@ -116,7 +116,7 @@ in {
 
             format-icons = ["" "" ""];
 
-            on-click = "${pkgs.helvum}/bin/helvum";
+            on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
 
             tooltip-format = "{node_name} ({volume}%)";
           };

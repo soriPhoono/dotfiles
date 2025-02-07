@@ -33,10 +33,18 @@ in {
       hyprland.enable = true;
 
       hyprlock.enable = true;
+
+      nautilus-open-any-terminal = {
+        enable = true;
+
+        terminal = "kitty";
+      };
     };
 
     services = {
       hypridle.enable = true;
+
+      gnome.sushi.enable = true;
     };
   };
 }
