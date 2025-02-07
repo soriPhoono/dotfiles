@@ -20,13 +20,11 @@
       plymouth.enable = true;
     };
 
-    networking = {
-      enable = true;
-      networkmanager.enable = true;
-    };
-
+    networking.enable = true;
     pipewire.enable = true;
     power.enable = true;
+
+    services.location.enable = true;
   };
 
   desktop.noir.enable = true;

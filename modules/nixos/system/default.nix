@@ -3,6 +3,15 @@
     ./boot.nix
     ./power.nix
     ./audio.nix
-    ./networking.nix
+    ./location.nix
   ];
+
+  services = {
+    dbus.implementation = "broker";
+
+    psd = {
+      enable = true;
+      resyncTimer = "10m";
+    };
+  };
 }

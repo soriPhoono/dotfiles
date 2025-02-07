@@ -37,8 +37,6 @@ in {
   };
 
   config = {
-    security.sudo.wheelNeedsPassword = false;
-
     sops.secrets = let
       sopsFile = ../../../secrets/global.yaml;
 

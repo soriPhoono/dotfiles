@@ -6,7 +6,7 @@
   cfg = config.core;
 in {
   imports = [
-    ./nixconfig.nix
+    ./security.nix
 
     ./secrets.nix
     ./users.nix

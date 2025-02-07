@@ -11,7 +11,12 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    security.polkit.enable = true;
+    security = {
+      polkit.enable = true;
+
+      # allow wayland lockers to unlock the screen
+      pam.services.hyprlock.text = "auth include login";
+    };
 
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
@@ -29,6 +34,21 @@ in {
       };
     };
 
+    xdg.portal = {
+      enable = true;
+
+      xdgOpenUsePortal = true;
+
+      config = {
+        common.default = ["gtk"];
+        hyprland.default = ["gtk" "hyprland"];
+      };
+
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+    };
+
     programs = {
       hyprland.enable = true;
 
@@ -39,6 +59,10 @@ in {
 
         terminal = "kitty";
       };
+
+      kdeconnect.enable = true;
+
+      seahorse.enable = true;
     };
 
     services = {
