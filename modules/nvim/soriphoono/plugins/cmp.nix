@@ -42,6 +42,19 @@
       };
 
       filetype = {
+        norg = {
+          sources = [
+            {
+              name = "neorg";
+            }
+            {
+              name = "path";
+            }
+            {
+              name = "buffer";
+            }
+          ];
+        };
         lua = {
           sources = [
             {
