@@ -22,6 +22,7 @@ in {
     ./programs/firefox.nix
 
     ./services/gammastep.nix
+    ./services/hypridle.nix
   ];
 
   options.desktop.noir = {

@@ -75,41 +75,7 @@ in {
 
     programs = {
       dconf.enable = true;
-
-      fish = {
-        enable = cfg.shell == pkgs.fish;
-
-        shellAliases.rebuild = let
-          rebuild = pkgs.writeShellApplication {
-            name = "rebuild.sh";
-
-            text = ''
-              select choice in switch boot cancel
-              do
-                case $choice
-                in
-                  switch)
-                    sudo nixos-rebuild switch --flake '.#${config.core.hostname}'
-                    break
-                    ;;
-                  boot)
-                    sudo nixos-rebuild boot --flake '.#${config.core.hostname}'
-                    break
-                    ;;
-                  cancel)
-                    break
-                    ;;
-                  *)
-                    echo "Bad selection"
-                    ;;
-                esac
-              done
-
-              nix-index
-            '';
-          };
-        in "${rebuild}/bin/rebuild.sh";
-      };
+      fish.enable = cfg.shell == pkgs.fish;
     };
   };
 }
