@@ -13,9 +13,6 @@ in {
         grace = 5;
         ignore_empty_input = true;
       };
-      auth = {
-        "fingerprint:enabled" = true;
-      };
     };
   };
 }
