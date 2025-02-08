@@ -17,6 +17,7 @@ in {
     ./programs/fuzzel.nix
     ./programs/waybar.nix
     ./programs/wlogout.nix
+    ./programs/hyprlock.nix
     ./programs/kitty.nix
     ./programs/nautilus.nix
     ./programs/firefox.nix
