@@ -28,6 +28,11 @@ in {
             type = lib.types.either lib.types.int lib.types.float;
             description = "The scale of the monitor";
           };
+
+          default = lib.mkOption {
+            type = lib.types.bool;
+            description = "If this is the default monitor available";
+          };
         };
       };
     in

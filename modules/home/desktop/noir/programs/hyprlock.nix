@@ -30,7 +30,7 @@ in {
           {
             size = "200, 50";
             position = "0, -80";
-            monitor = "eDP-1";
+            monitor = (lib.elemAt (lib.filter (monitor: monitor.default) cfg.monitors) 0).name;
             dots_center = true;
             fade_on_empty = true;
             font_color = "rgb(202, 211, 245)";

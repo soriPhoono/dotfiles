@@ -119,7 +119,7 @@ in {
       ];
 
       bindl = let
-        monitor = lib.elemAt cfg.monitors 0;
+        monitor = lib.elemAt (lib.filter (monitor: monitor.default) cfg.monitors) 0;
       in
         lib.mkIf (cfg.switchId != null) [
           ", switch:on:${cfg.switchId}, exec, hyprctl keyword monitor \"eDP-1, disable\""
