@@ -16,15 +16,6 @@ in {
     stylix = {
       enable = true;
 
-      targets = {
-        neovim.enable = false;
-        nixvim.enable = false;
-
-        hyprland.hyprpaper.enable = false;
-
-        waybar.enable = false;
-      };
-
       cursor = {
         package = pkgs.bibata-cursors-translucent;
         size = 24;

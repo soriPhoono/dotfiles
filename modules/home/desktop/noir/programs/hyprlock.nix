@@ -6,6 +6,8 @@
   cfg = config.desktop.noir;
 in {
   config = lib.mkIf cfg.enable {
+    stylix.targets.hyprlock.enable = false;
+
     programs.hyprlock = {
       enable = true;
       settings = {

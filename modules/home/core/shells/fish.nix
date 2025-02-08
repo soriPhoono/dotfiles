@@ -12,6 +12,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    stylix.targets = {
+      neovim.enable = false;
+      nixvim.enable = false;
+    };
+
     programs.fish = {
       enable = true;
 

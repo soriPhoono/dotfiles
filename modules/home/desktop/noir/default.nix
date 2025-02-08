@@ -31,6 +31,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    stylix.targets.hyprland.hyprpaper.enable = false;
+
     gtk.iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";

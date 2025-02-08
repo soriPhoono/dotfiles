@@ -7,6 +7,8 @@
   cfg = config.desktop.noir;
 in {
   config = lib.mkIf cfg.enable {
+    stylix.targets.waybar.enable = false;
+
     programs.waybar = {
       enable = true;
 
