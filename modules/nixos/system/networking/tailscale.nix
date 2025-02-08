@@ -6,9 +6,14 @@
   cfg = config.system.networking;
 in {
   config = lib.mkIf cfg.enable {
-    networking.firewall = {
-      trustedInterfaces = ["tailscale0"];
-      checkReversePath = "loose";
+    networking = {
+      nameservers = ["100.100.100.100"];
+      search = []; # TODO: finish tailscale networking system
+
+      firewall = {
+        trustedInterfaces = ["tailscale0"];
+        checkReversePath = "loose";
+      };
     };
 
     services.tailscale = {
