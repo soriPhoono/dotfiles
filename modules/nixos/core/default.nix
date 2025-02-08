@@ -23,8 +23,6 @@ in {
 
     networking.hostName = cfg.hostname;
 
-    services.gvfs.enable = true;
-
     system.stateVersion = lib.mkDefault "25.05";
   };
 }

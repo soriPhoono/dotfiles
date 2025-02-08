@@ -16,6 +16,8 @@ in {
           wl-clip-persist
           cliphist
 
+          gammastep
+
           swww
         ];
 

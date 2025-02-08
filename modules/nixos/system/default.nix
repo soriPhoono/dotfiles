@@ -1,4 +1,10 @@
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.system;
+in {
   imports = [
     ./boot.nix
     ./power.nix
@@ -6,12 +12,16 @@
     ./location.nix
   ];
 
-  services = {
-    dbus.implementation = "broker";
+  options.system.enable = lib.mkEnableOption "Enable basic system configuration";
 
-    psd = {
-      enable = true;
-      resyncTimer = "10m";
+  config = lib.mkIf cfg.enable {
+    system = {
+      boot.enable = true;
+      power.enable = true;
+    };
+
+    services = {
+      dbus.implementation = "broker";
     };
   };
 }

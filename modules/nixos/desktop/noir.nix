@@ -53,22 +53,17 @@ in {
       hyprland.enable = true;
 
       hyprlock.enable = true;
-
-      nautilus-open-any-terminal = {
-        enable = true;
-
-        terminal = "kitty";
-      };
-
-      kdeconnect.enable = true;
-
-      seahorse.enable = true;
     };
 
     services = {
+      gvfs.enable = true;
+
       hypridle.enable = true;
 
-      gnome.sushi.enable = true;
+      psd = {
+        enable = true;
+        resyncTimer = "10m";
+      };
     };
   };
 }
