@@ -3,6 +3,8 @@
     inputs.impermanence.nixosModules.impermanence
   ];
 
+  programs.fuse.userAllowOther = true;
+
   environment.persistence."/persist" = {
     enable = true;
 

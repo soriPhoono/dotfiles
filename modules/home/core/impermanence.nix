@@ -7,8 +7,6 @@
     inputs.impermanence.homeManagerModules.impermanence
   ];
 
-  programs.fuse.userAllowOther = true;
-
   home.persistence."/persist/home/${config.home.username}" = {
     allowOther = true;
 
