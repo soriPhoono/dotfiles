@@ -27,6 +27,10 @@ in {
       };
     };
 
+    environment.persistence."/persist".directories = [
+      "/etc/NetworkManager/system-connections"
+    ];
+
     users.users = lib.genAttrs (map (user: user.name) config.core.users) (name: {extraGroups = ["networkmanager"];});
 
     services = {

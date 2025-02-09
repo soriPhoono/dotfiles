@@ -7,7 +7,7 @@
 in {
   imports = [
     ./security.nix
-
+    ./impermanence.nix
     ./secrets.nix
     ./users.nix
   ];
