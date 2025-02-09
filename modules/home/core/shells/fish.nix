@@ -21,7 +21,7 @@ in {
       enable = true;
 
       shellAliases = {
-        rm = "${pkgs.glib}/bin/gio trash";
+        trash = "${pkgs.glib}/bin/gio trash";
 
         v =
           lib.mkIf (builtins.pathExists ../../../../modules/nvim/${config.home.username})
