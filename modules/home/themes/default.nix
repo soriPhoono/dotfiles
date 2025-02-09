@@ -17,9 +17,9 @@ in {
       enable = true;
 
       cursor = {
-        package = pkgs.bibata-cursors-translucent;
+        package = pkgs.bibata-cursors;
         size = 24;
-        name = "Bibata_Ghost";
+        name = "Bibata-Modern-Ice";
       };
 
       fonts = {

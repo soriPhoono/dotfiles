@@ -14,7 +14,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     boot = {
-      kernelPackages = pkgs.linuxPackages_zen;
       kernelParams =
         if (!cfg.plymouth.enable)
         then [

@@ -50,12 +50,20 @@ in {
     };
 
     programs = {
-      hyprland.enable = true;
+      regreet = {
+        enable = true;
+      };
+
+      hyprland = {
+        enable = true;
+      };
 
       hyprlock.enable = true;
     };
 
     services = {
+      greetd.enable = true;
+
       gvfs.enable = true;
 
       hypridle.enable = true;

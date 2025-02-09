@@ -10,7 +10,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     stylix = {
-      image = ../../../../assets/wallpapers/catppuccin-mountain.jpg;
+      image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
 
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
     };
