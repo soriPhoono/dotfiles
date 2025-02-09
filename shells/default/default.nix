@@ -14,6 +14,8 @@ in
     packages = with pkgs; [
       nixd
 
+      sbctl
+
       age
       ssh-to-age
       sops
