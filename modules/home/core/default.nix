@@ -9,7 +9,7 @@ in {
   imports = [
     ./nixconfig.nix
     ./secrets.nix
-    ./impermanance.nix
+    ./impermanence.nix
 
     ./shells/bash.nix
     ./shells/fish.nix
