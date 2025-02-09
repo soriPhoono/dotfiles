@@ -14,6 +14,8 @@ in {
   options.system.boot = {
     enable = lib.mkEnableOption "Enable boot configuration";
 
+    secure-boot.enable = lib.mkEnableOption "Enable secure boot based kernel";
+
     plymouth.enable = lib.mkEnableOption "Enable Plymouth boot splash screen";
   };
 
@@ -39,16 +41,11 @@ in {
       loader = {
         efi.canTouchEfiVariables = true;
 
-        systemd-boot = {
-          enable = lib.mkForce false;
-
-          editor = false;
-          configurationLimit = 10;
-        };
+        systemd-boot.enable = lib.mkForce (!cfg.secure-boot.enable);
       };
 
       lanzaboote = {
-        enable = true;
+        inherit (cfg.secure-boot) enable;
         pkiBundle = "/var/lib/sbctl";
       };
 
@@ -57,7 +54,7 @@ in {
 
     zramSwap.enable = true;
 
-    environment.persistence."/persist".directories = [
+    environment.persistence."/persist".directories = lib.mkIf cfg.secure-boot.enable [
       "/var/lib/sbctl"
     ];
   };
