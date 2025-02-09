@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   config,
@@ -6,6 +7,10 @@
 }: let
   cfg = config.system.boot;
 in {
+  imports = [
+    inputs.lanzaboote.nixosModules.lanzaboote
+  ];
+
   options.system.boot = {
     enable = lib.mkEnableOption "Enable boot configuration";
 
@@ -35,16 +40,25 @@ in {
         efi.canTouchEfiVariables = true;
 
         systemd-boot = {
-          enable = true;
+          enable = lib.mkForce false;
 
           editor = false;
           configurationLimit = 10;
         };
       };
 
+      lanzaboote = {
+        enable = true;
+        pkiBundle = "/var/lib/sbctl";
+      };
+
       plymouth.enable = cfg.plymouth.enable;
     };
 
     zramSwap.enable = true;
+
+    environment.persistence."/persist".directories = [
+      "/var/lib/sbctl"
+    ];
   };
 }
