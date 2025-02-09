@@ -22,6 +22,8 @@ in {
         ];
 
         text = ''
+          sleep 1
+
           wallpapers=$(command ls ~/Pictures/Wallpapers/)
 
           wl-paste --watch cliphist store &
