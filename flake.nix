@@ -33,6 +33,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    impermanence.url = "github:nix-community/impermanence";
+
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     disko = {

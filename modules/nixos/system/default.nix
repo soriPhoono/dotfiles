@@ -9,7 +9,9 @@ in {
     ./boot.nix
     ./power.nix
     ./audio.nix
+    ./bluetooth.nix
     ./location.nix
+    ./impermanence.nix
   ];
 
   options.system.enable = lib.mkEnableOption "Enable basic system configuration";

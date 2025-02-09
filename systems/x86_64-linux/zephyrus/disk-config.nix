@@ -9,7 +9,7 @@
           type = "gpt";
           partitions = {
             ESP = {
-              size = "1G";
+              size = "512M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -70,4 +70,6 @@
       };
     };
   };
+
+  fileSystems."/persist".neededForBoot = true;
 }

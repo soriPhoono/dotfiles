@@ -13,16 +13,16 @@
     hardware = {
       amdgpu.integrated.enable = true;
       nvidia.enable = true;
-
-      bluetooth.enable = true;
     };
 
     boot.plymouth.enable = true;
 
     networking.enable = true;
+    bluetooth.enable = true;
+
     pipewire.enable = true;
 
-    services.location.enable = true;
+    location.enable = true;
   };
 
   desktop.noir.enable = true;

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.system.services.location;
+  cfg = config.system.location;
 in {
-  options.system.services.location.enable = lib.mkEnableOption "Enable location based services support";
+  options.system.location.enable = lib.mkEnableOption "Enable location based services support";
 
   config = lib.mkIf cfg.enable {
     # enable location service

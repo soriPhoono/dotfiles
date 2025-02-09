@@ -4,9 +4,9 @@
   virtual,
   ...
 }: let
-  cfg = config.system.hardware.bluetooth;
+  cfg = config.system.bluetooth;
 in {
-  options.system.hardware.bluetooth = {
+  options.system.bluetooth = {
     enable = lib.mkEnableOption "Enable bluetooth support";
   };
 

@@ -14,6 +14,7 @@ in {
     ./shells/fish.nix
     ./shells/starship.nix
 
+    ./programs/btop.nix
     ./programs/eza.nix
     ./programs/fastfetch.nix
     ./programs/bat.nix
@@ -63,6 +64,8 @@ in {
       direnv.enable = true;
 
       git.enable = true;
+
+      btop.enable = true;
     };
 
     programs.home-manager.enable = true;
