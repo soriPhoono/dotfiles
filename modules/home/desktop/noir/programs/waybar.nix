@@ -52,12 +52,14 @@ in {
           };
 
           image = {
-            path = pkgs.fetchFromGithub {
-              owner = "NixOS";
-              repo = "nixos-artwork";
-              rev = "33856d7";
-              sha256 = pkgs.lib.fakeHash;
-            };
+            path =
+              pkgs.fetchFromGithub {
+                owner = "NixOS";
+                repo = "nixos-artwork";
+                rev = "33856d7";
+                sha256 = pkgs.lib.fakeHash;
+              }
+              /logo/nix-snowflake-colours.svg;
             size = 20;
 
             on-click = "${pkgs.wlogout}/bin/wlogout";
