@@ -59,27 +59,27 @@ in {
         }
 
         #lock {
-          background-image: image(url("${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/system-lock-screen.svg"));
+          background-image: image(url("${../../../../../assets/icons/system-lock-screen.svg}"));
         }
 
         #logout {
-          background-image: image(url("${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/system-log-out.svg"));
+          background-image: image(url("${../../../../../assets/icons/system-log-out.svg}"));
         }
 
         #suspend {
-          background-image: image(url("${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/system-suspend.svg"));
+          background-image: image(url("${../../../../../assets/icons/system-suspend.svg}"));
         }
 
         #hibernate {
-          background-image: image(url("${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/system-suspend-hibernate.svg"));
+          background-image: image(url("${../../../../../assets/icons/system-suspend-hibernate.svg}"));
         }
 
         #reboot {
-          background-image: image(url("${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/system-reboot.svg"));
+          background-image: image(url("${../../../../../assets/icons/system-reboot.svg}"));
         }
 
         #shutdown {
-          background-image: image(url("${pkgs.papirus-icon-theme}/share/icons/Papirus/64x64/apps/system-shutdown.svg"));
+          background-image: image(url("${../../../../../assets/icons/system-shutdown.svg}"));
         }
       '';
     };
