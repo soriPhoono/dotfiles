@@ -14,4 +14,3 @@ creation_rules:
       - age:
         - *admin_recovery
         - *server_zephyrus
-
