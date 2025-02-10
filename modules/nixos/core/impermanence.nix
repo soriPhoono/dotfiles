@@ -11,6 +11,8 @@ in {
   ];
 
   options.core.impermanence = {
+    enable = lib.mkEnableOption "Enable system level impermanence";
+
     directories = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Extra directories to back up and persist between sessions";
@@ -24,7 +26,7 @@ in {
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.fuse.userAllowOther = true;
 
     fileSystems."/nix".neededForBoot = true;

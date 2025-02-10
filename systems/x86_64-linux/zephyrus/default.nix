@@ -16,7 +16,7 @@
     };
 
     boot = {
-      secure-boot.enable = true;
+      # secure-boot.enable = true;
       plymouth.enable = true;
     };
 
