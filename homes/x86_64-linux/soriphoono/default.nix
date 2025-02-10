@@ -1,6 +1,6 @@
 {config, ...}: {
   core = {
-    impermanence.enable = true;
+    # impermanence.enable = true;
 
     secrets = {
       enable = true;

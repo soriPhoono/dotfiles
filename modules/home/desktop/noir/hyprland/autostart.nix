@@ -19,6 +19,7 @@ in {
           gammastep
 
           swww
+          waybar
         ];
 
         text = ''
@@ -31,12 +32,21 @@ in {
 
           swww-daemon &
 
-          for wallpaper in $wallpapers; do swww img "$wallpaper"; done
+          for wallpaper in $wallpapers
+          do
+            swww img "$wallpaper"
+          done
+
+          waybar &
         '';
       };
     in {
       exec-once = [
         "${bootstrap}/bin/bootstrap.sh"
+      ];
+
+      exec = [
+        "if pgrep -f waybar > /dev/null; then pkill -f waybar; fi && waybar &"
       ];
     };
   };

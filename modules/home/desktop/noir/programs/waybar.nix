@@ -181,8 +181,6 @@ in {
             border-radius: 1rem 0px 0px 1rem;
           }
         '';
-
-      systemd.enable = true;
     };
   };
 }
