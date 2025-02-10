@@ -55,11 +55,6 @@
             mountpoint = "/nix";
             options."com.sun:auto-snapshot" = "false";
           };
-          "local/persist" = {
-            type = "zfs_fs";
-            mountpoint = "/persist";
-            options."com.sun:auto-snapshot" = "false";
-          };
           "local/root" = {
             type = "zfs_fs";
             mountpoint = "/";

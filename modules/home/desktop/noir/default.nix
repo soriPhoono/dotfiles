@@ -44,6 +44,11 @@ in {
       systemd.variables = ["--all"];
     };
 
+    programs = {
+      feh.enable = true;
+      mpv.enable = true;
+    };
+
     services.gnome-keyring.enable = true;
   };
 }

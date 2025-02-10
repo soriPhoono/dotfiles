@@ -7,7 +7,7 @@
     inputs.impermanence.homeManagerModules.impermanence
   ];
 
-  home.persistence."/persist/home/${config.home.username}" = {
+  home.persistence."/nix/home/${config.home.username}" = {
     allowOther = true;
 
     directories = [

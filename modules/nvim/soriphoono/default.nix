@@ -12,6 +12,7 @@
     ./plugins/telescope.nix
     ./plugins/treesitter.nix
     ./plugins/util.nix
+    ./plugins/neorg.nix
   ];
 
   colorschemes.catppuccin = {

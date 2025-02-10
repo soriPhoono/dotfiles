@@ -27,9 +27,9 @@ in {
   config = {
     programs.fuse.userAllowOther = true;
 
-    fileSystems."/persist".neededForBoot = true;
+    fileSystems."/nix".neededForBoot = true;
 
-    environment.persistence."/persist" = {
+    environment.persistence."/nix/system" = {
       inherit (cfg) files;
 
       enable = true;
