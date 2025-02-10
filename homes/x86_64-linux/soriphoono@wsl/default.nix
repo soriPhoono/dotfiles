@@ -1,7 +1,13 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ../soriphoono
   ];
+
+  core.impermanence.enable = lib.mkForce false;
 
   nix.package = pkgs.lix;
 

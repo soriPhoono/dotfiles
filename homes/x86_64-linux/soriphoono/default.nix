@@ -1,5 +1,7 @@
 {config, ...}: {
   core = {
+    impermanence.enable = true;
+
     secrets = {
       enable = true;
       defaultSopsFile = ./secrets.yaml;

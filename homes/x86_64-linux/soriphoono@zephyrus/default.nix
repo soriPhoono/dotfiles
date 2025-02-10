@@ -14,4 +14,9 @@
 
     switchId = "c0b2370";
   };
+
+  userapps = {
+    enable = true;
+    development.enable = true;
+  };
 }

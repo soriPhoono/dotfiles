@@ -1,19 +1,32 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  cfg = config.userapps;
+in {
   imports = [
     ./development.nix
   ];
 
-  # Look into LMMS
-  home.packages = with pkgs; [
-    thunderbird
-    signal-desktop
-    element-desktop
+  options.userapps = {
+    enable = lib.mkEnableOption "Enable user applications for end-user systems";
+  };
 
-    gimp
-    obs-studio
-    tenacity
+  config = lib.mkIf cfg.enable {
+    # Look into LMMS
+    home.packages = with pkgs; [
+      thunderbird
+      signal-desktop
+      element-desktop
 
-    discord
-    betterdiscordctl
-  ];
+      gimp
+      obs-studio
+      tenacity
+
+      discord
+      betterdiscordctl
+    ];
+  };
 }
