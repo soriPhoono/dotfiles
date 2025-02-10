@@ -23,12 +23,14 @@ in {
         ];
 
         text = ''
-          sleep 1
-
           wallpapers=$(command ls ~/Pictures/Wallpapers/)
 
           wl-paste --watch cliphist store &
           wl-clip-persist --clipboard regular &
+
+          waybar &
+
+          sleep 1
 
           swww-daemon &
 
@@ -36,17 +38,11 @@ in {
           do
             swww img "$wallpaper"
           done
-
-          waybar &
         '';
       };
     in {
       exec-once = [
         "${bootstrap}/bin/bootstrap.sh"
-      ];
-
-      exec = [
-        "if pgrep -f waybar > /dev/null; then pkill -f waybar; fi && waybar &"
       ];
     };
   };
