@@ -10,7 +10,27 @@ in {
     programs.wlogout = {
       enable = true;
 
-      layout = [
+      layout = let
+        shutdownScript = pkgs.writeShellApplication {
+          name = "shutdown.sh";
+
+          runtimeInputs = with pkgs; [
+            swww
+
+            waybar
+
+            hyprland
+          ];
+
+          text = ''
+            if pgrep swww-daemon; then swww kill; fi
+
+            if pgrep waybar; then pkill waybar; fi
+
+            hyprctl dispatch exit
+          '';
+        };
+      in [
         {
           label = "lock";
           action = "hyprlock";
@@ -23,7 +43,7 @@ in {
         }
         {
           label = "logout";
-          action = "hyprctl dispatch exit";
+          action = "${shutdownScript}/bin/shutdown.sh";
           keybind = "q";
         }
         {

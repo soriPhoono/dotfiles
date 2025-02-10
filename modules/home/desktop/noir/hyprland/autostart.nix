@@ -12,37 +12,31 @@ in {
         name = "bootstrap.sh";
 
         runtimeInputs = with pkgs; [
-          wl-clipboard-rs
-          wl-clip-persist
-          cliphist
-
-          gammastep
-
           swww
           waybar
         ];
 
         text = ''
-          wallpapers=$(command ls ~/Pictures/Wallpapers/)
+          sleep 0.1
 
-          wl-paste --watch cliphist store &
-          wl-clip-persist --clipboard regular &
+          if ! pgrep swww-daemon; then swww-daemon; fi
 
-          waybar &
-
-          sleep 1
-
-          swww-daemon &
-
-          for wallpaper in $wallpapers
+          for wallpaper in $(command ls ~/Pictures/Wallpapers/)
           do
             swww img "$wallpaper"
           done
+
+          if ! pgrep waybar; then exec 'waybar &'; fi
         '';
       };
     in {
+      exec = [
+        "${bootstrap}/bin/bootstrap.sh | tee -a ~/.noir-log"
+      ];
+
       exec-once = [
-        "${bootstrap}/bin/bootstrap.sh"
+        "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch cliphist store & | tee -a ~/.noir-log"
+        "${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard both & | tee -a ~/.noir-log"
       ];
     };
   };
