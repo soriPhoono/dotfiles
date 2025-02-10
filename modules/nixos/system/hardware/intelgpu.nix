@@ -15,13 +15,6 @@ in {
         type = lib.types.str;
         description = "The igpu device id to detect on later generation gpus";
       };
-
-      acceleration = lib.mkOption {
-        type = lib.types.bool;
-        description = "Enable hardware accleration features on this hardware";
-
-        default = true;
-      };
     };
   };
 
@@ -35,7 +28,7 @@ in {
       enable32Bit = true;
 
       extraPackages = with pkgs;
-        lib.mkIf (cfg.integrated.enable && cfg.integrated.acceleration) [
+        lib.mkIf cfg.integrated.enable [
           intel-media-driver
           libvdpau-va-gl
         ];
@@ -48,7 +41,7 @@ in {
         nvtopPackages.full
       ];
 
-      variables = lib.mkIf (cfg.integrated.enable && cfg.integrated.acceleration) {
+      variables = lib.mkIf cfg.integrated.enable {
         LIBVA_DRIVER_NAME = "iHD";
         VDPAU_DRIVER = "va_gl";
       };

@@ -8,27 +8,8 @@
   cfg = config.system.hardware.amdgpu;
 in {
   options.system.hardware.amdgpu = {
-    integrated = {
-      enable = lib.mkEnableOption "Enable integrated GPU features";
-
-      acceleration = lib.mkOption {
-        type = lib.types.bool;
-        description = "Enable hardware acceleration features on amd gpus";
-
-        default = true;
-      };
-    };
-
-    dedicated = {
-      enable = lib.mkEnableOption "Enable dedicated GPU features";
-
-      rocm = lib.mkOption {
-        type = lib.types.bool;
-        description = "Enable ROCm support on AMD GPUs";
-
-        default = true;
-      };
-    };
+    integrated.enable = lib.mkEnableOption "Enable integrated GPU features";
+    dedicated.enable = lib.mkEnableOption "Enable dedicated GPU features";
   };
 
   config = lib.mkIf (!virtual && (cfg.integrated.enable || cfg.dedicated.enable)) {
@@ -51,13 +32,13 @@ in {
         nvtopPackages.full
       ];
 
-      variables = lib.mkIf (cfg.integrated.enable && cfg.integrated.acceleration) {
+      variables = lib.mkIf cfg.integrated.enable {
         LIBVA_DRIVER_NAME = "radeonsi";
         VDPAU_DRIVER = "radeonsi";
       };
     };
 
-    systemd.tmpfiles.rules = lib.mkIf (cfg.dedicated.enable && cfg.dedicated.rocm) [
+    systemd.tmpfiles.rules = lib.mkIf cfg.dedicated.enable [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
     ];
   };

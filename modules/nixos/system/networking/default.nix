@@ -6,9 +6,9 @@
   cfg = config.system.networking;
 in {
   imports = [
-    ./avahi.nix
+    # ./avahi.nix
     ./firewall.nix
-    ./tailscale.nix
+    # ./tailscale.nix
   ];
 
   options.system.networking = {
@@ -26,14 +26,16 @@ in {
       };
     };
 
-    core.impermanence.directories = [
+    environment.persistence."/persist".directories = [
       "/etc/NetworkManager/system-connections"
     ];
 
-    users.users = lib.genAttrs (map (user: user.name) config.core.users) (name: {extraGroups = ["networkmanager"];});
+    users.users = lib.genAttrs config.system.users (_: {extraGroups = ["networkmanager"];});
 
     services = {
       openssh = {
+        enable = true;
+
         startWhenNeeded = true;
 
         settings = {

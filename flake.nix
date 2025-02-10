@@ -92,10 +92,12 @@
       systems.modules.nixos = with inputs; [
         nixos-facter-modules.nixosModules.facter
         disko.nixosModules.disko
+        lanzaboote.nixosModules.lanzaboote
+        impermanence.homeManagerModules.impermanence
         sops-nix.nixosModules.sops
-        nixvim.nixosModules.nixvim
         stylix.nixosModules.stylix
         nix-index-database.nixosModules.nix-index
+        nixvim.nixosModules.nixvim
         nur.modules.nixos.default
       ];
 
@@ -106,6 +108,7 @@
         ];
 
         modules = with inputs; [
+          impermanence.homeManagerModules.impermanence
           sops-nix.homeManagerModules.sops
           nixvim.homeManagerModules.nixvim
         ];
@@ -129,7 +132,7 @@
     in {
       nixvimConfigurations =
         lib.mapAttrs
-        (name: type: nixvim.legacyPackages.${system}.makeNixvim (import ./modules/nvim/${name}))
+        (name: _: nixvim.legacyPackages.${system}.makeNixvim (import ./modules/nvim/${name}))
         (lib.filterAttrs
           (name: type: type == "directory" && builtins.pathExists ./modules/nvim/${name}/default.nix)
           (builtins.readDir ./modules/nvim));

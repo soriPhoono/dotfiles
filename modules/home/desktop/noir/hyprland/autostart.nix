@@ -8,6 +8,7 @@
 in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = let
+      # TODO: finish this
       bootstrap = pkgs.writeShellApplication {
         name = "bootstrap.sh";
 
@@ -19,7 +20,7 @@ in {
         text = ''
           sleep 0.1
 
-          if ! pgrep swww-daemon; then swww-daemon; fi
+          if pgrep swww-daemon; then swww-daemon; fi
 
           for wallpaper in $(command ls ~/Pictures/Wallpapers/)
           do

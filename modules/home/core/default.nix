@@ -9,37 +9,27 @@ in {
   imports = [
     ./nixconfig.nix
     ./secrets.nix
-    ./impermanence.nix
 
     ./shells/bash.nix
     ./shells/fish.nix
     ./shells/starship.nix
 
-    ./programs/btop.nix
-    ./programs/eza.nix
     ./programs/fastfetch.nix
-    ./programs/bat.nix
-    ./programs/ripgrep.nix
     ./programs/fd.nix
     ./programs/fzf.nix
-    ./programs/direnv.nix
 
     ./programs/git.nix
   ];
 
   options.core = {
-    plainShell = lib.mkOption {
-      type = lib.types.bool;
-      description = "Disable cli tools";
-
-      default = false;
-    };
+    plainShell = lib.mkEnableOption "Enable plain shell configuration";
   };
 
   config = {
     home.packages = with pkgs; [
       zip
       unzip
+
       unrar
     ];
 
@@ -56,20 +46,39 @@ in {
     snowfallorg.user.enable = true;
 
     core.programs = lib.mkIf (!cfg.plainShell) {
-      eza.enable = true;
       fastfetch.enable = true;
-      bat.enable = true;
-      ripgrep.enable = true;
       fd.enable = true;
       fzf.enable = true;
-      direnv.enable = true;
 
       git.enable = true;
-
-      btop.enable = true;
     };
 
-    programs.home-manager.enable = true;
+    programs = {
+      bat.enable = true;
+      eza = {
+        enable = true;
+
+        enableFishIntegration = config.core.shells.fish.enable;
+
+        git = true;
+        icons = "auto";
+
+        extraOptions = [
+          "--group-directories-first"
+        ];
+      };
+      ripgrep.enable = true;
+
+      direnv = {
+        enable = true;
+
+        nix-direnv.enable = true;
+      };
+
+      btop.enable = true;
+
+      home-manager.enable = true;
+    };
 
     home.stateVersion = "25.05";
   };

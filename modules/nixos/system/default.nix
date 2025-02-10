@@ -1,28 +1,24 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.system;
-in {
+{lib, ...}: {
   imports = [
+    ./disk.nix
     ./boot.nix
+    ./secure-boot.nix
+    ./impermanence.nix
+    ./secrets.nix
+    ./users.nix
     ./power.nix
     ./audio.nix
     ./bluetooth.nix
     ./location.nix
   ];
 
-  options.system.enable = lib.mkEnableOption "Enable basic system configuration";
+  time.timeZone = lib.mkDefault "America/Chicago";
 
-  config = lib.mkIf cfg.enable {
-    system = {
-      boot.enable = true;
-      power.enable = true;
-    };
+  networking.hostName = lib.mkDefault "nixos";
 
-    services = {
-      dbus.implementation = "broker";
-    };
+  services = {
+    dbus.implementation = "broker";
   };
+
+  system.stateVersion = "25.05";
 }

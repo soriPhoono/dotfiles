@@ -24,7 +24,7 @@ in {
       };
     };
 
-    core.impermanence.directories = [
+    system.impermanence.directories = [
       "/var/lib/bluetooth"
     ];
   };

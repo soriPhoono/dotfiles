@@ -30,14 +30,13 @@ in {
           {
             size = "200, 50";
             position = "0, -80";
-            monitor = (lib.elemAt (lib.filter (monitor: monitor.default) cfg.monitors) 0).name;
             dots_center = true;
             fade_on_empty = true;
             font_color = "rgb(202, 211, 245)";
             inner_color = "rgb(91, 96, 120)";
             outer_color = "rgb(24, 25, 38)";
             outline_thickness = 3;
-            placeholder_text = "\'<span foreground=\"##cad3f5\">Password...</span>\'";
+            placeholder_text = "<span foreground='##cad3f5'>Password...</span>"; # TODO: check this...
             shadow_passes = 2;
           }
         ];

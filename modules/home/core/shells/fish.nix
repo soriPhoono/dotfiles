@@ -23,6 +23,8 @@ in {
       shellAliases = {
         trash = "${pkgs.glib}/bin/gio trash";
 
+        cat = "${pkgs.bat}/bin/bat";
+
         v =
           lib.mkIf (builtins.pathExists ../../../../modules/nvim/${config.home.username})
           "${inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvim (import ../../../../modules/nvim/${config.home.username})}/bin/nvim";

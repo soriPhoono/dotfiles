@@ -107,7 +107,7 @@ in {
       '';
     };
 
-    desktop.noir.extraBinds = let
+    wayland.windowManager.hyprland.settings.bind = let
       wlogout-script = pkgs.writeShellApplication {
         name = "wlogout-blur.sh";
 

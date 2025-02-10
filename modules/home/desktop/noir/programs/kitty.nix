@@ -17,7 +17,7 @@ in {
       };
     };
 
-    desktop.noir.extraBinds = [
+    wayland.windowManager.hyprland.settings.bind = [
       "$mod, Return, exec, kitty"
     ];
   };

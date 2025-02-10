@@ -7,7 +7,7 @@
   cfg = config.desktop.noir;
 in {
   config = lib.mkIf cfg.enable {
-    desktop.noir.extraBinds = [
+    wayland.windowManager.hyprland.settings.bind = [
       "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
     ];
   };

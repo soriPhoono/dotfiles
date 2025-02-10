@@ -20,13 +20,6 @@ in {
 
       default = null;
     };
-
-    extraBinds = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "The extra binds to inject into hyprland's config";
-
-      default = [];
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -59,6 +52,7 @@ in {
           "$mod, C, centerwindow, "
 
           ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+
           ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
           ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl prev"
           ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
@@ -100,8 +94,7 @@ in {
               ]
             )
             9)
-        )
-        ++ cfg.extraBinds;
+        );
 
       binde = [
         ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"

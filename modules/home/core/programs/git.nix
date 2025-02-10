@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -8,24 +7,11 @@
 in {
   options.core.programs.git = {
     enable = lib.mkEnableOption "Enable git config";
-
-    username = lib.mkOption {
-      type = lib.types.str;
-      description = "Your username for git related services";
-    };
-
-    email = lib.mkOption {
-      type = lib.types.str;
-      description = "Your email for git related inquiry";
-    };
   };
 
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
-
-      userName = cfg.username;
-      userEmail = cfg.email;
 
       aliases = {
         edit = "commit --amend --only";

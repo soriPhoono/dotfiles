@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.system.pipewire;
+  cfg = config.system.audio;
 in {
-  options.system.pipewire.enable = lib.mkEnableOption "Enable audio driver";
+  options.system.audio.enable = lib.mkEnableOption "Enable audio driver";
 
   config = lib.mkIf cfg.enable {
     security.rtkit.enable = true;
@@ -15,8 +15,6 @@ in {
 
       alsa.enable = true;
       alsa.support32Bit = true;
-
-      jack.enable = true;
 
       pulse.enable = true;
     };

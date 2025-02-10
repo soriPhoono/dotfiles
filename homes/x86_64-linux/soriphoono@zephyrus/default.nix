@@ -1,22 +1,13 @@
 {
+  system.impermanence.enable = true;
+
   desktop.noir = {
     enable = true;
-
-    monitors = [
-      {
-        name = "eDP-1";
-        resolution = "1920x1080@144";
-        position = "0x0";
-        scale = 1;
-        default = true;
-      }
-    ];
 
     switchId = "c0b2370";
   };
 
-  userapps = {
-    enable = true;
-    development.enable = true;
-  };
+  wayland.windowManager.hyprland.settings.monitor = [
+    "eDP-1, 1920x1080@144, 0x0, 1"
+  ];
 }

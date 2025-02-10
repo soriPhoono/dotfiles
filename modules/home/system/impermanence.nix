@@ -1,21 +1,16 @@
 {
-  inputs,
   lib,
   config,
   ...
 }: let
-  cfg = config.core.impermanence;
+  cfg = config.system.impermanence;
 in {
-  imports = [
-    inputs.impermanence.homeManagerModules.impermanence
-  ];
-
-  options.core.impermanence = {
+  options.system.impermanence = {
     enable = lib.mkEnableOption "Enable impermanence on hardware based systems";
   };
 
   config = lib.mkIf cfg.enable {
-    home.persistence."/nix/home/${config.home.username}" = {
+    home.persistence."/persist/home/${config.home.username}" = {
       allowOther = true;
 
       directories = [

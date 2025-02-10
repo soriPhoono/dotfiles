@@ -5,32 +5,12 @@
 }: let
   cfg = config.desktop.noir;
 in {
-  options.desktop.noir = {
-    workspaceRules = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "Extra workspace rules for the system";
-
-      default = [];
-    };
-
-    windowRules = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "Extra window rules for the applications on the system";
-
-      default = [];
-    };
-  };
-
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      workspace = cfg.workspaceRules;
-
-      windowrulev2 =
-        [
-          # Opacity
-          "opacity 0.8, class:(.*)"
-        ]
-        ++ cfg.windowRules;
+      windowrulev2 = [
+        # Opacity
+        "opacity 0.8, class:(.*)"
+      ];
 
       bezier = [
         "ease-in-out, .42, 0, .58, 1"

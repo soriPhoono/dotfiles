@@ -8,7 +8,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.fuzzel.enable = true;
 
-    desktop.noir.extraBinds = [
+    wayland.windowManager.hyprland.settings.bind = [
       "$mod, A, exec, fuzzel"
     ];
   };

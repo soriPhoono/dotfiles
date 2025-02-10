@@ -10,10 +10,8 @@
   nix = {
     package = pkgs.lix;
 
-    settings.trusted-users = ["@sudo"];
+    settings.trusted-users = lib.mkForce ["@sudo"];
   };
-
-  core.impermanence.enable = lib.mkForce false;
 
   programs.bash.initExtra = ''
     ${pkgs.fish}/bin/fish

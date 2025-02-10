@@ -10,7 +10,6 @@ in {
     ./hyprland/autostart.nix
     ./hyprland/binds.nix
     ./hyprland/general.nix
-    ./hyprland/monitors.nix
     ./hyprland/rules.nix
 
     ./programs/mako.nix
