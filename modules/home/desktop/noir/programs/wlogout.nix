@@ -59,27 +59,27 @@ in {
         }
 
         #lock {
-          background-image: image(url("${../../../../../assets/icons/system-lock-screen.svg}"));
+          background-image: image(url("${../../../../../assets/icons/lock-screen.png}"));
         }
 
         #logout {
-          background-image: image(url("${../../../../../assets/icons/system-log-out.svg}"));
+          background-image: image(url("${../../../../../assets/icons/log-out.png}"));
         }
 
         #suspend {
-          background-image: image(url("${../../../../../assets/icons/system-suspend.svg}"));
+          background-image: image(url("${../../../../../assets/icons/suspend.png}"));
         }
 
         #hibernate {
-          background-image: image(url("${../../../../../assets/icons/system-suspend-hibernate.svg}"));
+          background-image: image(url("${../../../../../assets/icons/suspend-hibernate.png}"));
         }
 
         #reboot {
-          background-image: image(url("${../../../../../assets/icons/system-reboot.svg}"));
+          background-image: image(url("${../../../../../assets/icons/reboot.png}"));
         }
 
         #shutdown {
-          background-image: image(url("${../../../../../assets/icons/system-shutdown.svg}"));
+          background-image: image(url("${../../../../../assets/icons/shutdown.png}"));
         }
       '';
     };
