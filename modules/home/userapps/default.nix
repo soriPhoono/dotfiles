@@ -14,5 +14,6 @@
     tenacity
 
     discord
+    betterdiscordctl
   ];
 }

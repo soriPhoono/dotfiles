@@ -21,20 +21,23 @@ in {
           modules-left = [
             "custom/spacer"
             "hyprland/workspaces"
+            "custom/spacer"
           ];
 
           modules-center = [
           ];
 
           modules-right = [
-            "tray"
             "custom/spacer"
+            "tray"
+            "custom/separator"
             "network"
             "bluetooth"
             "wireplumber"
             "battery"
             "custom/spacer"
             "clock"
+            "custom/spacer"
           ];
 
           "custom/spacer" = {
@@ -127,7 +130,7 @@ in {
           };
 
           clock = {
-            format = "<span color='#cad3f5'>{:%I:%M %p}  </span>";
+            format = "<span color='#cad3f5'>{:%I:%M %p} </span>";
             tooltip-format = "{calendar}";
 
             calendar = {

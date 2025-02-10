@@ -1,13 +1,7 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../soriphoono
   ];
-
-  desktop.noir.enable = lib.mkForce false;
 
   nix.package = pkgs.lix;
 

@@ -1,5 +1,7 @@
 {
   desktop.noir = {
+    enable = true;
+
     monitors = [
       {
         name = "eDP-1";

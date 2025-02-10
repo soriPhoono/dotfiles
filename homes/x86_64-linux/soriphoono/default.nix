@@ -21,8 +21,6 @@
     };
   };
 
-  desktop.noir.enable = true;
-
   themes = {
     enable = true;
     catppuccin.enable = true;

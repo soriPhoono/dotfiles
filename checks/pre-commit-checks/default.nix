@@ -12,5 +12,6 @@ inputs.pre-commit-hooks.lib.${system}.run {
     alejandra.enable = true;
     flake-checker.enable = true;
     statix.enable = true;
+    deadnix.enable = true;
   };
 }
