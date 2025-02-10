@@ -15,7 +15,10 @@
       nvidia.enable = true;
     };
 
-    boot.plymouth.enable = true;
+    boot = {
+      secure-boot.enable = true;
+      plymouth.enable = true;
+    };
 
     networking.enable = true;
     bluetooth.enable = true;

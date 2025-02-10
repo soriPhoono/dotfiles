@@ -29,9 +29,6 @@ in {
         [
           # Opacity
           "opacity 0.8, class:(.*)"
-
-          "float, class:(clipse)"
-          "size 622 652, class:(clipse)"
         ]
         ++ cfg.windowRules;
 

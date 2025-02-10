@@ -20,8 +20,6 @@ in {
 
           modules-left = [
             "custom/spacer"
-            "image"
-            "custom/separator"
             "hyprland/workspaces"
           ];
 
@@ -47,22 +45,6 @@ in {
 
           "custom/separator" = {
             format = " | ";
-
-            tooltip = false;
-          };
-
-          image = {
-            path = let
-              nixos-artwork = pkgs.fetchFromGitHub {
-                owner = "NixOS";
-                repo = "nixos-artwork";
-                rev = "33856d7";
-                sha256 = "sha256-VIrSOBCCNq6Fc0dS7XMtC1VebnjRvIUi0/kPal2gWcU=";
-              };
-            in "${nixos-artwork}/logo/nix-snowflake-colours.svg";
-            size = 20;
-
-            on-click = "${pkgs.wlogout}/bin/wlogout";
 
             tooltip = false;
           };
