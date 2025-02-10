@@ -24,7 +24,7 @@ in {
       };
     };
 
-    environment.persistence."/persist".directories = [
+    core.impermanence.directories = [
       "/var/lib/bluetooth"
     ];
   };

@@ -17,24 +17,24 @@ in {
           keybind = "l";
         }
         {
-          label = "logout";
-          action = "hyprctl dispatch exit";
-          keybind = "q";
-        }
-        {
-          label = "suspend";
-          action = "systemctl suspend";
-          keybind = "s";
-        }
-        {
           label = "hibernate";
           action = "systemctl hibernate";
           keybind = "h";
         }
         {
+          label = "logout";
+          action = "hyprctl dispatch exit";
+          keybind = "q";
+        }
+        {
           label = "reboot";
           action = "systemctl reboot";
           keybind = "r";
+        }
+        {
+          label = "suspend";
+          action = "systemctl suspend";
+          keybind = "s";
         }
         {
           label = "shutdown";
@@ -50,7 +50,10 @@ in {
 
         button {
           background-color: rgb(110, 115, 141);
-          border-radius: 600px;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 35%;
+          border-radius: 30px;
         }
 
         button:focus, button:active, button:hover {

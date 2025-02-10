@@ -50,10 +50,7 @@ in {
     };
 
     programs = {
-      hyprland = {
-        enable = true;
-      };
-
+      hyprland.enable = true;
       hyprlock.enable = true;
     };
 

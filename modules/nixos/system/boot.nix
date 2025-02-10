@@ -54,7 +54,7 @@ in {
 
     zramSwap.enable = true;
 
-    environment.persistence."/persist".directories = lib.mkIf cfg.secure-boot.enable [
+    core.impermanence.directories = lib.mkIf cfg.secure-boot.enable [
       "/var/lib/sbctl"
     ];
   };

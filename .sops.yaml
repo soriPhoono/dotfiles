@@ -1,6 +1,6 @@
 keys:
   - &admin_recovery age177swcgdm7684cxtkghjkm4c8mhfmx8yqj0vlhd0ath0t52v06vtsl5qdr2
-  - &admin_soriphoono age1fv7e6nr6y5d6gf3lhdq36dhm2xnuvlwx2uaa2yzrsnlpjc4tl4rstt4p7w
+  - &admin_soriphoono age1e5jg7tt5czmwrty4w8unh6ajqsh9npn0dplxcfmjw8c3h6r39g9q2dggfu
 
   - &server_zephyrus age1k5r7fsn7g57z7pnaym3u58pmhgandvy0wqypswzd34w2xfqxt3tqlnnzn3
 creation_rules:

@@ -1,21 +1,48 @@
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.impermanence;
+in {
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
 
-  programs.fuse.userAllowOther = true;
+  options.core.impermanence = {
+    directories = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Extra directories to back up and persist between sessions";
+      default = [];
+    };
 
-  fileSystems."/persist".neededForBoot = true;
+    files = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Extra directories to back up and persist between sessions";
+      default = [];
+    };
+  };
 
-  environment.persistence."/persist" = {
-    enable = true;
+  config = {
+    programs.fuse.userAllowOther = true;
 
-    hideMounts = true;
+    fileSystems."/persist".neededForBoot = true;
 
-    directories = [
-      "/var/log"
-      "/var/lib/nixos"
-      "/var/lib/systemd/coredump"
-    ];
+    environment.persistence."/persist" = {
+      inherit (cfg) files;
+
+      enable = true;
+
+      hideMounts = true;
+
+      directories =
+        [
+          "/var/log"
+          "/var/lib/nixos"
+          "/var/lib/systemd/coredump"
+        ]
+        ++ cfg.directories;
+    };
   };
 }

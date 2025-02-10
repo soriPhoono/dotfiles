@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -27,7 +26,7 @@ in {
       };
     };
 
-    environment.persistence."/persist".directories = [
+    core.impermanence.directories = [
       "/etc/NetworkManager/system-connections"
     ];
 
