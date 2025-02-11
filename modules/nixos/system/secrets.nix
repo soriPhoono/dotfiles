@@ -17,7 +17,7 @@ in {
   };
 
   config = let
-    hostKeys = lib.mapAttrSetToList (_: value: value.path) config.services.openssh.hostKeys;
+    hostKeys = map (key: key.path) config.services.openssh.hostKeys;
   in
     lib.mkIf cfg.enable {
       sops = {
@@ -31,18 +31,18 @@ in {
           getName = token: lib.elemAt (lib.splitString "/" token) 0;
         in
           lib.genAttrs
-          (map (user: "${user}/password") config.users.users)
+          (map (user: "${user}/password") config.system.users)
           (_: {
-            sopsFile = config.core.secrets.defaultSopsFile;
+            sopsFile = config.system.secrets.defaultSopsFile;
 
             neededForUsers = true;
           })
           // lib.genAttrs
-          (map (user: "${user}/age_key") config.users.users)
+          (map (user: "${user}/age_key") config.system.users)
           (name: let
             username = getName name;
           in {
-            sopsFile = config.core.secrets.defaultSopsFile;
+            sopsFile = config.system.secrets.defaultSopsFile;
 
             path = "/tmp/${username}.key";
 
@@ -52,6 +52,6 @@ in {
           });
       };
 
-      environment.persistence."/persist".files = hostKeys;
+      system.impermanence.files = hostKeys;
     };
 }

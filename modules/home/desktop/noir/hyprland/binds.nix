@@ -110,14 +110,6 @@ in {
         "$mod, mouse:273, resizewindow"
         "$mod, ALT_L, resizewindow"
       ];
-
-      bindl = let
-        monitor = lib.elemAt (lib.filter (monitor: monitor.default) cfg.monitors) 0;
-      in
-        lib.mkIf (cfg.switchId != null) [
-          ", switch:on:${cfg.switchId}, exec, hyprctl keyword monitor \"eDP-1, disable\""
-          ", switch:off:${cfg.switchId}, exec, hyprctl keyword monitor \"${monitor.name}, ${monitor.resolution}, ${monitor.position}, ${toString monitor.scale}\""
-        ];
     };
   };
 }

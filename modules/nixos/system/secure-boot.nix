@@ -19,7 +19,7 @@ in {
       };
     };
 
-    environment.persistence."/persist".directories = [
+    system.impermanence.directories = [
       "/var/lib/sbctl"
     ];
   };

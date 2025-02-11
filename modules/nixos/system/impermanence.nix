@@ -1,17 +1,24 @@
 {
-  inputs,
   lib,
   config,
   ...
 }: let
   cfg = config.system.impermanence;
 in {
-  imports = [
-    inputs.impermanence.nixosModules.impermanence
-  ];
-
   options.system.impermanence = {
     enable = lib.mkEnableOption "Enable system level impermanence";
+
+    directories = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List of directories to be persisted";
+    };
+
+    files = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "List of files to be persisted";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -28,6 +35,10 @@ in {
       datasets = {
         "local" = {
           type = "zfs_fs";
+        };
+        "local/home" = {
+          type = "zfs_fs";
+          mountpoint = "/home";
         };
         "local/nix" = {
           type = "zfs_fs";
@@ -52,15 +63,19 @@ in {
     fileSystems."/persist".neededForBoot = true;
 
     environment.persistence."/persist" = {
+      inherit (cfg) files;
+
       enable = true;
 
       hideMounts = true;
 
-      directories = [
-        "/var/log"
-        "/var/lib/nixos"
-        "/var/lib/systemd/coredump"
-      ];
+      directories =
+        [
+          "/var/log"
+          "/var/lib/nixos"
+          "/var/lib/systemd/coredump"
+        ]
+        ++ cfg.directories;
     };
 
     programs.fuse.userAllowOther = true;

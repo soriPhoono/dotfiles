@@ -26,7 +26,7 @@ in {
       };
     };
 
-    environment.persistence."/persist".directories = [
+    system.impermanence.directories = [
       "/etc/NetworkManager/system-connections"
     ];
 

@@ -93,7 +93,7 @@
         nixos-facter-modules.nixosModules.facter
         disko.nixosModules.disko
         lanzaboote.nixosModules.lanzaboote
-        impermanence.homeManagerModules.impermanence
+        impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         nix-index-database.nixosModules.nix-index
@@ -108,7 +108,6 @@
         ];
 
         modules = with inputs; [
-          impermanence.homeManagerModules.impermanence
           sops-nix.homeManagerModules.sops
           nixvim.homeManagerModules.nixvim
         ];
