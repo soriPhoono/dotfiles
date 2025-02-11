@@ -7,7 +7,6 @@
   cfg = config.core;
 in {
   imports = [
-    ./nixconfig.nix
     ./secrets.nix
 
     ./shells/bash.nix

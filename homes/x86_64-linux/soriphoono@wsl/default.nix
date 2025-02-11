@@ -3,10 +3,6 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ../soriphoono
-  ];
-
   nix = {
     package = pkgs.lix;
 

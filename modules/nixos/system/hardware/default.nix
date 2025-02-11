@@ -1,11 +1,21 @@
-{config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.system.hardware;
+in {
   imports = [
     ./intelgpu.nix
     ./amdgpu.nix
     ./nvidia.nix
   ];
 
-  facter.reportPath = ../../../../facter/${config.networking.hostName}.json;
+  options.system.hardware.enable = lib.mkEnableOption "Enable hardware support";
 
-  services.fstrim.enable = true;
+  config = lib.mkIf cfg.enable {
+    facter.reportPath = ../../../../facter/${config.networking.hostName}.json;
+
+    services.fstrim.enable = true;
+  };
 }

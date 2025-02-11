@@ -6,6 +6,8 @@
   cfg = config.core.secrets;
 in {
   options.core.secrets = {
+    enable = lib.mkEnableOption "Enable secrets";
+
     defaultSopsFile = lib.mkOption {
       type = lib.types.path;
       description = "Default sops database";
@@ -21,7 +23,7 @@ in {
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     sops = {
       inherit (cfg) defaultSopsFile;
 

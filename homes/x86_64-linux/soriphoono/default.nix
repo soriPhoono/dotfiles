@@ -6,6 +6,8 @@
 
   core = {
     secrets = {
+      enable = true;
+
       defaultSopsFile = ./secrets.yaml;
 
       environment = {

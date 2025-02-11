@@ -1,5 +1,5 @@
-_: {
-  networking.hostName = "nixos";
+{lib, ...}: {
+  networking.wireless.enable = lib.mkForce false;
 
   system = {
     boot = {
@@ -11,7 +11,7 @@ _: {
 
     bluetooth.enable = true;
 
-    pipewire.enable = true;
+    audio.enable = true;
 
     location.enable = true;
   };

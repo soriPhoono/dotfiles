@@ -1,8 +1,7 @@
 {
-  networking.hostName = "zephyrus";
-
   system = {
     hardware = {
+      enable = true;
       amdgpu.integrated.enable = true;
       nvidia.enable = true;
     };
