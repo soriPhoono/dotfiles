@@ -26,11 +26,17 @@ in {
     snowfallorg.users = lib.genAttrs cfg.users (_: {});
 
     users = {
-      users = lib.genAttrs cfg.users (user: {
-        inherit (cfg) shell;
+      users =
+        (lib.genAttrs cfg.users (user: {
+          inherit (cfg) shell;
 
-        hashedPasswordFile = lib.mkIf config.system.secrets.enable config.sops.secrets."${user}/password".path;
-      });
+          hashedPasswordFile = config.sops.secrets."${user}/password".path;
+        }))
+        // {
+          soriphoono.openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7 soriphoono@gmail.com"
+          ];
+        };
     };
 
     programs = {
