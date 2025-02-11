@@ -1,8 +1,6 @@
 {
   desktop.noir = {
     enable = true;
-
-    switchId = "c0b2370";
   };
 
   wayland.windowManager.hyprland.settings = {

@@ -9,7 +9,6 @@
 
     disk = {
       enable = true;
-
       hostId = "7dc588ff";
     };
 
@@ -17,7 +16,6 @@
 
     boot = {
       enable = true;
-      # secure-boot.enable = true;
       plymouth.enable = true;
     };
 
