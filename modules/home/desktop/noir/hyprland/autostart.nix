@@ -27,7 +27,7 @@ in {
 
           if [[ -d ~/Pictures/Wallpapers ]];
           then
-            find ~/Pictures/Wallpapers/ -type f -exec swww img {} + notify-send "Loaded into memory {}" \;
+            find ~/Pictures/Wallpapers/ -type f -exec swww img {} \;
           else
             notify-send "Failed to find wallpapers directory"
           fi
