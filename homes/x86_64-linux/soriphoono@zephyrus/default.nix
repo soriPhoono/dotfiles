@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   desktop.noir.enable = true;
 
   wayland.windowManager.hyprland.settings = {

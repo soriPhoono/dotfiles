@@ -26,9 +26,9 @@ in {
     snowfallorg.users = lib.genAttrs cfg.users (_: {});
 
     users = {
-      defaultUserShell = cfg.shell;
-
       users = lib.genAttrs cfg.users (user: {
+        inherit (cfg) shell;
+
         hashedPasswordFile = lib.mkIf config.system.secrets.enable config.sops.secrets."${user}/password".path;
       });
     };
