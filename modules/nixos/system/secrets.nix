@@ -29,20 +29,11 @@ in {
         sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
       };
 
-      secrets = let
-        getName = token: lib.elemAt (lib.splitString "/" token) 0;
-      in
+      secrets =
         lib.genAttrs
-        (map (user: "${user}/password") config.system.users)
-        (_: {
-          sopsFile = config.system.secrets.defaultSopsFile;
-
-          neededForUsers = true;
-        })
-        // lib.genAttrs
         (map (user: "${user}/age_key") config.system.users)
         (name: let
-          username = getName name;
+          username = lib.elemAt (lib.splitString "/" name) 0;
         in {
           sopsFile = config.system.secrets.defaultSopsFile;
 
