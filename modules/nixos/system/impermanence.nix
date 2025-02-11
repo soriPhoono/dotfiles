@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -36,9 +37,13 @@ in {
         "local" = {
           type = "zfs_fs";
         };
-        "local/home" = {
+        "safe/home" = {
           type = "zfs_fs";
           mountpoint = "/home";
+        };
+        "safe/persist" = {
+          type = "zfs_fs";
+          mountpoint = "/persist";
         };
         "local/nix" = {
           type = "zfs_fs";
@@ -49,16 +54,20 @@ in {
           mountpoint = "/";
           postCreateHook = "zfs list -t snapshot -H -o name | grep \"^zroot/local/root@blank$\" || zfs snapshot zroot/local/root@blank";
         };
-        "local/persist" = {
-          type = "zfs_fs";
-          mountpoint = "/persist";
-        };
       };
     };
 
-    boot.initrd.postDeviceCommands = ''
-      zfs rollback -r zroot/local/root@blank
-    '';
+    boot.initrd.systemd.enable = true;
+    boot.initrd.systemd.services.reset = {
+      description = "reset root filesystem";
+      wantedBy = ["initrd.target"];
+      after = ["zfs-import-system.service"];
+      before = ["sysroot.mount"];
+      path = with pkgs; [zfs];
+      unitConfig.defaultDependencies = "no";
+      serviceConfig.type = "oneshot";
+      script = "zfs rollback -r zroot/local/root@blank";
+    };
 
     fileSystems."/persist".neededForBoot = true;
 
@@ -69,15 +78,18 @@ in {
 
       directories =
         [
+          "/etc/nixos/"
+
           "/var/log"
           "/var/lib/nixos"
-          "/var/lib/systemd/coredump"
+          "/var/lib/systemd"
         ]
         ++ cfg.directories;
 
       files =
         [
           "/etc/machine-id"
+          "/etc/zfs/zpool.cache"
         ]
         ++ cfg.files;
     };
