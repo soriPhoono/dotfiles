@@ -83,5 +83,12 @@ in {
     };
 
     programs.fuse.userAllowOther = true;
+
+    services.openssh.hostKeys = lib.mkForce [
+      {
+        path = "/persist/etc/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+    ];
   };
 }

@@ -20,24 +20,28 @@ in {
         text = ''
           sleep 0.1
 
-          if pgrep swww-daemon; then swww-daemon; fi
+          if pgrep swww-daemon; then swww kill; fi
+
+          swww-daemon &
 
           for wallpaper in $(command ls ~/Pictures/Wallpapers/)
           do
             swww img "$wallpaper"
           done
 
-          if ! pgrep waybar; then exec 'waybar &'; fi
+          if pgrep waybar; then pkill waybar; fi
+
+          waybar &
         '';
       };
     in {
       exec = [
-        "${bootstrap}/bin/bootstrap.sh | tee -a ~/.noir-log"
+        "${bootstrap}/bin/bootstrap.sh"
       ];
 
       exec-once = [
-        "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch cliphist store & | tee -a ~/.noir-log"
-        "${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard both & | tee -a ~/.noir-log"
+        "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch cliphist store &"
+        "${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard both &"
       ];
     };
   };

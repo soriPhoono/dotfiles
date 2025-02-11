@@ -16,37 +16,40 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    services.openssh.hostKeys = [
+  config = let
+    hostKeys = [
       {
         path = "/etc/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }
     ];
+  in
+    lib.mkIf cfg.enable {
+      services.openssh.hostKeys = hostKeys;
 
-    sops = {
-      inherit (cfg) defaultSopsFile;
+      sops = {
+        inherit (cfg) defaultSopsFile;
 
-      age = {
-        sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
+        age = {
+          sshKeyPaths = map (key: key.path) hostKeys;
+        };
+
+        secrets =
+          lib.genAttrs
+          (map (user: "${user}/age_key") config.system.users)
+          (name: let
+            username = lib.elemAt (lib.splitString "/" name) 0;
+          in {
+            sopsFile = config.system.secrets.defaultSopsFile;
+
+            path = "/tmp/${username}.key";
+
+            mode = "0440";
+            owner = username;
+            group = "users";
+          });
       };
 
-      secrets =
-        lib.genAttrs
-        (map (user: "${user}/age_key") config.system.users)
-        (name: let
-          username = lib.elemAt (lib.splitString "/" name) 0;
-        in {
-          sopsFile = config.system.secrets.defaultSopsFile;
-
-          path = "/tmp/${username}.key";
-
-          mode = "0440";
-          owner = username;
-          group = "users";
-        });
+      system.impermanence.files = map (key: key.path) hostKeys;
     };
-
-    system.impermanence.files = map (key: key.path) config.services.openssh.hostKeys;
-  };
 }

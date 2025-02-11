@@ -6,9 +6,9 @@
   cfg = config.system.networking;
 in {
   imports = [
-    # ./avahi.nix
+    ./avahi.nix
     ./firewall.nix
-    # ./tailscale.nix
+    ./tailscale.nix
   ];
 
   options.system.networking = {

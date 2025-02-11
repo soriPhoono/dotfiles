@@ -23,7 +23,7 @@ in {
       openFirewall = true;
     };
 
-    core.impermanence.directories = [
+    system.impermanence.directories = [
       "/var/lib/tailscale"
     ];
   };
