@@ -16,42 +16,44 @@ in {
     };
   };
 
-  config = let
-    hostKeys = map (key: key.path) config.services.openssh.hostKeys;
-  in
-    lib.mkIf cfg.enable {
-      sops = {
-        inherit (cfg) defaultSopsFile;
+  config = lib.mkIf cfg.enable {
+    services.openssh.hostKeys = {
+      path = "/etc/ssh/ssh_host_ed25519_key";
+      type = "ed25519";
+    };
 
-        age = {
-          sshKeyPaths = hostKeys;
-        };
+    sops = {
+      inherit (cfg) defaultSopsFile;
 
-        secrets = let
-          getName = token: lib.elemAt (lib.splitString "/" token) 0;
-        in
-          lib.genAttrs
-          (map (user: "${user}/password") config.system.users)
-          (_: {
-            sopsFile = config.system.secrets.defaultSopsFile;
-
-            neededForUsers = true;
-          })
-          // lib.genAttrs
-          (map (user: "${user}/age_key") config.system.users)
-          (name: let
-            username = getName name;
-          in {
-            sopsFile = config.system.secrets.defaultSopsFile;
-
-            path = "/tmp/${username}.key";
-
-            mode = "0440";
-            owner = username;
-            group = "users";
-          });
+      age = {
+        sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
       };
 
-      system.impermanence.files = hostKeys;
+      secrets = let
+        getName = token: lib.elemAt (lib.splitString "/" token) 0;
+      in
+        lib.genAttrs
+        (map (user: "${user}/password") config.system.users)
+        (_: {
+          sopsFile = config.system.secrets.defaultSopsFile;
+
+          neededForUsers = true;
+        })
+        // lib.genAttrs
+        (map (user: "${user}/age_key") config.system.users)
+        (name: let
+          username = getName name;
+        in {
+          sopsFile = config.system.secrets.defaultSopsFile;
+
+          path = "/tmp/${username}.key";
+
+          mode = "0440";
+          owner = username;
+          group = "users";
+        });
     };
+
+    system.impermanence.files = map (key: key.path) config.services.openssh.hostKeys;
+  };
 }

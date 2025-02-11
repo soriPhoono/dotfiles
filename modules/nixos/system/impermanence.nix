@@ -63,8 +63,6 @@ in {
     fileSystems."/persist".neededForBoot = true;
 
     environment.persistence."/persist" = {
-      inherit (cfg) files;
-
       enable = true;
 
       hideMounts = true;
@@ -76,6 +74,12 @@ in {
           "/var/lib/systemd/coredump"
         ]
         ++ cfg.directories;
+
+      files =
+        [
+          "/etc/machine-id"
+        ]
+        ++ cfg.files;
     };
 
     programs.fuse.userAllowOther = true;
