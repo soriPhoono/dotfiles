@@ -12,6 +12,13 @@ in {
       type = lib.types.str;
       description = "The machine-id to use for the system's zfs pool";
     };
+
+    primaryDevice = lib.mkOption {
+      type = lib.types.str;
+      description = "The primary device to install the system on";
+
+      default = "/dev/nvme0n1";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -22,6 +29,8 @@ in {
     disko.devices = {
       disk = {
         main = {
+          inherit (cfg) primaryDevice;
+
           type = "disk";
           content = {
             type = "gpt";
