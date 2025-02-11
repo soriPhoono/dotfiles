@@ -19,6 +19,8 @@ in
       age
       ssh-to-age
       sops
+
+      nixos-anywhere
     ];
 
     buildInputs = pre-commit-check.enabledPackages;
