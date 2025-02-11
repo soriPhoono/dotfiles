@@ -8,26 +8,29 @@
 in {
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = let
-      # TODO: finish this
       bootstrap = pkgs.writeShellApplication {
         name = "bootstrap.sh";
 
         runtimeInputs = with pkgs; [
+          libnotify
+
           swww
           waybar
         ];
 
         text = ''
-          sleep 0.1
+          sleep 1
 
           if pgrep swww-daemon; then swww kill; fi
 
           swww-daemon &
 
-          for wallpaper in $(command ls ~/Pictures/Wallpapers/)
-          do
-            swww img "$wallpaper"
-          done
+          if [[ -d ~/Pictures/Wallpapers ]];
+          then
+            find ~/Pictures/Wallpapers/ -type f -exec swww img {} + notify-send "Loaded into memory {}" \;
+          else
+            notify-send "Failed to find wallpapers directory"
+          fi
 
           if pgrep waybar; then pkill waybar; fi
 
