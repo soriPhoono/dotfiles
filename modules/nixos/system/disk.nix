@@ -29,9 +29,8 @@ in {
     disko.devices = {
       disk = {
         main = {
-          inherit (cfg) primaryDevice;
-
           type = "disk";
+          device = cfg.primaryDevice;
           content = {
             type = "gpt";
             partitions = {

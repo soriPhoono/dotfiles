@@ -1,4 +1,4 @@
-_: final: prev: {
+_: _: prev: {
   discord = prev.discord.overrideAttrs (
     _: {
       src = builtins.fetchTarball {
@@ -8,7 +8,7 @@ _: final: prev: {
     }
   ); # Auto update discord on rebuild
 
-  gnome = prev.gnome.overrideScope (gself: gsuper: {
+  gnome = prev.gnome.overrideScope (_: gsuper: {
     nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
       buildInputs =
         nsuper.buildInputs
