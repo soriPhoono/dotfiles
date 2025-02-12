@@ -64,7 +64,7 @@ in {
 
           "/var/log"
           "/var/lib/nixos"
-          "/var/lib/systemd"
+          "/var/lib/systemd/coredump"
         ]
         ++ cfg.directories;
 
