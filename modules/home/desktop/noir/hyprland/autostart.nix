@@ -45,6 +45,8 @@ in {
       exec-once = [
         "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch cliphist store &"
         "${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard both &"
+
+        "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent &"
       ];
     };
   };
