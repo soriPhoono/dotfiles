@@ -20,11 +20,16 @@ in {
     lib.mkIf config.core.boot.enable {
       services = {
         openssh = {
-          inherit hostKeys;
-
           enable = true;
 
           startWhenNeeded = true;
+
+          hostKeys = [
+            {
+              path = "/persist/etc/ssh/ssh_host_ed25519_key";
+              type = "ed25519";
+            }
+          ];
 
           settings = {
             UseDns = true;
