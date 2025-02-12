@@ -6,7 +6,6 @@
   cfg = config.system.networking;
 in {
   imports = [
-    ./avahi.nix
     ./firewall.nix
     ./tailscale.nix
   ];
@@ -25,10 +24,6 @@ in {
         wifi.powersave = true;
       };
     };
-
-    system.impermanence.directories = [
-      "/etc/NetworkManager/system-connections"
-    ];
 
     users.users = lib.genAttrs config.system.users (_: {extraGroups = ["networkmanager"];});
 
@@ -53,5 +48,9 @@ in {
 
       timesyncd.enable = true;
     };
+
+    system.impermanence.directories = [
+      "/etc/NetworkManager/system-connections"
+    ];
   };
 }
