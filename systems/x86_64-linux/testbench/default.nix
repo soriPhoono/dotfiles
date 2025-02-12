@@ -1,4 +1,6 @@
 {
+  facter.reportPath = ../../../facter/testbench.json;
+
   core = {
     hardware = {
       enable = true;

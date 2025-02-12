@@ -32,13 +32,6 @@ in {
           if pgrep swww-daemon; then swww kill; fi
 
           swww-daemon &
-
-          if [[ -d ~/Pictures/Wallpapers ]];
-          then
-            find ~/Pictures/Wallpapers/ -type f -exec swww img {} \;
-          else
-            notify-send "Failed to find wallpapers directory"
-          fi
         '';
       };
 
@@ -51,11 +44,20 @@ in {
         ];
 
         text = ''
+          sleep 1
+
+          if [[ -d ~/Pictures/Wallpapers ]];
+          then
+            find ~/Pictures/Wallpapers/ -type f -exec swww img {} \;
+          else
+            notify-send "Failed to find wallpapers directory"
+          fi
+
+          swww restore
+
           if pgrep waybar; then pkill waybar; fi
 
           waybar &
-
-          swww restore
         '';
       };
     in {

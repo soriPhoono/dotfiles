@@ -1,4 +1,6 @@
 {
+  facter.reportPath = ../../../facter/zephyrus.json;
+
   core = {
     boot = {
       plymouth.enable = true;

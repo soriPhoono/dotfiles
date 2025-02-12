@@ -1,10 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.core.hardware;
-in {
+{lib, ...}: {
   imports = [
     ./gpu/gpu.nix
 
@@ -12,8 +6,4 @@ in {
   ];
 
   options.core.hardware.enable = lib.mkEnableOption "Enable hardware support";
-
-  config = lib.mkIf cfg.enable {
-    facter.reportPath = ../../../../facter/${config.networking.hostName}.json;
-  };
 }
