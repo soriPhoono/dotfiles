@@ -31,22 +31,42 @@ in {
           else
             notify-send "Failed to find wallpapers directory"
           fi
+        '';
+      };
+
+      reload = pkgs.writeShellApplication {
+        name = "reload.sh";
+
+        runtimeInputs = with pkgs; [
+          wl-clipboard-rs
+          wl-clip-persist
+
+          lxqt.lxqt-policykit
+
+          swww
+          waybar
+        ];
+
+        text = ''
+          lxqt-policykit-agent &
+
+          wl-paste --watch cliphist store &
+          wl-clip-persist --clipboard both &
 
           if pgrep waybar; then pkill waybar; fi
 
           waybar &
+
+          swww restore
         '';
       };
     in {
       exec = [
-        "${bootstrap}/bin/bootstrap.sh"
+        "${reload}/bin/reset.sh"
       ];
 
       exec-once = [
-        "${pkgs.wl-clipboard-rs}/bin/wl-paste --watch cliphist store &"
-        "${pkgs.wl-clip-persist}/bin/wl-clip-persist --clipboard both &"
-
-        "${pkgs.lxqt.lxqt-policykit}/bin/lxqt-policykit-agent &"
+        "${bootstrap}/bin/bootstrap.sh"
       ];
     };
   };
