@@ -1,8 +1,6 @@
 {
   imports = [
     ./network-manager.nix
-
-    ./tailscale.nix
   ];
 
   config = {
