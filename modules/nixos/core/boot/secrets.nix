@@ -40,6 +40,10 @@ in {
         };
       };
 
+      users.users.root.openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7 soriphoono@gmail.com"
+      ];
+
       sops = {
         defaultSopsFile = lib.mkMerge [
           (lib.mkIf cfg.useCustomVault ../../../../secrets/${config.networking.hostName})
