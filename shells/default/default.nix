@@ -19,6 +19,9 @@ in
       age
       ssh-to-age
       sops
+
+      disko
+      nixos-anywhere
     ];
 
     buildInputs = pre-commit-check.enabledPackages;
