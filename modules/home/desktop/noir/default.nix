@@ -47,7 +47,5 @@ in {
       feh.enable = true;
       mpv.enable = true;
     };
-
-    services.gnome-keyring.enable = true;
   };
 }

@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -18,8 +19,33 @@ in {
     ];
   in
     lib.mkIf config.core.boot.enable {
-      services.openssh = {
-        inherit hostKeys;
+      environment.systemPackages = with pkgs; [
+        pinentry-curses
+      ];
+
+      programs.gnupg.agent = {
+        enable = true;
+        pinentryFlavor = "curses";
+        enableSSHSupport = true;
+      };
+
+      services = {
+        openssh = {
+          inherit hostKeys;
+
+          enable = true;
+
+          startWhenNeeded = true;
+
+          settings = {
+            UseDns = true;
+            PermitRootLogin = "prohibit-password";
+            PasswordAuthentication = false;
+            KbdInteractiveAuthentication = false;
+          };
+        };
+
+        pcscd.enable = true;
       };
 
       sops = {

@@ -2,7 +2,6 @@
   imports = [
     ./network-manager.nix
 
-    ./openssh.nix
     ./tailscale.nix
   ];
 
