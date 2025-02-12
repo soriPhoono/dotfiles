@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   core = {
     secrets = {
       defaultSopsFile = ./secrets.yaml;
@@ -25,5 +25,5 @@
     catppuccin.enable = true;
   };
 
-  sops.secrets.ssh_private.path = "~/.ssh/id_ed25519";
+  sops.secrets.ssh_private.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
 }

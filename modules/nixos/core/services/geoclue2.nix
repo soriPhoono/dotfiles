@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.core.geoclue2;
+  cfg = config.core.services.geoclue2;
 in {
-  options.core.geoclue2.enable = lib.mkEnableOption "Enable location based services support";
+  options.core.services.geoclue2.enable = lib.mkEnableOption "Enable location based services support";
 
   config = lib.mkIf cfg.enable {
     # enable location service

@@ -1,33 +1,27 @@
 {
-  system = {
-    hardware = {
-      enable = true;
-      amdgpu.integrated.enable = true;
-      nvidia.enable = true;
-    };
-
-    disk = {
-      enable = true;
-      hostId = "7dc588ff";
-    };
-
-    impermanence.enable = true;
-
+  core = {
     boot = {
-      enable = true;
       plymouth.enable = true;
     };
 
+    hardware = {
+      enable = true;
+      ssd.enable = true;
+      gpu = {
+        enable = true;
+        integrated.amd.enable = true;
+        dedicated.nvidia.enable = true;
+      };
+    };
+
+    services = {
+      asusd.enable = true;
+      geoclue2.enable = true;
+    };
+
     power.enable = true;
-
-    secrets.enable = true;
-
-    networking.enable = true;
-    bluetooth.enable = true;
-
     audio.enable = true;
-
-    location.enable = true;
+    bluetooth.enable = true;
   };
 
   desktop.noir.enable = true;

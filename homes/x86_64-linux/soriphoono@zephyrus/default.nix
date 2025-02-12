@@ -1,4 +1,4 @@
-{config, ...}: {
+{
   desktop.noir.enable = true;
 
   wayland.windowManager.hyprland.settings = {
@@ -15,6 +15,4 @@
       ", switch:off:${switchId}, exec, hyprctl keyword monitor \"${monitor}\""
     ];
   };
-
-  sops.secrets.ssh_private.path = "${config.home.homeDirectory}/.ssh/id_ed25519";
 }
