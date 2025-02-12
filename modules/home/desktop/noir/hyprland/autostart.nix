@@ -14,12 +14,20 @@ in {
         runtimeInputs = with pkgs; [
           libnotify
 
+          lxqt.lxqt-policykit
+
+          wl-clipboard-rs
+          wl-clip-persist
+
           swww
           waybar
         ];
 
         text = ''
-          sleep 1
+          lxqt-policykit-agent &
+
+          wl-paste --watch cliphist store &
+          wl-clip-persist --clipboard both &
 
           if pgrep swww-daemon; then swww kill; fi
 
@@ -38,21 +46,11 @@ in {
         name = "reload.sh";
 
         runtimeInputs = with pkgs; [
-          wl-clipboard-rs
-          wl-clip-persist
-
-          lxqt.lxqt-policykit
-
-          swww
           waybar
+          swww
         ];
 
         text = ''
-          lxqt-policykit-agent &
-
-          wl-paste --watch cliphist store &
-          wl-clip-persist --clipboard both &
-
           if pgrep waybar; then pkill waybar; fi
 
           waybar &
