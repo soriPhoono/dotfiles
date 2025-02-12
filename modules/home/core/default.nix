@@ -6,7 +6,6 @@
   imports = [
     ./secrets.nix
 
-    ./shells/bash.nix
     ./shells/fish.nix
     ./shells/starship.nix
 
