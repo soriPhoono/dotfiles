@@ -18,12 +18,9 @@ in {
     ];
   in
     lib.mkIf config.core.boot.enable {
-      services.openssh.hostKeys =
-        map (key: {
-          inherit (key) type;
-          path = "/persist/${key.path}";
-        })
-        hostKeys;
+      services.openssh = {
+        inherit hostKeys;
+      };
 
       sops = {
         defaultSopsFile = lib.mkMerge [
@@ -37,7 +34,7 @@ in {
 
         secrets =
           lib.genAttrs
-          (map (user: "${user}/age_key") config.core.users)
+          (map (user: "${user}/age_key") config.core.users.users)
           (name: let
             username = lib.elemAt (lib.splitString "/" name) 0;
           in {

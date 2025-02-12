@@ -13,7 +13,10 @@
     nixos-facter
   ];
 
-  core.users.enable = false;
+  core = {
+    boot.enable = false;
+    users.enable = false;
+  };
 
   themes = {
     enable = true;

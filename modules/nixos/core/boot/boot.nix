@@ -17,7 +17,11 @@ in {
     ./secrets.nix
   ];
 
-  options.core.boot.enable = lib.mkEnableOption "Enable bootloader features";
+  options.core.boot.enable =
+    lib.mkEnableOption "Enable bootloader features"
+    // {
+      default = true;
+    };
 
   config = lib.mkIf cfg.enable {
     boot = {
