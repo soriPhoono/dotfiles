@@ -13,7 +13,7 @@
     services.resolved = {
       enable = true;
 
-      dnsovertls = "true";
+      dnsovertls = "opportunistic";
     };
 
     services.timesyncd.enable = true;
