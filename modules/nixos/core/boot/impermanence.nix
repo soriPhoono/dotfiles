@@ -68,9 +68,11 @@ in {
         ]
         ++ cfg.directories;
 
-      files = [
-        "/etc/machine-id"
-      ];
+      files =
+        [
+          "/etc/machine-id"
+        ]
+        ++ cfg.files;
     };
 
     programs.fuse.userAllowOther = true;

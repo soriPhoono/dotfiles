@@ -9,15 +9,11 @@
     wifi.powersave = true;
   };
 
+  systemd.network.wait-online.enable = false;
+
   users.users = lib.genAttrs config.core.users.users (_: {
     extraGroups = ["networkmanager"];
   });
-
-  services.resolved = {
-    enable = true;
-
-    dnsovertls = "opportunistic";
-  };
 
   core.boot.impermanence.directories = [
     "/etc/NetworkManager/system-connections"
