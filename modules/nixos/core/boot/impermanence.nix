@@ -21,7 +21,7 @@ in {
 
   config = lib.mkIf config.core.boot.enable {
     boot.initrd.systemd = {
-      enable = false;
+      enable = true;
       services.reset = {
         description = "reset root filesystem";
 
