@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.system.audio;
+  cfg = config.core.audio;
 in {
-  options.system.audio.enable = lib.mkEnableOption "Enable audio driver";
+  options.core.audio.enable = lib.mkEnableOption "Enable audio driver";
 
   config = lib.mkIf cfg.enable {
     security.rtkit.enable = true;

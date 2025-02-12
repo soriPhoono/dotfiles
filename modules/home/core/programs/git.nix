@@ -6,11 +6,21 @@
   cfg = config.core.programs.git;
 in {
   options.core.programs.git = {
-    enable = lib.mkEnableOption "Enable git config";
+    userName = lib.mkOption {
+      type = lib.types.str;
+      description = "The git username to set globally for the profile";
+    };
+
+    userEmail = lib.mkOption {
+      type = lib.types.str;
+      description = "The git email to set globally for the profile";
+    };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.git = {
+      inherit (cfg) userName userEmail;
+
       enable = true;
 
       aliases = {

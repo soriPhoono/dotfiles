@@ -21,6 +21,7 @@ in
       sops
 
       disko
+      nixos-facter
       nixos-anywhere
     ];
 

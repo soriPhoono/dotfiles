@@ -3,11 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.system.services.asusd;
+  cfg = config.core.services.asusd;
 in {
-  options.system.services.asusd = {
-    enable = lib.mkEnableOption "Enable asusd system controller";
-  };
+  options.core.services.asusd.enable = lib.mkEnableOption "Enable asusd system controller";
 
   config = lib.mkIf cfg.enable {
     services.asusd = {

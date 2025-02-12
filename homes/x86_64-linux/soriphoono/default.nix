@@ -1,13 +1,6 @@
 {
-  programs.git = {
-    userName = "soriphoono";
-    userEmail = "soriphoono@gmail.com";
-  };
-
   core = {
     secrets = {
-      enable = true;
-
       defaultSopsFile = ./secrets.yaml;
 
       environment = {
@@ -19,6 +12,11 @@
     shells = {
       fish.enable = true;
       starship.enable = true;
+    };
+
+    programs.git = {
+      userName = "soriphoono";
+      userEmail = "soriphoono@gmail.com";
     };
   };
 

@@ -1,23 +1,11 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.core.programs.fzf;
-in {
-  options.core.programs.fzf = {
-    enable = lib.mkEnableOption "Enable fzf";
-  };
+{config, ...}: {
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = config.programs.fish.enable;
 
-  config = lib.mkIf cfg.enable {
-    programs.fzf = {
-      enable = true;
-      enableFishIntegration = config.core.shells.fish.enable;
-
-      defaultCommand = "fd --type file";
-      defaultOptions = [
-        "--ansi"
-      ];
-    };
+    defaultCommand = "fd --type file";
+    defaultOptions = [
+      "--ansi"
+    ];
   };
 }

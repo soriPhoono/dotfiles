@@ -1,11 +1,8 @@
 {
-  lib,
   pkgs,
   config,
   ...
-}: let
-  cfg = config.core;
-in {
+}: {
   imports = [
     ./secrets.nix
 
@@ -16,13 +13,8 @@ in {
     ./programs/fastfetch.nix
     ./programs/fd.nix
     ./programs/fzf.nix
-
     ./programs/git.nix
   ];
-
-  options.core = {
-    plainShell = lib.mkEnableOption "Enable plain shell configuration";
-  };
 
   config = {
     home.packages = with pkgs; [
@@ -44,20 +36,12 @@ in {
 
     snowfallorg.user.enable = true;
 
-    core.programs = lib.mkIf (!cfg.plainShell) {
-      fastfetch.enable = true;
-      fd.enable = true;
-      fzf.enable = true;
-
-      git.enable = true;
-    };
-
     programs = {
       bat.enable = true;
       eza = {
         enable = true;
 
-        enableFishIntegration = config.core.shells.fish.enable;
+        enableFishIntegration = config.programs.fish.enable;
 
         git = true;
         icons = "auto";

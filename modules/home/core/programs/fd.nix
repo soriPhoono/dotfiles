@@ -1,15 +1,5 @@
 {
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.core.programs.fd;
-in {
-  options.core.programs.fd = {
-    enable = lib.mkEnableOption "Enable fd";
-  };
-
-  config = lib.mkIf cfg.enable {
+  config = {
     programs.fd = {
       enable = true;
       hidden = true;

@@ -4,9 +4,15 @@
   config,
   ...
 }: let
-  cfg = config.system;
+  cfg = config.core.users;
 in {
-  options.system = {
+  options.core.users = {
+    enable =
+      lib.mkEnableOption "Enable user management"
+      // {
+        default = true;
+      };
+
     shell = lib.mkOption {
       type = lib.types.package;
       description = "The package to use as the user's shell";
@@ -35,6 +41,7 @@ in {
 
     programs = {
       dconf.enable = true;
+
       fish.enable = cfg.shell == pkgs.fish;
     };
   };

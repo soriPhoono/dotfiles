@@ -4,9 +4,9 @@
   virtual,
   ...
 }: let
-  cfg = config.system.bluetooth;
+  cfg = config.core.bluetooth;
 in {
-  options.system.bluetooth = {
+  options.core.bluetooth = {
     enable = lib.mkEnableOption "Enable bluetooth support";
   };
 
@@ -24,7 +24,7 @@ in {
       };
     };
 
-    system.impermanence.directories = [
+    core.boot.impermanence.directories = [
       "/var/lib/bluetooth"
     ];
   };

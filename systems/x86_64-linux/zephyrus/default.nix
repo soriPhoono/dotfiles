@@ -1,6 +1,4 @@
 {
-  networking.hostName = "zephyrus";
-
   system = {
     hardware = {
       enable = true;

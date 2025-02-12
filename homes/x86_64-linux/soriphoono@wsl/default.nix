@@ -1,13 +1,7 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
-  nix = {
-    package = pkgs.lix;
-
-    settings.trusted-users = lib.mkForce ["@sudo"];
-  };
+{pkgs, ...}: {
+  imports = [
+    ../soriphoono
+  ];
 
   programs.bash.initExtra = ''
     ${pkgs.fish}/bin/fish

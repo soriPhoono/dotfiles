@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.system.power;
+  cfg = config.core.power;
 in {
-  options.system.power = {
+  options.core.power = {
     enable = lib.mkEnableOption "Enable power optimisations";
   };
 

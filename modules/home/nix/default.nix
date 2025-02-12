@@ -1,12 +1,11 @@
 {
   inputs,
   lib,
-  pkgs,
   config,
   ...
 }: {
-  home.packages = with pkgs; [
-    git
+  imports = [
+    ./nh.nix
   ];
 
   nix = let

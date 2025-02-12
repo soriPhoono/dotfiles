@@ -3,42 +3,10 @@
   config,
   ...
 }: let
-  cfg = config.system.boot;
+  cfg = config.core.boot;
 in {
-  options.system.boot = {
-    enable = lib.mkEnableOption "Enable boot configuration";
-
-    plymouth.enable = lib.mkEnableOption "Enable Plymouth boot splash screen";
-  };
-
   config = lib.mkIf cfg.enable {
     boot = {
-      kernelParams =
-        if (!cfg.plymouth.enable)
-        then [
-        ]
-        else [
-          "quiet"
-          "systemd.show_status=false"
-          "udev.log_level=3"
-        ];
-
-      initrd.verbose = !cfg.plymouth.enable;
-
-      consoleLogLevel =
-        if (!cfg.plymouth.enable)
-        then 4
-        else 0;
-
-      loader = {
-        efi.canTouchEfiVariables = true;
-        systemd-boot.enable = true;
-      };
-
-      plymouth = {
-        inherit (cfg.plymouth) enable;
-      };
-
       kernel.sysctl = {
         # The Magic SysRq key is a key combo that allows users connected to the
         # system console of a Linux kernel to perform some low-level commands.
@@ -82,8 +50,6 @@ in {
 
       kernelModules = ["tcp_bbr"];
     };
-
-    zramSwap.enable = true;
 
     security.sudo.wheelNeedsPassword = false;
   };
