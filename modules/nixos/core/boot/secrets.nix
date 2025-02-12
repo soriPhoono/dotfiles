@@ -38,8 +38,6 @@ in {
             KbdInteractiveAuthentication = false;
           };
         };
-
-        pcscd.enable = true;
       };
 
       sops = {
