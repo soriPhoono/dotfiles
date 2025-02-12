@@ -24,4 +24,6 @@
     enable = true;
     catppuccin.enable = true;
   };
+
+  sops.secrets.ssh_private.path = "~/.ssh/id_ed25519";
 }
