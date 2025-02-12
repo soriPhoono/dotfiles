@@ -1,15 +1,12 @@
 keys:
   - &admin_recovery age177swcgdm7684cxtkghjkm4c8mhfmx8yqj0vlhd0ath0t52v06vtsl5qdr2
   - &admin_soriphoono age1e5jg7tt5czmwrty4w8unh6ajqsh9npn0dplxcfmjw8c3h6r39g9q2dggfu
-  - &admin_test E8DD656E4A7B4CCA777F056119CF01343F3904A6
 
   - &server_zephyrus age1zz9ugqn5u3fzuv2cmjzsp5uavcxe2g40309htpj845h6dv5a2pkstg6cfe
 creation_rules:
   - path_regex: homes/.*/soriphoono/secrets.(yaml|json|env|ini)$
     key_groups:
-      - pgp:
-        - *admin_test
-        age:
+      - age:
         - *admin_recovery
         - *admin_soriphoono
   - path_regex: secrets/global.(yaml|json|env|ini)$
