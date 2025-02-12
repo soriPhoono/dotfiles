@@ -19,14 +19,11 @@ in {
     ];
   in
     lib.mkIf config.core.boot.enable {
-      environment.systemPackages = with pkgs; [
-        pinentry-curses
-      ];
-
       programs.gnupg.agent = {
         enable = true;
-        pinentryFlavor = "curses";
         enableSSHSupport = true;
+
+        pinentryPackage = pkgs.pinentry-curses;
       };
 
       services = {

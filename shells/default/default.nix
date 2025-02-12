@@ -25,5 +25,11 @@ in
       nixos-anywhere
     ];
 
+    sopsCreateGPGHome = true;
+
     buildInputs = pre-commit-check.enabledPackages;
+
+    nativeBuildInputs = [
+      (pkgs.callPackage inputs.sops-nix {}).sops-import-keys-hook
+    ];
   }
