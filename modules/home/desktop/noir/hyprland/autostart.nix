@@ -43,7 +43,10 @@ in {
 
           if [[ -d ~/Pictures/Wallpapers ]];
           then
-            swww query
+            if pgrep swww-daemon; then swww kill; fi
+
+            swww-daemon &
+
             if [ $? -eq 1 ]; then
               random_x=$(echo "scale=2; $RANDOM/32767" | bc)
               random_y=$(echo "scale=2; $RANDOM/32767" | bc)
@@ -63,7 +66,7 @@ in {
       };
     in {
       exec = [
-        "${reload}/bin/reset.sh"
+        "${reload}/bin/reload.sh"
       ];
 
       exec-once = [

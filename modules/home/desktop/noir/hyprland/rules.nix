@@ -10,6 +10,10 @@ in {
       windowrulev2 = [
         # Opacity
         "opacity 0.8, class:(.*)"
+
+        "float,class:^(nm-applet)$"
+        "float,class:^(nm-connection-editor)$"
+        "float,class:^(pavucontrol)$"
       ];
 
       bezier = [

@@ -110,9 +110,9 @@ in {
           ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl prev"
           ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
 
-          "$mod, print, exec ${screenshot}/bin/screenshot.sh s"
-          "$mod CTRL, print, exec, ${screenshot}/bin/screenshot.sh m"
-          "$mod ALT, print, exec, ${screenshot}/bin/screenshot.sh p"
+          "$mod, P, exec, ${screenshot}/bin/screenshot.sh s"
+          "$mod CTRL, P, exec, ${screenshot}/bin/screenshot.sh m"
+          "$mod ALT, P, exec, ${screenshot}/bin/screenshot.sh p"
         ]
         ++ (builtins.concatLists (builtins.genList (
             i: let
