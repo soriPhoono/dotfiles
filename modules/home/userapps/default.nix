@@ -25,8 +25,7 @@ in {
       obs-studio
       tenacity
 
-      discord
-      betterdiscordctl
+      discord # TODO: update this with custom betterdiscordctl extensions
     ];
   };
 }
