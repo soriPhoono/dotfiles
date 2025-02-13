@@ -20,16 +20,8 @@ in
       ssh-to-age
       sops
 
-      disko
-      nixos-facter
       nixos-anywhere
     ];
 
-    sopsCreateGPGHome = true;
-
     buildInputs = pre-commit-check.enabledPackages;
-
-    nativeBuildInputs = [
-      (pkgs.callPackage inputs.sops-nix {}).sops-import-keys-hook
-    ];
   }

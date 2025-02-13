@@ -12,15 +12,10 @@ in {
         name = "bootstrap.sh";
 
         runtimeInputs = with pkgs; [
-          libnotify
-
           lxqt.lxqt-policykit
 
           wl-clipboard-rs
           wl-clip-persist
-
-          swww
-          waybar
         ];
 
         text = ''
@@ -28,10 +23,6 @@ in {
 
           wl-paste --watch cliphist store &
           wl-clip-persist --clipboard both &
-
-          if pgrep swww-daemon; then swww kill; fi
-
-          swww-daemon &
         '';
       };
 
@@ -39,6 +30,10 @@ in {
         name = "reload.sh";
 
         runtimeInputs = with pkgs; [
+          libnotify
+
+          bc
+
           waybar
           swww
         ];
@@ -48,12 +43,18 @@ in {
 
           if [[ -d ~/Pictures/Wallpapers ]];
           then
-            find ~/Pictures/Wallpapers/ -type f -exec swww img {} \;
+            swww query
+            if [ $? -eq 1 ]; then
+              random_x=$(echo "scale=2; $RANDOM/32767" | bc)
+              random_y=$(echo "scale=2; $RANDOM/32767" | bc)
+
+              swww-daemon --format xrgb &
+
+              find ~/Pictures/Wallpapers/ -type f -exec swww img {} --transition-type "grow" --transition-pos "$random_x,$random_y" --transition-duration 3 \;
+            fi
           else
             notify-send "Failed to find wallpapers directory"
           fi
-
-          swww restore
 
           if pgrep waybar; then pkill waybar; fi
 
