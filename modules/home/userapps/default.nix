@@ -7,7 +7,7 @@
   cfg = config.userapps;
 in {
   imports = [
-    ./development.nix
+    ./programs/thunderbird.nix
   ];
 
   options.userapps = {
@@ -17,15 +17,17 @@ in {
   config = lib.mkIf cfg.enable {
     # Look into LMMS
     home.packages = with pkgs; [
-      thunderbird
-      signal-desktop
+      discord
       element-desktop
+      signal-desktop
 
       gimp
       obs-studio
       tenacity
-
-      discord # TODO: update this with custom betterdiscordctl extensions
     ];
+
+    userapps.programs = {
+      thunderbird.enable = true;
+    };
   };
 }

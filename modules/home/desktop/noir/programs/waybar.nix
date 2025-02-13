@@ -16,8 +16,6 @@ in {
         statusBar = {
           name = "statusBar";
 
-          layer = "top";
-
           modules-left = [
             "custom/spacer"
             "hyprland/workspaces"

@@ -42,7 +42,7 @@
       };
 
       filetype = {
-        norg = {
+        neorg = {
           sources = [
             {
               name = "neorg";
