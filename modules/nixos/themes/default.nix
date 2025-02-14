@@ -45,12 +45,11 @@ in {
 
         sizes = let
           default = 14;
-          focused = 16;
         in {
-          applications = focused;
-          desktop = focused;
+          applications = default;
+          desktop = default;
           popups = default;
-          terminal = focused;
+          terminal = default;
         };
       };
     };

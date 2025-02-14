@@ -18,4 +18,8 @@ _: _: prev: {
         ]);
     });
   }); # Correct nautilus GStreamer plugins
+
+  lldb = prev.lldb.overrideAttrs {
+    dontCheckForBrokenSymlinks = true;
+  };
 }

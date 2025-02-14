@@ -72,6 +72,8 @@ in {
         };
       };
 
+      seatd.enable = true;
+
       gvfs.enable = true;
       gnome.gnome-keyring.enable = true;
 

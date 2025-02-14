@@ -7,9 +7,7 @@
 
       treesitter.enable = true;
 
-      setupOpts.load = {
-        "core.default".enable = true;
-      };
+      setupOpts.load = {};
     };
   };
 }
