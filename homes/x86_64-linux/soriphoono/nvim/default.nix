@@ -1,6 +1,19 @@
 {
   imports = [
     ./plugins/codeium.nix
+    ./plugins/assistant.nix
+    ./plugins/autocomplete.nix
+    ./plugins/autopairs.nix
+    ./plugins/binds.nix
+    ./plugins/comment.nix
+    ./plugins/dashboard.nix
+    ./plugins/debugger.nix
+    ./plugins/diagnostics.nix
+    ./plugins/filetree.nix
+    ./plugins/formatter.nix
+    ./plugins/languages.nix
+    ./plugins/lsp.nix
+    ./plugins/notes.nix
   ];
 
   programs.nvf = {

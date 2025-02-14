@@ -1,4 +1,8 @@
 {config, ...}: {
+  imports = [
+    ./nvim
+  ];
+
   core = {
     secrets = {
       defaultSopsFile = ./secrets.yaml;
