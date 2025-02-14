@@ -33,7 +33,7 @@
       snippets.luasnip.enable = true;
       spellcheck = {
         enable = true;
-        programmingWordList.enable = true;
+        programmingWordlist.enable = true;
       };
       statusline.lualine = {
         enable = true;
