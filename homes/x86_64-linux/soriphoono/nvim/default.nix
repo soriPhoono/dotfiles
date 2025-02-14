@@ -1,6 +1,5 @@
 {
   imports = [
-    ./plugins/codeium.nix
     ./plugins/assistant.nix
     ./plugins/autocomplete.nix
     ./plugins/autopairs.nix
