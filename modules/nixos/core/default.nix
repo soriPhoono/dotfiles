@@ -6,6 +6,9 @@
 
     ./networking/networking.nix
 
+    ./services/asusd.nix
+    ./services/geoclue2.nix
+
     ./users.nix
     ./power.nix
     ./audio.nix
