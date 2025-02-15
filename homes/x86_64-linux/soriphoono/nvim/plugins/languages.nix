@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   programs.nvf.settings.vim.languages = {
     enableDAP = true;
     enableExtraDiagnostics = true;
@@ -6,15 +6,34 @@
     enableLSP = true;
     enableTreesitter = true;
 
-    nix.enable = true;
+    # System admin languages
+    nix = {
+      enable = true;
+      extraDiagnostics.enable = true;
+      lsp.package = pkgs.nixd;
+    };
+
     terraform.enable = true;
     bash.enable = true;
     nu.enable = true;
 
-    clang.enable = true;
-    lua.enable = true;
+    # Compiled desktop languages
+    clang = {
+      enable = true;
+      cHeader = true;
+    };
+    lua = {
+      enable = true;
+      lsp.lazydev.enable = true;
+    };
     zig.enable = true;
-    rust.enable = true;
+    rust = {
+      enable = true;
+      crates = {
+        enable = true;
+        codeActions = true;
+      };
+    };
     wgsl.enable = true;
 
     java.enable = true;

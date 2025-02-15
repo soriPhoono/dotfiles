@@ -1,17 +1,12 @@
 {
   imports = [
-    ./plugins/assistant.nix
-    ./plugins/autocomplete.nix
-    ./plugins/autopairs.nix
-    ./plugins/binds.nix
-    ./plugins/comment.nix
     ./plugins/dashboard.nix
-    ./plugins/debugger.nix
-    ./plugins/diagnostics.nix
     ./plugins/filetree.nix
-    ./plugins/formatter.nix
+    ./plugins/binds.nix
     ./plugins/languages.nix
     ./plugins/lsp.nix
+    ./plugins/autocomplete.nix
+    ./plugins/debugger.nix
     ./plugins/notes.nix
   ];
 
@@ -22,26 +17,31 @@
       viAlias = false;
       vimAlias = true;
 
-      enableLuaLoader = true;
-
       bell = "on";
       hideSearchHighlight = true;
 
+      globals = {
+        mapleader = " ";
+        maplocalleader = " ";
+      };
+
+      options = {
+        shiftwidth = 2;
+        tabstop = 2;
+        expandtab = true;
+
+        foldenable = false;
+        wrap = false;
+      };
+
       git.enable = true;
-      notify.nvim-notify.enable = true;
-      presence.neocord.enable = true;
-      snippets.luasnip.enable = true;
+      undoFile.enable = true;
+
       spellcheck = {
         enable = true;
         programmingWordlist.enable = true;
       };
-      statusline.lualine = {
-        enable = true;
-      };
-      syntaxHighlighting = true;
-      tabline.nvimBufferline.enable = true;
-      telescope.enable = true;
-      terminal.toggleterm.enable = true;
+
       theme = {
         enable = true;
         name = "catppuccin";
@@ -49,41 +49,39 @@
         transparent = true;
       };
 
+      ui = {
+        borders.enable = true;
+        breadcrumbs.enable = true;
+
+        noice = {
+          enable = true;
+
+          setupOpts = {
+            lsp.signature.enabled = true;
+            presets.inc_rename = true;
+          };
+        };
+
+        smartcolumn.enable = true;
+      };
+
+      visuals = {
+        nvim-web-devicons.enable = true;
+        cinnamon-nvim.enable = true;
+        indent-blankline.enable = true;
+        rainbow-delimiters.enable = true;
+      };
+
+      utility.icon-picker.enable = true;
+      autopairs.nvim-autopairs.enable = true;
+      comments.comment-nvim.enable = true;
+
       treesitter = {
         enable = true;
         autotagHtml = true;
       };
 
-      ui = {
-        borders.enable = true;
-        breadcrumbs.enable = true;
-        fastaction.enable = true;
-        modes-nvim.enable = true;
-        noice.enable = true;
-        nvim-ufo.enable = true;
-        smartcolumn.enable = true;
-      };
-
-      undoFile.enable = true;
-
-      utility = {
-        icon-picker.enable = true;
-        surround.enable = true;
-      };
-
-      visuals = {
-        cinnamon-nvim.enable = true;
-        fidget-nvim.enable = true;
-        highlight-undo.enable = true;
-        indent-blankline.enable = true;
-        nvim-cursorline.enable = true;
-        nvim-scrollbar.enable = true;
-        nvim-web-devicons.enable = true;
-        rainbow-delimiters.enable = true;
-      };
-
-      # extraPackages = with pkgs; [
-      # ];
+      telescope.enable = true;
     };
   };
 }
