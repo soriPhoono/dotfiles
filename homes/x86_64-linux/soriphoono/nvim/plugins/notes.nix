@@ -9,6 +9,32 @@
 
       setupOpts.load = {
         "core.defaults".enable = true;
+        "core.completion" = {
+          enable = true;
+          config = {
+            engine = "nvim-cmp";
+          };
+        };
+        "core.concealer".enable = true;
+        "core.dirman" = {
+          enable = true;
+          config = {
+            workspaces.default = "~/Documents/Notes";
+          };
+        };
+        "core.export.markdown" = {
+          enable = true;
+          config = {
+            extensions = "all";
+          };
+        };
+        "core.latex.renderer" = {
+          enable = true;
+          config = {
+            render_on_enter = true;
+          };
+        };
+        "core.summary".enable = true;
       };
     };
   };

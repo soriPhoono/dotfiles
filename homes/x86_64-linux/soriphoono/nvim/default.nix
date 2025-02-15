@@ -72,7 +72,31 @@
         rainbow-delimiters.enable = true;
       };
 
-      utility.icon-picker.enable = true;
+      utility = {
+        icon-picker.enable = true;
+        images.image-nvim = {
+          enable = true;
+
+          setupOpts = {
+            backend = "kitty";
+
+            maxWidthWindowPercentage = 50;
+
+            integrations = {
+              markdown = {
+                enable = true;
+                clearInInsertMode = true;
+                downloadRemoteImages = true;
+              };
+              neorg = {
+                enable = true;
+                clearInInsertMode = true;
+                downloadRemoteImages = true;
+              };
+            };
+          };
+        };
+      };
       autopairs.nvim-autopairs.enable = true;
       comments.comment-nvim.enable = true;
 
