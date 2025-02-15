@@ -6,6 +6,9 @@
 
     ./networking/networking.nix
 
+    ./services/asusd.nix
+    ./services/geoclue2.nix
+
     ./users.nix
     ./power.nix
     ./audio.nix
@@ -13,8 +16,6 @@
   ];
 
   time.timeZone = lib.mkDefault "America/Chicago";
-
-  documentation.man.generateCaches = false;
 
   services.dbus.implementation = "broker";
 

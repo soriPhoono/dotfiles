@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   pkgs,
   config,
@@ -12,18 +11,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    stylix.targets = {
-      neovim.enable = false;
-      nixvim.enable = false;
-    };
-
     programs.fish = {
       enable = true;
 
       shellAliases = {
-        v =
-          lib.mkIf (builtins.pathExists ../../../../modules/nvim/${config.home.username})
-          "${inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvim (import ../../../../modules/nvim/${config.home.username})}/bin/nvim";
+        v = "vim";
       };
 
       shellInitLast = let

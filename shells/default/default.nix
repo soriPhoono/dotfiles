@@ -12,8 +12,6 @@ in
     inherit (pre-commit-check) shellHook;
 
     packages = with pkgs; [
-      nixd
-
       sbctl
 
       age

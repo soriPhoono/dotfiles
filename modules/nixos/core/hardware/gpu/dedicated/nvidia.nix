@@ -11,8 +11,6 @@ in {
 
   config = lib.mkIf (config.core.hardware.enable && config.core.hardware.gpu.enable && cfg.enable) {
     hardware.nvidia = {
-      open = true;
-
       powerManagement = {
         enable = true;
         finegrained = true;

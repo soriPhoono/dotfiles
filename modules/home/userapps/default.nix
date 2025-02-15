@@ -21,6 +21,8 @@ in {
       element-desktop
       signal-desktop
 
+      onlyoffice-desktopeditors
+
       gimp
       obs-studio
       tenacity

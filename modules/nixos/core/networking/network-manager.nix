@@ -7,6 +7,7 @@
     enable = true;
     dns = "systemd-resolved";
     wifi.powersave = true;
+    insertNameservers = config.networking.nameservers;
   };
 
   systemd.network.wait-online.enable = false;

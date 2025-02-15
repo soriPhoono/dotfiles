@@ -14,9 +14,27 @@ in {
         isDefault = true;
 
         search = {
-          default = "DuckDuckGo";
+          default = "Brave Search";
 
           engines = {
+            "Brave Search" = {
+              urls = [
+                {
+                  template = "https://search.brave.com/search";
+                  params = [
+                    {
+                      name = "type";
+                      value = "search";
+                    }
+                    {
+                      name = "query";
+                      value = "{searchTerms}";
+                    }
+                  ];
+                }
+              ];
+            };
+
             "Nix Packages" = {
               urls = [
                 {

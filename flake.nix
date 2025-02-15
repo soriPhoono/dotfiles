@@ -4,13 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    flake-utils.url = "github:numtide/flake-utils";
-
     snowfall-lib = {
       url = "github:snowfallorg/lib";
       inputs = {
@@ -66,23 +59,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nvf = {
+      url = "github:notashelf/nvf";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-        nix-darwin.follows = "";
       };
     };
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    flake-utils,
-    snowfall-lib,
-    nixvim,
-    ...
-  }:
+  outputs = inputs @ {snowfall-lib, ...}:
     snowfall-lib.mkFlake {
       inherit inputs;
 
@@ -90,14 +80,13 @@
       snowfall.namespace = "dotfiles";
 
       systems.modules.nixos = with inputs; [
+        impermanence.nixosModules.impermanence
         nixos-facter-modules.nixosModules.facter
         disko.nixosModules.disko
         lanzaboote.nixosModules.lanzaboote
-        impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         nix-index-database.nixosModules.nix-index
-        nixvim.nixosModules.nixvim
         nur.modules.nixos.default
       ];
 
@@ -109,31 +98,12 @@
 
         modules = with inputs; [
           sops-nix.homeManagerModules.sops
-          nixvim.homeManagerModules.nixvim
+          nvf.homeManagerModules.default
         ];
-      };
-
-      templates = {
-        base_flake.description = "This is a basic template for a flake";
       };
 
       channels-config = {
         allowUnfree = true;
       };
-    }
-    // flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      formatter = pkgs.alejandra;
-    })
-    // flake-utils.lib.eachDefaultSystemPassThrough (system: let
-      inherit (nixpkgs) lib;
-    in {
-      nixvimConfigurations =
-        lib.mapAttrs
-        (name: _: nixvim.legacyPackages.${system}.makeNixvim (import ./modules/nvim/${name}))
-        (lib.filterAttrs
-          (name: type: type == "directory" && builtins.pathExists ./modules/nvim/${name}/default.nix)
-          (builtins.readDir ./modules/nvim));
-    });
+    };
 }
