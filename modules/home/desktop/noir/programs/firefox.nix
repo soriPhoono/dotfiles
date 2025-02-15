@@ -14,7 +14,7 @@ in {
         isDefault = true;
 
         search = {
-          default = "DuckDuckGo";
+          default = "Brave Search";
 
           engines = {
             "Brave Search" = {
@@ -22,6 +22,10 @@ in {
                 {
                   template = "https://search.brave.com/search";
                   params = [
+                    {
+                      name = "type";
+                      value = "search";
+                    }
                     {
                       name = "query";
                       value = "{searchTerms}";
