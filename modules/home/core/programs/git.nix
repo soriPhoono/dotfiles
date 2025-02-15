@@ -31,6 +31,10 @@ in {
         "*.bak"
       ];
 
+      signing = {
+        format = "openpgp";
+      };
+
       extraConfig = {
         init.defaultBranch = "main";
 
