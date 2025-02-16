@@ -66,17 +66,6 @@ in {
             mkdir -p "$swpy_dir"
             echo -e "[Default]\nsave_dir=$save_dir\nsave_filename_format=$save_file" > "$swpy_dir/config"
 
-            function print_error
-            {
-            cat << EOF
-            ./screenshot.sh <action>
-            ...valid actions are...
-                p : print all screens
-                s : snip current screen (frozen)
-                m : print focused monitor
-            EOF
-            }
-
             case "$1" in
             p)
               grimblast copysave screen $temp_screenshot && swappy -f $temp_screenshot ;;
@@ -85,7 +74,13 @@ in {
             m)
               grimblast copysave output $temp_screenshot && swappy -f $temp_screenshot ;;
             *)
-              print_error ;;
+              cat <<< "
+                ./screenshot.sh <action>
+                ...valid actions are...
+                  p : print all screens
+                  s : snip current screen (frozen)
+                  m : print focused monitor
+              " ;;
             esac
 
             rm "$temp_screenshot"

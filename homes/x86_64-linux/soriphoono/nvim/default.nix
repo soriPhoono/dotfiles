@@ -5,6 +5,7 @@
     ./plugins/binds.nix
     ./plugins/languages.nix
     ./plugins/lsp.nix
+    ./plugins/codeium.nix
     ./plugins/autocomplete.nix
     ./plugins/debugger.nix
     ./plugins/notes.nix

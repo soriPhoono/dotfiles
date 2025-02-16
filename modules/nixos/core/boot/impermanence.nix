@@ -53,24 +53,26 @@ in {
     fileSystems."/persist".neededForBoot = true;
     fileSystems."/home".neededForBoot = true;
 
-    environment.persistence."/persist" = {
-      enable = true;
+    environment = {
+      persistence."/persist" = {
+        enable = true;
 
-      hideMounts = true;
+        hideMounts = true;
 
-      directories =
-        [
-          "/var/log"
-          "/var/lib/nixos"
-          "/var/lib/systemd/coredump"
-        ]
-        ++ cfg.directories;
+        directories =
+          [
+            "/var/log"
+            "/var/lib/nixos"
+            "/var/lib/systemd/coredump"
+          ]
+          ++ cfg.directories;
 
-      files =
-        [
-          "/etc/machine-id"
-        ]
-        ++ cfg.files;
+        files =
+          [
+            "/etc/machine-id"
+          ]
+          ++ cfg.files;
+      };
     };
 
     programs.fuse.userAllowOther = true;

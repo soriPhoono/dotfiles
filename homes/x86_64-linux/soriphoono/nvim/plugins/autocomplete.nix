@@ -14,6 +14,7 @@
 
         sources = {
           neorg = null;
+          codeium = null;
         };
       };
     };

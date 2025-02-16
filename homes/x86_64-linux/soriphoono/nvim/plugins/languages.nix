@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   programs.nvf.settings.vim.languages = {
     enableDAP = true;
     enableExtraDiagnostics = true;
@@ -9,8 +9,7 @@
     # System admin languages
     nix = {
       enable = true;
-      extraDiagnostics.enable = true;
-      lsp.package = pkgs.nixd;
+      lsp.server = "nixd";
     };
 
     terraform.enable = true;
@@ -42,14 +41,34 @@
     go.enable = true;
     php.enable = true;
 
-    python.enable = true;
+    python = {
+      enable = true;
+      lsp.server = "pyright";
+      format.type = "black-and-isort";
+    };
 
     html.enable = true;
-    css.enable = true;
-    ts.enable = true;
-    svelte.enable = true;
+    css = {
+      enable = true;
+      format.type = "biome";
+    };
+    ts = {
+      enable = true;
+      lsp.server = "denols";
+      format.type = "biome";
+    };
+    svelte = {
+      enable = true;
+      format.type = "biome";
+    };
     sql.enable = true;
 
-    markdown.enable = true;
+    markdown = {
+      enable = true;
+      extensions.render-markdown-nvim = {
+        enable = true;
+        setupOpts.auto_override_publish_diagnostics = true;
+      };
+    };
   };
 }

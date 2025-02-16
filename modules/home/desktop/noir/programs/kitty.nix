@@ -9,8 +9,6 @@ in {
     programs.kitty = {
       enable = true;
 
-      shellIntegration.enableFishIntegration = config.core.shells.fish.enable;
-
       settings = {
         cursor_shape = "beam";
         cursor_trail = 1;

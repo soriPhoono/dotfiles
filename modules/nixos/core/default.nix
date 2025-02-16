@@ -1,5 +1,8 @@
 {lib, ...}: {
   imports = [
+    ./nix/nixconf.nix
+    ./nix/nh.nix
+
     ./boot/boot.nix
 
     ./hardware/hardware.nix

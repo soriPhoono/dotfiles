@@ -1,14 +1,12 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./secrets.nix
 
     ./shells/fish.nix
+    ./shells/nushell.nix
     ./shells/starship.nix
 
+    ./programs/atuin.nix
     ./programs/fastfetch.nix
     ./programs/fd.nix
     ./programs/fzf.nix
@@ -35,11 +33,12 @@
     snowfallorg.user.enable = true;
 
     programs = {
+      carapace.enable = true;
+
       bat.enable = true;
+
       eza = {
         enable = true;
-
-        enableFishIntegration = config.programs.fish.enable;
 
         git = true;
         icons = "auto";
@@ -48,7 +47,6 @@
           "--group-directories-first"
         ];
       };
-      ripgrep.enable = true;
 
       direnv = {
         enable = true;

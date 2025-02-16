@@ -42,7 +42,7 @@ in {
         ];
 
         text = ''
-          sleep 0.1
+          sleep 0.5
 
           if [[ -d ~/Pictures/Wallpapers ]];
           then
@@ -59,7 +59,7 @@ in {
               find ~/Pictures/Wallpapers/ -type f -exec swww img {} --transition-type "grow" --transition-pos "$random_x,$random_y" --transition-duration 3 \;
             fi
 
-            sleep 0.1
+            sleep 0.5
 
             swww restore
           else
@@ -73,7 +73,7 @@ in {
       };
     in {
       exec = [
-        "${reload}/bin/reload.sh"
+        "${reload}/bin/reload.sh &"
       ];
 
       exec-once = [

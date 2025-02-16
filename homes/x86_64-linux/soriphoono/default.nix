@@ -15,6 +15,7 @@
 
     shells = {
       fish.enable = true;
+      nushell.enable = true;
       starship.enable = true;
     };
 
