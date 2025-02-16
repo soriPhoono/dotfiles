@@ -1,13 +1,9 @@
 {pkgs, ...}: {
   programs.nvf.settings.vim.lazy.plugins = {
-    codeium = {
+    "codeium.nvim" = {
       package = pkgs.vimPlugins.codeium-nvim;
       event = ["LspAttach"];
-      setup =
-        # Lua
-        ''
-          require(\'codeium\').setup({})
-        '';
+      setupModule = "codeium";
     };
   };
 }
