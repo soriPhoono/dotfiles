@@ -44,6 +44,10 @@ in {
         text = ''
           sleep 0.5
 
+          if pgrep waybar; then pkill waybar; fi
+
+          waybar &
+
           if [[ -d ~/Pictures/Wallpapers ]];
           then
             if pgrep swww-daemon; then swww kill; fi
@@ -65,10 +69,6 @@ in {
           else
             notify-send "Failed to find wallpapers directory"
           fi
-
-          if pgrep waybar; then pkill waybar; fi
-
-          waybar &
         '';
       };
     in {
