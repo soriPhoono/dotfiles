@@ -18,14 +18,9 @@ in {
     # Look into LMMS
     home.packages = with pkgs; [
       discord
-      element-desktop
       signal-desktop
 
       onlyoffice-desktopeditors
-
-      gimp
-      obs-studio
-      tenacity
     ];
 
     userapps.programs = {
