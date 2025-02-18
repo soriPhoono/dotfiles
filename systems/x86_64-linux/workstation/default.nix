@@ -1,5 +1,5 @@
 {
-  facter.reportPath = ../../../facter/desktop.json;
+  facter.reportPath = ../../../facter/workstation.json;
 
   core = {
     boot = {
