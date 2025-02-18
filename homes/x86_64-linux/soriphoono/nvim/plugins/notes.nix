@@ -28,12 +28,6 @@
             extensions = "all";
           };
         };
-        "core.latex.renderer" = {
-          enable = true;
-          config = {
-            render_on_enter = true;
-          };
-        };
         "core.summary".enable = true;
       };
     };
