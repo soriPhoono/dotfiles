@@ -13,7 +13,7 @@
         enable = true;
         integrated.intel = {
           enable = true;
-          device_id = "744c";
+          device_id = "a780";
         };
         dedicated.amd.enable = true;
       };
