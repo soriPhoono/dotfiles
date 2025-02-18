@@ -13,9 +13,13 @@
         enable = true;
         integrated.intel = {
           enable = true;
-          device_id = ""; # TODO: fill this out
+          device_id = "744c";
         };
         dedicated.amd.enable = true;
+      };
+      hid = {
+        logitech.enable = true;
+        qmk.enable = true;
       };
     };
 
