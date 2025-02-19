@@ -14,9 +14,17 @@ in {
         isDefault = true;
 
         search = {
-          default = "DuckDuckGo";
+          default = "Brave search";
 
           engines = {
+            "Brave search" = {
+              urls = [
+                {
+                  template = "https://search.brave.com/search?q={searchTerms}&source=web";
+                }
+              ];
+            };
+
             "Nix Packages" = {
               urls = [
                 {
@@ -58,18 +66,13 @@ in {
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = ["@no"];
             };
-
-            "NixOS Wiki" = {
-              urls = [{template = "https://wiki.nixos.org/index.php?search={searchTerms}";}];
-              iconUpdateURL = "https://wiki.nixos.org/favicon.png";
-              updateInterval = 24 * 60 * 60 * 1000; # every day
-              definedAliases = ["@nw"];
-            };
           };
         };
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           ublock-origin
+
+          tabliss
         ];
 
         settings = {
