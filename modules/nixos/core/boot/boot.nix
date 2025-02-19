@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -25,6 +26,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     boot = {
+      kernelPackages = pkgs.linuxPackages_zen;
+
       loader = {
         efi.canTouchEfiVariables = true;
         systemd-boot.enable = true;
