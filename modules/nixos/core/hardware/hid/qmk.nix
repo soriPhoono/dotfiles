@@ -9,5 +9,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     hardware.keyboard.qmk.enable = true;
+
+    # TODO: update udev rules for qmk keyboard
+    services.udev.extraRules = ''
+      # blacklist for usb autosuspend
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="05c6", ATTR{idProduct}=="9205", GOTO="power_usb_rules_end"
+
+      ACTION=="add", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="auto"
+      LABEL="power_usb_rules_end"
+    '';
   };
 }
