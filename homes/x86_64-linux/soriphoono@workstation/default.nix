@@ -4,6 +4,7 @@
   userapps = {
     enable = true;
     development.enable = true;
+    streaming.enable = true;
   };
 
   wayland.windowManager.hyprland.settings = {

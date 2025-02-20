@@ -8,6 +8,7 @@
 in {
   imports = [
     ./development.nix
+    ./streaming.nix
 
     ./programs/thunderbird.nix
   ];
@@ -17,7 +18,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # Look into LMMS
     home.packages = with pkgs; [
       discord
       signal-desktop
