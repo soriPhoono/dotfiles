@@ -36,7 +36,7 @@ in {
             inner_color = "rgb(91, 96, 120)";
             outer_color = "rgb(24, 25, 38)";
             outline_thickness = 3;
-            placeholder_text = "<span foreground='##cad3f5'>Password...</span>"; # TODO: check this...
+            placeholder_text = "<span foreground='##cad3f5'>Password...</span>";
             shadow_passes = 2;
           }
         ];
