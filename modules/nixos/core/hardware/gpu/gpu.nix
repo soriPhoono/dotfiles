@@ -8,7 +8,6 @@
 in {
   imports = [
     ./dedicated/amd.nix
-    # ./dedicated/intel.nix
     ./dedicated/nvidia.nix
 
     ./integrated/amd.nix

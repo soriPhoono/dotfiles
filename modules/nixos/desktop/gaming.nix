@@ -16,6 +16,16 @@ in {
 
         extest.enable = true;
         protontricks.enable = true;
+
+        gamescopeSession = {
+          enable = true;
+
+          args = [
+          ];
+
+          env = {
+          };
+        };
       };
 
       gamescope = {
