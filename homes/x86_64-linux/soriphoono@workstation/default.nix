@@ -1,7 +1,10 @@
 {
   desktop.noir.enable = true;
 
-  userapps.enable = true;
+  userapps = {
+    enable = true;
+    development.enable = true;
+  };
 
   wayland.windowManager.hyprland.settings = {
     env = [

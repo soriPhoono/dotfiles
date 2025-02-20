@@ -7,6 +7,8 @@
   cfg = config.userapps;
 in {
   imports = [
+    ./development.nix
+
     ./programs/thunderbird.nix
   ];
 
@@ -21,6 +23,7 @@ in {
       signal-desktop
 
       onlyoffice-desktopeditors
+      joplin-desktop
     ];
 
     userapps.programs = {
