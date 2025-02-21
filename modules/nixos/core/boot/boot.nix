@@ -27,6 +27,9 @@ in {
   config = lib.mkIf cfg.enable {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen;
+      kernelParams = [
+        "usbcore.autosuspend=-1"
+      ];
 
       loader = {
         efi.canTouchEfiVariables = true;

@@ -32,7 +32,10 @@
     bluetooth.enable = true;
   };
 
-  desktop.noir.enable = true;
+  desktop = {
+    noir.enable = true;
+    gaming.enable = true;
+  };
 
   themes = {
     enable = true;

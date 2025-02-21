@@ -12,9 +12,5 @@ in {
       enable = true;
       enableGraphical = true;
     };
-
-    services.udev.extraRules = ''
-      ACTION="add", SUBSYSTEM="usb", ATTR{idVendor}="05e3", ATTR{idProduct}="0608", ATTR{power/autosuspend}="-1"
-    '';
   };
 }

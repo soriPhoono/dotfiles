@@ -17,5 +17,16 @@
       "DP-5, 1920x1080@144, 1920x0, 1"
       "HDMI-A-5, 1920x1080@75, 3840x0, 1"
     ];
+
+    workspace = let
+      monitors = [
+        "DP-4"
+        "DP-5"
+        "HDMI-A-5"
+      ];
+    in
+      map (
+        x: "${builtins.toString x}, monitor:${builtins.elemAt monitors (builtins.floor (x / 3))}"
+      ) (builtins.genList (x: x) 9);
   };
 }
