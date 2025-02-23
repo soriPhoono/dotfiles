@@ -10,6 +10,7 @@ in {
     ./development.nix
     ./streaming.nix
 
+    ./programs/firefox.nix
     ./programs/thunderbird.nix
   ];
 
@@ -27,6 +28,7 @@ in {
     ];
 
     userapps.programs = {
+      firefox.enable = true;
       thunderbird.enable = true;
     };
   };

@@ -4,8 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.desktop.noir;
+  cfg = config.userapps.programs.firefox;
 in {
+  options.userapps.programs.firefox.enable = lib.mkEnableOption "Enable Firefox";
+
   config = lib.mkIf cfg.enable {
     programs.firefox = let
       ff-ultima = pkgs.fetchFromGitHub {

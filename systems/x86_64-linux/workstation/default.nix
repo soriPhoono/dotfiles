@@ -28,6 +28,7 @@
     };
 
     power.enable = true;
+
     audio.enable = true;
     bluetooth.enable = true;
   };
@@ -41,4 +42,11 @@
     enable = true;
     catppuccin.enable = true;
   };
+
+  programs.steam.gamescopeSession.args = [
+    "-W 1920"
+    "-H 1080"
+    "-r 144"
+    "--prefer-output DP-5"
+  ];
 }

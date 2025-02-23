@@ -19,7 +19,6 @@ in {
     ./programs/hyprlock.nix
     ./programs/kitty.nix
     ./programs/nautilus.nix
-    ./programs/firefox.nix
 
     ./services/gammastep.nix
     ./services/hypridle.nix
