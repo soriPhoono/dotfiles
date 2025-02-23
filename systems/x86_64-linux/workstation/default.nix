@@ -35,7 +35,6 @@
 
   desktop = {
     noir.enable = true;
-    gaming.enable = true;
   };
 
   themes = {
