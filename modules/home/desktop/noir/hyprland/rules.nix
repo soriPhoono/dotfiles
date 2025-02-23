@@ -11,6 +11,11 @@ in {
         # Opacity
         "opacity 0.8, class:(.*)"
 
+        "opacity 1, title:(.* - YouTube —.*)"
+
+        "opacity 1, class:(gamescope)"
+        "float, class:(gamescope)"
+
         "float,class:^(nm-applet)$"
         "float,class:^(nm-connection-editor)$"
         "float,class:^(pavucontrol)$"

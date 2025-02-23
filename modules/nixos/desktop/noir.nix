@@ -83,6 +83,8 @@ in {
         enable = true;
         resyncTimer = "10m";
       };
+
+      flatpak.enable = true;
     };
   };
 }
