@@ -7,7 +7,7 @@
 in {
   options.desktop.kde.enable = lib.mkEnableOption "Enable KDE desktop environment";
 
-  config = lib.mkIf cfg {
+  config = lib.mkIf cfg.enable {
     # TODO: make this a module
     services.displayManager.sddm = {
       enable = true;
