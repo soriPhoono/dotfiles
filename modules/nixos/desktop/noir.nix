@@ -59,8 +59,6 @@ in {
     programs = {
       hyprland.enable = true;
       hyprlock.enable = true;
-
-      gamescope.enable = true;
     };
 
     services = {
@@ -85,13 +83,6 @@ in {
         enable = true;
         resyncTimer = "10m";
       };
-
-      flatpak.enable = true;
     };
-
-    core.boot.impermanence.directories = [
-      "/var/lib/flatpak"
-      "/var/cache"
-    ];
   };
 }
