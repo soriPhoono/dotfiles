@@ -5,8 +5,7 @@
 }: {
   networking.networkmanager = {
     enable = true;
-    dns = "systemd-resolved";
-    wifi.powersave = true;
+    dns = lib.mkForce "none";
     insertNameservers = config.networking.nameservers;
   };
 

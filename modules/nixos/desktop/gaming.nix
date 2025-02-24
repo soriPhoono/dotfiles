@@ -14,6 +14,9 @@ in {
     environment.systemPackages = with pkgs; [
       lutris
       bottles
+
+      protonup
+
       prismlauncher
       gzdoom
       shattered-pixel-dungeon
@@ -29,9 +32,7 @@ in {
         enableRenice = true;
       };
 
-      gamescope = {
-        enable = true;
-      };
+      gamescope.enable = true;
 
       steam = {
         enable = true;

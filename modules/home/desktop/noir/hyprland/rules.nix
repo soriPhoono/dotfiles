@@ -15,6 +15,7 @@ in {
 
         "opacity 1, class:(gamescope)"
         "float, class:(gamescope)"
+        "workspace 1, class:(gamescope)"
 
         "float,class:^(nm-applet)$"
         "float,class:^(nm-connection-editor)$"

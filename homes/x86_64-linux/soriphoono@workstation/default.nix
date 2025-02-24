@@ -20,13 +20,13 @@
 
     workspace = let
       monitors = [
-        "DP-4"
         "DP-5"
         "HDMI-A-5"
+        "DP-4"
       ];
     in
       map (
-        x: "${builtins.toString x}, monitor:${builtins.elemAt monitors (builtins.floor (x / 3))}"
+        x: "${builtins.toString (x + 1)}, monitor:${builtins.elemAt monitors (builtins.floor (x / 3))}"
       ) (builtins.genList (x: x) 9);
   };
 }
