@@ -19,7 +19,6 @@ in {
 
       gamescope = {
         enable = true;
-        capSysNice = true;
       };
 
       steam = {
@@ -39,10 +38,6 @@ in {
               keyutils
             ];
         };
-
-        extraPackages = with pkgs; [
-          gamescope
-        ];
       };
     };
   };
