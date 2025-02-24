@@ -11,6 +11,19 @@ in {
   config = lib.mkIf cfg.enable {
     hardware.steam-hardware.enable = true;
 
+    environment.systemPackages = with pkgs; [
+      lutris
+      bottles
+      prismlauncher
+      gzdoom
+      tome4
+      shattered-pixel-dungeon
+      osu-lazer-bin
+
+      winetricks
+      protontricks
+    ];
+
     programs = {
       gamemode = {
         enable = true;
