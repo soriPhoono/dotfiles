@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -12,6 +13,25 @@ in {
       enable = true;
 
       profiles.default.isDefault = true;
+    };
+
+    systemd.user.services.protonmail-bridge = {
+      Unit = {
+        Description = "Protonmail Bridge";
+      };
+
+      Service = {
+        ExecStart = "${pkgs.protonmail-bridge}/bin/protonmail-bridge --noninteractive --log-level info";
+      };
+
+      Install = {
+        WantedBy = [
+          "graphical-session.target"
+        ];
+        PartOf = [
+          "graphical-session.target"
+        ];
+      };
     };
   };
 }

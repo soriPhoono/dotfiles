@@ -48,19 +48,9 @@
     };
 
     html.enable = true;
-    css = {
-      enable = true;
-      format.type = "biome";
-    };
-    ts = {
-      enable = true;
-      lsp.server = "denols";
-      format.type = "biome";
-    };
-    svelte = {
-      enable = true;
-      format.type = "biome";
-    };
+    css.enable = true;
+    ts.enable = true;
+    svelte.enable = true;
     sql.enable = true;
 
     markdown = {

@@ -97,5 +97,12 @@ in {
     wayland.windowManager.hyprland.settings.bind = [
       "$mod, B, exec, firefox"
     ];
+
+    services = {
+      psd = {
+        enable = true;
+        resyncTimer = "10m";
+      };
+    };
   };
 }

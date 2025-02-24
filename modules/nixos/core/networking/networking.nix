@@ -11,10 +11,12 @@
       nftables.enable = true;
     };
 
-    services.resolved = {
-      enable = true;
+    services = {
+      resolved = {
+        enable = true;
 
-      dnsovertls = "opportunistic";
+        dnsovertls = "opportunistic";
+      };
     };
 
     services.timesyncd.enable = true;

@@ -78,11 +78,6 @@ in {
       gnome.gnome-keyring.enable = true;
 
       hypridle.enable = true;
-
-      psd = {
-        enable = true;
-        resyncTimer = "10m";
-      };
     };
   };
 }
