@@ -11,6 +11,9 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       element-desktop
+
+      android-udev-rules
+      android-tools
     ];
   };
 }
