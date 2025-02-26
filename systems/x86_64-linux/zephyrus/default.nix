@@ -9,6 +9,7 @@
     hardware = {
       enable = true;
       ssd.enable = true;
+      android.enable = true;
       gpu = {
         enable = true;
         integrated.amd.enable = true;
