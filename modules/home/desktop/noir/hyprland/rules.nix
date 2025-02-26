@@ -18,8 +18,26 @@ in {
         "workspace 1, class:(gamescope)"
 
         "float,class:^(nm-applet)$"
+        "size 80% 80%, class:^(nm-applet)$"
+        "center, class:^(nm-applet)$"
+
         "float,class:^(nm-connection-editor)$"
+        "size 80% 80%, class:^(nm-connection-editor)$"
+        "center, class:^(nm-connection-editor)$"
+
         "float,class:^(pavucontrol)$"
+        "size 80% 80%, class:^(pavucontrol)$"
+        "center, class:^(pavucontrol)$"
+
+        "float,class:^(blueberry.py)$"
+        "size, class:^(blueberry.py)$"
+        "center, class:^(blueberry.py)$"
+      ];
+
+      workspace = [
+        "1, default:true"
+        "4, default:true"
+        "7, default:true"
       ];
 
       bezier = [
@@ -29,16 +47,6 @@ in {
       animation = [
         "windows, 1, 5, ease-in-out, slide"
         "fade, 1, 5, ease-in-out"
-      ];
-
-      env = [
-        "NIXOS_OZONE_WL,1"
-
-        "GDK_BACKEND,wayland,x11,*"
-
-        "QT_QPA_PLATFORM,wayland;xcb"
-        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
-        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
       ];
     };
   };

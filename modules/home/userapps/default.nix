@@ -7,6 +7,7 @@
   cfg = config.userapps;
 in {
   imports = [
+    ./artwork.nix
     ./development.nix
     ./streaming.nix
 
