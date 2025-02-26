@@ -14,6 +14,7 @@ in {
       element-desktop
 
       android-udev-rules
+      android-tools
     ];
   };
 }
