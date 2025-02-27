@@ -19,7 +19,6 @@ in {
 
       prismlauncher
       gzdoom
-      tome4
       shattered-pixel-dungeon
       osu-lazer-bin
 

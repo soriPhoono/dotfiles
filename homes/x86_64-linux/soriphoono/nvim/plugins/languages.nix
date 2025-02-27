@@ -49,7 +49,6 @@
 
     html = {
       enable = true;
-      autotagHtml = true;
     };
 
     css = {

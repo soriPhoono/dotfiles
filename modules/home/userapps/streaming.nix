@@ -14,7 +14,7 @@ in {
 
       gimp
       tenacity
-      kdenlive
+      kdePackages.kdenlive
     ];
   };
 }
