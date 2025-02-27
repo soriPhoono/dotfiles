@@ -47,10 +47,26 @@
       format.type = "black-and-isort";
     };
 
-    html.enable = true;
-    css.enable = true;
-    ts.enable = true;
-    svelte.enable = true;
+    html = {
+      enable = true;
+      autotagHtml = true;
+    };
+
+    css = {
+      enable = true;
+      format.type = "biome";
+    };
+
+    ts = {
+      enable = true;
+      format.type = "biome";
+    };
+
+    svelte = {
+      enable = true;
+      format.type = "biome";
+    };
+
     sql.enable = true;
 
     markdown = {
