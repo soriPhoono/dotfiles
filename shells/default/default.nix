@@ -12,13 +12,9 @@ in
     inherit (pre-commit-check) shellHook;
 
     packages = with pkgs; [
-      sbctl
-
       age
       ssh-to-age
       sops
-
-      nixos-anywhere
     ];
 
     buildInputs = pre-commit-check.enabledPackages;

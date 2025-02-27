@@ -17,7 +17,7 @@ in {
     ./programs/waybar.nix
     ./programs/wlogout.nix
     ./programs/hyprlock.nix
-    ./programs/kitty.nix
+    ./programs/ghostty.nix
     ./programs/nautilus.nix
 
     ./services/gammastep.nix

@@ -13,6 +13,7 @@ in {
       borderSize = 3;
 
       margin = "20";
+      defaultTimeout = 2500;
     };
   };
 }
