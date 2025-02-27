@@ -53,17 +53,14 @@
 
     css = {
       enable = true;
-      format.type = "biome";
     };
 
     ts = {
       enable = true;
-      format.type = "biome";
     };
 
     svelte = {
       enable = true;
-      format.type = "biome";
     };
 
     sql.enable = true;
