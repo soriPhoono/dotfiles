@@ -1,20 +1,12 @@
-{config, ...}: {
+{
   facter.reportPath = ../../../facter/zephyrus.json;
 
-  sops.secrets."wireless_secrets" = {
-    format = "dotenv";
-    sopsFile = ../../../secrets/wireless.env;
-  };
-
   core = {
-    boot = {
-      plymouth.enable = true;
-    };
+    boot.plymouth.enable = true;
 
     hardware = {
       enable = true;
       ssd.enable = true;
-      android.enable = true;
       gpu = {
         enable = true;
         integrated.amd.enable = true;
@@ -22,15 +14,7 @@
       };
     };
 
-    networking.wireless = {
-      enable = true;
-
-      secretsFile = config.sops.secrets."wireless_secrets".path;
-
-      networks = {
-        eaglenet = {};
-      };
-    };
+    networking.wireless.enable = true;
 
     services = {
       asusd.enable = true;
