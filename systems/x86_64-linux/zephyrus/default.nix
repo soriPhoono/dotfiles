@@ -1,5 +1,10 @@
-{
+{config, ...}: {
   facter.reportPath = ../../../facter/zephyrus.json;
+
+  sops.secrets."wireless_secrets" = {
+    format = "dotenv";
+    sopsFile = ../../../secrets/wireless.env;
+  };
 
   core = {
     boot = {
@@ -14,6 +19,16 @@
         enable = true;
         integrated.amd.enable = true;
         dedicated.nvidia.enable = true;
+      };
+    };
+
+    networking.wireless = {
+      enable = true;
+
+      secretsFile = config.sops.secrets."wireless_secrets".path;
+
+      networks = {
+        eaglenet = {};
       };
     };
 
