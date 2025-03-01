@@ -1,14 +1,26 @@
-{config, ...}: {
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.networking;
+in {
   imports = [
     ./openssh.nix
     ./wireless.nix
   ];
 
-  config = {
-    networking.nameservers = [
-      "1.1.1.1"
-      "1.0.0.1"
-    ];
+  options.networking.enable = lib.mkEnableOption "Enable networking";
+
+  config = lib.mkIf cfg.enable {
+    networking = {
+      nameservers = [
+        "1.1.1.1"
+        "1.0.0.1"
+      ];
+
+      nftables.enable = true;
+    };
 
     services = {
       resolved = {

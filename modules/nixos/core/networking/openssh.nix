@@ -1,16 +1,26 @@
 {
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7 soriphoono@gmail.com"
-  ];
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.networking.openssh;
+in {
+  options.core.networking.openssh.enable = lib.mkEnableOption "Enable OpenSSH";
 
-  services.openssh = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+    users.users.root.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7 soriphoono@gmail.com"
+    ];
 
-    settings = {
-      UseDns = true;
-      PermitRootLogin = "prohibit-password";
-      PasswordAuthentication = false;
-      KbdInteractiveAuthentication = false;
+    services.openssh = {
+      enable = true;
+
+      settings = {
+        UseDns = true;
+        PermitRootLogin = "prohibit-password";
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
     };
   };
 }
