@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.core.audio;
+  cfg = config.core.services.pipewire;
 in {
-  options.core.audio.enable = lib.mkEnableOption "Enable audio driver";
+  options.core.services.pipewire.enable = lib.mkEnableOption "Enable audio driver";
 
   config = lib.mkIf cfg.enable {
     security.rtkit.enable = true;

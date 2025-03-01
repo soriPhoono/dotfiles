@@ -7,6 +7,9 @@
     hardware = {
       enable = true;
       ssd.enable = true;
+      android.enable = true;
+      bluetooth.enable = true;
+      monitors.enable = true;
       gpu = {
         enable = true;
         integrated.amd.enable = true;
@@ -14,19 +17,28 @@
       };
     };
 
-    networking.wireless.enable = true;
-
-    services = {
-      asusd.enable = true;
-      geoclue2.enable = true;
+    networking = {
+      enable = true;
+      wireless.enable = true;
+      openssh.enable = true;
     };
 
-    power.enable = true;
-    audio.enable = true;
-    bluetooth.enable = true;
+    services = {
+      geoclue2.enable = true;
+      pipewire.enable = true;
+    };
+
+    suites = {
+      power.enable = true;
+      audio.enable = true;
+    };
   };
 
-  desktop.noir.enable = true;
+  desktop = {
+    environments.noir.enable = true;
+    services.asusd.enable = true;
+    suites.gaming.enable = true;
+  };
 
   themes = {
     enable = true;

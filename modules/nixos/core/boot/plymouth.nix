@@ -18,10 +18,6 @@ in {
 
     consoleLogLevel = 0;
 
-    plymouth = {
-      enable = true;
-
-      # TODO: theme this!
-    };
+    plymouth.enable = true;
   };
 }

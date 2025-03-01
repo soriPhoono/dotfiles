@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.core.power;
+  cfg = config.core.suites.power;
 in {
-  options.core.power = {
+  options.core.suites.power = {
     enable = lib.mkEnableOption "Enable power optimisations";
   };
 
@@ -23,12 +23,6 @@ in {
           CPU_SCALING_GOVENOR_ON_BAT = "powersave";
         };
       };
-    };
-
-    powerManagement = {
-      enable = true;
-
-      powertop.enable = true;
     };
   };
 }

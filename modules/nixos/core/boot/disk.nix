@@ -15,6 +15,7 @@ in {
   };
 
   config = lib.mkIf config.core.boot.enable {
+    # TODO: make home follow impermanence
     disko.devices = let
       type = "btrfs";
       extraArgs = ["-L" "nixos" "-f"];

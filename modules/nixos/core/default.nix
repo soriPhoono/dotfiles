@@ -1,7 +1,6 @@
 {lib, ...}: {
   imports = [
     ./nix/nixconf.nix
-    ./nix/nh.nix
 
     ./boot/boot.nix
 
@@ -9,13 +8,11 @@
 
     ./networking/networking.nix
 
-    ./services/asusd.nix
     ./services/geoclue2.nix
+    ./services/pipewire.nix
 
-    ./users.nix
-    ./power.nix
-    ./audio.nix
-    ./bluetooth.nix
+    ./suites/users.nix
+    ./suites/power.nix
   ];
 
   time.timeZone = lib.mkDefault "America/Chicago";

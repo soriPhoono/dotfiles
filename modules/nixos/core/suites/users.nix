@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.core.users;
+  cfg = config.core.suites.users;
 in {
-  options.core.users = {
+  options.core.suites.users = {
     enable =
       lib.mkEnableOption "Enable user management"
       // {
@@ -32,6 +32,8 @@ in {
     snowfallorg.users = lib.genAttrs cfg.users (_: {});
 
     users = {
+      mutableUsers = false;
+
       users = lib.genAttrs cfg.users (_: {
         inherit (cfg) shell;
 

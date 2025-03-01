@@ -2,13 +2,7 @@
   lib,
   config,
   ...
-}: let
-  cfg = config.core.boot.secrets;
-in {
-  options.core.boot.secrets = {
-    useCustomVault = lib.mkEnableOption "Enable custom vault for sops secrets import (system level secrets)";
-  };
-
+}: {
   config = let
     hostKeys = [
       {
@@ -30,27 +24,33 @@ in {
       };
 
       sops = {
-        defaultSopsFile = lib.mkMerge [
-          (lib.mkIf cfg.useCustomVault ../../../../secrets/${config.networking.hostName})
-          (lib.mkIf (!cfg.useCustomVault) ../../../../secrets/global.yaml)
-        ];
+        defaultSopsFile = ../../../../secrets/${config.networking.hostName}.yaml;
 
         age = {
           sshKeyPaths = map (key: key.path) hostKeys;
         };
 
         secrets =
-          lib.genAttrs
-          (map (user: "${user}/age_key") config.core.users.users)
-          (name: let
-            username = lib.elemAt (lib.splitString "/" name) 0;
-          in {
-            path = "/tmp/${username}.key";
+          (
+            lib.genAttrs
+            (map (user: "${user}/age_key") config.core.suites.users.users)
+            (name: let
+              username = lib.elemAt (lib.splitString "/" name) 0;
+            in {
+              path = "/tmp/${username}.key";
 
-            mode = "0440";
-            owner = username;
-            group = "users";
-          });
+              mode = "0440";
+              owner = username;
+              group = "users";
+            })
+          )
+          // (
+            lib.genAttrs
+            (map (user: "${user}/password") config.core.suites.users.users)
+            (_: {
+              neededForUsers = true;
+            })
+          );
       };
 
       core.boot.impermanence.files = map (key: key.path) hostKeys;

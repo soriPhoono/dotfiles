@@ -10,7 +10,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.adb.enable = true;
 
-    users.users = lib.genAttrs config.core.users.users (_: {
+    users.users = lib.genAttrs config.core.suites.users.users (_: {
       extraGroups = ["adbusers"];
     });
   };

@@ -6,11 +6,11 @@
   cfg = config.core.networking;
 in {
   imports = [
-    ./openssh.nix
     ./wireless.nix
+    ./openssh.nix
   ];
 
-  options.networking.enable = lib.mkEnableOption "Enable networking";
+  options.core.networking.enable = lib.mkEnableOption "Enable networking";
 
   config = lib.mkIf cfg.enable {
     networking = {

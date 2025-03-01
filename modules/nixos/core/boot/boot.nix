@@ -24,6 +24,7 @@ in {
       default = true;
     };
 
+  # TODO: setup encrypted systems when I get the fido key
   config = lib.mkIf cfg.enable {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen;
@@ -33,7 +34,10 @@ in {
 
       loader = {
         efi.canTouchEfiVariables = true;
-        systemd-boot.enable = true;
+        systemd-boot = {
+          enable = true;
+          configurationLimit = 10;
+        };
       };
     };
 

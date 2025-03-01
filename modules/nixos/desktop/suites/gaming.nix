@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.desktop.gaming;
+  cfg = config.desktop.suites.gaming;
 in {
-  options.desktop.gaming.enable = lib.mkEnableOption "Enable gaming desktop setup";
+  options.desktop.suites.gaming.enable = lib.mkEnableOption "Enable gaming desktop setup";
 
   config = lib.mkIf cfg.enable {
     hardware.steam-hardware.enable = true;

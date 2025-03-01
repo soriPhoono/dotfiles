@@ -15,6 +15,7 @@ in {
     networking.networkmanager = {
       enable = true;
 
+      dhcp = "dhcpcd";
       insertNameservers = config.networking.nameservers;
 
       wifi = {
@@ -26,7 +27,7 @@ in {
     };
 
     users.users =
-      lib.genAttrs config.core.users.users
+      lib.genAttrs config.core.suites.users.users
       (_: {
         extraGroups = ["networkmanager"];
       });

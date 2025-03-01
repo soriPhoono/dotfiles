@@ -9,9 +9,5 @@ in {
 
   config = lib.mkIf cfg.enable {
     hardware.keyboard.qmk.enable = true;
-
-    services.udev.extraRules = ''
-      ACTION="add", SUBSYSTEM="usb", ATTR{idVendor}="1462", ATTR{idProduct}="7e06", ATTR{power/autosuspend}="-1"
-    '';
   };
 }

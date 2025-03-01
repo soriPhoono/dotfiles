@@ -34,12 +34,6 @@ in {
         "center, class:^(blueberry.py)$"
       ];
 
-      workspace = [
-        "1, default:true"
-        "4, default:true"
-        "7, default:true"
-      ];
-
       bezier = [
         "ease-in-out, .42, 0, .58, 1"
       ];

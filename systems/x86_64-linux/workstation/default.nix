@@ -2,12 +2,13 @@
   facter.reportPath = ../../../facter/workstation.json;
 
   core = {
-    boot = {
-      plymouth.enable = true;
-    };
+    boot.plymouth.enable = true;
 
     hardware = {
       enable = true;
+      android.enable = true;
+      bluetooth.enable = true;
+      monitors.enable = true;
       ssd.enable = true;
       gpu = {
         enable = true;
@@ -20,24 +21,29 @@
       hid = {
         logitech.enable = true;
         qmk.enable = true;
+        gamepads.enable = true;
       };
     };
 
-    networking.wireless.enable = true;
+    networking = {
+      enable = true;
+      wireless.enable = true;
+      openssh.enable = true;
+    };
 
     services = {
       geoclue2.enable = true;
+      pipewire.enable = true;
     };
 
-    power.enable = true;
-
-    audio.enable = true;
-    bluetooth.enable = true;
+    suites = {
+      power.enable = true;
+    };
   };
 
   desktop = {
-    noir.enable = true;
-    gaming.enable = true;
+    environments.noir.enable = true;
+    suites.gaming.enable = true;
   };
 
   themes = {

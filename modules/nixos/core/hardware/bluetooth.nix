@@ -4,9 +4,9 @@
   virtual,
   ...
 }: let
-  cfg = config.core.bluetooth;
+  cfg = config.core.hardware.bluetooth;
 in {
-  options.core.bluetooth = {
+  options.core.hardware.bluetooth = {
     enable = lib.mkEnableOption "Enable bluetooth support";
   };
 
