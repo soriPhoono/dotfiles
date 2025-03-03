@@ -19,7 +19,7 @@ in {
     };
 
     wayland.windowManager.hyprland.settings.bind = [
-      "$mod, B, exec, ${pkgs.librewolf}"
+      "$mod, B, exec, ${pkgs.librewolf}/bin/librewolf"
     ];
 
     services = {
