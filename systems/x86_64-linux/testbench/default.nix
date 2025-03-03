@@ -31,7 +31,7 @@
     };
   };
 
-  desktop.noir.enable = true;
+  desktop.environments.noir.enable = true;
 
   themes = {
     enable = true;
