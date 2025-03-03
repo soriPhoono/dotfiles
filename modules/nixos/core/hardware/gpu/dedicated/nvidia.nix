@@ -5,8 +5,6 @@
 }: let
   cfg = config.core.hardware.gpu.dedicated.nvidia;
 in {
-  # TODO: configure dual specialization for laptops
-
   options.core.hardware.gpu.dedicated.nvidia = {
     enable = lib.mkEnableOption "Enable NVIDIA GPU support";
 
