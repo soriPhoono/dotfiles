@@ -17,11 +17,6 @@ in {
       geoProviderUrl = "https://api.beacondb.net/v1/geolocate";
       submissionUrl = "https://api.beacondb.net/v2/geosubmit";
       submissionNick = "geoclue";
-
-      appConfig.gammastep = {
-        isAllowed = true;
-        isSystem = false;
-      };
     };
   };
 }

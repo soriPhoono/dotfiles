@@ -9,10 +9,10 @@
 
     hardware = {
       enable = true;
+
       android.enable = true;
       bluetooth.enable = true;
-      monitors.enable = true;
-      ssd.enable = true;
+
       gpu = {
         enable = true;
         integrated.intel = {
@@ -21,6 +21,7 @@
         };
         dedicated.amd.enable = true;
       };
+
       hid = {
         logitech.enable = true;
         qmk.enable = true;
@@ -31,33 +32,26 @@
     networking = {
       enable = true;
       wireless.enable = true;
-      openssh.enable = true;
     };
 
     services = {
+      fstrim.enable = true;
       geoclue2.enable = true;
       pipewire.enable = true;
-    };
-
-    suites = {
-      power.enable = true;
+      tlp.enable = true;
     };
   };
 
   desktop = {
     environments.noir.enable = true;
-    suites.gaming.enable = true;
+    suites.gaming = {
+      enable = true;
+      mode = "desktop";
+    };
   };
 
   themes = {
     enable = true;
     catppuccin.enable = true;
   };
-
-  programs.steam.gamescopeSession.args = [
-    "-W 1920"
-    "-H 1080"
-    "-r 144"
-    "--prefer-output DP-5"
-  ];
 }

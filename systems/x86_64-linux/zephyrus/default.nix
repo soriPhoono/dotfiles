@@ -9,24 +9,29 @@
 
     hardware = {
       enable = true;
-      ssd.enable = true;
+
       android.enable = true;
       bluetooth.enable = true;
-      monitors.enable = true;
+
       gpu = {
         enable = true;
-        integrated.amd.enable = true;
-        dedicated.nvidia = {
+        integrated.intel = {
           enable = true;
-          mode = "laptop";
+          device_id = "a780";
         };
+        dedicated.amd.enable = true;
+      };
+
+      hid = {
+        logitech.enable = true;
+        qmk.enable = true;
+        gamepads.enable = true;
       };
     };
 
     networking = {
       enable = true;
       wireless.enable = true;
-      openssh.enable = true;
     };
 
     services = {
@@ -39,7 +44,10 @@
   desktop = {
     environments.noir.enable = true;
     services.asusd.enable = true;
-    suites.gaming.enable = true;
+    suites.gaming = {
+      enable = true;
+      mode = "desktop";
+    };
   };
 
   themes = {

@@ -6,10 +6,10 @@
 
     hardware = {
       enable = true;
+
       android.enable = true;
       bluetooth.enable = true;
       monitors.enable = true;
-      ssd.enable = true;
 
       gpu = {
         enable = true;
@@ -20,16 +20,13 @@
     networking = {
       enable = true;
       wireless.enable = true;
-      openssh.enable = true;
+      tailscale.enable = true;
     };
 
     services = {
       geoclue2.enable = true;
       pipewire.enable = true;
-    };
-
-    suites = {
-      power.enable = true;
+      tlp.enable = true;
     };
   };
 

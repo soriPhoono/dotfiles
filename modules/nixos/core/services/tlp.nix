@@ -6,7 +6,11 @@
   cfg = config.core.services.tlp;
 in {
   options.core.services.tlp = {
-    enable = lib.mkEnableOption "Enable power optimisations";
+    enable =
+      lib.mkEnableOption "Enable power optimisations"
+      // {
+        default = true;
+      };
   };
 
   config = lib.mkIf cfg.enable {

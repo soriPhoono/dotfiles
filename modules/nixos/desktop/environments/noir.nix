@@ -42,10 +42,22 @@ in {
     };
 
     services = {
+      greetd = {
+        settings = {
+          initial_session = {
+            command = "Hyprland";
+          };
+        };
+      };
       seatd.enable = true;
 
       gvfs.enable = true;
       gnome.gnome-keyring.enable = true;
+
+      geoclue2.appConfig.gammastep = {
+        isAllowed = true;
+        isSystem = false;
+      };
 
       hypridle.enable = true;
     };
