@@ -12,7 +12,6 @@ in {
     ./hid/logitech.nix
     ./hid/gamepads.nix
 
-    ./ssd.nix
     ./monitors.nix
     ./bluetooth.nix
     ./onlykey.nix
