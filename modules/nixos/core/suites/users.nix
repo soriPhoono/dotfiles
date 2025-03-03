@@ -37,7 +37,7 @@ in {
       users = lib.genAttrs cfg.users (_: {
         inherit (cfg) shell;
 
-        initialPassword = "password";
+        hashedPasswordFile = config.sops.secrets."soriphoono/password".path;
       });
     };
 

@@ -1,6 +1,5 @@
 {
   imports = [
-    ./environments/kde.nix
     ./environments/noir.nix
 
     ./programs/regreet.nix
