@@ -2,6 +2,8 @@
   facter.reportPath = ../../../facter/testbench.json;
 
   core = {
+    boot.secrets.defaultSopsFile = ./vault.yaml;
+
     hardware = {
       enable = true;
       android.enable = true;

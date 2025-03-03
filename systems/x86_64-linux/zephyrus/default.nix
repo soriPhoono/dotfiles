@@ -2,7 +2,10 @@
   facter.reportPath = ../../../facter/zephyrus.json;
 
   core = {
-    boot.plymouth.enable = true;
+    boot = {
+      secrets.defaultSopsFile = ./vault.yaml;
+      plymouth.enable = true;
+    };
 
     hardware = {
       enable = true;
@@ -30,7 +33,6 @@
 
     suites = {
       power.enable = true;
-      audio.enable = true;
     };
   };
 

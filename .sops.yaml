@@ -11,7 +11,7 @@ creation_rules:
       - age:
           - *admin_recovery
           - *admin_soriphoono
-  - path_regex: secrets/.*.(yaml|json|env|ini)$
+  - path_regex: systems/.*/.*/.*.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *admin_recovery

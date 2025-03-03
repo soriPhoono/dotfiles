@@ -2,7 +2,10 @@
   facter.reportPath = ../../../facter/workstation.json;
 
   core = {
-    boot.plymouth.enable = true;
+    boot = {
+      secrets.defaultSopsFile = ./vault.yaml;
+      plymouth.enable = true;
+    };
 
     hardware = {
       enable = true;

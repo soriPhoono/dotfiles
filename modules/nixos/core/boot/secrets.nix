@@ -2,7 +2,14 @@
   lib,
   config,
   ...
-}: {
+}: let
+  cfg = config.core.boot.secrets;
+in {
+  options.core.boot.secrets.defaultSopsFile = lib.mkOption {
+    type = lib.types.path;
+    description = "The path to the vault file";
+  };
+
   config = let
     hostKeys = [
       {
@@ -19,7 +26,7 @@
       };
 
       sops = {
-        defaultSopsFile = ../../../../secrets/${config.networking.hostName}.yaml;
+        inherit (cfg) defaultSopsFile;
 
         age = {
           sshKeyPaths = map (key: key.path) hostKeys;
@@ -48,7 +55,8 @@
           );
       };
 
-      # TODO: fix this to correct replacement path
-      core.boot.impermanence.files = map (key: key.path) hostKeys;
+      core.boot.impermanence.files = [
+        "/etc/ssh/ssh_host_ed25519_key"
+      ];
     };
 }
