@@ -3,7 +3,7 @@
     ./environments/kde.nix
     ./environments/noir.nix
 
-    ./programs/greetd.nix
+    ./programs/regreet.nix
 
     ./services/asusd.nix
     ./services/greetd.nix
