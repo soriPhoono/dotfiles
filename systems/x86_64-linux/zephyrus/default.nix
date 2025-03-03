@@ -32,10 +32,7 @@
     services = {
       geoclue2.enable = true;
       pipewire.enable = true;
-    };
-
-    suites = {
-      power.enable = true;
+      tlp.enable = true;
     };
   };
 

@@ -7,7 +7,7 @@
 in {
   imports = [
     ./wireless.nix
-    ./openssh.nix
+    ./tailscale.nix
   ];
 
   options.core.networking.enable = lib.mkEnableOption "Enable networking";

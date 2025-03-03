@@ -74,7 +74,5 @@ in {
           ++ cfg.files;
       };
     };
-
-    programs.fuse.userAllowOther = true;
   };
 }

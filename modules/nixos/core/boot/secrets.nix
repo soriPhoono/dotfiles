@@ -21,6 +21,8 @@ in {
     lib.mkIf config.core.boot.enable {
       services = {
         openssh = {
+          enable = true;
+
           inherit hostKeys;
         };
       };
@@ -32,27 +34,20 @@ in {
           sshKeyPaths = map (key: key.path) hostKeys;
         };
 
-        secrets =
-          (
-            lib.genAttrs
-            (map (user: "${user}/age_key") config.core.suites.users.users)
-            (name: let
-              username = lib.elemAt (lib.splitString "/" name) 0;
-            in {
-              path = "/tmp/${username}.key";
+        secrets = lib.listToAttrs (
+          map (user: {
+            name = "${user.name}/age_key";
+
+            value = {
+              path = "/tmp/${user.name}.key";
 
               mode = "0440";
-              owner = username;
+              owner = user.name;
               group = "users";
-            })
-          )
-          // (
-            lib.genAttrs
-            (map (user: "${user}/password") config.core.suites.users.users)
-            (_: {
-              neededForUsers = true;
-            })
-          );
+            };
+          })
+          config.core.suites.users.users
+        );
       };
 
       core.boot.impermanence.files = [

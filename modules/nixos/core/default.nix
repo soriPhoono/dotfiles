@@ -10,9 +10,9 @@
 
     ./services/geoclue2.nix
     ./services/pipewire.nix
+    ./services/tlp.nix
 
     ./suites/users.nix
-    ./suites/power.nix
   ];
 
   time.timeZone = lib.mkDefault "America/Chicago";

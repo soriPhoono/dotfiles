@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -8,10 +9,23 @@ in {
   options.core.hardware.android.enable = lib.mkEnableOption "Enable Android support";
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      android-tools
+    ];
+
     programs.adb.enable = true;
 
-    users.users = lib.genAttrs config.core.suites.users.users (_: {
-      extraGroups = ["adbusers"];
-    });
+    users.extraUsers = lib.listToAttrs (
+      map (user: {
+        inherit (user) name;
+
+        value = {
+          extraGroups = [
+            "adbusers"
+          ];
+        };
+      })
+      config.core.suites.users.users
+    );
   };
 }

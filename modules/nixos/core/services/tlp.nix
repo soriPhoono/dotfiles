@@ -3,16 +3,14 @@
   config,
   ...
 }: let
-  cfg = config.core.suites.power;
+  cfg = config.core.services.tlp;
 in {
-  options.core.suites.power = {
+  options.core.services.tlp = {
     enable = lib.mkEnableOption "Enable power optimisations";
   };
 
   config = lib.mkIf cfg.enable {
     services = {
-      upower.enable = true;
-
       tlp = {
         enable = true;
 

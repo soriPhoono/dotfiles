@@ -26,11 +26,18 @@ in {
       ethernet.macAddress = "random";
     };
 
-    users.users =
-      lib.genAttrs config.core.suites.users.users
-      (_: {
-        extraGroups = ["networkmanager"];
-      });
+    users.extraUsers = lib.listToAttrs (
+      map (user: {
+        inherit (user) name;
+
+        value = {
+          extraGroups = [
+            "networkmanager"
+          ];
+        };
+      })
+      config.core.suites.users.users
+    );
 
     core.boot.impermanence.directories = [
       "/etc/NetworkManager/system-connections/"

@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  cfg = config.core.boot.disk;
+  cfg = config.core.boot;
 in {
   options.core.boot.disk = {
     device = lib.mkOption {
@@ -14,7 +14,7 @@ in {
     };
   };
 
-  config = lib.mkIf config.core.boot.enable {
+  config = lib.mkIf cfg.enable {
     # TODO: make home follow impermanence
     disko.devices = let
       type = "btrfs";
@@ -56,7 +56,7 @@ in {
     in {
       disk = {
         root = {
-          inherit (cfg) device;
+          inherit (cfg.disk) device;
           type = "disk";
           content = {
             type = "gpt";
