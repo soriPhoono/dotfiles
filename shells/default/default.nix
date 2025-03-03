@@ -12,6 +12,8 @@ in
     inherit (pre-commit-check) shellHook;
 
     packages = with pkgs; [
+      nixos-facter
+
       age
       ssh-to-age
       sops
