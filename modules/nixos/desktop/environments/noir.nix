@@ -11,7 +11,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    desktop.programs.greetd.enable = true;
+    desktop.programs.regreet.enable = true;
 
     security = {
       polkit.enable = true;
