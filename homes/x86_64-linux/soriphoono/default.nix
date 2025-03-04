@@ -14,7 +14,17 @@
     };
 
     shells = {
-      fish.enable = true;
+      fish = {
+        enable = true;
+
+        shellVariables = {
+          EDITOR = "nvim";
+        };
+
+        shellAliases = {
+          v = "nvim";
+        };
+      };
       starship.enable = true;
     };
 

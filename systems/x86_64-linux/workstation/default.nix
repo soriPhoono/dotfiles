@@ -32,6 +32,7 @@
     networking = {
       enable = true;
       wireless.enable = true;
+      tailscale.enable = true;
     };
 
     services = {
