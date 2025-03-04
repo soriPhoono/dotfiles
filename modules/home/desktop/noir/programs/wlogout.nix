@@ -117,6 +117,7 @@ in {
           wlogout
         ];
 
+        # TODO: fix this on multimonitor
         text = ''
           grim /tmp/shot.png
           magick /tmp/shot.png -blur 0x8 /tmp/shot-blur.png

@@ -44,6 +44,7 @@ in {
           '';
         };
 
+        # TODO: fix this!
         screenshot = pkgs.writeShellApplication {
           name = "screenshot.sh";
 

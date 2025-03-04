@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  nixosConfig,
   ...
 }: let
   cfg = config.userapps.artwork;
@@ -11,7 +12,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       krita
-      blender-hip
+      (lib.mkIf (!nixosConfig.core.hardware.gpu.dedicated.amd.enable) pkgs.blender)
+      (lib.mkIf nixosConfig.core.hardware.gpu.dedicated.amd.enable pkgs.blender-hip)
     ];
   };
 }
