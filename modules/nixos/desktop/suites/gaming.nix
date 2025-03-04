@@ -70,8 +70,6 @@ in {
       steam = {
         enable = true;
 
-        extest.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
-
         extraPackages = with pkgs;
           lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) [
             xorg.libXcursor
@@ -97,8 +95,9 @@ in {
         protontricks.enable = lib.mkIf (cfg.mode == "desktop") true;
 
         gamescopeSession =
-          lib.mkIf (cfg.mode
-            == "console")
+          lib.mkIf ((cfg.mode == "desktop")
+            || (cfg.mode
+              == "console"))
           ({
               enable = true;
             }

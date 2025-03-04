@@ -7,13 +7,12 @@
 in {
   options.core.networking.tailscale = {
     enable =
-      lib.mkEnableOption "Enable tailscale always on vpn"
-      // {
-        default = true;
-      };
+      lib.mkEnableOption "Enable tailscale always on vpn";
   };
 
   config = lib.mkIf cfg.enable {
+    sops.secrets.tailscale_auth_key = {};
+
     services.tailscale = {
       enable = true;
 

@@ -11,6 +11,8 @@ in
   pkgs.mkShell {
     inherit (pre-commit-check) shellHook;
 
+    RUST_MIN_STACK = 16777216;
+
     packages = with pkgs; [
       nixos-facter
 

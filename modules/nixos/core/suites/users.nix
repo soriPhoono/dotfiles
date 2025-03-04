@@ -53,13 +53,29 @@ in {
   config = lib.mkIf cfg.enable {
     # NOTE: This was so hard and I love it
 
-    sops.secrets = lib.listToAttrs (map (user: {
-        name = "${user.name}/password";
-        value = {
-          neededForUsers = true;
-        };
-      })
-      cfg.users);
+    sops.secrets =
+      (lib.listToAttrs (map (user: {
+          name = "${user.name}/password";
+          value = {
+            neededForUsers = true;
+          };
+        })
+        cfg.users))
+      // (lib.listToAttrs (
+        map (user: {
+          name = "${user.name}/age_key";
+
+          value = {
+            inherit (config.users.extraUsers."${user.name}") group;
+
+            path = "/tmp/${user.name}.key";
+
+            mode = "0440";
+            owner = user.name;
+          };
+        })
+        config.core.suites.users.users
+      ));
 
     snowfallorg.users = lib.listToAttrs (map (user: {
         inherit (user) name;

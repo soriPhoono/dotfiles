@@ -33,21 +33,6 @@ in {
         age = {
           sshKeyPaths = map (key: key.path) hostKeys;
         };
-
-        secrets = lib.listToAttrs (
-          map (user: {
-            name = "${user.name}/age_key";
-
-            value = {
-              path = "/tmp/${user.name}.key";
-
-              mode = "0440";
-              owner = user.name;
-              group = "users";
-            };
-          })
-          config.core.suites.users.users
-        );
       };
 
       core.boot.impermanence.files = [
