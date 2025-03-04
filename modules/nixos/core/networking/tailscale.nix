@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -16,11 +17,27 @@ in {
       ];
     };
 
-    services.tailscale = {
-      enable = true;
+    services.tailscale.enable = true;
 
-      authKeyFile = config.sops.secrets.tailscale_api_key.path;
-      authKeyParameters.preauthorized = true;
+    systemd.services.tailscaled-autoconnect = {
+      description = "Automatic connection to tailscale";
+
+      after = ["network-pre.target" "tailscaled.service"];
+      wants = ["network-pre.target" "tailscaled.service"];
+      wantedBy = ["multi-user.target"];
+
+      serviceConfig.Type = "oneshot";
+
+      script = with pkgs; ''
+        sleep 2
+
+        status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
+        if [ $status = "Running" ]; then
+          exit 0
+        fi
+
+        ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.tailscale_api_key.path})"
+      '';
     };
   };
 }
