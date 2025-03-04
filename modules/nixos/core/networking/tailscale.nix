@@ -6,8 +6,7 @@
   cfg = config.core.networking.tailscale;
 in {
   options.core.networking.tailscale = {
-    enable =
-      lib.mkEnableOption "Enable tailscale always on vpn";
+    enable = lib.mkEnableOption "Enable tailscale always on vpn";
   };
 
   config = lib.mkIf cfg.enable {
