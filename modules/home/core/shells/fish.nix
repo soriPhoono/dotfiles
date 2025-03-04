@@ -38,14 +38,14 @@ in {
 
         shellVariables =
           lib.mapAttrsToList
-          (name: value: "${name}=${value}")
+          (name: value: "set ${name} ${value}")
           cfg.shellVariables;
       in ''
         set fish_greeting
 
         ${importEnvironment}
 
-        ${shellVariables}
+        ${lib.concatStringsSep "\n" shellVariables}
 
         ${pkgs.fastfetch}/bin/fastfetch
       '';
