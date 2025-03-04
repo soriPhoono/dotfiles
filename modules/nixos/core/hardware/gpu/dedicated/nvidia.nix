@@ -17,7 +17,6 @@ in {
 
       powerManagement = {
         enable = true;
-        finegrained = true;
       };
 
       dynamicBoost.enable = true;
@@ -28,19 +27,25 @@ in {
         amdgpuBusId = lib.mkIf config.core.hardware.gpu.integrated.amd.enable "PCI:4:0:0";
         nvidiaBusId = "PCI:1:0:0";
 
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
+        sync.enable = true;
       };
     };
 
     services.xserver.videoDrivers = ["nvidia"];
 
     specialisation = {
-      "on-ac".configuration = lib.mkIf cfg.laptopMode {
+      "on-battery".configuration = lib.mkIf cfg.laptopMode {
         system.nixos.tags = ["laptop-mode"];
-        hardware.nvidia.prime.sync.enable = true;
+        hardware.nvidia = {
+          powerManagement.finegrained = lib.mkForce true;
+          prime = {
+            sync.enable = lib.mkForce false;
+            offload = {
+              enable = lib.mkForce true;
+              enableOffloadCmd = lib.mkForce true;
+            };
+          };
+        };
       };
     };
   };

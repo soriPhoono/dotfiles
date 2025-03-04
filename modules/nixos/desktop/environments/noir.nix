@@ -45,7 +45,7 @@ in {
       greetd = {
         settings = {
           initial_session = {
-            command = "Hyprland";
+            command = "${lib.getExe config.programs.hyprland.package}";
           };
         };
       };

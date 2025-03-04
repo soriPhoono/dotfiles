@@ -17,11 +17,11 @@
 
       gpu = {
         enable = true;
-        integrated.intel = {
+        integrated.amd.enable = true;
+        dedicated.nvidia = {
           enable = true;
-          device_id = "a780";
+          laptopMode = true;
         };
-        dedicated.amd.enable = true;
       };
 
       hid = {
@@ -34,6 +34,7 @@
     networking = {
       enable = true;
       wireless.enable = true;
+      tailscale.enable = true;
     };
 
     services = {
