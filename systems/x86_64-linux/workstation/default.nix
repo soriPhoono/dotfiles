@@ -1,6 +1,8 @@
 {
   facter.reportPath = ../../../facter/workstation.json;
 
+  services.greetd.settings.initial_session.user = "soriphoono";
+
   core = {
     boot = {
       secrets.defaultSopsFile = ./vault.yaml;

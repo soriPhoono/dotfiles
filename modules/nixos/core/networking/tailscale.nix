@@ -10,7 +10,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets.tailscale_auth_key = {
+    sops.secrets.tailscale_api_key = {
       restartUnits = [
         "tailscaled.service"
       ];
@@ -19,7 +19,7 @@ in {
     services.tailscale = {
       enable = true;
 
-      authKeyFile = config.sops.secrets.tailscale_auth_key.path;
+      authKeyFile = config.sops.secrets.tailscale_api_key.path;
       authKeyParameters.preauthorized = true;
     };
   };
