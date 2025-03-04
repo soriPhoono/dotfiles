@@ -1,6 +1,8 @@
 {
   desktop.noir.enable = true;
 
+  userapps.enable = true;
+
   wayland.windowManager.hyprland.settings = {
     monitor = [
       "eDP-1, 1366x768@60, 0x0, 1"
