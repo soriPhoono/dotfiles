@@ -53,6 +53,15 @@
     };
   };
 
+  server = {
+    services.nextcloud = {
+      enable = true;
+      users = [
+        "soriphoono"
+      ];
+    };
+  };
+
   themes = {
     enable = true;
     catppuccin.enable = true;

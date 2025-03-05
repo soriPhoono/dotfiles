@@ -17,10 +17,14 @@ in {
       ];
     };
 
+    networking.firewall.checkReversePath = "loose";
+
     services.tailscale = {
       enable = true;
 
       openFirewall = true;
+
+      useRoutingFeatures = "both";
     };
 
     systemd.services.tailscaled-autoconnect = {
