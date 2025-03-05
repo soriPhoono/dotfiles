@@ -16,7 +16,6 @@ in {
       enable = true;
 
       dhcp = "dhcpcd";
-      insertNameservers = config.networking.nameservers;
 
       wifi = {
         powersave = true;

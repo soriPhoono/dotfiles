@@ -8,6 +8,12 @@
 in {
   options.core.networking.tailscale = {
     enable = lib.mkEnableOption "Enable tailscale always on vpn";
+
+    useRoutingFeatures = lib.mkOption {
+      type = lib.types.str;
+      description = "Enable routing features";
+      default = "client";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -17,17 +23,12 @@ in {
       ];
     };
 
-    networking = {
-      firewall.checkReversePath = "loose";
-      interfaces.${config.services.tailscale.interfaceName}.useDHCP = false;
-    };
-
     services.tailscale = {
+      inherit (cfg) useRoutingFeatures;
+
       enable = true;
 
       openFirewall = true;
-
-      useRoutingFeatures = "both";
     };
 
     systemd.services.tailscaled-autoconnect = {
