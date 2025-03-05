@@ -17,7 +17,10 @@ in {
       ];
     };
 
-    networking.firewall.checkReversePath = "loose";
+    networking = {
+      firewall.checkReversePath = "loose";
+      interfaces.${config.services.tailscale.interfaceName}.useDHCP = false;
+    };
 
     services.tailscale = {
       enable = true;
