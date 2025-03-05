@@ -1,7 +1,5 @@
 {
-  facter.reportPath = ../../../facter/workstation.json;
-
-  services.greetd.settings.initial_session.user = "soriphoono";
+  facter.reportPath = ../../../facter/zephyrus.json;
 
   core = {
     boot = {
@@ -17,11 +15,11 @@
 
       gpu = {
         enable = true;
-        integrated.intel = {
+        integrated.amd.enable = true;
+        dedicated.nvidia = {
           enable = true;
-          device_id = "a780";
+          laptopMode = true;
         };
-        dedicated.amd.enable = true;
       };
 
       hid = {
@@ -38,7 +36,6 @@
     };
 
     services = {
-      fstrim.enable = true;
       geoclue2.enable = true;
       pipewire.enable = true;
       tlp.enable = true;
@@ -47,6 +44,7 @@
 
   desktop = {
     environments.noir.enable = true;
+    services.asusd.enable = true;
     suites.gaming = {
       enable = true;
       mode = "desktop";

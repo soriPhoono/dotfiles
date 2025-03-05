@@ -4,20 +4,15 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
-    pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
+    devenv = {
+      url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
+    nix2container = {
+      url = "github:nlewo/nix2container";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -72,38 +67,55 @@
     };
   };
 
-  outputs = inputs @ {snowfall-lib, ...}:
-    snowfall-lib.mkFlake {
-      inherit inputs;
-
-      src = ./.;
-      snowfall.namespace = "dotfiles";
-
-      systems.modules.nixos = with inputs; [
-        impermanence.nixosModules.impermanence
-        nixos-facter-modules.nixosModules.facter
-        disko.nixosModules.disko
-        lanzaboote.nixosModules.lanzaboote
-        sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
-        nix-index-database.nixosModules.nix-index
-        nur.modules.nixos.default
+  outputs = inputs @ {flake-parts, ...}: let
+    util = inputs.nixpkgs.lib.extend (self: _: import ./lib {lib = self;});
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = [
+        "x86_64-linux"
       ];
 
-      homes = {
-        users."soriphoono@wsl".modules = with inputs; [
-          stylix.homeManagerModules.stylix
-          nix-index-database.hmModules.nix-index
-        ];
+      imports = with inputs; [
+        devenv.flakeModule
+        home-manager.flakeModules.home-manager
+      ];
 
-        modules = with inputs; [
-          sops-nix.homeManagerModules.sops
-          nvf.homeManagerModules.default
-        ];
+      perSystem = {pkgs, ...}: {
+        devenv.shells.default = import ./devenv.nix {inherit pkgs;};
       };
 
-      channels-config = {
-        allowUnfree = true;
-      };
+      flake = _:
+        util.load_modules {
+          nixosModules = {
+            cwd = ./modules/nixos;
+            action = import;
+          };
+        };
     };
+
+  /*
+    systems.modules.nixos = with inputs; [
+      impermanence.nixosModules.impermanence
+      nixos-facter-modules.nixosModules.facter
+      disko.nixosModules.disko
+      lanzaboote.nixosModules.lanzaboote
+      sops-nix.nixosModules.sops
+      stylix.nixosModules.stylix
+      nix-index-database.nixosModules.nix-index
+      nur.modules.nixos.default
+    ];
+
+    homes = {
+      users."soriphoono@wsl".modules = with inputs; [
+        stylix.homeManagerModules.stylix
+        nix-index-database.hmModules.nix-index
+      ];
+
+      modules = with inputs; [
+        sops-nix.homeManagerModules.sops
+        nvf.homeManagerModules.default
+      ];
+    };
+  };
+  */
 }
