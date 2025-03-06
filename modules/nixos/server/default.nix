@@ -2,6 +2,7 @@
   options.server.enable = lib.mkEnableOption "Enable server configuration mode";
 
   config = {
+    /*
     networking = {
       bridges.br0.interfaces = [
         "ethernet-here" # TODO: fix this
@@ -23,5 +24,6 @@
         ];
       };
     };
+    */
   };
 }
