@@ -16,9 +16,5 @@ in {
         cursor_trail = 1;
       };
     };
-
-    wayland.windowManager.hyprland.settings.bind = [
-      "$mod, Return, exec, kitty"
-    ];
   };
 }

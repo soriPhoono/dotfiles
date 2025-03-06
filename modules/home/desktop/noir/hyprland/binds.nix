@@ -99,6 +99,11 @@ in {
           "$mod, P, pin, active"
           "$mod, C, centerwindow, "
 
+          "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
+          "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
+          "$mod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+          "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
+
           ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 

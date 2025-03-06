@@ -13,9 +13,5 @@ in {
       nautilus
       file-roller
     ];
-
-    wayland.windowManager.hyprland.settings.bind = [
-      "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
-    ];
   };
 }

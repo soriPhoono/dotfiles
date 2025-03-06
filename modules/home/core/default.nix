@@ -3,7 +3,6 @@
     ./secrets.nix
 
     ./shells/fish.nix
-    ./shells/nushell.nix
     ./shells/starship.nix
 
     ./programs/atuin.nix
@@ -11,6 +10,9 @@
     ./programs/fd.nix
     ./programs/fzf.nix
     ./programs/git.nix
+    ./programs/eza.nix
+    ./programs/direnv.nix
+    ./programs/programs.nix
   ];
 
   config = {
@@ -32,32 +34,7 @@
 
     snowfallorg.user.enable = true;
 
-    programs = {
-      carapace.enable = true;
-
-      bat.enable = true;
-
-      eza = {
-        enable = true;
-
-        git = true;
-        icons = "auto";
-
-        extraOptions = [
-          "--group-directories-first"
-        ];
-      };
-
-      direnv = {
-        enable = true;
-
-        nix-direnv.enable = true;
-      };
-
-      btop.enable = true;
-
-      home-manager.enable = true;
-    };
+    programs.home-manager.enable = true;
 
     home.stateVersion = "25.05";
   };

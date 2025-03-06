@@ -12,9 +12,5 @@ in {
     home.packages = with pkgs; [
       ghostty
     ];
-
-    wayland.windowManager.hyprland.settings.bind = [
-      "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
-    ];
   };
 }
