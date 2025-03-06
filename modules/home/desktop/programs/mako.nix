@@ -3,8 +3,10 @@
   config,
   ...
 }: let
-  cfg = config.desktop.noir;
+  cfg = config.desktop.programs.mako;
 in {
+  options.desktop.programs.mako.enable = lib.mkEnableOption "Enable mako notification daemon";
+
   config = lib.mkIf cfg.enable {
     services.mako = {
       enable = true;

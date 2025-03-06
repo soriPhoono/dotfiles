@@ -11,17 +11,6 @@ in {
     ./hyprland/binds.nix
     ./hyprland/general.nix
     ./hyprland/rules.nix
-
-    ./programs/mako.nix
-    ./programs/fuzzel.nix
-    ./programs/waybar.nix
-    ./programs/wlogout.nix
-    ./programs/hyprlock.nix
-    ./programs/ghostty.nix
-    ./programs/nautilus.nix
-
-    ./services/gammastep.nix
-    ./services/hypridle.nix
   ];
 
   options.desktop.noir = {
@@ -29,6 +18,22 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    desktop = {
+      programs = {
+        fuzzel.enable = true;
+        ghostty.enable = true;
+        hyprlock.enable = true;
+        mako.enable = true;
+        nautilus.enable = true;
+        waybar.enable = true;
+      };
+      services = {
+        gammastep.enable = true;
+        gnome-keyring.enable = true;
+        hypridle.enable = true;
+      };
+    };
+
     stylix.targets.hyprland.hyprpaper.enable = false;
 
     home.file = {

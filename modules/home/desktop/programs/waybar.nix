@@ -4,8 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.desktop.noir;
+  cfg = config.desktop.programs.waybar;
 in {
+  options.desktop.programs.waybar.enable = lib.mkEnableOption "Enable waybar status bar";
+
   config = lib.mkIf cfg.enable {
     stylix.targets.waybar.enable = false;
 

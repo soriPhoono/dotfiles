@@ -3,8 +3,10 @@
   config,
   ...
 }: let
-  cfg = config.desktop.noir;
+  cfg = config.desktop.programs.hyprlock;
 in {
+  options.desktop.programs.hyprlock.enable = lib.mkEnableOption "Enable hyprlock wayland locker";
+
   config = lib.mkIf cfg.enable {
     stylix.targets.hyprlock.enable = false;
 
