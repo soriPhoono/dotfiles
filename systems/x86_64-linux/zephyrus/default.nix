@@ -1,8 +1,6 @@
 {
   facter.reportPath = ../../../facter/zephyrus.json;
 
-  services.greetd.settings.initial_session.user = "soriphoono";
-
   core = {
     boot = {
       secrets.defaultSopsFile = ./vault.yaml;

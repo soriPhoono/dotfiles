@@ -42,13 +42,6 @@ in {
     };
 
     services = {
-      greetd = {
-        settings = {
-          initial_session = {
-            command = "${lib.getExe config.programs.hyprland.package}";
-          };
-        };
-      };
       seatd.enable = true;
 
       gvfs.enable = true;
