@@ -91,15 +91,6 @@ in {
           DisplayBookmarksToolbar = "never";
         };
       };
-
-      librewolf = {
-        enable = true;
-
-        policies = {
-          DisableTelementry = true;
-          DisplayBookmarksToolbar = "never";
-        };
-      };
     };
 
     wayland.windowManager.hyprland.settings.bind = [
