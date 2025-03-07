@@ -4,7 +4,6 @@
 
     ./programs/regreet.nix
     ./programs/hyprlock.nix
-    ./programs/one-password.nix
 
     ./services/asusd.nix
     ./services/greetd.nix

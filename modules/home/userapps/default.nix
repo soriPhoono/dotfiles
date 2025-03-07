@@ -12,6 +12,7 @@ in {
     ./streaming.nix
 
     ./programs/firefox.nix
+    ./programs/bitwarden.nix
     ./programs/thunderbird.nix
   ];
 
@@ -33,6 +34,7 @@ in {
 
     userapps.programs = {
       firefox.enable = true;
+      bitwarden.enable = true;
       thunderbird.enable = true;
     };
   };

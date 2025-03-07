@@ -14,7 +14,6 @@ in {
       programs = {
         regreet.enable = true;
         hyprlock.enable = true;
-        one-password.enable = true;
       };
       services.hypridle.enable = true;
     };
