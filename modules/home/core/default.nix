@@ -12,6 +12,7 @@
     ./programs/git.nix
     ./programs/eza.nix
     ./programs/direnv.nix
+    ./programs/ssh.nix
     ./programs/programs.nix
   ];
 
