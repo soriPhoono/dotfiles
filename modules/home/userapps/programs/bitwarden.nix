@@ -10,11 +10,16 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      bitwarden-cli
       bitwarden-desktop
     ];
 
     home.sessionVariables = {
       SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
     };
+
+    programs.firefox.profiles.default.extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+      bitwarden
+    ];
   };
 }

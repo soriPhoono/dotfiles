@@ -13,19 +13,14 @@ in {
     desktop = {
       programs = {
         regreet.enable = true;
+        hyprland.enable = true;
         hyprlock.enable = true;
       };
-      services.hypridle.enable = true;
-    };
-
-    security.polkit.enable = true;
-
-    programs.hyprland.enable = true;
-
-    services = {
-      seatd.enable = true;
-
-      gvfs.enable = true;
+      services = {
+        hypridle.enable = true;
+        polkit.enable = true;
+        gvfs.enable = true;
+      };
     };
   };
 }
