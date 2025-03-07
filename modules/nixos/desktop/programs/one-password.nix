@@ -16,11 +16,24 @@ in {
       };
     };
 
-    /*
-    home-manager.users = lib.listToAttrs
-      (user: {
-        inherit (user) name;
-      })
-    */
+    home-manager.users =
+      lib.listToAttrs
+      (map (user: {
+          inherit (user) name;
+
+          value = {
+            programs.ssh = {
+              enable = true;
+
+              extraConfig = let
+                onePassPath = "~/.1password/agent.sock";
+              in ''
+                Host *
+                  IdentityAgent ${onePassPath}
+              '';
+            };
+          };
+        })
+        config.core.suites.users.users);
   };
 }
