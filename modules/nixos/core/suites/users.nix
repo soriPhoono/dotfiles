@@ -103,6 +103,8 @@ in {
             hashedPasswordFile = config.sops.secrets."${user.name}/password".path;
 
             extraGroups = user.groups;
+
+            openssh.authorizedKeys.keys = [user.publicKey];
           };
         })
         cfg.users);
