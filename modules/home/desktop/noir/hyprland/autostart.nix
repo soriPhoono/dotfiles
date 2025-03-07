@@ -24,7 +24,6 @@ in {
 
           lxqt-policykit-agent &
 
-          wl-paste --watch cliphist store &
           wl-clip-persist --clipboard both &
         '';
       };

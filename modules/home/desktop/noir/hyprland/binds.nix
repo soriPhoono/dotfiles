@@ -53,43 +53,41 @@ in {
             swappy
           ];
 
-          text = ''
-            if [ -z "$XDG_PICTURES_DIR" ] ; then
-              XDG_PICTURES_DIR="$HOME/Pictures"
-            fi
+          text =
+            # Bash
+            ''
+              swpy_dir="$HOME/.config/swappy"
+              save_dir="$HOME/Pictures/Screenshots"
+              save_file=$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')
+              temp_screenshot="/tmp/screenshot.png"
 
-            swpy_dir="$HOME/.config/swappy"
-            save_dir="$HOME/Pictures/Screenshots"
-            save_file=$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')
-            temp_screenshot="/tmp/screenshot.png"
+              mkdir -p "$save_dir"
+              mkdir -p "$swpy_dir"
+              echo -e "[Default]\nsave_dir=$save_dir\nsave_filename_format=$save_file" > "$swpy_dir/config"
 
-            mkdir -p "$save_dir"
-            mkdir -p "$swpy_dir"
-            echo -e "[Default]\nsave_dir=$save_dir\nsave_filename_format=$save_file" > "$swpy_dir/config"
+              case "$1" in
+              p)
+                grimblast copysave screen $temp_screenshot && swappy -f $temp_screenshot ;;
+              s)
+                grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
+              m)
+                grimblast copysave output $temp_screenshot && swappy -f $temp_screenshot ;;
+              *)
+                cat <<< "
+                  ./screenshot.sh <action>
+                  ...valid actions are...
+                    p : print all screens
+                    s : snip current screen (frozen)
+                    m : print focused monitor
+                " ;;
+              esac
 
-            case "$1" in
-            p)
-              grimblast copysave screen $temp_screenshot && swappy -f $temp_screenshot ;;
-            s)
-              grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
-            m)
-              grimblast copysave output $temp_screenshot && swappy -f $temp_screenshot ;;
-            *)
-              cat <<< "
-                ./screenshot.sh <action>
-                ...valid actions are...
-                  p : print all screens
-                  s : snip current screen (frozen)
-                  m : print focused monitor
-              " ;;
-            esac
+              rm "$temp_screenshot"
 
-            rm "$temp_screenshot"
-
-            if [ -f "$save_dir/$save_file" ]; then
-              notify-send -a "Screenshot" -i "$save_dir/$save_file" -t 2200 "Screenshot saved" "saved at $save_dir/$save_file"
-            fi
-          '';
+              if [ -f "$save_dir/$save_file" ]; then
+                notify-send -a "Screenshot" -i "$save_dir/$save_file" -t 2200 "Screenshot saved" "saved at $save_dir/$save_file"
+              fi
+            '';
         };
       in
         [
@@ -111,9 +109,9 @@ in {
           ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl prev"
           ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
 
-          "$mod, P, exec, ${screenshot}/bin/screenshot.sh s"
-          "$mod CTRL, P, exec, ${screenshot}/bin/screenshot.sh m"
-          "$mod ALT, P, exec, ${screenshot}/bin/screenshot.sh p"
+          ", Print, exec, ${screenshot}/bin/screenshot.sh s"
+          "CTRL, Print, exec, ${screenshot}/bin/screenshot.sh m"
+          "ALT, Print, exec, ${screenshot}/bin/screenshot.sh p"
         ]
         ++ (builtins.concatLists (builtins.genList (
             i: let
