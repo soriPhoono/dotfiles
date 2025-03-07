@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -22,15 +23,26 @@ in {
           inherit (user) name;
 
           value = {
-            programs.ssh = {
-              enable = true;
+            programs = {
+              ssh = {
+                enable = true;
 
-              extraConfig = let
-                onePassPath = "~/.1password/agent.sock";
-              in ''
-                Host *
-                  IdentityAgent ${onePassPath}
-              '';
+                extraConfig = let
+                  onePassPath = "~/.1password/agent.sock";
+                in ''
+                  Host *
+                    IdentityAgent ${onePassPath}
+                '';
+              };
+              git = {
+                enable = true;
+                extraConfig = {
+                  gpg.format = "ssh";
+                  "gpg \"ssh\"".program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+                  commit.gpgsign = true;
+                  user.signingKey = user.publicKey;
+                };
+              };
             };
           };
         })
