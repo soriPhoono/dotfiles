@@ -37,7 +37,7 @@ in {
     in
       lib.mkOption {
         type = gamescopeModeType;
-        description = "The options for the gamescope binary (only effects console mode)";
+        description = "The options for the gamescope binary (only effects desktop and console mode)";
 
         default = {};
       };
@@ -92,7 +92,7 @@ in {
         remotePlay.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
 
-        protontricks.enable = lib.mkIf (cfg.mode == "desktop") true;
+        protontricks.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
 
         gamescopeSession =
           lib.mkIf ((cfg.mode == "desktop")

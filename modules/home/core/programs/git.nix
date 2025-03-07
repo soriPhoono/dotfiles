@@ -31,6 +31,12 @@ in {
         "*.bak"
       ];
 
+      signing = {
+        format = "ssh";
+        signByDefault = true;
+        key = config.core.programs.ssh.publicKey;
+      };
+
       extraConfig = {
         init.defaultBranch = "main";
 

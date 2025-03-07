@@ -10,12 +10,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      bitwarden-cli
       bitwarden-desktop
     ];
 
     home.sessionVariables = {
-      SSH_AUTH_SOCK = "~/.bitwarden-ssh-agent.sock";
+      SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
     };
   };
 }

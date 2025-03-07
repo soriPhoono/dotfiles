@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -9,8 +8,8 @@ in {
   options.desktop.programs.ghostty.enable = lib.mkEnableOption "Enable ghostty terminal";
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      ghostty
-    ];
+    programs.ghostty = {
+      enable = true;
+    };
   };
 }

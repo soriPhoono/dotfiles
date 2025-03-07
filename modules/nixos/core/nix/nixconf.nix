@@ -13,8 +13,6 @@
     git
   ];
 
-  # TODO: explore this and fix this wtf
-
   nix = let
     flakeInputs = lib.filterAttrs (_: v: lib.isType "flake" v) inputs;
   in {

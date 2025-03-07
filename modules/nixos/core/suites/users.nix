@@ -33,10 +33,6 @@ in {
 
             default = pkgs.fish;
           };
-          publicKey = lib.mkOption {
-            type = lib.types.str;
-            description = "The public ssh key to use for the user";
-          };
         };
       };
     in
@@ -49,7 +45,6 @@ in {
             name = "soriphoono";
             admin = true;
             shell = pkgs.fish;
-            publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
           }
         ];
       };
@@ -103,8 +98,6 @@ in {
             hashedPasswordFile = config.sops.secrets."${user.name}/password".path;
 
             extraGroups = user.groups;
-
-            openssh.authorizedKeys.keys = [user.publicKey];
           };
         })
         cfg.users);

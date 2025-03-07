@@ -7,8 +7,6 @@
   cfg = config.core.boot;
 in {
   imports = [
-    ./security.nix
-
     ./disk.nix
     ./impermanence.nix
     ./secure-boot.nix
@@ -42,5 +40,7 @@ in {
     };
 
     zramSwap.enable = true;
+
+    security.sudo.wheelNeedsPassword = false;
   };
 }
