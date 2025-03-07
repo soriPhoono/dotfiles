@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -11,47 +10,23 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    desktop.programs.regreet.enable = true;
-
-    security = {
-      polkit.enable = true;
-      # allow wayland lockers to unlock the screen
-      pam.services.hyprlock.text = "auth include login";
-    };
-
-    xdg.portal = {
-      enable = true;
-
-      xdgOpenUsePortal = true;
-
-      config = {
-        common.default = ["gtk"];
-        hyprland.default = ["gtk" "hyprland"];
+    desktop = {
+      programs = {
+        regreet.enable = true;
+        hyprlock.enable = true;
+        one-password.enable = true;
       };
-
-      extraPortals = with pkgs; [
-        xdg-desktop-portal
-        xdg-desktop-portal-hyprland
-        xdg-desktop-portal-gtk
-      ];
+      services.hypridle.enable = true;
     };
 
-    programs = {
-      hyprland.enable = true;
-      hyprlock.enable = true;
-    };
+    security.polkit.enable = true;
+
+    programs.hyprland.enable = true;
 
     services = {
       seatd.enable = true;
 
       gvfs.enable = true;
-
-      geoclue2.appConfig.gammastep = {
-        isAllowed = true;
-        isSystem = false;
-      };
-
-      hypridle.enable = true;
     };
   };
 }
