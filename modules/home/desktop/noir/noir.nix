@@ -23,7 +23,6 @@ in {
         fuzzel.enable = true;
         ghostty.enable = true;
         hyprlock.enable = true;
-        mako.enable = true;
         nautilus.enable = true;
         waybar.enable = true;
       };
@@ -31,6 +30,7 @@ in {
         gammastep.enable = true;
         gnome-keyring.enable = true;
         hypridle.enable = true;
+        mako.enable = true;
       };
     };
 
