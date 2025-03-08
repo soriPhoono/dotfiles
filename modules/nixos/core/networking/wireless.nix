@@ -21,8 +21,6 @@ in {
         powersave = true;
         macAddress = "random";
       };
-
-      ethernet.macAddress = "random";
     };
 
     users.extraUsers = lib.listToAttrs (
