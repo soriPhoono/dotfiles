@@ -21,7 +21,6 @@ in {
     desktop = {
       programs = {
         fuzzel.enable = true;
-        ghostty.enable = true;
         hyprlock.enable = true;
         nautilus.enable = true;
         waybar.enable = true;

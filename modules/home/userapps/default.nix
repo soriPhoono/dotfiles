@@ -34,6 +34,7 @@ in {
     ];
 
     userapps.programs = {
+      ghostty.enable = true;
       firefox.enable = true;
       bitwarden.enable = true;
       thunderbird.enable = true;

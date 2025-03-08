@@ -149,7 +149,7 @@ in {
           "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
           "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
 
-          "$mod, Return, exec, $TERMINAL"
+          "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
 
           ", XF86AudioMute, exec, ${audio}/bin/audio.sh mute"
           ", XF86AudioMicMute, exec, ${audio}/bin/audio.sh micmute"
