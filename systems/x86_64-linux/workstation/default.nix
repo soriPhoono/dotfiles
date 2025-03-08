@@ -51,6 +51,11 @@
     };
   };
 
+  server = {
+    enable = true;
+    ethernet-interface = "enp6s0";
+  };
+
   themes = {
     enable = true;
     catppuccin.enable = true;

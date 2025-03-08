@@ -1,29 +1,20 @@
-{lib, ...}: {
-  options.server.enable = lib.mkEnableOption "Enable server configuration mode";
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.server;
+in {
+  options.server = {
+    enable = lib.mkEnableOption "Enable server configuration mode";
 
-  config = {
-    /*
-    networking = {
-      bridges.br0.interfaces = [
-        "ethernet-here" # TODO: fix this
-      ];
-
-      useDHCP = false;
-
-      interfaces.br0 = {
-        useDHCP = true;
-        ipv4.addresses = [
-          {
-            address = "192.168.100.3";
-            prefixLength = 24;
-          }
-        ];
-        defaultGateway = "192.168.100.1";
-        nameservers = [
-          "192.168.100.1"
-        ];
-      };
+    ethernet-interface = lib.mkOption {
+      type = lib.types.str;
+      description = "The ethernet interface to use for the server";
     };
-    */
+  };
+
+  config = lib.mkIf cfg.enable {
+    networking.interfaces.${cfg.ethernet-interface}.wakeOnLan.enable = true;
   };
 }
