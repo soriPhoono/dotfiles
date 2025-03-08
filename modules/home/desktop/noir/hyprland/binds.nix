@@ -23,73 +23,121 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    wayland.windowManager.hyprland.settings = {
-      "$mod" = cfg.modKey;
+    wayland.windowManager.hyprland.settings = let
+      killScript = pkgs.writeShellApplication {
+        name = "killscript.sh";
 
-      bind = let
-        killScript = pkgs.writeShellApplication {
-          name = "killscript.sh";
+        runtimeInputs = with pkgs; [
+          jq
+          xdotool
+        ];
 
-          runtimeInputs = with pkgs; [
-            jq
-            xdotool
-          ];
+        text = ''
+          if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ]; then
+            xdotool getactivewindow windowunmap
+          else
+            hyprctl dispatch killactive ""
+          fi
+        '';
+      };
 
-          text = ''
-            if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ]; then
-              xdotool getactivewindow windowunmap
-            else
-              hyprctl dispatch killactive ""
+      screenshot = pkgs.writeShellApplication {
+        name = "screenshot.sh";
+
+        runtimeInputs = with pkgs; [
+          grimblast
+          swappy
+        ];
+
+        text =
+          # Bash
+          ''
+            swpy_dir="$HOME/.config/swappy"
+            save_dir="$HOME/Pictures/Screenshots"
+            save_file=$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')
+            temp_screenshot="/tmp/screenshot.png"
+
+            mkdir -p "$save_dir"
+            mkdir -p "$swpy_dir"
+            echo -e "[Default]\nsave_dir=$save_dir\nsave_filename_format=$save_file" > "$swpy_dir/config"
+
+            case "$1" in
+            p)
+              grimblast copysave screen $temp_screenshot && swappy -f $temp_screenshot ;;
+            s)
+              grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
+            m)
+              grimblast copysave output $temp_screenshot && swappy -f $temp_screenshot ;;
+            *)
+              cat <<< "
+                ./screenshot.sh <action>
+                ...valid actions are...
+                  p : print all screens
+                  s : snip current screen (frozen)
+                  m : print focused monitor
+              " ;;
+            esac
+
+            rm "$temp_screenshot"
+
+            if [ -f "$save_dir/$save_file" ]; then
+              notify-send -a "Screenshot" -i "$save_dir/$save_file" -t 2200 "Screenshot saved" "saved at $save_dir/$save_file"
             fi
           '';
-        };
+      };
 
-        # TODO: fix this!
-        screenshot = pkgs.writeShellApplication {
-          name = "screenshot.sh";
+      audio = pkgs.writeShellApplication {
+        name = "audio.sh";
 
-          runtimeInputs = with pkgs; [
-            grimblast
-            swappy
-          ];
+        runtimeInputs = with pkgs; [
+          wireplumber
+          playerctl
+        ];
 
-          text =
-            # Bash
-            ''
-              swpy_dir="$HOME/.config/swappy"
-              save_dir="$HOME/Pictures/Screenshots"
-              save_file=$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')
-              temp_screenshot="/tmp/screenshot.png"
+        text =
+          # Bash
+          ''
+            case "$1" in
+            up)
+              wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+              ;;
+            down)
+              wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+              ;;
+            mute)
+              wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+              ;;
+            micmute)
+              wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+              ;;
+            playpause)
+              playerctl play-pause
+              ;;
+            next)
+              playerctl next
+              ;;
+            previous)
+              playerctl previous
+              ;;
+            *)
+              cat <<< "
+                ./volume.sh <action>
+                ...valid actions are...
+                  up : raise volume up
+                  down : lower volume down
+                  mute : toggle mute
+                  micmute : toggle mic mute
+                  playpause : toggle play/pause
+                  next : play next track
+                  previous : play previous track
+              " ;;
+            esac
+          '';
+      };
+    in {
+      "$mod" = cfg.modKey;
 
-              mkdir -p "$save_dir"
-              mkdir -p "$swpy_dir"
-              echo -e "[Default]\nsave_dir=$save_dir\nsave_filename_format=$save_file" > "$swpy_dir/config"
-
-              case "$1" in
-              p)
-                grimblast copysave screen $temp_screenshot && swappy -f $temp_screenshot ;;
-              s)
-                grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
-              m)
-                grimblast copysave output $temp_screenshot && swappy -f $temp_screenshot ;;
-              *)
-                cat <<< "
-                  ./screenshot.sh <action>
-                  ...valid actions are...
-                    p : print all screens
-                    s : snip current screen (frozen)
-                    m : print focused monitor
-                " ;;
-              esac
-
-              rm "$temp_screenshot"
-
-              if [ -f "$save_dir/$save_file" ]; then
-                notify-send -a "Screenshot" -i "$save_dir/$save_file" -t 2200 "Screenshot saved" "saved at $save_dir/$save_file"
-              fi
-            '';
-        };
-      in
+      bind =
         [
           "$mod, Q, exec, ${killScript}/bin/killscript.sh"
 
@@ -97,17 +145,18 @@ in {
           "$mod, P, pin, active"
           "$mod, C, centerwindow, "
 
-          "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
-          "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
           "$mod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+          "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
           "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
 
-          ", XF86AudioMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-          ", XF86AudioMicMute, exec, ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+          "$mod, Return, exec, $TERMINAL"
 
-          ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
-          ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl prev"
-          ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+          ", XF86AudioMute, exec, ${audio}/bin/audio.sh mute"
+          ", XF86AudioMicMute, exec, ${audio}/bin/audio.sh micmute"
+
+          ", XF86AudioNext, exec, ${audio}/bin/audio next"
+          ", XF86AudioPrev, exec, ${audio}/bin/audio previous"
+          ", XF86AudioPlay, exec, ${audio}/bin/audio playpause"
 
           ", Print, exec, ${screenshot}/bin/screenshot.sh s"
           "CTRL, Print, exec, ${screenshot}/bin/screenshot.sh m"
@@ -153,8 +202,8 @@ in {
         );
 
       binde = [
-        ", XF86AudioLowerVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioRaiseVolume, exec, ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, ${audio}/bin/audio.sh down"
+        ", XF86AudioRaiseVolume, exec, ${audio}/bin/audio.sh up"
 
         ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 10%+"
         ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl set 10%-"

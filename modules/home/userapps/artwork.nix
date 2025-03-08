@@ -12,8 +12,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       krita
-      (lib.mkIf (!nixosConfig.core.hardware.gpu.dedicated.amd.enable) pkgs.blender)
-      (lib.mkIf nixosConfig.core.hardware.gpu.dedicated.amd.enable pkgs.blender-hip)
+      (lib.mkIf (nixosConfig != null && !nixosConfig.core.hardware.gpu.dedicated.amd.enable) pkgs.blender)
+      (lib.mkIf (nixosConfig != null && nixosConfig.core.hardware.gpu.dedicated.amd.enable) pkgs.blender-hip)
     ];
   };
 }

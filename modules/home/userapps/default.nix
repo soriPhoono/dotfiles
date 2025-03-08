@@ -11,6 +11,7 @@ in {
     ./development.nix
     ./streaming.nix
 
+    ./programs/ghostty.nix
     ./programs/firefox.nix
     ./programs/bitwarden.nix
     ./programs/thunderbird.nix

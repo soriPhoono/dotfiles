@@ -5,7 +5,6 @@
     ./programs/fuzzel.nix
     ./programs/waybar.nix
     ./programs/hyprlock.nix
-    ./programs/ghostty.nix
     ./programs/nautilus.nix
 
     ./services/mako.nix
