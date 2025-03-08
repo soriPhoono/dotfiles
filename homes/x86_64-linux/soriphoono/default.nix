@@ -29,7 +29,6 @@
     };
 
     programs = {
-      ssh.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
       git = {
         userName = "soriphoono";
         userEmail = "soriphoono@gmail.com";

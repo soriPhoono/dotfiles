@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  nixosConfig,
   ...
 }: let
   cfg = config.core.programs.git;
@@ -34,7 +35,10 @@ in {
       signing = {
         format = "ssh";
         signByDefault = true;
-        key = config.core.programs.ssh.publicKey;
+        key =
+          if (nixosConfig == null)
+          then config.core.programs.ssh.publicKey
+          else lib.elemAt nixosConfig.users.extraUsers.${config.home.username}.openssh.authorizedKeys.keys 0;
       };
 
       extraConfig = {
