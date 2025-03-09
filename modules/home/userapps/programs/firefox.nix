@@ -9,6 +9,8 @@ in {
   options.userapps.programs.firefox.enable = lib.mkEnableOption "Enable Firefox";
 
   config = lib.mkIf cfg.enable {
+    home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
+
     programs = {
       firefox = let
         ff-ultima = pkgs.fetchFromGitHub {
@@ -21,9 +23,15 @@ in {
         enable = true;
 
         profiles.default = {
+          id = 0;
+          name = "default";
           isDefault = true;
 
           search = {
+            force = true;
+
+            order = ["DuckDuckGo"];
+
             default = "DuckDuckGo";
 
             engines = {
@@ -68,6 +76,9 @@ in {
                 icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = ["@no"];
               };
+
+              "Google".metaData.hidden = true;
+              "Bing".metaData.hidden = true;
             };
           };
 
@@ -79,6 +90,12 @@ in {
 
           settings = {
             extensions.autoDisableScopes = 0;
+            browser = {
+              search = {
+                defaultenginename = "DuckDuckGo";
+                "order.1" = "DuckDuckGo";
+              };
+            };
           };
 
           extraConfig = builtins.readFile (ff-ultima + "/user.js");

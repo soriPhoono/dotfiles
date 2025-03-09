@@ -2,6 +2,7 @@
   imports = [
     ./plugins/dashboard.nix
     ./plugins/filetree.nix
+    ./plugins/statusline.nix
     ./plugins/binds.nix
     ./plugins/languages.nix
     ./plugins/lsp.nix
