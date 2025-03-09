@@ -90,6 +90,8 @@ in {
         name = "audio.sh";
 
         runtimeInputs = with pkgs; [
+          bc
+
           wireplumber
           playerctl
         ];
@@ -99,7 +101,7 @@ in {
           ''
             case "$1" in
             up)
-              if [ "$(wpctl get-volume @DEFAULT_SINK@ | awk '{ print $2 }')" != "0.95" ]; then
+              if [[ "$(echo "$(wpctl get-volume @DEFAULT_SINK@ | awk '{ print $2 }') <= 0.95" | bc)" == "1" ]]; then
                 wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
               fi
               ;;
