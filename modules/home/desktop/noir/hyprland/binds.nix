@@ -99,7 +99,9 @@ in {
           ''
             case "$1" in
             up)
-              wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+              if [ "$(wpctl get-volume @DEFAULT_SINK@ | awk '{ print $2 }')" != "0.95" ]; then
+                wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+              fi
               ;;
             down)
               wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
