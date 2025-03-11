@@ -15,6 +15,7 @@ in {
     ./programs/firefox.nix
     ./programs/bitwarden.nix
     ./programs/thunderbird.nix
+    ./programs/zathura.nix
   ];
 
   options.userapps = {
