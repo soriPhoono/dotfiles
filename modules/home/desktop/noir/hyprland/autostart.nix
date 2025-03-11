@@ -43,24 +43,16 @@ in {
         text =
           # Bash
           ''
-            if pgrep waybar; then pkill waybar; fi
-
-            waybar &
-
             if [[ -d ~/Pictures/Wallpapers ]];
             then
+              random_x=$(echo "scale=2; $RANDOM/32767" | bc)
+              random_y=$(echo "scale=2; $RANDOM/32767" | bc)
+
               if pgrep swww-daemon; then swww kill; fi
 
-              swww-daemon &
+              swww-daemon --format xrgb &
 
-              if [ $? -eq 1 ]; then
-                random_x=$(echo "scale=2; $RANDOM/32767" | bc)
-                random_y=$(echo "scale=2; $RANDOM/32767" | bc)
-
-                swww-daemon --format xrgb &
-
-                find ~/Pictures/Wallpapers/ -type f -exec swww img {} --transition-type "grow" --transition-pos "$random_x,$random_y" --transition-duration 3 \;
-              fi
+              find ~/Pictures/Wallpapers/ -type f -exec swww img {} --transition-type "grow" --transition-pos "$random_x,$random_y" --transition-duration 3 \;
 
               sleep 0.5
 
