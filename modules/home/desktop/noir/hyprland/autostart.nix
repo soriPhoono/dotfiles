@@ -16,6 +16,8 @@ in {
 
           wl-clipboard-rs
           wl-clip-persist
+
+          swww
         ];
 
         text = ''
@@ -25,6 +27,8 @@ in {
           lxqt-policykit-agent &
 
           wl-clip-persist --clipboard both &
+
+          swww-daemon --format xrgb &
         '';
       };
 
@@ -34,9 +38,6 @@ in {
         runtimeInputs = with pkgs; [
           libnotify
 
-          bc
-
-          waybar
           swww
         ];
 
@@ -45,15 +46,6 @@ in {
           ''
             if [[ -d ~/Pictures/Wallpapers ]];
             then
-              random_x=$(echo "scale=2; $RANDOM/32767" | bc)
-              random_y=$(echo "scale=2; $RANDOM/32767" | bc)
-
-              if pgrep swww-daemon; then swww kill; fi
-
-              swww-daemon --format xrgb &
-
-              find ~/Pictures/Wallpapers/ -type f -exec swww img {} --transition-type "grow" --transition-pos "$random_x,$random_y" --transition-duration 3 \;
-
               sleep 0.5
 
               swww restore

@@ -11,6 +11,9 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # Administration tools
+      wakeonlan
+
+      # Communication tools
       element-desktop
     ];
   };
