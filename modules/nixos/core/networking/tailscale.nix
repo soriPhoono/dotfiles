@@ -12,7 +12,7 @@ in {
     useRoutingFeatures = lib.mkOption {
       type = lib.types.str;
       description = "Enable routing features";
-      default = "client";
+      default = "both";
     };
   };
 
