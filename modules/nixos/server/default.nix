@@ -5,6 +5,10 @@
 }: let
   cfg = config.server;
 in {
+  imports = [
+    ./containers/nextcloud.nix
+  ];
+
   options.server = {
     enable = lib.mkEnableOption "Enable server configuration mode";
 
@@ -15,6 +19,11 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    networking.interfaces.${cfg.ethernet-interface}.wakeOnLan.enable = true;
+    networking.nat = {
+      enable = true;
+      internalInterfaces = ["ve-+"];
+      externalInterface = "enp4s0f4u2";
+      enableIPv6 = true;
+    };
   };
 }

@@ -27,6 +27,8 @@ in {
       discord
       signal-desktop
 
+      vlc
+
       onlyoffice-desktopeditors
       joplin-desktop
 
