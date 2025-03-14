@@ -7,15 +7,16 @@
   cfg = config.userapps;
 in {
   imports = [
-    ./artwork.nix
-    ./development.nix
-    ./streaming.nix
-
     ./programs/ghostty.nix
     ./programs/firefox.nix
     ./programs/bitwarden.nix
+    ./programs/vscode.nix
     ./programs/thunderbird.nix
     ./programs/zathura.nix
+
+    ./artwork.nix
+    ./development.nix
+    ./streaming.nix
   ];
 
   options.userapps = {
