@@ -43,7 +43,7 @@ in {
       script = with pkgs;
       # bash
         ''
-          sleep 2
+          sleep 0.5
 
           status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
           if [ $status = "Running" ]; then
