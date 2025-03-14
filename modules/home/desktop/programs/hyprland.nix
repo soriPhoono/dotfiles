@@ -1,17 +1,65 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
-  cfg = config.hyprland;
+  cfg = config.desktop.programs.hyprland;
 in {
-  options.hyprland = {
+  options.desktop.programs.hyprland = let
+    mkListOfStr = description:
+      lib.mkOption {
+        inherit description;
+        type = with lib.types; listOf str;
+
+        default = [];
+      };
+  in {
+    enable = lib.mkEnableOption "Enable hyprland wayland compositor";
+
+    environmentVariables = lib.mkOption {
+      type = with lib.types; attrsOf str;
+
+      default = {};
+
+      description = "Environment variables for the session compositor";
+    };
+
+    extraSettings = lib.mkOption {
+      type = with lib.types; attrs;
+
+      default = {};
+
+      description = "Extra hyprland settings";
+    };
+
+    autostart = lib.mkOption {
+      type = with lib.types; listOf str;
+
+      default = [];
+
+      description = "Commands to run on hyprland startup";
+    };
+
+    onReload = lib.mkOption {
+      type = with lib.types; listOf str;
+
+      default = [];
+
+      description = "Commands to run on hyprland reload";
+    };
+
     modKey = lib.mkOption {
       type = lib.types.str;
       description = "The modifier key to enable hyprland hotkeys";
 
       default = "SUPER";
+    };
+
+    windowRules = mkListOfStr "Window rules for Hyprland.";
+
+    animations = {
+      curves = mkListOfStr "Animation curves for Hyprland.";
+      animationRules = mkListOfStr "Animation rules for Hyprland.";
     };
   };
 
@@ -34,6 +82,19 @@ in {
         '';
       };
     in {
+      enable = true;
+
+      systemd.variables = ["--all"];
+
+      settings =
+        {
+          env =
+            lib.mapAttrsToList
+            (name: value: "${name},${value}")
+            cfg.environmentVariables;
+        }
+        // cfg.extraSettings;
+
       "$mod" = cfg.modKey;
 
       bind =
@@ -89,6 +150,14 @@ in {
         "$mod, mouse:273, resizewindow"
         "$mod, ALT_L, resizewindow"
       ];
+
+      exec-once = cfg.autostart;
+      exec = cfg.onReload;
+
+      windowrulev2 = cfg.windowRules;
+
+      bezier = cfg.animations.curves;
+      animation = cfg.animations.animationRules;
     };
   };
 }

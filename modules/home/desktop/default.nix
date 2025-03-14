@@ -4,7 +4,7 @@
     ./programs/waybar.nix
     ./programs/hyprlock.nix
     ./programs/nautilus.nix
-    ./programs/hyprland/general.nix
+    ./programs/hyprland.nix
 
     ./services/mako.nix
     ./services/hypridle.nix
