@@ -1,6 +1,6 @@
 {lib, ...}: {
   desktop = {
-    noir.enable = true;
+    environments.noir.enable = true;
 
     services.hypridle.enable = lib.mkForce false;
   };

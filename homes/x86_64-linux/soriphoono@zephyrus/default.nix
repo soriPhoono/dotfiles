@@ -1,5 +1,5 @@
 {
-  desktop.noir.enable = true;
+  desktop.environments.noir.enable = true;
 
   userapps = {
     enable = true;

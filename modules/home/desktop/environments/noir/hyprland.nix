@@ -7,8 +7,18 @@
   cfg = config.desktop.environments.noir;
 in {
   config = lib.mkIf cfg.enable {
-    hyprland = {
+    desktop.programs.hyprland = {
       enable = true;
+
+      environmentVariables = {
+        NIXOS_OZONE_WL = "1";
+
+        GDK_BACKEND = "wayland,x11,*";
+
+        QT_QPA_PLATFORM = "wayland;xcb";
+        QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+        QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      };
 
       autostart = let
         bootstrap = pkgs.writeShellApplication {
@@ -28,6 +38,8 @@ in {
             wl-clip-persist --clipboard both &
 
             swww-daemon --format xrgb &
+
+            bitwarden --ozone-platform-hint=auto
           '';
         };
       in [
@@ -49,7 +61,7 @@ in {
             ''
               if [[ -d ~/Pictures/Wallpapers ]];
               then
-                sleep 0.1
+                sleep 0.5
 
                 swww restore
               else
@@ -61,7 +73,42 @@ in {
         "${reload}/bin/reload.sh &"
       ];
 
-      extraSettings = let
+      settings = {
+        general = {
+          border_size = 3;
+
+          snap = {
+            enabled = true;
+            border_overlap = true;
+          };
+        };
+
+        decoration.rounding = 5;
+
+        input = {
+          repeat_rate = 20;
+          repeat_delay = 300;
+
+          accel_profile = "flat";
+        };
+
+        gestures = {
+          workspace_swipe = true;
+        };
+
+        misc = {
+          disable_hyprland_logo = true;
+          disable_splash_rendering = true;
+          mouse_move_enables_dpms = true;
+          key_press_enables_dpms = true;
+        };
+
+        xwayland.force_zero_scaling = true;
+
+        cursor.no_hardware_cursors = true;
+      };
+
+      binds = let
         screenshot = pkgs.writeShellApplication {
           name = "screenshot.sh";
 
@@ -160,40 +207,9 @@ in {
             '';
         };
       in {
-        general = {
-          border_size = 3;
+        modKey = "SUPER";
 
-          snap = {
-            enabled = true;
-            border_overlap = true;
-          };
-        };
-
-        decoration.rounding = 5;
-
-        input = {
-          repeat_rate = 20;
-          repeat_delay = 300;
-
-          accel_profile = "flat";
-        };
-
-        gestures = {
-          workspace_swipe = true;
-        };
-
-        misc = {
-          disable_hyprland_logo = true;
-          disable_splash_rendering = true;
-          mouse_move_enables_dpms = true;
-          key_press_enables_dpms = true;
-        };
-
-        xwayland.force_zero_scaling = true;
-
-        cursor.no_hardware_cursors = true;
-
-        bind = [
+        extraBinds = [
           "$mod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
           "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
           "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
@@ -212,7 +228,7 @@ in {
           "ALT, Print, exec, ${screenshot}/bin/screenshot.sh p"
         ];
 
-        binde = [
+        extraBindsE = [
           ", XF86AudioLowerVolume, exec, ${audio}/bin/audio.sh down"
           ", XF86AudioRaiseVolume, exec, ${audio}/bin/audio.sh up"
 
@@ -238,10 +254,6 @@ in {
 
         "opacity 1, title:(.* - YouTube —.*)"
 
-        "opacity 1, class:(gamescope)"
-        "float, class:(gamescope)"
-        "workspace 1, class:(gamescope)"
-
         "float,class:^(nm-applet)$"
         "size 80% 80%, class:^(nm-applet)$"
         "center, class:^(nm-applet)$"
@@ -257,6 +269,10 @@ in {
         "float,class:^(blueberry.py)$"
         "size, class:^(blueberry.py)$"
         "center, class:^(blueberry.py)$"
+
+        "opacity 1, class:(gamescope)"
+        "float, class:(gamescope)"
+        "workspace 1, class:(gamescope)"
       ];
     };
   };

@@ -33,7 +33,7 @@ in {
     stylix.targets.hyprpaper.enable = lib.mkForce false;
 
     home.file = {
-      "Pictures/Wallpapers".source = ../../../../assets/wallpapers;
+      "Pictures/Wallpapers".source = ../../../../../assets/wallpapers;
     };
 
     xdg.portal = {

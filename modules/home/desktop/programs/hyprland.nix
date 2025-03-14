@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -14,7 +15,8 @@ in {
         default = [];
       };
   in {
-    enable = lib.mkEnableOption "Enable hyprland wayland compositor";
+    enable =
+      lib.mkEnableOption "Enable hyprland wayland compositor";
 
     environmentVariables = lib.mkOption {
       type = with lib.types; attrsOf str;
@@ -24,7 +26,7 @@ in {
       description = "Environment variables for the session compositor";
     };
 
-    extraSettings = lib.mkOption {
+    settings = lib.mkOption {
       type = with lib.types; attrs;
 
       default = {};
@@ -32,27 +34,20 @@ in {
       description = "Extra hyprland settings";
     };
 
-    autostart = lib.mkOption {
-      type = with lib.types; listOf str;
+    autostart = mkListOfStr "Commands to run on hyprland startup";
 
-      default = [];
+    onReload = mkListOfStr "Commands to run on hyprland reload";
 
-      description = "Commands to run on hyprland startup";
-    };
+    binds = {
+      modKey = lib.mkOption {
+        type = lib.types.str;
+        description = "The modifier key to enable hyprland hotkeys";
 
-    onReload = lib.mkOption {
-      type = with lib.types; listOf str;
+        default = "SUPER";
+      };
 
-      default = [];
-
-      description = "Commands to run on hyprland reload";
-    };
-
-    modKey = lib.mkOption {
-      type = lib.types.str;
-      description = "The modifier key to enable hyprland hotkeys";
-
-      default = "SUPER";
+      extraBinds = mkListOfStr "Extra binds for hyprland";
+      extraBindsE = mkListOfStr "Extra binds for hyprland (Lid)";
     };
 
     windowRules = mkListOfStr "Window rules for Hyprland.";
@@ -64,24 +59,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    wayland.windowManager.hyprland.settings = let
-      killScript = pkgs.writeShellApplication {
-        name = "killscript.sh";
-
-        runtimeInputs = with pkgs; [
-          jq
-          xdotool
-        ];
-
-        text = ''
-          if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ]; then
-            xdotool getactivewindow windowunmap
-          else
-            hyprctl dispatch killactive ""
-          fi
-        '';
-      };
-    in {
+    wayland.windowManager.hyprland = {
       enable = true;
 
       systemd.variables = ["--all"];
@@ -92,72 +70,92 @@ in {
             lib.mapAttrsToList
             (name: value: "${name},${value}")
             cfg.environmentVariables;
-        }
-        // cfg.extraSettings;
 
-      "$mod" = cfg.modKey;
+          "$mod" = cfg.binds.modKey;
 
-      bind =
-        [
-          "$mod, Q, exec, ${killScript}/bin/killscript.sh"
+          bind = let
+            killScript = pkgs.writeShellApplication {
+              name = "killscript.sh";
 
-          "$mod, F, togglefloating, "
-          "$mod, P, pin, active"
-          "$mod, C, centerwindow, "
-        ]
-        ++ (builtins.concatLists (builtins.genList (
-            i: let
-              directions = [
-                "Up"
-                "Left"
-                "Right"
-                "Down"
+              runtimeInputs = with pkgs; [
+                jq
+                xdotool
               ];
 
-              key = builtins.elemAt directions i;
-              direction = lib.toLower (lib.substring 0 1 key);
+              text = ''
+                if [ "$(hyprctl activewindow -j | jq -r ".class")" = "Steam" ]; then
+                  xdotool getactivewindow windowunmap
+                else
+                  hyprctl dispatch killactive ""
+                fi
+              '';
+            };
+          in
+            [
+              "$mod, Q, exec, ${killScript}/bin/killscript.sh"
 
-              resizeParams =
-                if direction == "u"
-                then "0 -10"
-                else if direction == "l"
-                then "-10 0"
-                else if direction == "r"
-                then "10 0"
-                else "0 10";
-            in [
-              "$mod, ${key}, movefocus, ${direction}"
-              "$mod CTRL, ${key}, movewindow, ${direction}"
-              "$mod CTRL_SHIFT, ${key}, resizeactive, ${resizeParams}"
+              "$mod, F, togglefloating, "
+              "$mod, P, pin, active"
+              "$mod, C, centerwindow, "
             ]
-          )
-          4))
-        ++ (
-          builtins.concatLists (builtins.genList (
-              i: let
-                ws = i + 1;
-              in [
-                "$mod, ${toString ws}, workspace, ${toString ws}"
-                "$mod SHIFT, ${toString ws}, movetoworkspacesilent, ${toString ws}"
-              ]
+            ++ (builtins.concatLists (builtins.genList (
+                i: let
+                  directions = [
+                    "Up"
+                    "Left"
+                    "Right"
+                    "Down"
+                  ];
+
+                  key = builtins.elemAt directions i;
+                  direction = lib.toLower (lib.substring 0 1 key);
+
+                  resizeParams =
+                    if direction == "u"
+                    then "0 -10"
+                    else if direction == "l"
+                    then "-10 0"
+                    else if direction == "r"
+                    then "10 0"
+                    else "0 10";
+                in [
+                  "$mod, ${key}, movefocus, ${direction}"
+                  "$mod CTRL, ${key}, movewindow, ${direction}"
+                  "$mod CTRL_SHIFT, ${key}, resizeactive, ${resizeParams}"
+                ]
+              )
+              4))
+            ++ (
+              builtins.concatLists (builtins.genList (
+                  i: let
+                    ws = i + 1;
+                  in [
+                    "$mod, ${toString ws}, workspace, ${toString ws}"
+                    "$mod SHIFT, ${toString ws}, movetoworkspacesilent, ${toString ws}"
+                  ]
+                )
+                9)
             )
-            9)
-        );
+            ++ cfg.binds.extraBinds;
 
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, Control_L, movewindow"
-        "$mod, mouse:273, resizewindow"
-        "$mod, ALT_L, resizewindow"
-      ];
+          bindl = cfg.binds.extraBindsE;
 
-      exec-once = cfg.autostart;
-      exec = cfg.onReload;
+          bindm = [
+            "$mod, mouse:272, movewindow"
+            "$mod, Control_L, movewindow"
+            "$mod, mouse:273, resizewindow"
+            "$mod, ALT_L, resizewindow"
+          ];
 
-      windowrulev2 = cfg.windowRules;
+          exec-once = cfg.autostart;
+          exec = cfg.onReload;
 
-      bezier = cfg.animations.curves;
-      animation = cfg.animations.animationRules;
+          windowrulev2 = cfg.windowRules;
+
+          bezier = cfg.animations.curves;
+          animation = cfg.animations.animationRules;
+        }
+        // cfg.settings;
     };
   };
 }
