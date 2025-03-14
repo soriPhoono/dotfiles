@@ -9,5 +9,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.gnome-keyring.enable = true;
+
+    core.impermanence.directories = [
+      ".local/share/keyrings"
+    ];
   };
 }

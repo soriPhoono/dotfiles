@@ -22,31 +22,59 @@ in {
   config = lib.mkIf config.core.boot.enable {
     boot.initrd.systemd = {
       enable = true;
-      services.reset = {
-        description = "reset root filesystem";
+      services = {
+        reset-root = {
+          description = "reset root filesystem";
 
-        wantedBy = ["initrd.target"];
-        requires = ["dev-disk-by\\x2dlabel-nixos.device"];
-        after = ["dev-disk-by\\x2dlabel-nixos.device"];
-        before = ["sysroot.mount"];
-        unitConfig.DefaultDependencies = "no";
-        serviceConfig.Type = "oneshot";
-        script = ''
-          mkdir -p /mnt
-          mount -o subvolid=5 -t btrfs /dev/disk/by-partlabel/disk-root-root /mnt
-          btrfs subvolume list -o /mnt/root
-          btrfs subvolume list -o /mnt/root |
-          cut -f9 -d' ' |
-          while read subvolume; do
-            echo "deleting /$subvolume subvolume..."
-            btrfs subvolume delete "/mnt/$subvolume"
-          done &&
-          echo "deleting /root subvolume..." &&
-          btrfs subvolume delete /mnt/root
-          echo "restoring blank /root subvolume..."
-          btrfs subvolume snapshot /mnt/root-blank /mnt/root
-          umount /mnt
-        '';
+          wantedBy = ["initrd.target"];
+          requires = ["dev-disk-by\\x2dlabel-nixos.device"];
+          after = ["dev-disk-by\\x2dlabel-nixos.device"];
+          before = ["sysroot.mount"];
+          unitConfig.DefaultDependencies = "no";
+          serviceConfig.Type = "oneshot";
+          script = ''
+            mkdir -p /mnt
+            mount -o subvolid=5 -t btrfs /dev/disk/by-partlabel/disk-root-root /mnt
+            btrfs subvolume list -o /mnt/root
+            btrfs subvolume list -o /mnt/root |
+            cut -f9 -d' ' |
+            while read subvolume; do
+              echo "deleting /$subvolume subvolume..."
+              btrfs subvolume delete "/mnt/$subvolume"
+            done &&
+            echo "deleting /root subvolume..." &&
+            btrfs subvolume delete /mnt/root
+            echo "restoring blank /root subvolume..."
+            btrfs subvolume snapshot /mnt/root-blank /mnt/root
+            umount /mnt
+          '';
+        };
+        reset-home = {
+          description = "reset home filesystem";
+
+          wantedBy = ["initrd.target"];
+          requires = ["dev-disk-by\\x2dlabel-nixos.device"];
+          after = ["dev-disk-by\\x2dlabel-nixos.device"];
+          before = ["sysroot.mount"];
+          unitConfig.DefaultDependencies = "no";
+          serviceConfig.Type = "oneshot";
+          script = ''
+            mkdir -p /mnt
+            mount -o subvolid=5 -t btrfs /dev/disk/by-partlabel/disk-root-root /mnt
+            btrfs subvolume list -o /mnt/root
+            btrfs subvolume list -o /mnt/root |
+            cut -f9 -d' ' |
+            while read subvolume; do
+              echo "deleting /$subvolume subvolume..."
+              btrfs subvolume delete "/mnt/$subvolume"
+            done &&
+            echo "deleting /home subvolume..." &&
+            btrfs subvolume delete /mnt/home
+            echo "restoring blank /home subvolume..."
+            btrfs subvolume snapshot /mnt/home-blank /mnt/home
+            umount /mnt
+          '';
+        };
       };
     };
 
@@ -74,5 +102,7 @@ in {
           ++ cfg.files;
       };
     };
+
+    programs.fuse.userAllowOther = true;
   };
 }

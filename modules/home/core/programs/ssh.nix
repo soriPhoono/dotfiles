@@ -12,5 +12,9 @@
       compression = true;
       controlMaster = "yes";
     };
+
+    core.impermanence.directories = [
+      ".ssh"
+    ];
   };
 }

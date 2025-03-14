@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ./impermanence.nix
     ./secrets.nix
 
     ./shells/fish.nix

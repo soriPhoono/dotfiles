@@ -5,4 +5,8 @@
 
     # TODO: setup sync server
   };
+
+  core.impermanence.directories = [
+    ".local/share/atuin"
+  ];
 }

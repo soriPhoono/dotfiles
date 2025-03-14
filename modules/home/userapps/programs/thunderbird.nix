@@ -13,5 +13,9 @@ in {
 
       profiles.default.isDefault = true;
     };
+
+    core.impermanence.directories = [
+      ".thunderbird" # TODO: update this when personal email is online
+    ];
   };
 }

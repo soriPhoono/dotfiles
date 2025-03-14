@@ -97,6 +97,7 @@
         ];
 
         modules = with inputs; [
+          impermanence.homeManagerModules.impermanence
           sops-nix.homeManagerModules.sops
           nvf.homeManagerModules.default
         ];
