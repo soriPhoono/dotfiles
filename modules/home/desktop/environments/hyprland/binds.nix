@@ -13,13 +13,6 @@ in {
 
       default = "SUPER";
     };
-
-    switchId = lib.mkOption {
-      type = lib.types.str;
-      description = "The id for the laptop switch if applicable";
-
-      default = null;
-    };
   };
 
   config = lib.mkIf cfg.enable {
