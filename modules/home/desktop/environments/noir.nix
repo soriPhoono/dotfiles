@@ -117,6 +117,14 @@ in {
 
         cursor.no_hardware_cursors = true;
       };
+
+      extraBinds = [
+        "$mod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
+        "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
+        "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
+
+        "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
+      ];
     };
 
     home.file = {

@@ -4,14 +4,21 @@
   config,
   ...
 }: let
-  cfg = config.desktop.noir;
+  cfg = config.hyprland;
 in {
-  options.desktop.noir = {
+  options.hyprland = {
     modKey = lib.mkOption {
       type = lib.types.str;
       description = "The modifier key to enable hyprland hotkeys";
 
       default = "SUPER";
+    };
+
+    extraBinds = lib.mkOption {
+      type = with lib.types; listOf str;
+      description = "Additional hotkey binds";
+
+      default = [];
     };
   };
 
@@ -142,12 +149,6 @@ in {
           "$mod, P, pin, active"
           "$mod, C, centerwindow, "
 
-          "$mod, L, exec, ${pkgs.hyprlock}/bin/hyprlock"
-          "$mod, A, exec, ${pkgs.fuzzel}/bin/fuzzel"
-          "$mod, E, exec, ${pkgs.nautilus}/bin/nautilus"
-
-          "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
-
           ", XF86AudioMute, exec, ${audio}/bin/audio.sh mute"
           ", XF86AudioMicMute, exec, ${audio}/bin/audio.sh micmute"
 
@@ -196,7 +197,8 @@ in {
               ]
             )
             9)
-        );
+        )
+        ++ cfg.extraBinds;
 
       binde = [
         ", XF86AudioLowerVolume, exec, ${audio}/bin/audio.sh down"

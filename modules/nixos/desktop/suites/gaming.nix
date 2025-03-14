@@ -104,5 +104,16 @@ in {
             // cfg.gamescopeMode);
       };
     };
+
+    services.ananicy = {
+      enable = true;
+      extraRules = [
+        {
+          name = "gamescope";
+
+          nice = 20;
+        }
+      ];
+    };
   };
 }
