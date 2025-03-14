@@ -105,15 +105,24 @@ in {
       };
     };
 
-    services.ananicy = {
-      enable = true;
-      extraRules = [
-        {
-          name = "gamescope";
+    services.ananicy.enable = true;
 
-          nice = 20;
-        }
-      ];
-    };
+    home-manager.users =
+      lib.listToAttrs
+      (
+        map (user: {
+          inherit (user) name;
+
+          value = {
+            core.impermanence.directories = [
+              {
+                directory = ".local/share/Steam";
+                method = "symlink";
+              }
+            ];
+          };
+        })
+        config.core.suites.users.users
+      );
   };
 }

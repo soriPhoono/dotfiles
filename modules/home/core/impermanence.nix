@@ -7,7 +7,7 @@
 in {
   options.core.impermanence = {
     directories = lib.mkOption {
-      type = with lib.types; oneOf [(listOf str) (attrsOf str)];
+      type = with lib.types; listOf (oneOf [str (attrsOf str)]);
 
       default = [];
 
@@ -15,7 +15,7 @@ in {
     };
 
     files = lib.mkOption {
-      type = with lib.types; oneOf [(listOf str) (attrsOf str)];
+      type = with lib.types; listOf (oneOf [str (attrsOf str)]);
 
       default = [];
 
