@@ -8,6 +8,8 @@ in {
   options.desktop.programs.hyprlock.enable = lib.mkEnableOption "Enable hyprlock wayland locker";
 
   config = lib.mkIf cfg.enable {
+    stylix.targets.hyprlock.enable = lib.mkForce false;
+
     programs.hyprlock = {
       enable = true;
       settings = {

@@ -6,11 +6,6 @@
 }: let
   cfg = config.desktop.noir;
 in {
-  imports = [
-    ./hyprland/binds.nix
-    ./hyprland/rules.nix
-  ];
-
   options.desktop.noir = {
     enable = lib.mkEnableOption "Enable hyprland desktop with sane defaults";
   };
@@ -32,6 +27,8 @@ in {
     };
 
     hyprland = {
+      enable = true;
+
       autostart = let
         bootstrap = pkgs.writeShellApplication {
           name = "bootstrap.sh";
@@ -125,7 +122,47 @@ in {
 
         "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
       ];
+
+      animations = {
+        curves = [
+          "ease-in-out, .42, 0, .58, 1"
+        ];
+
+        animationRules = [
+          "windows, 1, 5, ease-in-out, slide"
+          "fade, 1, 5, ease-in-out"
+        ];
+      };
+
+      windowRules = [
+        # Opacity
+        "opacity 0.8, class:(.*)"
+
+        "opacity 1, title:(.* - YouTube —.*)"
+
+        "opacity 1, class:(gamescope)"
+        "float, class:(gamescope)"
+        "workspace 1, class:(gamescope)"
+
+        "float,class:^(nm-applet)$"
+        "size 80% 80%, class:^(nm-applet)$"
+        "center, class:^(nm-applet)$"
+
+        "float,class:^(nm-connection-editor)$"
+        "size 80% 80%, class:^(nm-connection-editor)$"
+        "center, class:^(nm-connection-editor)$"
+
+        "float,class:^(pavucontrol)$"
+        "size 80% 80%, class:^(pavucontrol)$"
+        "center, class:^(pavucontrol)$"
+
+        "float,class:^(blueberry.py)$"
+        "size, class:^(blueberry.py)$"
+        "center, class:^(blueberry.py)$"
+      ];
     };
+
+    stylix.targets.hyprpaper.enable = lib.mkForce false;
 
     home.file = {
       "Pictures/Wallpapers".source = ../../../../assets/wallpapers;
@@ -151,12 +188,6 @@ in {
     gtk.iconTheme = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus-Dark";
-    };
-
-    wayland.windowManager.hyprland = {
-      enable = true;
-
-      systemd.variables = ["--all"];
     };
   };
 }
