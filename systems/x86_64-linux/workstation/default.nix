@@ -44,7 +44,7 @@
   };
 
   desktop = {
-    environments.noir.enable = true;
+    environments.hyprland.enable = true;
     suites.gaming = {
       enable = true;
       mode = "desktop";

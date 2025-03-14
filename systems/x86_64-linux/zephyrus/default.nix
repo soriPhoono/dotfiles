@@ -43,7 +43,7 @@
   };
 
   desktop = {
-    environments.noir.enable = true;
+    environments.hyprland.enable = true;
     services.asusd.enable = true;
     suites.gaming = {
       enable = true;

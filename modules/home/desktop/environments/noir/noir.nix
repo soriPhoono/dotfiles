@@ -8,6 +8,9 @@
 in {
   imports = [
     ./hyprland.nix
+    ./scripts.nix
+    ./binds.nix
+    ./rules.nix
   ];
 
   options.desktop.environments.noir = {

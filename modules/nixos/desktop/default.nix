@@ -1,6 +1,6 @@
 {
   imports = [
-    ./environments/noir.nix
+    ./environments/hyprland.nix
 
     ./programs/regreet.nix
     ./programs/hyprland.nix

@@ -83,6 +83,7 @@ in {
                     mount "/dev/disk/by-partlabel/disk-root-root" "$MNTPOINT" -o subvolid=5
                     trap 'umount $MNTPOINT; rm -rf $MNTPOINT' EXIT
                     btrfs subvolume snapshot -r $MNTPOINT/root $MNTPOINT/root-blank
+                    btrfs subvolume snapshot -r $MNTPOINT/home $MNTPOINT/home-blank
                   '';
                 };
               };

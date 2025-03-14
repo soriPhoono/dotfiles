@@ -30,7 +30,7 @@
     };
   };
 
-  desktop.environments.noir.enable = true;
+  desktop.environments.hyprland.enable = true;
 
   themes = {
     enable = true;
