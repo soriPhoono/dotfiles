@@ -45,10 +45,6 @@
   desktop = {
     environments.hyprland.enable = true;
     services.asusd.enable = true;
-    suites.gaming = {
-      enable = true;
-      mode = "desktop";
-    };
   };
 
   themes = {
