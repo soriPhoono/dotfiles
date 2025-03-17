@@ -120,5 +120,9 @@ in {
         resyncTimer = "10m";
       };
     };
+
+    core.impermanence.directories = [
+      ".mozzilla/firefox/default"
+    ];
   };
 }

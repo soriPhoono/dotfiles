@@ -1,6 +1,7 @@
 {
   imports = [
     ./programs/fuzzel.nix
+    ./programs/feh.nix
     ./programs/waybar.nix
     ./programs/hyprlock.nix
     ./programs/nautilus.nix

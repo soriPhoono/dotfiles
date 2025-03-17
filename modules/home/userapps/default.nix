@@ -12,6 +12,7 @@ in {
     ./programs/bitwarden.nix
     ./programs/vscode.nix
     ./programs/thunderbird.nix
+    ./programs/joplin-desktop.nix
     ./programs/zathura.nix
 
     ./artwork.nix
@@ -31,7 +32,6 @@ in {
       vlc
 
       onlyoffice-desktopeditors
-      joplin-desktop
 
       qbittorrent
       ytmdl
@@ -41,12 +41,11 @@ in {
       ghostty.enable = true;
       firefox.enable = true;
       bitwarden.enable = true;
+      joplin-desktop.enable = true;
     };
 
     core.impermanence.directories = [
       ".config/discord"
-
-      ".config/joplin-desktop"
 
       ".config/Signal"
     ];

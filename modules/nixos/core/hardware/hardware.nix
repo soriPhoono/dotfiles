@@ -14,7 +14,6 @@ in {
 
     ./monitors.nix
     ./bluetooth.nix
-    ./onlykey.nix
 
     ./android.nix
   ];

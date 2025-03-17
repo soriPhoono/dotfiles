@@ -12,6 +12,8 @@
 
         location.repositories = [
           {
+            path = "/persist/home/${config.home.username}/backup.borg";
+            label = "local";
           }
         ];
 
@@ -36,4 +38,8 @@
       };
     };
   };
+
+  core.impermanence.files = [
+    "backup.borg"
+  ];
 }
