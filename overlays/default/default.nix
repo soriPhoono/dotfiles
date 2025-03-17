@@ -3,7 +3,7 @@ _: _: prev: {
     _: {
       src = builtins.fetchTarball {
         url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-        sha256 = "1lfrnkq7qavlcbyjzn2m8kq39wn82z40dkpn6l5aijy12c775x7s";
+        sha256 = "07h735lzx70ghrddv0krahm1sqjcxx52wlpy7fsi17gqxix1mbrr";
       };
     }
   ); # Auto update discord on rebuild
