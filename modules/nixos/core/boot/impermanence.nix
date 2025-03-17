@@ -35,6 +35,7 @@ in {
           script = ''
             mkdir -p /mnt
             mount -o subvolid=5 -t btrfs /dev/disk/by-partlabel/disk-root-root /mnt
+
             btrfs subvolume list -o /mnt/root
             btrfs subvolume list -o /mnt/root |
             cut -f9 -d' ' |
@@ -46,23 +47,9 @@ in {
             btrfs subvolume delete /mnt/root
             echo "restoring blank /root subvolume..."
             btrfs subvolume snapshot /mnt/root-blank /mnt/root
-            umount /mnt
-          '';
-        };
-        reset-home = {
-          description = "reset home filesystem";
 
-          wantedBy = ["initrd.target"];
-          requires = ["dev-disk-by\\x2dlabel-nixos.device"];
-          after = ["dev-disk-by\\x2dlabel-nixos.device"];
-          before = ["sysroot.mount"];
-          unitConfig.DefaultDependencies = "no";
-          serviceConfig.Type = "oneshot";
-          script = ''
-            mkdir -p /mnt
-            mount -o subvolid=5 -t btrfs /dev/disk/by-partlabel/disk-root-root /mnt
-            btrfs subvolume list -o /mnt/root
-            btrfs subvolume list -o /mnt/root |
+            btrfs subvolume list -o /mnt/home
+            btrfs subvolume list -o /mnt/home |
             cut -f9 -d' ' |
             while read subvolume; do
               echo "deleting /$subvolume subvolume..."

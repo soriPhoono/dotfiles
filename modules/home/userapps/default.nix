@@ -42,5 +42,13 @@ in {
       firefox.enable = true;
       bitwarden.enable = true;
     };
+
+    core.impermanence.directories = [
+      ".config/discord"
+
+      ".config/joplin-desktop"
+
+      ".config/Signal"
+    ];
   };
 }

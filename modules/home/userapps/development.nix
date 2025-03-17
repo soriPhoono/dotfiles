@@ -16,5 +16,9 @@ in {
       # Communication tools
       element-desktop
     ];
+
+    core.impermanence.directories = [
+      ".config/Element"
+    ];
   };
 }

@@ -61,5 +61,9 @@ in {
         "${reload}/bin/reload.sh &"
       ];
     };
+
+    core.impermanence.directories = [
+      ".cache/swww"
+    ];
   };
 }

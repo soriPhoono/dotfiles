@@ -3,7 +3,7 @@ keys:
   - &admin_soriphoono age1e5jg7tt5czmwrty4w8unh6ajqsh9npn0dplxcfmjw8c3h6r39g9q2dggfu
 
   - &server_workstation age1tg5nr8dtzshrd0rne0xj76g6lrps8gxejwsasv9eylwu3cmqgexqpkjpg5
-  - &server_zephyrus age1f9gaalr0ylpctr3g6cnz82sa9kps7mfgvgu8406a4utxphmd7gnsra8p66
+  - &server_zephyrus age17n8s2ekm9txtamhclwwlkv33tm2ppvy0agsqxplgfdp09uj05v3qdk5nk4
   - &server_testbench age1fx8z5th0qy6qtm458t07z6xhlkp6mnnx9fl7zd22ctcks532yuusxum9ym
 creation_rules:
   - path_regex: homes/.*/soriphoono/secrets.(yaml|json|env|ini)$
