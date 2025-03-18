@@ -31,27 +31,29 @@ in {
       openFirewall = true;
     };
 
-    systemd.services.tailscaled-autoconnect = {
-      description = "Automatic connection to tailscale";
+    systemd.services = {
+      tailscaled-autoconnect = {
+        description = "Automatic connection to tailscale";
 
-      after = ["network-pre.target" "tailscaled.service"];
-      wants = ["network-pre.target" "tailscaled.service"];
-      wantedBy = ["multi-user.target"];
+        after = ["network-pre.target" "tailscaled.service"];
+        wants = ["network-pre.target" "tailscaled.service"];
+        wantedBy = ["multi-user.target"];
 
-      serviceConfig.Type = "oneshot";
+        serviceConfig.Type = "oneshot";
 
-      script = with pkgs;
-      # bash
-        ''
-          sleep 0.5
+        script = with pkgs;
+        # bash
+          ''
+            sleep 0.5
 
-          status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
-          if [ $status = "Running" ]; then
-            exit 0
-          fi
+            status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
+            if [ $status = "Running" ]; then
+              exit 0
+            fi
 
-          ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.tailscale_api_key.path})"
-        '';
+            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.tailscale_api_key.path})"
+          '';
+      };
     };
 
     core.boot.impermanence.directories = [

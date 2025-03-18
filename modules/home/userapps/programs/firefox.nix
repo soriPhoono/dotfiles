@@ -122,7 +122,7 @@ in {
     };
 
     core.impermanence.directories = [
-      ".mozzilla/firefox/default"
+      ".mozilla/firefox/default"
     ];
   };
 }
