@@ -24,6 +24,7 @@ in {
         hyprlock.enable = true;
         nautilus.enable = true;
         waybar.enable = true;
+        feh.enable = true;
       };
       services = {
         gammastep.enable = true;
