@@ -15,6 +15,7 @@ creation_rules:
     key_groups:
       - age:
           - *admin_recovery
+          - *admin_soriphoono
           - *server_workstation
           - *server_zephyrus
           - *server_testbench
