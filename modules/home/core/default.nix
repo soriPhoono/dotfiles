@@ -7,7 +7,6 @@
     ./shells/starship.nix
 
     ./programs/atuin.nix
-    ./programs/borgmatic.nix
     ./programs/fastfetch.nix
     ./programs/fd.nix
     ./programs/fzf.nix
