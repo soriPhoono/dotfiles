@@ -23,7 +23,7 @@ in {
     boot.initrd.systemd = {
       enable = true;
       services = {
-        reset-root = {
+        reset-disk = {
           description = "reset root filesystem";
 
           wantedBy = ["initrd.target"];

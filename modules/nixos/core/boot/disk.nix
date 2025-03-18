@@ -15,7 +15,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # TODO: make home follow impermanence
     disko.devices = let
       type = "btrfs";
       extraArgs = ["-L" "nixos" "-f"];
@@ -64,7 +63,7 @@ in {
               ESP = {
                 priority = 1;
                 name = "ESP";
-                size = "512M";
+                size = "1G";
                 type = "EF00";
                 content = {
                   type = "filesystem";

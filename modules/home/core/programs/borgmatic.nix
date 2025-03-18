@@ -3,19 +3,20 @@
     enable = true;
     backups = {
       personal = {
-        sourceDirectories = [
-          "${config.home.homeDirectory}/Documents"
-          "${config.home.homeDirectory}/Music"
-          "${config.home.homeDirectory}/Pictures"
-          "${config.home.homeDirectory}/Videos"
-        ];
-
-        location.repositories = [
-          {
-            path = "/persist/home/${config.home.username}/backup.borg";
-            label = "local";
-          }
-        ];
+        location = {
+          sourceDirectories = [
+            "${config.home.homeDirectory}/Documents"
+            "${config.home.homeDirectory}/Music"
+            "${config.home.homeDirectory}/Pictures"
+            "${config.home.homeDirectory}/Videos"
+          ];
+          repositories = [
+            {
+              path = "/persist/home/${config.home.username}/backup.borg";
+              label = "local";
+            }
+          ];
+        };
 
         consistency.checks = [
           {
