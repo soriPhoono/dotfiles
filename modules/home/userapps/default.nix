@@ -29,8 +29,6 @@ in {
       discord
       signal-desktop
 
-      vlc
-
       onlyoffice-desktopeditors
 
       qbittorrent

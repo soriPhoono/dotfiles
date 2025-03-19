@@ -48,6 +48,10 @@ in {
 
     environment.systemPackages = with pkgs;
       lib.mkIf (cfg.mode == "desktop") [
+        winetricks
+        mangohud
+        protonup
+
         lutris
         bottles
 
@@ -55,8 +59,6 @@ in {
         gzdoom
         shattered-pixel-dungeon
         osu-lazer-bin
-
-        winetricks
       ];
 
     programs = {
@@ -115,10 +117,7 @@ in {
 
           value = {
             core.impermanence.directories = [
-              {
-                directory = ".local/share/Steam";
-                method = "symlink";
-              }
+              ".local/share/Steam"
             ];
           };
         })

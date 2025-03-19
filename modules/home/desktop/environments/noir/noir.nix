@@ -25,6 +25,7 @@ in {
         nautilus.enable = true;
         waybar.enable = true;
         feh.enable = true;
+        mpv.enable = true;
       };
       services = {
         gammastep.enable = true;

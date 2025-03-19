@@ -48,12 +48,18 @@
     suites.gaming = {
       enable = true;
       mode = "desktop";
+      gamescopeMode = {
+        args = [
+          "-W 1920"
+          "-H 1080"
+          "-r 144"
+          "--rt"
+          "-O DP-5"
+        ];
+        env = {
+        };
+      };
     };
-  };
-
-  server = {
-    enable = true;
-    ethernet-interface = "enp6s0";
   };
 
   themes = {
