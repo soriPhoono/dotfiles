@@ -116,6 +116,8 @@ in {
 
           "$mod, Return, exec, ${pkgs.ghostty}/bin/ghostty"
 
+          "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
+
           ", XF86AudioMute, exec, ${audio}/bin/audio.sh mute"
           ", XF86AudioMicMute, exec, ${audio}/bin/audio.sh micmute"
 

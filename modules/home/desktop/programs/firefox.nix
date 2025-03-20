@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.userapps.programs.firefox;
+  cfg = config.desktop.programs.firefox;
 in {
-  options.userapps.programs.firefox.enable = lib.mkEnableOption "Enable Firefox";
+  options.desktop.programs.firefox.enable = lib.mkEnableOption "Enable Firefox";
 
   config = lib.mkIf cfg.enable {
     home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
@@ -109,10 +109,6 @@ in {
         };
       };
     };
-
-    wayland.windowManager.hyprland.settings.bind = [
-      "$mod, B, exec, ${pkgs.firefox}/bin/firefox"
-    ];
 
     services = {
       psd = {

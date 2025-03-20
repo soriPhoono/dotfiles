@@ -20,12 +20,17 @@ in {
   config = lib.mkIf cfg.enable {
     desktop = {
       programs = {
+        ghostty.enable = true;
         fuzzel.enable = true;
         hyprlock.enable = true;
         nautilus.enable = true;
         waybar.enable = true;
+
         feh.enable = true;
         mpv.enable = true;
+        zathura.enable = true;
+
+        firefox.enable = true;
       };
       services = {
         gammastep.enable = true;

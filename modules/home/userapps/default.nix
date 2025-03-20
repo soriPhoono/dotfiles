@@ -7,13 +7,10 @@
   cfg = config.userapps;
 in {
   imports = [
-    ./programs/ghostty.nix
-    ./programs/firefox.nix
     ./programs/bitwarden.nix
     ./programs/vscode.nix
     ./programs/thunderbird.nix
     ./programs/joplin-desktop.nix
-    ./programs/zathura.nix
 
     ./artwork.nix
     ./development.nix
@@ -29,15 +26,11 @@ in {
       discord
       signal-desktop
 
-      onlyoffice-desktopeditors
-
       qbittorrent
       ytmdl
     ];
 
     userapps.programs = {
-      ghostty.enable = true;
-      firefox.enable = true;
       bitwarden.enable = true;
       joplin-desktop.enable = true;
     };

@@ -44,7 +44,10 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    hardware.steam-hardware.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
+    hardware = {
+      uinput.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
+      steam-hardware.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
+    };
 
     environment.systemPackages = with pkgs;
       lib.mkIf (cfg.mode == "desktop") [
@@ -84,11 +87,6 @@ in {
             stdenv.cc.cc.lib
             libkrb5
             keyutils
-          ];
-
-        extraCompatPackages = with pkgs;
-          lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) [
-            proton-ge-bin
           ];
 
         remotePlay.openFirewall = true;

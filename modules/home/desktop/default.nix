@@ -7,6 +7,9 @@
     ./programs/hyprlock.nix
     ./programs/nautilus.nix
     ./programs/hyprland.nix
+    ./programs/firefox.nix
+    ./programs/ghostty.nix
+    ./programs/zathura.nix
 
     ./services/mako.nix
     ./services/hypridle.nix
