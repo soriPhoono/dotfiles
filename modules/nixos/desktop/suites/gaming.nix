@@ -109,19 +109,8 @@ in {
 
     services.ananicy.enable = true;
 
-    home-manager.users =
-      lib.listToAttrs
-      (
-        map (user: {
-          inherit (user) name;
-
-          value = {
-            core.impermanence.directories = [
-              ".local/share/Steam"
-            ];
-          };
-        })
-        config.core.suites.users.users
-      );
+    core.boot.impermanence.users.directories = [
+      ".local/share/Steam"
+    ];
   };
 }

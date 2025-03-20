@@ -13,6 +13,8 @@
     git
   ];
 
+  systemd.extraConfig = "DefaultLimitNOFILE=2048";
+
   nix = let
     flakeInputs = lib.filterAttrs (_: v: lib.isType "flake" v) inputs;
   in {

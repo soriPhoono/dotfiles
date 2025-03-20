@@ -27,6 +27,8 @@ in {
 
             swww-daemon --format xrgb &
 
+            sleep 0.5
+
             bitwarden --ozone-platform-hint=auto
           '';
         };

@@ -5,17 +5,22 @@
 }: let
   cfg = config.core.boot.impermanence;
 in {
-  options.core.boot.impermanence = {
-    directories = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [];
-      description = "List of directories to be persisted";
-    };
+  options.core.boot.impermanence = let
+    mkOption = description:
+      lib.mkOption {
+        inherit description;
+        type = with lib.types; listOf (oneOf [str (attrsOf str)]);
+        default = [];
+      };
+  in {
+    directories = mkOption "List of directories to be persisted";
 
-    files = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [];
-      description = "List of files to be persisted";
+    files = mkOption "List of files to be persisted";
+
+    users = {
+      directories = mkOption "List of directories to be persisted";
+
+      files = mkOption "List of files to be persisted";
     };
   };
 
@@ -87,6 +92,19 @@ in {
             "/etc/machine-id"
           ]
           ++ cfg.files;
+
+        users =
+          lib.listToAttrs
+          (
+            map (user: {
+              inherit (user) name;
+
+              value = {
+                inherit (cfg.users) directories files;
+              };
+            })
+            config.core.suites.users.users
+          );
       };
     };
 
