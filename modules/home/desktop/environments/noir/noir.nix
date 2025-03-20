@@ -25,6 +25,7 @@ in {
         hyprlock.enable = true;
         nautilus.enable = true;
         waybar.enable = true;
+        ags.enable = true;
 
         feh.enable = true;
         mpv.enable = true;

@@ -4,6 +4,7 @@
     ./programs/feh.nix
     ./programs/mpv.nix
     ./programs/waybar.nix
+    ./programs/ags.nix
     ./programs/hyprlock.nix
     ./programs/nautilus.nix
     ./programs/hyprland.nix
