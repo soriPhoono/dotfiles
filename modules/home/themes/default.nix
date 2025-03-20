@@ -38,11 +38,6 @@ in {
           name = "JetBrainsMono Nerd Font Mono";
         };
 
-        emoji = {
-          package = pkgs.noto-fonts-emoji;
-          name = "Noto Color Emoji";
-        };
-
         sizes = let
           default = 14;
         in {
