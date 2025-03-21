@@ -54,9 +54,12 @@
           "-H 1080"
           "-r 144"
           "--rt"
+          "-e"
+          "--force-grab-cursor"
           "-O DP-5"
         ];
         env = {
+          LD_PRELOAD = "\"\"";
         };
       };
     };
