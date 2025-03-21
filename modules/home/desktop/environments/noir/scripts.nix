@@ -8,7 +8,7 @@
 in {
   config = lib.mkIf cfg.enable {
     desktop.programs.hyprland = {
-      autostart = let
+      autostart = with pkgs; let
         bootstrap = pkgs.writeShellApplication {
           name = "bootstrap.sh";
 
@@ -34,6 +34,7 @@ in {
         };
       in [
         "${bootstrap}/bin/bootstrap.sh"
+        "${hyprpanel}/bin/hyprpanel"
       ];
 
       onReload = let

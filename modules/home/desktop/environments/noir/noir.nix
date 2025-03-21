@@ -11,6 +11,7 @@ in {
     ./scripts.nix
     ./binds.nix
     ./rules.nix
+    ./panel.nix
   ];
 
   options.desktop.environments.noir = {
@@ -24,7 +25,7 @@ in {
         fuzzel.enable = true;
         hyprlock.enable = true;
         nautilus.enable = true;
-        waybar.enable = true;
+        hyprpanel.enable = true;
 
         feh.enable = true;
         mpv.enable = true;
@@ -36,7 +37,6 @@ in {
         gammastep.enable = true;
         gnome-keyring.enable = true;
         hypridle.enable = true;
-        mako.enable = true;
       };
     };
 

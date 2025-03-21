@@ -70,6 +70,11 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+
+    hyprpanel = {
+      url = "github:Jas-SinghFSU/HyprPanel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {snowfall-lib, ...}:
@@ -100,6 +105,7 @@
           impermanence.homeManagerModules.impermanence
           sops-nix.homeManagerModules.sops
           nvf.homeManagerModules.default
+          hyprpanel.homeManagerModules.hyprpanel
         ];
       };
 
