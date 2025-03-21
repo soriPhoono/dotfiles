@@ -10,11 +10,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      obs-studio
-
       gimp
       tenacity
       kdePackages.kdenlive
     ];
+
+    userapps.programs.obs-studio.enable = true;
   };
 }

@@ -11,6 +11,7 @@ in {
     ./programs/vscode.nix
     ./programs/thunderbird.nix
     ./programs/joplin-desktop.nix
+    ./programs/obs-studio.nix
 
     ./artwork.nix
     ./development.nix
@@ -32,6 +33,7 @@ in {
 
     userapps.programs = {
       bitwarden.enable = true;
+      thunderbird.enable = true;
       joplin-desktop.enable = true;
     };
 
