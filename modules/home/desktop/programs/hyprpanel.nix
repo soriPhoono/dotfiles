@@ -8,6 +8,11 @@ in {
   options.desktop.programs.hyprpanel = {
     enable = lib.mkEnableOption "Enable Hyprpanel";
 
+    theme = lib.mkOption {
+      type = lib.types.str;
+      description = "The theme for hyprpanel";
+    };
+
     layout = lib.mkOption {
       type = with lib.types; attrs;
       description = "The settings for hyprpanel";
@@ -25,10 +30,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs.hyprpanel = {
-      inherit (cfg) layout settings;
+      inherit (cfg) theme layout settings;
 
       enable = true;
-      systemd.enable = true;
       hyprland.enable = true;
       overwrite.enable = true;
     };

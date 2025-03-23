@@ -4,7 +4,6 @@
   core = {
     boot = {
       secrets.defaultSopsFile = ./vault.yaml;
-      plymouth.enable = true;
     };
 
     hardware = {
@@ -33,12 +32,6 @@
       enable = true;
       wireless.enable = true;
       tailscale.enable = true;
-    };
-
-    services = {
-      geoclue2.enable = true;
-      pipewire.enable = true;
-      tlp.enable = true;
     };
   };
 

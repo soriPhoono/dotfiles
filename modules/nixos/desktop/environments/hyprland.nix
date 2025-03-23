@@ -10,6 +10,17 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    core = {
+      boot.plymouth.enable = true;
+
+      services = {
+        power-profiles-daemon.enable = true;
+        upower.enable = true;
+        geoclue2.enable = true;
+        pipewire.enable = true;
+      };
+    };
+
     desktop = {
       programs = {
         regreet.enable = true;
@@ -17,9 +28,9 @@ in {
         hyprlock.enable = true;
       };
       services = {
-        hypridle.enable = true;
         polkit.enable = true;
         gvfs.enable = true;
+        hypridle.enable = true;
       };
     };
   };

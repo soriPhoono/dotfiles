@@ -11,7 +11,8 @@
     ./services/fstrim.nix
     ./services/geoclue2.nix
     ./services/pipewire.nix
-    ./services/tlp.nix
+    ./services/power-profiles-daemon.nix
+    ./services/upower.nix
 
     ./suites/users.nix
   ];

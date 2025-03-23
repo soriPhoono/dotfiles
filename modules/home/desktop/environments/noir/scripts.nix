@@ -33,8 +33,8 @@ in {
           '';
         };
       in [
-        "${bootstrap}/bin/bootstrap.sh"
-        "${hyprpanel}/bin/hyprpanel"
+        "${bootstrap}/bin/bootstrap.sh &"
+        "${hyprpanel}/bin/hyprpanel &"
       ];
 
       onReload = let
