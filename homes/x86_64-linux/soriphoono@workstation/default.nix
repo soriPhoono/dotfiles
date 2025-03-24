@@ -18,26 +18,23 @@
     ];
 
     monitor = [
-      "DP-4, 1920x1080@165, 0x0, 1, vrr, 1"
-      "DP-5, 1920x1080@144, 1920x0, 1, vrr, 1"
-      "HDMI-A-5, 1920x1080@75, 3840x0, 1, vrr, 1"
+      "DP-1, 1920x1080@144, 0x0, 1, vrr, 1"
+      "HDMI-A-1, 1920x1080@75, 1920x0, 1, vrr, 1"
     ];
 
     workspace =
       (let
         monitors = [
-          "DP-5"
-          "HDMI-A-5"
-          "DP-4"
+          "DP-1"
+          "HDMI-A-1"
         ];
       in
         map (
           x: "${builtins.toString (x + 1)}, monitor:${builtins.elemAt monitors (builtins.floor (x / 3))}"
-        ) (builtins.genList (x: x) 9))
+        ) (builtins.genList (x: x) 6))
       ++ [
         "1, default:true"
         "4, default:true"
-        "7, default:true"
       ];
   };
 }

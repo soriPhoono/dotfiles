@@ -14,6 +14,7 @@
     ./programs/eza.nix
     ./programs/direnv.nix
     ./programs/ssh.nix
+    ./programs/cava.nix
     ./programs/programs.nix
   ];
 
