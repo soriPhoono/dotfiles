@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "Enable gaming desktop setup";
 
     mode = lib.mkOption {
-      type = with lib.types; enum ["desktop" "console" "gameServer" "streamServer"];
+      type = with lib.types; enum ["desktop" "console"];
       description = "The type of gaming setup to enable";
 
       default = "desktop";
@@ -45,8 +45,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     hardware = {
-      uinput.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
-      steam-hardware.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
+      uinput.enable = true;
+      steam-hardware.enable = true;
     };
 
     environment.systemPackages = with pkgs;
@@ -65,43 +65,39 @@ in {
       ];
 
     programs = {
-      gamemode = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) {
+      gamemode = {
         enable = true;
         enableRenice = true;
       };
 
-      gamescope.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
+      gamescope.enable = true;
 
       steam = {
         enable = true;
 
-        extraPackages = with pkgs;
-          lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) [
-            xorg.libXcursor
-            xorg.libXi
-            xorg.libXinerama
-            xorg.libXScrnSaver
-            libpng
-            libpulseaudio
-            libvorbis
-            stdenv.cc.cc.lib
-            libkrb5
-            keyutils
-          ];
+        extraPackages = with pkgs; [
+          xorg.libXcursor
+          xorg.libXi
+          xorg.libXinerama
+          xorg.libXScrnSaver
+          libpng
+          libpulseaudio
+          libvorbis
+          stdenv.cc.cc.lib
+          libkrb5
+          keyutils
+        ];
 
         remotePlay.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
 
-        protontricks.enable = lib.mkIf ((cfg.mode == "desktop") || (cfg.mode == "console")) true;
+        protontricks.enable = true;
 
         gamescopeSession =
-          lib.mkIf ((cfg.mode == "desktop")
-            || (cfg.mode
-              == "console"))
-          ({
-              enable = true;
-            }
-            // cfg.gamescopeMode);
+          {
+            enable = true;
+          }
+          // cfg.gamescopeMode;
       };
     };
 

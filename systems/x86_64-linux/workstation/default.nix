@@ -39,7 +39,6 @@
     environments.hyprland.enable = true;
     suites.gaming = {
       enable = true;
-      mode = "desktop";
       gamescopeMode = {
         args = [
           "-W 1920"
@@ -47,7 +46,6 @@
           "-r 144"
           "--rt"
           "-e"
-          "--force-grab-cursor"
           "-O DP-5"
         ];
         env = {

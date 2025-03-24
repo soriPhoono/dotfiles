@@ -38,6 +38,21 @@
   desktop = {
     environments.hyprland.enable = true;
     services.asusd.enable = true;
+    suites.gaming = {
+      enable = true;
+      gamescopeMode = {
+        args = [
+          "-W 1920"
+          "-H 1080"
+          "-r 144"
+          "--rt"
+          "-e"
+        ];
+        env = {
+          LD_PRELOAD = "\"\"";
+        };
+      };
+    };
   };
 
   themes = {
