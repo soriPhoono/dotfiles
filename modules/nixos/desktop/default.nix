@@ -8,6 +8,7 @@
 
     ./services/asusd.nix
     ./services/greetd.nix
+    ./services/sddm.nix
     ./services/gvfs.nix
     ./services/polkit.nix
     ./services/hypridle.nix

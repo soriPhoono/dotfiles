@@ -23,7 +23,7 @@ in {
 
     desktop = {
       programs = {
-        regreet.enable = true;
+        sddm.enable = true;
         hyprland.enable = true;
         hyprlock.enable = true;
       };
