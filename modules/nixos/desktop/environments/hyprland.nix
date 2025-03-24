@@ -23,11 +23,11 @@ in {
 
     desktop = {
       programs = {
-        sddm.enable = true;
         hyprland.enable = true;
         hyprlock.enable = true;
       };
       services = {
+        gdm.enable = true;
         polkit.enable = true;
         gvfs.enable = true;
         hypridle.enable = true;
