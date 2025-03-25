@@ -29,7 +29,10 @@ in {
           };
         };
 
-        decoration.rounding = 5;
+        decoration = {
+          rounding = 5;
+          fullscreen_opacity = 1;
+        };
 
         input = {
           repeat_rate = 20;

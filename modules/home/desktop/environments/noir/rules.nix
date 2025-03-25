@@ -12,6 +12,7 @@ in {
         "opacity 0.8, class:(.*)"
 
         "opacity 1, title:(.* - YouTube —.*)"
+        "opacity 1, title:(.* • Max — .*)"
 
         "float,class:^(nm-applet)$"
         "size 80% 80%, class:^(nm-applet)$"

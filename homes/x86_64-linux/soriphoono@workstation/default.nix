@@ -18,15 +18,15 @@
     ];
 
     monitor = [
-      "DP-1, 1920x1080@144, 0x0, 1, vrr, 1"
-      "HDMI-A-1, 1920x1080@75, 1920x0, 1, vrr, 1"
+      "DP-5, 1920x1080@144, 0x0, 1, vrr, 1"
+      "HDMI-A-5, 1920x1080@75, 1920x0, 1, vrr, 1"
     ];
 
     workspace =
       (let
         monitors = [
-          "DP-1"
-          "HDMI-A-1"
+          "DP-5"
+          "HDMI-A-5"
         ];
       in
         map (
