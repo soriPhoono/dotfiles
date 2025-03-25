@@ -2,9 +2,7 @@
   facter.reportPath = ../../../facter/zephyrus.json;
 
   core = {
-    boot = {
-      secrets.defaultSopsFile = ./vault.yaml;
-    };
+    boot.secrets.defaultSopsFile = ./vault.yaml;
 
     hardware = {
       enable = true;

@@ -1,5 +1,8 @@
-{
-  facter.reportPath = ../../../facter/testbench.json;
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    disko
+    nixos-facter
+  ];
 
   core = {
     boot.secrets.defaultSopsFile = ./vault.yaml;
@@ -7,13 +10,7 @@
     hardware = {
       enable = true;
 
-      android.enable = true;
       bluetooth.enable = true;
-
-      gpu = {
-        enable = true;
-        integrated.amd.enable = true;
-      };
     };
 
     networking = {
