@@ -1,8 +1,4 @@
 {lib, ...}: {
-  imports = [
-    ./containers/nextcloud.nix
-  ];
-
   options.server = {
     enable = lib.mkEnableOption "Enable server configuration mode";
 

@@ -45,8 +45,8 @@ in {
 
   config = lib.mkIf cfg.enable {
     hardware = {
-      uinput.enable = true;
       steam-hardware.enable = true;
+      xone.enable = true;
     };
 
     environment.systemPackages = with pkgs;
