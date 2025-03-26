@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.desktop.programs.firefox;
+  cfg = config.userapps.programs.firefox;
 in {
-  options.desktop.programs.firefox.enable = lib.mkEnableOption "Enable Firefox";
+  options.userapps.programs.firefox.enable = lib.mkEnableOption "Enable Firefox";
 
   config = lib.mkIf cfg.enable {
     home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;

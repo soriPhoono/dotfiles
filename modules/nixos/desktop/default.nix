@@ -1,6 +1,7 @@
 {
   imports = [
     ./environments/hyprland.nix
+    ./environments/gnome.nix
 
     ./programs/regreet.nix
     ./programs/hyprland.nix

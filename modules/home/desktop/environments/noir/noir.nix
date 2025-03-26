@@ -30,8 +30,6 @@ in {
         feh.enable = true;
         mpv.enable = true;
         zathura.enable = true;
-
-        firefox.enable = true;
       };
       services = {
         gammastep.enable = true;

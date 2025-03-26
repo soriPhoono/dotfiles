@@ -36,7 +36,7 @@
   };
 
   desktop = {
-    environments.hyprland.enable = true;
+    environments.gnome.enable = true;
     suites.gaming = {
       enable = true;
       gamescopeMode = {

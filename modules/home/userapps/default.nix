@@ -8,6 +8,7 @@
 in {
   imports = [
     ./programs/bitwarden.nix
+    ./programs/firefox.nix
     ./programs/vscode.nix
     ./programs/thunderbird.nix
     ./programs/joplin-desktop.nix
@@ -33,6 +34,7 @@ in {
 
     userapps.programs = {
       bitwarden.enable = true;
+      firefox.enable = true;
       thunderbird.enable = true;
       joplin-desktop.enable = true;
     };
