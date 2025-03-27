@@ -35,6 +35,16 @@ case $(grep vendor_id /proc/cpuinfo | awk 'NR==1 {print $3}') in
 "GenuineIntel") install_packages intel-ucode ;;
 esac
 
+info "Locking root account"
+
+sudo passwd --lock root
+
+# TODO: Check out https://wiki.archlinux.org/title/Security#Sandboxing_applications
+
+info "Setting up firewall"
+
+install_packages firewalld
+
 # Install plymouth boot screen
 
 info "Installing plymouth bootup sequence"
