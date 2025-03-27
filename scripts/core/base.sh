@@ -63,7 +63,7 @@ if paru -Q | grep -q mkinitcpio; then
   paru -R mkinitcpio
 fi
 
-if [ "$(grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf)" -eq 1 ]; then
+if grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
   echo "options plymouth.use-simpledrm splash quiet" | tee -a test.txt
 fi
 
