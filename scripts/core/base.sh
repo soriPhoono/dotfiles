@@ -3,26 +3,46 @@
 # Imports
 source ./scripts/util/default.sh
 
-function invoke-nix() {
-  binary=$1
-
-  command "$binary" --extra-experimental-features "nix-command flakes" "${@:2}"
-}
-
 # Install chaotic AUR
+
+info "Installing Chaotic-AUR keys"
 
 sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
 sudo pacman-key --lsign-key 3056513887B78AEB
 
+info "Installing Chaotic-AUR packages and mirror"
+
 sudo pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
 sudo pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
-if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
-  echo -e "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
-fi
+sudo cp -r ./scripts/root/* /
 
-# Install module dependencies
+info "Installing paru"
 
-sudo pacman -Syu --needed paru nix
+sudo pacman -Syu --needed paru
 
-invoke-nix nix run home-manager/master -- init --switch
+# Install security systems
+
+info "Hardening system"
+
+info "Configuring password security"
+
+install_packages libpwquality
+
+info "Installing cpu microcode"
+
+case $(grep vendor_id /proc/cpuinfo | awk 'NR==1 {print $3}') in
+"GenuineIntel") install_packages intel-ucode ;;
+esac
+
+# Install plymouth boot screen
+
+info "Installing plymouth bootup sequence"
+
+install_packages plymouth plymouth-theme-dna-git
+
+sudo plymouth-set-default-theme -R dna
+
+# Installing fonts
+
+install_packages ttf-sourcecodepro-nerd otf-aurulent-nerd

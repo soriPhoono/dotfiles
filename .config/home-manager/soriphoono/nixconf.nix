@@ -1,5 +1,0 @@
-{
-  nix = {
-    gc.automatic = true;
-  };
-}
