@@ -70,3 +70,7 @@ fi
 # Installing fonts
 
 install_packages ttf-sourcecodepro-nerd otf-aurulent-nerd
+
+# Configure bluetooth
+
+sudo systemctl enable --now bluetooth.service
