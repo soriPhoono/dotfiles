@@ -43,7 +43,13 @@ sudo passwd --lock root
 
 info "Setting up firewall"
 
-install_packages firewalld
+install_packages firewalld sshguard
+
+firewall-cmd --permanent --zone=public --add-rich-rule="rule source ipset=sshguard4 drop"
+firewall-cmd --permanent --zone=public --add-rich-rule="rule source ipset=sshguard6 drop"
+firewall-cmd --reload
+
+# TODO: finish this https://wiki.archlinux.org/title/Sshguard#firewalld
 
 # Install plymouth boot screen
 
