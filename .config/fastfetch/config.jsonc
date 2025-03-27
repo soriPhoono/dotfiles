@@ -1,0 +1,45 @@
+{
+  "display": {
+    "color": "cyan",
+    "separator": "  "
+  },
+  "logo": {
+    "color": {
+      "1": "cyan"
+    },
+    "padding": {
+      "right": 1
+    },
+    "source": "/nix/store/zciz6bjzvnnj0xi6hwiza4vi8v82dm52-logo.txt"
+  },
+  "modules": [
+    {
+      "format": "{1}-{3}-{11}",
+      "key": "Date",
+      "type": "datetime"
+    },
+    {
+      "format": "{14}:{17}:{20}",
+      "key": "Time",
+      "type": "datetime"
+    },
+    "break",
+    "os",
+    "wm",
+    {
+      "key": "User",
+      "myselfOnly": true,
+      "type": "users"
+    },
+    {
+      "key": "CPU",
+      "temp": true,
+      "type": "cpu"
+    },
+    {
+      "key": "GPU",
+      "temp": true,
+      "type": "gpu"
+    }
+  ]
+}
