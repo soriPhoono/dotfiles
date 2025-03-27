@@ -74,3 +74,11 @@ install_packages ttf-sourcecodepro-nerd otf-aurulent-nerd
 # Configure bluetooth
 
 sudo systemctl enable --now bluetooth.service
+
+# Install tailscale
+
+install_packages tailscale
+
+sudo systemctl enable --now tailscaled
+
+sudo tailscale up

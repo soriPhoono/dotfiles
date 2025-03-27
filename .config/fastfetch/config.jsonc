@@ -10,7 +10,7 @@
     "padding": {
       "right": 1
     },
-    "source": "/nix/store/zciz6bjzvnnj0xi6hwiza4vi8v82dm52-logo.txt"
+    "source": "$HOME/.config/fastfetch/logo.txt"
   },
   "modules": [
     {
