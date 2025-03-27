@@ -17,9 +17,12 @@ sudo pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirro
 
 sudo cp -r ./scripts/root/* /
 
-info "Installing paru"
+info "Installing paru and configuring pacman"
 
-sudo pacman -Syu --needed paru
+sudo pacman -Syu --needed paru pacman-contrib reflector rsync
+
+sudo systemctl enable --now paccache.timer
+sudo systemctl enable --now reflector.timer
 
 # Install security systems
 
@@ -33,6 +36,7 @@ info "Installing cpu microcode"
 
 case $(grep vendor_id /proc/cpuinfo | awk 'NR==1 {print $3}') in
 "GenuineIntel") install_packages intel-ucode ;;
+"AuthenticAMD") install_packages amd-ucode ;;
 esac
 
 info "Locking root account"
@@ -43,21 +47,25 @@ sudo passwd --lock root
 
 info "Setting up firewall"
 
-install_packages firewalld sshguard
+install_packages firewalld
 
-firewall-cmd --permanent --zone=public --add-rich-rule="rule source ipset=sshguard4 drop"
-firewall-cmd --permanent --zone=public --add-rich-rule="rule source ipset=sshguard6 drop"
-firewall-cmd --reload
-
-# TODO: finish this https://wiki.archlinux.org/title/Sshguard#firewalld
+sudo systemctl enable --now firewalld.service
 
 # Install plymouth boot screen
 
 info "Installing plymouth bootup sequence"
 
-install_packages plymouth plymouth-theme-dna-git
+install_packages plymouth plymouth-theme-dna-git dracut
 
-sudo plymouth-set-default-theme -R dna
+sudo dracut --force
+
+if paru -Q | grep -q mkinitcpio; then
+  paru -R mkinitcpio
+fi
+
+if [ "$(grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf)" -eq 1 ]; then
+  echo "options plymouth.use-simpledrm splash quiet" | tee -a test.txt
+fi
 
 # Installing fonts
 
