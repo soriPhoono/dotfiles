@@ -55,8 +55,10 @@ if paru -Q | grep -q mkinitcpio; then
 fi
 
 if grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
-  echo "options plymouth.use-simpledrm splash quiet" | tee -a /boot/loader/entries*linux-zen.conf
+  echo "options plymouth.use-simpledrm splash quiet" | tee -a /boot/loader/entries/*linux-zen.conf
 fi
+
+sudo systemctl enable plymouth-quit.service
 
 # Installing fonts
 

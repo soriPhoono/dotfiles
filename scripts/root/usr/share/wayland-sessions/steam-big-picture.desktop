@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Steam Big Picture Mode
+Name=Steam
 Comment=Start Steam in Big Picture Mode
 Exec=/usr/bin/gamescope -e -- /usr/bin/steam -tenfoot
 Type=Application

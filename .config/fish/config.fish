@@ -4,5 +4,7 @@ if status is-interactive
 
   fastfetch
 
+  alias rm 'gio trash'
+
   starship init fish | source
 end

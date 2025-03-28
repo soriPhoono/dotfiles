@@ -2,6 +2,8 @@
 
 source ./scripts/util/default.sh
 
+# Install code editors
+
 info "Installing editors"
 
 install_packages neovim visual-studio-code-bin
