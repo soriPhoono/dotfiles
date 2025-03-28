@@ -6,9 +6,15 @@ source ./scripts/util/default.sh
 
 info "Installing editors"
 
+info "Installing development tools"
+
+install_packages git nodejs npm rustup
+
+rustup default stable
+
 info "Installing neovim"
 
-install_packages git neovim ripgrep lazygit nodejs npm
+install_packages neovim ripgrep lazygit
 
 info "Installing astroNvim"
 

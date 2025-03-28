@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd ~/.dotfiles
+cd ~/.dotfiles || exit
 
 # Imports
 source ./scripts/util/default.sh
