@@ -28,20 +28,11 @@ sudo systemctl enable --now reflector.timer
 
 info "Hardening system"
 
+# Configure password security
+
 info "Configuring password security"
 
 install_packages libpwquality
-
-info "Installing cpu microcode"
-
-case $(grep vendor_id /proc/cpuinfo | awk 'NR==1 {print $3}') in
-"GenuineIntel") install_packages intel-ucode ;;
-"AuthenticAMD") install_packages amd-ucode ;;
-esac
-
-info "Locking root account"
-
-sudo passwd --lock root
 
 # TODO: Check out https://wiki.archlinux.org/title/Security#Sandboxing_applications
 
@@ -64,7 +55,7 @@ if paru -Q | grep -q mkinitcpio; then
 fi
 
 if grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
-  echo "options plymouth.use-simpledrm splash quiet" | tee -a test.txt
+  echo "options plymouth.use-simpledrm splash quiet" | tee -a /boot/loader/entries*linux-zen.conf
 fi
 
 # Installing fonts
