@@ -1,2 +1,7 @@
+\.git
 assets
 scripts
+
+\.gitmodules
+README\.md
+init\.sh
