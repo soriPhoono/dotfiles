@@ -76,4 +76,4 @@ sudo tailscale up
 
 # Install gnome tools
 
-install_packages gdm-settings power-profiles-daemon gnome-shell-extension-dash-to-dock papirus-icon-theme bibata-cursor-theme
+install_packages gdm-settings power-profiles-daemon gnome-shell-extension-dash-to-dock papirus-icon-theme bibata-cursor-translucent

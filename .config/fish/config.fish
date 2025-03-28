@@ -5,6 +5,7 @@ if status is-interactive
   fastfetch
 
   alias rm 'gio trash'
+  alias v 'nvim'
 
   starship init fish | source
 end
