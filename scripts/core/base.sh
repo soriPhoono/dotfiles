@@ -5,6 +5,8 @@ cd ~/.dotfiles
 # Imports
 source ./scripts/util/default.sh
 
+logger_init
+
 # Install chaotic AUR
 
 info "Installing Chaotic-AUR keys"
@@ -52,7 +54,7 @@ info "Installing plymouth bootup sequence"
 
 install_packages plymouth plymouth-theme-dna-git
 
-if grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
+if ! grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
   echo "options plymouth.use-simpledrm splash quiet" | sudo tee -a /boot/loader/entries/*linux-zen.conf
 fi
 
@@ -76,4 +78,6 @@ sudo tailscale up
 
 # Install gnome tools
 
-install_packages gdm-settings power-profiles-daemon gnome-shell-extension-dash-to-dock papirus-icon-theme bibata-cursor-translucent
+install_packages gdm-settings power-profiles-daemon \
+  gnome-shell-extension-dash-to-dock papirus-icon-theme \
+  bibata-cursor-translucent

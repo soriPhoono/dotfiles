@@ -1,11 +1,16 @@
 if status is-interactive
-  # Commands to run in interactive sessions can go here
+  # Disable welcome hint
   set -U fish_greeting
 
+  # Prompt line
+  starship init fish | source
+
+  # Splash screen
   fastfetch
 
+  # Sane defaults
   alias rm 'gio trash'
-  alias v 'nvim'
 
-  starship init fish | source
+  # Tool shortcuts
+  alias v 'nvim'
 end

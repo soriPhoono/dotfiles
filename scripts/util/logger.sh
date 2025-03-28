@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+function logger_init() {
+  if [ -f ~/.install-log.txt ]; then
+    rm ~/.install-log.txt
+
+    info "Old log purged"
+  fi
+}
+
 function logger() {
   if [ $# -eq 0 ]; then
     echo "Usage: logger \"Message\""
