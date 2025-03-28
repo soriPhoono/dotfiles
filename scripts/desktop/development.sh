@@ -6,6 +6,6 @@ source ./scripts/util/default.sh
 
 info "Installing editors"
 
-install_packages neovim visual-studio-code-bin
+install_packages neovim visual-studio-code-bin ripgrep lazygit
 
 # Install neovim dependencies
