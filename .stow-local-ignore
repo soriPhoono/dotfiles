@@ -2,6 +2,7 @@
 assets
 scripts
 
+\.editorconfig
 \.gitmodules
 README\.md
 init\.sh
