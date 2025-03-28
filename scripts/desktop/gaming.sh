@@ -8,7 +8,7 @@ source ./scripts/util/default.sh
 
 info "Installing XBOX controller drivers"
 
-install_packages xpadneo-dkms
+install_packages linux-zen-headers xpadneo-dkms
 
 info "Installing backend tools for steam and other gaming platforms"
 

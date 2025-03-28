@@ -3,7 +3,7 @@
 source ./scripts/util/logger.sh
 
 function install_packages() {
-  paru -S --noconfirm --needed "$@"
+  paru -S --needed "$@"
 
   if [ $? -eq 1 ]; then
     err "Failed to install packages" + "$@"
