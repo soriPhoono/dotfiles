@@ -15,6 +15,8 @@ info "Installing Chaotic-AUR packages and mirror"
 sudo pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
 sudo pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
+info "Deploying scripts"
+
 sudo cp -r ./scripts/root/* /
 
 info "Installing paru and configuring pacman"
@@ -46,13 +48,7 @@ sudo systemctl enable --now firewalld.service
 
 info "Installing plymouth bootup sequence"
 
-install_packages plymouth plymouth-theme-dna-git dracut
-
-sudo dracut --force
-
-if paru -Q | grep -q mkinitcpio; then
-  paru -R mkinitcpio
-fi
+install_packages plymouth plymouth-theme-dna-git
 
 if grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
   echo "options plymouth.use-simpledrm splash quiet" | tee -a /boot/loader/entries/*linux-zen.conf
