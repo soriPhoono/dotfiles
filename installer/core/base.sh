@@ -3,9 +3,15 @@
 cd ~/.dotfiles || exit
 
 # Imports
-source ./scripts/util/default.sh
+source ./util/default.sh
 
 logger_init
+
+# Configure repo base
+
+if ! git submodule init && git submodule update; then
+  warn "Failed to initialize submodule data"
+fi
 
 # Install chaotic AUR
 
@@ -43,6 +49,8 @@ install_packages libpwquality
 # TODO: Check out https://wiki.archlinux.org/title/Security#Sandboxing_applications
 
 info "Setting up firewall"
+
+paru -S --needed iptables-nft
 
 install_packages firewalld
 

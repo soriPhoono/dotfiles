@@ -1,6 +1,8 @@
 \.git
 assets
-scripts
+util
+drivers
+installer
 
 \.editorconfig
 \.gitmodules

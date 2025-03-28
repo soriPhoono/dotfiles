@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ./scripts/util/default.sh
+source ./util/default.sh
 
 # Install controller drivers
 

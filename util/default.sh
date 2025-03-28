@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ./scripts/util/logger.sh
+source ./util/logger.sh
 
 function install_packages() {
   paru -S --needed "$@"

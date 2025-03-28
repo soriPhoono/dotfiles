@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Imports
-source ./scripts/util/default.sh
+source ./util/default.sh
 
 install_packages stow
 
