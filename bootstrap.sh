@@ -12,8 +12,9 @@ stow .
 
 paru -S --needed --noconfirm fish starship btop \
   eza fastfetch zip unzip unrar nvtop bc yazi \
-  nodejs npm rustup ripgrep zellij bitwarden \
-  firefox profile-sync-daemon discord obsidian
+  nodejs npm rustup ripgrep zellij \
+  bitwarden firefox profile-sync-daemon thunderbird \
+  obsidian discord signal-desktop element-desktop
 
 chsh --shell /usr/bin/fish
 
