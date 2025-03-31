@@ -1,3 +1,7 @@
+if [ "$(hostnamectl | grep hostname | awk '{print $3}')" != "workstation" ]; then
+  exit 0
+fi
+
 monitor_mode=$1
 
 gnome-monitor-config set -LpM DP-1 -m 1920x1080@143.980
