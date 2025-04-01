@@ -9,7 +9,7 @@ mkdir -p ~/.local/bin
 hostname="$(hostnamectl | grep hostname | awk '{print $3}')"
 
 if [ "$hostname" = "workstation" ]; then
-  cat <<EOF > ~/.local/bin/gaming-mode.sh
+  cat <<EOF >~/.local/bin/gaming-mode.sh
 #!/usr/bin/env bash
 
 gnome-monitor-config set -LpM DP-1 -m 1920x1080@143.980
@@ -33,14 +33,16 @@ paru -S --needed --noconfirm stow
 stow .
 
 paru -S --needed --noconfirm fish starship btop \
-  eza fastfetch zip unzip unrar nvtop bc yazi \
-  nodejs npm rustup ripgrep zellij neovim \
+  eza fastfetch nvtop nodejs npm rustup ripgrep neovim \
   visual-studio-code-bin onlyoffice-bin \
   bitwarden firefox profile-sync-daemon thunderbird \
-  obsidian discord signal-desktop element-desktop \
-  winetricks protontricks-git protonup gamemode \
-  gamescope steam lutris bottles prismlauncher gzdoom \
-  obs-studio obs-vkcapture obs-gstreamer gstreamer-vaapi
+  obsidian discord signal-desktop element-desktop
+
+if [ "$hostname" = "workstation" ]; then
+  paru -S --needed --noconfirm winetricks protontricks-git protonup gamemode \
+    gamescope steam lutris bottles prismlauncher gzdoom \
+    obs-studio obs-vkcapture obs-gstreamer gstreamer-vaapi
+fi
 
 chsh --shell /usr/bin/fish
 
