@@ -1,8 +1,7 @@
-\.mypy_cache
 \.git
 
 \.editorconfig
 \.gitignore
 \.gitmodules
-README\.md
 bootstrap\.sh
+README\.md
