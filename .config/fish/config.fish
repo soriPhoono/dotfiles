@@ -5,6 +5,9 @@ if status is-interactive
   # Prompt line
   starship init fish | source
 
+  # Init direnv
+  direnv hook fish | source
+
   # Splash screen
   fastfetch
 
