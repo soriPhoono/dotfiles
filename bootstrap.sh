@@ -10,8 +10,9 @@ paru -S --needed --noconfirm stow
 
 stow -R . || exit
 
-paru -S --needed --noconfirm fish starship btop \
-  eza fastfetch nvtop nodejs npm rustup ripgrep \
+paru -S --needed --noconfirm \
+  fish starship btop eza fastfetch nvtop \
+  nodejs npm rustup ripgrep direnv \
   firefox profile-sync-daemon \
   discord signal-desktop element-desktop \
   bitwarden onlyoffice-bin thunderbird \
