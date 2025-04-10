@@ -1,46 +1,6 @@
 #!/usr/bin/env bash
 
-hostname=$1
-
-source ./src/util/default.sh
-
-logger_init
-
-sh ./src/lib/chaotic-aur.sh
-
-info "Deploying configurations"
-
 sudo cp -r ./root/* /
-
-info "Installing packages"
-
-install_packages paru
-
-install_packages --aur pacman-contrib reflector \
-  plymouth plymouth-theme-dna-git \
-  libpwquality iptables-nft firewalld \
-  easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 \
-  stow ttf-sourcecodepro-nerd otf-aurulent-nerd \
-  bibata-cursor-translucent papirus-icon-theme \
-  fish starship btop eza fastfetch nvtop \
-  nodejs npm rustup ripgrep direnv less \
-  git-delta firefox profile-sync-daemon \
-  discord signal-desktop element-desktop \
-  bitwarden onlyoffice-bin thunderbird \
-  neovim visual-studio-code-bin obsidian \
-  gimp inkscape krita tenacity \
-  blender tailscale
-
-sudo systemctl enable --now paccache.timer
-sudo systemctl enable --now reflector.timer
-sudo systemctl enable --now firewalld.service
-sudo systemctl enable --now bluetooth.service
-
-systemctl --user enable --now psd.service
-
-if ! grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
-  echo "options plymouth.use-simpledrm splash quiet" | sudo tee -a /boot/loader/entries/*linux-zen.conf
-fi
 
 git submodule init && git submodule update
 

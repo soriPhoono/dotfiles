@@ -1,0 +1,88 @@
+---
+# tasks file for roles/installer
+- name: Install Chaotic-AUR keys
+  become: true
+  ansible.builtin.shell: |
+    pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    pacman-key --lsign-key 3056513887B78AEB
+    pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+    pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+  args:
+    creates: /etc/pacman.d/chaotic-mirrorlist
+
+- name: Install tools
+  become: true
+  ansible.builtin.package:
+    name:
+      - paru
+      - pacman-contrib
+      - reflector
+      - plymouth
+      - plymouth-theme-dna-git
+      - libpwquality
+      - firewalld
+      - easyeffects
+      - calf
+      - lsp-plugins-lv2
+      - zam-plugins-lv2
+      - stow
+      - ttf-sourcecodepro-nerd
+      - otf-aurulent-nerd
+      - bibata-cursor-translucent
+      - papirus-icon-theme
+      - fish
+      - starship
+      - btop
+      - eza
+      - fastfetch
+      - nvtop
+      - nodejs
+      - npm
+      - rustup
+      - ripgrep
+      - direnv
+      - less
+      - git-delta
+      - firefox
+      - profile-sync-daemon
+      - discord
+      - signal-desktop
+      - element-desktop
+      - bitwarden
+      - onlyoffice-bin
+      - thunderbird
+      - neovim
+      - visual-studio-code-bin
+      - obsidian
+      - gimp
+      - inkscape
+      - krita
+      - tenacity
+      - blender
+      - tailscale
+    state: present
+  notify:
+    - Enable paccache.timer
+    - Enable reflector.timer
+    - Enable firewalld.service
+    - Enable bluetooth.service
+    - Enable psd.service (user)
+
+- name: Configure bootloader
+  become: true
+  ansible.builtin.lineinfile:
+    path: "/boot/loader/entries/linux-zen.conf"
+    line: "options plymouth.use-simpledrm splash quiet"
+    insertafter: "^options"  # Adjust this to place the line appropriately
+    state: present
+
+- name: Deploy dotfiles
+  ansible.builtin.command: stow -R .
+  args:
+    chdir: ~/.dotfiles
+    creates:
+      - ~/.config/environment.d
+      - ~/.config/fastfetch
+      - ~/.config/fish
+      - ~/.config/nvim
+      - ~/.config/starship.toml

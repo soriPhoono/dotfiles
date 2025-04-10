@@ -4,3 +4,4 @@
 
   roles:
     - role: drivers
+    - role: installer

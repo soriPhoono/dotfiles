@@ -1,0 +1,36 @@
+---
+- name: Enable paccache.timer
+  become: true
+  ansible.builtin.systemd:
+    name: paccache.timer
+    enabled: true
+    state: started
+
+- name: Enable reflector.timer
+  become: true
+  ansible.builtin.systemd:
+    name: reflector.timer
+    enabled: true
+    state: started
+
+- name: Enable firewalld.service
+  become: true
+  ansible.builtin.systemd:
+    name: firewalld.service
+    enabled: true
+    state: started
+
+- name: Enable bluetooth.service
+  become: true
+  ansible.builtin.systemd:
+    name: bluetooth.service
+    enabled: true
+    state: started
+
+- name: Enable psd.service (user)
+  become: true
+  ansible.builtin.systemd:
+    name: psd.service
+    enabled: true
+    state: started
+    scope: user

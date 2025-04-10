@@ -1,0 +1,39 @@
+---
+- name: Install intel gpu drivers
+  become: true
+  ansible.builtin.package:
+    name:
+      - mesa
+      - vulkan-intel
+
+      - intel-media-driver
+      - libvdpau-va-gl
+
+      - clinfo
+      - ocl-icd
+      - opencl-rusticl-mesa
+
+      - lib32-mesa
+      - lib32-vulkan-intel
+
+      - lib32-ocl-icd
+      - lib32-opencl-rusticl-mesa
+    state: present
+
+- name: Detect hardware acceleration configuration file
+  ansible.builtin.stat:
+    path: /etc/profile.d/99-hardware-acceleration.sh
+  register: hardware_acceleration_check
+
+- name: Configure environment variables for hardware acceleration on intelgpu
+  become: true
+  ansible.builtin.template:
+    src: templates/drivers/etc/profile.d/99-hardware-acceleration.sh.j2
+    dest: /etc/profile.d/99-hardware-acceleration.sh
+    owner: root
+    group: root
+    mode: '0644'
+  vars:
+    libva_driver_name: iHD
+    vdpau_driver_name: va_gl
+  when: not hardware_acceleration_check.stat.exists
