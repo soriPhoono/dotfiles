@@ -27,7 +27,9 @@ install_packages --aur pacman-contrib reflector \
   git-delta firefox profile-sync-daemon \
   discord signal-desktop element-desktop \
   bitwarden onlyoffice-bin thunderbird \
-  neovim visual-studio-code-bin obsidian
+  neovim visual-studio-code-bin obsidian \
+  gimp inkscape krita tenacity \
+  blender tailscale
 
 sudo systemctl enable --now paccache.timer
 sudo systemctl enable --now reflector.timer
