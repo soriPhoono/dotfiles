@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Console Mode
+Comment=Start Steam in Big Picture Mode
+Exec=env LD_PRELOAD="" /usr/bin/gamescope -W 1920 -H 1080 -r 144 --adaptive-sync -fe --force-grab-cursor --prefer-output DP-1 -- /usr/bin/steam -tenfoot
+Type=Application

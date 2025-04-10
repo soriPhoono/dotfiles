@@ -1,4 +1,6 @@
 \.git
+root
+src
 
 \.editorconfig
 \.gitignore

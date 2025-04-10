@@ -2,9 +2,9 @@
 
 echo "Dotfiles -- Sori Phoono"
 
-cd ~/.dotfiles || exit
+sh ./src/systems/"$(hostnamectl | grep hostname | awk '{print $3}')"/default.sh
 
-git submodule init
+git submodule init && git submodule update
 
 paru -S --needed --noconfirm stow
 
