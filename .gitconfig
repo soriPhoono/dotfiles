@@ -13,3 +13,22 @@
 
 [commit]
   verbose = true
+
+[push]
+  default = current
+  autoSetupRemote = true
+
+[pull]
+  rebase = true
+
+[rebase]
+  autosquash = true
+
+[rerere]
+  enabled = true
+
+[merge]
+  conflictstyle = zdiff3
+
+
+
