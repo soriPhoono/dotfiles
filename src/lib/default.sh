@@ -39,7 +39,7 @@ sudo systemctl enable --now bluetooth.service
 systemctl --user enable --now psd.service
 
 if ! grep -q "options plymouth.use-simpledrm splash quiet" /boot/loader/entries/*linux-zen.conf; then
-	echo "options plymouth.use-simpledrm splash quiet" | sudo tee -a /boot/loader/entries/*linux-zen.conf
+  echo "options plymouth.use-simpledrm splash quiet" | sudo tee -a /boot/loader/entries/*linux-zen.conf
 fi
 
 git submodule init && git submodule update
