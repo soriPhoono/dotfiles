@@ -1,0 +1,63 @@
+---
+- name: Install pciutils
+  ansible.builtin.package:
+    name: pciutils
+    state: present
+
+- name: Detect amd gpu
+  ansible.builtin.shell: |
+    set -e -o pipefail
+    lspci | grep -i vga | grep -iq 'amd'
+  register: amd_gpu_detect
+  changed_when: false
+
+- name: Install amd base drivers
+  ansible.builtin.package:
+    name:
+      - mesa
+      - xf86-video-amdgpu
+      - vulkan-radeon
+
+      - lib32-mesa
+      - lib32-vulkan-radeon
+
+      - clinfo
+
+      - ocl-icd
+      - opencl-rusticl-mesa
+
+      - lib32-ocl-icd
+      - lib32-opencl-rusticl-mesa
+    state: present
+
+- name: Detect hardware acceleration configuration file
+  ansible.builtin.stat:
+    path: /etc/profile.d/99-hardware-acceleration.sh
+  register: hardware_acceleration_check
+
+- name: Configure environment variables for hardware acceleration on amdgpu
+  become: true
+  ansible.builtin.template:
+    src: templates/drivers/etc/profile.d/99-hardware-acceleration.sh.j2
+    dest: /etc/profile.d/99-hardware-acceleration.sh
+    owner: root
+    group: root
+    mode: '0644'
+  vars:
+    libva_driver_name: radeonsi
+    vdpau_driver_name: radeonsi
+  when: not hardware_acceleration_check.stat.exists
+
+- name: Prompt for dedicated gpu support
+  ansible.builtin.pause:
+    prompt: "Do you want to install dedicated GPU support (rocm)? (y/n)"
+  register: amd_dedicated
+
+- name: Install dedicated GPU support (rocm)
+  ansible.builtin.package:
+    name:
+      - rocm-hip-runtime
+      - rocm-opencl-runtime
+      - hiprt
+    state: present
+  when: amd_dedicated == "y"

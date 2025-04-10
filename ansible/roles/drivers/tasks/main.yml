@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/drivers
+- name: Print CPU vendor
+  ansible.builtin.debug:
+    msg: "CPU vendor is {{ ansible_facts['processor'][1] }}"
+
+- name: Install cpu microcode (intel)
+  ansible.builtin.package:
+    name: intel-ucode
+    state: present
+  when: ansible_facts['processor'][1] == 'GenuineIntel'
+
+- name: Install cpu microcode (amd)
+  ansible.builtin.package:
+    name: amd-ucode
+    state: present
+  when: ansible_facts['processor'][1] == 'AuthenticAMD'
+
+- name: Install amd integrated gpu drivers
+  ansible.builtin.import_tasks: gpu/integrated/amd.yml

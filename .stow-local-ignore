@@ -5,5 +5,8 @@ src
 \.editorconfig
 \.gitignore
 \.gitmodules
-init\.sh
+
+LICENSE
 README\.md
+init\.sh
+requirements.txt

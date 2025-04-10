@@ -1,0 +1,11 @@
+galaxy_info:
+  author: SoriPhoono <soriphoono@protonmail.com>
+  description: Install and configure hardware drivers outside of the scope of default installation using archinstall.
+
+  license: GPL-3.0-only
+
+  min_ansible_version: '2.1'
+
+  galaxy_tags: []
+
+dependencies: []

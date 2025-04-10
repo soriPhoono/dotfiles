@@ -1,0 +1,6 @@
+---
+- name: Install Zephyrus configurations
+  hosts: localhost
+
+  roles:
+    - role: drivers
