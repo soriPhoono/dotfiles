@@ -3,7 +3,7 @@
 # tasks file for roles/drivers
 - name: Print CPU vendor
   ansible.builtin.debug:
-    msg: "CPU vendor is {{ ansible_facts['processor'][1] }}"
+    msg: "{{ ansible_facts }}"
 
 - name: Install cpu microcode (intel)
   ansible.builtin.package:
@@ -17,5 +17,45 @@
     state: present
   when: ansible_facts['processor'][1] == 'AuthenticAMD'
 
-- name: Install amd integrated gpu drivers
-  ansible.builtin.import_tasks: gpu/integrated/amd.yml
+- name: Install required packages
+  ansible.builtin.package:
+    name:
+      - pciutils
+      - "{{ drivers_kernel_name }}-headers"
+    state: present
+
+- name: Detect amd gpu
+  ansible.builtin.shell: |
+    set -e -o pipefail
+    lspci | grep -i vga | grep -iq 'amd'
+  register: amd_gpu_detect
+  changed_when: false
+  failed_when: false
+
+- name: Detect intel gpu
+  ansible.builtin.shell: |
+    set -e -o pipefail
+    lspci | grep -i vga | grep -iq 'intel'
+  register: intel_gpu_detect
+  changed_when: false
+  failed_when: false
+
+- name: Detect nvidia gpu
+  ansible.builtin.shell: |
+    set -e -o pipefail
+    lspci | grep -i vga | grep -iq 'nvidia'
+  register: nvidia_gpu_detect
+  changed_when: false
+  failed_when: false
+
+- name: Install amd gpu drivers
+  ansible.builtin.import_tasks: gpu/amd.yml
+  when: amd_gpu_detect.rc == 0
+
+- name: Install intel gpu drivers
+  ansible.builtin.import_tasks: gpu/intel.yml
+  when: intel_gpu_detect.rc == 0
+
+- name: Install nvidia gpu drivers
+  ansible.builtin.import_tasks: gpu/nvidia.yml
+  when: nvidia_gpu_detect.rc == 0

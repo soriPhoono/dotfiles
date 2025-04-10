@@ -1,17 +1,6 @@
 ---
-- name: Install pciutils
-  ansible.builtin.package:
-    name: pciutils
-    state: present
-
-- name: Detect amd gpu
-  ansible.builtin.shell: |
-    set -e -o pipefail
-    lspci | grep -i vga | grep -iq 'amd'
-  register: amd_gpu_detect
-  changed_when: false
-
 - name: Install amd base drivers
+  become: true
   ansible.builtin.package:
     name:
       - mesa
@@ -54,6 +43,7 @@
   register: amd_dedicated
 
 - name: Install dedicated GPU support (rocm)
+  become: true
   ansible.builtin.package:
     name:
       - rocm-hip-runtime

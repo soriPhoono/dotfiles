@@ -1,0 +1,4 @@
+desktops:
+  hosts:
+    mymachine:
+      ansible_connector: local
