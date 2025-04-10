@@ -14,7 +14,8 @@ paru -S --needed --noconfirm \
   ttf-sourcecodepro-nerd otf-aurulent-nerd \
   bibata-cursor-translucent papirus-icon-theme \
   fish starship btop eza fastfetch nvtop \
-  nodejs npm rustup ripgrep direnv \
+  nodejs npm rustup ripgrep direnv less \
+  git-delta \
   firefox profile-sync-daemon \
   discord signal-desktop element-desktop \
   bitwarden onlyoffice-bin thunderbird \

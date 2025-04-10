@@ -5,6 +5,9 @@
 [init]
 	defaultBranch = main
 
+[core]
+  pager = delta
+
 [diff]
   algorithm = histogram
 
@@ -29,6 +32,17 @@
 
 [merge]
   conflictstyle = zdiff3
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+  dark = true
+  line-numbers = true
+  side-by-side = true
+  hyperlinks = true
+  hyperlinks-file-link-format = "vscode://file/{path}:{line}"
 
 [url "git@github.com:"]
   insteadOf = gh:
