@@ -4,13 +4,15 @@ echo "Dotfiles -- Sori Phoono"
 
 cd ~/.dotfiles || exit
 
-git submodule init && git submodule update
+git submodule init
 
 paru -S --needed --noconfirm stow
 
 stow -R . || exit
 
 paru -S --needed --noconfirm \
+  ttf-sourcecodepro-nerd otf-aurulent-nerd \
+  bibata-cursor-translucent papirus-icon-theme \
   fish starship btop eza fastfetch nvtop \
   nodejs npm rustup ripgrep direnv \
   firefox profile-sync-daemon \
