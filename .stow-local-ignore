@@ -5,5 +5,5 @@ src
 \.editorconfig
 \.gitignore
 \.gitmodules
-bootstrap\.sh
+init\.sh
 README\.md
