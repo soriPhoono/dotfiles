@@ -1,5 +1,5 @@
 ---
-- name: Install Zephyrus configurations
+- name: Install configurations
   hosts: localhost
 
   roles:

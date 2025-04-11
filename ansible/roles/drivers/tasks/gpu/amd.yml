@@ -19,10 +19,16 @@
       - lib32-opencl-rusticl-mesa
     state: present
 
+- name: Prompt for hardware accleration support
+  ansible.builtin.pause:
+    prompt: "Do you want to install hardware acceleration support (mesa)? (y/n)"
+  register: amd_integrated
+
 - name: Detect hardware acceleration configuration file
   ansible.builtin.stat:
     path: /etc/profile.d/99-hardware-acceleration.sh
   register: hardware_acceleration_check
+  when: amd_integrated == "y"
 
 - name: Configure environment variables for hardware acceleration on amdgpu
   become: true
@@ -35,7 +41,9 @@
   vars:
     libva_driver_name: radeonsi
     vdpau_driver_name: radeonsi
-  when: not hardware_acceleration_check.stat.exists
+  when:
+    - amd_integrated == "y"
+    - not hardware_acceleration_check.stat.exists
 
 - name: Prompt for dedicated gpu support
   ansible.builtin.pause:

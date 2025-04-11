@@ -8,14 +8,6 @@
   args:
     creates: /etc/pacman.d/chaotic-mirrorlist
 
-- name: Write repo route
-  become: true
-  ansible.builtin.lineinfile:
-    path: "/etc/pacman.conf"
-    line: "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist"
-    insertafter: EOF
-    state: present
-
 - name: Update pacman cache
   become: true
   ansible.builtin.pacman:

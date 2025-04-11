@@ -1,10 +1,4 @@
-# SPDX-License-Identifier: MIT-0
 ---
-# tasks file for roles/drivers
-- name: Print CPU vendor
-  ansible.builtin.debug:
-    msg: "{{ ansible_facts }}"
-
 - name: Install cpu microcode (intel)
   ansible.builtin.package:
     name: intel-ucode

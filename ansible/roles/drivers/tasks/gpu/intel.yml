@@ -20,10 +20,16 @@
       - lib32-opencl-rusticl-mesa
     state: present
 
+- name: Prompt for hardware accleration support
+  ansible.builtin.pause:
+    prompt: "Do you want to install hardware acceleration support (mesa)? (y/n)"
+  register: intel_integrated
+
 - name: Detect hardware acceleration configuration file
   ansible.builtin.stat:
     path: /etc/profile.d/99-hardware-acceleration.sh
   register: hardware_acceleration_check
+  when: intel_integrated == "y"
 
 - name: Configure environment variables for hardware acceleration on intelgpu
   become: true
@@ -36,4 +42,6 @@
   vars:
     libva_driver_name: iHD
     vdpau_driver_name: va_gl
-  when: not hardware_acceleration_check.stat.exists
+  when:
+    - intel_integrated == "y"
+    - not hardware_acceleration_check.stat.exists

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-sudo cp -r ./root/* /
-
 if [[ "$REPLY" =~ [yY] ]]; then
   paru -S --needed --noconfirm winetricks protontricks-git protonup gamemode \
     gamescope steam lutris bottles prismlauncher gzdoom \

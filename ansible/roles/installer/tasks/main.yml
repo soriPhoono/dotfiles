@@ -1,4 +1,23 @@
 ---
+- name: Copy files
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - etc/pam.d/passwd
+    - etc/pam.d/system-login
+    - etc/plymouth/plymouthd.conf
+    - etc/ssh/sshd_config.d/20-deny_root.conf
+    - etc/ssh/sshd_config.d/20-force_publickey_auth.conf
+    - etc/sudoers.d/10-wheel
+    - etc/mkinitcpio.conf
+    - etc/pacman.conf
+    - etc/paru.conf
+
 - name: Install chaotic-AUR
   ansible.builtin.import_tasks: chaotic-aur.yml
 
@@ -9,49 +28,64 @@
       - paru
       - pacman-contrib
       - reflector
+
       - plymouth
       - plymouth-theme-dna-git
+
       - libpwquality
       - firewalld
+
       - easyeffects
       - calf
       - lsp-plugins-lv2
       - zam-plugins-lv2
+
       - stow
+
       - ttf-sourcecodepro-nerd
       - otf-aurulent-nerd
       - bibata-cursor-translucent
       - papirus-icon-theme
+
       - fish
       - starship
-      - btop
-      - eza
       - fastfetch
-      - nvtop
-      - nodejs
-      - npm
-      - rustup
-      - ripgrep
       - direnv
-      - less
+      - eza
+      - ripgrep
       - git-delta
+      - less
+      - btop
+      - nvtop
+
+      - tailscale
+
       - firefox
       - profile-sync-daemon
+
       - discord
       - signal-desktop
       - element-desktop
-      - bitwarden
+
       - onlyoffice-bin
       - thunderbird
+
+      - rustup
+      - nodejs
+      - npm
       - neovim
-      - visual-studio-code-bin
+
       - obsidian
+      - bitwarden
+      - visual-studio-code-bin
+
+      - krita
       - gimp
       - inkscape
-      - krita
+
       - tenacity
+
       - blender
-      - tailscale
     state: present
   notify:
     - Enable paccache.timer
@@ -59,6 +93,10 @@
     - Enable firewalld.service
     - Enable bluetooth.service
     - Enable psd.service (user)
+
+- name: Rebuild initramfs
+  become: true
+  ansible.builtin.command: mkinitcpio -P
 
 - name: Configure bootloader
   become: true
