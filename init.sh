@@ -18,4 +18,5 @@ pip install -r requirements.txt
 
 echo "----------------------------------------"
 echo "Running Ansible playbook..."
-ansible-playbook -Ji ansible/inventory.yml "ansible/$hostname.yml"
+
+ansible-playbook -Ji ansible/inventory.yml "ansible/localhost.yml"

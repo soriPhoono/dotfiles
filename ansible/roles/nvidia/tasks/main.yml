@@ -1,3 +1,63 @@
-#SPDX-License-Identifier: MIT-0
----
+# SPDX-License-Identifier: MIT-0
+
 # tasks file for ansible/roles/drivers/nvidia
+# This role installs NVIDIA drivers and CUDA on the target system.
+# It is designed to work with Arch Linux.
+
+# The role performs the following tasks:
+# 1. Check if the system is running Arch Linux.
+# 2. Check if the system has an NVIDIA GPU.
+# 3. Install the NVIDIA driver using the package manager.
+# 4. Install the CUDA toolkit.
+# 5. Install opencl acceleration.
+
+---
+- name: Check if the system is running Arch Linux
+  ansible.builtin.assert:
+    that:
+      - ansible_distribution == "Archlinux"
+    fail_msg: "This role is only supported on Arch Linux."
+    success_msg: "System is running Arch Linux."
+
+- name: Check if the system has an NVIDIA GPU
+  ansible.builtin.assert:
+    that:
+      - gpu_check.rc == 0
+    fail_msg: "This role is only supported on systems with NVIDIA GPUs."
+    success_msg: "System has an NVIDIA GPU."
+
+- name: Install the NVIDIA driver
+  become: true
+  ansible.builtin.package:
+    name:
+      - nvidia-open-dkms
+
+      - nvidia-utils
+      - lib32-nvidia-utils
+
+      - nvidia-settings
+      - nvidia-prime
+
+      - clinfo
+
+      - ocl-icd
+      - opencl-nvidia
+
+      - lib32-ocl-icd
+      - lib32-opencl-nvidia
+
+      - cuda
+    state: present
+
+- name: Install configuration files
+  become: true
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - etc/pacman.d/hooks/nvidia.hook
+    - etc/modprobe.d/nvidia-pm.conf
+    - etc/udev/rules.d/80-nvidia-pm.rules

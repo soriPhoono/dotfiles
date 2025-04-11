@@ -2,7 +2,7 @@
 
 # tasks file for ansible/roles/drivers/amdgpu
 # This role installs the AMDGPU driver for AMD graphics cards.
-# It is designed to work with Arch linux and later versions.
+# It is designed to work with Arch linux.
 
 # The role performs the following tasks:
 # 1. Check if the system is running Arch Linux.
@@ -10,9 +10,7 @@
 # 3. Install the AMDGPU driver using the package manager.
 # 4. Set up hardware acceleration for the integrated AMD GPU.
 # 5. If the system does not have an integrated GPU check if the GPU is a dedicated card.
-# 6. If the system has a dedicated AMD GPU, install the AMDGPU driver.
-# 7. If the system has a dedicated AMD GPU, install rocm and opencl acceleration.
-# 8. If the system has a dedicated AMD GPU, install the amdgpu-pro driver for afmf.
+# 6. If the system has a dedicated AMD GPU, install rocm and opencl acceleration.
 
 ---
 - name: Check if the system is running Arch Linux
@@ -28,6 +26,13 @@
     lspci | grep -i vga | grep -iq "amd"
   register: gpu_check
   changed_when: false
+
+- name: Check if the system has an AMD GPU
+  ansible.builtin.assert:
+    that:
+      - gpu_check.rc == 0
+    fail_msg: "This role is only supported on systems with AMD GPUs."
+    success_msg: "System has an AMD GPU."
 
 - name: Install the AMDGPU driver
   ansible.builtin.package:
@@ -47,15 +52,11 @@
       - lib32-ocl-icd
       - lib32-opencl-rusticl-mesa
     state: present
-  when:
-    - gpu_check.rc == 0
 
 - name: Prompt for hardware accleration support
   ansible.builtin.pause:
     prompt: "Do you want to install hardware acceleration support (mesa)? (y/n)"
   register: amd_integrated
-  when:
-    - gpu_check.rc == 0
 
 - name: Detect hardware acceleration configuration file
   ansible.builtin.stat:
@@ -63,7 +64,7 @@
   register: hardware_acceleration_check
   when:
     - amd_integrated is defined
-    - amd_integrated == "y"
+    - amd_integrated.user_input == "y"
 
 - name: Configure environment variables for hardware acceleration on amdgpu
   become: true
@@ -80,7 +81,7 @@
     vdpau_driver_name: radeonsi
   when:
     - amd_integrated is defined
-    - amd_integrated == "y"
+    - amd_integrated.user_input == "y"
     - not hardware_acceleration_check.stat.exists
 
 - name: Prompt for ROCM support
@@ -89,7 +90,7 @@
   register: amd_dedicated
   when:
     - amd_integrated is defined
-    - amd_integrated == "n"
+    - amd_integrated.user_input == "n"
 
 - name: Install ROCM support
   become: true
@@ -101,4 +102,4 @@
     state: present
   when:
     - amd_dedicated is defined
-    - amd_dedicated == "y"
+    - amd_dedicated.user_input == "y"

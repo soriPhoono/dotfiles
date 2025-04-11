@@ -1,5 +1,5 @@
 galaxy_info:
-  author: Sori Phoono <soriphoono@gmail.com>
+  author: Sori Phoono <soriphoono@protonmail.com>
   description: An Ansible role to install AMD GPU drivers on Linux.
 
   license: GPL-2.0-or-later
@@ -10,7 +10,6 @@ galaxy_info:
   # min_ansible_container_version:
 
   galaxy_tags: [
-    "amdgpu",
     "amd",
     "gpu",
     "graphics",
