@@ -2,17 +2,6 @@
 
 sudo cp -r ./root/* /
 
-git submodule init && git submodule update
-
-stow -R . || exit
-
-chsh --shell /usr/bin/fish
-
-rustup default stable
-
-read -rp "Install gaming features? [y/N]: " -n 1
-echo -e '\n'
-
 if [[ "$REPLY" =~ [yY] ]]; then
   paru -S --needed --noconfirm winetricks protontricks-git protonup gamemode \
     gamescope steam lutris bottles prismlauncher gzdoom \

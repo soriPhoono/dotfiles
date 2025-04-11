@@ -1,0 +1,22 @@
+- name: Install Chaotic-AUR keys
+  become: true
+  ansible.builtin.shell: |
+    pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    pacman-key --lsign-key 3056513887B78AEB
+    pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+    pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+  args:
+    creates: /etc/pacman.d/chaotic-mirrorlist
+
+- name: Write repo route
+  become: true
+  ansible.builtin.lineinfile:
+    path: "/etc/pacman.conf"
+    line: "[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist"
+    insertafter: EOF
+    state: present
+
+- name: Update pacman cache
+  become: true
+  ansible.builtin.pacman:
+    update_cache: true
