@@ -7,12 +7,11 @@ galaxy_info:
   min_ansible_version: '2.1'
 
   galaxy_tags: [
-    "nvidia",
-    "gpu",
-    "graphics",
-    "driver",
-    "linux"
+    intel,
+    amd,
+    gpu,
+    drivers,
+    linux,
+    microcode,
+    firmware,
   ]
-
-dependencies:
-  - role: drivers
