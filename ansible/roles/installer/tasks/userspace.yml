@@ -1,0 +1,43 @@
+---
+- name: Install dependencies
+  become: true
+  ansible.builtin.package:
+    name:
+      - firefox
+      - profile-sync-daemon
+
+      - discord
+      - signal-desktop
+      - element-desktop
+
+      - onlyoffice-bin
+      - thunderbird
+
+      - rustup
+      - nodejs
+      - npm
+      - neovim
+
+      - obsidian
+      - bitwarden
+      - visual-studio-code-bin
+
+      - krita
+      - gimp
+      - inkscape
+
+      - tenacity
+      - easyeffects
+      - calf
+      - lsp-plugins-lv2
+      - zam-plugins-lv2
+
+      - blender
+    state: present
+  notify:
+    - Enable psd.service (user)
+
+- name: Install rust sdk
+  ansible.builtin.command:
+    cmd: rustup default stable
+    creates: "{{ ansible_env.HOME }}/.rustup"

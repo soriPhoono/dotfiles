@@ -1,0 +1,22 @@
+galaxy_info:
+  author: Sori Phoono <soriphoono@gmail.com>
+  description: An Ansible role to install AMD GPU drivers on Linux.
+
+  license: GPL-2.0-or-later
+
+  min_ansible_version: '2.1'
+
+  # If this a Container Enabled role, provide the minimum Ansible Container version.
+  # min_ansible_container_version:
+
+  galaxy_tags: [
+    "amdgpu",
+    "amd",
+    "gpu",
+    "graphics",
+    "driver",
+    "linux"
+  ]
+
+dependencies:
+  - role: drivers

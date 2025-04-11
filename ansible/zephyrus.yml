@@ -1,7 +1,7 @@
 ---
 - name: Install configurations
   hosts: localhost
+  gather_facts: true
 
   roles:
-    - role: drivers
-    - role: installer
+    - role: amdgpu

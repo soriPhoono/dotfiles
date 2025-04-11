@@ -1,0 +1,44 @@
+---
+- name: Install dependencies
+  become: true
+  ansible.builtin.package:
+    name:
+      - stow
+
+      - ttf-sourcecodepro-nerd
+      - otf-aurulent-nerd
+      - bibata-cursor-translucent
+      - papirus-icon-theme
+
+      - fish
+      - starship
+      - fastfetch
+      - direnv
+      - eza
+      - bat
+      - fd
+      - fzf
+      - ripgrep
+      - git-delta
+      - less
+      - btop
+      - nvtop
+    state: present
+
+- name: Deploy dotfiles
+  ansible.builtin.command: stow -R .
+  args:
+    chdir: ~/.dotfiles
+    creates:
+      - ~/.config/environment.d
+      - ~/.config/fastfetch
+      - ~/.config/fish
+      - ~/.config/nvim
+      - ~/.config/starship.toml
+
+- name: Set default shell
+  become: true
+  ansible.builtin.user:
+    name: ansible_env.USER
+    shell: /usr/bin/fish
+  when: ansible_env.SHELL != '/usr/bin/fish'

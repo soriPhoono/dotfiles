@@ -1,0 +1,104 @@
+# SPDX-License-Identifier: MIT-0
+
+# tasks file for ansible/roles/drivers/amdgpu
+# This role installs the AMDGPU driver for AMD graphics cards.
+# It is designed to work with Arch linux and later versions.
+
+# The role performs the following tasks:
+# 1. Check if the system is running Arch Linux.
+# 2. Check if the system has an AMD GPU.
+# 3. Install the AMDGPU driver using the package manager.
+# 4. Set up hardware acceleration for the integrated AMD GPU.
+# 5. If the system does not have an integrated GPU check if the GPU is a dedicated card.
+# 6. If the system has a dedicated AMD GPU, install the AMDGPU driver.
+# 7. If the system has a dedicated AMD GPU, install rocm and opencl acceleration.
+# 8. If the system has a dedicated AMD GPU, install the amdgpu-pro driver for afmf.
+
+---
+- name: Check if the system is running Arch Linux
+  ansible.builtin.assert:
+    that:
+      - ansible_distribution == "Archlinux"
+    fail_msg: "This role is only supported on Arch Linux."
+    success_msg: "System is running Arch Linux."
+
+- name: Check if the system has an AMD GPU
+  ansible.builtin.shell: |
+    set -o pipefail
+    lspci | grep -i vga | grep -iq "amd"
+  register: gpu_check
+  changed_when: false
+
+- name: Install the AMDGPU driver
+  ansible.builtin.package:
+    name:
+      - mesa
+      - xf86-video-amdgpu
+      - vulkan-radeon
+
+      - lib32-mesa
+      - lib32-vulkan-radeon
+
+      - clinfo
+
+      - ocl-icd
+      - opencl-rusticl-mesa
+
+      - lib32-ocl-icd
+      - lib32-opencl-rusticl-mesa
+    state: present
+  when:
+    - gpu_check.rc == 0
+
+- name: Prompt for hardware accleration support
+  ansible.builtin.pause:
+    prompt: "Do you want to install hardware acceleration support (mesa)? (y/n)"
+  register: amd_integrated
+  when:
+    - gpu_check.rc == 0
+
+- name: Detect hardware acceleration configuration file
+  ansible.builtin.stat:
+    path: /etc/profile.d/99-hardware-acceleration.sh
+  register: hardware_acceleration_check
+  when:
+    - amd_integrated is defined
+    - amd_integrated == "y"
+
+- name: Configure environment variables for hardware acceleration on amdgpu
+  become: true
+  ansible.builtin.template:
+    src: "templates/{{ item }}.j2"
+    dest: "{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - /etc/profile.d/99-hardware-acceleration.sh
+  vars:
+    libva_driver_name: radeonsi
+    vdpau_driver_name: radeonsi
+  when:
+    - amd_integrated is defined
+    - amd_integrated == "y"
+    - not hardware_acceleration_check.stat.exists
+
+- name: Prompt for ROCM support
+  ansible.builtin.pause:
+    prompt: "Do you want to install ROCM support (rocm)? (y/n)"
+  register: amd_dedicated
+  when:
+    - amd_integrated is defined
+    - amd_integrated == "n"
+
+- name: Install ROCM support
+  become: true
+  ansible.builtin.package:
+    name:
+      - rocm-hip-runtime
+      - rocm-opencl-runtime
+      - hiprt
+    state: present
+  when:
+    - amd_dedicated is defined
+    - amd_dedicated == "y"

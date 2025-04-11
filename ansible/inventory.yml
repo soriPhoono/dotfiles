@@ -1,4 +1,4 @@
-desktops:
+all:
   hosts:
     mymachine:
       ansible_connector: local

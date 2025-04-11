@@ -35,68 +35,30 @@
       - libpwquality
       - firewalld
 
-      - easyeffects
-      - calf
-      - lsp-plugins-lv2
-      - zam-plugins-lv2
-
-      - stow
-
-      - ttf-sourcecodepro-nerd
-      - otf-aurulent-nerd
-      - bibata-cursor-translucent
-      - papirus-icon-theme
-
-      - fish
-      - starship
-      - fastfetch
-      - direnv
-      - eza
-      - ripgrep
-      - git-delta
-      - less
-      - btop
-      - nvtop
-
       - tailscale
-
-      - firefox
-      - profile-sync-daemon
-
-      - discord
-      - signal-desktop
-      - element-desktop
-
-      - onlyoffice-bin
-      - thunderbird
-
-      - rustup
-      - nodejs
-      - npm
-      - neovim
-
-      - obsidian
-      - bitwarden
-      - visual-studio-code-bin
-
-      - krita
-      - gimp
-      - inkscape
-
-      - tenacity
-
-      - blender
     state: present
   notify:
     - Enable paccache.timer
     - Enable reflector.timer
     - Enable firewalld.service
     - Enable bluetooth.service
-    - Enable psd.service (user)
+
+- name: Query initramfs
+  become: true
+  ansible.builtin.stat:
+    path: /boot/initramfs-linux-zen.img
+  register: ansible_stat
 
 - name: Rebuild initramfs
   become: true
-  ansible.builtin.command: mkinitcpio -P
+  ansible.builtin.command:
+    cmd: mkinitcpio -P
+  when:
+    - ansible_stat.stat.exists
+    - ansible_stat.stat.mtime < ansible_date_time.epoch | int
+  changed_when:
+    - ansible_stat.stat.exists
+    - ansible_stat.stat.mtime < ansible_date_time.epoch | int
 
 - name: Configure bootloader
   become: true
@@ -107,19 +69,7 @@
     state: present
 
 - name: Deploy dotfiles
-  ansible.builtin.command: stow -R .
-  args:
-    chdir: ~/.dotfiles
-    creates:
-      - ~/.config/environment.d
-      - ~/.config/fastfetch
-      - ~/.config/fish
-      - ~/.config/nvim
-      - ~/.config/starship.toml
+  ansible.builtin.import_tasks: dotfiles.yml
 
-- name: Set default shell
-  become: true
-  ansible.builtin.command: chsh -s /usr/bin/fish soriphoono
-
-- name: Install rust sdk
-  ansible.builtin.command: rustup default stable
+- name: Deploy userspace
+  ansible.builtin.import_tasks: userspace.yml
