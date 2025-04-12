@@ -1,12 +1,12 @@
+\.direnv
 \.git
 
 ansible
-root
-src
 
 \.editorconfig
 \.gitignore
 \.gitmodules
+\.envrc
 
 LICENSE
 README\.md
