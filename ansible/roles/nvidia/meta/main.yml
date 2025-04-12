@@ -13,6 +13,3 @@ galaxy_info:
     "driver",
     "linux"
   ]
-
-dependencies:
-  - role: drivers

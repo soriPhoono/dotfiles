@@ -1,49 +1,48 @@
 [user]
-	name = soriphoono
-	email = soriphoono@protonmail.com
+name = soriphoono
+email = soriphoono@protonmail.com
 
 [init]
-	defaultBranch = main
+defaultBranch = main
 
 [core]
-  pager = delta
+pager = delta
 
 [diff]
-  algorithm = histogram
+algorithm = histogram
 
 [help]
-  autocorrect = prompt
+autocorrect = prompt
 
 [commit]
-  verbose = true
+verbose = true
 
 [push]
-  default = current
-  autoSetupRemote = true
+default = current
+autoSetupRemote = true
 
 [pull]
-  rebase = true
+rebase = true
 
 [rebase]
-  autosquash = true
+autosquash = true
 
 [rerere]
-  enabled = true
+enabled = true
 
 [merge]
-  conflictstyle = zdiff3
+conflictstyle = zdiff3
 
 [interactive]
-  diffFilter = delta --color-only
+diffFilter = delta --color-only
 
 [delta]
-  navigate = true
-  dark = true
-  line-numbers = true
-  side-by-side = true
-  hyperlinks = true
-  hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+navigate = true
+dark = true
+line-numbers = true
+side-by-side = true
+hyperlinks = true
+hyperlinks-file-link-format = "vscode://file/{path}:{line}"
 
 [url "git@github.com:"]
-  insteadOf = gh:
-
+insteadOf = gh:

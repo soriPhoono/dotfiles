@@ -4,4 +4,7 @@
   gather_facts: true
 
   roles:
+    - role: microcode
+    - role: intel
     - role: amdgpu
+    - role: installer

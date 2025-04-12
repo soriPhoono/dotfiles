@@ -1,3 +1,0 @@
-[submodule "nvim2"]
-	path = .config/nvim
-	url = gh:soriPhoono/nvim.git
