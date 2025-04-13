@@ -3,35 +3,76 @@
   become: true
   ansible.builtin.package:
     name:
+      # Development packages
+      # C/C++
+      - clang
+      - meson
+      - valgrind
+
+      # Zig
+      - zig
+      - zls
+
+      # Rust
+      - rust
+
+      # Python
+      - python
+
+      # Go
+      - go
+
+      # Dart
+      - dart
+
+      # Java
+      - jdk-openjdk
+
+      # C#
+      - dotnet-runtime
+      - dotnet-sdk
+      - mono
+      - mono-msbuild
+      - mono-msbuild-sdkresolver
+      - aspnet-runtime
+
+      # NodeJS
+      - nodejs
+      - npm
+
+      # Userspace utilities
+      # Browser
       - firefox
       - profile-sync-daemon
 
+      # Communication apps
       - discord
       - signal-desktop
       - element-desktop
 
+      # Office apps
       - onlyoffice-bin
       - thunderbird
-
-      - rustup
-      - nodejs
-      - npm
-      - neovim
-
       - obsidian
+
+      # Development apps
       - bitwarden
       - visual-studio-code-bin
+      - unityhub
 
-      - krita
-      - gimp
-      - inkscape
-
-      - tenacity
+      # Audio filter app
       - easyeffects
       - calf
       - lsp-plugins-lv2
       - zam-plugins-lv2
 
+      # Digital art apps
+      - krita
+      - inkscape
+
+      # Image editor apps
+      - gimp
+      - tenacity
       - blender
     state: present
   notify:
