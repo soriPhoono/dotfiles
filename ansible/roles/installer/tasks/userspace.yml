@@ -77,8 +77,3 @@
     state: present
   notify:
     - Enable psd.service (user)
-
-- name: Install rust sdk
-  ansible.builtin.command:
-    cmd: rustup default stable
-    creates: "{{ ansible_env.HOME }}/.rustup"

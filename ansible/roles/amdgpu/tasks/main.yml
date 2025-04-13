@@ -102,4 +102,4 @@
     state: present
   when:
     - amd_dedicated is defined
-    - amd_dedicated.user_input == "y"
+    - amd_dedicated == "y"

@@ -5,6 +5,6 @@
 
   roles:
     - role: microcode
-    - role: intel
     - role: amdgpu
+    - role: nvidia
     - role: installer
