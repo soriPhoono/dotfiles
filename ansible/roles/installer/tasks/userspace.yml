@@ -28,14 +28,6 @@
       # Java
       - jdk-openjdk
 
-      # C#
-      - dotnet-runtime
-      - dotnet-sdk
-      - mono
-      - mono-msbuild
-      - mono-msbuild-sdkresolver
-      - aspnet-runtime
-
       # NodeJS
       - nodejs
       - npm
