@@ -23,6 +23,7 @@ paru -S --needed --noconfirm \
   plymouth plymouth-theme-dna-git \
   libpwquality firewalld tailscale \
   gnome-shell-extension-dash-to-dock \
+  power-profiles-daemon \
   ttf-sourcecodepro-nerd otf-aurulent-nerd \
   bibata-cursor-translucent papirus-icon-theme \
   fish starship fastfetch direnv eza bat fd fzf \
