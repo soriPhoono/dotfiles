@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ -f ./drivers.sh ]]; then
+	source ./drivers.sh
+
+	install_drivers amd nvidia
+else
+	exit 1
+fi
