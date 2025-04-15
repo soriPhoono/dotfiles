@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
-source ./src/chaotic-aur.sh
 source ./src/drivers.sh
 
-sudo pacman -S --needed --noconfirm git paru
-
 install_drivers amd nvidia
+
+source ./src/chaotic-aur.sh
+source ./src/system-config.sh
+source ./src/dotfiles.sh
