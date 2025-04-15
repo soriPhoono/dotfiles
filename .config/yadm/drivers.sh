@@ -69,40 +69,40 @@ function install_drivers() {
 			nvidia-prime clinfo ocl-icd opencl-nvidia \
 			lib32-ocl-icd lib32-opencl-nvidia cuda
 
-		echo "options nvidia \"NVreg_DynamicPowerManagement=0x02\"" | sudo tee -a /etc/modprobe.d/nvidia-pm.conf
+		echo "options nvidia \"NVreg_DynamicPowerManagement=0x02\"" | sudo tee /etc/modprobe.d/nvidia-pm.conf
 
-		cat EOF | sudo tee -a /etc/pacman.d/hooks/nvidia.hook
-		[Trigger]
-		Operation=Install
-		Operation=Upgrade
-		Operation=Remove
-		Type=Package
-		# You can remove package(s) that don't apply to your config, e.g. if you only use nvidia-open you can remove nvidia-lts as a Target
-		Target=nvidia
-		Target=nvidia-open
-		# If running a different kernel, modify below to match
-		Target=linux-zen
+		cat <<EOF | sudo tee /etc/pacman.d/hooks/nvidia.hook
+[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+# You can remove package(s) that don't apply to your config, e.g. if you only use nvidia-open you can remove nvidia-lts as a Target
+Target=nvidia
+Target=nvidia-open
+# If running a different kernel, modify below to match
+Target=linux-zen
 
-		[Action]
-		Description=Updating NVIDIA module in initcpio
-		Depends=mkinitcpio
-		When=PostTransaction
-		NeedsTargets
-		Exec=/bin/sh -c 'while read -r trg; do case $trg in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P'
-		EOF
+[Action]
+Description=Updating NVIDIA module in initcpio
+Depends=mkinitcpio
+When=PostTransaction
+NeedsTargets
+Exec=/bin/sh -c 'while read -r trg; do case $trg in linux*) exit 0; esac; done; /usr/bin/mkinitcpio -P'
+EOF
 
-		cat EOF | sudo tee -a /etc/udev/rules.d/80-nvidia-pm.rules
-		# Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
-		ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
-		ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
+		cat <<EOF | sudo tee /etc/udev/rules.d/80-nvidia-pm.rules
+# Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
+ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
+ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
 
-		# Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
-		ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
-		ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="on"
+# Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
+ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
+ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="on"
 
-		# Enable runtime PM for NVIDIA VGA/3D controller devices on adding device
-		ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
-		ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
-		EOF
+# Enable runtime PM for NVIDIA VGA/3D controller devices on adding device
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
+ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
+EOF
 	fi
 }
