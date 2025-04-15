@@ -10,7 +10,6 @@
 .cargo/
 .cache/
 .ansible/
-
 .steampath
 .steampid
 .ssh/known_hosts.old
@@ -26,7 +25,17 @@
 .config/dconf/
 .config/btop/
 .config/autostart/
+.config/obsidian/
+.config/godot
+.config/background
 .config/.gsd-keyboard.settings-ported
 .bash_history
 .bash_logout
 .bash_profile
+Documents/
+Downloads/
+.nvidia-settings-rc
+.nv/
+.nuget/
+.minecraft/
+
