@@ -1,4 +1,7 @@
 ---
+- name: Install chaotic-AUR
+  ansible.builtin.import_tasks: chaotic-aur.yml
+
 - name: Copy files
   become: true
   ansible.builtin.copy:
@@ -17,9 +20,6 @@
     - etc/mkinitcpio.conf
     - etc/pacman.conf
     - etc/paru.conf
-
-- name: Install chaotic-AUR
-  ansible.builtin.import_tasks: chaotic-aur.yml
 
 - name: Install tools
   become: true

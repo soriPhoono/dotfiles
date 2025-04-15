@@ -82,15 +82,15 @@
   become: true
   ansible.builtin.template:
     src: "{{ item }}.j2"
-    dest: "{{ item }}"
+    dest: "/{{ item }}"
     owner: root
     group: root
     mode: '0644'
   loop:
-    - /etc/profile.d/99-hardware-acceleration.sh
+    - etc/profile.d/99-hardware-acceleration.sh
   vars:
     libva_driver_name: iHD
-    vdpau_driver_name: va_gl
+    vdpau_driver: va_gl
   when:
     - intel_integrated is defined
     - intel_integrated.user_input == "y"

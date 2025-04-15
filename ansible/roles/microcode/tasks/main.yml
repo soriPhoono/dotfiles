@@ -1,17 +1,20 @@
 ---
 - name: Install cpu microcode (intel)
+  become: true
   ansible.builtin.package:
     name: intel-ucode
     state: present
   when: ansible_facts['processor'][1] == 'GenuineIntel'
 
 - name: Install cpu microcode (amd)
+  become: true
   ansible.builtin.package:
     name: amd-ucode
     state: present
   when: ansible_facts['processor'][1] == 'AuthenticAMD'
 
 - name: Install required packages
+  become: true
   ansible.builtin.package:
     name:
       - pciutils

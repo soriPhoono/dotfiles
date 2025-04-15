@@ -35,6 +35,7 @@
     success_msg: "System has an AMD GPU."
 
 - name: Install the AMDGPU driver
+  become: true
   ansible.builtin.package:
     name:
       - mesa
@@ -69,16 +70,16 @@
 - name: Configure environment variables for hardware acceleration on amdgpu
   become: true
   ansible.builtin.template:
-    src: "templates/{{ item }}.j2"
-    dest: "{{ item }}"
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
     owner: root
     group: root
     mode: '0644'
   loop:
-    - /etc/profile.d/99-hardware-acceleration.sh
+    - etc/profile.d/99-hardware-acceleration.sh
   vars:
     libva_driver_name: radeonsi
-    vdpau_driver_name: radeonsi
+    vdpau_driver: radeonsi
   when:
     - amd_integrated is defined
     - amd_integrated.user_input == "y"
