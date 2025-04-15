@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
-if [[ -f ./drivers.sh ]]; then
-	source ./drivers.sh
+source ./src/chaotic-aur.sh
+source ./src/drivers.sh
 
-	install_drivers amd nvidia
-else
-	exit 1
-fi
+sudo pacman -S --needed --noconfirm git paru
+
+install_drivers amd nvidia
