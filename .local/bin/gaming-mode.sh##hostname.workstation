@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# gaming-mode.sh
+
+# This script is designed to enable or disable monitor configurations for gaming on arch linux.
+gnome-monitor-config set -LpM DP-3 -m 1920x1080@143.980
+
+if [ "$2" = "--fgc" ]; then
+  env DXVK_ASYNC=1 LD_PRELOAD="" gamemoderun gamescope -W 1920 -H 1080 -r 144 --adaptive-sync --force-grab-cursor --mangoapp -fb -- "${@:3}"
+else
+  env DXVK_ASYNC=1 LD_PRELOAD="" gamemoderun gamescope -W 1920 -H 1080 -r 144 --adaptive-sync --mangoapp -fb -- "${@:2}"
+fi
+
+gnome-monitor-config set -LpM DP-3 -m 1920x1080@143.980 -LM HDMI-5 -x 1920 -m 1920x1080@74.986
