@@ -1,1 +1,17 @@
 .vscode/
+.steam/
+.pki/
+.npm/
+.mozilla/
+.local/
+.dotnet/
+.config/Bitwarden/
+.config/Code/
+.cargo/
+.cache/
+.ansible/
+
+.steampath
+.steampid
+.ssh/known_hosts.old
+.pulse-cookie
