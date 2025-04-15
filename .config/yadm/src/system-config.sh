@@ -34,6 +34,6 @@ sudo systemctl enable --now firewalld.service
 sudo systemctl enable --now tailscaled.service
 sudo systemctl enable --now bluetooth.service
 
-mkinitcpio -P
+sudo mkinitcpio -P
 
 chsh -s /usr/bin/fish

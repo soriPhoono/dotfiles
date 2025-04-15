@@ -4,7 +4,7 @@ cd ~/.config/yadm || exit 1
 
 source ./src/drivers.sh
 
-install_drivers amd nvidia
+install_drivers intel amd
 
 source ./src/chaotic-aur.sh
 source ./src/system-config.sh
