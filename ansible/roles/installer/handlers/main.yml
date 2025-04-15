@@ -28,7 +28,6 @@
     state: started
 
 - name: Enable psd.service (user)
-  become: true
   ansible.builtin.systemd:
     name: psd.service
     enabled: true

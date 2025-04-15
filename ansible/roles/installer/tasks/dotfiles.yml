@@ -5,8 +5,11 @@
     name:
       - stow
 
+      - gnome-shell-extension-dash-to-dock
+
       - ttf-sourcecodepro-nerd
       - otf-aurulent-nerd
+
       - bibata-cursor-translucent
       - papirus-icon-theme
 
