@@ -8,7 +8,7 @@ function install_drivers() {
   "intel")
     echo "Installing Intel drivers"
 
-    if ! lspci | grep -i vga | grep -iq intel; then # TODO: work on this
+    if ! lspci | grep -i display | grep -iq intel; then # TODO: work on this
       echo "Failed to detect Intel GPU"
       exit 1
     fi
