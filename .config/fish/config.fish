@@ -8,6 +8,9 @@ if status is-interactive
   # Init direnv
   direnv hook fish | source
 
+  # Init command not found
+  source /usr/share/doc/find-the-command/ftc.fish
+
   # Splash screen
   fastfetch
 
