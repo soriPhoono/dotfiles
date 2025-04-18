@@ -38,14 +38,14 @@ paru -S --needed --noconfirm \
   nodejs npm bun deno
 
 paru -Syu --needed --noconfirm \
-    zip unzip unrar \
-    easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 \
-    firefox profile-sync-daemon \
-    discord signal-desktop grayjay-bin \
-    qbittorrent \
-    bitwarden joplin-beta thunderbird \
-    visual-studio-code-bin element-desktop obsidian \
-    obs-studio gimp
+  zip unzip unrar \
+  easyeffects calf lsp-plugins-lv2 zam-plugins-lv2 \
+  firefox profile-sync-daemon \
+  discord signal-desktop grayjay-bin \
+  qbittorrent \
+  bitwarden joplin-beta thunderbird \
+  visual-studio-code-bin element-desktop obsidian \
+  obs-studio gimp
 
 systemctl --user enable --now psd.service
 

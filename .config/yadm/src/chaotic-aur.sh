@@ -7,12 +7,12 @@ sudo pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyri
 sudo pacman -U --needed 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 
 files=(
-    etc/pacman.conf
-    etc/paru.conf
+  etc/pacman.conf
+  etc/paru.conf
 )
 
 for file in "${files[@]}"; do
-    sudo cp "./src/files/$file" "/$file"
+  sudo cp "./src/files/$file" "/$file"
 done
 
 paru
