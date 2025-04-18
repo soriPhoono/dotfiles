@@ -48,3 +48,11 @@ Downloads/
 .config/Joplin/
 .android/
 .config/Google/
+Android/
+.pub-cache/
+.flutter
+.config/vscode-sqltools/runningInfo.json
+.config/rygel.conf
+.config/flutter
+.config/QtProject.conf
+.config/Element/
