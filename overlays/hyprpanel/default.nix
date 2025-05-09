@@ -1,1 +1,0 @@
-{inputs, ...}: inputs.hyprpanel.overlay

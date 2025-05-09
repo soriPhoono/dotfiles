@@ -6,14 +6,7 @@
 
     snowfall-lib = {
       url = "github:snowfallorg/lib";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = { nixpkgs.follows = "nixpkgs"; };
     };
 
     nixos-generators = {
@@ -26,18 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    impermanence.url = "github:nix-community/impermanence";
-
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
     disko = {
       url = "github:nix-community/disko/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
-
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -63,21 +48,9 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    hyprpanel = {
-      url = "github:Jas-SinghFSU/HyprPanel";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = inputs @ {snowfall-lib, ...}:
+  outputs = inputs@{ snowfall-lib, ... }:
     snowfall-lib.mkFlake {
       inherit inputs;
 
@@ -85,32 +58,16 @@
       snowfall.namespace = "dotfiles";
 
       systems.modules.nixos = with inputs; [
-        impermanence.nixosModules.impermanence
         nixos-facter-modules.nixosModules.facter
         disko.nixosModules.disko
-        lanzaboote.nixosModules.lanzaboote
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
         nix-index-database.nixosModules.nix-index
         nur.modules.nixos.default
       ];
 
-      homes = {
-        users."soriphoono@wsl".modules = with inputs; [
-          stylix.homeManagerModules.stylix
-          nix-index-database.hmModules.nix-index
-        ];
+      homes.modules = with inputs; [ sops-nix.homeManagerModules.sops ];
 
-        modules = with inputs; [
-          impermanence.homeManagerModules.impermanence
-          sops-nix.homeManagerModules.sops
-          nvf.homeManagerModules.default
-          hyprpanel.homeManagerModules.hyprpanel
-        ];
-      };
-
-      channels-config = {
-        allowUnfree = true;
-      };
+      channels-config = { allowUnfree = true; };
     };
 }

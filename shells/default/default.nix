@@ -1,25 +1,12 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
-  pre-commit-check = import ../../checks/pre-commit-checks {
-    inherit inputs;
-    inherit (pkgs) system;
-  };
-in
-  pkgs.mkShell {
-    inherit (pre-commit-check) shellHook;
+{ inputs, pkgs, ... }:
+pkgs.mkShell {
+  packages = with pkgs; [
+    nixfmt
 
-    RUST_MIN_STACK = 16777216;
+    nixos-facter
 
-    packages = with pkgs; [
-      nixos-facter
-
-      age
-      ssh-to-age
-      sops
-    ];
-
-    buildInputs = pre-commit-check.enabledPackages;
-  }
+    age
+    ssh-to-age
+    sops
+  ];
+}
