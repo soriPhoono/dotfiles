@@ -23,14 +23,16 @@ in {
       ];
     };
 
-    networking.resolved.enable = true;
+    services = {
+      resolved.enable = true;
 
-    services.tailscale = {
-      inherit (cfg) useRoutingFeatures;
+      tailscale = {
+        inherit (cfg) useRoutingFeatures;
 
-      enable = true;
+        enable = true;
 
-      openFirewall = true;
+        openFirewall = true;
+      };
     };
 
     systemd.services = {
