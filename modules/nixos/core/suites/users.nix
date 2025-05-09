@@ -54,6 +54,7 @@ in {
     sops.secrets =
       (lib.listToAttrs (map (user: {
           name = "${user.name}/password";
+
           value = {
             neededForUsers = true;
           };
@@ -72,8 +73,7 @@ in {
             owner = user.name;
           };
         })
-        config.core.suites.users.users
-      ));
+        cfg.users));
 
     snowfallorg.users = lib.listToAttrs (map (user: {
         inherit (user) name;
