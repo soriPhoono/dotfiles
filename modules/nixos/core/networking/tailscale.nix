@@ -23,6 +23,8 @@ in {
       ];
     };
 
+    networking.resolved.enable = true;
+
     services.tailscale = {
       inherit (cfg) useRoutingFeatures;
 
@@ -55,9 +57,5 @@ in {
           '';
       };
     };
-
-    core.boot.impermanence.directories = [
-      "/var/lib/tailscale"
-    ];
   };
 }

@@ -17,7 +17,6 @@ in {
     networking.nftables.enable = true;
 
     services = {
-      resolved.enable = true;
       timesyncd.enable = true;
     };
   };

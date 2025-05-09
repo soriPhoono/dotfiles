@@ -1,7 +1,6 @@
 {
   lib,
   config,
-  virtual,
   ...
 }: let
   cfg = config.core.hardware.bluetooth;
@@ -10,7 +9,7 @@ in {
     enable = lib.mkEnableOption "Enable bluetooth support";
   };
 
-  config = lib.mkIf (!virtual && cfg.enable) {
+  config = lib.mkIf cfg.enable {
     hardware.bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -23,9 +22,5 @@ in {
         };
       };
     };
-
-    core.boot.impermanence.directories = [
-      "/var/lib/bluetooth"
-    ];
   };
 }

@@ -7,7 +7,7 @@
 in {
   options.core.boot.plymouth.enable = lib.mkEnableOption "Enable plymouth boot animation";
 
-  config.boot = lib.mkIf (config.core.boot.enable && cfg.enable) {
+  config.boot = lib.mkIf cfg.enable {
     kernelParams = [
       "quiet"
       "systemd.show_status=false"

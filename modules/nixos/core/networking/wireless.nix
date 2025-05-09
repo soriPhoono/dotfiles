@@ -15,8 +15,6 @@ in {
     networking.networkmanager = {
       enable = true;
 
-      dhcp = "dhcpcd";
-
       wifi = {
         powersave = true;
         macAddress = "random";
@@ -35,9 +33,5 @@ in {
       })
       config.core.suites.users.users
     );
-
-    core.boot.impermanence.directories = [
-      "/etc/NetworkManager/system-connections/"
-    ];
   };
 }

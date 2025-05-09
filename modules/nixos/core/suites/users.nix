@@ -7,12 +7,6 @@
   cfg = config.core.suites.users;
 in {
   options.core.suites.users = {
-    enable =
-      lib.mkEnableOption "Enable user management"
-      // {
-        default = true;
-      };
-
     users = let
       userType = lib.types.submodule {
         options = {
@@ -48,14 +42,13 @@ in {
           {
             name = "soriphoono";
             admin = true;
-            shell = pkgs.fish;
             publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
           }
         ];
       };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     # NOTE: This was so hard and I love it
 
     sops.secrets =

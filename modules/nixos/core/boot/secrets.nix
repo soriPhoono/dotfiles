@@ -10,33 +10,15 @@ in {
     description = "The path to the vault file";
   };
 
-  config = let
-    hostKeys = [
-      {
-        path = "/persist/etc/ssh/ssh_host_ed25519_key";
-        type = "ed25519";
-      }
-    ];
-  in
-    lib.mkIf config.core.boot.enable {
-      services = {
-        openssh = {
-          enable = true;
-
-          inherit hostKeys;
-        };
-      };
+  config = {
+      services.openssh.enable = true;
 
       sops = {
         inherit (cfg) defaultSopsFile;
 
         age = {
-          sshKeyPaths = map (key: key.path) hostKeys;
+          sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
         };
       };
-
-      core.boot.impermanence.files = [
-        "/etc/ssh/ssh_host_ed25519_key"
-      ];
     };
 }

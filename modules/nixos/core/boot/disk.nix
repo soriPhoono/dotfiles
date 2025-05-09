@@ -1,9 +1,5 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.core.boot;
+{ lib, config, ... }:
+let cfg = config.core.boot;
 in {
   options.core.boot.disk = {
     device = lib.mkOption {
@@ -14,45 +10,8 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    disko.devices = let
-      type = "btrfs";
-      extraArgs = ["-L" "nixos" "-f"];
-      subvolumes = {
-        "/root" = {
-          mountpoint = "/";
-          mountOptions = [
-            "subvol=root"
-            "compress=zstd"
-            "noatime"
-          ];
-        };
-        "/home" = {
-          mountpoint = "/home";
-          mountOptions = [
-            "subvol=home"
-            "compress=zstd"
-            "noatime"
-          ];
-        };
-        "/persist" = {
-          mountpoint = "/persist";
-          mountOptions = [
-            "subvol=persist"
-            "compress=zstd"
-            "noatime"
-          ];
-        };
-        "/nix" = {
-          mountpoint = "/nix";
-          mountOptions = [
-            "subvol=nix"
-            "compress=zstd"
-            "noatime"
-          ];
-        };
-      };
-    in {
+  config = {
+    disko.devices = {
       disk = {
         root = {
           inherit (cfg.disk) device;
@@ -69,21 +28,30 @@ in {
                   type = "filesystem";
                   format = "vfat";
                   mountpoint = "/boot";
-                  mountOptions = ["defaults"];
+                  mountOptions = [ "defaults" ];
                 };
               };
               root = {
                 size = "100%";
                 content = {
-                  inherit type extraArgs subvolumes;
-
-                  postCreateHook = ''
-                    MNTPOINT=$(mktemp -d)
-                    mount "/dev/disk/by-partlabel/disk-root-root" "$MNTPOINT" -o subvolid=5
-                    trap 'umount $MNTPOINT; rm -rf $MNTPOINT' EXIT
-                    btrfs subvolume snapshot -r $MNTPOINT/root $MNTPOINT/root-blank
-                    btrfs subvolume snapshot -r $MNTPOINT/home $MNTPOINT/home-blank
-                  '';
+                  type = "btrfs";
+                  extraArgs = [ "-L" "nixos" "-f" ];
+                  subvolumes = {
+                    "/root" = {
+                      mountpoint = "/";
+                      mountOptions =
+                        [ "subvol=root" "compress=zstd" "noatime" ];
+                    };
+                    "/home" = {
+                      mountpoint = "/home";
+                      mountOptions =
+                        [ "subvol=home" "compress=zstd" "noatime" ];
+                    };
+                    "/nix" = {
+                      mountpoint = "/nix";
+                      mountOptions = [ "subvol=nix" "compress=zstd" "noatime" ];
+                    };
+                  };
                 };
               };
             };

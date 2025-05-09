@@ -15,7 +15,7 @@ in {
 
   options.core.hardware.gpu.enable = lib.mkEnableOption "Enable gpu related features";
 
-  config = lib.mkIf (config.core.hardware.enable && cfg.enable) {
+  config = lib.mkIf cfg.enable {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;

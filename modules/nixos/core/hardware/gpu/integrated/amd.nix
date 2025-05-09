@@ -7,7 +7,7 @@
 in {
   options.core.hardware.gpu.integrated.amd.enable = lib.mkEnableOption "Enable integrated GPU features";
 
-  config = lib.mkIf (config.core.hardware.enable && config.core.hardware.gpu.enable && cfg.enable) {
+  config = lib.mkIf (config.core.hardware.gpu.enable && cfg.enable) {
     hardware.amdgpu.initrd.enable = true;
 
     services.xserver.videoDrivers = ["amdgpu"];

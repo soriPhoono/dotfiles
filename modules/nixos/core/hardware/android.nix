@@ -27,18 +27,5 @@ in {
       })
       config.core.suites.users.users
     );
-
-    home-manager.users = lib.listToAttrs (
-      map (user: {
-        inherit (user) name;
-
-        value = {
-          core.impermanence.directories = [
-            ".android"
-          ];
-        };
-      })
-      config.core.suites.users.users
-    );
   };
 }

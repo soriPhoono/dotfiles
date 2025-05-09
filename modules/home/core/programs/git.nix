@@ -24,23 +24,6 @@ in {
 
       enable = true;
 
-      aliases = {
-        edit = "commit --amend --only";
-      };
-
-      ignores = [
-        "*.bak"
-      ];
-
-      signing = {
-        format = "ssh";
-        signByDefault = true;
-        key =
-          if (nixosConfig == null)
-          then config.core.programs.ssh.publicKey
-          else lib.elemAt nixosConfig.users.extraUsers.${config.home.username}.openssh.authorizedKeys.keys 0;
-      };
-
       extraConfig = {
         init.defaultBranch = "main";
 
@@ -70,7 +53,6 @@ in {
         enable = true;
 
         options = {
-          line-numbers = true;
           side-by-side = true;
         };
       };

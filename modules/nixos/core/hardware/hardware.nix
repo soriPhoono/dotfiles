@@ -1,9 +1,5 @@
-{
-  lib,
-  config,
-  ...
-}: let
-  cfg = config.core.hardware;
+{ lib, config, ... }:
+let cfg = config.core.hardware;
 in {
   imports = [
     ./gpu/gpu.nix
@@ -12,16 +8,23 @@ in {
     ./hid/logitech.nix
     ./hid/gamepads.nix
 
-    ./monitors.nix
     ./bluetooth.nix
-
     ./android.nix
   ];
 
-  options.core.hardware.enable = lib.mkEnableOption "Enable hardware support";
+  options.core.hardware = {
+    enable = lib.mkEnableOption "Enable hardware support";
 
-  config = lib.mkIf cfg.enable {
-    hardware = {
+    defaultReportPath = lib.mkOption {
+      type = lib.types.path;
+      description = "The default report path for the system facter report";
+    };
+  };
+
+  config = {
+    facter.reportPath = cfg.defaultReportPath;
+
+    hardware = lib.mkIf cfg.enable {
       ksm.enable = true;
       i2c.enable = true;
     };
