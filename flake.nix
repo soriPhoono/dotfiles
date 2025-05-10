@@ -5,22 +5,26 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     snowfall = {
-            url = "github:snowfallorg/lib";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-  };
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-  outputs = inputs@{ self, nixpkgs, snowfall, ... }: snowfall.mkFlake {
-    inherit inputs;
-
-    src = ./.;
-
-    snowfall.namespace = "soriphoono";
-
-    channels-config.allowUnfree = true;
-
-    templates = {
-      module.description = "A very basic module entrypoint";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
+
+  outputs = inputs@{ self, nixpkgs, snowfall, ... }:
+    snowfall.mkFlake {
+      inherit inputs;
+
+      src = ./.;
+
+      snowfall.namespace = "soriphoono";
+
+      systems.modules.nixos = with inputs; [ sops-nix.nixosModules.sops ];
+
+      templates = { module.description = "A very basic module entrypoint"; };
+    };
 }
