@@ -15,6 +15,8 @@
 
     src = ./.;
 
+    snowfall.namespace = "soriphoono";
+
     channels-config.allowUnfree = true;
 
     templates = {
