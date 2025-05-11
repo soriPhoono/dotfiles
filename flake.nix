@@ -14,6 +14,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +38,7 @@
 
       snowfall.namespace = "soriphoono";
 
-      systems.modules.nixos = with inputs; [sops-nix.nixosModules.sops];
+      systems.modules.nixos = with inputs; [disko.nixosModules.disko sops-nix.nixosModules.sops];
 
       templates = {module.description = "A very basic module entrypoint";};
 

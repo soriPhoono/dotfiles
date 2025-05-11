@@ -1,5 +1,5 @@
 {namespace, ...}: {
-  ${namespace}.core = {
+  ${namespace}.core.secrets = {
     authorized = true;
     defaultSopsFile = ./secrets.yaml;
   };

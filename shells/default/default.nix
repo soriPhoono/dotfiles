@@ -1,6 +1,4 @@
 {
-  lib,
-  inputs,
   pkgs,
   mkShell,
   ...
@@ -8,7 +6,7 @@
 mkShell {
   packages = with pkgs; [
     nixd
-    nixfmt
+    alejandra
 
     age
     sops

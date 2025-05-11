@@ -48,12 +48,14 @@ in {
 
     description = "List of users to create.";
 
-    default = [{
-      name = "soriphoono";
-      admin = true;
-      shell = pkgs.fish;
-      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
-    }];
+    default = [
+      {
+        name = "soriphoono";
+        admin = true;
+        shell = pkgs.fish;
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
+      }
+    ];
 
     example = [
       {
@@ -90,8 +92,8 @@ in {
           value = {
             inherit (user) extraGroups shell;
 
-            initialPassword = "password";
-            hashedPasswordFile = lib.mkIf (!config.${namespace}.core.authorized) config.sops.secrets."${user.name}/password".path;
+            initialPassword = lib.mkIf (!config.${namespace}.core.secrets.authorized) "password";
+            hashedPasswordFile = lib.mkIf config.${namespace}.core.secrets.authorized config.sops.secrets."${user.name}/password".path;
 
             openssh.authorizedKeys.keys =
               lib.mkIf (user.publicKey != null) [user.publicKey];

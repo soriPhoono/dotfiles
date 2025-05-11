@@ -1,14 +1,13 @@
 {
   inputs,
   lib,
-  pkgs,
   config,
   namespace,
   ...
 }: let
-  cfg = config.${namespace}.core;
+  cfg = config.${namespace}.core.secrets;
 in {
-  options.${namespace}.core = {
+  options.${namespace}.core.secrets = {
     authorized = lib.mkOption {
       type = lib.types.bool;
       default = false;
@@ -34,6 +33,7 @@ in {
 
     sops = {
       inherit (cfg) defaultSopsFile;
+
       age = {
         sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
       };
