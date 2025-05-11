@@ -17,7 +17,7 @@ in {
         The default secrets file to use for the secrets module.
         This is used when no specific secrets file is provided.
       '';
-      example = ./secrets.nix;
+      example = ./secrets.yaml;
     };
   };
 
@@ -28,6 +28,7 @@ in {
       inherit (cfg) defaultSopsFile;
 
       age = {
+        keyFile = "/tmp/admin.key";
         sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
       };
     };

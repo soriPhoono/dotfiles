@@ -57,7 +57,6 @@ in {
                 name = "crypted";
                 passwordFile = config.sops.secrets.disk_password.path; # Interactive
                 settings.allowDiscards = true;
-                additionalKeyFiles = ["/tmp/additionalSecret.key"];
                 content = basePartition;
               };
             };
