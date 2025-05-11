@@ -9,6 +9,12 @@
 in {
   options.${namespace}.core.boot = {
     enable = lib.mkEnableOption "Enable bootloader";
+
+    primaryDevice = lib.mkOption {
+      type = lib.types.str;
+      description = "Device to install nixos on";
+      example = "/dev/nvme0n1";
+    }
   };
 
   config = lib.mkIf cfg.enable {
