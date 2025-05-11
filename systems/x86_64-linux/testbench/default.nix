@@ -4,10 +4,7 @@
   ];
 
   ${namespace}.core = {
-    boot = {
-      enable = true;
-      primaryDevice = "/dev/vda";
-    };
+    boot.enable = true;
     secrets = {
       enable = true;
       defaultSopsFile = ./secrets.yaml;
