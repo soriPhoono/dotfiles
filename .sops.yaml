@@ -1,0 +1,8 @@
+keys:
+  - &admin_soriphoono age1y4x8gzzcdhxvqaf9matt0eze3z3yxwx607avq4cexfkgwal4psesj39lvn
+
+creation_rules:
+  - path_regex: systems/.*/.*/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+        - *admin_soriphoono

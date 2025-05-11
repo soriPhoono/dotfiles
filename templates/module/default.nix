@@ -1,5 +1,11 @@
-{inputs, lib, pkgs, config, namespace, ...}:
-let
+{
+  inputs,
+  lib,
+  pkgs,
+  config,
+  namespace,
+  ...
+}: let
   path = "${namespace}.Your path here";
   cfg = config.${path};
 in {

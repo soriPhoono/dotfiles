@@ -1,8 +1,14 @@
-{ lib, pkgs, config, namespace, ... }:
-let cfg = config.${namespace}.core;
+{
+  lib,
+  pkgs,
+  config,
+  namespace,
+  ...
+}: let
+  cfg = config.${namespace}.core;
 in {
   options.${namespace}.core.users = lib.mkOption {
-    type = lib.types.listOf (lib.types.attrsOf (lib.types.submodule ({
+    type = lib.types.listOf (lib.types.submodule {
       options = {
         name = lib.mkOption {
           type = lib.types.str;
@@ -19,9 +25,9 @@ in {
 
         extraGroups = lib.mkOption {
           type = lib.types.listOf lib.types.str;
-          default = [ ];
+          default = [];
           description = "Additional groups the user should belong to.";
-          example = [ "wheel" "docker" ];
+          example = ["wheel" "docker"];
         };
 
         shell = lib.mkOption {
@@ -38,7 +44,7 @@ in {
           example = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...";
         };
       };
-    })));
+    });
 
     description = "List of users to create.";
 
@@ -46,8 +52,7 @@ in {
       name = "soriphoono";
       admin = true;
       shell = pkgs.fish;
-      publicKey =
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
     }];
 
     example = [
@@ -63,30 +68,36 @@ in {
   };
 
   config = {
-    sops.secrets = (lib.listToAttrs (map (user: {
-      name = "${user.name}/password";
-      value = { neededForUsers = true; };
-    })));
+    sops.secrets = lib.listToAttrs (map (user: {
+        name = "${user.name}/password";
+        value = {neededForUsers = true;};
+      })
+      cfg.users);
 
     snowfallorg.users = lib.listToAttrs (map (user: {
-      inherit (user) name;
+        inherit (user) name;
 
-      value = { inherit (user) admin; };
-    }) cfg.users);
+        value = {inherit (user) admin;};
+      })
+      cfg.users);
 
     users = {
       mutableUsers = false;
 
       extraUsers = lib.listToAttrs (map (user: {
-        inherit (user) name;
+          inherit (user) name;
 
-        value = {
-          inherit (user) extraGroups shell;
+          value = {
+            inherit (user) extraGroups shell;
 
-          openssh.authorizedKeys.keys =
-            lib.mkIf (user.publicKey != null) [ user.publicKey ];
-        };
-      }) cfg.users);
+            initialPassword = "password";
+            hashedPasswordFile = lib.mkIf (!config.${namespace}.core.authorized) config.sops.secrets."${user.name}/password".path;
+
+            openssh.authorizedKeys.keys =
+              lib.mkIf (user.publicKey != null) [user.publicKey];
+          };
+        })
+        cfg.users);
     };
 
     programs = {

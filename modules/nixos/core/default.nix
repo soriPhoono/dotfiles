@@ -1,5 +1,5 @@
 {
-  imports = [ ./nixconf.nix ./secrets.nix ./users.nix ];
+  imports = [./nixconf.nix ./secrets.nix ./users.nix];
 
   programs.nh = {
     enable = true;

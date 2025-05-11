@@ -1,6 +1,13 @@
-{ lib, inputs, pkgs, mkShell, ... }:
+{
+  lib,
+  inputs,
+  pkgs,
+  mkShell,
+  ...
+}:
 mkShell {
   packages = with pkgs; [
+    nixd
     nixfmt
 
     age
