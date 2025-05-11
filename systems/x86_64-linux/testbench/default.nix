@@ -1,4 +1,8 @@
 {namespace, ...}: {
+  imports = [
+    ./disko.nix
+  ];
+
   ${namespace}.core = {
     boot = {
       enable = true;
