@@ -70,11 +70,11 @@ in {
   };
 
   config = {
-    sops.secrets = lib.listToAttrs (map (user: {
+    sops.secrets = lib.mkIf config.${namespace}.core.secrets.enable (lib.listToAttrs (map (user: {
         name = "${user.name}/password";
         value = {neededForUsers = true;};
       })
-      cfg.users);
+      cfg.users));
 
     snowfallorg.users = lib.listToAttrs (map (user: {
         inherit (user) name;
@@ -92,8 +92,8 @@ in {
           value = {
             inherit (user) extraGroups shell;
 
-            initialPassword = lib.mkIf (!config.${namespace}.core.secrets.authorized) "password";
-            hashedPasswordFile = lib.mkIf config.${namespace}.core.secrets.authorized config.sops.secrets."${user.name}/password".path;
+            initialPassword = lib.mkIf (!config.${namespace}.core.secrets.enable) "password";
+            hashedPasswordFile = lib.mkIf config.${namespace}.core.secrets.enable config.sops.secrets."${user.name}/password".path;
 
             openssh.authorizedKeys.keys =
               lib.mkIf (user.publicKey != null) [user.publicKey];

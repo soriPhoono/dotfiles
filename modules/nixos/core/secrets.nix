@@ -8,14 +8,7 @@
   cfg = config.${namespace}.core.secrets;
 in {
   options.${namespace}.core.secrets = {
-    authorized = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = ''
-        Whether the target system can use secrets or is an initial install.
-      '';
-      example = true;
-    };
+    enable = lib.mkEnableOption "Enable secrets management";
 
     defaultSopsFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
@@ -28,7 +21,7 @@ in {
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     services.openssh.enable = true;
 
     sops = {

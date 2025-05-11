@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     snowfall = {
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -29,10 +29,6 @@
           "noatime"
         ];
       };
-      "/swap" = {
-        mountpoint = "/.swapvol";
-        swap.swapfile.size = "20M";
-      };
     };
   };
 in {
@@ -54,7 +50,7 @@ in {
                 mountOptions = ["umask=0077"];
               };
             };
-            luks = lib.mkIf config.${namespace}.core.secrets.authorized {
+            luks = lib.mkIf config.${namespace}.core.secrets.enable {
               size = "100%";
               content = {
                 type = "luks";
@@ -65,7 +61,7 @@ in {
                 content = basePartition;
               };
             };
-            root = lib.mkIf (!config.${namespace}.core.secrets.authorized) {
+            root = lib.mkIf (!config.${namespace}.core.secrets.enable) {
               size = "100%";
               content = basePartition;
             };
