@@ -28,8 +28,6 @@ in {
       inherit (cfg) defaultSopsFile;
 
       age = {
-        keyFile = "/tmp/admin.key";
-
         sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
       };
     };

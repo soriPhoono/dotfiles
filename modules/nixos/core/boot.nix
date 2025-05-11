@@ -42,35 +42,7 @@ in {
           device = "/dev/vdb";
           content = {
             type = "gpt";
-            partitions = let
-              basePartition = {
-                type = "btrfs";
-                extraArgs = ["-f"];
-                subvolumes = {
-                  "/root" = {
-                    mountpoint = "/";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/home" = {
-                    mountpoint = "/home";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "/nix" = {
-                    mountpoint = "/nix";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                };
-              };
-            in {
+            partitions = {
               ESP = {
                 size = "512M";
                 type = "EF00";
@@ -81,19 +53,41 @@ in {
                   mountOptions = ["umask=0077"];
                 };
               };
-              luks = lib.mkIf config.${namespace}.core.secrets.enable {
+              luks = {
                 size = "100%";
                 content = {
                   type = "luks";
                   name = "crypted";
-                  passwordFile = config.sops.secrets.disk_password.path; # Interactive
+                  passwordFile = "/tmp/password.key"; # Interactive
                   settings.allowDiscards = true;
-                  content = basePartition;
+                  content = {
+                    type = "btrfs";
+                    extraArgs = ["-f"];
+                    subvolumes = {
+                      "/root" = {
+                        mountpoint = "/";
+                        mountOptions = [
+                          "compress=zstd"
+                          "noatime"
+                        ];
+                      };
+                      "/home" = {
+                        mountpoint = "/home";
+                        mountOptions = [
+                          "compress=zstd"
+                          "noatime"
+                        ];
+                      };
+                      "/nix" = {
+                        mountpoint = "/nix";
+                        mountOptions = [
+                          "compress=zstd"
+                          "noatime"
+                        ];
+                      };
+                    };
+                  };
                 };
-              };
-              root = lib.mkIf (!config.${namespace}.core.secrets.enable) {
-                size = "100%";
-                content = basePartition;
               };
             };
           };
