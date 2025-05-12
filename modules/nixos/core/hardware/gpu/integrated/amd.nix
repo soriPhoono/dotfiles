@@ -9,7 +9,7 @@ in {
   options.${namespace}.core.hardware.gpu.integrated.amd.enable = lib.mkEnableOption "Enable integrated GPU features";
 
   config = lib.mkIf cfg.enable {
-    core.hardware.gpu.enable = true;
+    ${namespace}.core.hardware.gpu.enable = true;
 
     hardware.amdgpu.initrd.enable = true;
 

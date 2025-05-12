@@ -9,7 +9,9 @@
 in {
   options.${namespace}.core.hardware.gpu.dedicated.amd.enable = lib.mkEnableOption "Enable  amdgpu driver features for dedicated cards";
 
-  config = lib.mkIf (config.core.hardware.enable && config.core.hardware.gpu.enable && cfg.enable) {
+  config = lib.mkIf cfg.enable {
+    ${namespace}.core.hardware.gpu.enable = true;
+
     hardware.amdgpu.opencl.enable = true;
 
     services.xserver.videoDrivers = ["amdgpu"];

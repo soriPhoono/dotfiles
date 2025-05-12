@@ -12,10 +12,10 @@ in {
     laptopMode = lib.mkEnableOption "Enable laptop on-battery profile for system";
   };
 
-  config = lib.mkIf (config.core.hardware.enable && config.core.hardware.gpu.enable && cfg.enable) {
-    hardware.nvidia = {
-      open = true;
+  config = lib.mkIf cfg.enable {
+    ${namespace}.core.hardware.gpu.enable = true;
 
+    hardware.nvidia = {
       powerManagement = {
         enable = true;
       };

@@ -18,7 +18,9 @@ in {
     };
   };
 
-  config = lib.mkIf (config.core.hardware.enable && config.core.hardware.gpu.enable && cfg.enable) {
+  config = lib.mkIf cfg.enable {
+    ${namespace}.core.hardware.gpu.enable = true;
+
     boot.kernelParams = lib.mkIf (cfg.device_id != null) [
       "i915.force_probe=${cfg.device_id}"
     ];

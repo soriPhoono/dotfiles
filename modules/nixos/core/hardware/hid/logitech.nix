@@ -1,11 +1,12 @@
 {
   lib,
   config,
+  namespace,
   ...
 }: let
-  cfg = config.core.hardware.hid.logitech;
+  cfg = config.${namespace}.core.hardware.hid.logitech;
 in {
-  options.core.hardware.hid.logitech.enable = lib.mkEnableOption "Enable logitech drivers";
+  options.${namespace}.core.hardware.hid.logitech.enable = lib.mkEnableOption "Enable logitech drivers";
 
   config = lib.mkIf cfg.enable {
     hardware.logitech.wireless = {

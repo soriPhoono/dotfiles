@@ -1,16 +1,15 @@
 {
   lib,
   config,
+  namespace,
   ...
 }: let
-  cfg = config.core.hardware.hid.gamepads;
+  cfg = config.${namespace}.core.hardware.hid.xbox_controllers;
 in {
-  options.core.hardware.hid.gamepads.enable = lib.mkEnableOption "Enable gamepad drivers";
+  options.${namespace}.core.hardware.hid.xbox_controllers.enable = lib.mkEnableOption "Enable gamepad drivers";
 
   config = lib.mkIf cfg.enable {
     hardware = {
-      uinput.enable = true;
-      steam-hardware.enable = true;
       xone.enable = true;
 
       # 🗒️: hardware.xpadneo.enable = true # for xbox one original controllers
