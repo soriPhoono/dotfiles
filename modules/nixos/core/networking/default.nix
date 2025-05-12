@@ -8,6 +8,8 @@
 in {
   imports = [
     ./openssh.nix
+    ./network-manager.nix
+    ./tailscale.nix
   ];
 
   options.${namespace}.core.networking = {

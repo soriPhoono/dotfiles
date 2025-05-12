@@ -56,8 +56,6 @@
         stylix.nixosModules.stylix
       ];
 
-      templates = {module.description = "A very basic module entrypoint";};
-
       outputs-builder = channels: {
         formatter = channels.nixpkgs.alejandra;
       };

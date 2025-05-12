@@ -16,6 +16,8 @@ in {
     ${namespace}.core.hardware.gpu.enable = true;
 
     hardware.nvidia = {
+      open = true;
+
       powerManagement = {
         enable = true;
       };
@@ -24,11 +26,11 @@ in {
       modesetting.enable = true;
 
       prime = {
-        intelBusId = lib.mkIf config.core.hardware.gpu.integrated.intel.enable "PCI:0:2:0";
-        amdgpuBusId = lib.mkIf config.core.hardware.gpu.integrated.amd.enable "PCI:4:0:0";
+        intelBusId = lib.mkIf config.${namespace}.core.hardware.gpu.integrated.intel.enable "PCI:0:2:0";
+        amdgpuBusId = lib.mkIf config.${namespace}.core.hardware.gpu.integrated.amd.enable "PCI:4:0:0";
         nvidiaBusId = "PCI:1:0:0";
 
-        offload = {
+        offload = lib.mkIf cfg.laptopMode {
           enable = true;
           enableOffloadCmd = true;
         };

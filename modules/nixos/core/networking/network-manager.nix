@@ -16,8 +16,6 @@ in {
     networking.networkmanager = {
       enable = true;
 
-      dhcp = "dhcpcd";
-
       wifi = {
         powersave = true;
         macAddress = "random";
