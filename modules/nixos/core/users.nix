@@ -16,6 +16,12 @@ in {
           example = "john";
         };
 
+        hashedPassword = lib.mkOption {
+          type = lib.types.str;
+          description = "The password hash for the user";
+          example = "$6$N9zTq2VII1RiqgFr$IO8lxVRPfDPoDs3qZIqlUtfhtLxx/iNO47hUcx2zbDGHZsw..1sy5k.6.HIxpwkAhDPI7jZnTXKaIKqwiSWZA0";
+        };
+
         admin = lib.mkOption {
           type = lib.types.bool;
           default = false;
@@ -51,6 +57,7 @@ in {
     default = [
       {
         name = "soriphoono";
+        hashedPassword = "$6$x7n.SUTMtInzs2l4$Ew3Zu3Mkc4zvuH8STaVpwIv59UX9rmUV7I7bmWyTRjomM7QRn0Jt/Pl/JN./IqTrXqEe8nIYB43m1nLI2Un211";
         admin = true;
         shell = pkgs.fish;
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
@@ -70,12 +77,6 @@ in {
   };
 
   config = {
-    sops.secrets = lib.mkIf config.${namespace}.core.secrets.enable (lib.listToAttrs (map (user: {
-        name = "${user.name}/password";
-        value = {neededForUsers = true;};
-      })
-      cfg.users));
-
     snowfallorg.users = lib.listToAttrs (map (user: {
         inherit (user) name;
 
@@ -90,10 +91,7 @@ in {
           inherit (user) name;
 
           value = {
-            inherit (user) extraGroups shell;
-
-            initialPassword = lib.mkIf (!config.${namespace}.core.secrets.enable) "password";
-            hashedPasswordFile = lib.mkIf config.${namespace}.core.secrets.enable config.sops.secrets."${user.name}/password".path;
+            inherit (user) hashedPassword extraGroups shell;
 
             openssh.authorizedKeys.keys =
               lib.mkIf (user.publicKey != null) [user.publicKey];
