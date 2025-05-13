@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      elegant-sddm
+      sddm-sugar-dark
     ];
 
     services = {
@@ -24,7 +24,7 @@ in {
             enable = true;
             compositor = "kwin";
           };
-          theme = "Elegant";
+          theme = "sugar-dark";
         };
       };
       desktopManager.plasma6.enable = true;

@@ -22,6 +22,13 @@ in {
         name = "Bibata-Modern-Ice";
       };
 
+      iconTheme = {
+        enable = true;
+        dark = "Papirus-Dark";
+        light = "Papirus";
+        package = pkgs.papirus-icon-theme;
+      };
+
       fonts = {
         serif = {
           package = pkgs.nerd-fonts.aurulent-sans-mono;
