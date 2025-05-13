@@ -21,6 +21,7 @@
               size = "100%";
               content = {
                 type = "luks";
+                name = "crypted";
                 passwordFile = "/tmp/password.key"; # Interactive
                 settings.allowDiscards = true;
                 content = {
