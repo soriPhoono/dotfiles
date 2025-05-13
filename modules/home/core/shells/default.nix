@@ -8,7 +8,6 @@ in {
   imports = [
     ./bash.nix
     ./fish.nix
-    ./starship.nix
   ];
 
   options.core.shells = {

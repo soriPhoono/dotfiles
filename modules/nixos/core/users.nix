@@ -76,12 +76,9 @@ in {
   };
 
   config = {
-    snowfallorg.users = lib.listToAttrs (map (user: {
-        inherit (user) name;
-
-        value = {inherit (user) admin;};
-      })
-      cfg.users);
+    programs = {
+      fish.enable = lib.any (user: user.shell == pkgs.fish) cfg.users;
+    };
 
     users = {
       mutableUsers = false;
@@ -99,8 +96,24 @@ in {
         cfg.users);
     };
 
-    programs = {
-      fish.enable = lib.any (user: user.shell == pkgs.fish) cfg.users;
-    };
+    snowfallorg.users = lib.listToAttrs (map (user: {
+        inherit (user) name;
+
+        value = {inherit (user) admin;};
+      })
+      cfg.users);
+
+    home-manager.users = lib.listToAttrs (map (user: {
+        inherit (user) name;
+
+        value = {
+          core = {
+            ssh.publicKey = lib.mkIf (!(builtins.isNull user.publicKey)) user.publicKey;
+
+            shells.fish.enable = user.shell == pkgs.fish;
+          };
+        };
+      })
+      cfg.users);
   };
 }

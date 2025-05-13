@@ -8,6 +8,13 @@
 in {
   options.core.shells.fish = {
     enable = lib.mkEnableOption "Enable the fish shell";
+
+    shellInit = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "The extra commands to run on a fish login shell";
+      example = "fastfetch";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -23,8 +30,6 @@ in {
         set fish_greeting
 
         ${importEnvironment}
-
-        ${pkgs.fastfetch}/bin/fastfetch
       '';
     };
   };
