@@ -11,6 +11,15 @@ in {
   ];
 
   options.core.shells = {
+    shellAliases = lib.mkOption {
+      type = with lib.types; attrsOf str;
+      default = {};
+      description = "Shell command aliases";
+      example = {
+        g = "git";
+      };
+    };
+
     sessionVariables = lib.mkOption {
       type = with lib.types; attrsOf str;
       default = {};
@@ -24,7 +33,7 @@ in {
 
   config = {
     home = {
-      inherit (cfg) sessionVariables;
+      inherit (cfg) shellAliases sessionVariables;
     };
   };
 }

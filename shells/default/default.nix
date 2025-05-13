@@ -5,8 +5,8 @@
 }:
 mkShell {
   packages = with pkgs; [
-    nixd
-    alejandra
+    disko
+    nixos-facter
 
     age
     sops

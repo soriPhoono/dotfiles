@@ -19,7 +19,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets.tailscale_api_key = lib.mkIf (config.core.secrets.enable && cfg.autoLogin) {
+    sops.secrets.tailscale_auth_key = lib.mkIf (config.core.secrets.enable && cfg.autoLogin) {
       restartUnits = [
         "tailscaled.service"
       ];
@@ -53,7 +53,7 @@ in {
               exit 0
             fi
 
-            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.tailscale_api_key.path})"
+            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.tailscale_auth_key.path})"
           '';
       };
     };

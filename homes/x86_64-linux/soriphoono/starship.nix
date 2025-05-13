@@ -2,9 +2,6 @@
   programs.starship = {
     enable = true;
 
-    enableFishIntegration = config.core.shells.fish.enable;
-    enableTransience = config.core.shells.fish.enable;
-
     settings = {
       add_newline = true;
 

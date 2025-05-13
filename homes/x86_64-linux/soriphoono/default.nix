@@ -3,7 +3,6 @@
     ./fastfetch.nix
     ./git.nix
     ./starship.nix
-    ./ssh.nix
   ];
 
   core = {
@@ -12,7 +11,27 @@
     };
   };
 
-  programs.fish.shellInitLast = ''
-    fastfetch
-  '';
+  programs = {
+    fish.shellInitLast = ''
+      fastfetch
+    '';
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
+    eza = {
+      enable = true;
+
+      git = true;
+      icons = "auto";
+
+      extraOptions = [
+        "--group-directories-first"
+      ];
+    };
+
+    btop.enable = true;
+  };
 }

@@ -1,6 +1,10 @@
 {
   core = {
-    hardware.gpu.enable = true;
+    hardware = {
+      gpu.enable = true;
+
+      bluetooth.enable = true;
+    };
 
     boot.enable = true;
 
@@ -10,6 +14,8 @@
       tailscale.enable = true;
     };
   };
+
+  desktop.plasma.enable = true;
 
   themes.catppuccin.enable = true;
 }

@@ -19,6 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +64,7 @@
       src = ./.;
 
       systems.modules.nixos = with inputs; [
+        nixos-facter-modules.nixosModules.facter
         disko.nixosModules.disko
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
