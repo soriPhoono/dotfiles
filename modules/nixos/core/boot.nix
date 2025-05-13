@@ -17,7 +17,10 @@ in {
         "udev.log_level=3"
       ];
 
-      initrd.verbose = false;
+      initrd = {
+        verbose = false;
+        systemd.enable = true;
+      };
 
       consoleLogLevel = 0;
 
