@@ -2,15 +2,14 @@
   lib,
   pkgs,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.hardware.gpu.dedicated.amd;
+  cfg = config.core.hardware.gpu.dedicated.amd;
 in {
-  options.${namespace}.core.hardware.gpu.dedicated.amd.enable = lib.mkEnableOption "Enable  amdgpu driver features for dedicated cards";
+  options.core.hardware.gpu.dedicated.amd.enable = lib.mkEnableOption "Enable  amdgpu driver features for dedicated cards";
 
   config = lib.mkIf cfg.enable {
-    ${namespace}.core.hardware.gpu.enable = true;
+    core.hardware.gpu.enable = true;
 
     hardware.amdgpu.opencl.enable = true;
 

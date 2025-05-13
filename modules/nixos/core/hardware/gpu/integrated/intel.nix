@@ -2,12 +2,11 @@
   lib,
   pkgs,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.hardware.gpu.integrated.intel;
+  cfg = config.core.hardware.gpu.integrated.intel;
 in {
-  options.${namespace}.core.hardware.gpu.integrated.intel = {
+  options.core.hardware.gpu.integrated.intel = {
     enable = lib.mkEnableOption "Enable igpu features for intel igpus";
 
     device_id = lib.mkOption {
@@ -19,7 +18,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    ${namespace}.core.hardware.gpu.enable = true;
+    core.hardware.gpu.enable = true;
 
     boot.kernelParams = lib.mkIf (cfg.device_id != null) [
       "i915.force_probe=${cfg.device_id}"

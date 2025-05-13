@@ -1,12 +1,11 @@
 {
   lib,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.hardware.bluetooth;
+  cfg = config.core.hardware.bluetooth;
 in {
-  options.${namespace}.core.hardware.bluetooth = {
+  options.core.hardware.bluetooth = {
     enable = lib.mkEnableOption "Enable bluetooth hardware support";
   };
 

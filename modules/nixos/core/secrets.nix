@@ -1,12 +1,11 @@
 {
   lib,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.secrets;
+  cfg = config.core.secrets;
 in {
-  options.${namespace}.core.secrets = {
+  options.core.secrets = {
     enable = lib.mkEnableOption "Enable secrets management";
 
     defaultSopsFile = lib.mkOption {
@@ -26,9 +25,16 @@ in {
     sops = {
       inherit (cfg) defaultSopsFile;
 
-      age = {
-        sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
-      };
+      age.sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
     };
+
+    home-manager.users = lib.listToAttrs (map (user: {
+        inherit (user) name;
+
+        value = {
+          sops.age.sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
+        };
+      })
+      config.core.users);
   };
 }

@@ -1,10 +1,9 @@
 {
   lib,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.hardware.gpu;
+  cfg = config.core.hardware.gpu;
 in {
   imports = [
     ./dedicated/amd.nix
@@ -13,7 +12,7 @@ in {
     ./integrated/intel.nix
   ];
 
-  options.${namespace}.core.hardware.gpu = {
+  options.core.hardware.gpu = {
     enable = lib.mkEnableOption "Enable graphics driver features";
   };
 

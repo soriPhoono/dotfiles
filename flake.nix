@@ -39,16 +39,27 @@
   };
 
   outputs = inputs @ {
+    self,
     nixpkgs,
     snowfall,
     ...
-  }:
-    snowfall.mkFlake {
+  }: let
+    lib = snowfall.mkLib {
+      inherit inputs;
+      src = ./.;
+      snowfall = {
+        meta = {
+          name = "dotfiles";
+          title = "Dotfiles";
+        };
+        namespace = "soriphoono";
+      };
+    };
+  in
+    lib.mkFlake {
       inherit inputs;
 
       src = ./.;
-
-      snowfall.namespace = "soriphoono";
 
       systems.modules.nixos = with inputs; [
         disko.nixosModules.disko
@@ -56,8 +67,22 @@
         stylix.nixosModules.stylix
       ];
 
+      homes = {
+        modules = with inputs; [
+          sops-nix.homeManagerModules.sops
+        ];
+
+        users.soriphoono.specialArgs = {
+          namespace = self.snowfall.namespace;
+        };
+      };
+
       outputs-builder = channels: {
         formatter = channels.nixpkgs.alejandra;
+      };
+
+      channels-config = {
+        allowUnfree = true;
       };
     };
 }

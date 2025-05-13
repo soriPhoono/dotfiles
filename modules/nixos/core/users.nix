@@ -2,12 +2,11 @@
   lib,
   pkgs,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core;
+  cfg = config.core;
 in {
-  options.${namespace}.core.users = lib.mkOption {
+  options.core.users = lib.mkOption {
     type = lib.types.listOf (lib.types.submodule {
       options = {
         name = lib.mkOption {

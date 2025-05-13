@@ -2,16 +2,15 @@
   lib,
   pkgs,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.themes;
+  cfg = config.themes;
 in {
   imports = [
     ./catppuccin.nix
   ];
 
-  options.${namespace}.themes.enable = lib.mkEnableOption "Enable themes system";
+  options.themes.enable = lib.mkEnableOption "Enable themes system";
 
   config = lib.mkIf cfg.enable {
     stylix = {

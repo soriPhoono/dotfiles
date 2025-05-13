@@ -1,10 +1,9 @@
 {
   lib,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.networking;
+  cfg = config.core.networking;
 in {
   imports = [
     ./openssh.nix
@@ -12,7 +11,7 @@ in {
     ./tailscale.nix
   ];
 
-  options.${namespace}.core.networking = {
+  options.core.networking = {
     enable = lib.mkEnableOption "Enable system networking";
   };
 

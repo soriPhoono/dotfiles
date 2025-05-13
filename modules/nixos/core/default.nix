@@ -1,5 +1,11 @@
 {
-  imports = [./boot.nix ./nixconf.nix ./secrets.nix ./users.nix];
+  imports = [
+    ./bash.nix
+    ./boot.nix
+    ./nixconf.nix
+    ./secrets.nix
+    ./users.nix
+  ];
 
   programs.nh = {
     enable = true;

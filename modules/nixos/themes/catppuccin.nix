@@ -2,15 +2,14 @@
   lib,
   pkgs,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.themes.catppuccin;
+  cfg = config.themes.catppuccin;
 in {
-  options.${namespace}.themes.catppuccin.enable = lib.mkEnableOption "Enable catppuccin colorscheme";
+  options.themes.catppuccin.enable = lib.mkEnableOption "Enable catppuccin colorscheme";
 
   config = lib.mkIf cfg.enable {
-    ${namespace}.themes.enable = true;
+    themes.enable = true;
 
     stylix = {
       image = ../../../assets/wallpapers/catppuccin-mountain.jpg;

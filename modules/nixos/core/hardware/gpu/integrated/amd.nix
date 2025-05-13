@@ -1,15 +1,14 @@
 {
   lib,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.hardware.gpu.integrated.amd;
+  cfg = config.core.hardware.gpu.integrated.amd;
 in {
-  options.${namespace}.core.hardware.gpu.integrated.amd.enable = lib.mkEnableOption "Enable integrated GPU features";
+  options.core.hardware.gpu.integrated.amd.enable = lib.mkEnableOption "Enable integrated GPU features";
 
   config = lib.mkIf cfg.enable {
-    ${namespace}.core.hardware.gpu.enable = true;
+    core.hardware.gpu.enable = true;
 
     hardware.amdgpu.initrd.enable = true;
 

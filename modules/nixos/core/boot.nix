@@ -2,12 +2,11 @@
   lib,
   pkgs,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.boot;
+  cfg = config.core.boot;
 in {
-  options.${namespace}.core.boot.enable = lib.mkEnableOption "Enable bootloader";
+  options.core.boot.enable = lib.mkEnableOption "Enable bootloader";
 
   config = lib.mkIf cfg.enable {
     boot = {

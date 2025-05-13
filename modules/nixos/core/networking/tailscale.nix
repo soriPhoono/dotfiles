@@ -2,12 +2,11 @@
   lib,
   pkgs,
   config,
-  namespace,
   ...
 }: let
-  cfg = config.${namespace}.core.networking.tailscale;
+  cfg = config.core.networking.tailscale;
 in {
-  options.${namespace}.core.networking.tailscale = {
+  options.core.networking.tailscale = {
     enable = lib.mkEnableOption "Enable tailscale always on vpn";
 
     useRoutingFeatures = lib.mkOption {
@@ -15,12 +14,14 @@ in {
       description = "Enable routing features";
       default = "both";
     };
+
+    autoLogin = lib.mkEnableOption "Enable autologin to tailscale";
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets.tailscale_api_key = lib.mkIf config.${namespace}.core.secrets.enable {
+    sops.secrets.tailscale_api_key = lib.mkIf (config.core.secrets.enable && cfg.autoLogin) {
       restartUnits = [
-        "tailscaled-autoconnect.service"
+        "tailscaled.service"
       ];
     };
 
@@ -33,7 +34,7 @@ in {
     };
 
     systemd.services = {
-      tailscaled-autoconnect = lib.mkIf config.${namespace}.core.secrets.enable {
+      tailscaled-autoconnect = lib.mkIf (config.core.secrets.enable && cfg.autoLogin) {
         description = "Automatic connection to tailscale";
 
         after = ["network-pre.target" "tailscaled.service"];
