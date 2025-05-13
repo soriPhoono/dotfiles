@@ -7,6 +7,10 @@
     hardware = {
       enable = true;
       reportPath = ./facter.json;
+
+      gpu.enable = true;
+
+      bluetooth.enable = true;
     };
 
     boot.enable = true;

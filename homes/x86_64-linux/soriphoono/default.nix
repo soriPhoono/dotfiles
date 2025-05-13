@@ -9,6 +9,10 @@
     secrets = {
       defaultSopsFile = ./secrets.yaml;
     };
+
+    shells.shellAliases = {
+      v = "nix run github:soriPhoono/nvim/nixos#soriphoono";
+    };
   };
 
   programs = {
