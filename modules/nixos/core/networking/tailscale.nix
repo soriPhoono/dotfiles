@@ -21,7 +21,7 @@ in {
   config = lib.mkIf cfg.enable {
     sops.secrets.tailscale_auth_key = lib.mkIf (config.core.secrets.enable && cfg.autoLogin) {
       restartUnits = [
-        "tailscaled.service"
+        "tailscaled-autoconnect.service"
       ];
     };
 
