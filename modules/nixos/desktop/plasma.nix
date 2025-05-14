@@ -12,7 +12,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      sddm-sugar-dark
+      (catppuccin-sddm.override {
+        flavor = "frappe";
+        background = "${config.stylix.image}";
+        loginBackground = true;
+      })
     ];
 
     services = {
@@ -20,11 +24,12 @@ in {
         defaultSession = "plasma";
         sddm = {
           enable = true;
+          package = lib.mkForce pkgs.kdePackages.sddm;
           wayland = {
             enable = true;
             compositor = "kwin";
           };
-          theme = "sugar-dark";
+          theme = "catppuccin-frappe";
         };
       };
       desktopManager.plasma6.enable = true;

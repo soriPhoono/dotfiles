@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -14,5 +13,14 @@ in {
     stylix = {
       image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
     };
+
+    home-manager.users = lib.listToAttrs (map (user: {
+        inherit (user) name;
+
+        value = {
+          themes.catppuccin.enable = true;
+        };
+      })
+      config.core.users);
   };
 }
