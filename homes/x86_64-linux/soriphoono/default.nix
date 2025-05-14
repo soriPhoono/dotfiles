@@ -15,7 +15,7 @@
     };
   };
 
-  sops.secrets.age_key.path = "$HOME/.config/sops/age/keys.txt"
+  sops.secrets.age_key.path = "$HOME/.config/sops/age/keys.txt";
 
   programs = {
     fish.shellInitLast = ''
