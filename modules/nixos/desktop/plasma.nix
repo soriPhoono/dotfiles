@@ -7,7 +7,7 @@
   cfg = config.desktop.plasma;
 in {
   options.desktop.plasma = {
-    enable = lib.mkEnableOption "Enable gnome desktop environment";
+    enable = lib.mkEnableOption "Enable kde desktop environment";
   };
 
   config = lib.mkIf cfg.enable {

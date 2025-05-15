@@ -15,10 +15,7 @@
 
     boot.enable = true;
 
-    secrets = {
-      enable = true;
-      defaultSopsFile = ./secrets.yaml;
-    };
+    secrets.defaultSopsFile = ./secrets.yaml;
 
     networking = {
       enable = true;

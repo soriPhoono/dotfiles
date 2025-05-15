@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -30,6 +29,8 @@ in {
         set fish_greeting
 
         ${importEnvironment}
+
+        fastfetch
       '';
     };
   };

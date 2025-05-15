@@ -12,8 +12,6 @@ in {
     themes.enable = true;
 
     stylix = {
-      image = ../../../assets/wallpapers/catppuccin-mountain.jpg;
-
       base16Scheme = let
         base16-catppuccin = pkgs.fetchFromGitHub {
           owner = "catppuccin";

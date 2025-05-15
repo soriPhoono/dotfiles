@@ -63,12 +63,14 @@
 
       src = ./.;
 
-      systems.modules.nixos = with inputs; [
-        nixos-facter-modules.nixosModules.facter
-        disko.nixosModules.disko
-        sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
-      ];
+      systems = {
+        modules.nixos = with inputs; [
+          nixos-facter-modules.nixosModules.facter
+          disko.nixosModules.disko
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
+        ];
+      };
 
       homes = {
         modules = with inputs; [

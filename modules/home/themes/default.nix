@@ -1,58 +1,49 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
-  cfg = config.themes;
-in {
+{pkgs, ...}: {
   imports = [
     ./catppuccin.nix
   ];
 
-  options.themes.enable = lib.mkEnableOption "Enable themes system";
+  stylix = {
+    enable = true;
 
-  config = lib.mkIf cfg.enable {
-    stylix = {
+    image = ../../../assets/image.png;
+
+    cursor = {
+      package = pkgs.bibata-cursors;
+      size = 24;
+      name = "Bibata-Modern-Ice";
+    };
+
+    iconTheme = {
       enable = true;
+      dark = "Papirus-Dark";
+      light = "Papirus";
+      package = pkgs.papirus-icon-theme;
+    };
 
-      cursor = {
-        package = pkgs.bibata-cursors;
-        size = 24;
-        name = "Bibata-Modern-Ice";
+    fonts = {
+      serif = {
+        package = pkgs.nerd-fonts.aurulent-sans-mono;
+        name = "AurulentSansM Nerd Font Propo";
       };
 
-      iconTheme = {
-        enable = true;
-        dark = "Papirus-Dark";
-        light = "Papirus";
-        package = pkgs.papirus-icon-theme;
+      sansSerif = {
+        package = pkgs.nerd-fonts.aurulent-sans-mono;
+        name = "AurulentSansM Nerd Font Propo";
       };
 
-      fonts = {
-        serif = {
-          package = pkgs.nerd-fonts.aurulent-sans-mono;
-          name = "AurulentSansM Nerd Font Propo";
-        };
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font Mono";
+      };
 
-        sansSerif = {
-          package = pkgs.nerd-fonts.aurulent-sans-mono;
-          name = "AurulentSansM Nerd Font Propo";
-        };
-
-        monospace = {
-          package = pkgs.nerd-fonts.jetbrains-mono;
-          name = "JetBrainsMono Nerd Font Mono";
-        };
-
-        sizes = let
-          default = 14;
-        in {
-          applications = default;
-          desktop = default;
-          popups = default;
-          terminal = default;
-        };
+      sizes = let
+        default = 14;
+      in {
+        applications = default;
+        desktop = default;
+        popups = default;
+        terminal = default;
       };
     };
   };

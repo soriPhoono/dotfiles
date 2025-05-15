@@ -8,6 +8,9 @@ in {
   imports = [
     ./bash.nix
     ./fish.nix
+
+    ./starship.nix
+    ./fastfetch.nix
   ];
 
   options.core.shells = {
@@ -34,6 +37,26 @@ in {
   config = {
     home = {
       inherit (cfg) shellAliases sessionVariables;
+    };
+
+    programs = {
+      direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+      };
+
+      eza = {
+        enable = true;
+
+        git = true;
+        icons = "auto";
+
+        extraOptions = [
+          "--group-directories-first"
+        ];
+      };
+
+      btop.enable = true;
     };
   };
 }

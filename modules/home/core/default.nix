@@ -6,6 +6,7 @@
   imports = [
     ./secrets.nix
     ./ssh.nix
+    ./git.nix
   ];
 
   home.packages = with pkgs; [
