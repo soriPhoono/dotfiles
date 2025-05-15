@@ -9,8 +9,6 @@ in {
   options.themes.catppuccin.enable = lib.mkEnableOption "Enable catppuccin colorscheme";
 
   config = lib.mkIf cfg.enable {
-    themes.enable = true;
-
     stylix = {
       base16Scheme = let
         base16-catppuccin = pkgs.fetchFromGitHub {

@@ -4,7 +4,7 @@
 
     settings = {
       logo = {
-        source = ../../../assets/logo.png;
+        source = ../../../../assets/logo.png;
         type = "kitty";
 
         padding.right = 1;

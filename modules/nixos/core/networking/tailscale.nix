@@ -19,7 +19,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets.tailscale_auth_key = lib.mkIf (config.core.secrets.enable && cfg.autoLogin) {
+    sops.secrets.tailscale_auth_key = lib.mkIf cfg.autoLogin {
       restartUnits = [
         "tailscaled-autoconnect.service"
       ];
@@ -34,7 +34,7 @@ in {
     };
 
     systemd.services = {
-      tailscaled-autoconnect = lib.mkIf (config.core.secrets.enable && cfg.autoLogin) {
+      tailscaled-autoconnect = lib.mkIf cfg.autoLogin {
         description = "Automatic connection to tailscale";
 
         after = ["network-pre.target" "tailscaled.service"];

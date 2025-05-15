@@ -2,6 +2,10 @@
   networking.wireless.enable = lib.mkForce false;
 
   core = {
+    hardware = {
+      bluetooth.enable = true;
+    };
+
     secrets.defaultSopsFile = ./secrets.yaml;
 
     networking = {
@@ -12,6 +16,4 @@
   };
 
   desktop.plasma.enable = true;
-
-  themes.enable = true;
 }

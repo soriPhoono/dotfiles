@@ -43,13 +43,4 @@
       };
     };
   };
-
-  home-manager.users = lib.listToAttrs (map (user: {
-      inherit (user) name;
-
-      value = {
-        themes.enable = true;
-      };
-    })
-    config.core.users);
 }
