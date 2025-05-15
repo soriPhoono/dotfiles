@@ -3,6 +3,7 @@
 
   core = {
     hardware = {
+      gpu.enable = true;
       bluetooth.enable = true;
     };
 
@@ -15,5 +16,5 @@
     };
   };
 
-  desktop.plasma.enable = true;
+  desktop.gnome.enable = true;
 }

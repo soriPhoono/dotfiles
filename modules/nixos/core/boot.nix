@@ -8,11 +8,7 @@
 in {
   options.core.boot.enable = lib.mkEnableOption "Enable bootloader";
 
-  config = lib.mkIf cfg.enable {
-    stylix.targets = {
-      plymouth.enable = false;
-    };
-
+  config = {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen;
       kernelParams = [
@@ -23,12 +19,12 @@ in {
 
       initrd = {
         verbose = false;
-        systemd.enable = true;
+        systemd.enable = lib.mkIf cfg.enable true;
       };
 
       consoleLogLevel = 0;
 
-      loader = {
+      loader = lib.mkIf cfg.enable {
         efi.canTouchEfiVariables = true;
         systemd-boot = {
           enable = true;
@@ -36,13 +32,7 @@ in {
         };
       };
 
-      plymouth = {
-        enable = true;
-        themePackages = with pkgs; [
-          adi1090x-plymouth-themes
-        ];
-        theme = "Hexagon Dots";
-      };
+      plymouth.enable = true;
     };
 
     zramSwap.enable = true;
