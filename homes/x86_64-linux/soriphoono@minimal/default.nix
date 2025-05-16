@@ -1,0 +1,5 @@
+{
+  userapps = {
+    firefox.enable = true;
+  };
+}

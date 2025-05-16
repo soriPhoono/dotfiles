@@ -2,7 +2,9 @@
   lib,
   config,
   ...
-}: {
+}: let
+  cfg = config.core.git;
+in {
   options.core.git = {
     userName = lib.mkOption {
       type = lib.types.str;
@@ -19,6 +21,8 @@
 
   config = {
     programs.git = {
+      inherit (cfg) userName userEmail;
+
       enable = true;
 
       signing = {

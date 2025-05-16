@@ -18,6 +18,8 @@
 
     boot.enable = true;
 
+    secrets.defaultSopsFile = ./secrets.yaml;
+
     networking = {
       enable = true;
       network-manager.enable = true;
@@ -25,7 +27,7 @@
     };
   };
 
-  desktop.plasma.enable = true;
+  desktop.gnome.enable = true;
 
   themes.catppuccin.enable = true;
 }

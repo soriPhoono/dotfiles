@@ -1,8 +1,4 @@
 {
-  imports = [
-    ./git.nix
-  ];
-
   core = {
     secrets.defaultSopsFile = ./secrets.yaml;
 
