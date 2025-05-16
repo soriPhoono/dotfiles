@@ -17,4 +17,6 @@
   };
 
   desktop.gnome.enable = true;
+
+  themes.catppuccin.enable = true;
 }
