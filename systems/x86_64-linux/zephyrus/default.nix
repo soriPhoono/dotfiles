@@ -27,7 +27,13 @@
     };
   };
 
-  desktop.gnome.enable = true;
+  desktop = {
+    gnome.enable = true;
+    steam = {
+      enable = true;
+      desktop.enable = true;
+    };
+  };
 
   themes.catppuccin.enable = true;
 }

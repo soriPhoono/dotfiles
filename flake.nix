@@ -44,6 +44,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nvim = {
       url = "github:soriPhoono/nvim/nixos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,6 +84,7 @@
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
+          nix-index-database.nixosModules.nix-index
         ];
       };
 

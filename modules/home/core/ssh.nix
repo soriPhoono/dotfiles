@@ -5,11 +5,4 @@
       description = "Public SSH key to use for authentication";
     };
   };
-
-  config = {
-    programs.ssh = {
-      enable = true;
-      compression = true;
-    };
-  };
 }
