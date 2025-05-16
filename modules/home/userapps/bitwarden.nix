@@ -4,9 +4,9 @@
   config,
   ...
 }: let
-  cfg = config.userapps.programs.bitwarden;
+  cfg = config.userapps.bitwarden;
 in {
-  options.userapps.programs.bitwarden.enable = lib.mkEnableOption "Enable Bitwarden desktop and cli clients";
+  options.userapps.bitwarden.enable = lib.mkEnableOption "Enable Bitwarden desktop and cli clients";
 
   config = lib.mkIf cfg.enable {
     home = {
