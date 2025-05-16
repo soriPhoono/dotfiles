@@ -19,9 +19,15 @@ in {
         gzdoom
       ];
     in
-      with pkgs; [
-        mangohud
-      ];
+      with pkgs;
+        [
+          mangohud
+        ]
+        ++ (
+          if cfg.enable
+          then desktop_packages
+          else []
+        );
 
     programs = {
       gamemode = {

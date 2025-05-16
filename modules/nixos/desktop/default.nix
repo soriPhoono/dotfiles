@@ -1,6 +1,6 @@
 {
   imports = [
     ./gnome.nix
-    ./steam.nix
+    ./programs/steam.nix
   ];
 }
