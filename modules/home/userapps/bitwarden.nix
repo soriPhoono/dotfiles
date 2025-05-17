@@ -9,14 +9,12 @@ in {
   options.userapps.bitwarden.enable = lib.mkEnableOption "Enable Bitwarden desktop and cli clients";
 
   config = lib.mkIf cfg.enable {
-    home = {
-      packages = with pkgs; [
-        bitwarden-desktop
-      ];
+    home.packages = with pkgs; [
+      bitwarden-desktop
+    ];
 
-      sessionVariables = {
-        SSH_AUTH_SOCK = lib.mkForce "$HOME/.bitwarden-ssh-agent.sock";
-      };
+    core.shells.sessionVariables = {
+      SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
     };
 
     programs.firefox.profiles.default.extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
