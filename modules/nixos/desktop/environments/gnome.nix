@@ -7,7 +7,7 @@
   cfg = config.desktop.environments.gnome;
 in {
   options.desktop.environments.gnome = {
-    enable = lib.mkEnableOption "Enable kde desktop environment";
+    enable = lib.mkEnableOption "Enable gnome desktop environment";
   };
 
   config = lib.mkIf cfg.enable {

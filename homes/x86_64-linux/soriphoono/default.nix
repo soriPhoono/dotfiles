@@ -20,6 +20,8 @@
       userName = "soriphoono";
       userEmail = "soriphoono@gmail.com";
     };
+
+    programs.zellij.enable = true;
   };
 
   sops.secrets.age_key.path = "$HOME/.config/sops/age/keys.txt";

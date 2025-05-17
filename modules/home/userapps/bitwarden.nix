@@ -15,7 +15,7 @@ in {
       ];
 
       sessionVariables = {
-        SSH_AUTH_SOCK = "$HOME/.bitwarden-ssh-agent.sock";
+        SSH_AUTH_SOCK = lib.mkForce "$HOME/.bitwarden-ssh-agent.sock";
       };
     };
 
