@@ -12,14 +12,6 @@
         success_symbol = "[➜](bold green) ";
         error_symbol = "[➜](bold red) ";
       };
-
-      nix_shell = {
-        disabled = false;
-      };
-
-      direnv = {
-        disabled = false;
-      };
     };
   };
 }

@@ -2,9 +2,7 @@
   lib,
   config,
   ...
-}: let
-  cfg = config.core.shells;
-in {
+}: {
   imports = [
     ./bash.nix
     ./fish.nix
@@ -35,10 +33,6 @@ in {
   };
 
   config = {
-    home = {
-      inherit (cfg) shellAliases sessionVariables;
-    };
-
     programs = {
       direnv = {
         enable = true;
