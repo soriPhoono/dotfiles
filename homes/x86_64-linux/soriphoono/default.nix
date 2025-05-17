@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./dconf.nix
+  ];
+
   home.packages = with pkgs; [
     inputs.nvim.packages.${system}.soriphoono
   ];

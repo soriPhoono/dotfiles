@@ -19,10 +19,24 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs;
-      lib.mkIf (lib.any (feature: feature == "vr") cfg.featureType) [
-        opencomposite
-        wlx-overlay-s
-      ];
+      (
+        if (lib.any (feature: feature == "desktop") cfg.featureType)
+        then [
+          bottles
+          prism-launcher
+          gzdoom
+          tome4
+        ]
+        else []
+      )
+      ++ (
+        if (lib.any (feature: feature == "vr") cfg.featureType)
+        then [
+          opencomposite
+          wlx-overlay-s
+        ]
+        else []
+      );
 
     programs = {
       # Gamemode for advanced performance tuning

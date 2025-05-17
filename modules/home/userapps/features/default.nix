@@ -7,6 +7,7 @@
   cfg = config.userapps.features;
 in {
   imports = [
+    ./artwork.nix
   ];
 
   options.userapps.features = {
@@ -18,6 +19,10 @@ in {
       # communications
       signal-desktop
       element-desktop
+
+      # office
+      onlyoffice-desktop
+      gimp
 
       # streaming
       gimp
