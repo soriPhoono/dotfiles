@@ -9,8 +9,11 @@
       reportPath = ./facter.json;
 
       gpu = {
-        integrated.amd.enable = true;
-        dedicated.nvidia.enable = true;
+        integrated.intel = {
+          enable = true;
+          deviceId = "";
+        };
+        dedicated.amd.enable = true;
       };
 
       bluetooth.enable = true;

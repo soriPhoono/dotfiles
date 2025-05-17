@@ -12,8 +12,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.zellij = {
       enable = true;
-      attachExistingSession = true;
-      exitShellOnExit = true;
     };
   };
 }

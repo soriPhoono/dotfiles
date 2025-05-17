@@ -10,7 +10,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.vesktop = {
       enable = true;
-      vencord.useSystem = true;
       settings = {
         discordBranch = "stable";
         appBadge = false;

@@ -15,9 +15,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      # communications
       signal-desktop
       element-desktop
 
+      # streaming
       gimp
       davinci-resolve
     ];
