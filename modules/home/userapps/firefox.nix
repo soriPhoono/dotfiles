@@ -42,17 +42,7 @@ in {
               "Nix Packages" = {
                 urls = [
                   {
-                    template = "https://search.nixos.org/packages";
-                    params = [
-                      {
-                        name = "type";
-                        value = "packages";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                    ];
+                    template = "https://search.nixos.org/packages?channel=unstable&query={searchTerms}";
                   }
                 ];
 
@@ -63,17 +53,7 @@ in {
               "Nix Options" = {
                 urls = [
                   {
-                    template = "https://search.nixos.org/options";
-                    params = [
-                      {
-                        name = "type";
-                        value = "options";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                    ];
+                    template = "https://search.nixos.org/options?channel=unstable&query={searchTerms}";
                   }
                 ];
 
