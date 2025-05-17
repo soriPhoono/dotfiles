@@ -28,10 +28,10 @@
   };
 
   desktop = {
-    gnome.enable = true;
-    steam = {
+    environments.gnome.enable = true;
+    features.gaming = {
       enable = true;
-      desktop.enable = true;
+      featureType = ["desktop" "console"];
     };
   };
 

@@ -49,6 +49,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    steam-experiments = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nvim = {
       url = "github:soriPhoono/nvim/nixos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -85,6 +90,7 @@
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           nix-index-database.nixosModules.nix-index
+          steam-experiments.nixosModules.default
         ];
       };
 

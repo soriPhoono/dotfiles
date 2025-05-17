@@ -16,7 +16,7 @@
     };
   };
 
-  desktop.gnome.enable = true;
+  desktop.environments.gnome.enable = true;
 
   themes.catppuccin.enable = true;
 }
