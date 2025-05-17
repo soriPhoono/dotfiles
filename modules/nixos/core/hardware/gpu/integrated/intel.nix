@@ -9,7 +9,7 @@ in {
   options.core.hardware.gpu.integrated.intel = {
     enable = lib.mkEnableOption "Enable igpu features for intel igpus";
 
-    device_id = lib.mkOption {
+    deviceId = lib.mkOption {
       type = lib.types.str;
       description = "The igpu device id to detect on later generation gpus (mandatory on 12 gen or later)";
 
@@ -20,8 +20,8 @@ in {
   config = lib.mkIf cfg.enable {
     core.hardware.gpu.enable = true;
 
-    boot.kernelParams = lib.mkIf (cfg.device_id != null) [
-      "i915.force_probe=${cfg.device_id}"
+    boot.kernelParams = lib.mkIf (cfg.deviceId != null) [
+      "i915.force_probe=${cfg.deviceId}"
     ];
 
     hardware.graphics.extraPackages = with pkgs; [

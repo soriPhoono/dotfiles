@@ -11,9 +11,15 @@
       gpu = {
         integrated.intel = {
           enable = true;
-          deviceId = "";
+          deviceId = "a780";
         };
         dedicated.amd.enable = true;
+      };
+
+      hid = {
+        logitech.enable = true;
+        qmk.enable = true;
+        xbox_controllers.enable = true;
       };
 
       bluetooth.enable = true;
