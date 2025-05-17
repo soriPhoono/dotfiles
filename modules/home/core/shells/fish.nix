@@ -44,6 +44,10 @@ in {
 
         ${importEnvironment}
 
+        ${sessionVariables}
+
+        ${shellAliases}
+
         fastfetch
       '';
     };
