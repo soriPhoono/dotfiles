@@ -21,7 +21,7 @@ in {
       element-desktop
 
       # office
-      onlyoffice-desktop
+      onlyoffice-desktopeditors
       gimp
 
       # streaming

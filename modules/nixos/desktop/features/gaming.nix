@@ -23,7 +23,7 @@ in {
         if (lib.any (feature: feature == "desktop") cfg.featureType)
         then [
           bottles
-          prism-launcher
+          prismlauncher
           gzdoom
           tome4
         ]
