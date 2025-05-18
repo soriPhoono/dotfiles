@@ -8,6 +8,7 @@
 in {
   imports = [
     ./artwork.nix
+    ./streaming.nix
   ];
 
   options.userapps.features = {
@@ -22,6 +23,8 @@ in {
 
       # office
       onlyoffice-desktopeditors
+
+      # tools
       gimp
     ];
   };
