@@ -4,14 +4,14 @@
   config,
   ...
 }: let
-  cfg = config.desktop.features.virtualization;
+  cfg = config.desktop.features.virtualisation;
 in {
-  options.desktop.features.virtualization = {
+  options.desktop.features.virtualisation = {
     enable = lib.mkEnableOption "Enable podman virtualization";
   };
 
   config = lib.mkIf cfg.enable {
-    virtualization = {
+    virtualisation = {
       containers.enable = true;
 
       podman = {

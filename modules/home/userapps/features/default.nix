@@ -23,10 +23,6 @@ in {
       # office
       onlyoffice-desktopeditors
       gimp
-
-      # streaming
-      gimp
-      davinci-resolve
     ];
   };
 }

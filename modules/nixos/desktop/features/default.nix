@@ -1,6 +1,6 @@
 {
   imports = [
     ./gaming.nix
-    ./virtualization.nix
+    ./virtualisation.nix
   ];
 }
