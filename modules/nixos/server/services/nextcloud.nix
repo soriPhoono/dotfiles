@@ -32,7 +32,7 @@ in {
             }
           ];
         };
-        "localhost" = {
+        "localhost".locations = {
           "^~ /.well-known" = {
             priority = 9000;
             extraConfig = ''
