@@ -11,8 +11,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    server.services.postgresql.enable = true;
-
     sops.secrets.nextcloud_admin_password = {};
 
     systemd = {
@@ -28,20 +26,27 @@ in {
 
     services = {
       postgresql = {
+        enable = true;
+        dataDir = "/mnt/postgresql";
         ensureDatabases = [
           "nextcloud"
         ];
         ensureUsers = [
           {
             name = "nextcloud";
-            ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+            ensureDBOwnership = true;
           }
         ];
       };
 
-      postgresqlBackup.databases = [
-        "nextcloud"
-      ];
+      postgresqlBackup = {
+        enable = true;
+        location = "/mnt/backup/postgresql";
+        startAt = "*-*-* 23:15:00";
+        databases = [
+          "nextcloud"
+        ];
+      };
 
       redis.servers.nextcloud = {
         enable = true;
@@ -52,7 +57,6 @@ in {
       nextcloud = {
         enable = true;
 
-        https = true;
         package = pkgs.nextcloud31;
         hostName = "nextcloud";
         home = "/mnt/nextcloud";
@@ -69,7 +73,7 @@ in {
         };
 
         settings = let
-          prot = "https";
+          prot = "http";
           host = "workstation.xerus-augmented.ts.net";
           dir = "/nextcloud";
         in {
@@ -93,24 +97,20 @@ in {
       nginx = {
         enable = true;
         recommendedGzipSettings = true;
-        recommendedOptimization = true;
+        recommendedOptimisation = true;
         recommendedProxySettings = true;
-        recommendedTslSettings = true;
+        recommendedTlsSettings = true;
 
         virtualHosts = {
           "${config.services.nextcloud.hostName}" = {
-            forceSSL = true;
-
             listen = [
               {
-                addr = "127.0.0.1";
+                addr = "localhost";
                 port = 8080;
               }
             ];
           };
           "workstation.xerus-augmented.ts.net" = {
-            forceSSL = true;
-
             locations = {
               "^~ /.well-known" = {
                 priority = 9000;
@@ -135,7 +135,7 @@ in {
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                   proxy_set_header X-NginX-Proxy true;
                   proxy_set_header X-Forwarded-Proto http;
-                  proxy_pass https://localhost:8080/;
+                  proxy_pass http://localhost:8080/;
                   proxy_set_header Host $host;
                   proxy_cache_bypass $http_upgrade;
                   proxy_redirect off;
