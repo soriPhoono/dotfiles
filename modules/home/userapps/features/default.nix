@@ -26,6 +26,7 @@ in {
 
       # tools
       gimp
+      qbittorrent
     ];
   };
 }

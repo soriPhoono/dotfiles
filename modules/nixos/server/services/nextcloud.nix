@@ -48,32 +48,29 @@ in {
         ];
       };
 
-      redis.servers.nextcloud = {
-        enable = true;
-        port = 31638;
-        bind = "localhost";
-      };
-
       nextcloud = {
         enable = true;
 
+        https = true;
         package = pkgs.nextcloud31;
         hostName = "nextcloud";
         home = "/mnt/nextcloud";
 
+        configureRedis = true;
+
         database.createLocally = true;
-
-        caching.redis = true;
-
-        autoUpdateApps.enable = true;
 
         config = {
           adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
           dbtype = "pgsql";
         };
 
+        phpOptions = {
+          "opcache.interned_strings_buffer" = 16;
+        };
+
         settings = let
-          prot = "http";
+          prot = "https";
           host = "workstation.xerus-augmented.ts.net";
           dir = "/nextcloud";
         in {
@@ -82,15 +79,11 @@ in {
           overwritewebroot = dir;
           overwrite.cli.url = "${prot}://${host}${dir}/";
           htaccess.RewriteBase = dir;
-        };
-
-        extraOptions = {
-          redis = {
-            host = "localhost";
-            port = 31638;
-            dbindex = 0;
-            timeout = 1.5;
-          };
+          default_phone_region = "US";
+          trusted_proxies = [
+            "127.0.0.1"
+          ];
+          maintenance_window_start = "1";
         };
       };
 
