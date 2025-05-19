@@ -13,18 +13,9 @@ in {
   config = lib.mkIf cfg.enable {
     sops.secrets.nextcloud_admin_password = {};
 
-    security.acme = {
-      acceptTerms = true;
-      certs = {
-        ${config.services.nextcloud.hostName}.email = "soriphoono@protonmail.com";
-      };
-    };
-
     services = {
       nginx.virtualHosts = {
         "${config.services.nextcloud.hostName}" = {
-          forceSSL = true;
-          enableACME = true;
           listen = [
             {
               addr = "127.0.0.1";
@@ -32,7 +23,7 @@ in {
             }
           ];
         };
-        "localhost".locations = {
+        "workstation.xerus-augmented.ts.net".locations = {
           "^~ /.well-known" = {
             priority = 9000;
             extraConfig = ''
@@ -55,8 +46,8 @@ in {
               proxy_set_header X-Real-IP $remote_addr;
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
               proxy_set_header X-NginX-Proxy true;
-              proxy_set_header X-Forwarded-Proto https;
-              proxy_pass https://127.0.0.1:8080/;
+              proxy_set_header X-Forwarded-Proto http;
+              proxy_pass http://127.0.0.1:8080/;
               proxy_set_header Host $host;
               proxy_cache_bypass $http_upgrade;
               proxy_redirect off;
@@ -69,8 +60,7 @@ in {
         enable = true;
 
         package = pkgs.nextcloud31;
-        hostName = "workstation";
-        https = true;
+        hostName = "workstation.xerus-augmented.ts.net";
         home = "/mnt/nextcloud";
 
         database.createLocally = true;
