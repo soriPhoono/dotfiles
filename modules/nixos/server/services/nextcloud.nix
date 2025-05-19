@@ -14,6 +14,33 @@ in {
     sops.secrets.nextcloud_admin_password = {};
 
     services = {
+      nextcloud = {
+        enable = true;
+
+        package = pkgs.nextcloud31;
+        hostName = "nextcloud";
+        home = "/mnt/nextcloud";
+
+        database.createLocally = true;
+
+        config = {
+          adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
+          dbtype = "pgsql";
+        };
+
+        settings = let
+          prot = "http";
+          host = "workstation.xerus-augmented.ts.net";
+          dir = "/nextcloud";
+        in {
+          overwriteprotocol = prot;
+          overwritehost = host;
+          overwritewebroot = dir;
+          overwrite.cli.url = "${prot}://${host}${dir}/";
+          htaccess.RewriteBase = dir;
+        };
+      };
+
       nginx.virtualHosts = {
         "${config.services.nextcloud.hostName}" = {
           listen = [
@@ -47,39 +74,12 @@ in {
               proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
               proxy_set_header X-NginX-Proxy true;
               proxy_set_header X-Forwarded-Proto http;
-              proxy_pass http://127.0.0.1:8080/;
+              proxy_pass http://localhost:8080/;
               proxy_set_header Host $host;
               proxy_cache_bypass $http_upgrade;
               proxy_redirect off;
             '';
           };
-        };
-      };
-
-      nextcloud = {
-        enable = true;
-
-        package = pkgs.nextcloud31;
-        hostName = "workstation.xerus-augmented.ts.net";
-        home = "/mnt/nextcloud";
-
-        database.createLocally = true;
-
-        config = {
-          adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
-          dbtype = "pgsql";
-        };
-
-        settings = let
-          prot = "http";
-          host = "127.0.0.1";
-          dir = "/nextcloud";
-        in {
-          overwriteprotocol = prot;
-          overwritehost = host;
-          overwritewebroot = dir;
-          overwrite.cli.url = "${prot}://${host}${dir}/";
-          htaccess.RewriteBase = dir;
         };
       };
     };
