@@ -25,7 +25,6 @@ in {
           bottles
           prismlauncher
           gzdoom
-          tome4
         ]
         else []
       )

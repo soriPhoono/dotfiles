@@ -44,5 +44,9 @@
     };
   };
 
+  server.services = {
+    nextcloud.enable = true;
+  };
+
   themes.catppuccin.enable = true;
 }
