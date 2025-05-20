@@ -21,9 +21,6 @@ in {
       signal-desktop
       element-desktop
 
-      # office
-      onlyoffice-desktopeditors
-
       # tools
       gimp
       qbittorrent
