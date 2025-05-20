@@ -20,13 +20,13 @@ in {
   config = lib.mkIf cfg.enable {
     sops.secrets =
       (lib.listToAttrs (map (user: {
-          name = "${user.name}/nextcloud_password";
+          name = "nextcloud/${user.name}_password";
           value = {
           };
         })
         config.core.users))
       // {
-        nextcloud_admin_password = {};
+        "nextcloud/admin_password" = {};
       };
 
     systemd = {
@@ -85,13 +85,13 @@ in {
             inherit (user) name;
             value = {
               email = user.email;
-              passwordFile = config.sops.secrets."${user.name}/nextcloud_password".path;
+              passwordFile = config.sops.secrets."nextcloud/${user.name}_password".path;
             };
           })
           config.core.users);
 
         config = {
-          adminpassFile = config.sops.secrets.nextcloud_admin_password.path;
+          adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
           dbtype = "pgsql";
         };
 

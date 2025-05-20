@@ -18,8 +18,10 @@ in {
           {
             resources = {
               cpu = true;
+              cputemp = true;
               disk = "/mnt";
               memory = true;
+              uptime = true;
             };
           }
           {
