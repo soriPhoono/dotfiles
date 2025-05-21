@@ -6,13 +6,6 @@
 }: let
   cfg = config.server.services.nextcloud;
 in {
-  imports = [
-    "${fetchTarball {
-      url = "https://github.com/onny/nixos-nextcloud-testumgebung/archive/fa6f062830b4bc3cedb9694c1dbf01d5fdf775ac.tar.gz";
-      sha256 = "0gzd0276b8da3ykapgqks2zhsqdv4jjvbv97dsxg0hgrhb74z0fs";
-    }}/nextcloud-extras.nix"
-  ];
-
   options.server.services.nextcloud = {
     enable = lib.mkEnableOption "Enable nextcloud backend services";
   };
@@ -81,15 +74,6 @@ in {
           inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
         };
         extraAppsEnable = true;
-
-        ensureUsers = lib.listToAttrs (map (user: {
-            inherit (user) name;
-            value = {
-              email = user.email;
-              passwordFile = config.sops.secrets."nextcloud/${user.name}_password".path;
-            };
-          })
-          config.core.users);
 
         config = {
           adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
@@ -161,7 +145,7 @@ in {
                   proxy_set_header X-Real-IP $remote_addr;
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                   proxy_set_header X-NginX-Proxy true;
-                  proxy_set_header X-Forwarded-Proto https;
+                  proxy_set_header X-Forwarded-Proto http;
                   proxy_pass http://localhost:8080/;
                   proxy_set_header Host $host;
                   proxy_cache_bypass $http_upgrade;

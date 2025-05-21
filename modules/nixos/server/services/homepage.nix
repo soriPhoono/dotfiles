@@ -43,6 +43,16 @@ in {
               }
             ];
           }
+          {
+            "Media" = [
+              {
+                "JellyFin" = {
+                  description = "JellyFin media server";
+                  href = "https://workstation.xerus-augmented.ts.net/jellyfin/";
+                };
+              }
+            ];
+          }
         ];
 
         bookmarks = [

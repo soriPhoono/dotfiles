@@ -48,28 +48,10 @@ in {
 
       nginx = {
         enable = true;
-        recommendedGzipSettings = true;
-        recommendedOptimisation = true;
         recommendedProxySettings = true;
-        recommendedTlsSettings = true;
-
         virtualHosts = {
-          "workstation.xerus-augmented.ts.net" = {
-            locations = {
-              "/gitlab/" = {
-                priority = 9999;
-                extraConfig = ''
-                  proxy_set_header X-Real-IP $remote_addr;
-                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                  proxy_set_header X-NginX-Proxy true;
-                  proxy_set_header X-Forwarded-Proto http;
-                  proxy_pass http://localhost:8081;
-                  proxy_set_header Host $host;
-                  proxy_cache_bypass $http_upgrade;
-                  proxy_redirect off;
-                '';
-              };
-            };
+          localhost = {
+            locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
           };
         };
       };
