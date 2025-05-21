@@ -40,7 +40,7 @@
     environments.gnome.enable = true;
     features.gaming = {
       enable = true;
-      featureType = ["desktop" "console"];
+      featureType = ["desktop" "vr"];
     };
   };
 
