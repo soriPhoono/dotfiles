@@ -1,5 +1,18 @@
 {
+  lib,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs; [
+    adw-gtk3
+  ];
+
   dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = lib.mkForce "prefer-dark";
+      gtk-theme = lib.mkForce "adw-gtk3-dark";
+    };
+
     "org/gnome/shell/extensions/dash-to-dock" = {
       apply-custom-theme = true;
       background-opacity = 0.8;
@@ -17,10 +30,6 @@
       shift-click-action = "minimize";
       shift-middle-click-action = "launch";
       show-mounts = false;
-    };
-
-    "Settings" = {
-      gtk-application-prefer-dark-theme = 1;
     };
   };
 }
