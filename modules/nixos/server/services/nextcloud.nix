@@ -71,6 +71,7 @@ in {
         package = pkgs.nextcloud31;
         hostName = "nextcloud";
         home = "/mnt/nextcloud";
+        maxUploadSize = "100G";
 
         configureRedis = true;
 
@@ -114,6 +115,7 @@ in {
             "127.0.0.1"
           ];
           maintenance_window_start = "1";
+          log_type = "file";
         };
       };
 
@@ -123,6 +125,8 @@ in {
         recommendedOptimisation = true;
         recommendedProxySettings = true;
         recommendedTlsSettings = true;
+
+        clientMaxBodySize = "100G";
 
         virtualHosts = {
           "${config.services.nextcloud.hostName}" = {
@@ -157,7 +161,7 @@ in {
                   proxy_set_header X-Real-IP $remote_addr;
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                   proxy_set_header X-NginX-Proxy true;
-                  proxy_set_header X-Forwarded-Proto http;
+                  proxy_set_header X-Forwarded-Proto https;
                   proxy_pass http://localhost:8080/;
                   proxy_set_header Host $host;
                   proxy_cache_bypass $http_upgrade;

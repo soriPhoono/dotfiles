@@ -47,6 +47,7 @@
   server.services = {
     homepage.enable = true;
     nextcloud.enable = true;
+    jellyfin.enable = true;
   };
 
   themes.catppuccin.enable = true;

@@ -10,12 +10,28 @@ in {
   config = lib.mkIf cfg.enable {
     systemd.services.gitlab-backup.environment.BACKUP = "dump";
 
+    sops.secrets = lib.listToAttrs (map (secret: {
+        name = secret;
+        value = {
+          owner = config.services.gitlab.user;
+          group = config.services.gitlab.group;
+        };
+      }) [
+        "gitlab/database_password"
+        "gitlab/admin_password"
+        "gitlab/secretsKey"
+        "gitlab/otpKey"
+        "gitlab/variablesKey"
+        "gitlab/sessionKey"
+        "gitlab/activeRecordSalt"
+        "gitlab/activeRecordPrimaryKey"
+        "gitlab/activeRecordDeterministicKey"
+      ]);
+
     services = {
       gitlab = {
         enable = true;
-        https = true;
-        port = 443;
-        host = "workstation.xerus-augmented.ts.net";
+        port = 8081;
         statePath = "/mnt/gitlab";
         databasePasswordFile = config.sops.secrets."gitlab/database_password".path;
         initialRootPasswordFile = config.sops.secrets."gitlab/admin_password".path;
@@ -24,6 +40,9 @@ in {
           otpFile = config.sops.secrets."gitlab/otpKey".path;
           dbFile = config.sops.secrets."gitlab/variablesKey".path;
           jwsFile = config.sops.secrets."gitlab/sessionKey".path;
+          activeRecordSaltFile = config.sops.secrets."gitlab/activeRecordSalt".path;
+          activeRecordPrimaryKeyFile = config.sops.secrets."gitlab/activeRecordPrimaryKey".path;
+          activeRecordDeterministicKeyFile = config.sops.secrets."gitlab/activeRecordDeterministicKey".path;
         };
       };
 
@@ -44,7 +63,7 @@ in {
                   proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
                   proxy_set_header X-NginX-Proxy true;
                   proxy_set_header X-Forwarded-Proto http;
-                  proxy_pass http://unix:/run/gitlab/gitlab-workhorse.socket;
+                  proxy_pass http://localhost:8081;
                   proxy_set_header Host $host;
                   proxy_cache_bypass $http_upgrade;
                   proxy_redirect off;
