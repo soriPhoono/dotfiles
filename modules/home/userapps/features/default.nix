@@ -22,6 +22,9 @@ in {
       signal-desktop
       element-desktop
 
+      # office work
+      obsidian
+
       # tools
       gimp
       qbittorrent
