@@ -15,10 +15,10 @@ in {
 
     services.caddy = {
       enable = true;
-      package = pkgs.caddy-tailscale;
+      package = pkgs.callPackage ./caddy-tailscale.nix {};
     };
 
-    systemd.services.caddy.serviceConfig.EnvironmentFile = "TS_AUTHKEY=${config.sops.secrets.ts_auth_key}";
+    systemd.services.caddy.serviceConfig.EnvironmentFile = "TS_AUTHKEY=${config.sops.secrets.ts_auth_key.path}";
 
     server.services = {
       nextcloud.enable = true;
