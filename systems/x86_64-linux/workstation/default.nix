@@ -45,8 +45,6 @@
   };
 
   server.services = {
-    homepage.enable = true;
-
     nextcloud.enable = true;
     jellyfin.enable = true;
 

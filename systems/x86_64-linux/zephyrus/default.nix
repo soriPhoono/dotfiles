@@ -23,18 +23,18 @@
     networking = {
       enable = true;
       network-manager.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        tn_name = "xerus-augmented.ts.net";
+      };
     };
   };
 
   desktop = {
     environments.gnome.enable = true;
-    features = {
-      homepage.enable = true;
-      gaming = {
-        enable = true;
-        featureType = ["desktop"];
-      };
+    features.gaming = {
+      enable = true;
+      featureType = ["desktop"];
     };
   };
 

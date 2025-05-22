@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -22,12 +23,106 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.tailscale = {
-      inherit (cfg) useRoutingFeatures;
+    sops.secrets.ts_auth_key = {};
 
-      enable = true;
+    services = {
+      tailscale = {
+        inherit (cfg) useRoutingFeatures;
 
-      openFirewall = true;
+        enable = true;
+
+        openFirewall = true;
+      };
+
+      homepage-dashboard = {
+        enable = true;
+        allowedHosts = "${config.networking.hostName}.${config.core.networking.tailscale.tn_name}";
+
+        widgets = [
+          {
+            resources = {
+              cpu = true;
+              cputemp = true;
+              disk = "/";
+              memory = true;
+              uptime = true;
+            };
+          }
+          {
+            search = {
+              provider = "duckduckgo";
+              target = "_blank";
+            };
+          }
+        ];
+
+        bookmarks = [
+          {
+            Developer = [
+              {
+                Github = [
+                  {
+                    abbr = "GH";
+                    href = "https://github.com/";
+                  }
+                ];
+              }
+            ];
+          }
+          {
+            Entertainment = [
+              {
+                YouTube = [
+                  {
+                    abbr = "YT";
+                    href = "https://youtube.com/";
+                  }
+                ];
+              }
+            ];
+          }
+        ];
+      };
+    };
+
+    systemd.services = {
+      "tailscaled_autoconnect" = {
+        description = "Automatic connection to tailscale";
+
+        after = ["network-pre.target" "tailscaled.service"];
+        wants = ["network-pre.target" "tailscaled.service"];
+        wantedBy = ["multi-user.target"];
+
+        serviceConfig.Type = "oneshot";
+
+        script = with pkgs;
+        # bash
+          ''
+            sleep 0.5
+
+            status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
+            if [ $status = "Running" ]; then
+              exit 0
+            fi
+
+            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.ts_auth_key.path})"
+          '';
+      };
+      "serve_homepage" = {
+        after = ["homepage-dashboard.service" "tailscaled.service"];
+        wants = ["homepage-dashboard.service" "tailscaled.service"];
+        wantedBy = ["multi-user.target"];
+        serviceConfig.type = "oneshot";
+        description = "Serve system homepage for network navigation";
+        script = with pkgs;
+        # bash
+          ''
+            sleep 1
+
+            ${tailscale}/bin/tailscale serve reset
+            ${tailscale}/bin/tailscale serve http://localhost:${builtins.toString config.services.homepage-dashboard.listenPort}
+          '';
+      };
     };
   };
 }

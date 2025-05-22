@@ -1,7 +1,7 @@
 keys:
   - &admin_soriphoono age1y4x8gzzcdhxvqaf9matt0eze3z3yxwx607avq4cexfkgwal4psesj39lvn
   - &system_testbench age1lqd89ed3x2j58kq4xckle5dwvdyt8kqkwwmaf0dw5e35sy2q9ptq8qzyhm
-  - &system_zephyrus age1a4atvf854gllja0qec50g4gtrs77s9h00lspwutza0savfagfqgsxxqkwu
+  - &system_zephyrus age1vgmm4uqreuwsk9qz0mdn2z0at5fmfansxy7epjd6mk8f3aefngjqe2chf6
   - &system_workstation age18ue2hsws4p592dwd7as4n8mrnk2e3lumty7ud5xjmt39c54flg5qtaljxy
 creation_rules:
   - path_regex: homes/.*/soriphoono/[^/]+\.(yaml|json|env|ini)$

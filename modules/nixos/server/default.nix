@@ -11,6 +11,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     services = {
+      caddy = {
+        enable = true;
+      };
     };
   };
 }
