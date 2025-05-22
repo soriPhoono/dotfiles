@@ -1,8 +1,8 @@
 {
   imports = [
+    ./ollama.nix
     ./nextcloud.nix
     ./jellyfin.nix
-    ./gitlab.nix
     ./homepage.nix
   ];
 }

@@ -50,7 +50,7 @@
     nextcloud.enable = true;
     jellyfin.enable = true;
 
-    gitlab.enable = true;
+    ollama.enable = true;
   };
 
   themes.catppuccin.enable = true;
