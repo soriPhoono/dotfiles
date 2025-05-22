@@ -32,7 +32,10 @@
     networking = {
       enable = true;
       network-manager.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        tn_name = "xerus-augmented.ts.net";
+      };
     };
   };
 
@@ -44,12 +47,7 @@
     };
   };
 
-  server.services = {
-    nextcloud.enable = true;
-    jellyfin.enable = true;
-
-    ollama.enable = true;
-  };
+  server.enable = true;
 
   themes.catppuccin.enable = true;
 }

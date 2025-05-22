@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -10,10 +11,18 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services = {
-      caddy = {
-        enable = true;
-      };
+    core.networking.tailscale.enable = true;
+
+    services.caddy = {
+      enable = true;
+      package = pkgs.caddy-tailscale;
+    };
+
+    systemd.services.caddy.serviceConfig.EnvironmentFile = "TS_AUTHKEY=${config.sops.secrets.ts_auth_key}";
+
+    server.services = {
+      nextcloud.enable = true;
+      jellyfin.enable = true;
     };
   };
 }
