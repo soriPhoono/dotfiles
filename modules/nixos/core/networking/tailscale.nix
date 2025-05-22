@@ -33,56 +33,6 @@ in {
 
         openFirewall = true;
       };
-
-      homepage-dashboard = {
-        enable = true;
-        allowedHosts = "${config.networking.hostName}.${config.core.networking.tailscale.tn_name}";
-
-        widgets = [
-          {
-            resources = {
-              cpu = true;
-              cputemp = true;
-              disk = "/";
-              memory = true;
-              uptime = true;
-            };
-          }
-          {
-            search = {
-              provider = "duckduckgo";
-              target = "_blank";
-            };
-          }
-        ];
-
-        bookmarks = [
-          {
-            Developer = [
-              {
-                Github = [
-                  {
-                    abbr = "GH";
-                    href = "https://github.com/";
-                  }
-                ];
-              }
-            ];
-          }
-          {
-            Entertainment = [
-              {
-                YouTube = [
-                  {
-                    abbr = "YT";
-                    href = "https://youtube.com/";
-                  }
-                ];
-              }
-            ];
-          }
-        ];
-      };
     };
 
     systemd.services = {
@@ -106,21 +56,6 @@ in {
             fi
 
             ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.ts_auth_key.path})"
-          '';
-      };
-      "serve_homepage" = {
-        after = ["homepage-dashboard.service" "tailscaled.service"];
-        wants = ["homepage-dashboard.service" "tailscaled.service"];
-        wantedBy = ["multi-user.target"];
-        serviceConfig.type = "oneshot";
-        description = "Serve system homepage for network navigation";
-        script = with pkgs;
-        # bash
-          ''
-            sleep 1
-
-            ${tailscale}/bin/tailscale serve reset
-            ${tailscale}/bin/tailscale serve http://localhost:${builtins.toString config.services.homepage-dashboard.listenPort}
           '';
       };
     };
