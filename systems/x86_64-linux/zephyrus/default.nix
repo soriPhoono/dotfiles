@@ -29,9 +29,12 @@
 
   desktop = {
     environments.gnome.enable = true;
-    features.gaming = {
-      enable = true;
-      featureType = ["desktop"];
+    features = {
+      homepage.enable = true;
+      gaming = {
+        enable = true;
+        featureType = ["desktop"];
+      };
     };
   };
 

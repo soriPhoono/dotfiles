@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -15,47 +14,20 @@ in {
       default = "both";
     };
 
-    autoLogin = lib.mkEnableOption "Enable autologin to tailscale";
+    tn_name = lib.mkOption {
+      type = lib.types.str;
+      description = "The name of your tailnet for hosting";
+      example = "name.ts.net";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets.tailscale_auth_key = lib.mkIf cfg.autoLogin {
-      restartUnits = [
-        "tailscaled-autoconnect.service"
-      ];
-    };
-
     services.tailscale = {
       inherit (cfg) useRoutingFeatures;
 
       enable = true;
 
       openFirewall = true;
-    };
-
-    systemd.services = {
-      tailscaled-autoconnect = lib.mkIf cfg.autoLogin {
-        description = "Automatic connection to tailscale";
-
-        after = ["network-pre.target" "tailscaled.service"];
-        wants = ["network-pre.target" "tailscaled.service"];
-        wantedBy = ["multi-user.target"];
-
-        serviceConfig.Type = "oneshot";
-
-        script = with pkgs;
-        # bash
-          ''
-            sleep 0.5
-
-            status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
-            if [ $status = "Running" ]; then
-              exit 0
-            fi
-
-            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.tailscale_auth_key.path})"
-          '';
-      };
     };
   };
 }
