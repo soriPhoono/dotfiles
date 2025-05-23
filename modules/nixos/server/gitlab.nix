@@ -31,7 +31,7 @@ in {
         # Check this with reverse proxy config, could break unix socket
         https = true;
         host = "localhost";
-        port = "8086";
+        port = 8086;
 
         databasePasswordFile = config.sops.secrets."gitlab/database_password".path;
         initialRootPasswordFile = config.sops.secrets."gitlab/root_password".path;
