@@ -24,5 +24,16 @@ mkShell {
           git push
         '';
     })
+
+    (pkgs.writeShellApplication {
+      name = "quick_pull.sh";
+      text =
+        # bash
+        ''
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_ed25519
+          git pull
+        '';
+    })
   ];
 }
