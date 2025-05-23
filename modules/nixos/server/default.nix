@@ -13,6 +13,7 @@ in {
     ./jellyfin.nix
 
     ./ollama.nix
+    ./gitlab.nix
   ];
 
   options.server = {
