@@ -19,8 +19,11 @@ mkShell {
         ''
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
+
           read -rp "What is your commit message: "
           git commit -am "$REPLY"
+
+          pkill ssh-agent
         '';
     })
 
@@ -30,8 +33,11 @@ mkShell {
         # bash
         ''
           eval "$(ssh-agent -s)"
-            ssh-add ~/.ssh/id_ed25519
-            git push
+          ssh-add ~/.ssh/id_ed25519
+
+          git push
+
+          pkill ssh-agent
         '';
     })
 
@@ -42,7 +48,10 @@ mkShell {
         ''
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
+
           git pull
+
+          pkill ssh-agent
         '';
     })
   ];
