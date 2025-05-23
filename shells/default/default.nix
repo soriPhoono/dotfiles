@@ -19,7 +19,7 @@ mkShell {
         ''
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_ed25519
-          read -rp "What is your commit message"
+          read -rp "What is your commit message: "
           git commit -am "$REPLY"
           git push
         '';
