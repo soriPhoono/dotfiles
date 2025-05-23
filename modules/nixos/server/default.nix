@@ -36,7 +36,7 @@ in {
         enable = true;
         enableReload = false;
         package = pkgs.caddy.withPlugins {
-          plugins = ["github.com/tailscale/caddy-tailscale@v0.0.0-20250207163903-69a970c84556"];
+          plugins = ["github.com/tailscale/caddy-tailscale@v0.0.0-20250508175905-642f61fea3cc"];
           hash = "sha256-wt3+xCsT83RpPySbL7dKVwgqjKw06qzrP2Em+SxEPto=";
         };
       };
