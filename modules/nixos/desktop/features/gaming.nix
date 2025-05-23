@@ -22,7 +22,6 @@ in {
       (
         if (lib.any (feature: feature == "desktop") cfg.featureType)
         then [
-          bottles
           prismlauncher
           gzdoom
         ]

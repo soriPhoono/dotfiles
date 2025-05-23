@@ -7,7 +7,12 @@
   cfg = config.server;
 in {
   imports = [
+    ./postgresql.nix
+
+    ./nextcloud.nix
     ./jellyfin.nix
+
+    ./ollama.nix
   ];
 
   options.server = {
@@ -17,7 +22,7 @@ in {
   config = lib.mkIf cfg.enable {
     sops.templates.caddy_env_file = {
       content = ''
-        TS_AUTHKEY=${config.sops.placeholder.ts_auth_key}
+        TS_AUTH_KEY=${config.sops.placeholder.ts_auth_key}
         TS_PERMIT_CERT_UID=${config.services.caddy.user};
       '';
       owner = config.services.caddy.user;
@@ -28,6 +33,7 @@ in {
     services = {
       caddy = {
         enable = true;
+        enableReload = false;
         package = pkgs.caddy.withPlugins {
           plugins = ["github.com/tailscale/caddy-tailscale@v0.0.0-20250207163903-69a970c84556"];
           hash = "sha256-wt3+xCsT83RpPySbL7dKVwgqjKw06qzrP2Em+SxEPto=";

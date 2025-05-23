@@ -47,5 +47,7 @@
     };
   };
 
+  server.enable = true;
+
   themes.catppuccin.enable = true;
 }
