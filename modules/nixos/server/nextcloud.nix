@@ -6,16 +6,9 @@
 }: let
   cfg = config.server;
 in {
-  sops.secrets =
-    (lib.listToAttrs (map (user: {
-        name = "nextcloud/${user.name}_password";
-        value = {
-        };
-      })
-      config.core.users))
-    // {
-      "nextcloud/admin_password" = {};
-    };
+  sops.secrets = {
+    "nextcloud/admin_password" = {};
+  };
 
   users.groups = {
     nextcloud.members = ["nextcloud" config.services.caddy.user];
