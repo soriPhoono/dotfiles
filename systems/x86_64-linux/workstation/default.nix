@@ -43,11 +43,9 @@
     environments.gnome.enable = true;
     features.gaming = {
       enable = true;
-      featureType = ["desktop" "vr"];
+      featureType = ["desktop"];
     };
   };
-
-  server.enable = true;
 
   themes.catppuccin.enable = true;
 }

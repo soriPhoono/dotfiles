@@ -1,24 +1,54 @@
 {
   disko.devices = {
     disk = {
-      nas = {
+      services = {
         type = "disk";
-        device = "/dev/disk/by-partuuid/88c129c9-66f0-4477-8b73-1f8f107fea09";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
-            luks = {
+            root = {
               size = "100%";
               content = {
-                type = "luks";
-                name = "crypted_nas";
-                passwordFile = "/tmp/nas_password.key";
-                settings.allowDiscards = true;
-                content = {
-                  type = "filesystem";
-                  format = "ext4";
-                  mountpoint = "/mnt";
-                };
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/services";
+              };
+            };
+          };
+        };
+      };
+
+      nas = {
+        type = "disk";
+        device = "/dev/sdb";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/mnt";
+              };
+            };
+          };
+        };
+      };
+
+      games = {
+        type = "disk";
+        device = "/dev/sdc";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/games";
               };
             };
           };
