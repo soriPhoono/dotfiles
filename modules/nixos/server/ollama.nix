@@ -28,6 +28,11 @@ in {
         port = 3000;
       };
 
+      searx = {
+        enable = true;
+        redisCreateLocally = true;
+      };
+
       caddy.virtualHosts = {
         "ai.xerus-augmented.ts.net" = {
           extraConfig = ''
