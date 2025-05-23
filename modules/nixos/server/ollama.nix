@@ -19,10 +19,6 @@ in {
 
         home = "/services/ollama";
         acceleration = "rocm";
-
-        loadModels = [
-          "deepseek-coder-v2:236b"
-        ];
       };
 
       open-webui = {
