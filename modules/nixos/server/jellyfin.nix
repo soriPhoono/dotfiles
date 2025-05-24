@@ -9,9 +9,10 @@ in {
     users.groups.multimedia.members = [config.services.jellyfin.user];
 
     systemd.tmpfiles.rules = [
-      "d /mnt/media/Shows/ 0770 ${config.services.jellyfin.user} multimedia -"
-      "d /mnt/media/Movies/ 0770 ${config.services.jellyfin.user} multimedia -"
-      "d /mnt/media/Music/ 0770 ${config.services.jellyfin.user} multimedia -"
+      "d /mnt/media/ 755 nextcloud multimedia -"
+      "d /mnt/media/Shows/ 755 nextcloud multimedia -"
+      "d /mnt/media/Movies/ 755 nextcloud multimedia -"
+      "d /mnt/media/Music/ 755 nextcloud multimedia -"
     ];
 
     services = {
