@@ -57,6 +57,7 @@ in {
         maxUploadSize = "1G";
 
         home = "/services/nextcloud";
+        datadir = "/mnt/cloud";
 
         configureRedis = true;
         database.createLocally = true;

@@ -9,8 +9,6 @@ in {
   imports = [
     ./postgresql.nix
 
-    ./searx.nix
-
     ./nextcloud.nix
     ./jellyfin.nix
 

@@ -6,11 +6,35 @@
   cfg = config.server;
 in {
   config = lib.mkIf cfg.enable {
+    sops = {
+      secrets.searx_secret = {};
+      templates.searx_secrets.content = ''
+        SEARX_SECRET_KEY=${config.sops.placeholder.searx_secret}
+      '';
+    };
+
     systemd.tmpfiles.rules = [
       "d /services/ollama 0770 ${config.services.ollama.user} ${config.services.ollama.user} -"
     ];
 
     services = {
+      searx = {
+        enable = true;
+        redisCreateLocally = true;
+        environmentFile = config.sops.templates.searx_secrets.path;
+        settings = {
+          server = {
+            port = 8000;
+            bind_address = "localhost";
+            secret_key = "@SEARX_SECRET_KEY@";
+          };
+          search.formats = [
+            "html"
+            "json"
+          ];
+        };
+      };
+
       ollama = {
         enable = true;
 
