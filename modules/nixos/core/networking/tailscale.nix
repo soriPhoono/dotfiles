@@ -61,7 +61,10 @@ in {
               {
                 "Ollama" = {
                   description = "Personal instance of ollama for selfhosted artificial intelligence";
+                  href = "https://ai.xerus-augmented.ts.net";
                 };
+              }
+              {
                 "GitLab" = {
                   description = "Personal gitlab instance for development automation on homelab";
                   href = "https://gitlab.xerus-augmented.ts.net";
