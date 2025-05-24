@@ -33,6 +33,91 @@ in {
 
         openFirewall = true;
       };
+
+      homepage-dashboard = {
+        enable = true;
+        allowedHosts = "${config.networking.hostName}.${config.core.networking.tailscale.tn_name}";
+        widgets = [
+          {
+            resources = {
+              cpu = true;
+              cputemp = true;
+              disk = "/";
+              memory = true;
+              uptime = true;
+            };
+          }
+          {
+            search = {
+              provider = "duckduckgo";
+              target = "_blank";
+            };
+          }
+        ];
+
+        services = lib.mkIf config.server.enable [
+          {
+            "Development" = [
+              {
+                "Ollama" = {
+                  description = "Personal instance of ollama for selfhosted artificial intelligence";
+                };
+                "GitLab" = {
+                  description = "Personal gitlab instance for development automation on homelab";
+                  href = "https://gitlab.xerus-augmented.ts.net";
+                };
+              }
+            ];
+          }
+          {
+            "Office" = [
+              {
+                "Nextcloud" = {
+                  description = "Nextcloud workspace drive";
+                  href = "https://nextcloud.xerus-augmented.ts.net";
+                };
+              }
+            ];
+          }
+          {
+            "Media" = [
+              {
+                "JellyFin" = {
+                  description = "JellyFin media server";
+                  href = "https://jellyfin.xerus-augmented.ts.net";
+                };
+              }
+            ];
+          }
+        ];
+
+        bookmarks = [
+          {
+            Developer = [
+              {
+                Github = [
+                  {
+                    abbr = "GH";
+                    href = "https://github.com/";
+                  }
+                ];
+              }
+            ];
+          }
+          {
+            Entertainment = [
+              {
+                YouTube = [
+                  {
+                    abbr = "YT";
+                    href = "https://youtube.com/";
+                  }
+                ];
+              }
+            ];
+          }
+        ];
+      };
     };
 
     systemd.services = {
@@ -56,6 +141,24 @@ in {
             fi
 
             ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.ts_auth_key.path})"
+          '';
+      };
+      "serve_homepage" = {
+        description = "Serve system homepage for network navigation";
+
+        after = ["homepage-dashboard.service" "tailscaled.service"];
+        wants = ["homepage-dashboard.service" "tailscaled.service"];
+        wantedBy = ["multi-user.target"];
+
+        serviceConfig.type = "oneshot";
+
+        script = with pkgs;
+        # bash
+          ''
+            sleep 1
+
+            ${tailscale}/bin/tailscale serve reset
+            ${tailscale}/bin/tailscale serve http://localhost:${builtins.toString config.services.homepage-dashboard.listenPort}
           '';
       };
     };
