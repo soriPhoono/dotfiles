@@ -23,7 +23,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets.ts_auth_key = {};
+    sops.secrets."core/ts_auth_key" = {
+      restartUnits = ["tailscaled_autoconnect.service"];
+    };
 
     services = {
       tailscale = {
@@ -36,7 +38,7 @@ in {
 
       homepage-dashboard = {
         enable = true;
-        allowedHosts = "${config.networking.hostName}.${config.core.networking.tailscale.tn_name}";
+        allowedHosts = "${config.networking.hostName}.${cfg.tn_name}";
         widgets = [
           {
             resources = {
@@ -52,45 +54,6 @@ in {
               provider = "duckduckgo";
               target = "_blank";
             };
-          }
-        ];
-
-        services = lib.mkIf config.server.enable [
-          {
-            "Development" = [
-              {
-                "Ollama" = {
-                  description = "Personal instance of ollama for selfhosted artificial intelligence";
-                  href = "https://ai.xerus-augmented.ts.net";
-                };
-              }
-              {
-                "GitLab" = {
-                  description = "Personal gitlab instance for development automation on homelab";
-                  href = "https://gitlab.xerus-augmented.ts.net";
-                };
-              }
-            ];
-          }
-          {
-            "Office" = [
-              {
-                "Nextcloud" = {
-                  description = "Nextcloud workspace drive";
-                  href = "https://nextcloud.xerus-augmented.ts.net";
-                };
-              }
-            ];
-          }
-          {
-            "Media" = [
-              {
-                "JellyFin" = {
-                  description = "JellyFin media server";
-                  href = "https://jellyfin.xerus-augmented.ts.net";
-                };
-              }
-            ];
           }
         ];
 
@@ -143,7 +106,7 @@ in {
               exit 0
             fi
 
-            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets.ts_auth_key.path})"
+            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets."core/ts_auth_key".path})"
           '';
       };
       "serve_homepage" = {

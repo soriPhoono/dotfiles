@@ -45,9 +45,6 @@
       enable = true;
       featureType = ["desktop"];
     };
-    programs = {
-      goldwarden.enable = true;
-    };
   };
 
   server.enable = true;

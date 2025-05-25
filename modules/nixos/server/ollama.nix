@@ -7,9 +7,9 @@
 in {
   config = lib.mkIf cfg.enable {
     sops = {
-      secrets.searx_secret = {};
+      secrets."server/searx_seed" = {};
       templates.searx_secrets.content = ''
-        SEARX_SECRET_KEY=${config.sops.placeholder.searx_secret}
+        SEARX_SECRET_KEY=${config.sops.placeholder."server/searx_seed"}
       '';
     };
 
@@ -53,13 +53,26 @@ in {
       };
 
       caddy.virtualHosts = {
-        "ai.xerus-augmented.ts.net" = {
+        "chat.xerus-augmented.ts.net" = {
           extraConfig = ''
-            bind tailscale/ai
+            bind tailscale/chat
             reverse_proxy localhost:3000
           '';
         };
       };
+
+      homepage-dashboard.services = [
+        {
+          "Development" = [
+            {
+              "Ollama" = {
+                description = "Personal instance of ollama for selfhosted artificial intelligence";
+                href = "https://chat.${config.core.networking.tailscale.tn_name}";
+              };
+            }
+          ];
+        }
+      ];
     };
   };
 }

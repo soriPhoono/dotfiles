@@ -23,7 +23,7 @@ in {
   config = lib.mkIf cfg.enable {
     sops.templates.caddy_env_file = {
       content = ''
-        TS_AUTH_KEY=${config.sops.placeholder.ts_auth_key}
+        TS_AUTH_KEY=${config.sops.placeholder."core/ts_auth_key"}
         TS_PERMIT_CERT_UID=${config.services.caddy.user};
       '';
       owner = config.services.caddy.user;

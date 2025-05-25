@@ -14,14 +14,14 @@ in {
           owner = config.services.gitlab.user;
         };
       }) [
-        "gitlab/database_password"
-        "gitlab/root_password"
-        "gitlab/secrets_key"
-        "gitlab/db_key"
-        "gitlab/otp_key"
-        "gitlab/salt_key"
-        "gitlab/primary_record_key"
-        "gitlab/deterministic_record_key"
+        "server/gitlab/database_password"
+        "server/gitlab/root_password"
+        "server/gitlab/secrets_key"
+        "server/gitlab/db_key"
+        "server/gitlab/otp_key"
+        "server/gitlab/salt_key"
+        "server/gitlab/primary_record_key"
+        "server/gitlab/deterministic_record_key"
       ]);
 
     services = {
@@ -33,27 +33,40 @@ in {
         host = "localhost";
         port = 8086;
 
-        databasePasswordFile = config.sops.secrets."gitlab/database_password".path;
-        initialRootPasswordFile = config.sops.secrets."gitlab/root_password".path;
+        databasePasswordFile = config.sops.secrets."server/gitlab/database_password".path;
+        initialRootPasswordFile = config.sops.secrets."server/gitlab/root_password".path;
         secrets = {
-          secretFile = config.sops.secrets."gitlab/secrets_key".path;
-          dbFile = config.sops.secrets."gitlab/db_key".path;
-          otpFile = config.sops.secrets."gitlab/otp_key".path;
+          secretFile = config.sops.secrets."server/gitlab/secrets_key".path;
+          dbFile = config.sops.secrets."server/gitlab/db_key".path;
+          otpFile = config.sops.secrets."server/gitlab/otp_key".path;
           jwsFile = pkgs.runCommand "oidcKeyBase" {} "${pkgs.openssl}/bin/openssl genrsa 2048 > $out";
-          activeRecordSaltFile = config.sops.secrets."gitlab/salt_key".path;
-          activeRecordPrimaryKeyFile = config.sops.secrets."gitlab/primary_record_key".path;
-          activeRecordDeterministicKeyFile = config.sops.secrets."gitlab/deterministic_record_key".path;
+          activeRecordSaltFile = config.sops.secrets."server/gitlab/salt_key".path;
+          activeRecordPrimaryKeyFile = config.sops.secrets."server/gitlab/primary_record_key".path;
+          activeRecordDeterministicKeyFile = config.sops.secrets."server/gitlab/deterministic_record_key".path;
         };
       };
 
       caddy.virtualHosts = {
-        "gitlab.xerus-augmented.ts.net" = {
+        "dev.${config.core.networking.tailscale.tn_name}" = {
           extraConfig = ''
-            bind tailscale/gitlab
+            bind tailscale/dev
             reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
           '';
         };
       };
+
+      homepage-dashboard.services = [
+        {
+          "Development" = [
+            {
+              "GitLab" = {
+                description = "Personal gitlab instance for development automation on homelab";
+                href = "https://dev.${config.core.networking.tailscale.tn_name}";
+              };
+            }
+          ];
+        }
+      ];
     };
 
     systemd.services.gitlab-backup.environment.BACKUP = "dump";

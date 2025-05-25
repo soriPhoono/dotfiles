@@ -114,6 +114,8 @@ in {
         inherit (user) name;
 
         value = {
+          home.file.".ssh/id_ed25519.pub".text = user.publicKey;
+
           core = {
             ssh.publicKey = lib.mkIf (!(builtins.isNull user.publicKey)) user.publicKey;
 

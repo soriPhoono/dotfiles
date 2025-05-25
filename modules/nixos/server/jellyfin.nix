@@ -23,13 +23,26 @@ in {
       };
 
       caddy.virtualHosts = {
-        "media.xerus-augmented.ts.net" = {
+        "media.${config.core.networking.tailscale.tn_name}" = {
           extraConfig = ''
             bind tailscale/media
             reverse_proxy localhost:8096
           '';
         };
       };
+
+      homepage-dashboard.services = [
+        {
+          "Media" = [
+            {
+              "JellyFin" = {
+                description = "JellyFin media server";
+                href = "https://media.${config.core.networking.tailscale.tn_name}";
+              };
+            }
+          ];
+        }
+      ];
     };
   };
 }

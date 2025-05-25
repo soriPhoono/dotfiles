@@ -36,9 +36,6 @@
       enable = true;
       featureType = ["desktop"];
     };
-    programs = {
-      goldwarden.enable = true;
-    };
   };
 
   themes.catppuccin.enable = true;

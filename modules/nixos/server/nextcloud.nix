@@ -8,7 +8,7 @@
 in {
   config = lib.mkIf cfg.enable {
     sops.secrets = {
-      "nextcloud/admin_password" = {};
+      "server/nextcloud/admin_password" = {};
     };
 
     users.groups = {
@@ -72,7 +72,7 @@ in {
         appstoreEnable = true;
 
         config = {
-          adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
+          adminpassFile = config.sops.secrets."server/nextcloud/admin_password".path;
           dbtype = "pgsql";
         };
 
@@ -83,7 +83,7 @@ in {
         settings = {
           default_phone_region = "US";
           trusted_domains = [
-            "cloud.xerus-augmented.ts.net"
+            "cloud.${config.core.networking.tailscale.tn_name}"
           ];
           trusted_proxies = [
             "127.0.0.1"
@@ -101,7 +101,7 @@ in {
       nginx.enable = lib.mkForce false;
 
       caddy.virtualHosts = {
-        "cloud.xerus-augmented.ts.net" = {
+        "cloud.${config.core.networking.tailscale.tn_name}" = {
           extraConfig = ''
             bind tailscale/cloud
 
@@ -158,6 +158,19 @@ in {
           '';
         };
       };
+
+      homepage-dashboard.services = [
+        {
+          "Office" = [
+            {
+              "Nextcloud" = {
+                description = "Nextcloud workspace drive";
+                href = "https://cloud.${config.core.networking.tailscale.tn_name}";
+              };
+            }
+          ];
+        }
+      ];
     };
   };
 }
