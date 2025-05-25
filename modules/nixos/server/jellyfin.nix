@@ -6,7 +6,7 @@
   cfg = config.server;
 in {
   config = lib.mkIf cfg.enable {
-    users.groups.multimedia.members = [config.services.jellyfin.user];
+    users.groups.multimedia.members = ["nextcloud" config.services.jellyfin.user];
 
     systemd.tmpfiles.rules = [
       "d /mnt/media/ 755 nextcloud multimedia -"
@@ -23,9 +23,9 @@ in {
       };
 
       caddy.virtualHosts = {
-        "jellyfin.xerus-augmented.ts.net" = {
+        "media.xerus-augmented.ts.net" = {
           extraConfig = ''
-            bind tailscale/jellyfin
+            bind tailscale/media
             reverse_proxy localhost:8096
           '';
         };

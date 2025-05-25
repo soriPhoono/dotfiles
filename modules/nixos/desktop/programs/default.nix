@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./goldwarden.nix
+  ];
+}

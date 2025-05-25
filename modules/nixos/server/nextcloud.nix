@@ -13,7 +13,6 @@ in {
 
     users.groups = {
       nextcloud.members = ["nextcloud" config.services.caddy.user];
-      multimedia.members = ["nextcloud"];
     };
 
     systemd = {
@@ -54,7 +53,7 @@ in {
 
         https = true;
         hostName = "localhost";
-        maxUploadSize = "1G";
+        maxUploadSize = "5G";
 
         home = "/services/nextcloud";
         datadir = "/mnt/cloud";
@@ -84,7 +83,7 @@ in {
         settings = {
           default_phone_region = "US";
           trusted_domains = [
-            "nextcloud.xerus-augmented.ts.net"
+            "cloud.xerus-augmented.ts.net"
           ];
           trusted_proxies = [
             "127.0.0.1"
@@ -102,9 +101,9 @@ in {
       nginx.enable = lib.mkForce false;
 
       caddy.virtualHosts = {
-        "nextcloud.xerus-augmented.ts.net" = {
+        "cloud.xerus-augmented.ts.net" = {
           extraConfig = ''
-            bind tailscale/nextcloud
+            bind tailscale/cloud
 
             encode zstd gzip
 
