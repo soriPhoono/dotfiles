@@ -8,6 +8,7 @@
 in {
   imports = [
     ./postgresql.nix
+    ./mailserver.nix
 
     ./nextcloud.nix
     ./jellyfin.nix

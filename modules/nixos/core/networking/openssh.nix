@@ -2,7 +2,7 @@
   services.openssh = {
     settings = {
       UseDns = true;
-      PermitRootLogin = "prohibit-password";
+      PermitRootLogin = "no";
       PasswordAuthentication = false;
       KbdInteractiveAuthentication = false;
     };

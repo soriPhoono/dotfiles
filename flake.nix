@@ -26,8 +26,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    steam-experiments = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -44,16 +54,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    steam-experiments = {
-      url = "github:Jovian-Experiments/Jovian-NixOS";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nvim = {
       url = "github:soriPhoono/nvim/nixos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,7 +61,6 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
     snowfall,
     ...
@@ -98,10 +97,6 @@
         modules = with inputs; [
           sops-nix.homeManagerModules.sops
         ];
-
-        users.soriphoono.specialArgs = {
-          namespace = self.snowfall.namespace;
-        };
       };
 
       outputs-builder = channels: {

@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -53,6 +54,27 @@ in {
           ];
         }
       ];
+    };
+
+    systemd.services = {
+      "serve_homepage" = {
+        description = "Serve system homepage for network navigation";
+
+        after = ["network-pre.target" "homepage-dashboard.service" "tailscaled.service"];
+        wants = ["network-pre.target" "homepage-dashboard.service" "tailscaled.service"];
+        wantedBy = ["multi-user.target"];
+
+        serviceConfig.type = "oneshot";
+
+        script = with pkgs;
+        # bash
+          ''
+            sleep 1
+
+            ${tailscale}/bin/tailscale serve reset
+            ${tailscale}/bin/tailscale serve http://localhost:${builtins.toString config.services.homepage-dashboard.listenPort}
+          '';
+      };
     };
   };
 }

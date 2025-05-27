@@ -69,7 +69,6 @@ in {
           enable = true;
           startAt = "01:00:00";
         };
-        appstoreEnable = true;
 
         config = {
           adminpassFile = config.sops.secrets."server/nextcloud/admin_password".path;
@@ -82,14 +81,20 @@ in {
 
         settings = {
           default_phone_region = "US";
+
           trusted_domains = [
             "cloud.${config.core.networking.tailscale.tn_name}"
           ];
+
           trusted_proxies = [
             "127.0.0.1"
           ];
+
           log_type = "file";
           maintenance_window_start = "1";
+
+          mail_smtpmode = "sendmail";
+          mail_sendmailmode = "pipe";
         };
       };
 

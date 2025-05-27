@@ -9,12 +9,6 @@ in {
   options.core.networking.tailscale = {
     enable = lib.mkEnableOption "Enable tailscale always on vpn";
 
-    useRoutingFeatures = lib.mkOption {
-      type = lib.types.enum ["both" "client" "server"];
-      description = "Enable routing features";
-      default = "both";
-    };
-
     tn_name = lib.mkOption {
       type = lib.types.str;
       description = "The name of your tailnet for hosting";
@@ -29,9 +23,9 @@ in {
 
     services = {
       tailscale = {
-        inherit (cfg) useRoutingFeatures;
-
         enable = true;
+
+        useRoutingFeatures = "both";
 
         openFirewall = true;
       };
@@ -58,24 +52,6 @@ in {
             fi
 
             ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets."core/ts_auth_key".path})"
-          '';
-      };
-      "serve_homepage" = {
-        description = "Serve system homepage for network navigation";
-
-        after = ["homepage-dashboard.service" "tailscaled.service"];
-        wants = ["homepage-dashboard.service" "tailscaled.service"];
-        wantedBy = ["multi-user.target"];
-
-        serviceConfig.type = "oneshot";
-
-        script = with pkgs;
-        # bash
-          ''
-            sleep 1
-
-            ${tailscale}/bin/tailscale serve reset
-            ${tailscale}/bin/tailscale serve http://localhost:${builtins.toString config.services.homepage-dashboard.listenPort}
           '';
       };
     };

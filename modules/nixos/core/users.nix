@@ -62,7 +62,7 @@ in {
     default = [
       {
         name = "soriphoono";
-        email = "soriphoono@protonmail.com";
+        email = "soriphoono@gmail.com";
         hashedPassword = "$6$x7n.SUTMtInzs2l4$Ew3Zu3Mkc4zvuH8STaVpwIv59UX9rmUV7I7bmWyTRjomM7QRn0Jt/Pl/JN./IqTrXqEe8nIYB43m1nLI2Un211";
         admin = true;
         shell = pkgs.fish;
@@ -87,6 +87,13 @@ in {
       fish.enable = lib.any (user: user.shell == pkgs.fish) cfg.users;
     };
 
+    snowfallorg.users = lib.listToAttrs (map (user: {
+        inherit (user) name;
+
+        value = {inherit (user) admin;};
+      })
+      cfg.users);
+
     users = {
       mutableUsers = false;
 
@@ -103,19 +110,12 @@ in {
         cfg.users);
     };
 
-    snowfallorg.users = lib.listToAttrs (map (user: {
-        inherit (user) name;
-
-        value = {inherit (user) admin;};
-      })
-      cfg.users);
-
     home-manager.users = lib.listToAttrs (map (user: {
         inherit (user) name;
 
         value = {
           core = {
-            ssh.publicKey = lib.mkIf (!(builtins.isNull user.publicKey)) user.publicKey;
+            ssh.publicKey = lib.mkIf (user.publicKey != null) user.publicKey;
 
             shells.fish.enable = user.shell == pkgs.fish;
           };
