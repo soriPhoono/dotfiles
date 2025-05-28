@@ -6,7 +6,7 @@
 }: let
   cfg = config.server;
 in {
-  config = lib.mkIf (!cfg.enable) {
+  config = lib.mkIf cfg.enable {
     sops.secrets = builtins.listToAttrs (map (secret: {
         name = secret;
         value = {

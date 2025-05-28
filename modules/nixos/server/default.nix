@@ -7,14 +7,9 @@
   cfg = config.server;
 in {
   imports = [
-    ./postgresql.nix
-    ./mailserver.nix
+    ./mysql.nix
 
-    ./nextcloud.nix
-    ./jellyfin.nix
-
-    ./ollama.nix
-    ./gitlab.nix
+    ./multimedia.nix
   ];
 
   options.server = {

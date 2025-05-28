@@ -53,7 +53,7 @@ in {
       };
 
       caddy.virtualHosts = {
-        "chat.${config.core.networking.tailscale.tn_name}" = {
+        "https://chat.${config.core.networking.tailscale.tn_name}" = {
           extraConfig = ''
             bind tailscale/chat
             reverse_proxy localhost:3000

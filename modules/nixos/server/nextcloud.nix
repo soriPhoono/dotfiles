@@ -5,47 +5,61 @@
   ...
 }: let
   cfg = config.server;
+
+  dataDir = "/services/cloud/";
 in {
   config = lib.mkIf cfg.enable {
     sops.secrets = {
-      "server/nextcloud/admin_password" = {};
+      "server/nextcloud/admin_password" = {
+        owner = "nextcloud";
+      };
     };
 
-    users.groups = {
-      nextcloud.members = ["nextcloud" config.services.caddy.user];
+    environment.systemPackages = with pkgs; [ffmpeg];
+
+    users = {
+      users.nextcloud.extraGroups = ["redis" "restic"];
+      groups = {
+        nextcloud.members = ["nextcloud" config.services.caddy.user];
+      };
     };
 
     systemd = {
       tmpfiles.rules = [
-        "d /services/nextcloud 0770 nextcloud nextcloud -"
+        "d ${dataDir} 0770 nextcloud nextcloud -"
       ];
 
-      services."nextcloud-setup" = {
-        requires = [
-          "postgresql.service"
-        ];
-        after = [
-          "postgresql.service"
-        ];
-      };
+      services =
+        lib.genAttrs [
+          "nextcloud-setup"
+          "nextcloud-cron"
+        ] (_: {
+          requires = [
+            "mysql.service"
+            "redis.service"
+          ];
+          after = [
+            "mysql.service"
+            "redis.service"
+          ];
+        });
     };
 
     services = {
-      postgresql = {
+      mysql = {
+        settings.mysqld.innodb_read_only_compressed = 0;
         ensureDatabases = [
           "nextcloud"
         ];
         ensureUsers = [
           {
             name = "nextcloud";
-            ensureDBOwnership = true;
+            ensurePermissions = {
+              "nextcloud.*" = "ALL PRIVILEGES";
+            };
           }
         ];
       };
-
-      postgresqlBackup.databases = [
-        "nextcloud"
-      ];
 
       nextcloud = {
         enable = true;
@@ -106,7 +120,7 @@ in {
       nginx.enable = lib.mkForce false;
 
       caddy.virtualHosts = {
-        "cloud.${config.core.networking.tailscale.tn_name}" = {
+        "https://cloud.${config.core.networking.tailscale.tn_name}" = {
           extraConfig = ''
             bind tailscale/cloud
 

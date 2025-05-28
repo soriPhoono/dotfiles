@@ -5,7 +5,6 @@
 }: {
   sops.secrets."server/smtp_password" = {
     owner = "nextcloud";
-    group = "users";
   };
 
   programs.msmtp = let
