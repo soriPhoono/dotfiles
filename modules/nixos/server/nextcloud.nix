@@ -6,7 +6,7 @@
 }: let
   cfg = config.server.nextcloud;
 
-  dataDir = "/services/cloud/";
+  dataDir = "/services/nextcloud/";
   storageDir = "/mnt/cloud";
 in {
   options.server.nextcloud.enable = lib.mkEnableOption "Enable cloud server services";
@@ -14,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     server = {
       users.nextcloud = {
-        password_hash = "usqKfFhG4Wz1ajHb1bNTlBHIKbVjAyST";
+        password_hash = "{SSHA}kvNzS4CXHeLPGRewYEBCkinzvd5hYWZj";
         email = "cloud@xerus-augmented.ts.net";
         groups = [
           "nextcloud_users"
@@ -54,10 +54,12 @@ in {
           requires = [
             "mysql.service"
             "redis.service"
+            "openldap.service"
           ];
           after = [
             "mysql.service"
             "redis.service"
+            "openldap.service"
           ];
         });
     };
@@ -86,8 +88,8 @@ in {
         hostName = "localhost";
         maxUploadSize = "5G";
 
-        home = "/services/nextcloud";
-        datadir = "/mnt/cloud";
+        home = dataDir;
+        datadir = storageDir;
 
         configureRedis = true;
         database.createLocally = true;

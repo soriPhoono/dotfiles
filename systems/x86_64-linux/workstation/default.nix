@@ -69,12 +69,13 @@
       soriphoono = {
         first_name = "Sori";
         last_name = "Phoono";
-        password_hash = "8aWQvwi22TJBjBSAbS8ca7E7CbLb1CA0";
+        password_hash = "{SSHA}9Et7vT4i7MPOsM6FPPYvZdzqBzkfdOGU";
         email = "soriphoono@protonmail.com";
 
         groups = [
           "nextcloud_users"
           "jellyfin_users"
+          "chat_users"
         ];
       };
     };

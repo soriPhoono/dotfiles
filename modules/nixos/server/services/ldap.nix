@@ -28,18 +28,18 @@ in {
           (lib.splitString "." config.core.networking.tailscale.tn_name)
         );
 
-        roles_bucket = "ou=groups,${olcSuffix}";
-        users_bucket = "ou=users,${olcSuffix}";
+        groups_bucket = "ou=groups,${olcSuffix}";
+        people_bucket = "ou=people,${olcSuffix}";
 
         usersCode = ''
-          dn: ${users_bucket}
+          dn: ${people_bucket}
           objectClass: top
           objectClass: organizationalUnit
-          ou: users
+          ou: people
           description: All users on the server
 
           ${builtins.concatStringsSep "\n\n" (builtins.attrValues (lib.mapAttrs (name: user: let
-              user_dn = "uid=${name},${users_bucket}";
+              user_dn = "uid=${name},${people_bucket}";
             in ''
               dn: ${user_dn}
               objectClass: top
@@ -50,32 +50,32 @@ in {
               cn: ${user.first_name}
               sn: ${user.last_name}
               mail: ${user.email}
-              userPassword: {SSHA}${user.password_hash}
+              userPassword: ${user.password_hash}
               ${builtins.concatStringsSep
                 "\n"
                 (map
-                  (member: "memberOf: cn=${member},${roles_bucket}")
+                  (member: "memberOf: cn=${member},${groups_bucket}")
                   user.groups)}
             '')
             config.server.users))}
         '';
 
         groupCode = ''
-          dn: ${roles_bucket}
+          dn: ${groups_bucket}
           objectClass: top
           objectClass: organizationalUnit
           ou: groups
           description: All roles users can belong to
 
           ${builtins.concatStringsSep "\n\n" (map (name: ''
-              dn: cn=${name},${roles_bucket}
+              dn: cn=${name},${groups_bucket}
               objectClass: top
               objectClass: groupOfNames
               cn: ${name}
               ${builtins.concatStringsSep
                 "\n"
                 (map
-                  (member: "member: uid=${member},${users_bucket}")
+                  (member: "member: uid=${member},${people_bucket}")
                   (builtins.attrNames
                     (lib.filterAttrs
                       (_: user: builtins.any (group: group == name) user.groups)

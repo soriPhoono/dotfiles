@@ -14,16 +14,16 @@ in {
 
   config = lib.mkIf cfg.enable {
     server = {
-      users.jellyfin = {
-        password_hash = "iaA1btDuuDOniXs4hjBDqvBJ8E9Fb310";
-        email = "jellyfin@xerus-augmented.ts.net";
+      users.multimedia = {
+        password_hash = "{SSHA}kvNzS4CXHeLPGRewYEBCkinzvd5hYWZj";
+        email = "multimedia@xerus-augmented.ts.net";
         groups = [
-          "jellyfin_users"
-          "jellyfin_admins"
+          "multimedia_users"
+          "multimedia_admins"
         ];
       };
 
-      groups = ["jellyfin_users" "jellyfin_admins"];
+      groups = ["multimedia_users" "multimedia_admins"];
 
       ldap.enable = true;
       nextcloud.enable = true;

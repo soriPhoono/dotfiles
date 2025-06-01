@@ -4,11 +4,27 @@
   ...
 }: let
   cfg = config.server.ollama;
+
+  ollama_data_dir = "/services/ollama/";
 in {
   options.server.ollama.enable = lib.mkEnableOption "Enable ollama self hosted artificial intelligence";
 
   config = lib.mkIf cfg.enable {
     server = {
+      users.chat = {
+        password_hash = "{SSHA}OoDf08b2bMzbQuW//tN30TIKRO75X7oh";
+        email = "chat@xerus-augmented.ts.net";
+        groups = [
+          "chat_users"
+          "chat_admins"
+        ];
+      };
+
+      groups = [
+        "chat_users"
+        "chat_admins"
+      ];
+
       ldap.enable = true;
     };
 
@@ -19,9 +35,11 @@ in {
       '';
     };
 
-    systemd.tmpfiles.rules = [
-      "d /services/ollama 0770 ${config.services.ollama.user} ${config.services.ollama.user} -"
-    ];
+    systemd = {
+      tmpfiles.rules = [
+        "d ${ollama_data_dir} 0770 ${config.services.ollama.user} ${config.services.ollama.user} -"
+      ];
+    };
 
     services = {
       searx = {
@@ -47,7 +65,7 @@ in {
         user = "ollama";
         host = "localhost";
 
-        home = "/services/ollama";
+        home = ollama_data_dir;
         acceleration = "rocm";
       };
 
