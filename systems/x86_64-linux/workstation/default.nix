@@ -73,6 +73,7 @@
         email = "soriphoono@protonmail.com";
 
         groups = [
+          "nextcloud_users"
           "jellyfin_users"
         ];
       };
