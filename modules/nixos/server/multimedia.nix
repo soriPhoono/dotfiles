@@ -3,14 +3,32 @@
   config,
   ...
 }: let
-  cfg = config.server;
+  cfg = config.server.multimedia;
 
   serviceDir = "/services/jellyfin/";
   dataDir = "/mnt/media";
 
   endpoint = "https://media.${config.core.networking.tailscale.tn_name}";
 in {
+  options.server.multimedia.enable = lib.mkEnableOption "Enable multimedia server";
+
   config = lib.mkIf cfg.enable {
+    server = {
+      users.jellyfin = {
+        password_hash = "iaA1btDuuDOniXs4hjBDqvBJ8E9Fb310";
+        email = "jellyfin@xerus-augmented.ts.net";
+        groups = [
+          "jellyfin_users"
+          "jellyfin_admins"
+        ];
+      };
+
+      groups = ["jellyfin_users" "jellyfin_admins"];
+
+      ldap.enable = true;
+      nextcloud.enable = true;
+    };
+
     users.groups.multimedia.members = ["nextcloud" config.services.jellyfin.user];
 
     systemd.tmpfiles.rules = [

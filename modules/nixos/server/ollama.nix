@@ -3,9 +3,15 @@
   config,
   ...
 }: let
-  cfg = config.server;
+  cfg = config.server.ollama;
 in {
+  options.server.ollama.enable = lib.mkEnableOption "Enable ollama self hosted artificial intelligence";
+
   config = lib.mkIf cfg.enable {
+    server = {
+      ldap.enable = true;
+    };
+
     sops = {
       secrets."server/searx_seed" = {};
       templates.searx_secrets.content = ''
@@ -50,6 +56,10 @@ in {
 
         host = "localhost";
         port = 3000;
+
+        environment = {
+          ENABLE_LDAP = "true";
+        };
       };
 
       caddy.virtualHosts = {

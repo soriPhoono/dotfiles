@@ -25,26 +25,21 @@ in {
 
       age.sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
 
-      secrets = lib.listToAttrs (map (user: {
-          name = "users/${user.name}/age_key";
-
-          value = {
-            path = "/home/${user.name}/.config/sops/age/keys.txt";
-            mode = "0400";
-            owner = user.name;
-            group = "users";
-          };
-        })
-        config.core.users);
+      secrets =
+        lib.genAttrs
+        (map (name: "users/${name}/age_key") (builtins.attrNames config.core.users))
+        (name: {
+          path = "/home/${name}/.config/sops/age/keys.txt";
+          mode = "0400";
+          owner = builtins.elemAt (lib.splitString "/" name) 1;
+          group = "users";
+        });
     };
 
-    home-manager.users = lib.listToAttrs (map (user: {
-        inherit (user) name;
-
-        value = {
-          sops.age.keyFile = config.sops.secrets."users/${user.name}/age_key".path;
-        };
+    home-manager.users =
+      lib.mapAttrs (name: _: {
+        sops.age.keyFile = config.sops.secrets."users/${name}/age_key".path;
       })
-      config.core.users);
+      config.core.users;
   };
 }

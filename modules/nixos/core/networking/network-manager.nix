@@ -21,17 +21,12 @@ in {
       };
     };
 
-    users.extraUsers = lib.listToAttrs (
-      map (user: {
-        inherit (user) name;
-
-        value = {
-          extraGroups = [
-            "networkmanager"
-          ];
-        };
+    users.extraUsers =
+      lib.mapAttrs (_: _: {
+        extraGroups = [
+          "networkmanager"
+        ];
       })
-      config.core.users
-    );
+      config.core.users;
   };
 }

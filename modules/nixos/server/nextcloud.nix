@@ -4,29 +4,36 @@
   config,
   ...
 }: let
-  cfg = config.server;
+  cfg = config.server.nextcloud;
 
   dataDir = "/services/cloud/";
+  storageDir = "/mnt/cloud";
 in {
+  options.server.nextcloud.enable = lib.mkEnableOption "Enable cloud server services";
+
   config = lib.mkIf cfg.enable {
+    server = {
+      mysql.enable = true;
+      redis.enable = true;
+      mailserver.enable = true;
+      ldap.enable = true;
+    };
+
     sops.secrets = {
       "server/nextcloud/admin_password" = {
         owner = "nextcloud";
       };
     };
 
-    environment.systemPackages = with pkgs; [ffmpeg];
-
-    users = {
-      users.nextcloud.extraGroups = ["redis" "restic"];
-      groups = {
-        nextcloud.members = ["nextcloud" config.services.caddy.user];
-      };
+    users.users = {
+      nextcloud.extraGroups = ["redis" "restic"];
+      ${config.services.caddy.user}.extraGroups = ["nextcloud"];
     };
 
     systemd = {
       tmpfiles.rules = [
         "d ${dataDir} 0770 nextcloud nextcloud -"
+        "d ${storageDir} 0770 nextcloud nextcloud -"
       ];
 
       services =
@@ -76,13 +83,9 @@ in {
         database.createLocally = true;
 
         extraApps = {
-          inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks;
+          inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks sociallogin;
         };
         extraAppsEnable = true;
-        autoUpdateApps = {
-          enable = true;
-          startAt = "01:00:00";
-        };
 
         config = {
           adminpassFile = config.sops.secrets."server/nextcloud/admin_password".path;
@@ -180,7 +183,7 @@ in {
 
       homepage-dashboard.services = [
         {
-          "Office" = [
+          Office = [
             {
               "Nextcloud" = {
                 description = "Nextcloud workspace drive";

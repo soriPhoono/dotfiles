@@ -20,13 +20,10 @@ in {
       in "${base16-catppuccin}/base16/frappe.yaml";
     };
 
-    home-manager.users = lib.listToAttrs (map (user: {
-        inherit (user) name;
-
-        value = {
-          themes.catppuccin.enable = true;
-        };
+    home-manager.users =
+      lib.mapAttrs (_: _: {
+        themes.catppuccin.enable = true;
       })
-      config.core.users);
+      config.core.users;
   };
 }

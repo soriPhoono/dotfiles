@@ -6,121 +6,95 @@
 }: let
   cfg = config.core;
 in {
-  options.core.users = lib.mkOption {
-    type = lib.types.listOf (lib.types.submodule {
-      options = {
-        name = lib.mkOption {
-          type = lib.types.str;
-          description = "The name of the user.";
-          example = "john";
-        };
+  options.core.users = with lib;
+    mkOption {
+      type = with types;
+        attrsOf (submodule {
+          options = {
+            email = mkOption {
+              type = str;
+              description = "The email of the user.";
+              example = "john@doe.com";
+            };
 
-        email = lib.mkOption {
-          type = lib.types.str;
-          description = "The email of the user.";
-          example = "john@doe.com";
-        };
+            hashedPassword = mkOption {
+              type = str;
+              description = "The password hash for the user";
+              example = "$6$N9zTq2VII1RiqgFr$IO8lxVRPfDPoDs3qZIqlUtfhtLxx/iNO47hUcx2zbDGHZsw..1sy5k.6.HIxpwkAhDPI7jZnTXKaIKqwiSWZA0";
+            };
 
-        hashedPassword = lib.mkOption {
-          type = lib.types.str;
-          description = "The password hash for the user";
-          example = "$6$N9zTq2VII1RiqgFr$IO8lxVRPfDPoDs3qZIqlUtfhtLxx/iNO47hUcx2zbDGHZsw..1sy5k.6.HIxpwkAhDPI7jZnTXKaIKqwiSWZA0";
-        };
+            admin = mkOption {
+              type = bool;
+              default = false;
+              description = "Whether the user should have admin privileges.";
+              example = true;
+            };
 
-        admin = lib.mkOption {
-          type = lib.types.bool;
-          default = false;
-          description = "Whether the user should have admin privileges.";
-          example = true;
-        };
+            extraGroups = mkOption {
+              type = listOf str;
+              default = [];
+              description = "Additional groups the user should belong to.";
+              example = ["wheel" "docker"];
+            };
 
-        extraGroups = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [];
-          description = "Additional groups the user should belong to.";
-          example = ["wheel" "docker"];
-        };
+            shell = with pkgs;
+              mkOption {
+                type = package;
+                default = bashInteractive;
+                description = "The shell for the user.";
+                example = zsh;
+              };
 
-        shell = lib.mkOption {
-          type = lib.types.package;
-          default = pkgs.bashInteractive;
-          description = "The shell for the user.";
-          example = pkgs.zsh;
-        };
+            publicKey = mkOption {
+              type = nullOr str;
+              default = null;
+              description = "The public key for the user.";
+              example = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...";
+            };
+          };
+        });
 
-        publicKey = lib.mkOption {
-          type = lib.types.nullOr lib.types.str;
-          default = null;
-          description = "The public key for the user.";
-          example = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...";
+      description = "List of users to create.";
+
+      example = {
+        john = {
+          admin = true;
         };
       };
-    });
-
-    description = "List of users to create.";
-
-    default = [
-      {
-        name = "soriphoono";
-        email = "soriphoono@gmail.com";
-        hashedPassword = "$6$x7n.SUTMtInzs2l4$Ew3Zu3Mkc4zvuH8STaVpwIv59UX9rmUV7I7bmWyTRjomM7QRn0Jt/Pl/JN./IqTrXqEe8nIYB43m1nLI2Un211";
-        admin = true;
-        shell = pkgs.fish;
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
-      }
-    ];
-
-    example = [
-      {
-        name = "john";
-        admin = true;
-      }
-      {
-        name = "jane";
-        admin = false;
-      }
-    ];
-  };
+    };
 
   config = {
     programs = {
-      fish.enable = lib.any (user: user.shell == pkgs.fish) cfg.users;
+      fish.enable = lib.any (user: user.shell == pkgs.fish) (builtins.attrValues cfg.users);
     };
 
-    snowfallorg.users = lib.listToAttrs (map (user: {
-        inherit (user) name;
-
-        value = {inherit (user) admin;};
+    snowfallorg.users =
+      lib.mapAttrs (_: user: {
+        inherit (user) admin;
       })
-      cfg.users);
+      cfg.users;
 
     users = {
       mutableUsers = false;
 
-      extraUsers = lib.listToAttrs (map (user: {
-          inherit (user) name;
+      extraUsers =
+        lib.mapAttrs (_: user: {
+          inherit (user) hashedPassword extraGroups shell;
 
-          value = {
-            inherit (user) hashedPassword extraGroups shell;
-
-            openssh.authorizedKeys.keys =
-              lib.mkIf (user.publicKey != null) [user.publicKey];
-          };
+          openssh.authorizedKeys.keys =
+            lib.mkIf (user.publicKey != null) [user.publicKey];
         })
-        cfg.users);
+        cfg.users;
     };
 
-    home-manager.users = lib.listToAttrs (map (user: {
-        inherit (user) name;
+    home-manager.users =
+      lib.mapAttrs (_: user: {
+        core = {
+          ssh.publicKey = lib.mkIf (user.publicKey != null) user.publicKey;
 
-        value = {
-          core = {
-            ssh.publicKey = lib.mkIf (user.publicKey != null) user.publicKey;
-
-            shells.fish.enable = user.shell == pkgs.fish;
-          };
+          shells.fish.enable = user.shell == pkgs.fish;
         };
       })
-      cfg.users);
+      cfg.users;
   };
 }
