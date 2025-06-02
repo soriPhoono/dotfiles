@@ -60,6 +60,8 @@
   server = {
     enable = true;
 
+    firefox-syncserver.enable = true;
+
     nextcloud.enable = true;
     multimedia.enable = true;
 

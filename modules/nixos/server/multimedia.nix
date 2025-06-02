@@ -8,45 +8,163 @@
   serviceDir = "/services/jellyfin/";
   dataDir = "/mnt/media";
 
-  endpoint = "https://media.${config.core.networking.tailscale.tn_name}";
+  streamingEndpoint = "https://media.${config.core.networking.tailscale.tn_name}";
+  delugeEndpoint = "https://torrent.${config.core.networking.tailscale.tn_name}";
+  sonarrEndpoint = "https://shows.${config.core.networking.tailscale.tn_name}";
+  radarrEndpoint = "https://movies.${config.core.networking.tailscale.tn_name}";
+  bazzarEndpoint = "https://subtitles.${config.core.networking.tailscale.tn_name}";
+  prowlarrEndpoint = "https://media-manager.${config.core.networking.tailscale.tn_name}";
+  readarrEndpoint = "https://books.${config.core.networking.tailscale.tn_name}";
+  lidarrEndpoint = "https://music.${config.core.networking.tailscale.tn_name}";
 in {
   options.server.multimedia.enable = lib.mkEnableOption "Enable multimedia server";
 
   config = lib.mkIf cfg.enable {
     server = {
-      users.multimedia = {
-        password_hash = "{SSHA}kvNzS4CXHeLPGRewYEBCkinzvd5hYWZj";
+      users.jellyfin = {
+        password_hash = "{SSHA}tAdReSdlZ4LY1uF9ISbo/XvOkQXiR2ls";
         email = "multimedia@xerus-augmented.ts.net";
         groups = [
           "multimedia_users"
-          "multimedia_admins"
         ];
       };
 
-      groups = ["multimedia_users" "multimedia_admins"];
+      groups = ["multimedia_users"];
 
       ldap.enable = true;
       nextcloud.enable = true;
     };
 
-    users.groups.multimedia.members = ["nextcloud" config.services.jellyfin.user];
+    sops.secrets =
+      lib.genAttrs
+      [
+        "server/multimedia/torrent_auth"
+      ] (_: {
+        mode = "0440";
+        group = "multimedia";
+      });
 
-    systemd.tmpfiles.rules = [
-      "d ${dataDir} 755 nextcloud multimedia -"
-      "d ${dataDir}/Shows/ 755 nextcloud multimedia -"
-      "d ${dataDir}/Movies/ 755 nextcloud multimedia -"
-      "d ${dataDir}/Music/ 755 nextcloud multimedia -"
+    users.groups.multimedia.members = [
+      "nextcloud"
+      config.services.jellyfin.user
+      config.services.deluge.user
+      config.services.sonarr.user
+      config.services.radarr.user
+      config.services.bazarr.user
+      config.services.readarr.user
+      config.services.lidarr.user
     ];
+
+    systemd = {
+      tmpfiles.rules = [
+        "d ${serviceDir} 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} -"
+        "d ${dataDir} 0777 ${config.services.deluge.user} multimedia -"
+        "d ${dataDir}/Shows/ 0777 ${config.services.deluge.user} multimedia -"
+        "d ${dataDir}/Movies/ 0777 ${config.services.deluge.user} multimedia -"
+        "d ${dataDir}/Music/ 0777 ${config.services.deluge.user} multimedia -"
+        "d ${dataDir}/Torrent/ 0777 ${config.services.deluge.user} multimedia -"
+      ];
+
+      services =
+        lib.genAttrs [
+          "jellyfin"
+          "deluge"
+        ] (_: {
+          requires = [
+            "openldap.service"
+            "systemd-tmpfiles-setup.service"
+            "systemd-tmpfiles-resetup.service"
+          ];
+          after = [
+            "openldap.service"
+            "systemd-tmpfiles-setup.service"
+            "systemd-tmpfiles-resetup.service"
+          ];
+        });
+    };
 
     services = {
       jellyfin = {
         enable = true;
 
+        cacheDir = serviceDir + "/cache/";
         dataDir = serviceDir;
+      };
+      sonarr.enable = true;
+      radarr.enable = true;
+      bazarr.enable = true;
+      readarr.enable = true;
+      lidarr.enable = true;
+      prowlarr.enable = true;
+      flaresolverr.enable = true;
+      deluge = {
+        enable = true;
+        web.enable = true;
+        dataDir = "${dataDir}/Torrent";
+        declarative = true;
+        config = {
+          enabled_plugins = ["Label"];
+          stop_seed_ratio = 0;
+          stop_seed_at_ratio = true;
+          remove_seed_at_ratio = true;
+          seed_time_limit = 0;
+          seed_time_ratio_limit = 0;
+          max_active_seeding = 1;
+        };
+        authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
       };
 
       caddy.virtualHosts = {
-        ${endpoint} = {
+        ${delugeEndpoint} = {
+          extraConfig = ''
+            bind tailscale/torrent
+            reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
+          '';
+        };
+
+        ${sonarrEndpoint} = {
+          extraConfig = ''
+            bind tailscale/shows
+            reverse_proxy localhost:${builtins.toString config.services.sonarr.settings.server.port}
+          '';
+        };
+
+        ${radarrEndpoint} = {
+          extraConfig = ''
+            bind tailscale/movies
+            reverse_proxy localhost:${builtins.toString config.services.radarr.settings.server.port}
+          '';
+        };
+
+        ${lidarrEndpoint} = {
+          extraConfig = ''
+            bind tailscale/music
+            reverse_proxy localhost:${builtins.toString config.services.lidarr.settings.server.port}
+          '';
+        };
+
+        ${bazzarEndpoint} = {
+          extraConfig = ''
+            bind tailscale/subtitles
+            reverse_proxy localhost:${builtins.toString config.services.bazarr.listenPort}
+          '';
+        };
+
+        ${readarrEndpoint} = {
+          extraConfig = ''
+            bind tailscale/books
+            reverse_proxy localhost:${builtins.toString config.services.readarr.settings.server.port}
+          '';
+        };
+
+        ${prowlarrEndpoint} = {
+          extraConfig = ''
+            bind tailscale/media-manager
+            reverse_proxy localhost:${builtins.toString config.services.prowlarr.settings.server.port}
+          '';
+        };
+
+        ${streamingEndpoint} = {
           extraConfig = ''
             bind tailscale/media
             reverse_proxy localhost:8096
@@ -58,9 +176,51 @@ in {
         {
           "Media" = [
             {
-              "JellyFin" = {
+              Deluge = {
+                description = "Torrent manager";
+                href = delugeEndpoint;
+              };
+            }
+            {
+              Prowlarr = {
+                description = "Indexer manager for torrent automation";
+                href = prowlarrEndpoint;
+              };
+            }
+            {
+              Sonarr = {
+                description = "TV manager for torrent automation";
+                href = sonarrEndpoint;
+              };
+            }
+            {
+              Radarr = {
+                description = "Movies manager for torrent automation";
+                href = radarrEndpoint;
+              };
+            }
+            {
+              Bazarr = {
+                description = "Subtitles manager for torrent automation";
+                href = bazzarEndpoint;
+              };
+            }
+            {
+              Readarr = {
+                description = "E-Book manager for torrent automation";
+                href = readarrEndpoint;
+              };
+            }
+            {
+              Lidarr = {
+                description = "Music manager for torrent automation";
+                href = lidarrEndpoint;
+              };
+            }
+            {
+              JellyFin = {
                 description = "JellyFin media server";
-                href = endpoint;
+                href = streamingEndpoint;
               };
             }
           ];

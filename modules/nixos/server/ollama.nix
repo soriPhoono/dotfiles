@@ -12,17 +12,15 @@ in {
   config = lib.mkIf cfg.enable {
     server = {
       users.chat = {
-        password_hash = "{SSHA}OoDf08b2bMzbQuW//tN30TIKRO75X7oh";
+        password_hash = "{SSHA}lC0A832WEnGu0AIwKdhsYUGLcHhlyx2d";
         email = "chat@xerus-augmented.ts.net";
         groups = [
           "chat_users"
-          "chat_admins"
         ];
       };
 
       groups = [
         "chat_users"
-        "chat_admins"
       ];
 
       ldap.enable = true;
@@ -74,17 +72,13 @@ in {
 
         host = "localhost";
         port = 3000;
-
-        environment = {
-          ENABLE_LDAP = "true";
-        };
       };
 
       caddy.virtualHosts = {
         "https://chat.${config.core.networking.tailscale.tn_name}" = {
           extraConfig = ''
             bind tailscale/chat
-            reverse_proxy localhost:3000
+            reverse_proxy localhost:${builtins.toString config.services.open-webui.port}
           '';
         };
       };
@@ -93,7 +87,7 @@ in {
         {
           "Development" = [
             {
-              "Ollama" = {
+              "Chat interface" = {
                 description = "Personal instance of ollama for selfhosted artificial intelligence";
                 href = "https://chat.${config.core.networking.tailscale.tn_name}";
               };

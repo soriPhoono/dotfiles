@@ -13,6 +13,8 @@ in {
     ./services/ldap.nix
     ./services/mailserver.nix
 
+    ./firefox-syncserver.nix
+
     ./nextcloud.nix
     ./multimedia.nix
 

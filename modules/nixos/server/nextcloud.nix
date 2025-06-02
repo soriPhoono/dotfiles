@@ -44,6 +44,7 @@ in {
       tmpfiles.rules = [
         "d ${dataDir} 0770 nextcloud nextcloud -"
         "d ${storageDir} 0770 nextcloud nextcloud -"
+        "d ${storageDir}/config 0770 nextcloud nextcloud -"
       ];
 
       services =
@@ -95,13 +96,20 @@ in {
         database.createLocally = true;
 
         extraApps = {
-          inherit (config.services.nextcloud.package.packages.apps) news contacts calendar tasks sociallogin;
+          inherit
+            (config.services.nextcloud.package.packages.apps)
+            news
+            contacts
+            calendar
+            tasks
+            sociallogin
+            ;
         };
         extraAppsEnable = true;
 
         config = {
           adminpassFile = config.sops.secrets."server/nextcloud/admin_password".path;
-          dbtype = "pgsql";
+          dbtype = "mysql";
         };
 
         phpOptions = {
