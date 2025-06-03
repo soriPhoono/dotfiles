@@ -13,12 +13,10 @@ in {
     ./services/ldap.nix
     ./services/mailserver.nix
 
-    ./firefox-syncserver.nix
-
-    ./nextcloud.nix
+    ./cloud.nix
     ./multimedia.nix
 
-    ./ollama.nix
+    ./chat.nix
   ];
 
   options.server = with lib; {

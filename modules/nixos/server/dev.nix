@@ -50,7 +50,7 @@ in {
         "dev.${config.core.networking.tailscale.tn_name}" = {
           extraConfig = ''
             bind tailscale/dev
-            reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
+            reverse_proxy ${config.services.gitlab.host}:${config.services.gitlab.port}
           '';
         };
       };

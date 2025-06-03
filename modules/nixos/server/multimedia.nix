@@ -21,7 +21,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     server = {
-      users.jellyfin = {
+      users.multimedia = {
         password_hash = "{SSHA}tAdReSdlZ4LY1uF9ISbo/XvOkQXiR2ls";
         email = "multimedia@xerus-augmented.ts.net";
         groups = [
@@ -62,6 +62,7 @@ in {
         "d ${dataDir}/Shows/ 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Movies/ 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Music/ 0777 ${config.services.deluge.user} multimedia -"
+        "d ${dataDir}/Books/ 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Torrent/ 0777 ${config.services.deluge.user} multimedia -"
       ];
 
@@ -83,149 +84,154 @@ in {
         });
     };
 
-    services = {
-      jellyfin = {
-        enable = true;
+    services =
+      (lib.genAttrs [
+          "sonarr"
+          "radarr"
+          "bazarr"
+          "readarr"
+          "lidarr"
+          "prowlarr"
+        ] (_: {
+          enable = true;
+        }))
+      // {
+        jellyfin = {
+          enable = true;
 
-        cacheDir = serviceDir + "/cache/";
-        dataDir = serviceDir;
+          cacheDir = serviceDir + "/cache/";
+          dataDir = serviceDir;
+        };
+        flaresolverr.enable = true;
+        deluge = {
+          enable = true;
+          web.enable = true;
+          dataDir = "${dataDir}/Torrent";
+          declarative = true;
+          config = {
+            enabled_plugins = ["Label"];
+            stop_seed_ratio = 0;
+            stop_seed_at_ratio = true;
+            remove_seed_at_ratio = true;
+            seed_time_limit = 0;
+            seed_time_ratio_limit = 0;
+            max_active_seeding = 1;
+          };
+          authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
+        };
+
+        caddy.virtualHosts = {
+          ${delugeEndpoint} = {
+            extraConfig = ''
+              bind tailscale/torrent
+              reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
+            '';
+          };
+
+          ${sonarrEndpoint} = {
+            extraConfig = ''
+              bind tailscale/shows
+              reverse_proxy localhost:${builtins.toString config.services.sonarr.settings.server.port}
+            '';
+          };
+
+          ${radarrEndpoint} = {
+            extraConfig = ''
+              bind tailscale/movies
+              reverse_proxy localhost:${builtins.toString config.services.radarr.settings.server.port}
+            '';
+          };
+
+          ${lidarrEndpoint} = {
+            extraConfig = ''
+              bind tailscale/music
+              reverse_proxy localhost:${builtins.toString config.services.lidarr.settings.server.port}
+            '';
+          };
+
+          ${bazzarEndpoint} = {
+            extraConfig = ''
+              bind tailscale/subtitles
+              reverse_proxy localhost:${builtins.toString config.services.bazarr.listenPort}
+            '';
+          };
+
+          ${readarrEndpoint} = {
+            extraConfig = ''
+              bind tailscale/books
+              reverse_proxy localhost:${builtins.toString config.services.readarr.settings.server.port}
+            '';
+          };
+
+          ${prowlarrEndpoint} = {
+            extraConfig = ''
+              bind tailscale/media-manager
+              reverse_proxy localhost:${builtins.toString config.services.prowlarr.settings.server.port}
+            '';
+          };
+
+          ${streamingEndpoint} = {
+            extraConfig = ''
+              bind tailscale/media
+              reverse_proxy localhost:8096
+            '';
+          };
+        };
+
+        homepage-dashboard.services = [
+          {
+            "Media" = [
+              {
+                Deluge = {
+                  description = "Torrent manager";
+                  href = delugeEndpoint;
+                };
+              }
+              {
+                Prowlarr = {
+                  description = "Indexer manager for torrent automation";
+                  href = prowlarrEndpoint;
+                };
+              }
+              {
+                Sonarr = {
+                  description = "TV manager for torrent automation";
+                  href = sonarrEndpoint;
+                };
+              }
+              {
+                Radarr = {
+                  description = "Movies manager for torrent automation";
+                  href = radarrEndpoint;
+                };
+              }
+              {
+                Bazarr = {
+                  description = "Subtitles manager for torrent automation";
+                  href = bazzarEndpoint;
+                };
+              }
+              {
+                Readarr = {
+                  description = "E-Book manager for torrent automation";
+                  href = readarrEndpoint;
+                };
+              }
+              {
+                Lidarr = {
+                  description = "Music manager for torrent automation";
+                  href = lidarrEndpoint;
+                };
+              }
+              {
+                JellyFin = {
+                  description = "JellyFin media server";
+                  href = streamingEndpoint;
+                };
+              }
+            ];
+          }
+        ];
       };
-      sonarr.enable = true;
-      radarr.enable = true;
-      bazarr.enable = true;
-      readarr.enable = true;
-      lidarr.enable = true;
-      prowlarr.enable = true;
-      flaresolverr.enable = true;
-      deluge = {
-        enable = true;
-        web.enable = true;
-        dataDir = "${dataDir}/Torrent";
-        declarative = true;
-        config = {
-          enabled_plugins = ["Label"];
-          stop_seed_ratio = 0;
-          stop_seed_at_ratio = true;
-          remove_seed_at_ratio = true;
-          seed_time_limit = 0;
-          seed_time_ratio_limit = 0;
-          max_active_seeding = 1;
-        };
-        authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
-      };
-
-      caddy.virtualHosts = {
-        ${delugeEndpoint} = {
-          extraConfig = ''
-            bind tailscale/torrent
-            reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
-          '';
-        };
-
-        ${sonarrEndpoint} = {
-          extraConfig = ''
-            bind tailscale/shows
-            reverse_proxy localhost:${builtins.toString config.services.sonarr.settings.server.port}
-          '';
-        };
-
-        ${radarrEndpoint} = {
-          extraConfig = ''
-            bind tailscale/movies
-            reverse_proxy localhost:${builtins.toString config.services.radarr.settings.server.port}
-          '';
-        };
-
-        ${lidarrEndpoint} = {
-          extraConfig = ''
-            bind tailscale/music
-            reverse_proxy localhost:${builtins.toString config.services.lidarr.settings.server.port}
-          '';
-        };
-
-        ${bazzarEndpoint} = {
-          extraConfig = ''
-            bind tailscale/subtitles
-            reverse_proxy localhost:${builtins.toString config.services.bazarr.listenPort}
-          '';
-        };
-
-        ${readarrEndpoint} = {
-          extraConfig = ''
-            bind tailscale/books
-            reverse_proxy localhost:${builtins.toString config.services.readarr.settings.server.port}
-          '';
-        };
-
-        ${prowlarrEndpoint} = {
-          extraConfig = ''
-            bind tailscale/media-manager
-            reverse_proxy localhost:${builtins.toString config.services.prowlarr.settings.server.port}
-          '';
-        };
-
-        ${streamingEndpoint} = {
-          extraConfig = ''
-            bind tailscale/media
-            reverse_proxy localhost:8096
-          '';
-        };
-      };
-
-      homepage-dashboard.services = [
-        {
-          "Media" = [
-            {
-              Deluge = {
-                description = "Torrent manager";
-                href = delugeEndpoint;
-              };
-            }
-            {
-              Prowlarr = {
-                description = "Indexer manager for torrent automation";
-                href = prowlarrEndpoint;
-              };
-            }
-            {
-              Sonarr = {
-                description = "TV manager for torrent automation";
-                href = sonarrEndpoint;
-              };
-            }
-            {
-              Radarr = {
-                description = "Movies manager for torrent automation";
-                href = radarrEndpoint;
-              };
-            }
-            {
-              Bazarr = {
-                description = "Subtitles manager for torrent automation";
-                href = bazzarEndpoint;
-              };
-            }
-            {
-              Readarr = {
-                description = "E-Book manager for torrent automation";
-                href = readarrEndpoint;
-              };
-            }
-            {
-              Lidarr = {
-                description = "Music manager for torrent automation";
-                href = lidarrEndpoint;
-              };
-            }
-            {
-              JellyFin = {
-                description = "JellyFin media server";
-                href = streamingEndpoint;
-              };
-            }
-          ];
-        }
-      ];
-    };
   };
 }

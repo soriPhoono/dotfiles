@@ -60,8 +60,6 @@
   server = {
     enable = true;
 
-    firefox-syncserver.enable = true;
-
     nextcloud.enable = true;
     multimedia.enable = true;
 
@@ -76,7 +74,7 @@
 
         groups = [
           "nextcloud_users"
-          "jellyfin_users"
+          "multimedia_users"
           "chat_users"
         ];
       };
