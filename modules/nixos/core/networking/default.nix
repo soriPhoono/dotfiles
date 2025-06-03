@@ -10,7 +10,6 @@ in {
     ./network-manager.nix
     ./tailscale.nix
     ./homepage-dashboard.nix
-    ./protonmail-bridge.nix
   ];
 
   options.core.networking = {

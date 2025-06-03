@@ -19,10 +19,12 @@ in {
     ];
 
     services = {
-      displayManager.defaultSession = lib.mkDefault "gnome";
-      displayManager.gdm = {
-        enable = true;
-        wayland = true;
+      displayManager = {
+        defaultSession = lib.mkDefault "gnome";
+        gdm = {
+          enable = true;
+          wayland = true;
+        };
       };
       desktopManager.gnome.enable = true;
     };

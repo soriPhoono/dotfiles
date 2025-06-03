@@ -21,12 +21,13 @@ in {
       signal-desktop
       element-desktop
 
-      # office work
-      obsidian
-
       # tools
       gimp
-      qbittorrent
     ];
+
+    userapps = {
+      firefox.enable = true;
+      discord.enable = true;
+    };
   };
 }

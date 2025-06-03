@@ -13,6 +13,8 @@
         dedicated.nvidia.enable = true;
       };
 
+      hid.tablet.enable = true;
+
       bluetooth.enable = true;
     };
 
