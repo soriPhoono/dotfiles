@@ -17,6 +17,7 @@ in {
     ./multimedia.nix
 
     ./chat.nix
+    ./development.nix
   ];
 
   options.server = with lib; {
@@ -76,9 +77,31 @@ in {
         };
       };
     };
+
+    home-page = {
+      services = mkOption {
+        type = with types;
+          attrsOf (submodule {
+            options = {
+              description = mkOption {
+                type = types.str;
+                description = "The description of the service link";
+                example = "This is a service";
+              };
+              href = mkOption {
+                type = types.str;
+                description = "The hyperlink of the service on the tailnet";
+              };
+            };
+          });
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
+    services.homepage-dashboard.services = [
+    ];
+
     sops.templates.caddy_env_file = {
       content = ''
         TS_AUTH_KEY=${config.sops.placeholder."core/ts_auth_key"}

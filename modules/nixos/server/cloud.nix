@@ -27,6 +27,13 @@ in {
       redis.enable = true;
       mailserver.enable = true;
       ldap.enable = true;
+
+      home-page.services = {
+        "Office/Nextcloud" = {
+          description = "Nextcloud workspace drive";
+          href = "https://cloud.${config.core.networking.tailscale.tn_name}";
+        };
+      };
     };
 
     sops.secrets = {
@@ -132,6 +139,20 @@ in {
 
           mail_smtpmode = "sendmail";
           mail_sendmailmode = "pipe";
+
+          enabledPreviewProviders = [
+            "OC\\Preview\\BMP"
+            "OC\\Preview\\GIF"
+            "OC\\Preview\\JPEG"
+            "OC\\Preview\\Krita"
+            "OC\\Preview\\MarkDown"
+            "OC\\Preview\\MP3"
+            "OC\\Preview\\OpenDocument"
+            "OC\\Preview\\PNG"
+            "OC\\Preview\\TXT"
+            "OC\\Preview\\XBitmap"
+            "OC\\Preview\\HEIC"
+          ];
         };
       };
 
@@ -200,19 +221,6 @@ in {
           '';
         };
       };
-
-      homepage-dashboard.services = [
-        {
-          Office = [
-            {
-              "Nextcloud" = {
-                description = "Nextcloud workspace drive";
-                href = "https://cloud.${config.core.networking.tailscale.tn_name}";
-              };
-            }
-          ];
-        }
-      ];
     };
   };
 }

@@ -4,8 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.server;
+  cfg = config.server.development;
 in {
+  options.server.development.enable = lib.mkEnableOption "Enable development features on server deployment";
+
   config = lib.mkIf cfg.enable {
     sops.secrets = builtins.listToAttrs (map (secret: {
         name = secret;
