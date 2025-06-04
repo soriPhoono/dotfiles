@@ -8,6 +8,17 @@
   serviceDir = "/services/jellyfin/";
   dataDir = "/mnt/media";
 
+  arrStack = [
+    "sonarr"
+    "radarr"
+    "bazarr"
+    "readarr"
+    "lidarr"
+    "prowlarr"
+  ];
+
+  youtubeFQDN = "tube.${config.core.networking.tailscale.tn_name}";
+  youtubeEndpoint = "https://${youtubeFQDN}";
   streamingEndpoint = "https://media.${config.core.networking.tailscale.tn_name}";
   delugeEndpoint = "https://torrent.${config.core.networking.tailscale.tn_name}";
   sonarrEndpoint = "https://shows.${config.core.networking.tailscale.tn_name}";
@@ -41,7 +52,8 @@ in {
         "server/multimedia/torrent_auth"
       ] (_: {
         mode = "0440";
-        group = "multimedia";
+        inherit (config.services.deluge) group;
+        owner = config.services.deluge.user;
       });
 
     users.groups.multimedia.members = [
@@ -66,36 +78,45 @@ in {
         "d ${dataDir}/Torrent/ 0777 ${config.services.deluge.user} multimedia -"
       ];
 
-      services =
-        lib.genAttrs [
-          "jellyfin"
-          "deluge"
-        ] (_: {
-          requires = [
-            "openldap.service"
-            "systemd-tmpfiles-setup.service"
-            "systemd-tmpfiles-resetup.service"
+      services = let
+        requires = args: {
+          wants = args;
+          after = args;
+        };
+      in
+        (lib.genAttrs [
+            "jellyfin"
+            "deluge"
+          ] (
+            _:
+              requires [
+                "openldap.service"
+                "systemd-tmpfiles-setup.service"
+                "systemd-tmpfiles-resetup.service"
+              ]
+          ))
+        // (lib.genAttrs arrStack (_:
+          requires [
+            "deluge.service"
+          ]))
+        // {
+          flaresolverr = requires [
+            "prowlarr.service"
           ];
-          after = [
-            "openldap.service"
-            "systemd-tmpfiles-setup.service"
-            "systemd-tmpfiles-resetup.service"
-          ];
-        });
+        };
     };
 
     services =
-      (lib.genAttrs [
-          "sonarr"
-          "radarr"
-          "bazarr"
-          "readarr"
-          "lidarr"
-          "prowlarr"
-        ] (_: {
-          enable = true;
-        }))
+      (lib.genAttrs arrStack (_: {
+        enable = true;
+      }))
       // {
+        invidious = {
+          enable = true;
+          domain = youtubeFQDN;
+          address = "127.0.0.1";
+          port = 3001;
+        };
         jellyfin = {
           enable = true;
 
@@ -108,6 +129,7 @@ in {
           web.enable = true;
           dataDir = "${dataDir}/Torrent";
           declarative = true;
+          group = "multimedia";
           config = {
             enabled_plugins = ["Label"];
             stop_seed_ratio = 0;
@@ -176,6 +198,13 @@ in {
               reverse_proxy localhost:8096
             '';
           };
+
+          ${youtubeEndpoint} = {
+            extraConfig = ''
+              bind tailscale/tube
+              reverse_proxy localhost:${builtins.toString config.services.invidious.port}
+            '';
+          };
         };
 
         homepage-dashboard.services = [
@@ -227,6 +256,12 @@ in {
                 JellyFin = {
                   description = "JellyFin media server";
                   href = streamingEndpoint;
+                };
+              }
+              {
+                Invidious = {
+                  description = "Invidious youtube front-end";
+                  href = youtubeEndpoint;
                 };
               }
             ];
