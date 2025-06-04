@@ -17,8 +17,6 @@
     "prowlarr"
   ];
 
-  youtubeFQDN = "tube.${config.core.networking.tailscale.tn_name}";
-  youtubeEndpoint = "https://${youtubeFQDN}";
   streamingEndpoint = "https://media.${config.core.networking.tailscale.tn_name}";
   delugeEndpoint = "https://torrent.${config.core.networking.tailscale.tn_name}";
   sonarrEndpoint = "https://shows.${config.core.networking.tailscale.tn_name}";
@@ -111,12 +109,6 @@ in {
         enable = true;
       }))
       // {
-        invidious = {
-          enable = true;
-          domain = youtubeFQDN;
-          address = "127.0.0.1";
-          port = 3001;
-        };
         jellyfin = {
           enable = true;
 
@@ -198,13 +190,6 @@ in {
               reverse_proxy localhost:8096
             '';
           };
-
-          ${youtubeEndpoint} = {
-            extraConfig = ''
-              bind tailscale/tube
-              reverse_proxy localhost:${builtins.toString config.services.invidious.port}
-            '';
-          };
         };
 
         homepage-dashboard.services = [
@@ -256,12 +241,6 @@ in {
                 JellyFin = {
                   description = "JellyFin media server";
                   href = streamingEndpoint;
-                };
-              }
-              {
-                Invidious = {
-                  description = "Invidious youtube front-end";
-                  href = youtubeEndpoint;
                 };
               }
             ];
