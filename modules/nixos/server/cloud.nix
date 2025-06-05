@@ -27,13 +27,6 @@ in {
       redis.enable = true;
       mailserver.enable = true;
       ldap.enable = true;
-
-      home-page.services = {
-        "Office/Nextcloud" = {
-          description = "Nextcloud workspace drive";
-          href = "https://cloud.${config.core.networking.tailscale.tn_name}";
-        };
-      };
     };
 
     sops.secrets = {
@@ -221,6 +214,19 @@ in {
           '';
         };
       };
+
+      homepage-dashboard.services = [
+        {
+          Office = [
+            {
+              "Nextcloud" = {
+                description = "Nextcloud workspace drive";
+                href = "https://cloud.${config.core.networking.tailscale.tn_name}";
+              };
+            }
+          ];
+        }
+      ];
     };
   };
 }

@@ -24,6 +24,7 @@ in {
         then [
           prismlauncher
           gzdoom
+          bottles
         ]
         else []
       )
