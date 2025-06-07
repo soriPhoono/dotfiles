@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  config,
   ...
 }: {
   imports = [
@@ -25,5 +24,11 @@
       userName = "soriphoono";
       userEmail = "soriphoono@gmail.com";
     };
+  };
+
+  userapps.features = {
+    enable = true;
+    artwork.enable = true;
+    development.enable = true;
   };
 }

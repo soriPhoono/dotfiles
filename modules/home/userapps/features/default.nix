@@ -9,6 +9,7 @@ in {
   imports = [
     ./artwork.nix
     ./streaming.nix
+    ./development.nix
   ];
 
   options.userapps.features = {
