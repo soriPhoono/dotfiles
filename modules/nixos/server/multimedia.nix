@@ -17,6 +17,7 @@
     "prowlarr"
   ];
 
+  navidromeEndpoint = "https://jukebox.${config.core.networking.tailscale.tn_name}";
   streamingEndpoint = "https://media.${config.core.networking.tailscale.tn_name}";
   delugeEndpoint = "https://torrent.${config.core.networking.tailscale.tn_name}";
   sonarrEndpoint = "https://shows.${config.core.networking.tailscale.tn_name}";
@@ -104,12 +105,21 @@ in {
         enable = true;
       }))
       // {
+        navidrome = {
+          enable = true;
+
+          settings = {
+            MusicFolder = "/mnt/media/Music";
+          };
+        };
+
         jellyfin = {
           enable = true;
 
           cacheDir = serviceDir + "/cache/";
           dataDir = serviceDir;
         };
+
         deluge = {
           enable = true;
           web.enable = true;
@@ -179,6 +189,13 @@ in {
             extraConfig = ''
               bind tailscale/media-manager
               reverse_proxy localhost:${builtins.toString config.services.prowlarr.settings.server.port}
+            '';
+          };
+
+          ${navidromeEndpoint} = {
+            extraConfig = ''
+              bind tailscale/jukebox
+              reverse_proxy localhost:${builtins.toString config.services.navidrome.settings.Port}
             '';
           };
 
