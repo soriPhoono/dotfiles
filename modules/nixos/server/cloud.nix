@@ -32,6 +32,7 @@ in {
     sops.secrets = {
       "server/nextcloud/admin_password" = {
         owner = "nextcloud";
+        group = "nextcloud";
       };
     };
 
@@ -102,7 +103,7 @@ in {
             contacts
             calendar
             tasks
-            sociallogin
+            notes
             ;
         };
         extraAppsEnable = true;

@@ -138,7 +138,11 @@ in {
           ${delugeEndpoint} = {
             extraConfig = ''
               bind tailscale/torrent
-              reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
+
+              route {
+                rewrite /torrent /
+                reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
+              }
             '';
           };
 
