@@ -65,6 +65,8 @@
 
     ollama.enable = true;
 
+    mailserver.host = "smtp.gmail.com";
+
     users = {
       soriphoono = {
         first_name = "Sori";

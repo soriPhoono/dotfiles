@@ -8,7 +8,7 @@ in {
   options.server.mailserver = with lib; {
     enable = mkEnableOption "Enable mailserver interface";
     host = mkOption {
-      type = str;
+      type = types.str;
       description = "The host fqdn of the stmp server to use";
       example = "smtp.gmail.com";
     };

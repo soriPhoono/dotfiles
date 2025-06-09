@@ -96,12 +96,7 @@ in {
         // (lib.genAttrs arrStack (_:
           requires [
             "deluge.service"
-          ]))
-        // {
-          flaresolverr = requires [
-            "prowlarr.service"
-          ];
-        };
+          ]));
     };
 
     services =
@@ -115,7 +110,6 @@ in {
           cacheDir = serviceDir + "/cache/";
           dataDir = serviceDir;
         };
-        flaresolverr.enable = true;
         deluge = {
           enable = true;
           web.enable = true;
