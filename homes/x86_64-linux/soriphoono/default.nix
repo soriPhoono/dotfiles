@@ -25,10 +25,4 @@
       userEmail = "soriphoono@gmail.com";
     };
   };
-
-  userapps.features = {
-    enable = true;
-    artwork.enable = true;
-    development.enable = true;
-  };
 }
