@@ -1,10 +1,3 @@
 {
-  programs.bash = {
-    undistractMe = {
-      enable = true;
-      playSound = true;
-    };
-
-    completion.enable = true;
-  };
+  programs.bash.completion.enable = true;
 }
