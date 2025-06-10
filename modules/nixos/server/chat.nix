@@ -10,22 +10,6 @@ in {
   options.server.ollama.enable = lib.mkEnableOption "Enable ollama self hosted artificial intelligence";
 
   config = lib.mkIf cfg.enable {
-    server = {
-      users.chat = {
-        password_hash = "{SSHA}lC0A832WEnGu0AIwKdhsYUGLcHhlyx2d";
-        email = "chat@xerus-augmented.ts.net";
-        groups = [
-          "chat_users"
-        ];
-      };
-
-      groups = [
-        "chat_users"
-      ];
-
-      ldap.enable = true;
-    };
-
     sops = {
       secrets."server/searx_seed" = {};
       templates.searx_secrets.content = ''

@@ -13,20 +13,9 @@ in {
 
   config = lib.mkIf cfg.enable {
     server = {
-      users.nextcloud = {
-        password_hash = "{SSHA}kvNzS4CXHeLPGRewYEBCkinzvd5hYWZj";
-        email = "cloud@xerus-augmented.ts.net";
-        groups = [
-          "nextcloud_users"
-        ];
-      };
-
-      groups = ["nextcloud_users"];
-
       mysql.enable = true;
       redis.enable = true;
       mailserver.enable = true;
-      ldap.enable = true;
     };
 
     sops.secrets = {

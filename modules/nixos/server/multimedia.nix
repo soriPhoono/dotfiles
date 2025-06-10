@@ -30,20 +30,7 @@ in {
   options.server.multimedia.enable = lib.mkEnableOption "Enable multimedia server";
 
   config = lib.mkIf cfg.enable {
-    server = {
-      users.multimedia = {
-        password_hash = "{SSHA}tAdReSdlZ4LY1uF9ISbo/XvOkQXiR2ls";
-        email = "multimedia@xerus-augmented.ts.net";
-        groups = [
-          "multimedia_users"
-        ];
-      };
-
-      groups = ["multimedia_users"];
-
-      ldap.enable = true;
-      nextcloud.enable = true;
-    };
+    server.nextcloud.enable = true;
 
     sops.secrets =
       lib.genAttrs
@@ -250,6 +237,12 @@ in {
                 Lidarr = {
                   description = "Music manager for torrent automation";
                   href = lidarrEndpoint;
+                };
+              }
+              {
+                Navidrome = {
+                  description = "Music streaming client";
+                  href = navidromeEndpoint;
                 };
               }
               {

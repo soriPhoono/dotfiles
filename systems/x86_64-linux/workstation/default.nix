@@ -20,6 +20,7 @@
         logitech.enable = true;
         qmk.enable = true;
         xbox_controllers.enable = true;
+        tablet.enable = true;
       };
 
       bluetooth.enable = true;
@@ -66,21 +67,6 @@
     ollama.enable = true;
 
     mailserver.host = "smtp.gmail.com";
-
-    users = {
-      soriphoono = {
-        first_name = "Sori";
-        last_name = "Phoono";
-        password_hash = "{SSHA}9Et7vT4i7MPOsM6FPPYvZdzqBzkfdOGU";
-        email = "soriphoono@protonmail.com";
-
-        groups = [
-          "nextcloud_users"
-          "multimedia_users"
-          "chat_users"
-        ];
-      };
-    };
   };
 
   themes.catppuccin.enable = true;
