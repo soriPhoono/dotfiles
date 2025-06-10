@@ -18,6 +18,7 @@
 
   navidromeEndpoint = "https://jukebox.${config.core.networking.tailscale.tn_name}";
   streamingEndpoint = "https://media.${config.core.networking.tailscale.tn_name}";
+  pvrEndpoint = "pvr.${config.core.networking.tailscale.tn_name}";
   delugeEndpoint = "https://torrent.${config.core.networking.tailscale.tn_name}";
 in {
   options.server.multimedia.enable = lib.mkEnableOption "Enable multimedia server";
@@ -152,7 +153,7 @@ in {
             '';
           };
 
-          "pvr.${config.core.networking.tailscale.tn_name}" = {
+          ${pvrEndpoint} = {
             extraConfig = ''
               bind tailscale/pvr
 
@@ -201,6 +202,16 @@ in {
                 };
               }
               {
+                Prowlarr = {
+                  description = "Torrent indexer manager";
+                  href = "${pvrEndpoint}/index";
+                  icon = "sh-prowlarr-radarr";
+                  widget = {
+                    type = "prowlarr";
+                    url = "http://localhost:${builtins.toString config.services.prowlarr.settings.server.port}";
+                    key = "e4d93e2710cb47c48d58ab119c76c5c6";
+                  };
+                };
               }
               {
                 Navidrome = {
