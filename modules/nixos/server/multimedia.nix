@@ -190,7 +190,9 @@ in {
             extraConfig = ''
               bind tailscale/pvr
 
-              reverse_proxy /torrent localhost:${builtins.toString config.services.deluge.web.port}
+              route /torrent {
+                reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
+              }
             '';
           };
 
