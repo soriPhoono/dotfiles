@@ -186,6 +186,14 @@ in {
             '';
           };
 
+          "pvr.${config.core.networking.tailscale.tn_name}" = {
+            extraConfig = ''
+              bind tailscale/pvr
+
+              reverse_proxy /torrent localhost:${builtins.toString config.services.deluge.web.port}
+            '';
+          };
+
           ${streamingEndpoint} = {
             extraConfig = ''
               bind tailscale/media
