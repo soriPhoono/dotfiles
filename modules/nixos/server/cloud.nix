@@ -45,12 +45,10 @@ in {
           requires = [
             "mysql.service"
             "redis.service"
-            "openldap.service"
           ];
           after = [
             "mysql.service"
             "redis.service"
-            "openldap.service"
           ];
         });
     };
