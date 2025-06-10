@@ -191,6 +191,7 @@ in {
               bind tailscale/pvr
 
               route /torrent {
+                rewrite /torrent /
                 reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
               }
             '';
