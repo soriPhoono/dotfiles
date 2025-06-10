@@ -11,7 +11,6 @@
   arrStack = [
     "sonarr"
     "radarr"
-    "bazarr"
     "readarr"
     "lidarr"
     "prowlarr"
@@ -20,12 +19,6 @@
   navidromeEndpoint = "https://jukebox.${config.core.networking.tailscale.tn_name}";
   streamingEndpoint = "https://media.${config.core.networking.tailscale.tn_name}";
   delugeEndpoint = "https://torrent.${config.core.networking.tailscale.tn_name}";
-  sonarrEndpoint = "https://shows.${config.core.networking.tailscale.tn_name}";
-  radarrEndpoint = "https://movies.${config.core.networking.tailscale.tn_name}";
-  bazzarEndpoint = "https://subtitles.${config.core.networking.tailscale.tn_name}";
-  prowlarrEndpoint = "https://media-manager.${config.core.networking.tailscale.tn_name}";
-  readarrEndpoint = "https://books.${config.core.networking.tailscale.tn_name}";
-  lidarrEndpoint = "https://music.${config.core.networking.tailscale.tn_name}";
 in {
   options.server.multimedia.enable = lib.mkEnableOption "Enable multimedia server";
 
@@ -71,12 +64,12 @@ in {
         };
       in
         (lib.genAttrs [
+            "navidrome"
             "jellyfin"
             "deluge"
           ] (
             _:
               requires [
-                "openldap.service"
                 "systemd-tmpfiles-setup.service"
                 "systemd-tmpfiles-resetup.service"
               ]
@@ -92,6 +85,31 @@ in {
         enable = true;
       }))
       // {
+        prowlarr = {
+          enable = true;
+          settings.server.urlbase = "/index/";
+        };
+
+        sonarr = {
+          enable = true;
+          settings.server.urlbase = "/shows/";
+        };
+
+        radarr = {
+          enable = true;
+          settings.server.urlbase = "/movies/";
+        };
+
+        lidarr = {
+          enable = true;
+          settings.server.urlbase = "/music/";
+        };
+
+        readarr = {
+          enable = true;
+          settings.server.urlbase = "/books/";
+        };
+
         navidrome = {
           enable = true;
 
@@ -130,59 +148,7 @@ in {
             extraConfig = ''
               bind tailscale/torrent
 
-              route {
-                rewrite /torrent /
-                reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
-              }
-            '';
-          };
-
-          ${sonarrEndpoint} = {
-            extraConfig = ''
-              bind tailscale/shows
-              reverse_proxy localhost:${builtins.toString config.services.sonarr.settings.server.port}
-            '';
-          };
-
-          ${radarrEndpoint} = {
-            extraConfig = ''
-              bind tailscale/movies
-              reverse_proxy localhost:${builtins.toString config.services.radarr.settings.server.port}
-            '';
-          };
-
-          ${lidarrEndpoint} = {
-            extraConfig = ''
-              bind tailscale/music
-              reverse_proxy localhost:${builtins.toString config.services.lidarr.settings.server.port}
-            '';
-          };
-
-          ${bazzarEndpoint} = {
-            extraConfig = ''
-              bind tailscale/subtitles
-              reverse_proxy localhost:${builtins.toString config.services.bazarr.listenPort}
-            '';
-          };
-
-          ${readarrEndpoint} = {
-            extraConfig = ''
-              bind tailscale/books
-              reverse_proxy localhost:${builtins.toString config.services.readarr.settings.server.port}
-            '';
-          };
-
-          ${prowlarrEndpoint} = {
-            extraConfig = ''
-              bind tailscale/media-manager
-              reverse_proxy localhost:${builtins.toString config.services.prowlarr.settings.server.port}
-            '';
-          };
-
-          ${navidromeEndpoint} = {
-            extraConfig = ''
-              bind tailscale/jukebox
-              reverse_proxy localhost:${builtins.toString config.services.navidrome.settings.Port}
+              reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
             '';
           };
 
@@ -190,10 +156,24 @@ in {
             extraConfig = ''
               bind tailscale/pvr
 
-              route /torrent {
-                rewrite /torrent /
-                reverse_proxy localhost:${builtins.toString config.services.deluge.web.port}
-              }
+              redir /index /index/
+              redir /shows /shows/
+              redir /movies /movies/
+              redir /music /music/
+              redir /books /books/
+
+              reverse_proxy /index/* localhost:${builtins.toString config.services.prowlarr.settings.server.port}
+              reverse_proxy /shows/* localhost:${builtins.toString config.services.sonarr.settings.server.port}
+              reverse_proxy /movies/* localhost:${builtins.toString config.services.radarr.settings.server.port}
+              reverse_proxy /music/* localhost:${builtins.toString config.services.lidarr.settings.server.port}
+              reverse_proxy /books/* localhost:${builtins.toString config.services.readarr.settings.server.port}
+            '';
+          };
+
+          ${navidromeEndpoint} = {
+            extraConfig = ''
+              bind tailscale/jukebox
+              reverse_proxy localhost:${builtins.toString config.services.navidrome.settings.Port}
             '';
           };
 
@@ -210,45 +190,17 @@ in {
             "Media" = [
               {
                 Deluge = {
-                  description = "Torrent manager";
+                  description = "Torrent download manager";
                   href = delugeEndpoint;
+                  icon = "sh-deluge";
+                  widget = {
+                    type = "deluge";
+                    url = "http://localhost:${builtins.toString config.services.deluge.web.port}";
+                    password = "deluge";
+                  };
                 };
               }
               {
-                Prowlarr = {
-                  description = "Indexer manager for torrent automation";
-                  href = prowlarrEndpoint;
-                };
-              }
-              {
-                Sonarr = {
-                  description = "TV manager for torrent automation";
-                  href = sonarrEndpoint;
-                };
-              }
-              {
-                Radarr = {
-                  description = "Movies manager for torrent automation";
-                  href = radarrEndpoint;
-                };
-              }
-              {
-                Bazarr = {
-                  description = "Subtitles manager for torrent automation";
-                  href = bazzarEndpoint;
-                };
-              }
-              {
-                Readarr = {
-                  description = "E-Book manager for torrent automation";
-                  href = readarrEndpoint;
-                };
-              }
-              {
-                Lidarr = {
-                  description = "Music manager for torrent automation";
-                  href = lidarrEndpoint;
-                };
               }
               {
                 Navidrome = {
