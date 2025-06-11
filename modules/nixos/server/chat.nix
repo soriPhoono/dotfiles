@@ -76,6 +76,7 @@ in {
               "Chat interface" = {
                 description = "Personal instance of ollama for selfhosted artificial intelligence";
                 href = open-webuiEndpoint;
+                icon = "sh-ollama";
               };
             }
           ];
