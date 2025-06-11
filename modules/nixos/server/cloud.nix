@@ -213,7 +213,7 @@ in {
                 icon = "sh-nextcloud";
                 widget = {
                   type = "nextcloud";
-                  url = "localhost:8080";
+                  url = "http://localhost:8080";
                   key = "GNdX889tJtFQ";
                 };
               };
