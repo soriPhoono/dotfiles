@@ -18,12 +18,14 @@ in {
       mailserver.enable = true;
     };
 
-    sops.secrets = {
-      "server/nextcloud/admin_password" = {
+    sops.secrets =
+      lib.genAttrs [
+        "server/nextcloud/admin_password"
+        "server/nextcloud/nc-token"
+      ] (_: {
         owner = "nextcloud";
         group = "nextcloud";
-      };
-    };
+      });
 
     users.users = {
       nextcloud.extraGroups = ["redis" "restic"];
@@ -211,11 +213,6 @@ in {
                 description = "Nextcloud workspace drive";
                 href = "https://cloud.${config.core.networking.tailscale.tn_name}";
                 icon = "sh-nextcloud";
-                widget = {
-                  type = "nextcloud";
-                  url = "http://localhost:8080";
-                  key = "GNdX889tJtFQ";
-                };
               };
             }
           ];
