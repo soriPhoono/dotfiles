@@ -66,7 +66,7 @@ in {
 
     home-manager.users =
       lib.mkIf (lib.any (feature: feature == "vr") cfg.featureType)
-      (lib.mapAttrs (_: _: {
+      (builtins.mapAttrs (_: _: {
           xdg.configFile = {
             "openxr/1/active_runtime.json".source = "${pkgs.wivrn}/share/openxr/1/openxr_wivrn.json";
 

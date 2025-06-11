@@ -22,7 +22,7 @@ in {
     };
 
     users.extraUsers =
-      lib.mapAttrs (_: _: {
+      builtins.mapAttrs (_: _: {
         extraGroups = [
           "networkmanager"
         ];

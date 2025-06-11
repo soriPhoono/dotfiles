@@ -37,7 +37,7 @@ in {
     };
 
     home-manager.users =
-      lib.mapAttrs (name: _: {
+      builtins.mapAttrs (name: _: {
         sops.age.keyFile = config.sops.secrets."users/${name}/age_key".path;
       })
       config.core.users;

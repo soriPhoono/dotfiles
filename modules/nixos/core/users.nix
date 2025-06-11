@@ -69,7 +69,7 @@ in {
     };
 
     snowfallorg.users =
-      lib.mapAttrs (_: user: {
+      builtins.mapAttrs (_: user: {
         inherit (user) admin;
       })
       cfg.users;
@@ -78,7 +78,7 @@ in {
       mutableUsers = false;
 
       extraUsers =
-        lib.mapAttrs (_: user: {
+        builtins.mapAttrs (_: user: {
           inherit (user) hashedPassword extraGroups shell;
 
           openssh.authorizedKeys.keys =
@@ -88,7 +88,7 @@ in {
     };
 
     home-manager.users =
-      lib.mapAttrs (_: user: {
+      builtins.mapAttrs (_: user: {
         core = {
           ssh.publicKey = lib.mkIf (user.publicKey != null) user.publicKey;
 

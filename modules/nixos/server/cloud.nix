@@ -4,12 +4,12 @@
   config,
   ...
 }: let
-  cfg = config.server.nextcloud;
+  cfg = config.server.cloud;
 
   dataDir = "/services/nextcloud/";
   storageDir = "/mnt/cloud";
 in {
-  options.server.nextcloud.enable = lib.mkEnableOption "Enable cloud server services";
+  options.server.cloud.enable = lib.mkEnableOption "Enable cloud server services";
 
   config = lib.mkIf cfg.enable {
     server = {
@@ -210,6 +210,12 @@ in {
               "Nextcloud" = {
                 description = "Nextcloud workspace drive";
                 href = "https://cloud.${config.core.networking.tailscale.tn_name}";
+                icon = "sh-nextcloud";
+                widget = {
+                  type = "nextcloud";
+                  url = "localhost:8080";
+                  key = "GNdX889tJtFQ";
+                };
               };
             }
           ];

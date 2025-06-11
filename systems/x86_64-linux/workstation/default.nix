@@ -61,10 +61,10 @@
   server = {
     enable = true;
 
-    nextcloud.enable = true;
+    cloud.enable = true;
     multimedia.enable = true;
 
-    ollama.enable = true;
+    chat.enable = true;
 
     mailserver.host = "smtp.gmail.com";
   };

@@ -3,11 +3,13 @@
   config,
   ...
 }: let
-  cfg = config.server.ollama;
+  cfg = config.server.chat;
 
   ollama_data_dir = "/services/ollama/";
+
+  open-webuiEndpoint = "https://chat.${config.core.networking.tailscale.tn_name}";
 in {
-  options.server.ollama.enable = lib.mkEnableOption "Enable ollama self hosted artificial intelligence";
+  options.server.chat.enable = lib.mkEnableOption "Enable ollama self hosted artificial intelligence";
 
   config = lib.mkIf cfg.enable {
     sops = {
@@ -59,7 +61,7 @@ in {
       };
 
       caddy.virtualHosts = {
-        "https://chat.${config.core.networking.tailscale.tn_name}" = {
+        ${open-webuiEndpoint} = {
           extraConfig = ''
             bind tailscale/chat
             reverse_proxy localhost:${builtins.toString config.services.open-webui.port}
@@ -73,7 +75,7 @@ in {
             {
               "Chat interface" = {
                 description = "Personal instance of ollama for selfhosted artificial intelligence";
-                href = "https://chat.${config.core.networking.tailscale.tn_name}";
+                href = open-webuiEndpoint;
               };
             }
           ];

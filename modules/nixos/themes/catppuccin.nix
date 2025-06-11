@@ -21,7 +21,7 @@ in {
     };
 
     home-manager.users =
-      lib.mapAttrs (_: _: {
+      builtins.mapAttrs (_: _: {
         themes.catppuccin.enable = true;
       })
       config.core.users;

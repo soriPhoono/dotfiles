@@ -24,7 +24,7 @@ in {
   options.server.multimedia.enable = lib.mkEnableOption "Enable multimedia server";
 
   config = lib.mkIf cfg.enable {
-    server.nextcloud.enable = true;
+    server.cloud.enable = true;
 
     sops.secrets =
       lib.genAttrs
