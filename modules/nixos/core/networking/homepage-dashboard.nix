@@ -17,7 +17,7 @@ in {
 
       settings = {
         title = config.networking.hostName;
-        background = "https://i.ibb.co/23NL4LW3/image.png";
+        background = "https://i.ibb.co/B2N7M7c2/image.png";
         cardBlur = "md";
       };
 
