@@ -191,7 +191,7 @@ in {
             layout = {
               Media = {
                 style = "row";
-                columns = 4;
+                columns = 3;
               };
             };
           };
