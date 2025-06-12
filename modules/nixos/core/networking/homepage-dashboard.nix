@@ -4,18 +4,29 @@
   config,
   ...
 }: let
-  cfg = config.core.networking.tailscale;
+  cfg = config.core.networking.homepage;
 in {
+  options.core.networking.homepage = {
+    enable = lib.mkEnableOption "Enable homepage for system";
+  };
+
   config = lib.mkIf cfg.enable {
     services.homepage-dashboard = {
       enable = true;
-      allowedHosts = "${config.networking.hostName}.${cfg.tn_name}";
+      allowedHosts = "${config.networking.hostName}.${config.core.networking.tailscale.tn_name}";
+
+      settings = {
+        title = config.networking.hostName;
+        background = "https://i.ibb.co/23NL4LW3/image.png";
+        cardBlur = "md";
+      };
+
       widgets = [
         {
           resources = {
             cpu = true;
             cputemp = true;
-            disk = "/mnt";
+            disk = "/";
             memory = true;
             uptime = true;
           };

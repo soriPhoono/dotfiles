@@ -25,6 +25,7 @@
     networking = {
       enable = true;
       network-manager.enable = true;
+      homepage.enable = true;
       tailscale = {
         enable = true;
         tn_name = "xerus-augmented.ts.net";
