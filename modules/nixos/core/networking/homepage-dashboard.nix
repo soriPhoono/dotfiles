@@ -17,8 +17,13 @@ in {
 
       settings = {
         title = config.networking.hostName;
-        background = "https://i.ibb.co/B2N7M7c2/image.png";
+        background = {
+          image = "https://i.ibb.co/B2N7M7c2/image.png";
+          blur = "xs";
+          opacity = 75;
+        };
         cardBlur = "md";
+        bookmarksStyle = "icons";
       };
 
       widgets = [
@@ -47,6 +52,7 @@ in {
                 {
                   abbr = "GH";
                   href = "https://github.com/";
+                  icon = "sh-github";
                 }
               ];
             }
@@ -59,6 +65,7 @@ in {
                 {
                   abbr = "YT";
                   href = "https://youtube.com/";
+                  icon = "sh-youtube";
                 }
               ];
             }
