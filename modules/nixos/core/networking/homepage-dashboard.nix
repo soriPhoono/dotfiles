@@ -24,6 +24,7 @@ in {
         };
         cardBlur = "md";
         bookmarksStyle = "icons";
+        headerStyle = "boxed";
       };
 
       widgets = [
@@ -41,35 +42,6 @@ in {
             provider = "duckduckgo";
             target = "_blank";
           };
-        }
-      ];
-
-      bookmarks = [
-        {
-          Developer = [
-            {
-              Github = [
-                {
-                  abbr = "GH";
-                  href = "https://github.com/";
-                  icon = "sh-github";
-                }
-              ];
-            }
-          ];
-        }
-        {
-          Entertainment = [
-            {
-              YouTube = [
-                {
-                  abbr = "YT";
-                  href = "https://youtube.com/";
-                  icon = "sh-youtube";
-                }
-              ];
-            }
-          ];
         }
       ];
     };
