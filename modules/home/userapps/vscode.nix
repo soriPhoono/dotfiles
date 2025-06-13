@@ -25,10 +25,7 @@ in {
       mutableExtensionsDir = false;
 
       profiles.${config.home.username} = {
-        extensions = with pkgs.vscode-extensions;
-          [
-          ]
-          ++ cfg.extraExtensions;
+        extensions = cfg.extraExtensions;
       };
     };
   };
