@@ -26,6 +26,16 @@ in {
   config = lib.mkIf cfg.enable {
     server.cloud.enable = true;
 
+    sops.secrets =
+      lib.genAttrs
+      [
+        "server/multimedia/torrent_auth"
+      ] (_: {
+        mode = "0440";
+        inherit (config.services.deluge) group;
+        owner = config.services.deluge.user;
+      });
+
     users.groups.multimedia.members = [
       "nextcloud"
       config.services.jellyfin.user
@@ -123,6 +133,7 @@ in {
           declarative = true;
           group = "multimedia";
           config.enabled_plugins = ["Label"];
+          authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
         };
 
         caddy.virtualHosts = {

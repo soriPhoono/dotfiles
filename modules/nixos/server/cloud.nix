@@ -21,13 +21,12 @@ in {
     sops.secrets =
       lib.genAttrs [
         "server/nextcloud/admin_password"
-        "server/nextcloud/nc-token"
       ] (_: {
         owner = "nextcloud";
         group = "nextcloud";
       });
 
-    users.extraGroups = {
+    users.extraUsers = {
       nextcloud.extraGroups = ["redis" "restic"];
       ${config.services.caddy.user}.extraGroups = ["nextcloud"];
     };
