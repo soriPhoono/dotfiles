@@ -7,6 +7,7 @@
 in {
   imports = [
     ./bluetooth.nix
+    ./adb.nix
   ];
 
   options.core.hardware = {

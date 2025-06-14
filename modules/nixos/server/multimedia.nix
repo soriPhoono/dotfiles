@@ -26,16 +26,6 @@ in {
   config = lib.mkIf cfg.enable {
     server.cloud.enable = true;
 
-    sops.secrets =
-      lib.genAttrs
-      [
-        "server/multimedia/torrent_auth"
-      ] (_: {
-        mode = "0440";
-        inherit (config.services.deluge) group;
-        owner = config.services.deluge.user;
-      });
-
     users.groups.multimedia.members = [
       "nextcloud"
       config.services.jellyfin.user
@@ -132,16 +122,7 @@ in {
           dataDir = "${dataDir}/Torrent";
           declarative = true;
           group = "multimedia";
-          config = {
-            enabled_plugins = ["Label"];
-            stop_seed_ratio = 0;
-            stop_seed_at_ratio = true;
-            remove_seed_at_ratio = true;
-            seed_time_limit = 0;
-            seed_time_ratio_limit = 0;
-            max_active_seeding = 1;
-          };
-          authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
+          config.enabled_plugins = ["Label"];
         };
 
         caddy.virtualHosts = {

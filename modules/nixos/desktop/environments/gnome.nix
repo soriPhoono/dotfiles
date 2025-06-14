@@ -11,12 +11,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs.gnomeExtensions; [
-      dash-to-dock
-      blur-my-shell
-      status-icons
-      removable-drive-menu
-    ];
+    environment = {
+      sessionVariables.NIXOS_OZONE_WL = "1";
+
+      systemPackages = with pkgs.gnomeExtensions; [
+        dash-to-dock
+        blur-my-shell
+        status-icons
+        removable-drive-menu
+      ];
+    };
 
     services = {
       displayManager = {
