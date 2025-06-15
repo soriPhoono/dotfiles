@@ -5,10 +5,8 @@
 }: {
   imports = [
     ./dconf.nix
-  ];
 
-  home.packages = with pkgs; [
-    inputs.nvim.packages.${system}.soriphoono
+    ./nvim
   ];
 
   core = {

@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    templates.url = "github:nixos/templates";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -24,11 +23,6 @@
 
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    steam-experiments = {
-      url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -55,17 +49,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvim = {
-      url = "github:soriPhoono/nvim/nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
     };
   };
 
-  outputs = inputs @ {
-    nixpkgs,
-    snowfall,
-    ...
-  }: let
+  outputs = inputs @ {snowfall, ...}: let
     lib = snowfall.mkLib {
       inherit inputs;
       src = ./.;
@@ -90,18 +83,14 @@
           sops-nix.nixosModules.sops
           stylix.nixosModules.stylix
           nix-index-database.nixosModules.nix-index
-          steam-experiments.nixosModules.default
         ];
       };
 
       homes = {
         modules = with inputs; [
           sops-nix.homeManagerModules.sops
+          nvf.homeManagerModules.default
         ];
-      };
-
-      outputs-builder = channels: {
-        formatter = channels.nixpkgs.alejandra;
       };
 
       channels-config = {

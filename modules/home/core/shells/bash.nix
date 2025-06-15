@@ -7,11 +7,6 @@
     enable = true;
     enableCompletion = true;
     bashrcExtra = let
-      importEnvironment =
-        if lib.hasAttr "environment" config.sops.secrets
-        then "export (cat ${config.sops.secrets.environment.path})"
-        else "";
-
       sessionVariables =
         builtins.concatStringsSep
         "\n"
@@ -26,8 +21,6 @@
           (name: command: "alias ${name}=\"${command}\"")
           config.core.shells.shellAliases);
     in ''
-      ${importEnvironment}
-
       ${sessionVariables}
 
       ${shellAliases}

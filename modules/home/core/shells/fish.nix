@@ -21,11 +21,6 @@ in {
       enable = true;
 
       shellInitLast = let
-        importEnvironment =
-          if lib.hasAttr "environment" config.sops.secrets
-          then "export (cat ${config.sops.secrets.environment.path})"
-          else "";
-
         sessionVariables =
           builtins.concatStringsSep
           "\n"
@@ -41,8 +36,6 @@ in {
             config.core.shells.shellAliases);
       in ''
         set fish_greeting
-
-        ${importEnvironment}
 
         ${sessionVariables}
 

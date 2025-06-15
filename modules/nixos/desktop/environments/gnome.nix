@@ -32,7 +32,5 @@ in {
       };
       desktopManager.gnome.enable = true;
     };
-
-    jovian.steam.desktopSession = "gnome";
   };
 }

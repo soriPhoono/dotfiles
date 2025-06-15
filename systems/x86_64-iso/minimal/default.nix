@@ -1,13 +1,20 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   networking.wireless.enable = lib.mkForce false;
+
+  environment.systemPackages = with pkgs; [
+    disko
+    nixos-facter
+  ];
 
   core = {
     hardware = {
       gpu.enable = true;
       bluetooth.enable = true;
     };
-
-    secrets.defaultSopsFile = ./secrets.yaml;
 
     networking = {
       enable = true;

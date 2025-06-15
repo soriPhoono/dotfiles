@@ -15,7 +15,6 @@ in {
     ./cloud.nix
     ./multimedia.nix
     ./chat.nix
-    ./development.nix
   ];
 
   options.server = with lib; {

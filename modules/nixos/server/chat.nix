@@ -12,6 +12,8 @@ in {
   options.server.chat.enable = lib.mkEnableOption "Enable ollama self hosted artificial intelligence";
 
   config = lib.mkIf cfg.enable {
+    desktop.features.intelligence.enable = true;
+
     sops = {
       secrets."server/searx_seed" = {};
       templates.searx_secrets.content = ''
@@ -43,15 +45,7 @@ in {
         };
       };
 
-      ollama = {
-        enable = true;
-
-        user = "ollama";
-        host = "localhost";
-
-        home = ollama_data_dir;
-        acceleration = "rocm";
-      };
+      ollama.home = ollama_data_dir;
 
       open-webui = {
         enable = true;

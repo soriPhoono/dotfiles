@@ -53,9 +53,12 @@
 
   desktop = {
     environments.gnome.enable = true;
-    features.gaming = {
-      enable = true;
-      featureType = ["desktop" "vr"];
+    features = {
+      intelligence = {
+        enable = true;
+        acceleration = "rocm";
+      };
+      gaming.enable = true;
     };
   };
 
