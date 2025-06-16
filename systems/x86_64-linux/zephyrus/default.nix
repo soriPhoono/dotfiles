@@ -49,7 +49,10 @@
 
   desktop = {
     environments.gnome.enable = true;
-    services.asusd.enable = true;
+    services = {
+      asusd.enable = true;
+      quickshare.enable = true;
+    };
     features = {
       intelligence = {
         enable = true;

@@ -24,19 +24,6 @@
         lsp.server = "nixd";
       };
       bash.enable = true;
-      nu.enable = true;
-      lua.enable = true;
-
-      haskell.enable = true;
-      clang.enable = true;
-      zig.enable = true;
-      rust = {
-        enable = true;
-        crates.enable = true;
-      };
-
-      csharp.enable = true;
-      java.enable = true;
 
       python = {
         enable = true;
@@ -44,33 +31,11 @@
         lsp.server = "python-lsp-server";
       };
 
-      kotlin.enable = true;
-      dart = {
-        enable = true;
-        flutter-tools = {
-          enable = true;
-          color = {
-            enable = true;
-            virtualText.enable = true;
-          };
-        };
-      };
-
-      go.enable = true;
-      sql.enable = true;
-
-      html.enable = true;
-      css.enable = true;
-      ts = {
-        enable = true;
-        extensions.ts-error-translator.enable = true;
-      };
-      php.enable = true;
-
       markdown = {
         enable = true;
+        format.type = "prettierd";
         extensions = {
-          markview-nvim.enable = true;
+          render-markdown-nvim.enable = true;
         };
       };
 

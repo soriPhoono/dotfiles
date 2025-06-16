@@ -27,6 +27,7 @@ in {
     ];
 
     userapps = {
+      ghostty.enable = true;
       firefox.enable = true;
       discord.enable = true;
     };

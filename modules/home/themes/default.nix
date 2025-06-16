@@ -38,7 +38,7 @@
       };
 
       sizes = let
-        default = 14;
+        default = 16;
       in {
         applications = default;
         desktop = default;

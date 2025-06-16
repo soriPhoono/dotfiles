@@ -6,7 +6,10 @@
     };
 
     utility = {
-      images.image-nvim.enable = true;
+      images.image-nvim = {
+        enable = true;
+        setupOpts.backend = "kitty";
+      };
       direnv.enable = true;
       mkdir.enable = true;
       multicursors.enable = true;

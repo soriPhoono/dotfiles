@@ -3,10 +3,6 @@
     ./plugins
   ];
 
-  home.packages = with pkgs; [
-    ueberzug
-  ];
-
   programs.nvf = {
     enable = true;
 
@@ -38,6 +34,8 @@
         enable = true;
         programmingWordlist.enable = true;
       };
+
+      theme.enable = true;
     };
   };
 }
