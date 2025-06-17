@@ -95,5 +95,9 @@
       channels-config = {
         allowUnfree = true;
       };
+
+      templates = {
+        rust.description = "A template for a minimal rust supported dev environment supported by devshells";
+      };
     };
 }
