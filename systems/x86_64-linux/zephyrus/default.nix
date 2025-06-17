@@ -54,6 +54,7 @@
       quickshare.enable = true;
     };
     features = {
+      gaming.enable = true;
       intelligence = {
         enable = true;
         acceleration = "cuda";

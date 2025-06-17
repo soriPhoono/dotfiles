@@ -19,11 +19,13 @@
       enableFormat = true;
       enableTreesitter = true;
 
-      nix = {
-        enable = true;
-        lsp.server = "nixd";
-      };
+      nix.enable = true;
       bash.enable = true;
+
+      rust = {
+        enable = true;
+        crates.enable = true;
+      };
 
       python = {
         enable = true;
