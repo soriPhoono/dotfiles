@@ -118,6 +118,9 @@ in {
       jellyfin = {
         enable = true;
 
+        user = "jellyfin";
+        group = "jellyfin";
+
         cacheDir = serviceDir + "/cache/";
         dataDir = serviceDir;
       };

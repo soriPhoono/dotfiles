@@ -19,7 +19,10 @@
       enableFormat = true;
       enableTreesitter = true;
 
-      nix.enable = true;
+      nix = {
+        enable = true;
+        lsp.server = "nixd";
+      };
       bash.enable = true;
 
       rust = {
