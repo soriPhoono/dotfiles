@@ -6,13 +6,21 @@
 }: let
   cfg = config.server.cloud;
 
+  officeFQDN = "office.${config.core.networking.tailscale.tn_name}";
+  cloudFQDN = "cloud.${config.core.networking.tailscale.tn_name}";
+
+  officeUrl = "https://${officeFQDN}";
+  cloudUrl = "https://${cloudFQDN}";
+
   dataDir = "/services/nextcloud/";
+
   storageDir = "/mnt/cloud";
 in {
   options.server.cloud.enable = lib.mkEnableOption "Enable cloud server services";
 
   config = lib.mkIf cfg.enable {
     server = {
+      postgresql.enable = true;
       mysql.enable = true;
       redis.enable = true;
       mailserver.enable = true;
@@ -55,6 +63,17 @@ in {
     };
 
     services = {
+      postgresql = {
+        ensureDatabases = [
+          "onlyoffice"
+        ];
+        ensureUsers = [
+          {
+            name = "onlyoffice";
+          }
+        ];
+      };
+
       mysql = {
         settings.mysqld.innodb_read_only_compressed = 0;
         ensureDatabases = [
@@ -68,6 +87,12 @@ in {
             };
           }
         ];
+      };
+
+      onlyoffice = {
+        enable = true;
+        hostname = officeFQDN;
+        port = 8099;
       };
 
       nextcloud = {
@@ -92,7 +117,7 @@ in {
             calendar
             tasks
             notes
-            richdocuments
+            onlyoffice
             ;
         };
         extraAppsEnable = true;
@@ -147,7 +172,7 @@ in {
       nginx.enable = lib.mkForce false;
 
       caddy.virtualHosts = {
-        "https://cloud.${config.core.networking.tailscale.tn_name}" = {
+        ${cloudUrl} = {
           extraConfig = ''
             bind tailscale/cloud
 
