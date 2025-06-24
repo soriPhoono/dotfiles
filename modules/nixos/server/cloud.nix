@@ -172,6 +172,15 @@ in {
       nginx.enable = lib.mkForce false;
 
       caddy.virtualHosts = {
+        ${officeUrl}.extraConfig = ''
+          reverse_proxy http://127.0.0.1:${config.services.onlyoffice.port} {
+            bind tailscale/office
+
+            # Required to circumvent bug of Onlyoffice loading mixed non-https content
+            header_up X-Forwarded-Proto https
+          }
+        '';
+
         ${cloudUrl} = {
           extraConfig = ''
             bind tailscale/cloud
