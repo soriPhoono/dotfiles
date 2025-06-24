@@ -6,21 +6,16 @@
 }: let
   cfg = config.server.cloud;
 
-  officeFQDN = "office.${config.core.networking.tailscale.tn_name}";
   cloudFQDN = "cloud.${config.core.networking.tailscale.tn_name}";
-
-  officeUrl = "https://${officeFQDN}";
   cloudUrl = "https://${cloudFQDN}";
 
   dataDir = "/services/nextcloud/";
-
   storageDir = "/mnt/cloud";
 in {
   options.server.cloud.enable = lib.mkEnableOption "Enable cloud server services";
 
   config = lib.mkIf cfg.enable {
     server = {
-      postgresql.enable = true;
       mysql.enable = true;
       redis.enable = true;
       mailserver.enable = true;
@@ -63,17 +58,6 @@ in {
     };
 
     services = {
-      postgresql = {
-        ensureDatabases = [
-          "onlyoffice"
-        ];
-        ensureUsers = [
-          {
-            name = "onlyoffice";
-          }
-        ];
-      };
-
       mysql = {
         settings.mysqld.innodb_read_only_compressed = 0;
         ensureDatabases = [
@@ -89,10 +73,13 @@ in {
         ];
       };
 
-      onlyoffice = {
+      collabora-online = {
         enable = true;
-        hostname = officeFQDN;
-        port = 8099;
+        aliasGroups = [
+          {
+            host = cloudUrl;
+          }
+        ];
       };
 
       nextcloud = {
@@ -117,7 +104,7 @@ in {
             calendar
             tasks
             notes
-            onlyoffice
+            richdocuments
             ;
         };
         extraAppsEnable = true;
@@ -172,15 +159,6 @@ in {
       nginx.enable = lib.mkForce false;
 
       caddy.virtualHosts = {
-        ${officeUrl}.extraConfig = ''
-          reverse_proxy http://127.0.0.1:${config.services.onlyoffice.port} {
-            bind tailscale/office
-
-            # Required to circumvent bug of Onlyoffice loading mixed non-https content
-            header_up X-Forwarded-Proto https
-          }
-        '';
-
         ${cloudUrl} = {
           extraConfig = ''
             bind tailscale/cloud
