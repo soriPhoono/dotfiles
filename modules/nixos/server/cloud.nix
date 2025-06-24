@@ -92,6 +92,7 @@ in {
             calendar
             tasks
             notes
+            richdocuments
             ;
         };
         extraAppsEnable = true;
