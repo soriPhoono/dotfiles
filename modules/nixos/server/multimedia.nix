@@ -115,6 +115,8 @@ in {
         };
       };
 
+      jellyseerr.enable = true;
+
       jellyfin = {
         enable = true;
 
@@ -123,10 +125,6 @@ in {
 
         cacheDir = serviceDir + "/jellyfin/cache/";
         dataDir = serviceDir + "/jellyfin/";
-      };
-
-      jellyseerr = {
-        enable = true;
       };
 
       deluge = {
