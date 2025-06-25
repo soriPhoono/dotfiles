@@ -39,7 +39,6 @@ in {
     users.groups.multimedia.members = [
       "nextcloud"
       config.services.jellyfin.user
-      "jellyseerr"
       config.services.deluge.user
       config.services.sonarr.user
       config.services.radarr.user
@@ -51,7 +50,6 @@ in {
     systemd = {
       tmpfiles.rules = [
         "d ${serviceDir}/jellyfin/ 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} -"
-        "d ${serviceDir}/jellyseerr/ 0770 jellyseerr jellyseerr -"
         "d ${dataDir} 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Shows/ 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Movies/ 0777 ${config.services.deluge.user} multimedia -"
@@ -129,7 +127,6 @@ in {
 
       jellyseerr = {
         enable = true;
-        configDir = serviceDir + "/jellyseerr/";
       };
 
       deluge = {
