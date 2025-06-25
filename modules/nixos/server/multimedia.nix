@@ -5,8 +5,8 @@
 }: let
   cfg = config.server.multimedia;
 
-  serviceDir = "/services/jellyfin/";
-  dataDir = "/mnt/media";
+  serviceDir = "/services/";
+  dataDir = "/mnt/media/";
 
   arrStack = [
     "sonarr"
@@ -39,6 +39,7 @@ in {
     users.groups.multimedia.members = [
       "nextcloud"
       config.services.jellyfin.user
+      "jellyseerr"
       config.services.deluge.user
       config.services.sonarr.user
       config.services.radarr.user
@@ -49,7 +50,8 @@ in {
 
     systemd = {
       tmpfiles.rules = [
-        "d ${serviceDir} 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} -"
+        "d ${serviceDir}/jellyfin/ 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} -"
+        "d ${serviceDir}/jellyseer/ 0770 jellyseerr jellyseerr -"
         "d ${dataDir} 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Shows/ 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Movies/ 0777 ${config.services.deluge.user} multimedia -"
@@ -111,7 +113,7 @@ in {
         enable = true;
 
         settings = {
-          MusicFolder = "/mnt/media/Music";
+          MusicFolder = dataDir + "/Music";
         };
       };
 
@@ -121,13 +123,13 @@ in {
         user = "jellyfin";
         group = "jellyfin";
 
-        cacheDir = serviceDir + "/cache/";
-        dataDir = serviceDir;
+        cacheDir = serviceDir + "/jellyfin/cache/";
+        dataDir = serviceDir + "/jellyfin/";
       };
 
       jellyseerr = {
         enable = true;
-        configDir = "/services/jellyseerr/";
+        configDir = serviceDir + "/jellyseerr/";
       };
 
       deluge = {
