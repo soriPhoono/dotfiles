@@ -125,6 +125,11 @@ in {
         dataDir = serviceDir;
       };
 
+      jellyseerr = {
+        enable = true;
+        configDir = "/services/jellyseerr/";
+      };
+
       deluge = {
         enable = true;
         web.enable = true;
@@ -159,6 +164,7 @@ in {
             reverse_proxy /movies/* localhost:${builtins.toString config.services.radarr.settings.server.port}
             reverse_proxy /music/* localhost:${builtins.toString config.services.lidarr.settings.server.port}
             reverse_proxy /books/* localhost:${builtins.toString config.services.readarr.settings.server.port}
+            reverse_proxy localhost:${builtins.toString config.services.jellyseerr.port}
           '';
         };
 
