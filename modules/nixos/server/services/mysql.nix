@@ -6,7 +6,7 @@
 }: let
   cfg = config.server.mysql;
 
-  dataDir = "/services/database/mysql";
+  dataDir = "/services/database/";
 in {
   options.server.mysql.enable = lib.mkEnableOption "Enable mysql database backend";
 

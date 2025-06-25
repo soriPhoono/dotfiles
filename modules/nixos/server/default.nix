@@ -9,7 +9,6 @@ in {
   imports = [
     ./services/backups.nix
     ./services/mysql.nix
-    ./services/postgresql.nix
     ./services/redis.nix
     ./services/mailserver.nix
 

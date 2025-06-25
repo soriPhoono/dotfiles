@@ -73,15 +73,6 @@ in {
         ];
       };
 
-      collabora-online = {
-        enable = true;
-        aliasGroups = [
-          {
-            host = cloudUrl;
-          }
-        ];
-      };
-
       nextcloud = {
         enable = true;
         package = pkgs.nextcloud31;
@@ -104,7 +95,6 @@ in {
             calendar
             tasks
             notes
-            richdocuments
             ;
         };
         extraAppsEnable = true;
