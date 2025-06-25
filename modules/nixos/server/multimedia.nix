@@ -51,7 +51,7 @@ in {
     systemd = {
       tmpfiles.rules = [
         "d ${serviceDir}/jellyfin/ 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} -"
-        "d ${serviceDir}/jellyseer/ 0770 jellyseerr jellyseerr -"
+        "d ${serviceDir}/jellyseerr/ 0770 jellyseerr jellyseerr -"
         "d ${dataDir} 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Shows/ 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Movies/ 0777 ${config.services.deluge.user} multimedia -"
