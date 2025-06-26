@@ -5,7 +5,6 @@
 }: let
   cfg = config.server.multimedia;
 
-  serviceDir = "/services/";
   dataDir = "/mnt/media/";
 
   arrStack = [
@@ -49,7 +48,6 @@ in {
 
     systemd = {
       tmpfiles.rules = [
-        "d ${serviceDir}/jellyfin/ 0770 ${config.services.jellyfin.user} ${config.services.jellyfin.group} -"
         "d ${dataDir} 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Shows/ 0777 ${config.services.deluge.user} multimedia -"
         "d ${dataDir}/Movies/ 0777 ${config.services.deluge.user} multimedia -"
@@ -122,9 +120,6 @@ in {
 
         user = "jellyfin";
         group = "jellyfin";
-
-        cacheDir = serviceDir + "/jellyfin/cache/";
-        dataDir = serviceDir + "/jellyfin/";
       };
 
       deluge = {
@@ -133,7 +128,15 @@ in {
         dataDir = "${dataDir}/Torrent";
         declarative = true;
         group = "multimedia";
-        config.enabled_plugins = ["Label"];
+        config = {
+          enabled_plugins = ["Label"];
+          stop_seed_ratio = 0;
+          stop_seed_at_ratio = true;
+          remove_seed_at_ratio = true;
+          seed_time_limit = 0;
+          seed_time_ratio_limit = 0;
+          max_active_seeding = 1;
+        };
         authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
       };
 
@@ -219,63 +222,10 @@ in {
                 };
               }
               {
-                Prowlarr = {
-                  description = "Torrent indexer manager";
-                  href = "${pvrEndpoint}/index";
-                  icon = "sh-prowlarr-radarr";
-                  widget = {
-                    type = "prowlarr";
-                    url = "http://localhost:${builtins.toString config.services.prowlarr.settings.server.port}";
-                    key = "e4d93e2710cb47c48d58ab119c76c5c6";
-                  };
-                };
-              }
-              {
-                Sonarr = {
-                  description = "Torrent aggregator for TV";
-                  href = "${pvrEndpoint}/shows";
-                  icon = "sh-sonarr-radarr";
-                  widget = {
-                    type = "sonarr";
-                    url = "http://localhost:${builtins.toString config.services.sonarr.settings.server.port}";
-                    key = "6ba52920293a48a3ac448af8afc3f15e";
-                  };
-                };
-              }
-              {
-                Radarr = {
-                  description = "Torrent aggregator for Movies";
-                  href = "${pvrEndpoint}/movies";
+                PVR = {
+                  description = "Personal virtual recorder (request engine)";
+                  href = pvrEndpoint;
                   icon = "sh-radarr";
-                  widget = {
-                    type = "radarr";
-                    url = "http://localhost:${builtins.toString config.services.radarr.settings.server.port}";
-                    key = "58b06948502b45e2a56a54cc4f69b8ab";
-                  };
-                };
-              }
-              {
-                Lidarr = {
-                  description = "Torrent aggregator for Music";
-                  href = "${pvrEndpoint}/music";
-                  icon = "sh-lidarr-radarr";
-                  widget = {
-                    type = "lidarr";
-                    url = "http://localhost:${builtins.toString config.services.lidarr.settings.server.port}";
-                    key = "58ae71018a0a454eacd2a8a718b2f178";
-                  };
-                };
-              }
-              {
-                Readarr = {
-                  description = "Torrent aggregator for Books";
-                  href = "${pvrEndpoint}/books";
-                  icon = "sh-readarr-radarr";
-                  widget = {
-                    type = "readarr";
-                    url = "http://localhost:${builtins.toString config.services.readarr.settings.server.port}";
-                    key = "0cbd4b7ae0ea4e41b8f30a57d61ee771";
-                  };
                 };
               }
               {

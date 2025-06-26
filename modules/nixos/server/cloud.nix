@@ -9,7 +9,6 @@
   cloudFQDN = "cloud.${config.core.networking.tailscale.tn_name}";
   cloudUrl = "https://${cloudFQDN}";
 
-  dataDir = "/services/nextcloud/";
   storageDir = "/mnt/cloud";
 in {
   options.server.cloud.enable = lib.mkEnableOption "Enable cloud server services";
@@ -36,7 +35,6 @@ in {
 
     systemd = {
       tmpfiles.rules = [
-        "d ${dataDir} 0770 nextcloud nextcloud -"
         "d ${storageDir} 0770 nextcloud nextcloud -"
         "d ${storageDir}/config 0770 nextcloud nextcloud -"
       ];
@@ -81,7 +79,6 @@ in {
         hostName = "localhost";
         maxUploadSize = "5G";
 
-        home = dataDir;
         datadir = storageDir;
 
         configureRedis = true;

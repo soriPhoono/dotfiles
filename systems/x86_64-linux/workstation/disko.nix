@@ -12,7 +12,7 @@
               content = {
                 type = "filesystem";
                 format = "ext4";
-                mountpoint = "/services";
+                mountpoint = "/home";
               };
             };
           };
@@ -48,7 +48,6 @@
               content = {
                 type = "filesystem";
                 format = "ext4";
-                mountpoint = "/games";
               };
             };
           };

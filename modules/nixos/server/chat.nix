@@ -5,8 +5,6 @@
 }: let
   cfg = config.server.chat;
 
-  ollama_data_dir = "/services/ollama/";
-
   open-webuiEndpoint = "https://chat.${config.core.networking.tailscale.tn_name}";
 in {
   options.server.chat.enable = lib.mkEnableOption "Enable ollama self hosted artificial intelligence";
@@ -19,12 +17,6 @@ in {
       templates.searx_secrets.content = ''
         SEARX_SECRET_KEY=${config.sops.placeholder."server/searx_seed"}
       '';
-    };
-
-    systemd = {
-      tmpfiles.rules = [
-        "d ${ollama_data_dir} 0770 ${config.services.ollama.user} ${config.services.ollama.user} -"
-      ];
     };
 
     services = {
@@ -44,8 +36,6 @@ in {
           ];
         };
       };
-
-      ollama.home = ollama_data_dir;
 
       open-webui = {
         enable = true;
