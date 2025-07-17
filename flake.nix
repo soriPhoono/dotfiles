@@ -88,6 +88,7 @@
       homes = {
         modules = with inputs; [
           sops-nix.homeManagerModules.sops
+          stylix.homeModules.stylix
           nvf.homeManagerModules.default
         ];
       };

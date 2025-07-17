@@ -4,7 +4,7 @@
   userapps.features = {
     enable = true;
     development.enable = true;
-    streaming.enable = false;
+    streaming.enable = true;
     artwork.enable = true;
   };
 }

@@ -12,6 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      obs-studio
       gimp
       tenacity
       davinci-resolve
