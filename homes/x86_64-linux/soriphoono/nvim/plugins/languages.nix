@@ -25,11 +25,6 @@
       };
       bash.enable = true;
 
-      rust = {
-        enable = true;
-        crates.enable = true;
-      };
-
       python = {
         enable = true;
         format.type = "black-and-isort";

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   imports = [
     ./plugins
   ];
@@ -29,12 +29,6 @@
 
       git.enable = true;
       undoFile.enable = true;
-
-      spellcheck = {
-        enable = true;
-        programmingWordlist.enable = true;
-      };
-
       theme.enable = true;
     };
   };

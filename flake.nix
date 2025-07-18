@@ -40,7 +40,6 @@
       url = "github:danth/stylix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
       };
     };
 
@@ -98,6 +97,7 @@
       };
 
       templates = {
+        empty.description = "An empty flake with a basic flake.nix to support a devshell environment";
         rust.description = "A template for a minimal rust supported dev environment supported by devshells";
       };
     };
