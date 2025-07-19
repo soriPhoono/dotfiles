@@ -7,12 +7,15 @@
     ./users.nix
   ];
 
-  programs.nh = {
-    enable = true;
-
-    clean = {
+  programs = {
+    nix-ld.enable = true;
+    nh = {
       enable = true;
-      extraArgs = "--keep-since 5d";
+
+      clean = {
+        enable = true;
+        extraArgs = "--keep-since 5d";
+      };
     };
   };
 

@@ -16,10 +16,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      alpaca
-    ];
-
     services.ollama = {
       inherit (cfg) acceleration;
 

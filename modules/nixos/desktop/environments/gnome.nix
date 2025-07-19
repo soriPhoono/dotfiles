@@ -16,7 +16,6 @@ in {
 
       systemPackages = with pkgs.gnomeExtensions; [
         dash-to-dock
-        blur-my-shell
         removable-drive-menu
       ];
     };
