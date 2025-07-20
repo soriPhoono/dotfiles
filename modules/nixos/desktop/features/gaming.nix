@@ -12,9 +12,14 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      bottles
+
+      protonplus
+
+      mangohud
+
       prismlauncher
       gzdoom
-      bottles
     ];
 
     programs = {
