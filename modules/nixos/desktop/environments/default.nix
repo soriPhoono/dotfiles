@@ -9,8 +9,6 @@ in {
   imports = [
     ./gnome.nix
     ./kde.nix
-
-    ./hyprland.nix
   ];
 
   options.desktop = {

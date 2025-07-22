@@ -27,4 +27,6 @@
     registry = builtins.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
+
+  programs.nix-ld.enable = true;
 }

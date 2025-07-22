@@ -80,6 +80,24 @@ in {
     };
 
     services = {
+      deluge = {
+        enable = true;
+        web.enable = true;
+        dataDir = "${dataDir}/Torrent";
+        declarative = true;
+        group = "multimedia";
+        config = {
+          enabled_plugins = ["Label"];
+          stop_seed_ratio = 0;
+          stop_seed_at_ratio = true;
+          remove_seed_at_ratio = true;
+          seed_time_limit = 0;
+          seed_time_ratio_limit = 0;
+          max_active_seeding = 1;
+        };
+        authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
+      };
+
       prowlarr = {
         enable = true;
         settings.server.urlbase = "/index/";
@@ -120,24 +138,6 @@ in {
 
         user = "jellyfin";
         group = "jellyfin";
-      };
-
-      deluge = {
-        enable = true;
-        web.enable = true;
-        dataDir = "${dataDir}/Torrent";
-        declarative = true;
-        group = "multimedia";
-        config = {
-          enabled_plugins = ["Label"];
-          stop_seed_ratio = 0;
-          stop_seed_at_ratio = true;
-          remove_seed_at_ratio = true;
-          seed_time_limit = 0;
-          seed_time_ratio_limit = 0;
-          max_active_seeding = 1;
-        };
-        authFile = config.sops.secrets."server/multimedia/torrent_auth".path;
       };
 
       caddy.virtualHosts = {
