@@ -51,7 +51,6 @@
     environments.gnome.enable = true;
     services = {
       asusd.enable = true;
-      quickshare.enable = true;
     };
     features = {
       gaming.enable = true;
