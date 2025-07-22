@@ -19,6 +19,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # communications
+      teams-for-linux
       signal-desktop
       element-desktop
 
