@@ -17,7 +17,11 @@
       formatter = pkgs.alejandra;
 
       devShells.default = pkgs.mkShell {
-        packages = [
+        packages = with pkgs; [
+          (python3.withPackages (python-pkgs:
+            with python-pkgs; [
+              numpy
+            ]))
         ];
       };
     });
