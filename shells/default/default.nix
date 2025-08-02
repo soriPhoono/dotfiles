@@ -8,5 +8,10 @@ mkShell {
     age
     sops
     ssh-to-age
+
+    (python3.withPackages (ps:
+      with ps; [
+        discordpy
+      ]))
   ];
 }
