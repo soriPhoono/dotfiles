@@ -41,7 +41,6 @@ in {
       config.services.deluge.user
       config.services.sonarr.user
       config.services.radarr.user
-      config.services.bazarr.user
       config.services.readarr.user
       config.services.lidarr.user
     ];
@@ -103,11 +102,6 @@ in {
         settings.server.urlbase = "/index/";
       };
 
-      bazarr = {
-        enable = true;
-        settings.server.urlbase = "/subtitles/";
-      };
-
       sonarr = {
         enable = true;
         settings.server.urlbase = "/shows/";
@@ -159,14 +153,12 @@ in {
             bind tailscale/pvr
 
             redir /index /index/
-            redir /subtitles /subtitles/
             redir /shows /shows/
             redir /movies /movies/
             redir /music /music/
             redir /books /books/
 
             reverse_proxy /index/* localhost:${builtins.toString config.services.prowlarr.settings.server.port}
-            reverse_proxy /subtitles/* localhost:${builtins.toString config.services.bazarr.settings.server.port}
             reverse_proxy /shows/* localhost:${builtins.toString config.services.sonarr.settings.server.port}
             reverse_proxy /movies/* localhost:${builtins.toString config.services.radarr.settings.server.port}
             reverse_proxy /music/* localhost:${builtins.toString config.services.lidarr.settings.server.port}
