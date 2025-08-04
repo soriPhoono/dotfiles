@@ -64,13 +64,6 @@
 
   server = {
     enable = true;
-
-    cloud.enable = true;
-    multimedia.enable = true;
-
-    chat.enable = true;
-
-    mailserver.host = "smtp.gmail.com";
   };
 
   themes.catppuccin.enable = true;
