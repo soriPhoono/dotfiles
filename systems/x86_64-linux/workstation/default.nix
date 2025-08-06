@@ -64,6 +64,8 @@
 
   server = {
     enable = true;
+
+    multimedia.enable = true;
   };
 
   themes.catppuccin.enable = true;
