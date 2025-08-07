@@ -66,6 +66,8 @@
     enable = true;
 
     multimedia.enable = true;
+
+    mailserver.host = "stmp.gmail.com";
   };
 
   themes.catppuccin.enable = true;
