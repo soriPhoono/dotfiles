@@ -67,10 +67,6 @@
 
   server = {
     enable = true;
-
-    networks = [
-      "server_net"
-    ];
   };
 
   themes.catppuccin.enable = true;

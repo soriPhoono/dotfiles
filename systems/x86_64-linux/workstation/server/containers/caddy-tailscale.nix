@@ -72,11 +72,11 @@ in with lib; {
           caddyConfig = pkgs.writeText "Caddyfile" ''
             cloud.xerus-augmented.ts.net {
               bind tailscale/cloud
-              reverse_proxy localhost:8080
+              reverse_proxy 172.18.0.3:8096
             }
           '';
         in [
-          "${caddyConfig}:/etc/caddy/config.caddy"
+          "${caddyConfig}:/etc/caddy/config.caddy:ro"
           "/mnt/data/caddy/:/.config/tsnet-caddy-cloud/"
         ];
 
