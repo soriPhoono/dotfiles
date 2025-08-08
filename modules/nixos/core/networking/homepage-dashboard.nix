@@ -47,7 +47,7 @@ in {
     };
 
     systemd.services = {
-      "serve_homepage" = {
+      serve-homepage = {
         description = "Serve system homepage for network navigation";
 
         after = ["network-pre.target" "homepage-dashboard.service" "tailscaled.service"];

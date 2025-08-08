@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ./disko.nix
+
+    ./server
   ];
 
   core = {
@@ -61,6 +63,14 @@
       gaming.enable = true;
       hosting.enable = true;
     };
+  };
+
+  server = {
+    enable = true;
+
+    networks = [
+      "server_net"
+    ];
   };
 
   themes.catppuccin.enable = true;

@@ -3,7 +3,7 @@
   pkgs,
   config,
   ...
-}: let 
+}: let
   cfg = config.desktop.features.hosting;
 in {
   options.desktop.features.hosting = {
@@ -15,7 +15,7 @@ in {
       docker-compose
     ];
 
-    virtualisation =  {
+    virtualisation = {
       docker = {
         enable = true;
         autoPrune.enable = true;
