@@ -1,7 +1,7 @@
 {
   disko.devices = {
     disk = {
-      services = {
+      home = {
         type = "disk";
         device = "/dev/sda";
         content = {
