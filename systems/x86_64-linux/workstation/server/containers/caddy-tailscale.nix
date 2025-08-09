@@ -75,7 +75,7 @@ in with lib; {
             https://${name}.${cfg.tn_name} {
               ${value}
             }
-          '') cfg.routes))
+          '') cfg.routes));
         in [
           "${caddyConfig}:/etc/caddy/config.caddy:ro"
           "/mnt/data/caddy/:/.config/tsnet-caddy-cloud/"
