@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ./disko.nix
+
+    ./server
   ];
 
   core = {
@@ -65,6 +67,8 @@
   server = {
     enable = true;
 
+    chat.enable = true;
+    cloud.enable = true;
     multimedia.enable = true;
 
     mailserver.host = "stmp.gmail.com";
