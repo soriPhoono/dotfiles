@@ -64,24 +64,21 @@ in with lib; {
           buildVMMemorySize = 512;
         };
 
+        extraOptions = ["--net=host"];
+
         environmentFiles = [
           config.sops.templates."caddy-tailscale.env".path
         ];
 
         volumes = let 
-          caddyConfig = pkgs.writeText "Caddyfile" ''
-            cloud.xerus-augmented.ts.net {
-              bind tailscale/cloud
-              reverse_proxy localhost:8096
+          caddyConfig = (builtins.concatStringsSep "\n\n" (map (name: value: ''
+            https://${name}.${cfg.tn_name} {
+              ${value}
             }
-          '';
+          '') cfg.routes))
         in [
           "${caddyConfig}:/etc/caddy/config.caddy:ro"
           "/mnt/data/caddy/:/.config/tsnet-caddy-cloud/"
-        ];
-
-        networks = [
-          "server_net"
         ];
       };
     };

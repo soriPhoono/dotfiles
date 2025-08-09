@@ -32,16 +32,15 @@ in {
         ];
 
         script = ''
-          docker network create server_net
+          if ! docker network ls | grep server_net; then
+            docker network create server_net
+          fi
         '';
       };
     };
 
     virtualisation.oci-containers.backend = "docker";
 
-    server.containers = {
-      caddy-tailscale.enable = true;
-      jellyfin.enable = true;
-    };
+    server.containers.caddy-tailscale.enable = true;
   };
 }

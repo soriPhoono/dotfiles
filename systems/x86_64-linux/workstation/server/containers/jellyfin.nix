@@ -4,6 +4,8 @@
   ...
 }: let 
   cfg = config.server.containers.jellyfin;
+
+  nodeName = "media";
 in with lib; {
   options.server.containers.jellyfin = {
     enable = mkEnableOption "Enable jellyfin media server container";
@@ -23,5 +25,10 @@ in with lib; {
         ];
       };
     };
+
+    server.containers.caddy-tailscale.routes.${nodeName} = ''
+      bind tailscale/${nodeName}
+      reverse_proxy localhost:8096
+    '';
   };
 }
