@@ -8,11 +8,36 @@
 in {
   imports = [
     ./containers/caddy-tailscale.nix
+    
+    ./containers/mariadb.nix
+    ./containers/redis.nix
+    ./containers/nextcloud.nix
+
+    ./containers/deluge.nix
+    ./containers/prowlarr.nix
+    ./containers/sonarr.nix
+    ./containers/radarr.nix
+    ./containers/lidarr.nix
+    ./containers/readarr.nix
+    
     ./containers/jellyfin.nix
+    ./containers/jellyseerr.nix
+
+    ./features/multimedia.nix
+    ./features/office.nix
   ];
 
   options.server = with lib; {
     enable = mkEnableOption "Enable server config";
+
+    networks = mkOption {
+      type = with types; listOf str;
+      default = [];
+      description = "The server networks to create for feature coordination";
+      example = [
+        "server_net"
+      ];
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -31,11 +56,12 @@ in {
           docker
         ];
 
-        script = ''
-          if ! docker network ls | grep server_net; then
-            docker network create server_net
-          fi
-        '';
+        script = builtins.concatStringsSep "\n" (map (name: ''
+            if ! docker network ls | grep ${name}; then
+              docker network create ${name}
+            fi
+          '')
+          cfg.networks);
       };
     };
 

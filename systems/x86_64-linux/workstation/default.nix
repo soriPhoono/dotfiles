@@ -67,6 +67,14 @@
 
   server = {
     enable = true;
+
+    containers.caddy-tailscale.tn_name = "xerus-augmented.ts.net";
+
+    features = {
+      office.enable = true;
+
+      multimedia.enable = true;
+    };
   };
 
   themes.catppuccin.enable = true;
