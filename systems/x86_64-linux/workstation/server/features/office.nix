@@ -16,14 +16,32 @@ in
           "office_network"
         ];
         containers = {
+          postgresql = {
+            enable = true;
+            users = {
+              linkwarden = "linkwarden";
+              nextcloud = "nextcloud";
+            };
+          };
+          linkwarden.enable = true;
           nextcloud.enable = true;
         };
       };
 
       server.containers.caddy-tailscale.blocks = [
         ''
+          https://bookmarks.${config.server.containers.caddy-tailscale.tn_name} {
+            bind tailscale/bookmarks
+
+            reverse_proxy localhost:3000
+          }
+
           https://cloud.${config.server.containers.caddy-tailscale.tn_name} {
             bind tailscale/cloud
+
+            handle_path /whiteboard/* {
+              reverse_proxy localhost:3002
+            }
 
             encode zstd gzip
 

@@ -15,6 +15,11 @@ in
         radarr = {
           image = "lscr.io/linuxserver/radarr:latest";
 
+          environment = {
+            PUID = "1000";
+            PGID = "1000";
+          };
+
           volumes = [
             "/mnt/config/radarr:/config"
             "/mnt/media/Movies:/movies"

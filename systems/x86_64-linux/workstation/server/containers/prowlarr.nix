@@ -15,10 +15,15 @@ in
         prowlarr = {
           image = "lscr.io/linuxserver/prowlarr:latest";
 
+          environment = {
+            PUID = "1000";
+            PGID = "1000";
+          };
+
           volumes = [
             "/mnt/config/prowlarr:/config"
           ];
-          
+
           networks = [
             "multimedia_network"
           ];

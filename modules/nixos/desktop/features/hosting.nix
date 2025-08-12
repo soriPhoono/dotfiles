@@ -10,11 +10,8 @@ in {
     enable = lib.mkEnableOption "hosting features";
   };
 
+  # TODO: fix group assignment to be inline with users.nix
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      docker-compose
-    ];
-
     virtualisation = {
       docker = {
         enable = true;

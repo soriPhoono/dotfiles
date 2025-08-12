@@ -16,16 +16,30 @@ in
           "multimedia_network"
         ];
         containers = {
+          postgresql = {
+            enable = true;
+            users = {
+              sonarr = "sonarr";
+              radarr = "radarr";
+              lidarr = "lidarr";
+              readarr = "readarr";
+            };
+          };
+
           deluge.enable = true;
 
           prowlarr.enable = true;
+
           sonarr.enable = true;
           radarr.enable = true;
+          jellyseerr.enable = true;
+
           lidarr.enable = true;
+
           readarr.enable = true;
 
+          navidrome.enable = true;
           jellyfin.enable = true;
-          jellyseerr.enable = true;
         };
       };
 
@@ -51,6 +65,11 @@ in
             reverse_proxy /music/* localhost:8686
             reverse_proxy /books/* localhost:8787
             reverse_proxy localhost:5055
+          }
+
+          https://jukebox.${config.server.containers.caddy-tailscale.tn_name} {
+            bind tailscale/jukebox
+            reverse_proxy localhost:4533
           }
 
           https://media.${config.server.containers.caddy-tailscale.tn_name} {

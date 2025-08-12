@@ -8,12 +8,6 @@
 in {
   options.core.networking.tailscale = {
     enable = lib.mkEnableOption "Enable tailscale always on vpn";
-
-    tn_name = lib.mkOption {
-      type = lib.types.str;
-      description = "The name of your tailnet for hosting";
-      example = "name.ts.net";
-    };
   };
 
   config = lib.mkIf cfg.enable {

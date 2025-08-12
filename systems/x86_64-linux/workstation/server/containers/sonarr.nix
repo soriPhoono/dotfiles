@@ -15,6 +15,11 @@ in
         sonarr = {
           image = "lscr.io/linuxserver/sonarr:latest";
 
+          environment = {
+            PUID = "1000";
+            PGID = "1000";
+          };
+
           volumes = [
             "/mnt/config/sonarr:/config"
             "/mnt/media/Shows:/tv"

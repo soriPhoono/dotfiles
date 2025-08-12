@@ -35,16 +35,11 @@
     networking = {
       enable = true;
       network-manager.enable = true;
-      homepage.enable = true;
-      tailscale = {
-        enable = true;
-        tn_name = "xerus-augmented.ts.net";
-      };
+      tailscale.enable = true;
     };
 
     users = {
       soriphoono = {
-        email = "soriphoono@gmail.com";
         hashedPassword = "$6$x7n.SUTMtInzs2l4$Ew3Zu3Mkc4zvuH8STaVpwIv59UX9rmUV7I7bmWyTRjomM7QRn0Jt/Pl/JN./IqTrXqEe8nIYB43m1nLI2Un211";
         admin = true;
         shell = pkgs.fish;
@@ -56,10 +51,6 @@
   desktop = {
     environments.gnome.enable = true;
     features = {
-      intelligence = {
-        enable = true;
-        acceleration = "rocm";
-      };
       gaming.enable = true;
       hosting.enable = true;
     };
@@ -72,8 +63,8 @@
 
     features = {
       office.enable = true;
-
       multimedia.enable = true;
+      development.enable = true;
     };
   };
 

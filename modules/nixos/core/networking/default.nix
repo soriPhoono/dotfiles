@@ -9,7 +9,6 @@ in {
     ./openssh.nix
     ./network-manager.nix
     ./tailscale.nix
-    ./homepage-dashboard.nix
   ];
 
   options.core.networking = {

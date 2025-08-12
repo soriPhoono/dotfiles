@@ -15,6 +15,11 @@ in
         lidarr = {
           image = "blampe/lidarr:latest";
 
+          environment = {
+            PUID = "1000";
+            PGID = "1000";
+          };
+
           volumes = [
             "/mnt/config/lidarr:/config"
             "/mnt/media/Music:/music"

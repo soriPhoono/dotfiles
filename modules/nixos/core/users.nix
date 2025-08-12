@@ -11,12 +11,6 @@ in {
       type = with types;
         attrsOf (submodule {
           options = {
-            email = mkOption {
-              type = str;
-              description = "The email of the user.";
-              example = "john@doe.com";
-            };
-
             hashedPassword = mkOption {
               type = str;
               description = "The password hash for the user";

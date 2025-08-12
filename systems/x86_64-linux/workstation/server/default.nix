@@ -8,23 +8,36 @@
 in {
   imports = [
     ./containers/caddy-tailscale.nix
-    
-    ./containers/mariadb.nix
+    ./containers/homepage-dashboard.nix
+
+    ./containers/postgresql.nix
     ./containers/redis.nix
+
+    ./containers/linkwarden.nix
     ./containers/nextcloud.nix
 
     ./containers/deluge.nix
+
     ./containers/prowlarr.nix
+
     ./containers/sonarr.nix
     ./containers/radarr.nix
-    ./containers/lidarr.nix
-    ./containers/readarr.nix
-    
-    ./containers/jellyfin.nix
     ./containers/jellyseerr.nix
 
-    ./features/multimedia.nix
+    ./containers/lidarr.nix
+
+    ./containers/readarr.nix
+
+    ./containers/jellyfin.nix
+    ./containers/navidrome.nix
+
+    ./containers/ollama.nix
+    ./containers/searxng.nix
+    ./containers/open-webui.nix
+
     ./features/office.nix
+    ./features/multimedia.nix
+    ./features/development.nix
   ];
 
   options.server = with lib; {
@@ -67,6 +80,20 @@ in {
 
     virtualisation.oci-containers.backend = "docker";
 
-    server.containers.caddy-tailscale.enable = true;
+    server.containers = {
+      caddy-tailscale = {
+        enable = true;
+        blocks = [
+          ''
+            https://home.xerus-augmented.ts.net {
+              bind tailscale/home
+
+              reverse_proxy localhost:8060
+            }
+          ''
+        ];
+      };
+      homepage-dashboard.enable = true;
+    };
   };
 }

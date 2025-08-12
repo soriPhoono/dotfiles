@@ -18,6 +18,11 @@ in
         deluge = {
           image = "lscr.io/linuxserver/deluge:latest";
 
+          environment = {
+            PUID = "1000";
+            PGID = "1000";
+          };
+
           volumes = [
             "/mnt/config/deluge:/config"
             "/mnt/media/Torrent:/downloads"

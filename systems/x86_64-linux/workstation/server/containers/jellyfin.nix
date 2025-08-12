@@ -4,8 +4,6 @@
   ...
 }: let
   cfg = config.server.containers.jellyfin;
-
-  nodeName = "media";
 in
   with lib; {
     options.server.containers.jellyfin = {
@@ -16,6 +14,10 @@ in
       virtualisation.oci-containers.containers = {
         jellyfin = {
           image = "jellyfin/jellyfin";
+
+          devices = [
+            "/dev/dri/"
+          ];
 
           volumes = [
             "/mnt/config/jellyfin/:/config"
