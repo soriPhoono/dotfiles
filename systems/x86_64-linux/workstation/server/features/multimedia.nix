@@ -26,7 +26,7 @@ in
             };
           };
 
-          deluge.enable = true;
+          qbittorrent.enable = true;
 
           prowlarr.enable = true;
 
@@ -53,13 +53,13 @@ in
           https://pvr.${config.server.containers.caddy-tailscale.tn_name} {
             bind tailscale/pvr
 
-            redir /index /index/
+            redir /indexers /indexers/
             redir /shows /shows/
             redir /movies /movies/
             redir /music /music/
             redir /books /books/
 
-            reverse_proxy /index/* localhost:9696
+            reverse_proxy /indexers/* localhost:9696
             reverse_proxy /shows/* localhost:8989
             reverse_proxy /movies/* localhost:7878
             reverse_proxy /music/* localhost:8686

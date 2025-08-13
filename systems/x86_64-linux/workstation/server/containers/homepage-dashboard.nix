@@ -21,7 +21,6 @@ in
 
           volumes = [
             "/mnt/config/homepage-dashboard:/app/config"
-            "/var/run/docker.sock:/var/run/docker.sock"
           ];
 
           ports = [

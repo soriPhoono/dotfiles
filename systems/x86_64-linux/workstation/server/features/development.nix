@@ -27,12 +27,6 @@ in
 
             reverse_proxy localhost:8040
           }
-
-          https://search.xerus-augmented.ts.net {
-            bind tailscale/search
-
-            reverse_proxy localhost:8888
-          }
         ''
       ];
     };

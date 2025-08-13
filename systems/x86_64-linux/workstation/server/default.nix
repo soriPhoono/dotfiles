@@ -17,6 +17,7 @@ in {
     ./containers/nextcloud.nix
 
     ./containers/deluge.nix
+    ./containers/qbittorrent.nix
 
     ./containers/prowlarr.nix
 
@@ -78,7 +79,34 @@ in {
       };
     };
 
-    virtualisation.oci-containers.backend = "docker";
+    virtualisation.oci-containers = {
+      backend = "docker";
+      containers.watchtower = {
+        image = "containrrr/watchtower";
+
+        environment = {
+          WATCHTOWER_CLEANUP = "true";
+          WATCHTOWER_POLL_INTERVAL = "3600";
+          WATCHTOWER_LABEL_ENABLE = "true";
+          WATCHTOWER_DEBUG = "true";
+          WATCHTOWER_NOTIFICATIONS = "email";
+          WATCHTOWER_NOTIFICATION_EMAIL_FROM = "admin@example.com";
+          WATCHTOWER_NOTIFICATION_EMAIL_TO = "notify@example.com";
+          WATCHTOWER_NOTIFICATION_EMAIL_SERVER = "smtp.gmail.com";
+          WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT = "587";
+          WATCHTOWER_NOTIFICATION_EMAIL_USERNAME = "your_email_username";
+          WATCHTOWER_NOTIFICATION_EMAIL_PASSWORD = "your_email_password";
+        };
+
+        volumes = [
+          "/var/run/docker.sock:/var/run/docker.sock"
+        ];
+
+        ports = [
+          "8080:8080"
+        ];
+      };
+    };
 
     server.containers = {
       caddy-tailscale = {
