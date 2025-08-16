@@ -1,8 +1,6 @@
 {pkgs, ...}: {
   imports = [
     ./disko.nix
-
-    ./server
   ];
 
   core = {
@@ -53,18 +51,6 @@
     features = {
       gaming.enable = true;
       hosting.enable = true;
-    };
-  };
-
-  server = {
-    enable = true;
-
-    containers.caddy-tailscale.tn_name = "xerus-augmented.ts.net";
-
-    features = {
-      office.enable = true;
-      multimedia.enable = true;
-      development.enable = true;
     };
   };
 
