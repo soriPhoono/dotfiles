@@ -26,10 +26,8 @@
     networking = {
       enable = true;
       network-manager.enable = true;
-      homepage.enable = true;
       tailscale = {
         enable = true;
-        tn_name = "xerus-augmented.ts.net";
       };
     };
 
@@ -51,13 +49,7 @@
     services = {
       asusd.enable = true;
     };
-    features = {
-      gaming.enable = true;
-      intelligence = {
-        enable = true;
-        acceleration = "cuda";
-      };
-    };
+    features.gaming.enable = true;
   };
 
   themes.catppuccin.enable = true;
