@@ -15,6 +15,8 @@ in {
       restartUnits = ["tailscaled_autoconnect.service"];
     };
 
+    networking.firewall.checkReversePath = "loose";
+
     services = {
       tailscale = {
         enable = true;

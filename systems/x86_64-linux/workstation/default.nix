@@ -3,6 +3,19 @@
     ./disko.nix
   ];
 
+  users = {
+    extraGroups.funkwhale = {};
+    extraUsers = {
+      funkwhale = {
+        group = "funkwhale";
+        shell = pkgs.bash;
+        createHome = true;
+        home = "/srv/funkwhale";
+        isSystemUser = true;
+      };
+    };
+  };
+
   core = {
     hardware = {
       enable = true;
