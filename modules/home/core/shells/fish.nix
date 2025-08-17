@@ -40,6 +40,8 @@ in {
         ${sessionVariables}
 
         ${shellAliases}
+
+        fastfetch
       '';
     };
   };

@@ -7,6 +7,7 @@
     ./dconf.nix
 
     ./nvim
+    ./vscode.nix
   ];
 
   core = {
