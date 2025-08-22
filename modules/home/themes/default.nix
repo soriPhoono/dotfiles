@@ -6,7 +6,7 @@
   stylix = {
     enable = true;
 
-    image = ../../../assets/image.png;
+    image = ../../../assets/wallpapers/japanese_sun.png;
 
     cursor = {
       package = pkgs.bibata-cursors;

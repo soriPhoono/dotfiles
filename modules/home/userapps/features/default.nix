@@ -20,7 +20,7 @@ in {
     home.packages = with pkgs; [
       # core applications
       sublime-music
-      grayjay
+      freetube
 
       # communications
       signal-desktop
