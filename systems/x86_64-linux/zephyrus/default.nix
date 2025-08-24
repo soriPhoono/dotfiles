@@ -49,7 +49,11 @@
     services = {
       asusd.enable = true;
     };
-    features.gaming.enable = true;
+    features = {
+      hosting.enable = true;
+      virtualisation.enable = true;
+      gaming.enable = true;
+    };
   };
 
   themes.catppuccin.enable = true;
