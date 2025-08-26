@@ -1,8 +1,4 @@
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   imports = [
     ./dconf.nix
 
@@ -24,4 +20,6 @@
       userEmail = "soriphoono@gmail.com";
     };
   };
+
+  gnome.dconf.enable = true;
 }
