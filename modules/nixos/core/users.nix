@@ -78,7 +78,7 @@ in {
 
         openssh.authorizedKeys.keys =
           lib.mkIf (user.publicKey != null) ([user.publicKey] 
-            ++ (adminKeys);
+            ++ adminKeys);
       })
       cfg.users;
     };
