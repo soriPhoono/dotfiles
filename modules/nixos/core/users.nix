@@ -72,7 +72,7 @@ in {
       mutableUsers = false;
 
       extraUsers = builtins.mapAttrs (_: user: let
-        adminKeys = if !user.admin (lib.mapAttrsToList (_: admin: admin.publicKey) (lib.filterAttrs (_: user: user.admin) cfg.users)) else [];
+        adminKeys = if !user.admin then (lib.mapAttrsToList (_: admin: admin.publicKey) (lib.filterAttrs (_: user: user.admin) cfg.users)) else [];
       in {
         inherit (user) hashedPassword extraGroups shell;
 
