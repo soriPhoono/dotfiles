@@ -76,7 +76,8 @@ in {
           inherit (user) hashedPassword extraGroups shell;
 
           openssh.authorizedKeys.keys =
-            lib.mkIf (user.publicKey != null) [user.publicKey];
+            lib.mkIf (user.publicKey != null) [user.publicKey] 
+              ++ (lib.mapAttrsToList (_: admin: admin.publicKey) (lib.filterAttrs (_: user: user.admin) cfg.users));
         })
         cfg.users;
     };
