@@ -62,8 +62,9 @@
   desktop = {
     environments.gnome.enable = true;
     features = {
-      gaming.enable = true;
       hosting.enable = true;
+      virtualisation.enable = true;
+      gaming.enable = true;
     };
   };
 
