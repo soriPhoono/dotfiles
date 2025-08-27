@@ -52,6 +52,7 @@
     environments.gnome.enable = true;
     services = {
       asusd.enable = true;
+      openrazer.enable = true;
     };
     features = {
       hosting.enable = true;
