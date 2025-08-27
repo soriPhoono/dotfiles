@@ -1,6 +1,5 @@
 {
   imports = [
-    ./bash.nix
     ./boot.nix
     ./nixconf.nix
     ./secrets.nix

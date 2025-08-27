@@ -10,6 +10,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.network.wait-online.enable = lib.mkForce false;
+
     networking.networkmanager = {
       enable = true;
 
