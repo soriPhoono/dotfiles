@@ -26,6 +26,7 @@ in {
       signal-desktop
       element-desktop
       slack
+      nextcloud-client
 
       # productivity
       thunderbird
