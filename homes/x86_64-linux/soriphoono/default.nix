@@ -21,5 +21,9 @@
     };
   };
 
+  themes ={
+    enable = true;
+  };
+
   gnome.dconf.enable = true;
 }

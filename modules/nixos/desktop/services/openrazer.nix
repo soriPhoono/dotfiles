@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: let cfg = config.desktop.services.openrazer;
+}: let
+  cfg = config.desktop.services.openrazer;
 in {
   options.desktop.services.openrazer = {
     enable = lib.mkEnableOption "OpenRazer service for Razer devices";

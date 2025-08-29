@@ -12,5 +12,11 @@
     };
   };
 
+  themes = {
+    enable = true;
+
+    background = ../../../assets/wallpapers/tech_ripples.png;
+  };
+
   gnome.dconf.enable = true;
 }
