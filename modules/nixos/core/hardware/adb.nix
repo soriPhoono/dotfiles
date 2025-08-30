@@ -11,5 +11,15 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs.adb.enable = true;
+
+    users.extraUsers =
+      builtins.mapAttrs (name: user: {
+        extraGroups = [
+          "adbusers"
+        ];
+      })
+      (lib.filterAttrs
+        (name: content: content.admin)
+        config.core.users);
   };
 }
