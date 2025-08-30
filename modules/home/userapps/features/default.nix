@@ -19,17 +19,14 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # core applications
-      sublime-music
-      freetube
-
-      # communications
-      signal-desktop
-      element-desktop
-      slack
+      ungoogled-chromium
       nextcloud-client
 
-      # productivity
+      # communications
       thunderbird
+      signal-desktop
+
+      # productivity
       onlyoffice-desktopeditors
       obsidian
 
@@ -38,7 +35,6 @@ in {
     ];
 
     userapps = {
-      ghostty.enable = true;
       firefox.enable = true;
       discord.enable = true;
     };
