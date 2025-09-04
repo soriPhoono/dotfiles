@@ -14,7 +14,15 @@ in {
     desktop.enable = true;
 
     environment = {
-      sessionVariables.NIXOS_OZONE_WL = "1";
+      sessionVariables = {
+        NIXOS_OZONE_WL = "1";
+        GST_PLUGIN_SYSTEM_PATH_1_0 = with pkgs; lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
+          gst_all_1.gst-plugins-good
+          gst_all_1.gst-plugins-bad
+          gst_all_1.gst-plugins-ugly
+          gst_all_1.gst-libav
+        ];
+      };
 
       systemPackages = with pkgs.gnomeExtensions; [
         dash-to-dock
