@@ -8,6 +8,8 @@
 in {
   options.desktop.features.gaming = {
     enable = lib.mkEnableOption "Enable steam integration";
+
+    vr.enable = lib.mkEnableOption "Enable VR support with WiVRn";
   };
 
   config = lib.mkIf cfg.enable {
@@ -42,7 +44,7 @@ in {
       };
     };
 
-    services.wivrn = {
+    services.wivrn = lib.mkIf cfg.vr.enable {
       enable = true;
       defaultRuntime = true;
       highPriority = true;
@@ -70,28 +72,5 @@ in {
         };
       };
     };
-
-    # home-manager.users = 
-    #   builtins.mapAttrs (user: _: {
-    #     xdg.configFile = {
-    #       "openvr/openvrpaths.vrpath".text = ''
-    #         {
-    #           "config": [
-    #             "${config.home-manager.users.${user}.xdg.dataHome}/Steam/config"
-    #           ],
-    #           "external_drivers": null,
-    #           "jsonid": "vrpathreg",
-    #           "log": [
-    #             "${config.home-manager.users.${user}.xdg.dataHome}/Steam/logs"
-    #           ],
-    #           "runtime": [
-    #             "${pkgs.opencomposite}/lib/opencomposite",
-    #           ],
-    #           "version": 1
-    #         }
-    #       '';
-    #     };
-    #   })
-    #   config.core.users;
   };
 }
