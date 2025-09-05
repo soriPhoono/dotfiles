@@ -16,11 +16,11 @@ in {
     environment = {
       sessionVariables = {
         NIXOS_OZONE_WL = "1";
-        GST_PLUGIN_SYSTEM_PATH_1_0 = with pkgs; lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
-          gst_all_1.gst-plugins-good
-          gst_all_1.gst-plugins-bad
-          gst_all_1.gst-plugins-ugly
-          gst_all_1.gst-libav
+        GST_PLUGIN_SYSTEM_PATH_1_0 = with pkgs.gst_all_1; lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
+          gst-plugins-good
+          gst-plugins-bad
+          gst-plugins-ugly
+          gst-libav
         ];
       };
 
