@@ -7,7 +7,6 @@
   cfg = config.desktop;
 in {
   imports = [
-    ./environments/gnome.nix
     ./environments/kde.nix
   ];
 

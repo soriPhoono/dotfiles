@@ -18,10 +18,7 @@ in {
       displayManager = {
         sddm = {
           enable = true;
-          wayland = {
-            enable = true;
-            compositor = "kwin";
-          };
+          wayland.enable = true;
         };
       };
       desktopManager.plasma6.enable = true;

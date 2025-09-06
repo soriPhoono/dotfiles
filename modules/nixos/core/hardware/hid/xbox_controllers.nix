@@ -11,8 +11,6 @@ in {
     hardware = {
       uinput.enable = true;
       xone.enable = true;
-
-      # 🗒️: hardware.xpadneo.enable = true # for xbox one original controllers
     };
   };
 }

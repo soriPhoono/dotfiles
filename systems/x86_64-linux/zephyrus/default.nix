@@ -45,7 +45,7 @@
   };
 
   desktop = {
-    environments.gnome.enable = true;
+    environments.kde.enable = true;
     services.asusd.enable = true;
     features = {
       virtualisation.enable = true;

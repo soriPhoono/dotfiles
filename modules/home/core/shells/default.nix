@@ -33,10 +33,6 @@
   };
 
   config = {
-    home.packages = with pkgs; [
-      nvtopPackages.full
-    ];
-
     programs = {
       direnv = {
         enable = true;

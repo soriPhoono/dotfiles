@@ -19,7 +19,6 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       # core applications
-      ungoogled-chromium
       nextcloud-client
 
       # communications
