@@ -1,7 +1,6 @@
 keys:
   - &admin_soriphoono age1y4x8gzzcdhxvqaf9matt0eze3z3yxwx607avq4cexfkgwal4psesj39lvn
-  - &user_spookyskelly age1zjztnawqp0feq2pfqthvrae2g4g4pac4h6e7dw8u5thj4zlg9s9sgh7vyd
-  - &system_testbench age1lqd89ed3x2j58kq4xckle5dwvdyt8kqkwwmaf0dw5e35sy2q9ptq8qzyhm
+  - &admin_spookyskelly age1zjztnawqp0feq2pfqthvrae2g4g4pac4h6e7dw8u5thj4zlg9s9sgh7vyd
   - &system_zephyrus age1vgmm4uqreuwsk9qz0mdn2z0at5fmfansxy7epjd6mk8f3aefngjqe2chf6
   - &system_workstation age10zqsaldzq8uy7k3nwct2s8age6s9vjxyz8j4ldk836hcep8aafnsnnrdg9
 creation_rules:
@@ -14,7 +13,13 @@ creation_rules:
     key_groups:
       - age:
         - *admin_soriphoono
-        - *user_spookyskelly
+        - *admin_spookyskelly
+
+  - path_regex: systems/.*/lg-laptop/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+        - *admin_soriphoono
+        - *admin_spookyskelly
 
   - path_regex: systems/.*/zephyrus/[^/]+\.(yaml|json|env|ini)$
     key_groups:
