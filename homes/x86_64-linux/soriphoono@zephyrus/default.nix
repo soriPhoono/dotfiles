@@ -1,7 +1,3 @@
 {
-  userapps.features = {
-    enable = true;
-    development.enable = true;
-    artwork.enable = true;
-  };
+  userapps.enable = true;
 }

@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -10,8 +11,16 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    desktop.enable = true;
+
     environment = {
       sessionVariables.NIXOS_OZONE_WL = "1";
+
+      systemPackages = with pkgs; [
+        kdePackages.discover
+        kdePackages.sddm-kcm
+        kdePackages.ksystemlog
+      ];
     };
 
     services = {

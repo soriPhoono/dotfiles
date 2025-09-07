@@ -1,9 +1,6 @@
 {
   imports = [
-    ./dconf.nix
-
     ./nvim
-    ./vscode.nix
   ];
 
   core = {
@@ -20,10 +17,4 @@
       userEmail = "soriphoono@gmail.com";
     };
   };
-
-  themes ={
-    enable = true;
-  };
-
-  gnome.dconf.enable = true;
 }

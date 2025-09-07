@@ -49,9 +49,10 @@
     services.asusd.enable = true;
     features = {
       virtualisation.enable = true;
-      gaming.enable = true;
+      gaming = {
+        enable = true;
+        vr.enable = true;
+      };
     };
   };
-
-  themes.catppuccin.enable = true;
 }

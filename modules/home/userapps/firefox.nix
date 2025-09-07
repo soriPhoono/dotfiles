@@ -11,10 +11,6 @@ in {
   config = lib.mkIf cfg.enable {
     home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
 
-    stylix.targets.firefox.profileNames = [
-      "default"
-    ];
-
     programs = {
       firefox = let
         ff-ultima = pkgs.fetchFromGitHub {

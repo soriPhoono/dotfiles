@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -15,10 +14,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    fonts.packages = with pkgs; [
-      carlito
-    ];
-
     services = {
       pulseaudio.enable = false;
 
@@ -32,6 +27,10 @@ in {
           support32Bit = true;
         };
       };
+
+      geoclue2.enable = true;
+      localtimed.enable = true;
+      flatpak.enable = true;
     };
 
     security.rtkit.enable = true;

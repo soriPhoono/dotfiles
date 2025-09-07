@@ -47,7 +47,7 @@ in {
               exit 0
             fi
 
-            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets."core/ts_auth_key".path})" --exit-node-allow-lan-access
+            ${tailscale}/bin/tailscale up --auth-key "$(cat ${config.sops.secrets."core/ts_auth_key".path})"
           '';
       };
     };

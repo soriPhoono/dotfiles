@@ -36,13 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:danth/stylix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,7 +72,6 @@
           nixos-facter-modules.nixosModules.facter
           disko.nixosModules.disko
           sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
           nix-index-database.nixosModules.nix-index
         ];
       };
@@ -87,7 +79,6 @@
       homes = {
         modules = with inputs; [
           sops-nix.homeManagerModules.sops
-          stylix.homeModules.stylix
           nvf.homeManagerModules.default
         ];
       };

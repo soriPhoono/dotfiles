@@ -12,7 +12,13 @@
   home.packages = with pkgs; [
     p7zip
     unrar
+
+    carlito
+    nerd-fonts.sauce-code-pro
+    nerd-fonts.aurulent-sans-mono
   ];
+
+  fonts.fontconfig.enable = true;
 
   xdg = {
     enable = true;

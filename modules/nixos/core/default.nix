@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   imports = [
     ./boot.nix
     ./nixconf.nix
@@ -18,5 +18,5 @@
     };
   };
 
-  system.stateVersion = "25.11";
+  system.stateVersion = config.system.nixos.release;
 }
