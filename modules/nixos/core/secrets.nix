@@ -28,10 +28,12 @@ in {
       secrets =
         lib.genAttrs
         (map (name: "users/${name}/age_key") (builtins.attrNames config.core.users))
-        (name: {
-          path = "/home/${name}/.config/sops/age/keys.txt";
+        (name: let
+          username = builtins.elemAt (lib.splitString "/" name) 1;
+        in {
+          path = "/home/${username}/.config/sops/age/keys.txt";
           mode = "0400";
-          owner = builtins.elemAt (lib.splitString "/" name) 1;
+          owner = username;
           group = "users";
         });
     };

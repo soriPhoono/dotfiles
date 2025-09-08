@@ -1,34 +1,35 @@
 keys:
   - &admin_soriphoono age1y4x8gzzcdhxvqaf9matt0eze3z3yxwx607avq4cexfkgwal4psesj39lvn
-  - &admin_spookyskelly age1zjztnawqp0feq2pfqthvrae2g4g4pac4h6e7dw8u5thj4zlg9s9sgh7vyd
-  - &system_lg_laptop
+  - &admin_spookyskelly age1kv7f5nyknwhf5lvm7yzhm0jetleceklj7u225uxce5x007hkvgys0fmeey
+  - &system_lg_laptop age1yqsdglc9s03k6yhefaqpnpyurj0j9nktlccc8rq2uevpuzn0ea2stx0msr
   - &system_zephyrus age1vz3rjjgwq9t3288mwlt9cdyt83429srm8hwycjrflllhcwkkugvs0jafa0
   - &system_workstation age10zqsaldzq8uy7k3nwct2s8age6s9vjxyz8j4ldk836hcep8aafnsnnrdg9
 creation_rules:
-  - path_regex: homes/.*/soriphoono/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: homes/.*/soriphoono@.*/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-        - *admin_soriphoono
+          - *admin_soriphoono
 
-  - path_regex: homes/.*/spookyskelly/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: homes/.*/spookyskelly@.*/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-        - *admin_spookyskelly
+          - *admin_soriphoono
+          - *admin_spookyskelly
 
   - path_regex: systems/.*/lg-laptop/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-        - *admin_spookyskelly
-        - *system_lg_laptop
+          - *admin_soriphoono
+          - *system_lg_laptop
 
   - path_regex: systems/.*/zephyrus/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-        - *admin_soriphoono
-        - *system_zephyrus
+          - *admin_soriphoono
+          - *system_zephyrus
 
   - path_regex: systems/.*/workstation/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-        - *admin_soriphoono
-        - *system_workstation
+          - *admin_soriphoono
+          - *system_workstation
