@@ -9,7 +9,10 @@
       reportPath = ./facter.json;
 
       gpu = {
-        integrated.intel.enable = true;
+        integrated.intel = {
+          enable = true;
+          deviceId = "a7a0";
+        };
       };
 
       hid = {
