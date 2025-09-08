@@ -41,9 +41,10 @@
   };
 
   desktop = {
-    environments.gnome.enable = true;
-    features.gaming.enable = true;
+    environments.kde.enable = true;
+    features = {
+      printing.enable = true;
+      gaming.enable = true;
+    };
   };
-
-  themes.catppuccin.enable = true;
 }
