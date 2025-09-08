@@ -18,7 +18,6 @@ in {
 
       systemPackages = with pkgs; [
         kdePackages.discover
-        kdePackages.sddm-kcm
         kdePackages.ksystemlog
       ];
     };
