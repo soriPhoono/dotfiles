@@ -66,13 +66,12 @@
   };
 
   desktop = {
-    environments.gnome.enable = true;
+    environments.kde.enable = true;
     features = {
       hosting.enable = true;
       virtualisation.enable = true;
+      printing.enable = true;
       gaming.enable = true;
     };
   };
-
-  themes.catppuccin.enable = true;
 }
