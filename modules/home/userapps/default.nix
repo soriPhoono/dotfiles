@@ -8,6 +8,7 @@
 in {
   imports = [
     ./firefox.nix
+    ./vscode.nix
   ];
 
   options.userapps = {
@@ -20,6 +21,9 @@ in {
       nextcloud-client
     ];
 
-    userapps.firefox.enable = true;
+    userapps = {
+      firefox.enable = true;
+      vscode.enable = true;
+    };
   };
 }
