@@ -1,4 +1,6 @@
 {
+  programs.ssh.startAgent = true;
+
   services.openssh = {
     settings = {
       UseDns = true;
