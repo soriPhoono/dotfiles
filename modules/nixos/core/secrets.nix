@@ -18,6 +18,12 @@ in {
   };
 
   config = {
+    systemd.tmpfiles.rules = lib.flatten (map (username: [
+      "d /home/${username}/.config/ 0600 ${username} users -"
+      "d /home/${username}/.config/sops/ 0600 ${username} users -"
+      "d /home/${username}/.config/sops/age/ 0600 ${username} users -"
+    ]) (builtins.attrNames config.core.users));
+
     services.openssh.enable = true;
 
     sops = {
