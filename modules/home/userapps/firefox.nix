@@ -9,8 +9,6 @@ in {
   options.userapps.firefox.enable = lib.mkEnableOption "Enable Firefox";
 
   config = lib.mkIf cfg.enable {
-    home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
-
     programs = {
       librewolf = let
         ff-ultima = pkgs.fetchFromGitHub {
