@@ -12,7 +12,7 @@ in {
     home.file.".mozilla/firefox/default/search.json.mozlz4".force = lib.mkForce true;
 
     programs = {
-      firefox = let
+      librewolf = let
         ff-ultima = pkgs.fetchFromGitHub {
           owner = "soulhotel";
           repo = "FF-ULTIMA";
