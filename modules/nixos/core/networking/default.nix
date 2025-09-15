@@ -24,6 +24,10 @@ in {
         dnsovertls = "true";
         dnssec = "true";
         fallbackDns = [];
+        extraConfig = ''
+          [Resolve]
+          DNSStubListener=no
+        '';
       };
       timesyncd.enable = true;
     };
