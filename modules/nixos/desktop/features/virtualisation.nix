@@ -12,7 +12,12 @@ in {
   config = lib.mkIf cfg.enable {
     virtualisation.virtualbox.host = {
       enable = true;
-      enableExtensionPack = true;
+      enableKvm = true;
+      addNetworkInterface = lib.mkForce false;
+    };
+
+    programs.virt-manager = {
+      enable = true;
     };
 
     users.extraUsers =
