@@ -19,7 +19,12 @@ in {
     networking.nftables.enable = true;
 
     services = {
-      resolved.enable = true;
+      resolved = {
+        enable = true;
+        dnsovertls = "true";
+        dnssec = "true";
+        fallbackDns = [];
+      };
       timesyncd.enable = true;
     };
   };

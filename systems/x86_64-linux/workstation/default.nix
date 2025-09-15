@@ -68,7 +68,14 @@
   desktop = {
     environments.kde.enable = true;
     features = {
-      hosting.enable = true;
+      hosting = {
+        enable = true;
+        provider = "cloudflare";
+        domain = "cryptic-coders.net";
+        targets = [
+          "cryptic-coders.net"
+        ];
+      };
       virtualisation.enable = true;
       printing.enable = true;
       gaming = {
