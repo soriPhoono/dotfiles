@@ -10,10 +10,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.virtualbox.host = {
-      enable = true;
-      enableKvm = true;
-      addNetworkInterface = lib.mkForce false;
+    virtualisation = {
+      libvirtd.enable = true;
+      spiceUSBRedirection.enable = true;
     };
 
     programs.virt-manager = {
@@ -23,7 +22,7 @@ in {
     users.extraUsers =
       builtins.mapAttrs (_: _: {
         extraGroups = [
-          "vboxusers"
+          "libvirtd"
         ];
       })
       config.core.users;
