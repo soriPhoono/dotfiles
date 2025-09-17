@@ -19,6 +19,10 @@ in {
       enable = true;
     };
 
+    networking.firewall.trustedInterfaces = [
+      "virbr0"
+    ];
+
     users.extraUsers =
       builtins.mapAttrs (_: _: {
         extraGroups = [
