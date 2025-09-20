@@ -3,6 +3,7 @@
     ./disko.nix
   ];
 
+  /*
   users = {
     extraGroups.funkwhale = {};
     extraUsers = {
@@ -15,6 +16,7 @@
       };
     };
   };
+  */
 
   core = {
     hardware = {
@@ -39,8 +41,6 @@
       adb.enable = true;
       bluetooth.enable = true;
     };
-
-    boot.enable = true;
 
     secrets.defaultSopsFile = ./secrets.yaml;
 

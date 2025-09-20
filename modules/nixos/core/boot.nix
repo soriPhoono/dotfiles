@@ -6,8 +6,6 @@
 }: let
   cfg = config.core.boot;
 in {
-  options.core.boot.enable = lib.mkEnableOption "Enable bootloader";
-
   config = {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen;
@@ -19,17 +17,22 @@ in {
 
       initrd = {
         verbose = false;
-        systemd.enable = lib.mkIf cfg.enable true;
+        systemd.enable = true;
       };
 
       consoleLogLevel = 0;
 
-      loader = lib.mkIf cfg.enable {
+      loader = {
         efi.canTouchEfiVariables = true;
         systemd-boot = {
-          enable = true;
+          enable = lib.mkForce false;
           configurationLimit = 10;
         };
+      };
+
+      lanzaboote = {
+        enable = true;
+        pkiBundle = "/var/lib/sbctl";
       };
 
       plymouth.enable = true;
