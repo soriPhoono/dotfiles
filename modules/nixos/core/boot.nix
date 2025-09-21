@@ -4,8 +4,12 @@
   config,
   ...
 }: let
-  cfg = config.core.boot;
+  cfg = config.core.secure-boot;
 in {
+  options.core.secure-boot = {
+    enable = lib.mkEnableOption "Enable bootloader hardening features";
+  };
+
   config = {
     boot = {
       kernelPackages = pkgs.linuxPackages_zen;
@@ -25,13 +29,13 @@ in {
       loader = {
         efi.canTouchEfiVariables = true;
         systemd-boot = {
-          enable = lib.mkForce false;
+          enable = lib.mkForce (!(cfg.enable));
           configurationLimit = 10;
         };
       };
 
       lanzaboote = {
-        enable = true;
+        enable = cfg.enable;
         pkiBundle = "/var/lib/sbctl";
       };
 
