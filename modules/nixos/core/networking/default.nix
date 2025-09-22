@@ -19,16 +19,7 @@ in {
     networking.nftables.enable = true;
 
     services = {
-      resolved = {
-        enable = true;
-        dnsovertls = "true";
-        dnssec = "true";
-        fallbackDns = [];
-        extraConfig = ''
-          [Resolve]
-          DNSStubListener=no
-        '';
-      };
+      resolved.enable = true;
       timesyncd.enable = true;
     };
   };

@@ -8,6 +8,7 @@
 in {
   options.core.networking.tailscale = {
     enable = lib.mkEnableOption "Enable tailscale always on vpn";
+    lockToTailnet = lib.mkEnableOption "Enable tailnet only dns resolution and connection";
   };
 
   config = lib.mkIf cfg.enable {
@@ -16,6 +17,16 @@ in {
     networking.firewall.checkReversePath = "loose";
 
     services = {
+      resolved = lib.mkIf cfg.lockToTailnet {
+        dnsovertls = "true";
+        dnssec = "true";
+        fallbackDns = [];
+        extraConfig = ''
+          [Resolve]
+          DNSStubListener=no
+        '';
+      };
+
       tailscale = {
         enable = true;
 

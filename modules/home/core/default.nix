@@ -14,6 +14,7 @@
     unrar
 
     carlito
+    liberation_ttf
     nerd-fonts.sauce-code-pro
     nerd-fonts.aurulent-sans-mono
   ];

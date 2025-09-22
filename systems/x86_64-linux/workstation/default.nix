@@ -3,21 +3,6 @@
     ./disko.nix
   ];
 
-  /*
-  users = {
-    extraGroups.funkwhale = {};
-    extraUsers = {
-      funkwhale = {
-        group = "funkwhale";
-        shell = pkgs.bash;
-        createHome = true;
-        home = "/srv/funkwhale";
-        isSystemUser = true;
-      };
-    };
-  };
-  */
-
   core = {
     hardware = {
       enable = true;
@@ -47,7 +32,10 @@
     networking = {
       enable = true;
       network-manager.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        lockToTailnet = true;
+      };
     };
 
     users = {
