@@ -8,7 +8,6 @@
 in {
   imports = [
     ./firefox.nix
-    ./vscode.nix
   ];
 
   options.userapps = {
@@ -23,7 +22,6 @@ in {
 
     userapps = {
       firefox.enable = true;
-      vscode.enable = true;
     };
   };
 }

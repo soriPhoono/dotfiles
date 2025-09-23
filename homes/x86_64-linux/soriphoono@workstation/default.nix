@@ -18,5 +18,8 @@
     };
   };
 
-  userapps.enable = true;
+  userapps = {
+    enable = true;
+    development.enable = true;
+  };
 }
