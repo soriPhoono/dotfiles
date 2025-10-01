@@ -12,8 +12,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets."core/ts_auth_key" = {};
-
     networking.firewall.checkReversePath = "loose";
 
     services = {

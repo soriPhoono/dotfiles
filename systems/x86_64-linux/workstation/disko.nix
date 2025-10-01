@@ -21,42 +21,6 @@
     };
 
     disk = {
-      home = {
-        type = "disk";
-        device = "/dev/sdc";
-        content = {
-          type = "gpt";
-          partitions = {
-            root = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/home";
-              };
-            };
-          };
-        };
-      };
-
-      games = {
-        type = "disk";
-        device = "/dev/sdd";
-        content = {
-          type = "gpt";
-          partitions = {
-            root = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/games";
-              };
-            };
-          };
-        };
-      };
-
       main = {
         type = "disk";
         device = "/dev/nvme0n1";
@@ -93,6 +57,13 @@
                       "noatime"
                     ];
                   };
+                  "/home" = {
+                    mountpoint = "/home";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
                 };
               };
             };
@@ -100,28 +71,24 @@
         };
       };
 
-      hdd1 = {
+      projects = {
         type = "disk";
         device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
-            boot = {
-              size = "1M";
-              type = "EF02";
-            };
-            mdadm = {
+            root = {
               size = "100%";
               content = {
-                type = "mdraid";
-                name = "raid0";
+                type = "filesystem";
+                format = "ext4";
               };
             };
           };
         };
       };
 
-      hdd2 = {
+      hdd1 = {
         type = "disk";
         device = "/dev/sdb";
         content = {
@@ -141,6 +108,45 @@
           };
         };
       };
+
+      hdd2 = {
+        type = "disk";
+        device = "/dev/sdc";
+        content = {
+          type = "gpt";
+          partitions = {
+            boot = {
+              size = "1M";
+              type = "EF02";
+            };
+            mdadm = {
+              size = "100%";
+              content = {
+                type = "mdraid";
+                name = "raid0";
+              };
+            };
+          };
+        };
+      };
+
+      # services = {
+      #   type = "disk";
+      #   device = "/dev/sdd";
+      #   content = {
+      #     type = "gpt";
+      #     partitions = {
+      #       root = {
+      #         size = "100%";
+      #         content = {
+      #           type = "filesystem";
+      #           format = "ext4";
+      #           mountpoint = "/var/lib/docker";
+      #         };
+      #       };
+      #     };
+      #   };
+      # };
     };
   };
 }
