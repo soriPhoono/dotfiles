@@ -12,8 +12,6 @@ in with lib; {
 
   # TODO: fix group assignment to be inline with users.nix
   config = mkIf cfg.enable {
-    sops.secrets."desktop/hosting_password" = {};
-
     environment.systemPackages = with pkgs; [
       docker-compose
     ];

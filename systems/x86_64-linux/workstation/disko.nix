@@ -130,23 +130,23 @@
         };
       };
 
-      # services = {
-      #   type = "disk";
-      #   device = "/dev/sdd";
-      #   content = {
-      #     type = "gpt";
-      #     partitions = {
-      #       root = {
-      #         size = "100%";
-      #         content = {
-      #           type = "filesystem";
-      #           format = "ext4";
-      #           mountpoint = "/var/lib/docker";
-      #         };
-      #       };
-      #     };
-      #   };
-      # };
+      services = {
+        type = "disk";
+        device = "/dev/sdc";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/var/lib/docker";
+              };
+            };
+          };
+        };
+      };
     };
   };
 }
