@@ -3,6 +3,10 @@
     ./disko.nix
   ];
 
+  environment.variables = {
+    KWIN_DRM_DEVICES="/dev/dri/card1:/dev/dri/card2";
+  };
+
   core = {
     hardware = {
       enable = true;
