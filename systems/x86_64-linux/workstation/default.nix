@@ -23,7 +23,6 @@
         tablet.enable = true;
       };
 
-      adb.enable = true;
       bluetooth.enable = true;
     };
 
