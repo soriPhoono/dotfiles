@@ -73,7 +73,7 @@
 
       projects = {
         type = "disk";
-        device = "/dev/sdd";
+        device = "/dev/sdc";
         content = {
           type = "gpt";
           partitions = {
@@ -111,7 +111,7 @@
 
       hdd2 = {
         type = "disk";
-        device = "/dev/sdb";
+        device = "/dev/sdd";
         content = {
           type = "gpt";
           partitions = {
@@ -132,7 +132,7 @@
 
       services = {
         type = "disk";
-        device = "/dev/sdc";
+        device = "/dev/sdb";
         content = {
           type = "gpt";
           partitions = {
