@@ -22,8 +22,6 @@
       bluetooth.enable = true;
     };
 
-    boot.enable = true;
-
     secrets.defaultSopsFile = ./secrets.yaml;
 
     networking = {
@@ -31,6 +29,7 @@
       network-manager.enable = true;
       tailscale = {
         enable = true;
+        lockToTailnet = true;
       };
     };
 
@@ -50,10 +49,7 @@
     features = {
       virtualisation.enable = true;
       printing.enable = true;
-      gaming = {
-        enable = true;
-        vr.enable = true;
-      };
+      gaming.enable = true;
     };
   };
 }
