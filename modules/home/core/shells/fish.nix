@@ -41,7 +41,9 @@ in {
 
         ${shellAliases}
 
-        fastfetch
+        if not set -q SSH_CLIENT
+          fastfetch
+        end
       '';
     };
   };
