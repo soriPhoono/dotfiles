@@ -13,29 +13,11 @@ in
 
     # TODO: fix group assignment to be inline with users.nix
     config = mkIf cfg.enable {
-      environment.systemPackages = with pkgs; [
-        docker-compose
-      ];
-
       virtualisation = {
         docker = {
           enable = true;
           autoPrune.enable = true;
           rootless.enable = true;
-        };
-
-        oci-containers = {
-          backend = "docker";
-          containers.portainer = {
-            image = "portainer/portainer-ce:lts";
-            volumes = [
-              "/var/run/docker.sock:/var/run/docker.sock"
-              "portainer_data:/data"
-            ];
-            ports = [
-              "9443:9443"
-            ];
-          };
         };
       };
 
