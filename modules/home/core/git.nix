@@ -27,7 +27,6 @@ in {
 
       signing = {
         format = "ssh";
-        signByDefault = true;
         key = config.core.ssh.publicKey;
       };
 
