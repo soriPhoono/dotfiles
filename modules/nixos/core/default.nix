@@ -18,5 +18,7 @@
     };
   };
 
+  time.timeZone = "America/Chicago";
+
   system.stateVersion = config.system.nixos.release;
 }
