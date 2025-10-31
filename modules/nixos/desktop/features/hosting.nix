@@ -11,14 +11,37 @@ in
       enable = mkEnableOption "hosting features";
     };
 
-    # TODO: fix group assignment to be inline with users.nix
     config = mkIf cfg.enable {
       virtualisation = {
         docker = {
           enable = true;
+          enableOnBoot = true;
           autoPrune.enable = true;
           rootless.enable = true;
         };
+
+        oci-containers = {
+          backend = "docker";
+
+          containers."portainer" = {
+            image = "portainer/portainer-ee:lts";
+            restart = "always";
+            volumes = [
+              "/var/run/docker.sock:/var/run/docker.sock",
+              "portainer_data:/data"
+            ];
+            ports = [ "9443:9443" ];
+          };
+        };
+      };
+
+      systemd.services."create-core-networks" = {
+        serviceConfig.type = "oneshot";
+        wantedBy = [ "docker.service" ];
+        script = ''
+          ${pkgs.docker}/bin/docker network inspect core_network > /dev/null 2>&1 || \
+            ${pkgs.docker}/bin/docker network create core_network --subnet 192.168.25.0/24
+        '';
       };
 
       users.extraUsers =

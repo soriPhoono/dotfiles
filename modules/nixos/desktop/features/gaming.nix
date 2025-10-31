@@ -16,7 +16,7 @@ in {
     environment.systemPackages = with pkgs; [
       lutris
 
-      protonplus
+      protonup-qt
 
       mangohud
 
