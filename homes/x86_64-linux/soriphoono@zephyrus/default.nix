@@ -6,11 +6,7 @@
   core = {
     secrets.defaultSopsFile = ./secrets.yaml;
 
-    shells = {
-      shellAliases = {
-        v = "nvim";
-      };
-    };
+    shells.shellAliases.v = "nvim";
 
     git = {
       userName = "soriphoono";
