@@ -9,7 +9,6 @@ in {
     ./environments/kde.nix
 
     ./features/gaming.nix
-    ./features/hosting.nix
     ./features/printing.nix
     ./features/virtualisation.nix
 
