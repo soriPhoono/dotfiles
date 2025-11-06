@@ -11,17 +11,7 @@ with lib; {
     };
 
     extraSSHKeys = mkOption {
-      type = let
-        gitIdentity = submodule {
-          options = {
-          };
-        };
-      in
-        with types;
-          attrsOf (oneOf [
-            gitIdentity
-            str
-          ]);
+      type = with types; attrsOf str;
       description = ''
         An attrset of path on disk/secret in vault containing
         the private key for this ssh key, will also be appended

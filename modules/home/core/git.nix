@@ -21,7 +21,7 @@ in {
     projectsDir = lib.mkOption {
       type = lib.types.path;
       description = "The directory where git projects are stored";
-      default = config.home.homeDirectory + "/projects";
+      default = config.home.homeDirectory + "/Documents/Projects";
       example = "/run/media/john_doe/Projects";
     };
 
