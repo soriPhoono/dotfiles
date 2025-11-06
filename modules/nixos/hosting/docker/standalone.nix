@@ -25,7 +25,6 @@ in {
       containers = {
         "portainer-server-be" = lib.mkIf (cfg.mode == "server") {
           image = "portainer/portainer-ee:lts";
-          restart = "always";
           volumes = [
             "portainer_data:/data"
           ];
@@ -37,7 +36,6 @@ in {
         };
         "portainer-agent" = lib.mkIf (cfg.mode == "agent" || cfg.mode == "server") {
           image = "portainer/agent:lts";
-          restart = "always";
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
             "/var/lib/docker/volumes:/var/lib/docker/volumes"

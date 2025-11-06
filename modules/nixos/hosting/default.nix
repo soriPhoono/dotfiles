@@ -27,13 +27,13 @@ in
 
       users.extraUsers =
         mkIf cfg.docker.enable
-        builtins.mapAttrs (name: user: {
-          extraGroups = [
-            "docker"
-          ];
-        })
-        (filterAttrs
-          (name: content: content.admin)
-          config.core.users);
+        (builtins.mapAttrs (name: user: {
+            extraGroups = [
+              "docker"
+            ];
+          })
+          (filterAttrs
+            (name: content: content.admin)
+            config.core.users));
     };
   }

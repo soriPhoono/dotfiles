@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: with lib; {
+}:
+with lib; {
   options.core.ssh = {
     publicKey = lib.mkOption {
       type = lib.types.str;
@@ -13,13 +14,14 @@
       type = let
         gitIdentity = submodule {
           options = {
-            
           };
         };
-      in with types; attrsOf (oneOf [
-        gitIdentity
-        str
-      ]);
+      in
+        with types;
+          attrsOf (oneOf [
+            gitIdentity
+            str
+          ]);
       description = ''
         An attrset of path on disk/secret in vault containing
         the private key for this ssh key, will also be appended
@@ -27,7 +29,6 @@
       '';
       default = {};
       example = {
-
       };
     };
   };
