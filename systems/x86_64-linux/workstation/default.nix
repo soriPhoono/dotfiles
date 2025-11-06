@@ -59,7 +59,6 @@
   desktop = {
     environments.kde.enable = true;
     features = {
-      hosting.enable = true;
       virtualisation.enable = true;
       printing.enable = true;
       gaming = {
@@ -68,4 +67,6 @@
       };
     };
   };
+
+  hosting.docker.standalone.enable = true;
 }

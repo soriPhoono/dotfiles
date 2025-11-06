@@ -20,4 +20,10 @@ in with lib; {
       '';
     };
   };
+
+  config = mkIf cfg.enable {
+    hosting.docker.enable = true;
+
+    
+  };
 }
