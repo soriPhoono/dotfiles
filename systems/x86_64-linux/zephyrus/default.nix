@@ -48,9 +48,13 @@
     services.asusd.enable = true;
     features = {
       virtualisation.enable = true;
-      hosting.enable = true;
       printing.enable = true;
       gaming.enable = true;
     };
+  };
+
+  hosting.docker.standalone = {
+    enable = true;
+    mode = "server";
   };
 }
