@@ -30,6 +30,11 @@ in {
       with types;
         attrsOf (submodule {
           options = {
+            directory = mkOption {
+              type = str;
+              description = "The directory of the group of projects for this identity";
+              example = "Work";
+            };
             name = mkOption {
               type = str;
               description = "The name to use for this identity";
@@ -47,15 +52,17 @@ in {
             };
           };
         });
-      description = "A list of SSH identities to use for signing git commits";
+      description = "A list of SSH identities to use for signing git commits, each attribute name is the key used for ssh key deployment.";
       default = {};
       example = {
-        Work = {
+        work_key = {
+          directory = "Work";
           name = "john_work";
           email = "john_work@gmail.com";
           signingKey = "ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         };
-        School = {
+        school_key = {
+          directory = "School";
           name = "john_school";
           email = "JohnDoe@abc.edu";
           signingKey = "ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
@@ -65,6 +72,11 @@ in {
   };
 
   config = {
+    core.ssh.extraSSHKeys =
+      lib.mapAttrs
+      (_: identity: identity.signingKey)
+      cfg.extraIdentities;
+
     programs.git = {
       inherit (cfg) userName userEmail;
 
@@ -78,8 +90,8 @@ in {
 
       includes =
         builtins.attrValues
-        (lib.mapAttrs (dir: identity: {
-            condition = "gitdir:${cfg.projectsDir}/${dir}/";
+        (lib.mapAttrs (_: identity: {
+            condition = "gitdir:${cfg.projectsDir}/${identity.directory}/";
             contents.user = {
               inherit (identity) name email signingKey;
             };
