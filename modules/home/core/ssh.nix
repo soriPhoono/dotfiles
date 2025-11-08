@@ -19,24 +19,29 @@ with lib; {
       '';
       default = {};
       example = {
-        "school_key" = "ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+        "school" = "ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
       };
     };
   };
 
   config = {
-    home.file = {
-      ".ssh/id_ed25519.pub".text = config.core.ssh.publicKey;
-    } // (lib.mapAttrs (name: contents: {
-      target = ".ssh/${name}.pub";
-      text = contents;
-    }) config.core.ssh.extraSSHKeys);
+    home.file =
+      {
+        ".ssh/id_ed25519.pub".text = config.core.ssh.publicKey;
+      }
+      // (lib.mapAttrs (name: contents: {
+          target = ".ssh/${name}.pub";
+          text = contents;
+        })
+        config.core.ssh.extraSSHKeys);
 
-    sops.secrets = {
-      "ssh/primary_key".path = "${config.home.homeDirectory}/.ssh/id_ed25519";
-    } // (lib.mapAttrs (name: path: {
-      path = "${config.home.homeDirectory}/.ssh/${name}";
-    }) config.core.ssh.extraSSHKeys);
+    sops.secrets =
+      {
+        "ssh/primary_key".path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+      }
+      // (lib.genAttrs (map (name: "ssh/${name}_key") (builtins.attrNames config.core.ssh.extraSSHKeys)) (secret: {
+        path = "${config.home.homeDirectory}/.ssh/${builtins.replaceStrings ["ssh/"] [""] secret}";
+      }));
 
     programs.ssh.enable = true;
   };

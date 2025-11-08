@@ -55,13 +55,13 @@ in {
       description = "A list of SSH identities to use for signing git commits, each attribute name is the key used for ssh key deployment.";
       default = {};
       example = {
-        work_key = {
+        work = {
           directory = "Work";
           name = "john_work";
           email = "john_work@gmail.com";
           signingKey = "ssh-ed25519 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
         };
-        school_key = {
+        school = {
           directory = "School";
           name = "john_school";
           email = "JohnDoe@abc.edu";
