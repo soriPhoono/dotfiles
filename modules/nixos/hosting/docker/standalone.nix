@@ -56,6 +56,8 @@ in {
           ${pkgs.docker}/bin/docker network create portainer_agent_network
         ${pkgs.docker}/bin/docker network inspect reverse_proxy_network > /dev/null 2>&1 || \
           ${pkgs.docker}/bin/docker network create reverse_proxy_network --subnet 192.168.25.0/24
+        ${pkgs.docker}/bin/docker volume inspect backend_network > /dev/null 2>&1 || \
+          ${pkgs.docker}/bin/docker volume create backend_network
       '';
     };
   };

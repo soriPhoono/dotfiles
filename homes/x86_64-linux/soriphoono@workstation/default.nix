@@ -17,7 +17,7 @@
       userEmail = "soriphoono@gmail.com";
       projectsDir = "/run/media/soriphoono/Projects";
       extraIdentities = {
-        work_key = {
+        work = {
           directory = "Work";
           name = "xrezdev11";
           email = "xrezdev11@gmail.com";
