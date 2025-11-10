@@ -68,8 +68,5 @@
     };
   };
 
-  hosting.docker.standalone = {
-    enable = true;
-    mode = "server";
-  };
+  hosting.docker.enable = true;
 }
