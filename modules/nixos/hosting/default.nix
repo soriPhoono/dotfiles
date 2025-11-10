@@ -7,10 +7,6 @@
   cfg = config.hosting;
 in
   with lib; {
-    imports = [
-      ./docker/standalone.nix
-    ];
-
     options.hosting = {
       docker = {
         enable = mkEnableOption "Enable Docker hosting features";
