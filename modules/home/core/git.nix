@@ -77,54 +77,60 @@ in {
       (_: identity: identity.signingKey)
       cfg.extraIdentities;
 
-    programs.git = {
-      inherit (cfg) userName userEmail;
+    programs = {
+      git = {
+        enable = true;
 
-      enable = true;
-
-      signing = {
-        format = "ssh";
-        key = config.core.ssh.publicKey;
-        signByDefault = true;
-      };
-
-      includes =
-        builtins.attrValues
-        (lib.mapAttrs (_: identity: {
-            condition = "gitdir:${cfg.projectsDir}/${identity.directory}/";
-            contents.user = {
-              inherit (identity) name email signingKey;
-            };
-          })
-          cfg.extraIdentities);
-
-      extraConfig = {
-        init.defaultBranch = "main";
-
-        diff.algorithm = "histogram";
-
-        help.autocorrect = "prompt";
-
-        commit.verbose = true;
-        push = {
-          default = "current";
-          autoSetupRemote = true;
+        signing = {
+          format = "ssh";
+          key = config.core.ssh.publicKey;
+          signByDefault = true;
         };
-        pull.rebase = true;
-        rebase.autosquash = true;
-        rerere.enabled = true;
 
-        merge.conflictStyle = "zdiff3";
+        includes =
+          builtins.attrValues
+          (lib.mapAttrs (_: identity: {
+              condition = "gitdir:${cfg.projectsDir}/${identity.directory}/";
+              contents.user = {
+                inherit (identity) name email signingKey;
+              };
+            })
+            cfg.extraIdentities);
 
-        url = {
-          "git@github.com:" = {
-            insteadOf = ["github:" "gh:"];
+        settings = {
+          user = {
+            name = cfg.userName;
+            email = cfg.userEmail;
+          };
+
+          init.defaultBranch = "main";
+
+          diff.algorithm = "histogram";
+
+          help.autocorrect = "prompt";
+
+          commit.verbose = true;
+          push = {
+            default = "current";
+            autoSetupRemote = true;
+          };
+          pull.rebase = true;
+          rebase.autosquash = true;
+          rerere.enabled = true;
+
+          merge.conflictStyle = "zdiff3";
+
+          url = {
+            "git@github.com:" = {
+              insteadOf = ["github:" "gh:"];
+            };
           };
         };
       };
 
       delta = {
         enable = true;
+        enableGitIntegration = true;
 
         options = {
           line-numbers = true;

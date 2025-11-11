@@ -15,7 +15,7 @@ in
       kubernetes = {
         enable = mkEnableOption "Enable Kubernetes hosting features";
         mode = mkOption {
-          type = types.enum [ "master" "master-backup" "worker" ];
+          type = types.enum ["master" "master-backup" "worker"];
           default = "master";
           description = "Kubernetes node mode.";
         };
