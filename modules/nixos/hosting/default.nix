@@ -4,42 +4,46 @@
   config,
   ...
 }: let
-  cfg = config.hosting;
+  cfg = config.docker;
 in
   with lib; {
-    options.hosting = {
-      podman = {
-        enable = mkEnableOption "Enable Docker hosting features";
-      };
+    options.docker = {
+      enable = mkEnableOption "Enable Docker support";
 
-      kubernetes = {
-        enable = mkEnableOption "Enable Kubernetes hosting features";
-        mode = mkOption {
-          type = types.enum ["master" "master-backup" "worker"];
-          default = "master";
-          description = "Kubernetes node mode.";
-        };
-      }; # TODO: finish this setup system
+      mode = mkOption {
+        type = types.enum ["standalone" "swarm-manager" "swarm-submanager" "swarm-worker"];
+        default = "standalone";
+        description = ''
+          Set the Docker mode.
+        '';
+      };
     };
 
-    config = {
-      virtualisation = mkIf cfg.podman.enable {
-        podman = {
+    config = mkIf cfg.enable (mkMerge [
+      {
+        virtualisation.docker = {
           enable = true;
-          defaultNetwork.settings.dns_enabled = true;
-          autoPrune.enable = true;
+          autoPrune = true;
         };
-      };
 
-      users.extraUsers =
-        mkIf cfg.podman.enable
-        (builtins.mapAttrs (name: user: {
-            extraGroups = [
-              "podman"
-            ];
-          })
-          (filterAttrs
-            (name: content: content.admin)
-            config.core.users));
-    };
+        users.extraUsers =
+          (builtins.mapAttrs (name: user: {
+              extraGroups = [
+                "docker"
+              ];
+            })
+            (filterAttrs
+              (name: content: content.admin)
+              config.core.users));
+      }
+      (mkIf (cfg.mode == "swarm-manager") {
+
+      })
+      (mkIf (cfg.mode == "swarm-submanager") {
+
+      })
+      (mkIf (cfg.mode == "swarm-worker") {
+
+      })
+    ]);
   }
