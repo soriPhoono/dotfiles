@@ -23,18 +23,18 @@ in
       {
         virtualisation.docker = {
           enable = true;
-          autoPrune = true;
+          autoPrune.enable = true;
         };
 
         users.extraUsers =
-          (builtins.mapAttrs (name: user: {
+          builtins.mapAttrs (name: user: {
               extraGroups = [
                 "docker"
               ];
             })
             (filterAttrs
               (name: content: content.admin)
-              config.core.users));
+              config.core.users);
       }
       (mkIf (cfg.mode == "swarm-manager") {
 
