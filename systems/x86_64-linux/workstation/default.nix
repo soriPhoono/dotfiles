@@ -68,5 +68,5 @@
     };
   };
 
-  hosting.docker.enable = true;
+  docker.enable = true;
 }
