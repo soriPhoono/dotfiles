@@ -53,5 +53,5 @@
     };
   };
 
-  hosting.podman.enable = true;
+  docker.enable = true;
 }
