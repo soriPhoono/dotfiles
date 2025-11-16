@@ -45,12 +45,13 @@
 
   desktop = {
     environments.kde.enable = true;
-    services.asusd.enable = true;
     features = {
       virtualisation.enable = true;
       printing.enable = true;
       gaming.enable = true;
     };
+    programs.wireshark.enable = true;
+    services.asusd.enable = true;
   };
 
   docker.enable = true;

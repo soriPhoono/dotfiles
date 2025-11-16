@@ -12,6 +12,8 @@ in {
     ./features/printing.nix
     ./features/virtualisation.nix
 
+    ./programs/wireshark.nix
+
     ./services/asusd.nix
   ];
 
