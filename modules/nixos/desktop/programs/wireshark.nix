@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -11,6 +12,8 @@ in
     };
 
     config = mkIf cfg.enable {
+      environment.systemPackages = [ pkgs.wireshark ];
+
       programs.wireshark = {
         enable = true;
 
