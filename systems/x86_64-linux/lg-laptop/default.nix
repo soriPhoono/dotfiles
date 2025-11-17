@@ -23,14 +23,15 @@
       bluetooth.enable = true;
     };
 
-    boot.enable = true;
-
     secrets.defaultSopsFile = ./secrets.yaml;
 
     networking = {
       enable = true;
       network-manager.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        lockToTailnet = true;
+      };
     };
 
     users = {
