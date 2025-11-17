@@ -4,13 +4,13 @@
   config,
   ...
 }: let
-  cfg = config.userapps.firefox;
+  cfg = config.userapps.librewolf;
 in {
-  options.userapps.firefox.enable = lib.mkEnableOption "Enable Firefox";
+  options.userapps.librewolf.enable = lib.mkEnableOption "Enable Firefox";
 
   config = lib.mkIf cfg.enable {
     programs = {
-      firefox = let
+      librewolf = let
         ff-ultima = pkgs.fetchFromGitHub {
           owner = "soulhotel";
           repo = "FF-ULTIMA";

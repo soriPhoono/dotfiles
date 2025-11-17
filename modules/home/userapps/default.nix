@@ -7,7 +7,10 @@
   cfg = config.userapps;
 in {
   imports = [
+    ./bitwarden.nix
+
     ./firefox.nix
+    ./librewolf.nix
   ];
 
   options.userapps = {
@@ -20,8 +23,18 @@ in {
       nextcloud-client
     ];
 
+    services = {
+      psd = {
+        enable = true;
+        resyncTimer = "10m";
+      };
+    };
+
     userapps = {
+      bitwarden.enable = true;
+
       firefox.enable = true;
+      librewolf.enable = true;
     };
   };
 }
