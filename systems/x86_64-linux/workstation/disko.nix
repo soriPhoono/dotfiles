@@ -112,7 +112,7 @@
 
       hdd2 = {
         type = "disk";
-        device = "/dev/sdc";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
