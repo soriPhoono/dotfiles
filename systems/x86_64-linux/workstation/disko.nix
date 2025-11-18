@@ -73,7 +73,7 @@
 
       projects = {
         type = "disk";
-        device = "/dev/sdb";
+        device = "/dev/sdc";
         content = {
           type = "gpt";
           partitions = {
@@ -82,6 +82,7 @@
               content = {
                 type = "filesystem";
                 format = "ext4";
+                mountpoint = "/home/projects";
               };
             };
           };
@@ -90,7 +91,7 @@
 
       hdd1 = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/sdb";
         content = {
           type = "gpt";
           partitions = {
