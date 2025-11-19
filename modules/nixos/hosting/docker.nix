@@ -1,0 +1,31 @@
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
+  cfg = config.hosting.docker;
+in
+  with lib; {
+    options.hosting.docker = {
+      enable = mkEnableOption "Enable Docker hosting support.";
+    };
+
+    config = mkIf cfg.enable {
+      virtualisation.docker = {
+        enable = true;
+        logDriver = "local";
+        autoPrune.enable = true;
+      };
+
+      users.extraUsers =
+        builtins.mapAttrs (name: user: {
+          extraGroups = [
+            "docker"
+          ];
+        })
+        (filterAttrs
+          (name: content: content.admin)
+          config.core.users);
+    };
+  }

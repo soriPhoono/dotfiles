@@ -54,5 +54,5 @@
     services.asusd.enable = true;
   };
 
-  docker.enable = true;
+  hosting.podman.enable = true;
 }
