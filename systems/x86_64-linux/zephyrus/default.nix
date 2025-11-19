@@ -54,5 +54,5 @@
     services.asusd.enable = true;
   };
 
-  hosting.podman.enable = true;
+  hosting.kubernetes.testbench.enable = true;
 }
