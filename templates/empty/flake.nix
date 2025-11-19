@@ -7,9 +7,27 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
-    actions-nix.url = "github:nialov/actions.nix";
-    devenv.url = "github:cachix/devenv";
-    agenix-shell.url = "github:aciceri/agenix-shell";
+    actions-nix = {
+      url = "github:nialov/actions.nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+    devenv = {
+      url = "github:cachix/devenv";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+    agenix-shell = {
+      url = "github:aciceri/agenix-shell";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
   };
 
   outputs = inputs @ {
