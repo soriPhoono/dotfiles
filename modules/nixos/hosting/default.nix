@@ -7,24 +7,22 @@
   cfg = config.docker;
 in
   with lib; {
-    options.docker = {
-      enable = mkEnableOption "Enable Docker support";
-    };
+    options = {
+      hosting = {
+        enable = mkEnableOption "Enable Kubernetes support";
 
-    config = mkIf cfg.enable {
-      virtualisation.docker = {
-        enable = true;
-        autoPrune.enable = true;
+        deploymentType = mkOption {
+          type = types.enum [ "testbench" "production" ];
+        };
       };
-
-      users.extraUsers =
-        builtins.mapAttrs (name: user: {
-          extraGroups = [
-            "docker"
-          ];
-        })
-        (filterAttrs
-          (name: content: content.admin)
-          config.core.users);
     };
+
+    config = mkIf cfg.enable (mkMerge [
+      (mkIf (cfg.deploymentType == "testbench") {
+
+      })
+      (mkIf (cfg.deploymentType == "production") {
+
+      })
+    ]);
   }
