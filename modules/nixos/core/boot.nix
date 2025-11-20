@@ -17,6 +17,7 @@ in {
         "quiet"
         "systemd.show_status=false"
         "udev.log_level=3"
+        "systemd.unified_cgroup_hierarchy=false"
       ];
 
       initrd = {

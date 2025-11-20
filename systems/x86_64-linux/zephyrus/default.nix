@@ -54,5 +54,5 @@
     services.asusd.enable = true;
   };
 
-  hosting.kubernetes.testbench.enable = true;
+  hosting.kubernetes.single-node.enable = true;
 }
