@@ -68,5 +68,7 @@
     };
   };
 
-  docker.enable = true;
+  hosting.kubernetes = {
+    testbench.enable = true;
+  };
 }
