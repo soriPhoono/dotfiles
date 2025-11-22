@@ -70,5 +70,6 @@
 
   hosting.kubernetes = {
     testbench.enable = true;
+    single-node.enable = true;
   };
 }
