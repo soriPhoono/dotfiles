@@ -20,7 +20,6 @@ in {
 
     services = {
       resolved.enable = true;
-      timesyncd.enable = true;
     };
   };
 }

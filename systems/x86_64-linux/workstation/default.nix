@@ -68,8 +68,5 @@
     };
   };
 
-  hosting.kubernetes = {
-    testbench.enable = true;
-    single-node.enable = true;
-  };
+  hosting.docker.enable = true;
 }
