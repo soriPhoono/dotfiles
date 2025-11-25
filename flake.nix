@@ -96,10 +96,10 @@
       };
 
       templates = {
-        empty.description = "An empty flake with a basic flake.nix to support a devshell environment";
-        rust.description = "A template for a minimal rust supported dev environment supported by devshells";
-        dotnet.description = "A template for a minimal dotnet application supported by a devshell";
-        python.description = "A template for a minimal python application supported by a devshell";
+        empty.description = ''
+          An empty flake with a basic flake.nix to support a devshell environment.
+          Made with flake-parts and sensable defaults
+        '';
       };
     };
 }

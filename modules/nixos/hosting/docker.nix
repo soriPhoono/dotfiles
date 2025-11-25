@@ -4,27 +4,23 @@
   config,
   ...
 }: let
-  cfg = config.desktop.programs.wireshark;
+  cfg = config.hosting.docker;
 in
   with lib; {
-    options.desktop.programs.wireshark = {
-      enable = mkEnableOption "Wireshark network protocol analyzer";
+    options.hosting.docker = {
+      enable = mkEnableOption "Enable Docker hosting support.";
     };
 
     config = mkIf cfg.enable {
-      environment.systemPackages = [pkgs.wireshark];
-
-      programs.wireshark = {
+      virtualisation.docker = {
         enable = true;
-
-        dumpcap.enable = true;
-        usbmon.enable = true;
+        autoPrune.enable = true;
       };
 
       users.extraUsers =
         builtins.mapAttrs (name: user: {
           extraGroups = [
-            "wireshark"
+            "docker"
           ];
         })
         (filterAttrs

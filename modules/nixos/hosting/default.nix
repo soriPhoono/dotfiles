@@ -3,29 +3,14 @@
   pkgs,
   config,
   ...
-}: let
-  cfg = config.docker;
-in
-  with lib; {
-    options.docker = {
-      enable = mkEnableOption "Enable Docker support";
-    };
+}: {
+  imports = [
+    ./docker.nix
+    ./podman.nix
 
-    config = mkIf cfg.enable {
-      virtualisation.docker = {
-        enable = true;
-        logDriver = "local";
-        autoPrune.enable = true;
-      };
-
-      users.extraUsers =
-        builtins.mapAttrs (name: user: {
-          extraGroups = [
-            "docker"
-          ];
-        })
-        (filterAttrs
-          (name: content: content.admin)
-          config.core.users);
-    };
-  }
+    ./kubernetes/testbench.nix
+    ./kubernetes/single-node.nix
+    ./kubernetes/multi-node-leader.nix
+    ./kubernetes/multi-node-worker.nix
+  ];
+}

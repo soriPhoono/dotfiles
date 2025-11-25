@@ -62,6 +62,10 @@ in {
       fish.enable = lib.any (user: user.shell == pkgs.fish) (builtins.attrValues cfg.users);
     };
 
+    services.logind.settings.Login = {
+      RuntimeDirectorySize = "25%";
+    };
+
     snowfallorg.users =
       builtins.mapAttrs (_: user: {
         inherit (user) admin;

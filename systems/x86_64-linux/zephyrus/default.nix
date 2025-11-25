@@ -54,5 +54,5 @@
     services.asusd.enable = true;
   };
 
-  docker.enable = true;
+  hosting.kubernetes.single-node.enable = true;
 }
