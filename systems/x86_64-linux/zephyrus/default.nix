@@ -54,5 +54,9 @@
     services.asusd.enable = true;
   };
 
-  hosting.kubernetes.single-node.enable = true;
+  hosting.docker = {
+    enable = true;
+    portainerDeploymentMode = "server";
+    domainName = "localhost";
+  };
 }
