@@ -33,7 +33,9 @@ in
 
     config = mkIf cfg.enable {
       sops = {
-        secrets."hosting/cf_dns_api_token" = {};
+        secrets = {
+          "hosting/cf_dns_api_token" = {};
+        };
         templates."traefik.env".content = ''
           CLOUDFLARE_DNS_API_TOKEN=${config.sops.placeholder."hosting/cf_dns_api_token"}
         '';
@@ -59,6 +61,70 @@ in
               volumes = [
                 "/var/run/docker.sock:/var/run/docker.sock"
               ];
+            };
+            traefik = mkIf (cfg.portainerDeploymentMode == "server") {
+              image = "traefik:3.6";
+              cmd = [
+                "--entrypoints.web.address=:80"
+                "--entrypoints.websecure.address=:443"
+                "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=24h"
+                "--entrypoints.websecure.http.tls=true"
+                "--entrypoints.traefik.address=:8080" # For the dashboard/API
+
+                "--providers.docker=true"
+                "--providers.docker.exposedbydefault=false"
+                "--providers.docker.network=core_traefik-public"
+
+                "--api.dashboard=true"
+                "--api.insecure=false" # WARNING: Do not use in production without proper BasicAuth middleware
+
+                "--certificatesresolvers.le-ts.acme.email=admin@${cfg.domainName}"
+                "--certificatesresolvers.le-ts.acme.storage=/acme/acme.json"
+                "--certificatesresolvers.le-ts.acme.dnschallenge=true"
+                "--certificatesresolvers.le-ts.acme.dnschallenge.provider=cloudflare"
+
+                "--log.level=INFO" # Set the Log Level e.g INFO, DEBUG
+                "--accesslog=true" # Enable Access Logs
+                "--metrics.prometheus=true" # Enable Prometheus
+
+                "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+                "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+                "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+              ];
+              environmentFiles = [
+                config.sops.templates."traefik.env".path
+              ];
+              volumes = [
+                "/etc/localtime:/etc/localtime:ro"
+                "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+                "core_traefik-certs:/acme"
+              ];
+              networks = [
+                "core_traefik-public"
+              ];
+              ports = [
+                "80:80"
+                "443:443"
+              ];
+              labels = mkIf (cfg.domainName != null) {
+                "traefik.enable" = "true";
+
+                "traefik.http.routers.traefik.rule" = "Host(`dashboard.admin.ts.${cfg.domainName}`)";
+                "traefik.http.routers.traefik.entrypoints" = "web";
+                "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme" = "websecure";
+                "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto" = "https";
+                "traefik.http.routers.traefik.middlewares" = "traefik-https-redirect";
+                "traefik.http.routers.traefik-secure.rule" = "Host(`dashboard.admin.ts.${cfg.domainName}`)";
+                "traefik.http.routers.traefik-secure.entrypoints" = "websecure";
+                "traefik.http.routers.traefik-secure.tls" = "true";
+                "traefik.http.routers.traefik-secure.service" = "api@internal";
+                "traefik.http.routers.traefik-secure.tls.certresolver" = "le-ts";
+                "traefik.http.routers.traefik-secure.tls.domains[0].main" = "ts.${cfg.domainName}";
+                "traefik.http.routers.traefik-secure.tls.domains[0].sans" = "*.ts.${cfg.domainName}";
+                "traefik.http.middlewares.traefik-auth.basicauth.users" = "admin:$2y$05$/UrxciXCv1x57qFZhDwBLOT2FkMjn2JoLW4yoXmKbQgbawFB8AJkq";
+                "traefik.http.routers.traefik-secure.middlewares" = "traefik-auth";
+              };
             };
             portainer-agent =
               mkIf
@@ -95,57 +161,13 @@ in
               labels = mkIf (cfg.domainName != null) {
                 "traefik.enable" = "true";
 
-                "traefik.http.routers.portainer.rule" = "Host(`admin.${cfg.domainName}`)";
+                "traefik.http.routers.portainer.rule" = "Host(`admin.ts.${cfg.domainName}`)";
                 "traefik.http.routers.portainer.entrypoints" = "websecure";
                 "traefik.http.routers.portainer.tls" = "true";
-                "traefik.http.routers.portainer.tls.certresolver" = "le";
+                "traefik.http.routers.portainer.tls.certresolver" = "le-ts";
 
                 "traefik.http.services.portainer.loadbalancer.server.port" = "9000";
               };
-            };
-            traefik = mkIf (cfg.portainerDeploymentMode == "server") {
-              image = "traefik:3.6";
-              cmd = [
-                "--entrypoints.web.address=:80"
-                "--entrypoints.websecure.address=:443"
-                "--entrypoints.websecure.transport.respondingTimeouts.readTimeout=24h"
-                "--entrypoints.websecure.http.tls=true"
-                "--entrypoints.traefik.address=:8080" # For the dashboard/API
-
-                "--providers.docker=true"
-                "--providers.docker.exposedbydefault=false"
-                "--providers.docker.network=core_traefik-public"
-
-                "--api.dashboard=true"
-                "--api.insecure=false" # WARNING: Do not use in production without proper BasicAuth middleware
-
-                "--certificatesresolvers.le.acme.email=admin@${cfg.domainName}"
-                "--certificatesresolvers.le.acme.storage=/acme/acme.json"
-                "--certificatesresolvers.le.acme.dnschallenge=true"
-                "--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare"
-
-                "--log.level=INFO" # Set the Log Level e.g INFO, DEBUG
-                "--accesslog=true" # Enable Access Logs
-                "--metrics.prometheus=true" # Enable Prometheus
-
-                "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-                "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-                "--entrypoints.web.http.redirections.entrypoint.permanent=true"
-              ];
-              environmentFiles = [
-                config.sops.templates."traefik.env".path
-              ];
-              volumes = [
-                "/var/run/docker.sock:/var/run/docker.sock"
-                "core_traefik-certs:/acme"
-              ];
-              networks = [
-                "core_traefik-public"
-              ];
-              ports = [
-                "80:80"
-                "443:443"
-              ];
             };
           };
         };
