@@ -32,7 +32,12 @@ in
     };
 
     config = mkIf cfg.enable {
-      sops.secrets."hosting/cf_dns_api_token" = {};
+      sops = {
+        secrets."hosting/cf_dns_api_token" = {};
+        templates."traefik.env".content = ''
+          CLOUDFLARE_DNS_API_TOKEN=${config.sops.placeholder."hosting/cf_dns_api_token"}
+        '';
+      };
 
       virtualisation = {
         docker = {
@@ -130,9 +135,9 @@ in
                 "--entrypoints.web.http.redirections.entrypoint.scheme=https"
                 "--entrypoints.web.http.redirections.entrypoint.permanent=true"
               ];
-              environment = {
-                CLOUDFLARE_DNS_API_TOKEN_FILE = config.sops.secrets."hosting/cf_dns_api_token".path;
-              };
+              environmentFiles = [
+                config.sops.templates."traefik.env".path
+              ];
               volumes = [
                 "/var/run/docker.sock:/var/run/docker.sock"
                 "core_traefik-certs:/acme"
