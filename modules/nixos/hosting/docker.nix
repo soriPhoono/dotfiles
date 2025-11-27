@@ -121,11 +121,8 @@ in
 
                 "--certificatesresolvers.le.acme.email=admin@${cfg.domainName}"
                 "--certificatesresolvers.le.acme.storage=/acme/acme.json"
-                "--certificatesresolvers.le.acme.tlschallenge=true"
                 "--certificatesresolvers.le.acme.dnschallenge=true"
                 "--certificatesresolvers.le.acme.dnschallenge.provider=cloudflare"
-                "--certificatesresolvers.le.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53" # Recommended DNS resolvers for the challenge
-                "--certificatesresolvers.le.acme.dnschallenge.delayBeforeCheck=0" # Optional, but helps speed up the check
 
                 "--log.level=INFO" # Set the Log Level e.g INFO, DEBUG
                 "--accesslog=true" # Enable Access Logs
