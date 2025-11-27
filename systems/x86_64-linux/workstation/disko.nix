@@ -57,13 +57,6 @@
                       "noatime"
                     ];
                   };
-                  "/home" = {
-                    mountpoint = "/home";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
                 };
               };
             };
