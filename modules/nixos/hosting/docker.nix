@@ -118,10 +118,8 @@ in
                 "traefik.http.routers.traefik-secure.rule" = "Host(`dashboard.admin.ts.${cfg.domainName}`)";
                 "traefik.http.routers.traefik-secure.entrypoints" = "websecure";
                 "traefik.http.routers.traefik-secure.tls" = "true";
-                "traefik.http.routers.traefik-secure.service" = "api@internal";
                 "traefik.http.routers.traefik-secure.tls.certresolver" = "le-ts";
-                "traefik.http.routers.traefik-secure.tls.domains[0].main" = "ts.${cfg.domainName}";
-                "traefik.http.routers.traefik-secure.tls.domains[0].sans" = "*.ts.${cfg.domainName}";
+                "traefik.http.routers.traefik-secure.service" = "api@internal";
                 "traefik.http.middlewares.traefik-auth.basicauth.users" = "admin:$2y$05$/UrxciXCv1x57qFZhDwBLOT2FkMjn2JoLW4yoXmKbQgbawFB8AJkq";
                 "traefik.http.routers.traefik-secure.middlewares" = "traefik-auth";
               };
@@ -165,6 +163,8 @@ in
                 "traefik.http.routers.portainer.entrypoints" = "websecure";
                 "traefik.http.routers.portainer.tls" = "true";
                 "traefik.http.routers.portainer.tls.certresolver" = "le-ts";
+                "traefik.http.routers.portainer.tls.domains[0].main" = "admin.ts.${cfg.domainName}";
+                "traefik.http.routers.portainer.tls.domains[0].sans" = "*.admin.ts.${cfg.domainName}";
 
                 "traefik.http.services.portainer.loadbalancer.server.port" = "9000";
               };
