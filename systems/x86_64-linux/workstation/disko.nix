@@ -71,7 +71,7 @@
         };
       };
 
-      projects = {
+      home = {
         type = "disk";
         device = "/dev/sdc";
         content = {
@@ -82,7 +82,25 @@
               content = {
                 type = "filesystem";
                 format = "ext4";
-                mountpoint = "/home/projects";
+                mountpoint = "/home";
+              };
+            };
+          };
+        };
+      };
+
+      services = {
+        type = "disk";
+        device = "/dev/sdd";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/var/lib/docker";
               };
             };
           };
@@ -125,24 +143,6 @@
               content = {
                 type = "mdraid";
                 name = "raid0";
-              };
-            };
-          };
-        };
-      };
-
-      services = {
-        type = "disk";
-        device = "/dev/sdd";
-        content = {
-          type = "gpt";
-          partitions = {
-            root = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/var/lib/docker";
               };
             };
           };

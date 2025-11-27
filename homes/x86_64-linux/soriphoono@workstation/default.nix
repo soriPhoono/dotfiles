@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   imports = [
     ./nvim
   ];
@@ -15,7 +15,7 @@
     git = {
       userName = "soriphoono";
       userEmail = "soriphoono@gmail.com";
-      projectsDir = "/run/media/soriphoono/Projects";
+      projectsDir = "${config.home.homeDirectory}/Documents/Projects/";
       extraIdentities = {
         work = {
           directory = "Work";
