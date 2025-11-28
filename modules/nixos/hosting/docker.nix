@@ -175,6 +175,9 @@ in
               volumes = [
                 "/:/mnt/host:ro"
               ];
+              networks = [
+                "core_traefik-public"
+              ];
               labels = {
                 "traefik.enable" = "true";
 
