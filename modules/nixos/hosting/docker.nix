@@ -51,6 +51,23 @@ in
           backend = "docker";
 
           containers = {
+            portainer-agent =
+              mkIf
+              (builtins.any
+                (mode: cfg.portainerDeploymentMode == mode)
+                ["agent" "server"]) {
+                image = "portainer/agent:lts";
+                dependsOn = ["watchtower"];
+                volumes = [
+                  "/var/run/docker.sock:/var/run/docker.sock"
+                ];
+                networks = mkIf (cfg.portainerDeploymentMode == "server") [
+                  "core_portainer-network"
+                ];
+                ports = mkIf (cfg.portainerDeploymentMode == "agent") [
+                  "9001:9001"
+                ];
+              };
             watchtower = mkIf (cfg.portainerDeploymentMode != null) {
               image = "containrrr/watchtower:1.7.1";
               cmd = [
@@ -124,23 +141,6 @@ in
                 "traefik.http.routers.traefik-secure.middlewares" = "traefik-auth";
               };
             };
-            portainer-agent =
-              mkIf
-              (builtins.any
-                (mode: cfg.portainerDeploymentMode == mode)
-                ["agent" "server"]) {
-                image = "portainer/agent:lts";
-                dependsOn = ["watchtower"];
-                volumes = [
-                  "/var/run/docker.sock:/var/run/docker.sock"
-                ];
-                networks = mkIf (cfg.portainerDeploymentMode == "server") [
-                  "core_portainer-network"
-                ];
-                ports = mkIf (cfg.portainerDeploymentMode == "agent") [
-                  "9001:9001"
-                ];
-              };
             portainer-server = mkIf (cfg.portainerDeploymentMode == "server") {
               image = "portainer/portainer-ce:lts";
               dependsOn = ["portainer-agent" "watchtower"];
@@ -167,6 +167,23 @@ in
                 "traefik.http.routers.portainer.tls.domains[0].sans" = "*.admin.ts.${cfg.domainName}";
 
                 "traefik.http.services.portainer.loadbalancer.server.port" = "9000";
+              };
+            };
+            dash = {
+              image = "mauricenino/dashdot:latest";
+              privileged = true;
+              volumes = [
+                "/:/mnt/host:ro"
+              ];
+              labels = {
+                "traefik.enable" = "true";
+
+                "traefik.http.routers.dash.rule" = "Host(`${config.networking.hostName}`)";
+                "traefik.http.routers.dash.entrypoints" = "websecure";
+                "traefik.http.routers.dash.tls" = "true";
+                "traefik.http.routers.dash.tls.certresolver" = "le-ts";
+
+                "traefik.http.services.dash.loadbalancer.server.port" = "80";
               };
             };
           };
