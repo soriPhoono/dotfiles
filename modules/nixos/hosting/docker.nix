@@ -183,7 +183,7 @@ in
                 "traefik.http.routers.dash.tls" = "true";
                 "traefik.http.routers.dash.tls.certresolver" = "le-ts";
 
-                "traefik.http.services.dash.loadbalancer.server.port" = "80";
+                "traefik.http.services.dash.loadbalancer.server.port" = "3001";
               };
             };
           };
