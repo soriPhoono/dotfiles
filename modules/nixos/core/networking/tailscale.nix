@@ -8,39 +8,26 @@
 in {
   options.core.networking.tailscale = {
     enable = lib.mkEnableOption "Enable tailscale always on vpn";
-    lockToTailnet = lib.mkEnableOption "Enable tailnet only dns resolution and connection";
   };
 
   config = lib.mkIf cfg.enable {
     networking.firewall.checkReversePath = "loose";
 
-    services = {
-      resolved = lib.mkIf cfg.lockToTailnet {
-        dnsovertls = "true";
-        dnssec = "true";
-        fallbackDns = [];
-        extraConfig = ''
-          [Resolve]
-          DNSStubListener=no
-        '';
-      };
+    services.tailscale = {
+      enable = true;
 
-      tailscale = {
-        enable = true;
+      useRoutingFeatures = "both";
 
-        useRoutingFeatures = "both";
+      openFirewall = true;
 
-        openFirewall = true;
+      extraDaemonFlags = [
+        "--no-logs-no-support"
+      ];
 
-        extraDaemonFlags = [
-          "--no-logs-no-support"
-        ];
-
-        extraSetFlags = [
-          "--accept-dns"
-          "--exit-node-allow-lan-access"
-        ];
-      };
+      extraSetFlags = [
+        "--accept-dns"
+        "--exit-node-allow-lan-access"
+      ];
     };
   };
 }

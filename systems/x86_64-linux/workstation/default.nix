@@ -35,10 +35,7 @@
     networking = {
       enable = true;
       network-manager.enable = true;
-      tailscale = {
-        enable = true;
-        lockToTailnet = true;
-      };
+      tailscale.enable = true;
     };
 
     users = {
@@ -72,5 +69,6 @@
     enable = true;
     portainerDeploymentMode = "server";
     domainName = "cryptic-coders.net";
+    magicDnsName = "xerus-augmented.ts.net";
   };
 }

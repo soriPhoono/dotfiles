@@ -27,10 +27,7 @@
     networking = {
       enable = true;
       network-manager.enable = true;
-      tailscale = {
-        enable = true;
-        lockToTailnet = true;
-      };
+      tailscale.enable = true;
     };
 
     users = {
@@ -58,5 +55,6 @@
     enable = true;
     portainerDeploymentMode = "server";
     domainName = "localhost";
+    magicDnsName = "xerus-augmented.ts.net";
   };
 }

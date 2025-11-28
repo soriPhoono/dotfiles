@@ -29,9 +29,22 @@ in
         '';
         example = "mydomain.com";
       };
+
+      magicDnsName = mkOption {
+        type = with types; nullOr str;
+        default = null;
+        description = ''
+          Tailscale Magic DNS name to use for accessing Dash for system monitoring.
+          Only relevant if portainerDeploymentMode is set. Default: null.
+          Makes most sense when combined with both a domainName and the Tailscale module.
+        '';
+        example = "mydevice.mydomain.ts.net";
+      };
     };
 
     config = mkIf cfg.enable {
+      core.networking.tailscale.enable = mkIf (cfg.magicDnsName != null) true;
+
       sops = {
         secrets = {
           "hosting/cf_dns_api_token" = {};
@@ -95,10 +108,12 @@ in
                 "--api.dashboard=true"
                 "--api.insecure=false" # WARNING: Do not use in production without proper BasicAuth middleware
 
-                "--certificatesresolvers.le-ts.acme.email=admin@${cfg.domainName}"
-                "--certificatesresolvers.le-ts.acme.storage=/acme/acme.json"
-                "--certificatesresolvers.le-ts.acme.dnschallenge=true"
-                "--certificatesresolvers.le-ts.acme.dnschallenge.provider=cloudflare"
+                "--certificatesresolvers.cf-ts.acme.email=admin@${cfg.domainName}"
+                "--certificatesresolvers.cf-ts.acme.storage=/acme/acme.json"
+                "--certificatesresolvers.cf-ts.acme.dnschallenge=true"
+                "--certificatesresolvers.cf-ts.acme.dnschallenge.provider=cloudflare"
+
+                "--certificatesresolvers.ts-mdns.tailscale=true"
 
                 "--log.level=INFO" # Set the Log Level e.g INFO, DEBUG
                 "--accesslog=true" # Enable Access Logs
@@ -113,6 +128,7 @@ in
               ];
               volumes = [
                 "/etc/localtime:/etc/localtime:ro"
+                "/var/run/tailscale/tailscaled.sock:/var/run/tailscale/tailscaled.sock"
                 "/var/run/docker.sock:/var/run/docker.sock:ro"
 
                 "core_traefik-certs:/acme"
@@ -129,14 +145,17 @@ in
 
                 "traefik.http.routers.traefik.rule" = "Host(`dashboard.admin.ts.${cfg.domainName}`)";
                 "traefik.http.routers.traefik.entrypoints" = "web";
+
                 "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme" = "websecure";
                 "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto" = "https";
                 "traefik.http.routers.traefik.middlewares" = "traefik-https-redirect";
+
                 "traefik.http.routers.traefik-secure.rule" = "Host(`dashboard.admin.ts.${cfg.domainName}`)";
                 "traefik.http.routers.traefik-secure.entrypoints" = "websecure";
                 "traefik.http.routers.traefik-secure.tls" = "true";
-                "traefik.http.routers.traefik-secure.tls.certresolver" = "le-ts";
+                "traefik.http.routers.traefik-secure.tls.certresolver" = "cf-ts";
                 "traefik.http.routers.traefik-secure.service" = "api@internal";
+
                 "traefik.http.middlewares.traefik-auth.basicauth.users" = "admin:$2y$05$/UrxciXCv1x57qFZhDwBLOT2FkMjn2JoLW4yoXmKbQgbawFB8AJkq";
                 "traefik.http.routers.traefik-secure.middlewares" = "traefik-auth";
               };
@@ -162,7 +181,7 @@ in
                 "traefik.http.routers.portainer.rule" = "Host(`admin.ts.${cfg.domainName}`)";
                 "traefik.http.routers.portainer.entrypoints" = "websecure";
                 "traefik.http.routers.portainer.tls" = "true";
-                "traefik.http.routers.portainer.tls.certresolver" = "le-ts";
+                "traefik.http.routers.portainer.tls.certresolver" = "cf-ts";
                 "traefik.http.routers.portainer.tls.domains[0].main" = "admin.ts.${cfg.domainName}";
                 "traefik.http.routers.portainer.tls.domains[0].sans" = "*.admin.ts.${cfg.domainName}";
 
@@ -189,10 +208,10 @@ in
               labels = {
                 "traefik.enable" = "true";
 
-                "traefik.http.routers.dash.rule" = "Host(`${config.networking.hostName}`)";
+                "traefik.http.routers.dash.rule" = "Host(`${config.networking.hostName}.${cfg.magicDnsName}`)";
                 "traefik.http.routers.dash.entrypoints" = "websecure";
                 "traefik.http.routers.dash.tls" = "true";
-                "traefik.http.routers.dash.tls.certresolver" = "le-ts";
+                "traefik.http.routers.dash.tls.certresolver" = "ts-mdns";
 
                 "traefik.http.services.dash.loadbalancer.server.port" = "3001";
               };
