@@ -175,6 +175,14 @@ in
               volumes = [
                 "/:/mnt/host:ro"
               ];
+              environment = {
+                DASHDOT_PAGE_TITLE = "${config.networking.hostName} Dashboard";
+                DASHDOT_SHOW_DASH_VERSION = "none";
+                DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
+                DASHDOT_SHOW_HOST = "true";
+                DASHDOT_CUSTOM_HOST = "${cfg.domainName}";
+                DASHDOT_ENABLE_CPU_TEMPS = "true";
+              };
               networks = [
                 "core_traefik-public"
               ];
