@@ -79,7 +79,7 @@ in
                 "/var/run/docker.sock:/var/run/docker.sock"
               ];
             };
-            traefik = mkIf (cfg.portainerDeploymentMode == "server") {
+            traefik = mkIf (cfg.portainerDeploymentMode != null) {
               image = "traefik:3.6";
               cmd = [
                 "--entrypoints.web.address=:80"
@@ -169,7 +169,7 @@ in
                 "traefik.http.services.portainer.loadbalancer.server.port" = "9000";
               };
             };
-            dash = {
+            dash = mkIf (cfg.portainerDeploymentMode != null) {
               image = "mauricenino/dashdot:latest";
               privileged = true;
               volumes = [
@@ -206,30 +206,41 @@ in
           after = ["create-docker-networks.service"];
           requires = ["create-docker-networks.service"];
         };
-      in {
-        "docker-portainer-agent" = precedence;
-        "docker-portainer-server" = precedence;
-        "docker-traefik" = precedence;
-        "create-docker-networks" = {
-          description = "Create Docker networks";
-          wantedBy = ["multi-user.target"];
-          after = ["docker.service"];
-          requires = ["docker.service"];
-          serviceConfig = {
-            Type = "oneshot";
-            RemainAfterExit = true;
+      in
+        mkIf (cfg.portainerDeploymentMode != null) {
+          "docker-portainer-agent" = precedence;
+          "docker-portainer-server" = precedence;
+          "docker-traefik" = precedence;
+          "create-docker-networks" = {
+            description = "Create Docker networks";
+            wantedBy = ["multi-user.target"];
+            after = ["docker.service"];
+            requires = ["docker.service"];
+            serviceConfig = {
+              Type = "oneshot";
+              RemainAfterExit = true;
+            };
+            script = ''
+              ${lib.concatMapStringsSep "\n" (network: ''
+                  ${pkgs.docker}/bin/docker network inspect "${network}" &>/dev/null || ${pkgs.docker}/bin/docker network create "${network}"
+                '')
+                ((
+                    if (cfg.portainerDeploymentMode == "server")
+                    then [
+                      "core_portainer-network"
+                    ]
+                    else []
+                  )
+                  ++ (
+                    if (cfg.portainerDeploymentMode != null)
+                    then [
+                      "core_traefik-public"
+                    ]
+                    else []
+                  ))}
+            '';
           };
-          script = ''
-            ${lib.concatMapStringsSep "\n" (network: ''
-                ${pkgs.docker}/bin/docker network inspect "${network}" &>/dev/null || ${pkgs.docker}/bin/docker network create "${network}"
-              '')
-              [
-                "core_portainer-network"
-                "core_traefik-public"
-              ]}
-          '';
         };
-      };
 
       users.extraUsers =
         builtins.mapAttrs (name: user: {
