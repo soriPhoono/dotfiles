@@ -10,6 +10,7 @@ mkShell {
     ssh-to-age
 
     disko
+
     nixos-facter
   ];
 }
