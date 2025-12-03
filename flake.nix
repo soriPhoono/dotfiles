@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "A system flake for my homelab and personal devices";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -62,8 +62,8 @@
       src = ./.;
       snowfall = {
         meta = {
-          name = "dotfiles";
-          title = "Dotfiles";
+          name = "homelab";
+          title = "Homelab and Personal Devices Configuration";
         };
         namespace = "soriphoono";
       };

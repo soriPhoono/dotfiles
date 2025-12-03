@@ -13,8 +13,10 @@ in
 
     config = mkIf cfg.enable {
       networking.firewall = {
-        allowedTCPPorts = [6443 2379 2380];
+        allowedTCPPorts = [6443 2379 2380 10250];
         allowedUDPPorts = [8472];
+        trustedInterfaces = ["cni0" "flannel.1"];
+        checkReversePath = "loose";
       };
 
       services.k3s = {
