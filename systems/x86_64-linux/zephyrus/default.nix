@@ -53,8 +53,5 @@
 
   hosting.docker = {
     enable = true;
-    portainerDeploymentMode = "server";
-    domainName = "localhost";
-    magicDnsName = "xerus-augmented.ts.net";
   };
 }
