@@ -5,7 +5,7 @@ keys:
   - &system_lg_laptop age1yqsdglc9s03k6yhefaqpnpyurj0j9nktlccc8rq2uevpuzn0ea2stx0msr
   - &system_zephyrus age1vz3rjjgwq9t3288mwlt9cdyt83429srm8hwycjrflllhcwkkugvs0jafa0
 
-  - &system_adams age1uznddnr3azl2vgzs29xv2q8zf7am2tak32h568t36qsaa4mf6vgsyj6223
+  - &system_adams age1g42aafny4wus6zdd6eake7gl9tvmgsecze2kwjrxyqnjzyu0fsgs63lyk2
 creation_rules:
   - path_regex: homes/.*/soriphoono@.*/[^/]+\.(yaml|json|env|ini)$
     key_groups:
