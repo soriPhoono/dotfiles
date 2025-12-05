@@ -6,8 +6,27 @@
   services.qemuGuest.enable = true;
   boot.growPartition = true;
 
-  networking.firewall.allowedTCPPorts = [47984 47989 48010 ];
-  networking.firewall.allowedUDPPorts = [47998 47999 48100 48200 ];
+  networking.firewall.allowedTCPPorts = [47984 47989 48010];
+  networking.firewall.allowedUDPPorts = [47998 47999 48100 48200];
+
+  services.udev.extraRules = ''
+    # Allows Wolf to acces /dev/uinput
+    KERNEL=="uinput", SUBSYSTEM=="misc", MODE="0660", GROUP="input", OPTIONS+="static_node=uinput"
+
+    # Allows Wolf to access /dev/uhid
+    KERNEL=="uhid", TAG+="uaccess"
+
+    # Move virtual keyboard and mouse into a different seat
+    SUBSYSTEMS=="input", ATTRS{id/vendor}=="ab00", MODE="0660", GROUP="input", ENV{ID_SEAT}="seat9"
+
+    # Joypads
+    SUBSYSTEMS=="input", ATTRS{name}=="Wolf X-Box One (virtual) pad", MODE="0660", GROUP="input"
+    SUBSYSTEMS=="input", ATTRS{name}=="Wolf PS5 (virtual) pad", MODE="0660", GROUP="input"
+    SUBSYSTEMS=="input", ATTRS{name}=="Wolf gamepad (virtual) motion sensors", MODE="0660", GROUP="input"
+    SUBSYSTEMS=="input", ATTRS{name}=="Wolf Nintendo (virtual) pad", MODE="0660", GROUP="input"
+
+    What does that mean?
+  '';
 
   core = {
     hardware = {
