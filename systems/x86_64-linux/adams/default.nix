@@ -31,13 +31,7 @@
       enable = true;
       reportPath = ./facter.json;
 
-      gpu = {
-        integrated.intel = {
-          enable = true;
-          deviceId = "a780";
-        };
-        dedicated.amd.enable = true;
-      };
+      gpu.dedicated.amd.enable = true;
     };
 
     secrets.defaultSopsFile = ./secrets.yaml;
