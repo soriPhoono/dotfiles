@@ -11,6 +11,8 @@
     ./users.nix
   ];
 
+  hardware.enableAllFirmware
+
   console = {
     keyMap = "us";
     packages = with pkgs; [
