@@ -3,6 +3,9 @@
     ./disko.nix
   ];
 
+  services.qemuGuest.enable = true;
+  boot.growPartition = true;
+
   core = {
     hardware = {
       enable = true;
