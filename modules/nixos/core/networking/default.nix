@@ -15,16 +15,12 @@ in {
     enable = lib.mkEnableOption "Enable system networking";
   };
 
-  config = if cfg.enable then {
-    networking.nftables.enable = true;
-
-    services = {
-      resolved.enable = true;
-    };
-  } else {
+  config = {
     networking = {
-      wireless.enable = true;
+      wireless.enable = cfg.enable;
       nftables.enable = true;
     };
+
+    services.resolved.enable = true;
   };
 }
