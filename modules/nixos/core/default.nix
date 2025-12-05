@@ -11,7 +11,7 @@
     ./users.nix
   ];
 
-  hardware.enableAllFirmware
+  hardware.enableAllFirmware = true;
 
   console = {
     keyMap = "us";
