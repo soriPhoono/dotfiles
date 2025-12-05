@@ -4,10 +4,13 @@
   config,
   ...
 }: let
-  cfg = config.core.secure-boot;
+  cfg = config.core.boot;
 in {
-  options.core.secure-boot = {
-    enable = lib.mkEnableOption "Enable bootloader hardening features";
+  options.core.boot = {
+    enable = lib.mkEnableOption "Enable system boot configuration with systemd-boot and ZRAM swap";
+    secure-boot = {
+      enable = lib.mkEnableOption "Enable bootloader hardening features";
+    };
   };
 
   config = {
@@ -28,7 +31,7 @@ in {
 
       loader = {
         efi.canTouchEfiVariables = true;
-        systemd-boot = {
+        systemd-boot = lib.mkIf cfg.enable {
           enable = lib.mkForce (!(cfg.enable));
           configurationLimit = 10;
         };

@@ -21,11 +21,7 @@
     font = lib.mkDefault "Lat2-Terminus16";
   };
 
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-    consoleKeyMap = "us";
-    consoleFont = "Lat2-Terminus16";
-  };
+  i18n.defaultLocale = "en_US.UTF-8";
 
   programs = {
     nix-ld.enable = true;
