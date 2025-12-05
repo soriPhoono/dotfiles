@@ -6,6 +6,9 @@
   services.qemuGuest.enable = true;
   boot.growPartition = true;
 
+  networking.firewall.allowedTCPPorts = [47984 47989 48010];
+  networking.firewall.allowedUDPPorts = [47999 48100 48200];
+
   core = {
     hardware = {
       enable = true;
