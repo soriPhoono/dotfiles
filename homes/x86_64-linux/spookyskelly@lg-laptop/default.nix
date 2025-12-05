@@ -1,6 +1,9 @@
 {
   core = {
-    secrets.defaultSopsFile = ./secrets.yaml;
+    secrets = {
+      enable = true;
+      defaultSopsFile = ./secrets.yaml;
+    };
 
     git = {
       userName = "spookyskelly";

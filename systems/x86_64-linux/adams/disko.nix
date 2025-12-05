@@ -1,24 +1,6 @@
 {
   disko.devices = {
     disk = {
-      NAS = {
-        type = "disk";
-        device = "/dev/sdc";
-        content = {
-          type = "gpt";
-          partitions = {
-            data = {
-              size = "100%";
-              content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/mnt/data/media";
-              };
-            };
-          };
-        };
-      };
-
       main = {
         type = "disk";
         device = "/dev/sda";

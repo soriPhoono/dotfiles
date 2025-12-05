@@ -4,6 +4,8 @@
   ];
 
   core = {
+    boot.enable = true;
+
     hardware = {
       enable = true;
       reportPath = ./facter.json;
@@ -23,7 +25,10 @@
       bluetooth.enable = true;
     };
 
-    secrets.defaultSopsFile = ./secrets.yaml;
+    secrets = {
+      enable = true;
+      defaultSopsFile = ./secrets.yaml;
+    };
 
     networking = {
       enable = true;

@@ -4,6 +4,8 @@
   ];
 
   core = {
+    boot.enable = true;
+
     hardware = {
       enable = true;
       reportPath = ./facter.json;
@@ -22,7 +24,10 @@
       bluetooth.enable = true;
     };
 
-    secrets.defaultSopsFile = ./secrets.yaml;
+    secrets = {
+      enable = true;
+      defaultSopsFile = ./secrets.yaml;
+    };
 
     networking = {
       enable = true;
@@ -44,14 +49,10 @@
     environments.kde.enable = true;
     features = {
       virtualisation.enable = true;
-      printing.enable = true;
       gaming.enable = true;
     };
-    programs.wireshark.enable = true;
     services.asusd.enable = true;
   };
 
-  hosting.docker = {
-    enable = true;
-  };
+  hosting.docker.enable = true;
 }

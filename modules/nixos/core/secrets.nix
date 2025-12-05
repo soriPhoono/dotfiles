@@ -6,6 +6,8 @@
   cfg = config.core.secrets;
 in {
   options.core.secrets = {
+    enable = lib.mkEnableOption "Enable the core secrets module";
+
     defaultSopsFile = lib.mkOption {
       type = lib.types.nullOr lib.types.path;
       default = null;
@@ -17,7 +19,7 @@ in {
     };
   };
 
-  config = {
+  config = lib.mkIf config.core.secrets.enable {
     systemd.tmpfiles.rules = lib.flatten (map (username: [
       "d /home/${username}/.config/ 0755 ${username} users -"
       "d /home/${username}/.config/sops/ 0755 ${username} users -"
@@ -27,7 +29,7 @@ in {
     services.openssh.enable = true;
 
     sops = {
-      inherit (cfg) defaultSopsFile;
+      defaultSopsFile = lib.mkIf (cfg.defaultSopsFile != null) cfg.defaultSopsFile;
 
       age.sshKeyPaths = map (key: key.path) config.services.openssh.hostKeys;
 

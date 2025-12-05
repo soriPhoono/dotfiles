@@ -3,9 +3,6 @@
     ./disko.nix
   ];
 
-  services.qemuGuest.enable = true;
-  boot.growPartition = true;
-
   networking.firewall.allowedTCPPorts = [47984 47989 48010];
   networking.firewall.allowedUDPPorts = [47998 47999 48000 48100 48200];
 
@@ -31,10 +28,19 @@
       enable = true;
       reportPath = ./facter.json;
 
-      gpu.dedicated.amd.enable = true;
+      gpu = {
+        integrated.intel = {
+          enable = true;
+          deviceId = "a780";
+        };
+        dedicated.amd.enable = true;
+      };
     };
 
-    secrets.defaultSopsFile = ./secrets.yaml;
+    secrets = {
+      enable = true;
+      defaultSopsFile = ./secrets.yaml;
+    };
 
     networking = {
       enable = true;

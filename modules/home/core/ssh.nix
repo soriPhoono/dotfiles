@@ -6,7 +6,7 @@
 with lib; {
   options.core.ssh = {
     publicKey = lib.mkOption {
-      type = lib.types.str;
+      type = with lib.types; nullOr str;
       description = "Public SSH key to use for authentication";
     };
 
@@ -35,13 +35,13 @@ with lib; {
         })
         config.core.ssh.extraSSHKeys);
 
-    sops.secrets =
-      {
+    sops.secrets = lib.mkIf config.core.secrets.enable
+      ({
         "ssh/primary_key".path = "${config.home.homeDirectory}/.ssh/id_ed25519";
       }
       // (lib.genAttrs (map (name: "ssh/${name}_key") (builtins.attrNames config.core.ssh.extraSSHKeys)) (secret: {
         path = "${config.home.homeDirectory}/.ssh/${builtins.replaceStrings ["ssh/"] [""] secret}";
-      }));
+      })));
 
     programs.ssh.enable = true;
   };
