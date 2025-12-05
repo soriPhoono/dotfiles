@@ -7,7 +7,7 @@
   boot.growPartition = true;
 
   networking.firewall.allowedTCPPorts = [47984 47989 48010];
-  networking.firewall.allowedUDPPorts = [47998 47999 48100 48200];
+  networking.firewall.allowedUDPPorts = [47998 47999 48000 48100 48200];
 
   services.udev.extraRules = ''
     # Allows Wolf to acces /dev/uinput
