@@ -1,8 +1,6 @@
 {pkgs, modulesPath, ...}: {
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
-
-    ./disko.nix
   ];
 
   # networking.firewall.allowedTCPPorts = [47984 47989 48010];
