@@ -1,9 +1,9 @@
-{pkgs, ...}: {
+{pkgs, modulesPath, ...}: {
   imports = [
+    (modulesPath + "/virtualisation/proxmox-lxc.nix")
+
     ./disko.nix
   ];
-
-  boot.isContainer = true;
 
   networking.firewall.allowedTCPPorts = [47984 47989 48010];
   networking.firewall.allowedUDPPorts = [47998 47999 48000 48100 48200];
