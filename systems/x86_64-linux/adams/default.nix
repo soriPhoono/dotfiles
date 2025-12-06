@@ -3,6 +3,8 @@
     ./disko.nix
   ];
 
+  boot.isContainer = true;
+
   networking.firewall.allowedTCPPorts = [47984 47989 48010];
   networking.firewall.allowedUDPPorts = [47998 47999 48000 48100 48200];
 
@@ -24,8 +26,6 @@
   '';
 
   core = {
-    boot.enable = true;
-
     hardware = {
       enable = true;
       reportPath = ./facter.json;
