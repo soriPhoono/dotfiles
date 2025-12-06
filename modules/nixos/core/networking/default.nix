@@ -11,13 +11,8 @@ in {
     ./tailscale.nix
   ];
 
-  options.core.networking = {
-    enable = lib.mkEnableOption "Enable system networking";
-  };
-
   config = {
     networking = {
-      wireless.enable = cfg.enable;
       nftables.enable = true;
     };
 
