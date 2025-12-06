@@ -35,12 +35,25 @@
     };
   };
 
-  desktop.environments.sway.enable = true;
+  virtualisation.oci-containers = {
+    backend = "docker";
 
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
-    capSysAdmin = true;
-    openFirewall = true;
+    containers = {
+      wolf-server = {
+        image = "ghcr.io/games-on-whales/wolf:stable";
+        volumes = [
+          "wolf-config:/etc/wolf"
+          "/var/run/docker.sock:/var/run/docker.sock:rw"
+          "/dev:/dev:rw"
+          "/run/udev:/run/udev:rw"
+        ];
+        extraOptions = ["--device-cgroup-rule \"c 13:* rmw\""];
+        devices = [
+          "/dev/dri"
+          "/dev/uinput"
+          "/dev/uhid"
+        ];
+      };
+    };
   };
 }
