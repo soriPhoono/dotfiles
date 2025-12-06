@@ -35,6 +35,8 @@
     };
   };
 
+  desktop.environments.kde.enable = true;
+
   services.sunshine = {
     enable = true;
     capSysAdmin = true;
