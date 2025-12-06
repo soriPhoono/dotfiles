@@ -45,7 +45,7 @@
           "wolf-config:/etc/wolf"
           "/var/run/docker.sock:/var/run/docker.sock:rw"
           "/dev:/dev:rw"
-          "/run/udev:/run/udev:rw"
+          "/mnt/udev:/run/udev:rw"
         ];
         extraOptions = ["--device-cgroup-rule=c 13:* rmw"];
         devices = [
