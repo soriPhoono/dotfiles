@@ -30,7 +30,6 @@
     };
 
     networking = {
-      enable = true;
       network-manager.enable = true;
       tailscale.enable = true;
     };

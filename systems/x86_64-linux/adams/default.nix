@@ -24,6 +24,8 @@
   '';
 
   core = {
+    boot.enable = true;
+
     hardware = {
       enable = true;
       reportPath = ./facter.json;
@@ -43,7 +45,6 @@
     };
 
     networking = {
-      enable = true;
       network-manager.enable = true;
       tailscale.enable = true;
     };
