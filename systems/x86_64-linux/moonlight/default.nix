@@ -35,6 +35,9 @@
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 48010 47989 47984 ];
+  networking.firewall.allowedUDPPorts = [ 47999 48100 48200 ];
+
   virtualisation.oci-containers = {
     backend = "docker";
 
