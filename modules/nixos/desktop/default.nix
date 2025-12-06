@@ -7,6 +7,7 @@
 in {
   imports = [
     ./environments/kde.nix
+    ./environments/sway.nix
 
     ./features/gaming.nix
     ./features/printing.nix
