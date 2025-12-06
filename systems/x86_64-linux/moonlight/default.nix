@@ -47,7 +47,7 @@
           "/dev:/dev:rw"
           "/run/udev:/run/udev:rw"
         ];
-        extraOptions = ["--device-cgroup-rule=\"c 13:* rmw\""];
+        extraOptions = ["--device-cgroup-rule='c 13:* rmw'"];
         devices = [
           "/dev/dri"
           "/dev/uinput"
