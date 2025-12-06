@@ -5,9 +5,4 @@
       userEmail = "soriphoono@gmail.com";
     };
   };
-
-  userapps = {
-    enable = true;
-    development.enable = true;
-  };
 }
