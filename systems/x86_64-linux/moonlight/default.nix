@@ -35,7 +35,7 @@
     };
   };
 
-  desktop.environments.kde.enable = true;
+  desktop.environments.sway.enable = true;
 
   services.sunshine = {
     enable = true;
