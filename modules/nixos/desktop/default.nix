@@ -15,6 +15,7 @@ in {
     ./programs/wireshark.nix
 
     ./services/asusd.nix
+    ./services/pipewire.nix
   ];
 
   options.desktop = {

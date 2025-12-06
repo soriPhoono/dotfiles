@@ -55,5 +55,7 @@
     };
   };
 
+  desktop.services.pipewire.enable = true;
+
   hosting.docker.enable = true;
 }
