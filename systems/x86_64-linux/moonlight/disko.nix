@@ -1,9 +1,28 @@
 {
   disko.devices = {
     disk = {
+      games = {
+        type = "disk";
+        device = "/dev/sdb";
+        content = {
+          type = "gpt";
+          partitions = {
+            data = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/mnt/games";
+                mountOptions = ["defaults"];
+              };
+            };
+          };
+        };
+      };
+
       main = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
