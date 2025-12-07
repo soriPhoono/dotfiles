@@ -3,7 +3,7 @@
     disk = {
       games = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi1";
         content = {
           type = "gpt";
           partitions = {
@@ -21,7 +21,7 @@
 
       main = {
         type = "disk";
-        device = "/dev/sdb";
+        device = "/dev/disk/by-id/scsi-0QEMU_QEMU_HARDDISK_drive-scsi0";
         content = {
           type = "gpt";
           partitions = {
