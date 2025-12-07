@@ -36,40 +36,13 @@
                 mountOptions = ["umask=0077"];
               };
             };
-            luks = {
+            root = {
               size = "100%";
               content = {
-                type = "luks";
-                name = "crypted";
-                passwordFile = "/tmp/password.key"; # Interactive
-                settings.allowDiscards = true;
-                content = {
-                  type = "btrfs";
-                  extraArgs = ["-f"];
-                  subvolumes = {
-                    "/root" = {
-                      mountpoint = "/";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                    "/home" = {
-                      mountpoint = "/home";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                    "/nix" = {
-                      mountpoint = "/nix";
-                      mountOptions = [
-                        "compress=zstd"
-                        "noatime"
-                      ];
-                    };
-                  };
-                };
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+                mountOptions = ["defaults"];
               };
             };
           };
