@@ -1,11 +1,11 @@
 {pkgs, modulesPath, ...}: {
   imports = [
+    "${toString modulesPath}/virtualisation/qemu-vm.nix"
+
     ./disko.nix
   ];
 
   core = {
-    boot.enable = true;
-
     hardware.gpu.dedicated.amd.enable = true;
 
     secrets = {
