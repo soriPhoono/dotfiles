@@ -4,15 +4,7 @@
   ];
 
   core = {
-    hardware = {
-      gpu = {
-        integrated.intel = {
-          enable = true;
-          deviceId = "a780";
-        };
-        dedicated.amd.enable = true;
-      };
-    };
+    hardware.gpu.dedicated.amd.enable = true;
 
     secrets = {
       enable = true;
