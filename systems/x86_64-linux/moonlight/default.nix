@@ -51,8 +51,7 @@
           "/run/udev:/run/udev:rw"
         ];
         environment = {
-          # WOLF_RENDER_NODE = "/dev/dri/renderD129";
-          # WOLF_ENCODER_NODE = "/dev/dri/renderD128";
+          WOLF_RENDER_NODE = "/dev/dri/renderD129";
         };
         extraOptions = ["--device-cgroup-rule=c 13:* rmw" "--network=host"];
         devices = [
