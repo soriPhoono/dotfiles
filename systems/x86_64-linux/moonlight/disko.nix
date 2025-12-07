@@ -3,7 +3,7 @@
     disk = {
       games = {
         type = "disk";
-        device = "/dev/sdb";
+        device = "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
@@ -13,7 +13,6 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/mnt/games";
-                mountOptions = ["defaults"];
               };
             };
           };
@@ -22,7 +21,7 @@
 
       main = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/sdb";
         content = {
           type = "gpt";
           partitions = {
@@ -42,7 +41,6 @@
                 type = "filesystem";
                 format = "ext4";
                 mountpoint = "/";
-                mountOptions = ["defaults"];
               };
             };
           };
