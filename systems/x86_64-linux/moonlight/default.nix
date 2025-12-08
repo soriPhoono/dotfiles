@@ -41,11 +41,10 @@
       wolf-server = {
         image = "ghcr.io/games-on-whales/wolf:stable";
         volumes = [
-          "wolf-config:/etc/wolf"
+          "/mnt/games:/etc/wolf"
           "/var/run/docker.sock:/var/run/docker.sock:rw"
           "/dev:/dev:rw"
           "/run/udev:/run/udev:rw"
-          "/mnt/games:/mnt/games:rw"
         ];
         environment = {
           WOLF_RENDER_NODE = "/dev/dri/renderD129";
