@@ -10,7 +10,6 @@
           enable = true;
           deviceId = "a780";
         };
-        dedicated.amd.enable = true;
       };
     };
 

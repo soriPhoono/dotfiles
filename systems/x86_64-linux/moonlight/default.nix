@@ -1,8 +1,6 @@
 {pkgs, modulesPath, ...}: {
   imports = [
-    "${toString modulesPath}/virtualisation/qemu-vm.nix"
-
-    ./disko.nix
+    (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
 
   core = {
@@ -29,31 +27,39 @@
     };
   };
 
-  # networking.firewall.allowedTCPPorts = [ 48010 47989 47984 ];
-  # networking.firewall.allowedUDPPorts = [ 47999 48100 48200 ];
+  networking.firewall.allowedTCPPorts = [ 48010 47989 47984 ];
+  networking.firewall.allowedUDPPorts = [ 47999 48100 48200 ];
 
-  # virtualisation.oci-containers = {
-  #   backend = "docker";
+  virtualisation.oci-containers = {
+    backend = "docker";
 
-  #   containers = {
-  #     wolf-server = {
-  #       image = "ghcr.io/games-on-whales/wolf:stable";
-  #       volumes = [
-  #         "wolf-config:/etc/wolf"
-  #         "/var/run/docker.sock:/var/run/docker.sock:rw"
-  #         "/dev:/dev:rw"
-  #         "/run/udev:/run/udev:rw"
-  #       ];
-  #       environment = {
-  #         WOLF_RENDER_NODE = "/dev/dri/renderD129";
-  #       };
-  #       extraOptions = ["--device-cgroup-rule=c 13:* rmw" "--network=host"];
-  #       devices = [
-  #         "/dev/dri"
-  #         "/dev/uinput"
-  #         "/dev/uhid"
-  #       ];
-  #     };
-  #   };
-  # };
+    containers = {
+      wolf-server = {
+        image = "ghcr.io/games-on-whales/wolf:stable";
+        volumes = [
+          "wolf-config:/etc/wolf"
+          "/var/run/docker.sock:/var/run/docker.sock:rw"
+          "/dev:/dev:rw"
+          "/run/udev:/run/udev:rw"
+        ];
+        environment = {
+          WOLF_RENDER_NODE = "/dev/dri/renderD129";
+        };
+        extraOptions = ["--device-cgroup-rule=c 13:* rmw"];
+        devices = [
+          "/dev/dri"
+          "/dev/uinput"
+          "/dev/uhid"
+        ];
+        ports = [
+          "47984:47984/tcp"
+          "47989:47989/tcp"
+          "48010:48010/tcp"
+          "47999:47999/udp"
+          "48100:48100/udp"
+          "48200:48200/udp"
+        ];
+      };
+    };
+  };
 }
