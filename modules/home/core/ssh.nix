@@ -35,13 +35,14 @@ with lib; {
         })
         config.core.ssh.extraSSHKeys);
 
-    sops.secrets = lib.mkIf config.core.secrets.enable
+    sops.secrets =
+      lib.mkIf config.core.secrets.enable
       ({
-        "ssh/primary_key".path = "${config.home.homeDirectory}/.ssh/id_ed25519";
-      }
-      // (lib.genAttrs (map (name: "ssh/${name}_key") (builtins.attrNames config.core.ssh.extraSSHKeys)) (secret: {
-        path = "${config.home.homeDirectory}/.ssh/${builtins.replaceStrings ["ssh/"] [""] secret}";
-      })));
+          "ssh/primary_key".path = "${config.home.homeDirectory}/.ssh/id_ed25519";
+        }
+        // (lib.genAttrs (map (name: "ssh/${name}_key") (builtins.attrNames config.core.ssh.extraSSHKeys)) (secret: {
+          path = "${config.home.homeDirectory}/.ssh/${builtins.replaceStrings ["ssh/"] [""] secret}";
+        })));
 
     programs.ssh.enable = true;
   };

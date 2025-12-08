@@ -1,4 +1,8 @@
-{pkgs, modulesPath, ...}: {
+{
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
@@ -21,14 +25,14 @@
         hashedPassword = "$6$x7n.SUTMtInzs2l4$Ew3Zu3Mkc4zvuH8STaVpwIv59UX9rmUV7I7bmWyTRjomM7QRn0Jt/Pl/JN./IqTrXqEe8nIYB43m1nLI2Un211";
         admin = true;
         shell = pkgs.fish;
-        extraGroups = [ "input" ];
+        extraGroups = ["input"];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEgxxFcqHVwYhY0TjbsqByOYpmWXqzlVyGzpKjqS8mO7";
       };
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 48010 47989 47984 ];
-  networking.firewall.allowedUDPPorts = [ 47999 48100 48200 ];
+  networking.firewall.allowedTCPPorts = [48010 47989 47984];
+  networking.firewall.allowedUDPPorts = [47999 48100 48200];
 
   virtualisation.oci-containers = {
     backend = "docker";
@@ -41,6 +45,7 @@
           "/var/run/docker.sock:/var/run/docker.sock:rw"
           "/dev:/dev:rw"
           "/run/udev:/run/udev:rw"
+          "/mnt/games:/mnt/games:rw"
         ];
         environment = {
           WOLF_RENDER_NODE = "/dev/dri/renderD129";
