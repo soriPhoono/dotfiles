@@ -32,10 +32,7 @@
 
     networking = {
       network-manager.enable = true;
-      tailscale = {
-        enable = true;
-        lockToTailnet = true;
-      };
+      tailscale.enable = true;
     };
 
     users = {
