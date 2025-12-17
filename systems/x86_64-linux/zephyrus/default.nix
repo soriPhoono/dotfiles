@@ -16,7 +16,6 @@
       };
 
       hid = {
-        tablet.enable = true;
         xbox_controllers.enable = true;
       };
 
