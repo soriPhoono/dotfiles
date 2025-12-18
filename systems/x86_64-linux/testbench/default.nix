@@ -27,7 +27,10 @@
   };
 
   desktop = {
-    environments.kde.enable = true;
+    environments = {
+      kde.enable = true;
+      hyprland.enable = true;
+    };
     features = {
       virtualisation.enable = true;
       gaming.enable = true;
