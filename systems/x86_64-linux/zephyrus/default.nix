@@ -12,7 +12,10 @@
 
       gpu = {
         integrated.amd.enable = true;
-        dedicated.nvidia.enable = true;
+        dedicated.nvidia = {
+          enable = true;
+          laptopMode = true;
+        };
       };
 
       hid = {
