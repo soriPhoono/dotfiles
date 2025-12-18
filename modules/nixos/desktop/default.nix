@@ -7,12 +7,12 @@
 in {
   imports = [
     ./environments/kde.nix
-    ./environments/sway.nix
 
     ./features/gaming.nix
     ./features/printing.nix
     ./features/virtualisation.nix
 
+    ./programs/uwsm.nix
     ./programs/wireshark.nix
 
     ./services/asusd.nix
