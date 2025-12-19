@@ -28,8 +28,7 @@
 
   desktop = {
     environments = {
-      kde.enable = true;
-      hyprland.enable = true;
+      cosmic.enable = true;
     };
     features = {
       virtualisation.enable = true;

@@ -123,31 +123,43 @@
       pkgs = inputs.nixpkgs.legacyPackages.${system};
     in {
       systemConfigurations = let
-        mkSystem =
-          name: system-manager.lib.makeSystemConfig {
-            modules = (
-              builtins.attrValues
+        mkSystem = name:
+          system-manager.lib.makeSystemConfig {
+            modules =
+              (
+                builtins.attrValues
                 (lib.mapAttrs
-                  (name: _: import ./modules/environments/${name}/default.nix { inherit pkgs; })
+                  (name: _: import ./modules/environments/${name}/default.nix {inherit pkgs;})
                   (lib.filterAttrs
-                    (name: type: type == "directory" && (builtins.pathExists
-                      ./modules/environments/${name}/default.nix))
+                    (name: type:
+                      type
+                      == "directory"
+                      && (builtins.pathExists
+                        ./modules/environments/${name}/default.nix))
                     (builtins.readDir ./modules/environments)))
-            ) ++ [
-              ./environments/${name}/default.nix
-            ];
+              )
+              ++ [
+                ./environments/${name}/default.nix
+              ];
           };
-      in (lib.mapAttrs
+      in
+        (lib.mapAttrs
           (name: _: mkSystem name)
           (lib.filterAttrs
-            (name: type: type == "directory" && (builtins.pathExists
-              ./environments/${name}/default.nix))
+            (name: type:
+              type
+              == "directory"
+              && (builtins.pathExists
+                ./environments/${name}/default.nix))
             (builtins.readDir ./environments)))
         // (lib.mapAttrs
           (name: _: mkSystem name)
           (lib.filterAttrs
-            (name: type: type == "directory" && (builtins.pathExists
-              ./environments/${name}/default.nix))
+            (name: type:
+              type
+              == "directory"
+              && (builtins.pathExists
+                ./environments/${name}/default.nix))
             (builtins.readDir ./environments)));
     }));
 }
