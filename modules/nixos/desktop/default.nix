@@ -7,6 +7,7 @@
 in {
   imports = [
     ./environments/kde.nix
+    ./environments/cosmic.nix
     ./environments/hyprland.nix
 
     ./features/gaming.nix
