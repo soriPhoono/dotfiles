@@ -15,7 +15,7 @@ in
           package = (pkgs.catppuccin-sddm.override {
             flavor = "frappe";
             accent = "teal";
-            background = builtins.trace lib.${namespace} ../../../../assets/wallpapers/beach-path.jpg;
+            background = builtins.trace namespace ../../../../../assets/wallpapers/beach-path.jpg;
             loginBackground = true;
           });
           name = "catppuccin-frappe-teal";
