@@ -8,7 +8,8 @@ in {
   imports = [
     ./environments/kde.nix
     ./environments/cosmic.nix
-    ./environments/hyprland.nix
+
+    ./managers/hyprland.nix
 
     ./features/gaming.nix
     ./features/printing.nix
