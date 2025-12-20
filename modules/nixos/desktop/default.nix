@@ -15,6 +15,7 @@ in {
     ./features/printing.nix
     ./features/virtualisation.nix
 
+    ./programs/sddm.nix
     ./programs/uwsm.nix
     ./programs/wireshark.nix
 
