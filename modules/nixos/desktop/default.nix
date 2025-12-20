@@ -38,14 +38,17 @@ in
     config = mkIf cfg.enable {
       desktop.services.pipewire.enable = true;
 
-      services = {
-        geoclue2.enable = true;
-        localtimed.enable = true;
-        flatpak.enable = true;
+      programs = {
         appimage = {
           enable = true;
           binfmt = true;
         };
+      };
+
+      services = {
+        geoclue2.enable = true;
+        localtimed.enable = true;
+        flatpak.enable = true;
       };
     };
   }
