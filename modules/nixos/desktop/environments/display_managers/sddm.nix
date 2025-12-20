@@ -8,6 +8,8 @@
 in
   with lib; {
     options.desktop.environments.display_managers.sddm = {
+      enable = mkEnableOption "Enable sddm login manager";
+
       theme = {
         package = mkOption {
           type = with types; nullOr package;
@@ -30,7 +32,7 @@ in
       };
     };
 
-    config = mkIf (config.desktop.environment == "kde") {
+    config = mkIf (config.desktop.environment == "kde" || config.desktop.environments.display_managers.sddm.enable) {
       environment.systemPackages = mkIf (cfg.theme.package != null) [
         cfg.theme.package
       ];
