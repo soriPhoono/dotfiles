@@ -9,7 +9,6 @@ in
   with lib; {
     config = mkIf (config.desktop.environment == null) {
       desktop.environments.display_managers.sddm = {
-        enable = true;
         theme = {
           package = (pkgs.catppuccin-sddm.override {
             flavor = "frappe";
