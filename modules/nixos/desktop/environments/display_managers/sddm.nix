@@ -7,7 +7,7 @@
   cfg = config.desktop.environments.display_managers.sddm;
 in
   with lib; {
-    options.desktop.programs.sddm = {
+    options.desktop.environments.display_managers.sddm = {
       enable = mkEnableOption "Enable sddm login manager";
 
       theme = {
