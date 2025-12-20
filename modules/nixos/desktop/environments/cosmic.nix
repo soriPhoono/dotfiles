@@ -21,7 +21,6 @@ in
           COSMIC_DATA_CONTROL_ENABLED = 1;
         };
         systemPackages = with pkgs; [
-
         ];
       };
 

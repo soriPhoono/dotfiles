@@ -28,7 +28,7 @@
 
   desktop = {
     environments = {
-      cosmic.enable = true;
+      hyprland.enable = true;
     };
     features = {
       virtualisation.enable = true;
