@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  namespace,
   ...
 }: let
   cfg = config.desktop.environments.display_managers;
