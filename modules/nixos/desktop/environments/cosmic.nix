@@ -13,13 +13,17 @@ in
     };
 
     config = mkIf cfg.enable {
-      desktop.enable = true;
+      desktop = {
+        enable = true;
+        environment = "cosmic";
+      };
 
       environment = {
         sessionVariables = {
           NIXOS_OZONE_WL = "1";
           COSMIC_DATA_CONTROL_ENABLED = 1;
         };
+
         systemPackages = with pkgs; [
         ];
       };
@@ -32,7 +36,6 @@ in
       services = {
         system76-scheduler.enable = true;
 
-        displayManager.cosmic-greeter.enable = true;
         desktopManager.cosmic.enable = true;
       };
     };

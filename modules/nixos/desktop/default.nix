@@ -6,18 +6,18 @@
   cfg = config.desktop;
 in {
   imports = [
-    ./environments/kde.nix
-    ./environments/cosmic.nix
+    ./environments/display_managers/custom.nix
+    ./environments/display_managers/sddm.nix
 
-    ./managers/hyprland.nix
+    ./environments/managers/hyprland.nix
+
+    ./environments/cosmic.nix
+    ./environments/kde.nix
+    ./environments/uwsm.nix
 
     ./features/gaming.nix
     ./features/printing.nix
     ./features/virtualisation.nix
-
-    ./programs/sddm.nix
-    ./programs/uwsm.nix
-    ./programs/wireshark.nix
 
     ./services/asusd.nix
     ./services/pipewire.nix
@@ -25,28 +25,26 @@ in {
 
   options.desktop = {
     enable = lib.mkEnableOption "Enable core desktop configurations";
+
+    environment = mkOption {
+      type = with types; nullOr str;
+      default = null;
+      description = "The shorthand code for the currently enabled desktop, for autoselection of display manager";
+      example = "kde";
+    };
   };
 
   config = lib.mkIf cfg.enable {
+    desktop.services.pipewire.enable = true;
+
     services = {
-      pulseaudio.enable = false;
-
-      pipewire = {
-        enable = true;
-        audio.enable = true;
-        pulse.enable = true;
-        jack.enable = true;
-        alsa = {
-          enable = true;
-          support32Bit = true;
-        };
-      };
-
       geoclue2.enable = true;
       localtimed.enable = true;
       flatpak.enable = true;
+      appimage = {
+        enable = true;
+        binfmt = true;
+      };
     };
-
-    security.rtkit.enable = true;
   };
 }

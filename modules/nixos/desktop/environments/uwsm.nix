@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.desktop.programs.uwsm;
+  cfg = config.desktop.environments.uwsm;
 in
   with lib; {
-    options.desktop.programs.uwsm = {
+    options.desktop.environments.uwsm = {
       enable = mkEnableOption "Enable uwsm";
 
       environments = mkOption {
@@ -50,17 +50,19 @@ in
     };
 
     config = mkIf cfg.enable {
-      programs = {
-        uwsm = {
-          enable = true;
-          waylandCompositors =
-            lib.mapAttrs (name: value: {
-              prettyName = value.name;
-              comment = value.description;
-              binPath = value.execPath;
-            })
-            cfg.environments;
-        };
+      desktop = {
+        enable = true;
+      };
+
+      programs.uwsm = {
+        enable = true;
+        waylandCompositors =
+          lib.mapAttrs (name: value: {
+            prettyName = value.name;
+            comment = value.description;
+            binPath = value.execPath;
+          })
+          cfg.environments;
       };
     };
   }

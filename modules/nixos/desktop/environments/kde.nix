@@ -5,13 +5,17 @@
   ...
 }: let
   cfg = config.desktop.environments.kde;
-in {
+in
+  with lib; {
   options.desktop.environments.kde = {
-    enable = lib.mkEnableOption "Enable kde desktop environment";
+    enable = mkEnableOption "Enable kde desktop environment";
   };
 
-  config = lib.mkIf cfg.enable {
-    desktop.enable = true;
+  config = mkIf cfg.enable {
+    desktop = {
+      enable = true;
+      environment = "kde";
+    };
 
     environment = {
       sessionVariables.NIXOS_OZONE_WL = "1";
@@ -23,12 +27,6 @@ in {
     };
 
     services = {
-      displayManager = {
-        sddm = {
-          enable = true;
-          wayland.enable = true;
-        };
-      };
       desktopManager.plasma6.enable = true;
     };
   };

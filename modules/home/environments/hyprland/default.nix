@@ -21,11 +21,7 @@ in
         systemd.enable = false;
         settings = {
           "$mod" = "SUPER";
-          bind =
-            [
-              "$mod, Return, exec, kitty"
-            ]
-            ++ (
+          bind = (
               # workspaces
               # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
               builtins.concatLists (builtins.genList (
@@ -40,7 +36,5 @@ in
             );
         };
       };
-
-      programs.kitty.enable = true;
     };
   }

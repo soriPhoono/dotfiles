@@ -31,7 +31,7 @@ in with lib; {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf (config.desktop.environment == "kde") {
     environment.systemPackages = [
       cfg.theme.package
     ];
