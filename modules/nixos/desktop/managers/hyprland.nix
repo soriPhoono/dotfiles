@@ -12,7 +12,7 @@ in with lib; {
 
   config = mkIf cfg.enable {
     desktop.programs = {
-      sddm = mkIf (!config.programs.sddm.enable) {
+      sddm = mkIf (!config.services.displayManager.sddm.enable) {
         enable = true;
         theme = {
           package = (pkgs.catppuccin-sddm.override {
