@@ -27,7 +27,7 @@
   };
 
   desktop = {
-    environments = {
+    environments.managers = {
       hyprland.enable = true;
     };
     features = {
