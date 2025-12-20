@@ -8,8 +8,6 @@
 in
   with lib; {
     config = mkIf (config.environments.hyprland.enable && !config.environments.hyprland.custom) {
-      environments.hyprland.enable = true;
-
       programs.kitty.enable = true;
 
       wayland.windowManager.hyprland.settings.bind = [
