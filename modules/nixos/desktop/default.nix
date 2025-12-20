@@ -4,7 +4,7 @@
   ...
 }: let
   cfg = config.desktop;
-in {
+in with lib; {
   imports = [
     ./environments/display_managers/custom.nix
     ./environments/display_managers/sddm.nix
@@ -24,7 +24,7 @@ in {
   ];
 
   options.desktop = {
-    enable = lib.mkEnableOption "Enable core desktop configurations";
+    enable = mkEnableOption "Enable core desktop configurations";
 
     environment = mkOption {
       type = with types; nullOr str;
@@ -34,7 +34,7 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     desktop.services.pipewire.enable = true;
 
     services = {
