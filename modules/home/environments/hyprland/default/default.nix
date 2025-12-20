@@ -13,7 +13,7 @@ in
       wayland.windowManager.hyprland.settings.bind = [
         "$mod, Return, exec, kitty"
 
-        "$mod, Q, exec, uwsm stop"
+        "$mod, ESC, exec, uwsm stop"
       ];
     };
   }
