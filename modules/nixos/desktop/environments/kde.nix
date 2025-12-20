@@ -7,27 +7,27 @@
   cfg = config.desktop.environments.kde;
 in
   with lib; {
-  options.desktop.environments.kde = {
-    enable = mkEnableOption "Enable kde desktop environment";
-  };
-
-  config = mkIf cfg.enable {
-    desktop = {
-      enable = true;
-      environment = "kde";
+    options.desktop.environments.kde = {
+      enable = mkEnableOption "Enable kde desktop environment";
     };
 
-    environment = {
-      sessionVariables.NIXOS_OZONE_WL = "1";
+    config = mkIf cfg.enable {
+      desktop = {
+        enable = true;
+        environment = "kde";
+      };
 
-      systemPackages = with pkgs; [
-        kdePackages.discover
-        kdePackages.ksystemlog
-      ];
-    };
+      environment = {
+        sessionVariables.NIXOS_OZONE_WL = "1";
 
-    services = {
-      desktopManager.plasma6.enable = true;
+        systemPackages = with pkgs; [
+          kdePackages.discover
+          kdePackages.ksystemlog
+        ];
+      };
+
+      services = {
+        desktopManager.plasma6.enable = true;
+      };
     };
-  };
-}
+  }
