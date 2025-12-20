@@ -36,12 +36,10 @@ in with lib; {
       cfg.theme.package
     ];
 
-    displayManager = {
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-        theme = cfg.theme.name;
-      };
+    services.displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = cfg.theme.name;
     };
   };
 }
