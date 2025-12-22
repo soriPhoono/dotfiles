@@ -8,7 +8,7 @@
   cfg = config.desktop.environments.display_managers;
 in
   with lib; {
-    config = mkIf (config.desktop.environment == null) {
+    config = mkIf (config.desktop.enable && config.desktop.environment == null) {
       desktop.environments.display_managers.sddm = {
         enable = true;
         theme = {

@@ -32,7 +32,7 @@ in
       };
     };
 
-    config = mkIf (config.desktop.environment == "kde" || config.desktop.environments.display_managers.sddm.enable) {
+    config = mkIf (config.desktop.enable && (config.desktop.environment == "kde" || config.desktop.environments.display_managers.sddm.enable)) {
       environment.systemPackages = mkIf (cfg.theme.package != null) [
         cfg.theme.package
       ];

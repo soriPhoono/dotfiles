@@ -8,13 +8,9 @@
   ];
 
   core = {
-    hardware = {
-      gpu = {
-        integrated.intel = {
-          enable = true;
-          deviceId = "a780";
-        };
-      };
+    hardware.gpu.integrated.intel = {
+      enable = true;
+      deviceId = "a780";
     };
 
     secrets = {
