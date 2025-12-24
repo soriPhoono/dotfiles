@@ -62,6 +62,11 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -104,6 +109,7 @@
           modules = with inputs; [
             sops-nix.homeManagerModules.sops
             nvf.homeManagerModules.default
+            caelestia-shell.homeManagerModules.default
           ];
         };
 
