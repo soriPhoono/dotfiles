@@ -28,6 +28,6 @@
 
   userapps = {
     enable = true;
-    development.enable = true;
+    development.vscode.enable = true;
   };
 }
