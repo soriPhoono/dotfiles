@@ -49,7 +49,7 @@
   desktop = {
     environments = {
       kde.enable = true;
-      managers.hyprland.enable = true;
+      managers.hyprland.saphire.enable = true;
     };
     features = {
       virtualisation.enable = true;

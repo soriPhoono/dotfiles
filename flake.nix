@@ -56,11 +56,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nvf = {
       url = "github:notashelf/nvf";
       inputs = {
@@ -107,14 +102,12 @@
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
             nix-index-database.nixosModules.nix-index
-            stylix.nixosModules.stylix
           ];
         };
 
         homes = {
           modules = with inputs; [
             sops-nix.homeManagerModules.sops
-            stylix.homeModules.stylix
             nvf.homeManagerModules.default
           ];
         };

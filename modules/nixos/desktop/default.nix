@@ -7,10 +7,7 @@
 in
   with lib; {
     imports = [
-      ./environments/display_managers/custom.nix
       ./environments/display_managers/sddm.nix
-
-      ./environments/managers/hyprland.nix
 
       ./environments/cosmic.nix
       ./environments/kde.nix

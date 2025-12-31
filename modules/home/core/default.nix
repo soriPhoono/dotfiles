@@ -9,8 +9,6 @@
     ./git.nix
   ];
 
-  themes.default.enable = true;
-
   home.packages = with pkgs; [
     p7zip
     unrar

@@ -7,12 +7,6 @@
   cfg = config.environments.hyprland.default;
 in
   with lib; {
-    imports = [
-      ./hyprland/binds.nix
-
-      ./userapps/librewolf.nix
-    ];
-
     options.environments.hyprland.default = {
       enable = mkEnableOption "Enable default hyprland desktop";
     };

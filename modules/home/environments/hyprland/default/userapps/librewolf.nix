@@ -20,5 +20,11 @@ in with lib; {
         userContent = builtins.readFile (ff-ultima + "/userContent.css");
       };
     };
+
+    userapps.librewolf.enable = true;
+
+    wayland.windowManager.hyprland.settings.bind = [
+      "$mod, B, exec, librewolf"
+    ];
   };
 }
