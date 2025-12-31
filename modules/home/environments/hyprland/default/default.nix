@@ -7,6 +7,10 @@
   cfg = config.environments.hyprland.default;
 in
   with lib; {
+    imports = [
+      ./shell.nix
+    ];
+
     options.environments.hyprland.default = {
       enable = mkEnableOption "Enable default hyprland desktop";
     };
