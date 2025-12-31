@@ -1,6 +1,9 @@
 {pkgs, ...}: {
   core = {
-    networking.network-manager.enable = true;
+    networking = {
+      network-manager.enable = true;
+      tailscale.enable = true;
+    };
 
     users = {
       soriphoono = {
@@ -11,4 +14,6 @@
       };
     };
   };
+
+  hosting.docker.enable = true;
 }
