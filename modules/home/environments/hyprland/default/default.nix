@@ -8,6 +8,8 @@
 in
   with lib; {
     imports = [
+      ./conf/hypr.nix
+
       ./shell.nix
     ];
 
