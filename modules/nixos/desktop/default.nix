@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -7,6 +8,7 @@
 in
   with lib; {
     imports = [
+      ./environments/display_managers/greetd.nix
       ./environments/display_managers/sddm.nix
 
       ./environments/cosmic.nix
@@ -19,13 +21,14 @@ in
 
       ./services/asusd.nix
       ./services/pipewire.nix
+      ./services/flatpak.nix
     ];
 
     options.desktop = {
       enable = mkEnableOption "Enable core desktop configurations";
 
       environment = mkOption {
-        type = with types; nullOr str;
+        type = with types; nullOr (enum ["kde" "cosmic"]);
         default = null;
         description = "The shorthand code for the currently enabled desktop, for autoselection of display manager";
         example = "kde";
@@ -33,7 +36,10 @@ in
     };
 
     config = mkIf cfg.enable {
-      desktop.services.pipewire.enable = true;
+      desktop.services = {
+        pipewire.enable = true;
+        flatpak.enable = true;
+      };
 
       programs = {
         appimage = {
@@ -45,7 +51,11 @@ in
       services = {
         geoclue2.enable = true;
         localtimed.enable = true;
-        flatpak.enable = true;
+      };
+
+      fonts = {
+        enableDefaultPackages = true;
+        packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
       };
     };
   }

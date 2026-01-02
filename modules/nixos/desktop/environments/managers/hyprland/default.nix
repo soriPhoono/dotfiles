@@ -4,29 +4,38 @@
   ...
 }: let
   cfg = config.desktop.environments.managers.hyprland;
-in with lib; {
-  imports = [
-    ./saphire.nix
-  ];
+in
+  with lib; {
+    imports = [
+      ./saphire.nix
+    ];
 
-  options.desktop.environments.managers.hyprland = {
-    enable = mkEnableOption "Enable hyprland desktop environment.";
+    options.desktop.environments.managers.hyprland = {
+      enable = mkEnableOption "Enable hyprland desktop environment.";
 
-    configurationName = mkOption {
-      type = types.str;
-      default = "default";
-      description = "The name of the hyprland configuration to use.";
-    };
-  };
-
-  config = mkIf cfg.enable {
-    desktop.environments = {
-      uwsm.enable = true;
+      configurationName = mkOption {
+        type = with types; nullOr (enum ["saphire"]);
+        default = null;
+        description = "The full configuration name to use for hyprland.";
+        example = "saphire";
+      };
     };
 
-    programs.hyprland = {
-      enable = true;
-      withUWSM = true;
+    config = mkIf cfg.enable {
+      desktop.environments = {
+        managers.enable = true;
+        display_managers.greetd.enable = (config.desktop.environment == null);
+      };
+
+      programs.hyprland = {
+        enable = true;
+        withUWSM = true;
+      };
+
+      home-manager.users =
+        builtins.mapAttrs (name: _: {
+          desktop.environments.hyprland.enable = true;
+        })
+        config.core.users;
     };
-  };
-}
+  }

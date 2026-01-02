@@ -15,6 +15,7 @@ in
       desktop = {
         enable = true;
         environment = "kde";
+        environments.display_managers.sddm.enable = true;
       };
 
       environment = {

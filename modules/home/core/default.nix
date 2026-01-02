@@ -19,8 +19,6 @@
     nerd-fonts.aurulent-sans-mono
   ];
 
-  fonts.fontconfig.enable = true;
-
   xdg = {
     enable = true;
     userDirs = {
