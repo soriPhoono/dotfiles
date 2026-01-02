@@ -85,13 +85,19 @@ in
 
       wayland.windowManager.hyprland.settings = {
         exec-once = [
-          "${pkgs.swww}/bin/swww-daemon &"
-          "${pkgs.ashell}/bin/ashell &"
-          "${pkgs.vicinae}/bin/vicinae server &"
+          "${pkgs.uwsm}/bin/uwsm app -t service -s s ${pkgs.swww}/bin/swww-daemon &"
+          "${pkgs.uwsm}/bin/uwsm app -t service -s s ${pkgs.ashell}/bin/ashell &"
+          "${pkgs.uwsm}/bin/uwsm app -t service -s b ${pkgs.vicinae}/bin/vicinae server &"
         ];
 
         bind = [
-          "$mod, A, exec, ${pkgs.vicinae}/bin/vicinae toggle"
+          "$mod, A, exec, ${pkgs.uwsm}/bin/uwsm app ${pkgs.vicinae}/bin/vicinae toggle"
+        ];
+
+        layerrule = [
+          "blur,vicinae"
+          "ignorealpha 0, vicinae"
+          "noanim, vicinae"
         ];
       };
     };

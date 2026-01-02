@@ -17,7 +17,10 @@ in
       };
 
       systemd.user.services."create-font-directory" = {
-        Unit.Description = "Create font directory for user fonts";
+        Unit = {
+          Description = "Create font directory for user fonts";
+          X-SwitchMethod = "restart";
+        };
         Service.ExecStart = "${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/.local/share/fonts";
       };
     };

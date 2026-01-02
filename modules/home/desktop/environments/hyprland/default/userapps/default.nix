@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -16,9 +17,9 @@ in
       };
 
       wayland.windowManager.hyprland.settings.bind = [
-        "$mod, Return, exec, kitty"
+        "$mod, Return, exec, ${pkgs.uwsm}/bin/uwsm app ${pkgs.kitty}/bin/kitty"
 
-        "$mod, Escape, exec, uwsm stop"
+        "$mod, Escape, exec, ${pkgs.uwsm}/bin/uwsm stop"
       ];
     };
   }
