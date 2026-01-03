@@ -10,6 +10,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.vscode.enable = true;
+    programs = {
+      vscode.enable = true;
+      claude-code.enable = true;
+    };
   };
 }

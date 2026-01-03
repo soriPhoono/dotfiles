@@ -38,6 +38,12 @@ with lib; {
               )
               9)
           );
+        bindm = [
+          "ALT, mouse:272, movewindow"
+        ];
+        bindc = [
+          "ALT, mouse:272, togglefloating"
+        ];
       };
     };
   };

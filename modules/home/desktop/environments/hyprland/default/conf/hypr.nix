@@ -41,7 +41,11 @@ in
 
         misc = {
           disable_hyprland_logo = true;
+          animate_manual_resizes = true;
+          animate_mouse_windowdragging = true;
         };
+
+        xwayland.force_zero_scaling = true;
       };
     };
   }

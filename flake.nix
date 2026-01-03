@@ -63,6 +63,8 @@
       };
     };
 
+    awww.url = "git+https://codeberg.org/LGFae/awww";
+
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";

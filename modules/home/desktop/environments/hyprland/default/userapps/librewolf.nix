@@ -26,7 +26,7 @@ in
       userapps.librewolf.enable = true;
 
       wayland.windowManager.hyprland.settings.bind = [
-        "$mod, B, exec, ${pkgs.uwsm} app ${pkgs.librewolf}/bin/librewolf"
+        "$mod, B, exec, ${pkgs.uwsm}/bin/uwsm app ${config.programs.librewolf.package}/bin/librewolf"
       ];
     };
   }
