@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  nixosConfig,
   ...
 }: let
   cfg = config.desktop.environments.hyprland.default;
@@ -26,13 +27,13 @@ in
             };
 
             settings = {
-              logout_cmd = "${pkgs.uwsm}/bin/uwsm stop";
-              lock_cmd = "${pkgs.hyprlock}/bin/hyprlock &";
-              audio_sinks_more_cmd = "${pkgs.uwsm}/bin/uwsm app ${pkgs.pavucontrol}/bin/pavucontrol -t 3";
-              audio_sources_more_cmd = "${pkgs.uwsm}/bin/uwsm app ${pkgs.pavucontrol}/bin/pavucontrol -t 4";
-              wifi_more_cmd = "${pkgs.uwsm}/bin/uwsm app ${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
-              vpn_more_cmd = "${pkgs.uwsm}/bin/uwsm app ${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
-              bluetooth_more_cmd = "${pkgs.uwsm}/bin/uwsm app ${pkgs.blueman}/bin/blueman-manager";
+              logout_cmd = "${nixosConfig.programs.uwsm.package}/bin/uwsm stop";
+              lock_cmd = "${nixosConfig.programs.uwsm.package}/bin/uwsm app ${config.programs.hyprlock.package}/bin/hyprlock &";
+              audio_sinks_more_cmd = "${nixosConfig.programs.uwsm.package}/bin/uwsm app -- ${pkgs.pavucontrol}/bin/pavucontrol -t 3";
+              audio_sources_more_cmd = "${nixosConfig.programs.uwsm.package}/bin/uwsm app -- ${pkgs.pavucontrol}/bin/pavucontrol -t 4";
+              wifi_more_cmd = "${nixosConfig.programs.uwsm.package}/bin/uwsm app ${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+              vpn_more_cmd = "${nixosConfig.programs.uwsm.package}/bin/uwsm app ${pkgs.networkmanagerapplet}/bin/nm-connection-editor";
+              bluetooth_more_cmd = "${nixosConfig.programs.uwsm.package}/bin/uwsm app ${pkgs.blueman}/bin/blueman-manager";
               remove_idle_btn = true;
               peripheral_indicators = {
                 Specific = [
@@ -89,13 +90,13 @@ in
 
       wayland.windowManager.hyprland.settings = {
         exec-once = [
-          "${pkgs.uwsm}/bin/uwsm app -t service -s s ${pkgs.awww}/bin/awww-daemon &"
-          "${pkgs.uwsm}/bin/uwsm app -t service -s s ${pkgs.ashell}/bin/ashell &"
-          "${pkgs.uwsm}/bin/uwsm app -t service -s b ${pkgs.vicinae}/bin/vicinae server &"
+          "${nixosConfig.programs.uwsm.package}/bin/uwsm app -t service -s s ${pkgs.awww}/bin/awww-daemon &"
+          "${nixosConfig.programs.uwsm.package}/bin/uwsm app -t service -s s ${config.programs.ashell.package}/bin/ashell &"
+          "${nixosConfig.programs.uwsm.package}/bin/uwsm app -t service -s b ${config.programs.vicinae.package}/bin/vicinae server &"
         ];
 
         bind = [
-          "$mod, A, exec, ${pkgs.uwsm}/bin/uwsm app ${pkgs.vicinae}/bin/vicinae toggle"
+          "$mod, A, exec, ${nixosConfig.programs.uwsm.package}/bin/uwsm app ${config.programs.vicinae.package}/bin/vicinae toggle"
         ];
 
         layerrule = [
