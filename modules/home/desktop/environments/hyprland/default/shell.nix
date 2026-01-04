@@ -10,6 +10,10 @@ in
   with lib; {
     config = mkIf cfg.enable {
       programs = {
+        quickshell = {
+          enable = true;
+        };
+
         ashell = {
           enable = true;
           settings = {
