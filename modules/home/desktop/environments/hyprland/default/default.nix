@@ -96,14 +96,9 @@ with lib; {
         bindm = [
           "ALT, mouse:272, movewindow"
         ];
+
         bindc = [
           "ALT, mouse:272, togglefloating"
-        ];
-
-        windowrule = [
-          "nofocus, class:twmnd"
-          "float, class:twmnd"
-          "noborder, class:twmnd"
         ];
       };
     };

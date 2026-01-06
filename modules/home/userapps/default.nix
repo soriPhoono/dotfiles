@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.userapps;
-in {
+in with lib; {
   imports = [
     ./bitwarden.nix
 

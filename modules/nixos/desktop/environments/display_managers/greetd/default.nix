@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -10,7 +9,12 @@ in
     options.desktop.environments.display_managers.greetd = {
       enable = mkEnableOption "Enable greetd display manager.";
 
-      defaultConfiguration = mkEnableOption "Use the default configuration for greetd suitable for a functioning system.";
+      configurationName = mkOption {
+        type = with types; nullOr (enum [ "tuigreet" ]);
+        default = null;
+        description = "The greetd greeter configuration to use.";
+        example = "tuigreet";
+      };
     };
 
     config = mkIf cfg.enable {
@@ -18,9 +22,9 @@ in
         greetd = {
           enable = true;
 
-          useTextGreeter = cfg.defaultConfiguration;
+          useTextGreeter = cfg.configurationName == null;
 
-          settings = mkIf (cfg.defaultConfiguration) {
+          settings = mkIf (cfg.configurationName == null) {
             terminal.vt = 1;
 
             default_session = {

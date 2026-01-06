@@ -9,7 +9,11 @@ in
     options.desktop.services.flatpak = {
       enable = mkEnableOption "Enable Flatpak application containerisation system";
 
-      enableStore = mkEnableOption "Enable Flatpak store setup with Warehouse app";
+      enableStore =
+        mkEnableOption "Enable Flatpak store setup with Warehouse app"
+        // {
+          default = config.desktop.environment == null;
+        };
     };
 
     config = mkIf cfg.enable {

@@ -8,7 +8,6 @@
 in
   with lib; {
     imports = [
-      ./environments/display_managers/greetd.nix
       ./environments/display_managers/sddm.nix
 
       ./environments/cosmic.nix
@@ -55,7 +54,9 @@ in
 
       fonts = {
         enableDefaultPackages = true;
-        packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+        packages =
+          (builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts))
+          ++ (builtins.filter (package: package != null) (map (font: font.package) (builtins.attrValues config.theme.font)));
       };
     };
   }

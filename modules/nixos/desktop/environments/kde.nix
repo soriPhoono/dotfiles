@@ -18,6 +18,10 @@ in
         environments.display_managers.sddm.enable = true;
       };
 
+      userapps = {
+        fileManagers = [ "dolphin" ];
+      };
+
       environment = {
         sessionVariables.NIXOS_OZONE_WL = "1";
 
