@@ -8,8 +8,8 @@
 in
   with lib; {
     imports = [
-      ./podman.nix
-      ./docker.nix
+      ./platforms/standalone/docker.nix
+      ./platforms/standalone/podman.nix
     ];
 
     options.hosting = {
@@ -35,15 +35,22 @@ in
     };
 
     config = mkIf (cfg.enable && !cfg.clusteredMode) {
+      assertions = [
+        {
+          assertion = ! (config.hosting.docker.enable && config.hosting.podman.enable);
+          message = "Both backends being enabled for standalone service hosting is not supported given that it makes no sense";
+        }
+      ];
+
       hosting.docker.enable = !config.hosting.podman.enable;
 
       sops = {
         secrets = {
-          "hosting/cf_api_token" = {};
+          "hosting/admin/cf_api_token" = {};
         };
         templates = {
-          "traefik.env".content = ''
-            CLOUDFLARE_DNS_API_TOKEN=${config.sops.placeholder."hosting/cf_api_token"}
+          "docker_traefik.env".content = ''
+            CLOUDFLARE_DNS_API_TOKEN=${config.sops.placeholder."hosting/admin/cf_api_token"}
           '';
         };
       };
@@ -61,29 +68,32 @@ in
                 runtimeInputs = with pkgs; [
                   docker
                 ];
-                text = builtins.concatStringsSep
+                text =
+                  builtins.concatStringsSep
                   "\n"
-                  (builtins.map
+                  (
+                    builtins.map
                     (network_name: ''
                       if ! docker network ls | grep "${network_name}"; then
                         docker network create ${network_name}
                       fi
                     '')
-                    cfg.networks
+                    ((unique (flatten (mapAttrsToList
+                      (_: container_config: container_config.networks)
+                      config.virtualisation.oci-containers.containers)))
+                    ++ cfg.networks)
                   );
               }}/bin/docker-create-networks.sh";
             };
           };
         }
-        // (builtins.mapAttrs (container_name: container_config: {
-            after = ["${container_config.serviceName}.service"];
-          })
-          config.virtualisation.oci-containers.containers);
-
-      hosting.networks = [
-        "admin_portainer-agent"
-        "admin_traefik-public"
-      ];
+        // (lib.genAttrs
+          (lib.mapAttrsToList
+            (_: container_config: container_config.serviceName)
+            config.virtualisation.oci-containers.containers)
+          (serviceName: {
+            after = ["docker-create-networks.service"];
+          }));
 
       virtualisation.oci-containers.containers = {
         admin_portainer-agent = {
@@ -154,7 +164,7 @@ in
             "--entrypoints.web.http.redirections.entrypoint.permanent=true"
           ];
           environmentFiles = [
-            config.sops.templates."traefik.env".path
+            config.sops.templates."docker_traefik.env".path
           ];
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock:ro"
