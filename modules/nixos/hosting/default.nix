@@ -59,7 +59,7 @@ in
               ExecStart = "${pkgs.writeShellApplication {
                 name = "docker-create-networks.sh";
                 text = builtins.concatStringsSep "\n" (builtins.map (network_name: "docker network create ${network_name}") (cfg.networks));
-              }/bin/docker-create-networks.sh}";
+              }}/bin/docker-create-networks.sh";
             };
           };
         }
