@@ -22,10 +22,13 @@ in
           example = "SauceCodePro Nerd Font Propo";
         };
       };
-    in if config.desktop.enable then {
-      serif = mkFontOption;
-      sansSerif = mkFontOption;
-      monospace = mkFontOption;
-      emoji = mkFontOption;
-    } else { };
+    in
+      if config.desktop.enable
+      then {
+        serif = mkFontOption;
+        sansSerif = mkFontOption;
+        monospace = mkFontOption;
+        emoji = mkFontOption;
+      }
+      else {};
   }

@@ -19,7 +19,7 @@ in
       };
 
       userapps = {
-        fileManagers = [ "dolphin" ];
+        fileManagers = ["dolphin"];
       };
 
       environment = {

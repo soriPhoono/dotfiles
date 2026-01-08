@@ -55,7 +55,7 @@ in
       };
 
       userapps = {
-        fileManagers = [ "thunar" ];
+        fileManagers = ["thunar"];
       };
 
       programs.uwsm = {

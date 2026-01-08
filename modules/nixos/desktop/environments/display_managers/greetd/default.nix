@@ -10,7 +10,7 @@ in
       enable = mkEnableOption "Enable greetd display manager.";
 
       configurationName = mkOption {
-        type = with types; nullOr (enum [ "tuigreet" ]);
+        type = with types; nullOr (enum ["tuigreet"]);
         default = null;
         description = "The greetd greeter configuration to use.";
         example = "tuigreet";
