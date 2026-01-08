@@ -24,7 +24,7 @@ in with lib; {
   };
 
   config = mkIf (cfg.enable && !cfg.clusteredMode) {
-    hosting.docker.enable = !cfg.hosting.podman.enable;
+    hosting.docker.enable = !config.hosting.podman.enable;
 
     sops = {
       secrets = {
