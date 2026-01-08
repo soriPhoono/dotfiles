@@ -103,7 +103,7 @@ in
           ];
           cmd = [
             "-H"
-            "tcp://portainer-agent:9001"
+            "tcp://${config.virtualisation.oci-containers.containers.admin_portainer-agent.hostname}:9001"
             "--tlsskipverify"
           ];
           volumes = [
