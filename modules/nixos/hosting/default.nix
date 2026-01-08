@@ -86,7 +86,7 @@ in
       ];
 
       virtualisation.oci-containers.containers = {
-        agent = {
+        admin_portainer-agent = {
           image = "portainer/agent:lts";
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
@@ -96,7 +96,7 @@ in
           ];
         };
 
-        portainer = {
+        admin_portainer-server = {
           image = "portainer/portainer-ee:latest";
           dependsOn = [
             "agent"
@@ -123,7 +123,7 @@ in
           };
         };
 
-        traefik = {
+        admin_traefik-proxy = {
           image = "traefik:latest";
           cmd = [
             "--entrypoints.web.address=:80"
