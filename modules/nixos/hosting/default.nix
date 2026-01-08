@@ -56,7 +56,7 @@ in
             wantedBy = ["multi-user.target"];
             serviceConfig = {
               Type = "oneshot";
-              ExecStart = "${pkgs.writers.writeShellApplication {
+              ExecStart = "${pkgs.writeShellApplication {
                 name = "docker-create-networks.sh";
                 script = builtins.concatStringsSep "\n" (builtins.map (network_name: "docker network create ${network_name}") (cfg.networks));
               }}";
