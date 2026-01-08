@@ -32,13 +32,13 @@ in {
       loader = {
         efi.canTouchEfiVariables = true;
         systemd-boot = lib.mkIf cfg.enable {
-          enable = lib.mkForce (!(cfg.secure-boot.enable));
+          enable = lib.mkForce (!cfg.secure-boot.enable);
           configurationLimit = 10;
         };
       };
 
       lanzaboote = {
-        enable = cfg.secure-boot.enable;
+        inherit (cfg.secure-boot) enable;
         pkiBundle = "/var/lib/sbctl";
       };
 

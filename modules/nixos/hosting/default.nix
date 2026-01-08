@@ -61,7 +61,7 @@ in
                 runtimeInputs = with pkgs; [
                   docker
                 ];
-                text = builtins.concatStringsSep "\n" (builtins.map (network_name: "docker network create ${network_name}") (cfg.networks));
+                text = builtins.concatStringsSep "\n" (builtins.map (network_name: "docker network create ${network_name}") cfg.networks);
               }}/bin/docker-create-networks.sh";
             };
           };
@@ -73,9 +73,46 @@ in
 
       hosting.networks = [
         "admin_traefik-public"
+        "admin_portainer-agent"
       ];
 
       virtualisation.oci-containers.containers = {
+        agent = {
+          image = "portainer/agent:lts";
+          volumes = [
+            "/var/run/docker.sock:/var/run/docker.sock"
+          ];
+          networks = [
+            "admin_portainer-agent"
+          ];
+        };
+
+        portainer = {
+          image = "portainer/portainer-ee:latest";
+          dependsOn = [
+            "agent"
+          ];
+          cmd = [
+            "-H tcp://portainer-agent:9001"
+            "--tlsskipverify"
+          ];
+          volumes = [
+            "admin_portainer-data:/data"
+          ];
+          networks = [
+            "admin_portainer-agent"
+            "admin_traefik-public"
+          ];
+          labels = {
+            "traefik.enable"="true";
+            "traefik.http.routers.portainer.rule"="Host(`admin.ts.${cfg.domainName}`)";
+            "traefik.http.routers.portainer.entrypoints"="websecure";
+            "traefik.http.routers.portainer.tls"="true";
+            "traefik.http.routers.portainer.tls.certresolver"="cf-ts";
+            "traefik.http.services.portainer.loadbalancer.server.port"="9000";
+          };
+        };
+
         traefik = {
           image = "traefik:latest";
           cmd = [

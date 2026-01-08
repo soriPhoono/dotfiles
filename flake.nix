@@ -125,7 +125,7 @@
         };
       })
     // (flake-utils.lib.eachDefaultSystemPassThrough (system: let
-      lib = inputs.nixpkgs.lib;
+      inherit (inputs.nixpkgs) lib;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
     in {
       systemConfigurations = let
