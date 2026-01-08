@@ -58,7 +58,7 @@ in
               Type = "oneshot";
               ExecStart = "${pkgs.writeShellApplication {
                 name = "docker-create-networks.sh";
-                script = builtins.concatStringsSep "\n" (builtins.map (network_name: "docker network create ${network_name}") (cfg.networks));
+                text = builtins.concatStringsSep "\n" (builtins.map (network_name: "docker network create ${network_name}") (cfg.networks));
               }}";
             };
           };
