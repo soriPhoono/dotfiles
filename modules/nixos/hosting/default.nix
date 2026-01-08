@@ -61,7 +61,16 @@ in
                 runtimeInputs = with pkgs; [
                   docker
                 ];
-                text = builtins.concatStringsSep "\n" (builtins.map (network_name: "docker network create ${network_name}") cfg.networks);
+                text = builtins.concatStringsSep
+                  "\n"
+                  (builtins.map
+                    (network_name: ''
+                      if ! docker network ls | grep "${network_name}"; then
+                        docker network create ${network_name}
+                      fi
+                    '')
+                    cfg.networks
+                  );
               }}/bin/docker-create-networks.sh";
             };
           };
