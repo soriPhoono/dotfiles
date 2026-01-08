@@ -99,7 +99,7 @@ in
         admin_portainer-server = {
           image = "portainer/portainer-ee:latest";
           dependsOn = [
-            "agent"
+            "admin_portainer-agent"
           ];
           cmd = [
             "-H"
