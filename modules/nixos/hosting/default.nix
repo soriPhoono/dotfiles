@@ -72,8 +72,8 @@ in
           config.virtualisation.oci-containers.containers);
 
       hosting.networks = [
-        "admin_traefik-public"
         "admin_portainer-agent"
+        "admin_traefik-public"
       ];
 
       virtualisation.oci-containers.containers = {
@@ -104,12 +104,12 @@ in
             "admin_traefik-public"
           ];
           labels = {
-            "traefik.enable"="true";
-            "traefik.http.routers.portainer.rule"="Host(`admin.ts.${cfg.domainName}`)";
-            "traefik.http.routers.portainer.entrypoints"="websecure";
-            "traefik.http.routers.portainer.tls"="true";
-            "traefik.http.routers.portainer.tls.certresolver"="cf-ts";
-            "traefik.http.services.portainer.loadbalancer.server.port"="9000";
+            "traefik.enable" = "true";
+            "traefik.http.routers.portainer.rule" = "Host(`admin.ts.${cfg.domainName}`)";
+            "traefik.http.routers.portainer.entrypoints" = "websecure";
+            "traefik.http.routers.portainer.tls" = "true";
+            "traefik.http.routers.portainer.tls.certresolver" = "cf-ts";
+            "traefik.http.services.portainer.loadbalancer.server.port" = "9000";
           };
         };
 
