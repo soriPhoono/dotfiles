@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -10,7 +11,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.adb.enable = true;
+    environment.systemPackages = with pkgs; [
+      android-tools
+    ];
 
     users.extraUsers =
       builtins.mapAttrs (name: user: {
