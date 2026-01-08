@@ -49,7 +49,7 @@ in
       };
 
       systemd.services =
-        {
+        ({
           docker-create-networks = {
             description = "Create networks required by core docker service layer";
             after = ["docker.service"];
@@ -70,7 +70,7 @@ in
             };
           }) (mapAttrsToList
             (container_name: config.virtualisation.oci-containers.containers.${container_name}.serviceName)
-            config.virtualisation.oci-containers.containers)));
+            config.virtualisation.oci-containers.containers))));
 
       virtualisation.oci-containers.containers = {
         traefik = {
