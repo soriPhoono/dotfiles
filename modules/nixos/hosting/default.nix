@@ -3,7 +3,8 @@
   pkgs,
   config,
   ...
-}: {
+}: let cfg = config.hosting;
+in with lib; {
   imports = [
     ./podman.nix
     ./docker.nix
