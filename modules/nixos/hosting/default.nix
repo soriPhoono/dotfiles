@@ -64,7 +64,7 @@ in
           };
         }
         // (builtins.listToAttrs (map (name: {
-            inherit name;
+            name = name;
             value = {
               after = ["docker-create-networks.service"];
             };
