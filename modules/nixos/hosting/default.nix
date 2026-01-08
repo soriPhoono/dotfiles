@@ -68,6 +68,10 @@ in
           })
           config.virtualisation.oci-containers.containers);
 
+      hosting.networks = [
+        "admin_traefik-public"
+      ];
+
       virtualisation.oci-containers.containers = {
         traefik = {
           image = "traefik:latest";
