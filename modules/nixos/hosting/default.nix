@@ -102,7 +102,8 @@ in
             "agent"
           ];
           cmd = [
-            "-H tcp://portainer-agent:9001"
+            "-H"
+            "tcp://portainer-agent:9001"
             "--tlsskipverify"
           ];
           volumes = [
