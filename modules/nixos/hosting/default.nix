@@ -50,7 +50,7 @@ in
 
       systemd.services =
         {
-          "docker-create-networks" = {
+          docker-create-networks = {
             description = "Create networks required by core docker service layer";
             after = ["docker.service"];
             wantedBy = ["multi-user.target"];
@@ -64,7 +64,7 @@ in
           };
         }
         // (builtins.listToAttrs (map (name: {
-            name = name;
+            inherit name;
             value = {
               after = ["docker-create-networks.service"];
             };
