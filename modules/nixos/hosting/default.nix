@@ -24,6 +24,8 @@ in with lib; {
   };
 
   config = mkIf (cfg.enable && !cfg.clusteredMode) {
+    hosting.docker.enable = !cfg.hosting.podman.enable;
+
     sops = {
       secrets = {
         "hosting/cf_api_token" = {};
@@ -53,7 +55,7 @@ in with lib; {
           "--api.insecure=false" # WARNING: Do not use in production without proper BasicAuth middleware
           # TODO: Check this is working properly (TLS enabled on all domains not just cloudflare but tailscale custom endpoints on domain name as well)
           # ACME / Let's Encrypt setup (Optional)
-          "--certificatesresolvers.cf-ts.acme.email=admin@${DOMAIN_NAME}"
+          "--certificatesresolvers.cf-ts.acme.email=admin@${cfg.domainName}"
           "--certificatesresolvers.cf-ts.acme.storage=/acme/acme.json"
           "--certificatesresolvers.cf-ts.acme.dnschallenge=true"
           "--certificatesresolvers.cf-ts.acme.dnschallenge.provider=cloudflare"

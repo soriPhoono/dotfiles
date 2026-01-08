@@ -17,6 +17,7 @@ in
           enable = true;
           autoPrune.enable = true;
         };
+        oci-containers.backend = "docker";
       };
 
       users.extraUsers =

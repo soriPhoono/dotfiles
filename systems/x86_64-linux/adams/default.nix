@@ -34,5 +34,8 @@
     };
   };
 
-  hosting.docker.enable = true;
+  hosting = {
+    enable = true;
+    domainName = "cryptic-coders.net";
+  };
 }
