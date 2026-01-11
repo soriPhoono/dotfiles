@@ -32,6 +32,13 @@ in
           "admin_traefik-public"
         ];
       };
+
+      portainerMode = mkOption {
+        type = enum [ "server" "agent" "edge-agent" "edge-agent-async" ];
+        description = "The mode to deploy portainer agent/edge-agent, and a possible portainer server";
+        default = "agent";
+        example = "server";
+      };
     };
 
     config = mkIf (cfg.enable && !cfg.clusteredMode) {
@@ -96,7 +103,7 @@ in
           }));
 
       virtualisation.oci-containers.containers = {
-        admin_portainer-agent = {
+        admin_portainer-agent = if (builtins.any (badType: cfg.portainerMode != badType) ["edge-agent" "edge-agent-async"]) then {
           image = "portainer/agent:lts";
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
@@ -104,9 +111,23 @@ in
           networks = [
             "admin_portainer-agent"
           ];
+        } else {
+          image = "portainer/agent:lts";
+          volumes = [
+            "/var/run/docker.sock:/var/run/docker.sock"
+            "/var/lib/docker/volumes:/var/lib/docker/volumes"
+            "/:/host"
+            "admin_portainer-agent"
+          ];
+          environment = {
+            EDGE = 1;
+            EDGE_ID = "";
+            EDGE_KEY = "";
+            EDGE_INSECURE_POLL = 0; # TODO: change this after reading https://docs.portainer.io/advanced/edge-agent
+          };
         };
 
-        admin_portainer-server = {
+        admin_portainer-server = mkIf (cfg.portainerMode == "server") {
           image = "portainer/portainer-ee:latest";
           dependsOn = [
             "admin_portainer-agent"
