@@ -51,12 +51,5 @@ in
         geoclue2.enable = true;
         localtimed.enable = true;
       };
-
-      fonts = {
-        enableDefaultPackages = true;
-        packages =
-          (builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts))
-          ++ (builtins.filter (package: package != null) (map (font: font.package) (builtins.attrValues config.theme.font)));
-      };
     };
   }

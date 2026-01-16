@@ -58,29 +58,5 @@
     services.asusd.enable = true;
   };
 
-  theme = {
-    font = {
-      serif = {
-        package = pkgs.nerd-fonts.liberation;
-        name = "LiterationSerif Nerd Font Propo";
-      };
-
-      sansSerif = {
-        package = pkgs.nerd-fonts.liberation;
-        name = "LiterationSans Nerd Font Propo";
-      };
-
-      monospace = {
-        package = pkgs.nerd-fonts.sauce-code-pro;
-        name = "SauceCodePro Nerd Font Mono";
-      };
-
-      emoji = {
-        package = pkgs.noto-fonts-color-emoji;
-        name = "NotoColorEmoji Nerd Font Propo";
-      };
-    };
-  };
-
   hosting.docker.enable = true;
 }

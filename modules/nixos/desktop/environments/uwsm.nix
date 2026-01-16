@@ -54,10 +54,6 @@ in
         enable = true;
       };
 
-      userapps = {
-        fileManagers = ["thunar"];
-      };
-
       programs.uwsm = {
         enable = true;
         waylandCompositors =
