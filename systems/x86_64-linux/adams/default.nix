@@ -37,5 +37,6 @@
   hosting = {
     enable = true;
     domainName = "cryptic-coders.net";
+    portainerMode = "server";
   };
 }
