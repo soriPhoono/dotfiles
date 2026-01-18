@@ -34,7 +34,7 @@ in
       };
 
       portainerMode = mkOption {
-        type = enum [ "server" "agent" "edge-agent" "edge-agent-async" ];
+        type = types.enum [ "server" "agent" "edge-agent" "edge-agent-async" ];
         description = "The mode to deploy portainer agent/edge-agent, and a possible portainer server";
         default = "agent";
         example = "server";
