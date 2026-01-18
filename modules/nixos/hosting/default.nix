@@ -103,7 +103,7 @@ in
           }));
 
       virtualisation.oci-containers.containers = {
-        admin_portainer-agent = if (builtins.any (badType: cfg.portainerMode != badType) ["edge-agent" "edge-agent-async"]) then {
+        admin_portainer-agent = if (builtins.all (badType: cfg.portainerMode != badType) ["edge-agent" "edge-agent-async"]) then {
           image = "portainer/agent:lts";
           volumes = [
             "/var/run/docker.sock:/var/run/docker.sock"
