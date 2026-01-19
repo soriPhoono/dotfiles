@@ -100,7 +100,7 @@ in
             }}";
           };
         };
-        tailscale-serve-init = mkIf (cfg.service.exposure == "serve") {
+        tailscale-serve-init = mkIf (cfg.service.enable && cfg.service.exposure == "serve") {
           description = "Configure tailscale serve setup after tailscale has been logged-in";
           after = ["tailscale-login.service"];
           wantedBy = ["multi-user.target"];
@@ -133,7 +133,7 @@ in
             }}";
           };
         };
-        tailscale-funnel-init = mkIf (cfg.service.exposure == "funnel") {
+        tailscale-funnel-init = mkIf (cfg.service.enable && cfg.service.exposure == "funnel") {
           description = "Configure tailscale funnel setup after tailscale has been logged-in";
           after = ["tailscale-login.service"];
           wantedBy = ["multi-user.target"];
