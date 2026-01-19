@@ -62,7 +62,7 @@
         TS_ACCEPT_DNS = true;
         TS_USERSPACE = false;
         TS_ENABLE_METRICS = true;
-        TS_SERVE_CONFIG = "/tailscale-serve.json"
+        TS_SERVE_CONFIG = "/tailscale-serve.json";
       };
       environmentFiles = [
         config.sops.templates."docker/tailscale.env".path
