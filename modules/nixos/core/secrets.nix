@@ -22,7 +22,7 @@ in
 
     config = lib.mkIf config.core.secrets.enable {
       systemd.tmpfiles.rules = lib.flatten (map (username:
-        if (config.home-manager.users.${username}.core.secrets.enable)
+        if config.home-manager.users.${username}.core.secrets.enable
         then [
           "d /home/${username}/.config/ 0755 ${username} users -"
           "d /home/${username}/.config/sops/ 0755 ${username} users -"
@@ -38,7 +38,7 @@ in
         secrets =
           lib.genAttrs
           (filter (item: item != null) (map (name:
-            if (config.home-manager.users.${name}.core.secrets.enable)
+            if config.home-manager.users.${name}.core.secrets.enable
             then "users/${name}/age_key"
             else null) (builtins.attrNames config.core.users)))
           (name: let

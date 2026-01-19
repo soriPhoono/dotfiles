@@ -8,9 +8,13 @@
   ];
 
   core = {
+    secrets = {
+      enable = true;
+      defaultSopsFile = ./secrets.yaml;
+    };
+
     networking = {
       network-manager.enable = true;
-      tailscale.enable = true;
     };
 
     users = {
@@ -26,6 +30,13 @@
 
   hosting.docker.enable = true;
 
+  sops = {
+    secrets."hosting/tailscale/api_key" = {};
+    templates."docker/tailscale.env".content = ''
+      TS_AUTHKEY=${config.sops.placeholder."hosting/tailscale/api_key"}
+    '';
+  };
+
   virtualisation.oci-containers.containers = {
     portainer-server = {
       image = "portainer/portainer-ee:latest";
@@ -34,6 +45,48 @@
       ];
       ports = [
         "9000:9000"
+      ];
+    };
+    tailscale = {
+      image = "tailscale/tailscale:stable";
+      hostname = "cloud";
+      devices = [
+        "/dev/net/tun"
+      ];
+      capabilities = {
+        NET_ADMIN = true;
+        SYS_MODULE = true;
+      };
+      environment = {
+        TS_AUTH_ONCE = true;
+        TS_ACCEPT_DNS = true;
+        TS_USERSPACE = false;
+        TS_ENABLE_METRICS = true;
+        TS_SERVE_CONFIG = "/tailscale-serve.json"
+      };
+      environmentFiles = [
+        config.sops.templates."docker/tailscale.env".path
+      ];
+      volumes = [
+        "${pkgs.writeTextFile "tailscale-serve.json" ''
+          {
+            "TCP": {
+              "443": {
+                "HTTPS": true
+              }
+            },
+            "Web": {
+              "admin.xerus-augmented.ts.net:443": {
+                "Handlers": {
+                  "/": {
+                    "Proxy": "http://127.0.0.1:9000"
+                  }
+                }
+              }
+            }
+          }''}:/tailscale-serve.json"
+
+        "tailscale-config:/var/lib/tailscale"
       ];
     };
   };

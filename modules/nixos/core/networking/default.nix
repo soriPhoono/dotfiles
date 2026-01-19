@@ -34,7 +34,7 @@ in
           nftables.enable = true;
         }
         // (
-          if (cfg.network-manager.enable)
+          if cfg.network-manager.enable
           then {}
           else {
             interfaces.eth0 = {
