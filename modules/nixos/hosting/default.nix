@@ -191,21 +191,6 @@ in
             "80:80"
             "443:443"
           ];
-          labels = {
-            "traefik.enable" = "true";
-            "traefik.http.routers.traefik.rule" = "Host(`dashboard.admin.ts.${cfg.domainName}`)";
-            "traefik.http.routers.traefik.entrypoints" = "web";
-            "traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme" = "websecure";
-            "traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto" = "https";
-            "traefik.http.routers.traefik.middlewares" = "traefik-https-redirect";
-            "traefik.http.routers.traefik-secure.rule" = "Host(`dashboard.admin.ts.${cfg.domainName}`)";
-            "traefik.http.routers.traefik-secure.entrypoints" = "websecure";
-            "traefik.http.routers.traefik-secure.tls" = "true";
-            "traefik.http.routers.traefik-secure.tls.certresolver" = "cf-ts";
-            "traefik.http.routers.traefik-secure.service" = "api@internal";
-            "traefik.http.middlewares.traefik-auth.basicauth.users" = "admin:$2y$05$/UrxciXCv1x57qFZhDwBLOT2FkMjn2JoLW4yoXmKbQgbawFB8AJkq";
-            "traefik.http.routers.traefik-secure.middlewares" = "traefik-auth";
-          };
         };
       };
     };
