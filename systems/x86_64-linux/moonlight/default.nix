@@ -10,11 +10,6 @@
   core = {
     hardware.gpu.dedicated.amd.enable = true;
 
-    secrets = {
-      enable = true;
-      defaultSopsFile = ./secrets.yaml;
-    };
-
     networking = {
       network-manager.enable = true;
       tailscale.enable = true;

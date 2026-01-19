@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   mkShell,
   ...
@@ -12,5 +13,7 @@ mkShell {
     disko
 
     nixos-facter
+
+    inputs.deploy-rs.packages.${pkgs.system}.default
   ];
 }

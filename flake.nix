@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deploy-rs = {
+      url = "github:szlend/deploy-rs/fix-show-derivation-parsing";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     snowfall = {
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -73,6 +78,7 @@
     self,
     nixpkgs,
     flake-utils,
+    deploy-rs,
     system-manager,
     snowfall,
     ...
@@ -127,45 +133,64 @@
     // (flake-utils.lib.eachDefaultSystemPassThrough (system: let
       inherit (inputs.nixpkgs) lib;
       pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in {
-      systemConfigurations = let
-        mkSystem = name:
-          system-manager.lib.makeSystemConfig {
-            modules =
-              (
-                builtins.attrValues
-                (lib.mapAttrs
-                  (name: _: import ./modules/environments/${name}/default.nix {inherit pkgs;})
-                  (lib.filterAttrs
-                    (name: type:
-                      type
-                      == "directory"
-                      && (builtins.pathExists
-                        ./modules/environments/${name}/default.nix))
-                    (builtins.readDir ./modules/environments)))
-              )
-              ++ [
-                ./environments/${name}/default.nix
-              ];
-          };
-      in
-        (lib.mapAttrs
-          (name: _: mkSystem name)
-          (lib.filterAttrs
-            (name: type:
-              type
-              == "directory"
-              && (builtins.pathExists
-                ./environments/${name}/default.nix))
-            (builtins.readDir ./environments)))
-        // (lib.mapAttrs
-          (name: _: mkSystem name)
-          (lib.filterAttrs
-            (name: type:
-              type
-              == "directory"
-              && (builtins.pathExists
-                ./environments/${name}/default.nix))
-            (builtins.readDir ./environments)));
-    }));
+    in
+      with lib; {
+        checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
+        systemConfigurations = let
+          mkSystem = name:
+            system-manager.lib.makeSystemConfig {
+              modules =
+                (
+                  builtins.attrValues
+                  (lib.mapAttrs
+                    (name: _: import ./modules/environments/${name}/default.nix {inherit pkgs;})
+                    (lib.filterAttrs
+                      (name: type:
+                        type
+                        == "directory"
+                        && (builtins.pathExists
+                          ./modules/environments/${name}/default.nix))
+                      (builtins.readDir ./modules/environments)))
+                )
+                ++ [
+                  ./environments/${name}/default.nix
+                ];
+            };
+        in
+          (lib.mapAttrs
+            (name: _: mkSystem name)
+            (lib.filterAttrs
+              (name: type:
+                type
+                == "directory"
+                && (builtins.pathExists
+                  ./environments/${name}/default.nix))
+              (builtins.readDir ./environments)))
+          // (lib.mapAttrs
+            (name: _: mkSystem name)
+            (lib.filterAttrs
+              (name: type:
+                type
+                == "directory"
+                && (builtins.pathExists
+                  ./environments/${name}/default.nix))
+              (builtins.readDir ./environments)));
+
+        deploy =
+          {
+            user = "soriphoono";
+            sshUser = "soriphoono";
+
+            activationTimeout = 600;
+            confirmTimeout = 60;
+          }
+          // (concatMapAttrs (name: _:
+              import ./deployments/${name}/default.nix {
+                inherit inputs lib;
+                inherit (self) nixosConfigurations;
+              })
+            (filterAttrs (name: type: type == "directory" && builtins.pathExists ./deployments/${name}/default.nix)
+              (builtins.readDir ./deployments)));
+      }));
 }

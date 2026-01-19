@@ -8,14 +8,11 @@
 in
   with lib; {
     imports = [
-      ./platforms/standalone/docker.nix
-      ./platforms/standalone/podman.nix
+      ./docker.nix
     ];
 
     options.hosting = {
       enable = mkEnableOption "Enable hosting platform for system, in either single-host or clustered mode";
-
-      clusteredMode = mkEnableOption "Signify this machine as a member of a kubernetes cluster";
 
       domainName = mkOption {
         type = types.str;
@@ -34,22 +31,15 @@ in
       };
 
       portainerMode = mkOption {
-        type = types.enum [ "server" "agent" "edge-agent" "edge-agent-async" ];
+        type = types.enum ["server" "agent" "edge-agent" "edge-agent-async"];
         description = "The mode to deploy portainer agent/edge-agent, and a possible portainer server";
         default = "agent";
         example = "server";
       };
     };
 
-    config = mkIf (cfg.enable && !cfg.clusteredMode) {
-      assertions = [
-        {
-          assertion = ! (config.hosting.docker.enable && config.hosting.podman.enable);
-          message = "Both backends being enabled for standalone service hosting is not supported given that it makes no sense";
-        }
-      ];
-
-      hosting.docker.enable = !config.hosting.podman.enable;
+    config = mkIf cfg.enable {
+      hosting.docker.enable = true;
 
       sops = {
         secrets = {
@@ -103,29 +93,32 @@ in
           }));
 
       virtualisation.oci-containers.containers = {
-        admin_portainer-agent = if (builtins.all (badType: cfg.portainerMode != badType) ["edge-agent" "edge-agent-async"]) then {
-          image = "portainer/agent:lts";
-          volumes = [
-            "/var/run/docker.sock:/var/run/docker.sock"
-          ];
-          networks = [
-            "admin_portainer-agent"
-          ];
-        } else {
-          image = "portainer/agent:lts";
-          volumes = [
-            "/var/run/docker.sock:/var/run/docker.sock"
-            "/var/lib/docker/volumes:/var/lib/docker/volumes"
-            "/:/host"
-            "admin_portainer-agent"
-          ];
-          environment = {
-            EDGE = 1;
-            EDGE_ID = "";
-            EDGE_KEY = "";
-            EDGE_INSECURE_POLL = 0; # TODO: change this after reading https://docs.portainer.io/advanced/edge-agent
+        admin_portainer-agent =
+          if (builtins.all (badType: cfg.portainerMode != badType) ["edge-agent" "edge-agent-async"])
+          then {
+            image = "portainer/agent:lts";
+            volumes = [
+              "/var/run/docker.sock:/var/run/docker.sock"
+            ];
+            networks = [
+              "admin_portainer-agent"
+            ];
+          }
+          else {
+            image = "portainer/agent:lts";
+            volumes = [
+              "/var/run/docker.sock:/var/run/docker.sock"
+              "/var/lib/docker/volumes:/var/lib/docker/volumes"
+              "/:/host"
+              "admin_portainer-agent"
+            ];
+            environment = {
+              EDGE = 1;
+              EDGE_ID = "";
+              EDGE_KEY = "";
+              EDGE_INSECURE_POLL = 0; # TODO: change this after reading https://docs.portainer.io/advanced/edge-agent
+            };
           };
-        };
 
         admin_portainer-server = mkIf (cfg.portainerMode == "server") {
           image = "portainer/portainer-ee:latest";
