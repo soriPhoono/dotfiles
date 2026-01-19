@@ -27,7 +27,7 @@ in
           Type = "oneshot";
           ExecStart = "${pkgs.writers.writeShellApplication {
             name = "install-warehouse-flatpak";
-            script = ''
+            text = ''
               flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
               flatpak install -y flathub io.github.mimbrero.Warehouse
             '';

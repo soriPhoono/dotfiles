@@ -81,7 +81,7 @@ in
               runtimeInputs = with pkgs; [
                 tailscale
               ];
-              script = ''
+              text = ''
                 if tailscale status >/dev/null 2>&1; then
                   echo "Tailscale is already logged in and active. Skipping login"
                 else
@@ -111,7 +111,7 @@ in
               runtimeInputs = with pkgs; [
                 tailscale
               ];
-              script = ''
+              text = ''
                 CURRENT_STATUS=$(tailscale serve status --json)
                 if echo "$CURRENT_STATUS" | jq -e '.Service | length > 0' >/dev/null 2>&1 || \
                   echo "$CURRENT_STATUS" | jq -e '.Web | length > 0' >/dev/null 2>&1; then
@@ -144,7 +144,7 @@ in
               runtimeInputs = with pkgs; [
                 tailscale
               ];
-              script = ''
+              text = ''
                 CURRENT_STATUS=$(tailscale funnel status --json)
                 if echo "$CURRENT_STATUS" | jq -e '.Service | length > 0' >/dev/null 2>&1 || \
                   echo "$CURRENT_STATUS" | jq -e '.Web | length > 0' >/dev/null 2>&1; then
