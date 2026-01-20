@@ -11,9 +11,7 @@ mkShell {
     ssh-to-age
 
     disko
-
     nixos-facter
-
     inputs.deploy-rs.packages.${pkgs.system}.default
   ];
 }
