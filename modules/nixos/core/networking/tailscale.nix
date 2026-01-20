@@ -87,9 +87,7 @@ in
                 else
                   echo "Not logged in. Authenticating with Tailscale..."
 
-                  sudo tailscale up --authkey=$(sudo cat ${config.sops.secrets."networking/tailscale/auth_key".path})
-
-                  if [ $? -eq 0 ]; then
+                  if [ $(sudo tailscale up --authkey="$(sudo cat ${config.sops.secrets."networking/tailscale/auth_key".path})") -eq 0 ]; then
                     echo "Successfully authenticated."
                   else
                     echo "Authentication failed."
