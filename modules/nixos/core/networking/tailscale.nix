@@ -79,6 +79,7 @@ in
             ExecStart = "${pkgs.writeShellApplication {
               name = "tailscale-login.sh";
               runtimeInputs = with pkgs; [
+                sudo
                 tailscale
               ];
               text = ''
@@ -110,6 +111,7 @@ in
             ExecStart = "${pkgs.writeShellApplication {
               name = "tailscale-serve-init.sh";
               runtimeInputs = with pkgs; [
+                sudo
                 tailscale
               ];
               text = ''
@@ -143,6 +145,7 @@ in
             ExecStart = "${pkgs.writeShellApplication {
               name = "tailscale-funnel-init.sh";
               runtimeInputs = with pkgs; [
+                sudo
                 tailscale
               ];
               text = ''
