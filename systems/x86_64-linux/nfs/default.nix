@@ -10,7 +10,8 @@
 
   fileSystems = {
     "/export/media" = {
-      device = "/mnt/data/media"
+      device = "/mnt/data/media";
+      options = ["bind"];
     };
   };
 
@@ -20,6 +21,10 @@
     mountdPort = 4002;
     statdPort = 4000;
     extraNfsdConfig = '''';
+    exports = ''
+      /export       192.168.1.0/16(insecure,rw,crossmnt)
+      /export/media 192.168.1.0/16(insecure,rw,crossmnt)
+    '';
   };
 
   networking.firewall = {
@@ -38,27 +43,6 @@
       tailscale = {
         enable = true;
         auth.enable = true;
-        service = {
-          enable = true;
-          config = ''
-            {
-              "TCP": {
-                "443": {
-                  "HTTPS": true
-                }
-              },
-              "Web": {
-                "pvr.xerus-augmented.ts.net:443": {
-                  "Handlers": {
-                    "/": {
-                      "Proxy": "http://127.0.0.1:${builtins.toString config.services.qbittorrent.webuiPort}"
-                    }
-                  }
-                }
-              }
-            }
-          '';
-        };
       };
     };
 
@@ -73,5 +57,9 @@
     };
   };
 
-  hosting.docker.enable = true;
+  hosting = {
+    enable = true;
+    domainName = "cryptic-coders.net";
+    portainerMode = "server";
+  };
 }
