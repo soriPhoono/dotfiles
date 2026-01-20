@@ -98,7 +98,7 @@ in
                   fi
                 fi
               '';
-            }}";
+            }}/bin/tailscale-login.sh";
           };
         };
         tailscale-serve-init = mkIf (cfg.service.enable && cfg.service.exposure == "serve") {
@@ -131,7 +131,7 @@ in
                   fi
                 fi
               '';
-            }}";
+            }}/bin/tailscale-serve-init.sh";
           };
         };
         tailscale-funnel-init = mkIf (cfg.service.enable && cfg.service.exposure == "funnel") {
@@ -164,7 +164,7 @@ in
                   fi
                 fi
               '';
-            }}";
+            }}/bin/tailscale-funnel-init.sh";
           };
         };
       };
