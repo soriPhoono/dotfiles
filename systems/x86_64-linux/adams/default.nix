@@ -15,7 +15,10 @@
 
     networking = {
       network-manager.enable = true;
-      tailscale.enable = true;
+      tailscale = {
+        enable = true;
+        auth.enable = true;
+      };
     };
 
     users = {
