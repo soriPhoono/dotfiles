@@ -1,8 +1,4 @@
-{
-  pkgs,
-  modulesPath,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
@@ -31,9 +27,5 @@
     };
   };
 
-  hosting = {
-    enable = true;
-    domainName = "cryptic-coders.net";
-    portainerMode = "server";
-  };
+  hosting.docker.enable = true;
 }
