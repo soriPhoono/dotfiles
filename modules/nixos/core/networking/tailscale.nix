@@ -89,14 +89,8 @@ in
                   echo "Not logged in. Authenticating with Tailscale..."
 
                   TS_AUTHKEY=$(sudo cat ${config.sops.secrets."networking/tailscale/auth_key".path})
-                  TS_SUCCESS=$(sudo tailscale up --authkey="$TS_AUTHKEY")
 
-                  if [ "$TS_SUCCESS" -eq 0 ]; then
-                    echo "Successfully authenticated."
-                  else
-                    echo "Authentication failed."
-                    exit 1
-                  fi
+                  sudo tailscale up --authkey="$TS_AUTHKEY"
                 fi
               '';
             }}/bin/tailscale-login.sh";
