@@ -90,7 +90,7 @@ in
 
                   TS_AUTHKEY=$(sudo cat ${config.sops.secrets."networking/tailscale/auth_key".path})
 
-                  sudo tailscale up --authkey="$TS_AUTHKEY"
+                  sudo tailscale up --authkey="$TS_AUTHKEY" --exit-node-allow-lan-access
                 fi
               '';
             }}/bin/tailscale-login.sh";
