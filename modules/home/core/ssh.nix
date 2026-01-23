@@ -30,7 +30,7 @@ with lib; {
         ".ssh/id_ed25519.pub".text = config.core.ssh.publicKey;
       }
       // (lib.mapAttrs (name: contents: {
-          target = ".ssh/${name}.pub";
+          target = ".ssh/${name}_key.pub";
           text = contents;
         })
         config.core.ssh.extraSSHKeys);

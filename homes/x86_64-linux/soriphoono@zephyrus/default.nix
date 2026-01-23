@@ -16,6 +16,12 @@
       userEmail = "soriphoono@gmail.com";
       projectsDir = "${config.home.homeDirectory}/Documents/Projects/";
       extraIdentities = {
+        school = {
+          directory = "School";
+          name = "soriphoono";
+          email = "soriphoono@gmail.com";
+          signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPcVuhOU+afO33xi1Jb0VHZXlDwXMl0smJnxzSwZpysG soriphoono@zephyrus";
+        };
         work = {
           directory = "Work";
           name = "xrezdev11";

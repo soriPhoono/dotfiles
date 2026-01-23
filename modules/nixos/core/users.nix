@@ -76,17 +76,11 @@ in {
       mutableUsers = false;
 
       extraUsers =
-        builtins.mapAttrs (_: user: let
-          adminKeys =
-            if !user.admin
-            then (lib.mapAttrsToList (_: admin: admin.publicKey) (lib.filterAttrs (_: user: user.admin) cfg.users))
-            else [];
-        in {
+        builtins.mapAttrs (_: user: {
           inherit (user) hashedPassword extraGroups shell;
 
           openssh.authorizedKeys.keys =
-            lib.mkIf (user.publicKey != null) ([user.publicKey]
-              ++ adminKeys);
+            lib.mkIf (user.publicKey != null) [user.publicKey];
         })
         cfg.users;
     };
