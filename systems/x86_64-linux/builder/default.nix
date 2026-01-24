@@ -1,9 +1,15 @@
-{pkgs, modulesPath, ...}: {
+{
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = [
     (modulesPath + "/virtualisation/proxmox-lxc.nix")
   ];
 
   core = {
+    name = "builder";
+
     secrets = {
       enable = true;
       defaultSopsFile = ./secrets.yaml;
@@ -27,5 +33,5 @@
     };
   };
 
-  hosting.docker.enable = true;
+  hosting.backend.docker.enable = true;
 }

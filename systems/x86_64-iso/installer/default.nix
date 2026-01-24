@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   core = {
+    name = "installer";
+
     networking = {
       network-manager.enable = true;
       tailscale.enable = true;

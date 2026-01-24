@@ -57,7 +57,7 @@ in
       programs.uwsm = {
         enable = true;
         waylandCompositors =
-          lib.mapAttrs (name: value: {
+          lib.mapAttrs (_name: value: {
             prettyName = value.name;
             comment = value.description;
             binPath = value.execPath;

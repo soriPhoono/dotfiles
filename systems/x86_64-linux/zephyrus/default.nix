@@ -4,6 +4,8 @@
   ];
 
   core = {
+    name = "zephyrus";
+
     boot.enable = true;
 
     hardware = {
@@ -58,5 +60,5 @@
     services.asusd.enable = true;
   };
 
-  hosting.docker.enable = true;
+  hosting.backend.docker.enable = true;
 }

@@ -16,13 +16,13 @@ in {
     ];
 
     users.extraUsers =
-      builtins.mapAttrs (name: user: {
+      builtins.mapAttrs (_name: _user: {
         extraGroups = [
           "adbusers"
         ];
       })
       (lib.filterAttrs
-        (name: content: content.admin)
+        (_name: content: content.admin)
         config.core.users);
   };
 }

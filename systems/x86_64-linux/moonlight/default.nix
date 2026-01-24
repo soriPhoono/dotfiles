@@ -8,6 +8,8 @@
   ];
 
   core = {
+    name = "moonlight";
+
     hardware.gpu.dedicated.amd.enable = true;
 
     networking = {

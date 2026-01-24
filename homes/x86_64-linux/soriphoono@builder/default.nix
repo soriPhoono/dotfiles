@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
   core = {
     secrets = {
       enable = true;

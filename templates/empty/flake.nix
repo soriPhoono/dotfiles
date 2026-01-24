@@ -32,16 +32,10 @@
 
   outputs = inputs @ {
     systems,
-    nixpkgs,
     flake-parts,
     ...
   }:
-    flake-parts.lib.mkFlake {inherit inputs;} (top @ {
-      config,
-      withSystem,
-      moduleWithSystem,
-      ...
-    }: {
+    flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
       inherit systems;
 
       imports = with inputs; [
@@ -51,11 +45,7 @@
       ];
       flake = {
       };
-      perSystem = {
-        config,
-        pkgs,
-        ...
-      }: {
+      perSystem = _: {
       };
     });
 }

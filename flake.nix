@@ -2,19 +2,17 @@
   description = "A system flake for my homelab and personal devices";
 
   inputs = {
+    systems.url = "github:nix-systems/default";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
 
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
-
-    system-manager = {
-      url = "github:numtide/system-manager";
+    devshells.url = "github:numtide/devshell";
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    deploy-rs = {
-      url = "github:szlend/deploy-rs/fix-show-derivation-parsing";
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -51,6 +49,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    comin = {
+      url = "github:nlewo/comin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,122 +78,74 @@
   };
 
   outputs = inputs @ {
-    self,
     nixpkgs,
-    flake-utils,
-    deploy-rs,
-    system-manager,
+    flake-parts,
     snowfall,
     ...
-  }:
-    (let
-      lib = snowfall.mkLib {
-        inherit inputs;
-        src = ./.;
-        snowfall = {
-          meta = {
-            name = "homelab";
-            title = "Homelab and Personal Devices Configuration";
-          };
-          namespace = "soriphoono";
-        };
-      };
-    in
-      lib.mkFlake {
-        inherit inputs;
-
-        src = ./.;
-
-        systems = {
-          modules.nixos = with inputs; [
-            nixos-facter-modules.nixosModules.facter
-            disko.nixosModules.disko
-            lanzaboote.nixosModules.lanzaboote
-            sops-nix.nixosModules.sops
-            nix-index-database.nixosModules.nix-index
-          ];
-        };
-
-        homes = {
-          modules = with inputs; [
-            sops-nix.homeManagerModules.sops
-            nvf.homeManagerModules.default
-            caelestia-shell.homeManagerModules.default
-          ];
-        };
-
-        channels-config = {
-          allowUnfree = true;
-        };
-
-        templates = {
-          empty.description = ''
-            An empty flake with a basic flake.nix to support a devshell environment.
-            Made with flake-parts and sensable defaults
-          '';
+  }: let
+    inherit (nixpkgs) lib;
+  in
+    with lib;
+      recursiveUpdate
+      (flake-parts.lib.mkFlake {inherit inputs;} {
+        imports = with inputs; [
+          devshells.flakeModule
+          treefmt-nix.flakeModule
+          git-hooks-nix.flakeModule
+        ];
+        systems = with inputs; import systems;
+        perSystem = args @ {pkgs, ...}: {
+          devshells.default.devshell = import ./shell.nix (args
+            // {
+              inherit pkgs;
+            });
+          treefmt = import ./treefmt.nix;
+          pre-commit = import ./pre-commit.nix;
         };
       })
-    // (flake-utils.lib.eachDefaultSystemPassThrough (system: let
-      inherit (inputs.nixpkgs) lib;
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-    in
-      with lib; {
-        checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-
-        systemConfigurations = let
-          mkSystem = name:
-            system-manager.lib.makeSystemConfig {
-              modules =
-                (
-                  builtins.attrValues
-                  (lib.mapAttrs
-                    (name: _: import ./modules/environments/${name}/default.nix {inherit pkgs;})
-                    (lib.filterAttrs
-                      (name: type:
-                        type
-                        == "directory"
-                        && (builtins.pathExists
-                          ./modules/environments/${name}/default.nix))
-                      (builtins.readDir ./modules/environments)))
-                )
-                ++ [
-                  ./environments/${name}/default.nix
-                ];
+      ((snowfall.mkLib {
+          inherit inputs;
+          src = ./.;
+          snowfall = {
+            meta = {
+              name = "homelab";
+              title = "Homelab and Personal Devices Configuration";
             };
-        in
-          (lib.mapAttrs
-            (name: _: mkSystem name)
-            (lib.filterAttrs
-              (name: type:
-                type
-                == "directory"
-                && (builtins.pathExists
-                  ./environments/${name}/default.nix))
-              (builtins.readDir ./environments)))
-          // (lib.mapAttrs
-            (name: _: mkSystem name)
-            (lib.filterAttrs
-              (name: type:
-                type
-                == "directory"
-                && (builtins.pathExists
-                  ./environments/${name}/default.nix))
-              (builtins.readDir ./environments)));
+            namespace = "soriphoono";
+          };
+        }).mkFlake {
+          inherit inputs;
 
-        deploy =
-          {
-            user = "soriphoono";
-            sshUser = "soriphoono";
+          src = ./.;
 
-            activationTimeout = 600;
-            confirmTimeout = 60;
-          }
-          // (concatMapAttrs (name: _:
-              import ./deployments/${name}/default.nix {
-                inherit inputs lib;
-                inherit (self) nixosConfigurations;
-              })
-            (filterAttrs (name: type: type == "directory" && builtins.pathExists ./deployments/${name}/default.nix)
-              (builtins.readDir ./deployments)));
-      }));
+          systems = {
+            modules.nixos = with inputs; [
+              nixos-facter-modules.nixosModules.facter
+              disko.nixosModules.disko
+              lanzaboote.nixosModules.lanzaboote
+              sops-nix.nixosModules.sops
+              comin.nixosModules.comin
+              nix-index-database.nixosModules.nix-index
+            ];
+          };
+
+          homes = {
+            modules = with inputs; [
+              sops-nix.homeManagerModules.sops
+              nvf.homeManagerModules.default
+              caelestia-shell.homeManagerModules.default
+            ];
+          };
+
+          channels-config = {
+            allowUnfree = true;
+          };
+
+          templates = {
+            empty.description = ''
+              An empty flake with a basic flake.nix to support a devshell environment.
+              Made with flake-parts and sensable defaults
+            '';
+          };
+        });
 }

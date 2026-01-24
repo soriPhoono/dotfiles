@@ -29,30 +29,28 @@ in
     };
 
     config = {
-      networking =
+      networking = mkMerge [
         {
           nftables.enable = true;
         }
-        // (
-          if cfg.network-manager.enable
-          then {}
-          else {
-            interfaces.eth0 = {
-              ipv4.addresses = mkIf (cfg.ipv4_address != null) [
-                {
-                  address = cfg.ipv4_address;
-                  prefixLength = 24;
-                }
-              ];
-              ipv6.addresses = mkIf (cfg.ipv6_address != null) [
-                {
-                  address = cfg.ipv6_address;
-                  prefixLength = 64;
-                }
-              ];
-            };
-          }
-        );
+
+        (mkIf (!cfg.network-manager.enable) {
+          interfaces.eth0 = {
+            ipv4.addresses = mkIf (cfg.ipv4_address != null) [
+              {
+                address = cfg.ipv4_address;
+                prefixLength = 24;
+              }
+            ];
+            ipv6.addresses = mkIf (cfg.ipv6_address != null) [
+              {
+                address = cfg.ipv6_address;
+                prefixLength = 64;
+              }
+            ];
+          };
+        })
+      ];
 
       services.resolved.enable = true;
     };

@@ -4,6 +4,8 @@
   ];
 
   core = {
+    name = "lg-laptop";
+
     boot.enable = true;
 
     hardware = {

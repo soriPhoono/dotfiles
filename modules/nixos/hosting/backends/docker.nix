@@ -1,13 +1,12 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
-  cfg = config.hosting.docker;
+  cfg = config.hosting.backend.docker;
 in
   with lib; {
-    options.hosting.docker = {
+    options.hosting.backend.docker = {
       enable = mkEnableOption "Enable Docker hosting support.";
     };
 
@@ -21,13 +20,13 @@ in
       };
 
       users.extraUsers =
-        builtins.mapAttrs (name: user: {
+        builtins.mapAttrs (_name: _user: {
           extraGroups = [
             "docker"
           ];
         })
         (filterAttrs
-          (name: content: content.admin)
+          (_name: content: content.admin)
           config.core.users);
     };
   }

@@ -8,6 +8,8 @@
   ];
 
   core = {
+    name = "adams";
+
     secrets = {
       enable = true;
       defaultSopsFile = ./secrets.yaml;
@@ -32,8 +34,10 @@
   };
 
   hosting = {
-    enable = true;
-    domainName = "cryptic-coders.net";
-    portainerMode = "server";
+    mode = "single-node";
+    configuration.single-node = {
+      domainName = "cryptic-coders.net";
+      portainerMode = "server";
+    };
   };
 }

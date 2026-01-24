@@ -1,7 +1,5 @@
 {
-  inputs,
   lib,
-  pkgs,
   config,
   nixosConfig,
   ...
@@ -18,9 +16,7 @@ in
         };
       };
 
-      wayland.windowManager.hyprland.settings = let
-        caelestia-shell = inputs.caelestia-shell.packages.${pkgs.stdenv.system};
-      in {
+      wayland.windowManager.hyprland.settings = {
         exec-once = [
           "${nixosConfig.programs.uwsm.package}/bin/uwsm app -t service -s b caelestia-shell"
         ];
