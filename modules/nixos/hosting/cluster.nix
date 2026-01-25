@@ -8,7 +8,7 @@ with lib; {
     ./backends/k3s.nix
   ];
 
-  options.hosting.configuration = mkIf (config.mode == "cluster") {};
+  options.hosting.configuration.cluster = {};
 
   config = mkIf (config.hosting.mode == "cluster") {
     hosting.backend.k3s.enable = true;

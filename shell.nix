@@ -3,17 +3,18 @@
   config,
   ...
 }:
-with pkgs; {
-  packages = [
-    age
-    sops
-    ssh-to-age
+with pkgs;
+  mkShell {
+    packages = [
+      age
+      sops
+      ssh-to-age
 
-    disko
-    nixos-facter
-  ];
+      disko
+      nixos-facter
+    ];
 
-  interactive.default.text = ''
-    ${config.pre-commit.shellHook}
-  '';
-}
+    shellHook = ''
+      ${config.pre-commit.shellHook}
+    '';
+  }

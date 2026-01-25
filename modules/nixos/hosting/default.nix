@@ -2,6 +2,7 @@
 with lib; {
   imports = [
     ./single-node.nix
+    ./cluster.nix
   ];
 
   options.hosting = {

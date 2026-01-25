@@ -8,11 +8,15 @@
   ];
 
   core = {
-    name = "adams";
-
     secrets = {
       enable = true;
       defaultSopsFile = ./secrets.yaml;
+    };
+
+    gitops = {
+      enable = true;
+      repo = "https://github.com/soriphoono/homelab.git";
+      name = "adams";
     };
 
     networking = {

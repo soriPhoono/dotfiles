@@ -4,8 +4,6 @@
   ];
 
   core = {
-    name = "zephyrus";
-
     boot.enable = true;
 
     hardware = {
@@ -26,6 +24,12 @@
 
       adb.enable = true;
       bluetooth.enable = true;
+    };
+
+    gitops = {
+      enable = true;
+      repo = "https://github.com/soriphoono/homelab.git";
+      name = "zephyrus";
     };
 
     secrets = {
@@ -59,6 +63,4 @@
     };
     services.asusd.enable = true;
   };
-
-  hosting.backend.docker.enable = true;
 }

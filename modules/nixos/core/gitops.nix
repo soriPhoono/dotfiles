@@ -1,0 +1,36 @@
+{
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.core.gitops;
+in
+  with lib; {
+    options.core.gitops = {
+      enable = mkEnableOption "Enable gitops based update cycles on system";
+      repo = mkOption {
+        type = types.str;
+        description = "The url to retrieve the flake configuration from";
+        example = "https://github.com/soriphoono/homelab.git";
+      };
+      name = mkOption {
+        type = types.str;
+        description = "The name of the configuration to update from";
+        example = "zephyrus";
+      };
+    };
+
+    config = mkIf cfg.enable {
+      services.comin = {
+        enable = true;
+        hostname = cfg.name;
+        remotes = [
+          {
+            name = "origin";
+            url = cfg.repo;
+            branches.main.name = "main";
+          }
+        ];
+      };
+    };
+  }

@@ -87,7 +87,7 @@
   in
     with lib;
       recursiveUpdate
-      (flake-parts.lib.mkFlake {inherit inputs;} {
+      (flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
         imports = with inputs; [
           devshells.flakeModule
           treefmt-nix.flakeModule
@@ -95,57 +95,69 @@
         ];
         systems = with inputs; import systems;
         perSystem = args @ {pkgs, ...}: {
-          devshells.default.devshell = import ./shell.nix (args
+          devShells.default = import ./shell.nix (args
             // {
               inherit pkgs;
             });
           treefmt = import ./treefmt.nix;
           pre-commit = import ./pre-commit.nix;
         };
-      })
-      ((snowfall.mkLib {
-          inherit inputs;
-          src = ./.;
-          snowfall = {
-            meta = {
-              name = "homelab";
-              title = "Homelab and Personal Devices Configuration";
+      }))
+      (let
+        snowfallFlake =
+          (snowfall.mkLib {
+            inherit inputs;
+            src = ./.;
+            snowfall = {
+              meta = {
+                name = "homelab";
+                title = "Homelab and Personal Devices Configuration";
+              };
+              namespace = "soriphoono";
             };
-            namespace = "soriphoono";
-          };
-        }).mkFlake {
-          inherit inputs;
+          }).mkFlake {
+            inherit inputs;
 
-          src = ./.;
+            src = ./.;
 
-          systems = {
-            modules.nixos = with inputs; [
-              nixos-facter-modules.nixosModules.facter
-              disko.nixosModules.disko
-              lanzaboote.nixosModules.lanzaboote
-              sops-nix.nixosModules.sops
-              comin.nixosModules.comin
-              nix-index-database.nixosModules.nix-index
-            ];
-          };
+            systems = {
+              modules.nixos = with inputs; [
+                nixos-facter-modules.nixosModules.facter
+                disko.nixosModules.disko
+                nixos-generators.nixosModules.all-formats
+                lanzaboote.nixosModules.lanzaboote
+                sops-nix.nixosModules.sops
+                comin.nixosModules.comin
+                nix-index-database.nixosModules.nix-index
+              ];
+            };
 
-          homes = {
-            modules = with inputs; [
-              sops-nix.homeManagerModules.sops
-              nvf.homeManagerModules.default
-              caelestia-shell.homeManagerModules.default
-            ];
-          };
+            homes = {
+              modules = with inputs; [
+                sops-nix.homeManagerModules.sops
+                nvf.homeManagerModules.default
+                caelestia-shell.homeManagerModules.default
+              ];
+            };
 
-          channels-config = {
-            allowUnfree = true;
-          };
+            channels-config = {
+              allowUnfree = true;
+            };
 
-          templates = {
-            empty.description = ''
-              An empty flake with a basic flake.nix to support a devshell environment.
-              Made with flake-parts and sensable defaults
-            '';
+            templates = {
+              empty.description = ''
+                An empty flake with a basic flake.nix to support a devshell environment.
+                Made with flake-parts and sensable defaults
+              '';
+            };
           };
-        });
+      in
+        recursiveUpdate
+        {
+          proxmox-lxcConfigurations =
+            mapAttrs
+            (_: configuration: configuration.config.formats.proxmox-lxc)
+            snowfallFlake.nixosConfigurations;
+        }
+        snowfallFlake);
 }

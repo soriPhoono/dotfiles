@@ -4,8 +4,6 @@
   ];
 
   core = {
-    name = "lg-laptop";
-
     boot.enable = true;
 
     hardware = {
@@ -25,6 +23,12 @@
       };
 
       bluetooth.enable = true;
+    };
+
+    gitops = {
+      enable = true;
+      repo = "https://github.com/soriphoono/homelab.git";
+      name = "lg-laptop";
     };
 
     secrets = {

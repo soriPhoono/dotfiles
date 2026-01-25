@@ -8,13 +8,17 @@
   ];
 
   core = {
-    name = "moonlight";
-
     hardware.gpu.dedicated.amd.enable = true;
 
     networking = {
       network-manager.enable = true;
       tailscale.enable = true;
+    };
+
+    gitops = {
+      enable = true;
+      repo = "https://github.com/soriphoono/homelab.git";
+      name = "moonlight";
     };
 
     users = {
