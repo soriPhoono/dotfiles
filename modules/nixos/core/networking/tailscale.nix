@@ -12,43 +12,32 @@ in
 
       auth = {
         enable = mkEnableOption "Enable tailscale authkey auto login";
+        internal = mkEnableOption "Enable internal provisioning of the required secret for authentication";
       };
 
       service = {
-        enable = mkEnableOption "Enable publishing of a service via tailscale reverse proxying";
         exposure = mkOption {
           type = with types; enum ["serve" "funnel"];
-          default = "serve";
+          default = null;
           description = "How much exposure to give the service, tailnet only or public internet accessable";
           example = "funnel";
         };
-        config = mkOption {
-          type = with types; nullOr str;
+        port = mkOption {
+          type = with types; nullOr port;
           default = null;
-          description = "Tailscale serve configuration to load into tailscale";
-          example = ''
-            {
-              "TCP": {
-                "443": {
-                  "HTTPS": true
-                }
-              },
-              "Web": {
-                "admin.xerus-augmented.ts.net:443": {
-                  "Handlers": {
-                    "/": {
-                      "Proxy": "http://127.0.0.1:9000"
-                    }
-                  }
-                }
-              }
-            }'';
+          description = "The port to expose on this device's magic dns subdomain";
+          example = 9000;
         };
       };
     };
 
     config = lib.mkIf cfg.enable {
-      sops.secrets."networking/tailscale/auth_key" = mkIf cfg.auth.enable {};
+      sops = mkIf cfg.auth.internal {
+        secrets."networking/tailscale/auth_key" = {};
+        templates."tailscale.env".content = ''
+          TS_AUTHKEY=${config.sops.placeholder."networking/tailscale/auth_key"}
+        '';
+      };
 
       networking.firewall.checkReversePath = "loose";
 
@@ -62,107 +51,89 @@ in
         extraDaemonFlags = [
           "--no-logs-no-support"
         ];
-
-        extraSetFlags = [
-          "--accept-dns"
-          "--exit-node-allow-lan-access"
-        ];
       };
 
       systemd.services = {
-        tailscale-login = mkIf cfg.auth.enable {
+        tailscale-autoconnect = mkIf cfg.auth.enable {
           description = "Configure tailscale authorization";
-          after = ["tailscale.service"];
+          after = ["network-pre.target" "tailscale.service"];
+          wants = ["network-pre.target" "tailscale.service"];
           wantedBy = ["multi-user.target"];
-          serviceConfig = {
-            Type = "oneshot";
-            ExecStart = "${pkgs.writeShellApplication {
-              name = "tailscale-login.sh";
-              runtimeInputs = with pkgs; [
-                sudo
-                tailscale
-              ];
-              text = ''
-                if tailscale status >/dev/null 2>&1; then
-                  echo "Tailscale is already logged in and active. Skipping login"
-                else
-                  echo "Not logged in. Authenticating with Tailscale..."
+          serviceConfig = mkMerge [
+            {
+              Type = "oneshot";
+            }
+            (mkIf cfg.auth.internal {
+              EnvironmentFile = config.sops.templates."tailscale.env".path;
+            })
+            (mkIf (!cfg.auth.internal) {
+              EnvironmentFile = "/var/lib/tailscale/authkey";
+            })
+          ];
+          script = "${pkgs.writeShellApplication {
+            name = "tailscale-autoconnect.sh";
+            runtimeInputs = with pkgs; [
+              tailscale
+              jq
+            ];
+            text = ''
+              if [ $(tailscale status -json | jq -r .BackendState) = "Running" ]; then
+                exit 0
+              fi
 
-                  TS_AUTHKEY=$(sudo cat ${config.sops.secrets."networking/tailscale/auth_key".path})
+              echo "Not logged in. Authenticating with Tailscale..."
 
-                  sudo tailscale up --authkey="$TS_AUTHKEY" --exit-node-allow-lan-access
-                fi
-              '';
-            }}/bin/tailscale-login.sh";
-          };
+              tailscale up --authkey="$TS_AUTHKEY" --accept-dns --exit-node-allow-lan-access
+            '';
+          }}/bin/tailscale-autoconnect.sh";
         };
-        tailscale-serve-init = mkIf (cfg.service.enable && cfg.service.exposure == "serve") {
+        tailscale-serve-init = mkIf (cfg.service.port != null && cfg.service.exposure == "serve") {
           description = "Configure tailscale serve setup after tailscale has been logged-in";
-          after = ["tailscale-login.service"];
+          after = ["tailscale-autoconnect.service"];
+          wants = ["tailscale-autoconnect.service"];
           wantedBy = ["multi-user.target"];
           serviceConfig = {
             Type = "oneshot";
-            ExecStart = "${pkgs.writeShellApplication {
-              name = "tailscale-serve-init.sh";
-              runtimeInputs = with pkgs; [
-                sudo
-                tailscale
-              ];
-              text = ''
-                CURRENT_STATUS=$(tailscale serve status --json)
-                if echo "$CURRENT_STATUS" | jq -e '.Service | length > 0' >/dev/null 2>&1 || \
-                  echo "$CURRENT_STATUS" | jq -e '.Web | length > 0' >/dev/null 2>&1; then
-                    echo "Tailscale Serve is already configured. Skipping to avoid overwriting."
-                else
-                  echo "No existing Serve config found. Applying new configuration..."
-
-                  # Apply the config from the variable
-                  echo "${cfg.service.config}" | tailscale serve set -
-
-                  if [ $? -eq 0 ]; then
-                      echo "Serve configuration applied successfully."
-                  else
-                      echo "Failed to apply Serve configuration."
-                      exit 1
-                  fi
-                fi
-              '';
-            }}/bin/tailscale-serve-init.sh";
           };
+          script = "${pkgs.writeShellApplication {
+            name = "tailscale-serve-init.sh";
+            runtimeInputs = with pkgs; [
+              tailscale
+            ];
+            text = ''
+              # Apply the config from the variable
+              if tailscale serve --bg ${cfg.service.port}; then
+                 echo "Serve configuration applied successfully."
+              else
+                 echo "Failed to apply Serve configuration."
+                 exit 1
+              fi
+            '';
+          }}/bin/tailscale-serve-init.sh";
         };
-        tailscale-funnel-init = mkIf (cfg.service.enable && cfg.service.exposure == "funnel") {
+        tailscale-funnel-init = mkIf (cfg.service.port != null && cfg.service.exposure == "funnel") {
           description = "Configure tailscale funnel setup after tailscale has been logged-in";
-          after = ["tailscale-login.service"];
+          after = ["tailscale-autoconnect.service"];
+          wants = ["tailscale-autoconnect.service"];
           wantedBy = ["multi-user.target"];
           serviceConfig = {
             Type = "oneshot";
-            ExecStart = "${pkgs.writeShellApplication {
-              name = "tailscale-funnel-init.sh";
-              runtimeInputs = with pkgs; [
-                sudo
-                tailscale
-              ];
-              text = ''
-                CURRENT_STATUS=$(tailscale funnel status --json)
-                if echo "$CURRENT_STATUS" | jq -e '.Service | length > 0' >/dev/null 2>&1 || \
-                  echo "$CURRENT_STATUS" | jq -e '.Web | length > 0' >/dev/null 2>&1; then
-                    echo "Tailscale Funnel is already configured. Skipping to avoid overwriting."
-                else
-                  echo "No existing Funnel config found. Applying new configuration..."
-
-                  # Apply the config from the variable
-                  echo "${cfg.service.config}" | tailscale funnel set -
-
-                  if [ $? -eq 0 ]; then
-                      echo "Funnel configuration applied successfully."
-                  else
-                      echo "Failed to apply Funnel configuration."
-                      exit 1
-                  fi
-                fi
-              '';
-            }}/bin/tailscale-funnel-init.sh";
           };
+          script = "${pkgs.writeShellApplication {
+            name = "tailscale-funnel-init.sh";
+            runtimeInputs = with pkgs; [
+              tailscale
+            ];
+            text = ''
+              # Apply the config from the variable
+              if tailscale funnel --bg ${cfg.service.port}; then
+                echo "Funnel configuration applied successfully."
+              else
+                echo "Failed to apply Funnel configuration."
+                exit 1
+              fi
+            '';
+          }}/bin/tailscale-funnel-init.sh";
         };
       };
     };

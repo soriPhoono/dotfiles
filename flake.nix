@@ -3,10 +3,10 @@
 
   inputs = {
     systems.url = "github:nix-systems/default";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    devshells.url = "github:numtide/devshell";
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -89,7 +89,6 @@
       recursiveUpdate
       (flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
         imports = with inputs; [
-          devshells.flakeModule
           treefmt-nix.flakeModule
           git-hooks-nix.flakeModule
         ];
@@ -125,6 +124,7 @@
                 nixos-facter-modules.nixosModules.facter
                 disko.nixosModules.disko
                 nixos-generators.nixosModules.all-formats
+                determinate.nixosModules.default
                 lanzaboote.nixosModules.lanzaboote
                 sops-nix.nixosModules.sops
                 comin.nixosModules.comin

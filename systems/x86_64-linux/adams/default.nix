@@ -23,7 +23,10 @@
       network-manager.enable = true;
       tailscale = {
         enable = true;
-        auth.enable = true;
+        auth = {
+          enable = true;
+          internal = true;
+        };
       };
     };
 

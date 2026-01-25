@@ -13,6 +13,10 @@
       repo = "https://github.com/soriphoono/homelab.git";
       name = "k3s-node";
     };
+    networking.tailscale = {
+      enable = true;
+      auth.enable = true;
+    };
     users = {
       soriphoono = {
         hashedPassword = "$6$x7n.SUTMtInzs2l4$Ew3Zu3Mkc4zvuH8STaVpwIv59UX9rmUV7I7bmWyTRjomM7QRn0Jt/Pl/JN./IqTrXqEe8nIYB43m1nLI2Un211";
