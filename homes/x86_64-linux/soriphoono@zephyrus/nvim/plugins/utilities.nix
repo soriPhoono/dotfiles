@@ -1,5 +1,14 @@
 {
   programs.nvf.settings.vim = {
+    keymaps = [
+      {
+        key = "<leader>tt";
+        mode = "n";
+        silent = true;
+        action = "<cmd>ToggleTerm direction=float<CR>";
+      }
+    ];
+
     binds.whichKey = {
       enable = true;
       setupOpts.preset = "helix";
@@ -15,6 +24,8 @@
       multicursors.enable = true;
       surround.enable = true;
     };
+
+    terminal.toggleterm.enable = true;
 
     treesitter = {
       enable = true;

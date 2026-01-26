@@ -4,7 +4,7 @@
   inputs = {
     systems.url = "github:nix-systems/default";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "https://flakehub.com/f/DeterminateSystems/nixpkgs-weekly/*";
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     treefmt-nix = {
@@ -102,62 +102,53 @@
           pre-commit = import ./pre-commit.nix;
         };
       }))
-      (let
-        snowfallFlake =
-          (snowfall.mkLib {
-            inherit inputs;
-            src = ./.;
-            snowfall = {
-              meta = {
-                name = "homelab";
-                title = "Homelab and Personal Devices Configuration";
-              };
-              namespace = "soriphoono";
+      (
+        (snowfall.mkLib {
+          inherit inputs;
+          src = ./.;
+          snowfall = {
+            meta = {
+              name = "homelab";
+              title = "Homelab and Personal Devices Configuration";
             };
-          }).mkFlake {
-            inherit inputs;
-
-            src = ./.;
-
-            systems = {
-              modules.nixos = with inputs; [
-                nixos-facter-modules.nixosModules.facter
-                disko.nixosModules.disko
-                nixos-generators.nixosModules.all-formats
-                determinate.nixosModules.default
-                lanzaboote.nixosModules.lanzaboote
-                sops-nix.nixosModules.sops
-                comin.nixosModules.comin
-                nix-index-database.nixosModules.nix-index
-              ];
-            };
-
-            homes = {
-              modules = with inputs; [
-                sops-nix.homeManagerModules.sops
-                nvf.homeManagerModules.default
-                caelestia-shell.homeManagerModules.default
-              ];
-            };
-
-            channels-config = {
-              allowUnfree = true;
-            };
-
-            templates = {
-              empty.description = ''
-                An empty flake with a basic flake.nix to support a devshell environment.
-                Made with flake-parts and sensable defaults
-              '';
-            };
+            namespace = "soriphoono";
           };
-      in
-        recursiveUpdate
-        {
-          proxmox-lxcConfigurations =
-            mapAttrs
-            (_: configuration: configuration.config.formats.proxmox-lxc)
-            snowfallFlake.nixosConfigurations;
+        }).mkFlake {
+          inherit inputs;
+
+          src = ./.;
+
+          systems = {
+            modules.nixos = with inputs; [
+              nixos-facter-modules.nixosModules.facter
+              disko.nixosModules.disko
+              nixos-generators.nixosModules.all-formats
+              determinate.nixosModules.default
+              lanzaboote.nixosModules.lanzaboote
+              sops-nix.nixosModules.sops
+              comin.nixosModules.comin
+              nix-index-database.nixosModules.nix-index
+            ];
+          };
+
+          homes = {
+            modules = with inputs; [
+              sops-nix.homeManagerModules.sops
+              nvf.homeManagerModules.default
+              caelestia-shell.homeManagerModules.default
+            ];
+          };
+
+          channels-config = {
+            allowUnfree = true;
+          };
+
+          templates = {
+            empty.description = ''
+              An empty flake with a basic flake.nix to support a devshell environment.
+              Made with flake-parts and sensable defaults
+            '';
+          };
         }
-        snowfallFlake);
+      );
 }

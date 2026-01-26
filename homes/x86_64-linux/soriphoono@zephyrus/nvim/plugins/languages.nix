@@ -31,6 +31,9 @@
         lsp.server = "python-lsp-server";
       };
 
+      yaml.enable = true;
+      terraform.enable = true;
+
       markdown = {
         enable = true;
         format.type = "prettierd";
@@ -38,8 +41,6 @@
           render-markdown-nvim.enable = true;
         };
       };
-
-      yaml.enable = true;
     };
   };
 }

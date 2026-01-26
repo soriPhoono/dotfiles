@@ -77,7 +77,7 @@ in
               jq
             ];
             text = ''
-              if [ $(tailscale status -json | jq -r .BackendState) = "Running" ]; then
+              if [ "$(tailscale status -json | jq -r .BackendState)" = "Running" ]; then
                 exit 0
               fi
 
@@ -102,7 +102,7 @@ in
             ];
             text = ''
               # Apply the config from the variable
-              if tailscale serve --bg ${cfg.service.port}; then
+              if tailscale serve --bg ${cfg.service.port} >/dev/null 2&>1; then
                  echo "Serve configuration applied successfully."
               else
                  echo "Failed to apply Serve configuration."
@@ -126,7 +126,7 @@ in
             ];
             text = ''
               # Apply the config from the variable
-              if tailscale funnel --bg ${cfg.service.port}; then
+              if tailscale funnel --bg ${cfg.service.port} >/dev/null 2&>1; then
                 echo "Funnel configuration applied successfully."
               else
                 echo "Failed to apply Funnel configuration."
