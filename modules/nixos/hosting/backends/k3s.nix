@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.hosting.backend.k3s;
+  cfg = config.hosting.backends.k3s;
 in
   with lib; {
-    options.hosting.backend.k3s = {
+    options.hosting.backends.k3s = {
       enable = mkEnableOption "Enable k3s in manager mode";
     };
 

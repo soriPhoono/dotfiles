@@ -3,10 +3,10 @@
   config,
   ...
 }: let
-  cfg = config.hosting.backend.docker;
+  cfg = config.hosting.backends.docker;
 in
   with lib; {
-    options.hosting.backend.docker = {
+    options.hosting.backends.docker = {
       enable = mkEnableOption "Enable Docker hosting support.";
     };
 

@@ -9,6 +9,7 @@ in
   with lib; {
     imports = [
       ./backends/docker.nix
+      ./backends/podman.nix
     ];
 
     options.hosting.configuration.single-node = {
