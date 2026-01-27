@@ -38,7 +38,7 @@ in
     };
 
     config = mkIf (config.hosting.mode == "single-node") {
-      hosting.backend.docker.enable = true;
+      hosting.backends.docker.enable = true;
 
       sops = mkIf (cfg.domainName != null) {
         secrets = {

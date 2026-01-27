@@ -4,12 +4,10 @@
   config,
   ...
 }: let
-  namespace = "hosting.features.single-use.docker-games-server";
-
-  cfg = config.${namespace};
+  cfg = config.hosting.features.single-use.docker-games-server;
 in
   with lib; {
-    options.${namespace} = {
+    options.hosting.features.single-use.docker-games-server = {
       enable = mkEnableOption "Enable self-hosted game streaming server";
 
       gpuRenderNode = mkOption {
@@ -21,7 +19,7 @@ in
       openFirewall = mkEnableOption "Enable modifications to firewall for server port exposure";
 
       dataDir = mkOption {
-        type = types.path;
+        type = types.str;
         default = "~/Documents/Games";
         description = "The location for the game server's data";
         example = "/mnt/games";

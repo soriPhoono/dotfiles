@@ -32,7 +32,7 @@
     };
   };
 
-  hosting.features.docker-games-server = {
+  hosting.features.single-use.docker-games-server = {
     enable = true;
     openFirewall = true;
     dataDir = "/mnt/games";

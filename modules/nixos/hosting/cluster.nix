@@ -11,6 +11,6 @@ with lib; {
   options.hosting.configuration.cluster = {};
 
   config = mkIf (config.hosting.mode == "cluster") {
-    hosting.backend.k3s.enable = true;
+    hosting.backends.k3s.enable = true;
   };
 }

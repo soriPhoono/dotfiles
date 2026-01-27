@@ -20,7 +20,7 @@ in {
   config = lib.mkIf cfg.enable {
     assertions = [
       {
-        assertion = !config.core.hardware.gpu.integrated.amd;
+        assertion = !config.core.hardware.gpu.integrated.amd.enable;
         message = "A single machine can't have 2 integrated gpus!";
       }
     ];

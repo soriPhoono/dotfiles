@@ -3,12 +3,10 @@
   config,
   ...
 }: let
-  namespace = "hosting.backends.podman";
-
-  cfg = config.${namespace};
+  cfg = config.hosting.backends.podman;
 in
   with lib; {
-    options.${namespace} = {
+    options.hosting.backends.podman = {
       enable = mkEnableOption "Enable podman backend for service hosting related code";
     };
 
