@@ -63,4 +63,9 @@
     };
     services.asusd.enable = true;
   };
+
+  hosting.features.single-use.docker-games-server = {
+    enable = true;
+    gpuRenderNode = "/dev/dri/renderD129";
+  };
 }

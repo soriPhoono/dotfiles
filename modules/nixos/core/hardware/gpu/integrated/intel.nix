@@ -18,6 +18,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = !config.core.hardware.gpu.integrated.amd;
+        message = "A single machine can't have 2 integrated gpus!";
+      }
+    ];
+
     core.hardware.gpu.enable = true;
 
     boot.kernelParams = lib.mkIf (cfg.deviceId != null) [

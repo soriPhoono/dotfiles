@@ -11,12 +11,9 @@ in
     };
 
     config = {
-      virtualisation = {
-        docker = mkIf cfg.enable {
-          enable = true;
-          autoPrune.enable = true;
-        };
-        oci-containers.backend = "docker";
+      virtualisation.docker = mkIf cfg.enable {
+        enable = true;
+        autoPrune.enable = true;
       };
 
       users.extraUsers =
