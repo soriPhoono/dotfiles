@@ -93,7 +93,13 @@
           git-hooks-nix.flakeModule
         ];
         systems = with inputs; import systems;
-        perSystem = args @ {pkgs, ...}: {
+        perSystem = args @ {system, ...}: let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [];
+            config.allowUnfree = true;
+          };
+        in {
           devShells.default = import ./shell.nix (args
             // {
               inherit pkgs;
@@ -122,7 +128,6 @@
             modules.nixos = with inputs; [
               nixos-facter-modules.nixosModules.facter
               disko.nixosModules.disko
-              nixos-generators.nixosModules.all-formats
               determinate.nixosModules.default
               lanzaboote.nixosModules.lanzaboote
               sops-nix.nixosModules.sops
