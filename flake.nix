@@ -85,9 +85,8 @@
   }: let
     inherit (nixpkgs) lib;
   in
-    with lib;
-      recursiveUpdate
-      (flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
+    with lib; let
+      flake-parts-outputs = flake-parts.lib.mkFlake {inherit inputs;} ({...}: {
         imports = with inputs; [
           treefmt-nix.flakeModule
           git-hooks-nix.flakeModule
@@ -107,8 +106,9 @@
           treefmt = import ./treefmt.nix;
           pre-commit = import ./pre-commit.nix;
         };
-      }))
-      (
+      });
+
+      snowfall-outputs =
         (snowfall.mkLib {
           inherit inputs;
           src = ./.;
@@ -154,6 +154,10 @@
               Made with flake-parts and sensable defaults
             '';
           };
-        }
-      );
+        };
+    in
+      # Use a shallow merge (//) instead of recursiveUpdate to prevent Nix from
+      # deep-evaluating all configurations during the merge process.
+      # This significantly reduces memory usage during evaluation.
+      flake-parts-outputs // snowfall-outputs;
 }

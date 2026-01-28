@@ -34,6 +34,9 @@
 
   userapps = {
     enable = true;
-    development.vscode.enable = true;
+    development = {
+      vscode.enable = true;
+      antigravity.enable = true;
+    };
   };
 }

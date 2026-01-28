@@ -13,9 +13,10 @@ in
       ./firefox.nix
       ./librewolf.nix
 
-      ./terminal/kitty.nix
-
       ./development/vscode.nix
+      ./development/antigravity.nix
+
+      ./terminal/kitty.nix
     ];
 
     options.userapps = {
