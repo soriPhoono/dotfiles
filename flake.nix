@@ -156,8 +156,14 @@
           };
         };
     in
-      # Use a shallow merge (//) instead of recursiveUpdate to prevent Nix from
-      # deep-evaluating all configurations during the merge process.
-      # This significantly reduces memory usage during evaluation.
-      flake-parts-outputs // snowfall-outputs;
+      # Use a shallow merge (//) for the top-level attribute set to avoid traversing
+      # large configurations like nixosConfigurations, while surgically merging
+      # smaller attribute sets like devShells.
+      (flake-parts-outputs // snowfall-outputs)
+      // {
+        devShells = recursiveUpdate (flake-parts-outputs.devShells or {}) (snowfall-outputs.devShells or {});
+        checks = recursiveUpdate (flake-parts-outputs.checks or {}) (snowfall-outputs.checks or {});
+        packages = recursiveUpdate (flake-parts-outputs.packages or {}) (snowfall-outputs.packages or {});
+        formatter = recursiveUpdate (flake-parts-outputs.formatter or {}) (snowfall-outputs.formatter or {});
+      };
 }
