@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.userapps.development.antigravity;
+  cfg = config.userapps.development.editors.antigravity;
 in
   with lib; {
-    options.userapps.development.antigravity = {
+    options.userapps.development.editors.antigravity = {
       enable = mkEnableOption "Enable google antigravity AI accelerated coding platform";
     };
 

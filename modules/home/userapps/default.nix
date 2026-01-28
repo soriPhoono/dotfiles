@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -8,27 +7,27 @@
 in
   with lib; {
     imports = [
-      ./bitwarden.nix
+      ./browsers/firefox.nix
+      ./browsers/librewolf.nix
+      ./browsers/chrome.nix
+      ./browsers/floorp.nix
 
-      ./firefox.nix
-      ./librewolf.nix
+      ./office/bitwarden.nix
+      ./office/obsidian.nix
+      ./office/onlyoffice.nix
 
-      ./development/vscode.nix
-      ./development/antigravity.nix
+      ./communication/discord.nix
 
-      ./terminal/kitty.nix
+      ./development/editors/vscode.nix
+      ./development/editors/antigravity.nix
+      ./development/terminal/kitty.nix
     ];
 
     options.userapps = {
-      enable = lib.mkEnableOption "Enable core applications and default feature-set";
+      enable = mkEnableOption "Enable core applications and default feature-set";
     };
 
-    config = lib.mkIf cfg.enable {
-      home.packages = with pkgs; [
-        # core applications
-        nextcloud-client
-      ];
-
+    config = mkIf cfg.enable {
       services = {
         psd = {
           enable = true;
@@ -37,10 +36,15 @@ in
       };
 
       userapps = {
-        bitwarden.enable = true;
+        browsers.floorp.enable = true;
+        browsers.chrome.enable = true;
 
-        firefox.enable = true;
-        librewolf.enable = true;
+        office.bitwarden.enable = true;
+        office.nextcloud.enable = true;
+        office.obsidian.enable = true;
+        office.onlyoffice.enable = true;
+
+        communication.discord.enable = true;
       };
     };
   }

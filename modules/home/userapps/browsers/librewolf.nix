@@ -4,14 +4,15 @@
   config,
   ...
 }: let
-  cfg = config.userapps.librewolf;
+  cfg = config.userapps.browsers.librewolf;
 in {
-  options.userapps.librewolf.enable = lib.mkEnableOption "Enable Firefox";
+  options.userapps.browsers.librewolf.enable = lib.mkEnableOption "Enable Firefox";
 
   config = lib.mkIf cfg.enable {
     programs = {
       librewolf = {
         enable = true;
+        package = pkgs.librewolf-bin;
 
         profiles.default = {
           id = 0;

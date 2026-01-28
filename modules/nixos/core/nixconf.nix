@@ -27,6 +27,10 @@
         (lib.filterAttrs
           (_: content: content.admin)
           config.core.users);
+
+      # Limit the number of cores used per build job to prevent OOM
+      # during memory-intensive compilations (like browsers).
+      cores = 2;
     };
     # Opinionated: disable channels
     channel.enable = false;

@@ -35,8 +35,10 @@
   userapps = {
     enable = true;
     development = {
-      vscode.enable = true;
-      antigravity.enable = true;
+      editors = {
+        vscode.enable = true;
+        antigravity.enable = true;
+      };
     };
   };
 }

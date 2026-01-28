@@ -3,10 +3,10 @@
   config,
   ...
 }: let
-  cfg = config.userapps.terminal.kitty;
+  cfg = config.userapps.development.terminal.kitty;
 in
   with lib; {
-    options.userapps.terminal.kitty = {
+    options.userapps.development.terminal.kitty = {
       enable = mkEnableOption "Enable kitty terminal emulator application customisation";
     };
 

@@ -4,14 +4,15 @@
   config,
   ...
 }: let
-  cfg = config.userapps.firefox;
+  cfg = config.userapps.browsers.firefox;
 in {
-  options.userapps.firefox.enable = lib.mkEnableOption "Enable Firefox";
+  options.userapps.browsers.firefox.enable = lib.mkEnableOption "Enable Firefox";
 
   config = lib.mkIf cfg.enable {
     programs = {
       firefox = {
         enable = true;
+        package = pkgs.firefox-bin;
 
         profiles.default = {
           id = 0;

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  cfg = config.userapps.development.vscode;
+  cfg = config.userapps.development.editors.vscode;
 in {
-  options.userapps.development.vscode = with lib; {
+  options.userapps.development.editors.vscode = with lib; {
     enable = mkEnableOption "Enable vscode text editor";
   };
 

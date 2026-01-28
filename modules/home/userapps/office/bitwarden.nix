@@ -4,10 +4,10 @@
   config,
   ...
 }: let
-  cfg = config.userapps.bitwarden;
+  cfg = config.userapps.office.bitwarden;
 in
   with lib; {
-    options.userapps.bitwarden = {
+    options.userapps.office.bitwarden = {
       enable = mkEnableOption "Bitwarden password manager";
     };
 
