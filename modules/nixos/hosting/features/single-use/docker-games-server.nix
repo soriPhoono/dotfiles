@@ -50,10 +50,14 @@ in
           text = ''
             if [[ ! -f ${cfg.gpuRenderNode} ]]; then return 0; fi
 
-            case "$(cat \"/sys/class/drm/$(basename ${cfg.gpuRenderNode})/device/vendor\")" in
+            NODE="$(basename ${cfg.gpuRenderNode})"
+            case $(cat /sys/class/drm/"$NODE"/device/vendor) in
               "nvidia")
-                sudo curl https://raw.githubusercontent.com/games-on-whales/gow/master/images/nvidia-driver/Dockerfile | sudo podman build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION=$(cat /sys/module/nvidia/version) .
-                sudo podman run --rm --mount source=nvidia-driver-vol,destination=/usr/nvidia gow/nvidia-driver:latest true
+                sudo curl https://raw.githubusercontent.com/games-on-whales/gow/master/images/nvidia-driver/Dockerfile \
+                  | sudo podman build -t gow/nvidia-driver:latest -f - --build-arg NV_VERSION="$(cat /sys/module/nvidia/version)" .
+                sudo podman run --rm \
+                  --mount source=nvidia-driver-vol,destination=/usr/nvidia \
+                  gow/nvidia-driver:latest true
                 sudo podman run --rm \
                   --mount source=nvidia-driver-vol,destination=/usr/nvidia \
                   --device /dev/dri \
@@ -103,7 +107,6 @@ in
                   --security-opt label=disable \
                   --device-cgroup-rule=c 13:* rmw \
                   ghcr.io/games-on-whales/wolf:stable
-
                 ;;
               *)
                 echo "Failed to identify provided render node to create service container"
