@@ -6,11 +6,37 @@
 }: let
   cfg = config.userapps.browsers.firefox;
 in {
-  options.userapps.browsers.firefox.enable = lib.mkEnableOption "Enable Firefox";
+  options.userapps.browsers.firefox = {
+    enable = lib.mkEnableOption "Enable Firefox";
+    priority = lib.mkOption {
+      type = lib.types.int;
+      default = 20;
+      description = "Priority for being the default browser. Lower is higher priority.";
+    };
+  };
 
   config = lib.mkIf cfg.enable {
+    xdg.mimeApps.defaultApplications = let
+      browser = ["firefox.desktop"];
+    in
+      lib.mkOverride cfg.priority {
+        "text/html" = browser;
+        "text/xml" = browser;
+        "x-scheme-handler/http" = browser;
+        "x-scheme-handler/https" = browser;
+        "x-scheme-handler/about" = browser;
+        "x-scheme-handler/unknown" = browser;
+      };
+
     programs = {
-      firefox = {
+      firefox = let
+        ff-ultima = pkgs.fetchFromGitHub {
+          owner = "soulhotel";
+          repo = "FF-ULTIMA";
+          rev = "db84254";
+          sha256 = "sha256-z1R0OXJYbJd3G+ncWmp44uYJFaZtZ1Qzz8TbaHZ6BBQ=";
+        };
+      in {
         enable = true;
         package = pkgs.firefox-bin;
 
@@ -106,6 +132,10 @@ in {
               };
             };
           };
+
+          extraConfig = builtins.readFile (ff-ultima + "/user.js");
+          userChrome = builtins.readFile (ff-ultima + "/userChrome.css");
+          userContent = builtins.readFile (ff-ultima + "/userContent.css");
         };
 
         policies = {

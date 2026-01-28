@@ -13,6 +13,7 @@ in
       ./browsers/floorp.nix
 
       ./office/bitwarden.nix
+      ./office/nextcloud.nix
       ./office/obsidian.nix
       ./office/onlyoffice.nix
 
@@ -36,9 +37,6 @@ in
       };
 
       userapps = {
-        browsers.floorp.enable = true;
-        browsers.chrome.enable = true;
-
         office.bitwarden.enable = true;
         office.nextcloud.enable = true;
         office.obsidian.enable = true;
