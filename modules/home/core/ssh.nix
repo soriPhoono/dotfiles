@@ -44,6 +44,19 @@ with lib; {
           path = "${config.home.homeDirectory}/.ssh/${builtins.replaceStrings ["ssh/"] [""] secret}";
         })));
 
-    programs.ssh.enable = true;
+    programs.ssh = {
+      enable = true;
+      addKeysToAgent = "yes";
+
+      matchBlocks."*" = {
+        identityFile =
+          [
+            "${config.home.homeDirectory}/.ssh/id_ed25519"
+          ]
+          ++ (map (name: "${config.home.homeDirectory}/.ssh/${name}_key") (builtins.attrNames config.core.ssh.extraSSHKeys));
+      };
+    };
+
+    services.ssh-agent.enable = true;
   };
 }
