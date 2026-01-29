@@ -38,6 +38,7 @@ in {
         };
       in {
         enable = true;
+        package = pkgs.librewolf-bin;
 
         profiles.default = {
           id = 0;

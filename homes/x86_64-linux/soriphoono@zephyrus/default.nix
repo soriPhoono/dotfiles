@@ -34,6 +34,10 @@
 
   userapps = {
     enable = true;
+    browsers = {
+      librewolf.enable = true;
+      chrome.enable = true;
+    };
     development = {
       editors = {
         vscode.enable = true;
