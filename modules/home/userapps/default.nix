@@ -20,7 +20,6 @@ in
       ./communication/discord.nix
 
       ./development/editors/vscode.nix
-      ./development/editors/antigravity.nix
       ./development/terminal/kitty.nix
     ];
 

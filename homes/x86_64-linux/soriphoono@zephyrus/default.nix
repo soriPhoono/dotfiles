@@ -41,7 +41,6 @@
     development = {
       editors = {
         vscode.enable = true;
-        antigravity.enable = true;
       };
     };
   };

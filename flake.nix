@@ -15,6 +15,10 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    github-actions-nix = {
+      url = "github:synapdeck/github-actions-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     snowfall = {
       url = "github:snowfallorg/lib";
@@ -75,9 +79,15 @@
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
+    self,
     nixpkgs,
     flake-parts,
     snowfall,
@@ -90,6 +100,7 @@
         imports = with inputs; [
           treefmt-nix.flakeModule
           git-hooks-nix.flakeModule
+          github-actions-nix.flakeModule
         ];
         systems = with inputs; import systems;
         perSystem = args @ {system, ...}: let
@@ -105,6 +116,7 @@
             });
           treefmt = import ./treefmt.nix;
           pre-commit = import ./pre-commit.nix;
+          githubActions = import ./actions.nix {inherit self;};
         };
       });
 

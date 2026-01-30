@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -10,8 +11,20 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    home = {
+      sessionVariables = {
+        GEMINI_SANDBOX = "true";
+      };
+      packages = with pkgs; [
+        gemini-cli-bin
+      ];
+    };
+
     programs = {
-      vscode.enable = true;
+      vscode = {
+        enable = true;
+        package = pkgs.antigravity;
+      };
     };
   };
 }
