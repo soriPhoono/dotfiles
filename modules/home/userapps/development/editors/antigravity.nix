@@ -12,8 +12,9 @@ in
     };
 
     config = mkIf cfg.enable {
-      home.packages = [
-        pkgs.antigravity
+      home.packages = with pkgs; [
+        antigravity
+        gemini-cli-bin
       ];
     };
   }
