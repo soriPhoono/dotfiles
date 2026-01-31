@@ -1,29 +1,25 @@
 {
   lib,
+  pkgs,
   config,
-  nixosConfig,
   ...
 }: let
   cfg = config.desktop.environments.hyprland.default;
-in
-  with lib; {
-    config = mkIf cfg.enable {
-      programs = {
-        caelestia = {
-          enable = true;
-          systemd.enable = false;
-          cli.enable = true;
-        };
-      };
-
-      wayland.windowManager.hyprland.settings = {
-        exec-once = [
-          "${nixosConfig.programs.uwsm.package}/bin/uwsm app -t service -s b caelestia-shell"
-        ];
-
-        bind = [
-          "$mod, A, exec, ${nixosConfig.programs.uwsm.package}/bin/uwsm app caelestia shell drawers toggle launcher"
-        ];
-      };
+in {
+  config = lib.mkIf (cfg.enable && cfg.caelestia.enable) {
+    programs.caelestia = {
+      inherit (cfg.caelestia) settings;
+      enable = true;
+      systemd.enable = false;
+      cli.enable = true;
     };
-  }
+
+    desktop.environments.hyprland.binds = [
+      {
+        key = "A";
+        dispatcher = "exec";
+        params = "${pkgs.uwsm}/bin/uwsm app -- caelestia shell drawers toggle launcher";
+      }
+    ];
+  };
+}

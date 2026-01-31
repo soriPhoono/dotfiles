@@ -116,7 +116,7 @@
             });
           treefmt = import ./treefmt.nix;
           pre-commit = import ./pre-commit.nix;
-          githubActions = import ./actions.nix {inherit self;};
+          githubActions = import ./actions.nix {inherit self lib;};
         };
       });
 

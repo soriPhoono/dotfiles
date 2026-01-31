@@ -9,7 +9,7 @@ in
     config = mkIf cfg.enable {
       wayland.windowManager.hyprland.settings = {
         general = {
-          border_size = 3;
+          border_size = cfg.appearance.borderSize;
           gaps_out = 10;
 
           no_focus_fallback = true;
@@ -20,11 +20,11 @@ in
         };
 
         decoration = {
-          rounding = 10;
+          inherit (cfg.appearance) rounding;
           rounding_power = 4.0;
 
-          active_opacity = 0.8;
-          inactive_opacity = 0.8;
+          active_opacity = cfg.appearance.activeOpacity;
+          inactive_opacity = cfg.appearance.inactiveOpacity;
           fullscreen_opacity = 1.0; # NOTE: This may need to be removed with manual opacity specifications in the layer config later
         };
 

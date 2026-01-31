@@ -5,26 +5,52 @@
   ...
 }: let
   cfg = config.userapps.development.editors.vscode;
-in {
-  options.userapps.development.editors.vscode = with lib; {
-    enable = mkEnableOption "Enable vscode text editor";
-  };
+  hasGemini = config.userapps.agents ? gemini && config.userapps.agents.gemini.enable;
+  shouldOverride = hasGemini && config.userapps.agents.gemini.overrideEditor;
+in
+  with lib; {
+    options.userapps.development.editors.vscode = {
+      enable = mkEnableOption "Enable vscode text editor";
 
-  config = lib.mkIf cfg.enable {
-    home = {
-      sessionVariables = {
-        GEMINI_SANDBOX = "true";
+      priority = mkOption {
+        type = types.int;
+        default = 30; # Lower priority than terminal editors by default
+        description = "Priority for being the default editor. Lower is higher priority.";
       };
-      packages = with pkgs; [
-        gemini-cli-bin
-      ];
     };
 
-    programs = {
-      vscode = {
+    config = mkIf cfg.enable {
+      home.sessionVariables = {
+        EDITOR = mkOverride cfg.priority (
+          if shouldOverride
+          then "antigravity"
+          else "code"
+        );
+        VISUAL = mkOverride cfg.priority (
+          if shouldOverride
+          then "antigravity"
+          else "code"
+        );
+      };
+
+      xdg.mimeApps.defaultApplications = let
+        editor =
+          if shouldOverride
+          then ["antigravity.desktop"]
+          else ["code.desktop"];
+      in
+        mkOverride cfg.priority {
+          "text/plain" = editor;
+          "text/markdown" = editor;
+          "application/x-shellscript" = editor;
+        };
+
+      programs.vscode = {
         enable = true;
-        package = pkgs.antigravity;
+        package =
+          if shouldOverride
+          then pkgs.antigravity
+          else pkgs.vscode;
       };
     };
-  };
-}
+  }

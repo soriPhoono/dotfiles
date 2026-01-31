@@ -1,7 +1,7 @@
 {
   lib,
   config,
-  nixosConfig,
+  nixosConfig ? null,
   ...
 }: let
   cfg = config.core.secrets;
@@ -28,7 +28,7 @@ in {
     sops = {
       inherit (cfg) defaultSopsFile;
 
-      age.keyFile = nixosConfig.sops.secrets."users/${config.home.username}/age_key".path;
+      age.keyFile = lib.mkIf (nixosConfig != null) nixosConfig.sops.secrets."users/${config.home.username}/age_key".path;
 
       secrets.environment = lib.mkIf cfg.environment.enable {
         format = "dotenv";

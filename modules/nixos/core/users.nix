@@ -45,6 +45,42 @@ in {
               description = "The public key for the user.";
               example = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC...";
             };
+
+            subUidRanges = mkOption {
+              type = with types;
+                listOf (submodule {
+                  options = {
+                    startUid = mkOption {
+                      type = int;
+                      description = "The start uid of the range.";
+                    };
+                    count = mkOption {
+                      type = int;
+                      description = "The number of uids in the range.";
+                    };
+                  };
+                });
+              default = [];
+              description = "The sub-uid ranges for the user.";
+            };
+
+            subGidRanges = mkOption {
+              type = with types;
+                listOf (submodule {
+                  options = {
+                    startGid = mkOption {
+                      type = int;
+                      description = "The start gid of the range.";
+                    };
+                    count = mkOption {
+                      type = int;
+                      description = "The number of gids in the range.";
+                    };
+                  };
+                });
+              default = [];
+              description = "The sub-gid ranges for the user.";
+            };
           };
         });
 
@@ -77,7 +113,7 @@ in {
 
       extraUsers =
         builtins.mapAttrs (_: user: {
-          inherit (user) hashedPassword extraGroups shell;
+          inherit (user) hashedPassword extraGroups shell subUidRanges subGidRanges;
 
           openssh.authorizedKeys.keys =
             lib.mkIf (user.publicKey != null) [user.publicKey];

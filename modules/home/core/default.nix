@@ -1,6 +1,7 @@
 {
+  lib,
   pkgs,
-  nixosConfig,
+  nixosConfig ? null,
   ...
 }: {
   imports = [
@@ -43,5 +44,9 @@
     };
   };
 
-  home.stateVersion = nixosConfig.system.stateVersion;
+  home.stateVersion = lib.mkDefault (
+    if nixosConfig != null
+    then nixosConfig.system.stateVersion
+    else "24.11"
+  );
 }

@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }: let
@@ -12,15 +13,13 @@ in
       ./browsers/chrome.nix
       ./browsers/floorp.nix
 
-      ./office/bitwarden.nix
-      ./office/nextcloud.nix
-      ./office/obsidian.nix
-      ./office/onlyoffice.nix
-
-      ./communication/discord.nix
-
+      ./development/agents/claude.nix
+      ./development/agents/gemini.nix
       ./development/editors/vscode.nix
+      ./development/editors/neovim.nix
+
       ./development/terminal/kitty.nix
+      ./development/terminal/ghostty.nix
     ];
 
     options.userapps = {
@@ -28,20 +27,20 @@ in
     };
 
     config = mkIf cfg.enable {
+      home.packages = with pkgs; [
+        nextcloud-client
+        bitwarden-desktop
+        obsidian
+        onlyoffice-desktopeditors
+
+        discord
+      ];
+
       services = {
         psd = {
           enable = true;
           resyncTimer = "10m";
         };
-      };
-
-      userapps = {
-        office.bitwarden.enable = true;
-        office.nextcloud.enable = true;
-        office.obsidian.enable = true;
-        office.onlyoffice.enable = true;
-
-        communication.discord.enable = true;
       };
     };
   }

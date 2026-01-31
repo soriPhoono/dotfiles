@@ -1,105 +1,182 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
-with lib; {
+with lib; let
+  cfg = config.desktop.environments.hyprland.default;
+  core = config.desktop.environments.hyprland;
+in {
   imports = [
     ./conf/hypr.nix
-
+    ./conf/binds.nix
     ./shell.nix
   ];
 
   options.desktop.environments.hyprland.default = {
     enable = mkEnableOption "Enable default hyprland desktop";
+
+    caelestia = {
+      enable = mkEnableOption "Enable caelestia shell components" // {default = true;};
+      settings = mkOption {
+        type = types.submodule {
+          freeformType = types.attrs;
+          options = {};
+        };
+        default = {};
+        description = "Settings to pass to the caelestia shell";
+      };
+    };
+
+    appearance = {
+      rounding = mkOption {
+        type = types.int;
+        default = 10;
+        description = "Window corner rounding radius";
+      };
+      borderSize = mkOption {
+        type = types.int;
+        default = 3;
+        description = "Window border thickness";
+      };
+      activeOpacity = mkOption {
+        type = types.float;
+        default = 0.9;
+        description = "Opacity of the active window";
+      };
+      inactiveOpacity = mkOption {
+        type = types.float;
+        default = 0.9;
+        description = "Opacity of inactive windows";
+      };
+    };
   };
 
-  config = mkIf (config.desktop.environments.hyprland.enable && !config.desktop.environments.hyprland.custom) {
+  config = mkIf (core.enable && !core.custom) {
     desktop.environments.hyprland.default.enable = true;
 
-    wayland.windowManager.hyprland = {
+    desktop.environments.hyprland = {
+      components = mkIf cfg.caelestia.enable [
+        {
+          name = "caelestia-shell";
+          command = "caelestia-shell";
+          type = "service";
+          background = true;
+          reloadBehavior = "restart";
+        }
+      ];
+
+      binds = flatten (let
+        directions = {
+          left = "l";
+          right = "r";
+          up = "u";
+          down = "d";
+          H = "l";
+          L = "r";
+          K = "u";
+          J = "d";
+        };
+      in
+        [
+          # Cycle windows
+          {
+            key = "Tab";
+            dispatcher = "cyclenext";
+          }
+          {
+            mods = ["$mod" "SHIFT"];
+            key = "Tab";
+            dispatcher = "cyclenext";
+            params = "prev";
+          }
+        ]
+        # Window management
+        ++ (mapAttrsToList (key: dispatcher: {
+            inherit key dispatcher;
+          }) {
+            Q = "killactive";
+            F = "fullscreen";
+            V = "togglefloating";
+            P = "pseudo";
+            S = "togglesplit";
+          })
+        # Screenshotting
+        ++ (map (item: {
+            mods = item.mods or ["$mod"];
+            key = "Print";
+            dispatcher = "exec";
+            params = "${pkgs.uwsm}/bin/uwsm app -- ${config.programs.hyprshot.package}/bin/hyprshot -m ${item.params}";
+          }) [
+            {params = "active -m output";}
+            {
+              mods = ["$mod" "SHIFT"];
+              params = "active -m window";
+            }
+            {
+              mods = ["$mod" "ALT"];
+              params = "region";
+            }
+          ])
+        ++ (builtins.genList (i: [
+            {
+              key = toString (i + 1);
+              dispatcher = "workspace";
+              params = toString (i + 1);
+            }
+            {
+              mods = ["$mod" "SHIFT"];
+              key = toString (i + 1);
+              dispatcher = "movetoworkspace";
+              params = toString (i + 1);
+            }
+          ])
+          9)
+        # Movement and Resizing
+        ++ (mapAttrsToList (key: dir: [
+            {
+              inherit key;
+              dispatcher = "movefocus";
+              params = dir;
+              type = "binde";
+            }
+            {
+              mods = ["$mod" "SHIFT"];
+              inherit key;
+              dispatcher = "movewindow";
+              params = dir;
+              type = "binde";
+            }
+            {
+              mods = ["$mod" "CTRL"];
+              inherit key;
+              dispatcher = "resizeactive";
+              params =
+                if dir == "l"
+                then "-40 0"
+                else if dir == "r"
+                then "40 0"
+                else if dir == "u"
+                then "0 -40"
+                else "0 40";
+              type = "binde";
+            }
+          ])
+          directions)
+        ++ [
+          # Mouse bindings
+          {
+            mods = ["ALT"];
+            key = "mouse:272";
+            dispatcher = "movewindow";
+            type = "bindm";
+          }
+        ]);
+    };
+
+    wayland.windowManager.hyprland.settings = {
       systemd.enable = false;
-      settings = {
-        "$mod" = "SUPER";
-        bind =
-          [
-            # Window management
-            "$mod, Q, killactive, "
-            "$mod, F, fullscreen, "
-            "$mod, V, togglefloating, "
-            "$mod, P, pseudo, "
-            "$mod, S, togglesplit, "
-
-            # Cycle windows
-            "$mod, Tab, cyclenext, "
-            "$mod SHIFT, Tab, cyclenext, prev"
-
-            # Screenshotting
-            "$mod, Print, exec, ${config.programs.hyprshot.package}/bin/hyprshot -m active -m output"
-            "$mod SHIFT, Print, exec, ${config.programs.hyprshot.package}/bin/hyprshot -m active -m window"
-            "$mod ALT, Print, exec, ${config.programs.hyprshot.package}/bin/hyprshot -m region"
-          ]
-          ++ (
-            # workspaces
-            # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-            builtins.concatLists (builtins.genList (
-                i: let
-                  ws = i;
-                in [
-                  "$mod, ${toString i}, workspace, ${toString ws}"
-                  "$mod SHIFT, ${toString i}, movetoworkspace, ${toString ws}"
-                ]
-              )
-              9)
-          );
-
-        # Repeatable bindings for window controls
-        binde = [
-          # Focus movement (arrow keys)
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, down, movefocus, d"
-
-          # Focus movement (vim keys)
-          "$mod, H, movefocus, l"
-          "$mod, L, movefocus, r"
-          "$mod, K, movefocus, u"
-          "$mod, J, movefocus, d"
-
-          # Window movement (arrow keys)
-          "$mod SHIFT, left, movewindow, l"
-          "$mod SHIFT, right, movewindow, r"
-          "$mod SHIFT, up, movewindow, u"
-          "$mod SHIFT, down, movewindow, d"
-
-          # Window movement (vim keys)
-          "$mod SHIFT, H, movewindow, l"
-          "$mod SHIFT, L, movewindow, r"
-          "$mod SHIFT, K, movewindow, u"
-          "$mod SHIFT, J, movewindow, d"
-
-          # Window resizing (arrow keys)
-          "$mod CTRL, left, resizeactive, -40 0"
-          "$mod CTRL, right, resizeactive, 40 0"
-          "$mod CTRL, up, resizeactive, 0 -40"
-          "$mod CTRL, down, resizeactive, 0 40"
-
-          # Window resizing (vim keys)
-          "$mod CTRL, H, resizeactive, -40 0"
-          "$mod CTRL, L, resizeactive, 40 0"
-          "$mod CTRL, K, resizeactive, 0 -40"
-          "$mod CTRL, J, resizeactive, 0 40"
-        ];
-
-        bindm = [
-          "ALT, mouse:272, movewindow"
-        ];
-
-        bindc = [
-          "ALT, mouse:272, togglefloating"
-        ];
-      };
     };
   };
 }

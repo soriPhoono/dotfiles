@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }: let
@@ -21,7 +20,10 @@ in
           Description = "Create font directory for user fonts";
           X-SwitchMethod = "restart";
         };
-        Service.ExecStart = "${pkgs.coreutils}/bin/mkdir -p ${config.home.homeDirectory}/.local/share/fonts";
+        Service = {
+          Type = "oneshot";
+          ExecStart = "mkdir -p ${config.home.homeDirectory}/.local/share/fonts";
+        };
       };
     };
   }

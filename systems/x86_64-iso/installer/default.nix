@@ -14,6 +14,4 @@
       };
     };
   };
-
-  hosting.docker.enable = true;
 }

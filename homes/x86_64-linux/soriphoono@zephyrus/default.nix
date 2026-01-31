@@ -39,8 +39,17 @@
       chrome.enable = true;
     };
     development = {
+      terminal = {
+        ghostty.enable = true;
+      };
       editors = {
         vscode.enable = true;
+      };
+    };
+    agents = {
+      gemini = {
+        enable = true;
+        overrideEditor = true;
       };
     };
   };
